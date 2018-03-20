@@ -1,0 +1,55 @@
+.place_bid {
+  padding: 60px 0;
+  background-color: #002b4e;
+  text-align: center;
+  color: #fff; }
+  @media (min-width: 300px) {
+    .place_bid__form__input, .place_bid__form__button {
+      width: 96%; } }
+  @media (min-width: 992px) {
+    .place_bid__form__input, .place_bid__form__button {
+      width: 30%; } }
+  .place_bid__title {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 40px; }
+    @media (max-width: 992px) {
+      .place_bid__title {
+        margin: 0 0 40px 0;
+        font-size: 30px; } }
+    .place_bid__title span {
+      display: block;
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 24px; }
+  .place_bid__form_inline {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center; }
+    @media (max-width: 1199px) {
+      .place_bid__form_inline {
+        display: block;
+        margin-top: 20px; } }
+  .place_bid__form__input {
+    height: 55px;
+    margin: 4px 0;
+    padding: 20px;
+    color: #333333;
+    font-family: 'ProximaNova';
+    font-size: 14px;
+    font-weight: 300;
+    outline: none;
+    border: none; }
+  .place_bid__form__button {
+    height: 56px;
+    margin: 4px 0;
+    background-color: #07ba00;
+    border: none;
+    font-family: 'ProximaNova';
+    font-size: 16px;
+    font-weight: 300;
+    outline: none;
+    color: #fff; }
+    .place_bid__form__button:hover {
+      background-color: #0b9605; }

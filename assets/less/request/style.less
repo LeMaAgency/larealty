@@ -1,0 +1,59 @@
+.request {
+    padding: 25px 0 50px;
+    background-color: #002b4e;
+    &__title {
+        margin-bottom: 18px;
+        font-size: 28px;
+        line-height: 30px;
+        color: #fff;
+        &__small {
+            font-size: 20px;
+        }
+    }
+    &__text {
+        line-height: 20px;
+        color: #fff;
+    }
+    &__form {
+        text-align: right;
+        @media(max-width: 1199px) {
+            text-align: center;
+            padding-top: 30px;
+        }
+        &__input {
+            width: 236px;
+            height: 50px;
+            padding: 20px 17px;
+            margin: 70px 14px 20px 0;
+            &[placeholder] {
+                color: #333;
+                font-family: "ProximaNova";
+            }
+            @media(max-width:1199px) {
+                width: 100%;
+                margin: 0px 0px 20px 0;
+            }
+            @media(max-width:991px) {
+                width: 40%;
+                margin-right: 14px;
+            }
+            @media(max-width:767px) {
+                width: 100%;
+                margin-right: 0;
+            }
+        }
+        &__button {
+            width: 206px;
+            height: 50px;
+            background-color: #07ba00;
+            color: #fff;
+            font-family: "ProximaNova";
+            font-size: 16px;
+            border: none;
+            outline: none;
+            @media(max-width: 767px) {
+                width: 100%;
+            }
+        }
+    }
+}

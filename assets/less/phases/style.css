@@ -1,0 +1,215 @@
+.phases {
+    padding-bottom: 50px;
+    text-align: center;
+}
+
+.phases__h2 {
+    margin: 110px auto 80px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 40px;
+    text-transform: uppercase;
+}
+
+.phases_wrapper__item {
+    float: left;
+    vertical-align: top;
+    position: relative;
+    margin-bottom: 30px;
+    z-index: 2;
+}
+
+@media (min-width: 320px) {
+    .phases_wrapper__item {
+        width: 50%;
+    }
+}
+
+@media (min-width: 768px) {
+    .phases_wrapper__item {
+        width: 33.3333%;
+    }
+}
+
+@media (min-width: 992px) {
+    .phases_wrapper__item {
+        width: 20%;
+    }
+    .phases_wrapper__item:before {
+        content: '';
+        display: block;
+    }
+}
+
+.phases_wrapper__item:before {
+    position: absolute;
+    top: 42px;
+    right: -101px;
+    width: 200px;
+    height: 32px;
+    background-image: url(../../img/icons/phases-arrow.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+}
+
+.phases_wrapper__item.nth5:before,
+.phases_wrapper__item.nth10:before {
+    display: none;
+}
+
+.phases_wrapper__item.nth6,
+.phases_wrapper__item.nth7,
+.phases_wrapper__item.nth8,
+.phases_wrapper__item.nth9,
+.phases_wrapper__item.nth10 {
+    float: right;
+}
+
+.phases_wrapper__item.nth6:before,
+.phases_wrapper__item.nth7:before,
+.phases_wrapper__item.nth8:before,
+.phases_wrapper__item.nth9:before,
+.phases_wrapper__item.nth10:before {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+    right: auto;
+    left: -101px;
+}
+
+.phases_wrapper__item.nth5:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 57px;
+    right: -30px;
+    width: 94px;
+    height: 154px;
+    background-image: url(../../img/icons/seller-phases/half-circe-top.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    z-index: -2;
+}
+
+.phases_wrapper__item.nth6:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -95px;
+    right: -30px;
+    width: 94px;
+    height: 154px;
+    background-image: url(../../img/icons/seller-phases/half-circe-bottom.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    z-index: -3;
+}
+
+.phases_wrapper__item__img {
+    display: inline-block;
+    width: 108px;
+    height: 108px;
+    margin-bottom: 27px;
+    border: 2px solid #e6e6e6;
+    background-color: #fff;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.phases_wrapper__item__img:hover {
+    background-color: #07ba00;
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.phases_wrapper__item__img_1 {
+    background-image: url("../../img/icons/seller-phases/1.png");
+}
+
+.phases_wrapper__item__img_1:hover {
+    background-image: url("../../img/icons/seller-phases/1_active.png");
+}
+
+.phases_wrapper__item__img_2 {
+    background-image: url("../../img/icons/seller-phases/2.png");
+}
+
+.phases_wrapper__item__img_2:hover {
+    background-image: url("../../img/icons/seller-phases/2_active.png");
+}
+
+.phases_wrapper__item__img_3 {
+    background-image: url("../../img/icons/seller-phases/3.png");
+}
+
+.phases_wrapper__item__img_3:hover {
+    background-image: url("../../img/icons/seller-phases/3_active.png");
+}
+
+.phases_wrapper__item__img_4 {
+    background-image: url("../../img/icons/seller-phases/4.png");
+}
+
+.phases_wrapper__item__img_4:hover {
+    background-image: url("../../img/icons/seller-phases/4_active.png");
+}
+
+.phases_wrapper__item__img_5 {
+    background-image: url("../../img/icons/seller-phases/5.png");
+}
+
+.phases_wrapper__item__img_5:hover {
+    background-image: url("../../img/icons/seller-phases/5_active.png");
+}
+
+.phases_wrapper__item__img_6 {
+    background-image: url("../../img/icons/seller-phases/6.png");
+}
+
+.phases_wrapper__item__img_6:hover {
+    background-image: url("../../img/icons/seller-phases/6_active.png");
+}
+
+.phases_wrapper__item__img_7 {
+    background-image: url("../../img/icons/seller-phases/7.png");
+}
+
+.phases_wrapper__item__img_7:hover {
+    background-image: url("../../img/icons/seller-phases/7_active.png");
+}
+
+.phases_wrapper__item__img_8 {
+    background-image: url("../../img/icons/seller-phases/8.png");
+}
+
+.phases_wrapper__item__img_8:hover {
+    background-image: url("../../img/icons/seller-phases/8_active.png");
+}
+
+.phases_wrapper__item__img_9 {
+    background-image: url("../../img/icons/seller-phases/9.png");
+}
+
+.phases_wrapper__item__img_9:hover {
+    background-image: url("../../img/icons/seller-phases/9_active.png");
+}
+
+.phases_wrapper__item__img_10 {
+    background-image: url("../../img/icons/seller-phases/10.png");
+}
+
+.phases_wrapper__item__img_10:hover {
+    background-image: url("../../img/icons/seller-phases/10_active.png");
+}
+
+.phases_wrapper__item__text {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+}

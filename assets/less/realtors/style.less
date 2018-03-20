@@ -1,0 +1,79 @@
+.realtors {
+    margin: 100px auto 30px;
+    &__carousel {
+        &__item {
+            text-align: center;
+            &__wrap {
+                display: inline-block;
+                padding: 11px 0 0 11px;
+                text-align: left;
+                @media(max-width: 450px) {
+                    text-align: center;
+                }
+            }
+            &__img {
+                position: relative;
+                display: inline-block;
+                vertical-align: top;
+                width: 120px;
+                margin-right: 10px;
+                margin-bottom: 10px;
+                &__number {
+                    position: absolute;
+                    top: -10px;
+                    left: -10px;
+                    width: 30px;
+                    height: 30px;
+                    padding-top: 5px;
+                    border-radius: 50%;
+                    background-color: #07ba00;
+                    color: #fff;
+                    text-align: center;
+                }
+                img {
+                    width: 100%;
+                }
+            }
+            &__description {
+                display: inline-block;
+                vertical-align: top;
+                width: 190px;
+                &__title {
+                    margin-bottom: 5px;
+                }
+                &__name {
+                    margin-bottom: 10px;
+                    font-size: 18px;
+                    font-weight: bold;
+                    line-height: 1.1;
+                }
+                &__tel {
+                    margin-bottom: 10px;
+                }
+                &__link {
+                    text-decoration: underline;
+                }
+            }
+        }
+        & .slick-list {
+            margin: 0 25px;
+        }
+        & .arrows {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            fill: #07ba00;
+            cursor: pointer;
+            &:hover {
+                fill: #0b9605;
+            }
+        }
+        & .arrows--prev {
+            left: -10px;
+            z-index: 1;
+        }
+        & .arrows--next {
+            right: -10px;
+        }
+    }
+}

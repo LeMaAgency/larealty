@@ -1,0 +1,76 @@
+.flat-details {
+    padding: 40px 0 20px;
+    &__slider {
+        display: inline-block;
+        vertical-align: top;
+        width: 532px;
+        max-width: 100%;
+        @media(max-width: 1199px) {
+            width: 428px;
+        }
+        @media(max-width: 991px) {
+            width: 612px;
+        }
+        &__item {
+            text-align: center;
+            img {
+                margin: auto;
+                width: 532px;
+                max-width: 100%;
+                @media(max-width: 1199px) {
+                    width: 428px;
+                }
+                @media(max-width: 991px) {
+                    width: 612px;
+                }
+            }
+        }
+        &_nav {
+            display: inline-block;
+            vertical-align: top;
+            width: 101px;
+            margin-top: -50px;
+            margin-right: 2px;
+            @media(max-width: 770px) {
+                width: auto;
+                max-width: 100%;
+                margin-top: 0;
+            }
+            &__item {
+                text-align: center;
+                margin-bottom: 5px;
+                @media(max-width: 770px) {
+                    margin-right: 4px;
+                }
+                img {
+                    margin: auto;
+                    width: 101px;
+                    height: 81px;
+                }
+                &__wrap {
+                    position: relative;
+                    display: inline-block;
+                    &.active {
+                        &:before {
+                            content: '';
+                            display: block;
+                            position: absolute;
+                            left: 0;
+                            right: 0;
+                            top: 0;
+                            height: 81px;
+                            background-color: #fff;
+                            opacity: .7;
+                        }
+                        &:after {
+                            content: '';
+                            display: block;
+                            height: 3px;
+                            background-color: #07ba00;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

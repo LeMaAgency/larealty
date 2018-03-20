@@ -1,0 +1,77 @@
+.reason {
+    padding-bottom: 50px;
+    background-color: #ffffff;
+    background-image: url("../../img/bg/girl-keys.jpg");
+    background-repeat: no-repeat;
+    background-position: 75% bottom;
+    background-size: 585px;
+    @media (max-width: 1199px) {
+        background-position: 100% bottom;
+
+    }
+    @media (max-width: 991px) {
+        background-image: none;
+    }
+    &__h2 {
+        margin: 90px auto 40px;
+        font-size: 30px;
+        font-weight: 600;
+        line-height: 44px;
+        text-transform: uppercase;
+        @media(max-width: 500px) {
+            font-size: 25px;
+        }
+    }
+    &__list {
+        padding-left: 57px;
+        list-style: none;
+        &__item {
+            position: relative;
+            width: 390px;
+            max-width: 100%;
+            margin-bottom: 40px;
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 27px;
+            &:before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -57px;
+                width: 42px;
+                height: 42px;
+                padding-top: 5px;
+                border-radius: 50%;
+                border: 2px solid #07ba00;
+                text-align: center;
+                font-size: 15px;
+
+            }
+            &_1 {
+                &:before {
+                    content: '01';
+                }
+            }
+            &_2 {
+                &:before {
+                    content: '02';
+                }
+            }
+            &_3 {
+                &:before {
+                    content: '03';
+                }
+            }
+            &_4 {
+                &:before {
+                    content: '04';
+                }
+            }
+            &_5 {
+                &:before {
+                    content: '05';
+                }
+            }
+        }
+    }
+}

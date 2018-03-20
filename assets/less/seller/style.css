@@ -1,0 +1,60 @@
+.seller_main {
+  padding-bottom: 20px;
+  background: url("../../img/bg/seller.png") no-repeat center;
+  background-size: cover;
+  font-family: 'ProximaNova';
+  color: #fff; }
+  @media (min-width: 300px) {
+    .seller_main__h4 {
+      padding-top: 0;
+      padding-left: 63px; }
+    .seller_main__text {
+      padding-left: 63px; } }
+  @media (min-width: 768px) {
+    .seller_main__h4 {
+      padding-top: 60px;
+      padding-left: 0; }
+    .seller_main__text {
+      padding-left: 0; } }
+  .seller_main__h2 {
+    margin: 85px auto 20px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 45px;
+    font-weight: 400;
+    line-height: 54px;
+    text-align: center; }
+    @media (max-width: 500px) {
+      .seller_main__h2 {
+        font-size: 35px; } }
+  .seller_main__title {
+    margin-bottom: 75px;
+    font-size: 20px;
+    font-weight: 300;
+    text-align: center; }
+  .seller_main__h4 {
+    position: relative;
+    font-size: 20px;
+    font-weight: 600; }
+    .seller_main__h4:before {
+      position: absolute;
+      left: 0;
+      top: 0;
+      content: '';
+      width: 45px;
+      height: 45px;
+      background-position: 50% 0;
+      background-repeat: no-repeat; }
+    .seller_main__h4_1:before {
+      background-image: url("../../img/icons/seller-main/hourglass.png"); }
+    .seller_main__h4_2:before {
+      background-image: url("../../img/icons/seller-main/weight.png"); }
+    .seller_main__h4_3:before {
+      background-image: url("../../img/icons/seller-main/caution.png"); }
+    .seller_main__h4_4:before {
+      background-image: url("../../img/icons/seller-main/coins.png"); }
+  .seller_main__text {
+    max-width: 300px;
+    margin-bottom: 60px;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 24px; }
