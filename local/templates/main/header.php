@@ -8,13 +8,13 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i&amp;subset=cyrillic" rel="stylesheet">
-    <link rel="stylesheet" href="css/fonts/fonts.css">
-    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="/assets/css/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/normalize.css">
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/slick.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/media.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/slick.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/media.css">
 </head>
 
 <body class="catalog">
@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="header-contacts container-index">
-            <div class="header-logo"><img src="img/logo.png"></div>
+            <div class="header-logo"><img src="/assets/img/logo.png"></div>
             <div class="header-contacts-block">
                 <div class="header-phone">+7 (4242) 399-199</div>
                 <div class="header-account">
