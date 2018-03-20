@@ -86,233 +86,6 @@ $(document).ready(function () {
         });
     })();
 
-});
-
-
-
-//  инициализация карт на странице catalog
-
-function initMapCatalog() {
-
-    var map,
-        map2,
-        map3,
-        map4,
-        myLatLng;
-
-    myLatLng = {
-        lat: 55.675201,
-        lng: 37.633140
-    };
-
-    if (document.getElementById('map') !== null) {
-
-        // Create a map object and specify the DOM element for display.
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: myLatLng,
-            zoom: 10,
-            zoomControl: false,
-            mapTypeControl: false,
-            scaleControl: false,
-            streetViewControl: false,
-            rotateControl: false,
-            fullscreenControl: false
-        });
-
-
-        var icons = {
-            newFlat: {
-                name: 'newFlat',
-                icon: 'img/icons/place-mark.png'
-            }
-        };
-        var features = [
-            {
-                position: new google.maps.LatLng(55.717780, 37.701821),
-                type: 'newFlat'
-              }, {
-                position: new google.maps.LatLng(55.609196, 37.368095),
-                type: 'newFlat'
-              }
-            ];
-        // Create markers.
-        features.forEach(function (feature) {
-            var marker = new google.maps.Marker({
-                position: feature.position,
-                icon: icons[feature.type].icon,
-                map: map
-            });
-        });
-
-        // Create a map object and specify the DOM element for display.
-        map2 = new google.maps.Map(document.getElementById('map-2'), {
-            center: myLatLng,
-            zoom: 10,
-            zoomControl: false,
-            mapTypeControl: false,
-            scaleControl: false,
-            streetViewControl: false,
-            rotateControl: false,
-            fullscreenControl: false
-        });
-
-        var features2 = [
-            {
-                position: new google.maps.LatLng(55.847757, 37.448378),
-                type: 'newFlat'
-              }, {
-                position: new google.maps.LatLng(55.820392, 37.741523),
-                type: 'newFlat'
-              }
-            ];
-
-        // Create markers.
-        features2.forEach(function (feature) {
-            var marker = new google.maps.Marker({
-                position: feature.position,
-                icon: icons[feature.type].icon,
-                map: map2
-            });
-        });
-
-        // Create a map object and specify the DOM element for display.
-        map3 = new google.maps.Map(document.getElementById('map-3'), {
-            center: myLatLng,
-            zoom: 10,
-            zoomControl: false,
-            mapTypeControl: false,
-            scaleControl: false,
-            streetViewControl: false,
-            rotateControl: false,
-            fullscreenControl: false
-        });
-
-        var features3 = [
-            {
-                position: new google.maps.LatLng(55.717780, 37.701821),
-                type: 'newFlat'
-              }, {
-                position: new google.maps.LatLng(55.609196, 37.368095),
-                type: 'newFlat'
-              }
-            ];
-
-        // Create markers.
-        features3.forEach(function (feature) {
-            var marker = new google.maps.Marker({
-                position: feature.position,
-                icon: icons[feature.type].icon,
-                map: map3
-            });
-        });
-
-        // Create a map object and specify the DOM element for display.
-        var map4 = new google.maps.Map(document.getElementById('map-4'), {
-            center: myLatLng,
-            zoom: 10,
-            zoomControl: false,
-            mapTypeControl: false,
-            scaleControl: false,
-            streetViewControl: false,
-            rotateControl: false,
-            fullscreenControl: false
-        });
-
-        var features4 = [
-            {
-                position: new google.maps.LatLng(55.847757, 37.448378),
-                type: 'newFlat'
-              }, {
-                position: new google.maps.LatLng(55.820392, 37.741523),
-                type: 'newFlat'
-              }
-            ];
-
-        // Create markers.
-        features4.forEach(function (feature) {
-            var marker = new google.maps.Marker({
-                position: feature.position,
-                icon: icons[feature.type].icon,
-                map: map4
-            });
-        });
-    }
-}
-
-
-//  выделение активной кнопки таб панели и активация карты во вкладке
-var newFlatsTabNav = $('.new-flats__tab-nav');
-newFlatsTabNav.click(function (e) {
-    e.preventDefault();
-    var thisTab = $(this);
-    newFlatsTabNav.removeClass('active');
-    thisTab.addClass('active');
-    var idActive = thisTab.attr('href');
-    $('.tab-pane').hide();
-    $(idActive).show();
-    initMapCatalog();
-})
-
-
-
-
-//  инициализация карт на странице map
-
-
-function initMap() {
-
-    var map,
-        myLatLng;
-
-    myLatLng = {
-        lat: 49.938829,
-        lng: 30.697245
-    };
-    if (document.getElementById('map-location-flat') !== null) {
-        // Create a map object and specify the DOM element for display.
-        map = new google.maps.Map(document.getElementById('map-location-flat'), {
-            center: myLatLng,
-            zoom: 8,
-            zoomControl: false,
-            mapTypeControl: false,
-            scaleControl: false,
-            streetViewControl: false,
-            rotateControl: false,
-            fullscreenControl: false
-        });
-
-        var icons = {
-            newFlat: {
-                name: 'newFlat',
-                icon: 'img/icons/map-location-flat.png'
-            }
-        };
-
-        var features = [
-            {
-                position: new google.maps.LatLng(50.103587, 29.929313),
-                type: 'newFlat'
-              }
-            ];
-
-        // Create markers.
-        features.forEach(function (feature) {
-            var marker = new google.maps.Marker({
-                position: feature.position,
-                icon: icons[feature.type].icon,
-                map: map
-            });
-        });
-    }
-}
-
-
-
-
-
-
-$(document).ready(function () {
-
     //  слайдер услуг
     $('.slider-services__slider').slick({
         arrows: true,
@@ -356,11 +129,9 @@ $(document).ready(function () {
             }
         ]
     });
-});
 
-$(document).ready(function () {
+
     // слайдер фото квартиры
-
     $('.flat-details__slider').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -415,6 +186,33 @@ $(document).ready(function () {
         navItem.removeClass('active');
         $(this).addClass('active');
     });
+
+    //  выделение активной кнопки таб панели и активация карты во вкладке
+    var flatOnMapNav = $('.flat-on-map__nav__item');
+    flatOnMapNav.click(function (e) {
+        e.preventDefault();
+        var thisNav = $(this);
+        flatOnMapNav.removeClass('active');
+        thisNav.addClass('active');
+        var idActive = thisNav.attr('href');
+        $('.flat-on-map__content').hide();
+        $(idActive).show();
+        initMap();
+    });
+
+    //  выделение активной кнопки таб панели и активация карты во вкладке
+    var newFlatsTabNav = $('.new-flats__tab-nav');
+    newFlatsTabNav.click(function (e) {
+        e.preventDefault();
+        var thisTab = $(this);
+        newFlatsTabNav.removeClass('active');
+        thisTab.addClass('active');
+        var idActive = thisTab.attr('href');
+        $('.tab-pane').hide();
+        $(idActive).show();
+        initMapCatalog();
+    });
+
 });
 
 //$(document).ready(function () {
@@ -430,21 +228,201 @@ $(document).ready(function () {
 //});
 
 
-//  выделение активной кнопки таб панели и активация карты во вкладке
-var flatOnMapNav = $('.flat-on-map__nav__item');
-flatOnMapNav.click(function (e) {
-    e.preventDefault();
-    var thisNav = $(this);
-    flatOnMapNav.removeClass('active');
-    thisNav.addClass('active');
-    var idActive = thisNav.attr('href');
-    $('.flat-on-map__content').hide();
-    $(idActive).show();
-    initMap();
-})
+//  инициализация карт на странице catalog
+function initMapCatalog() {
+
+    var map,
+        map2,
+        map3,
+        map4,
+        myLatLng;
+
+    myLatLng = {
+        lat: 55.675201,
+        lng: 37.633140
+    };
+
+    if (document.getElementById('map') !== null) {
+
+        // Create a map object and specify the DOM element for display.
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: myLatLng,
+            zoom: 10,
+            zoomControl: false,
+            mapTypeControl: false,
+            scaleControl: false,
+            streetViewControl: false,
+            rotateControl: false,
+            fullscreenControl: false
+        });
 
 
+        var icons = {
+            newFlat: {
+                name: 'newFlat',
+                icon: 'img/icons/place-mark.png'
+            }
+        };
+        var features = [
+            {
+                position: new google.maps.LatLng(55.717780, 37.701821),
+                type: 'newFlat'
+            }, {
+                position: new google.maps.LatLng(55.609196, 37.368095),
+                type: 'newFlat'
+            }
+        ];
+        // Create markers.
+        features.forEach(function (feature) {
+            var marker = new google.maps.Marker({
+                position: feature.position,
+                icon: icons[feature.type].icon,
+                map: map
+            });
+        });
 
+        // Create a map object and specify the DOM element for display.
+        map2 = new google.maps.Map(document.getElementById('map-2'), {
+            center: myLatLng,
+            zoom: 10,
+            zoomControl: false,
+            mapTypeControl: false,
+            scaleControl: false,
+            streetViewControl: false,
+            rotateControl: false,
+            fullscreenControl: false
+        });
+
+        var features2 = [
+            {
+                position: new google.maps.LatLng(55.847757, 37.448378),
+                type: 'newFlat'
+            }, {
+                position: new google.maps.LatLng(55.820392, 37.741523),
+                type: 'newFlat'
+            }
+        ];
+
+        // Create markers.
+        features2.forEach(function (feature) {
+            var marker = new google.maps.Marker({
+                position: feature.position,
+                icon: icons[feature.type].icon,
+                map: map2
+            });
+        });
+
+        // Create a map object and specify the DOM element for display.
+        map3 = new google.maps.Map(document.getElementById('map-3'), {
+            center: myLatLng,
+            zoom: 10,
+            zoomControl: false,
+            mapTypeControl: false,
+            scaleControl: false,
+            streetViewControl: false,
+            rotateControl: false,
+            fullscreenControl: false
+        });
+
+        var features3 = [
+            {
+                position: new google.maps.LatLng(55.717780, 37.701821),
+                type: 'newFlat'
+            }, {
+                position: new google.maps.LatLng(55.609196, 37.368095),
+                type: 'newFlat'
+            }
+        ];
+
+        // Create markers.
+        features3.forEach(function (feature) {
+            var marker = new google.maps.Marker({
+                position: feature.position,
+                icon: icons[feature.type].icon,
+                map: map3
+            });
+        });
+
+        // Create a map object and specify the DOM element for display.
+        var map4 = new google.maps.Map(document.getElementById('map-4'), {
+            center: myLatLng,
+            zoom: 10,
+            zoomControl: false,
+            mapTypeControl: false,
+            scaleControl: false,
+            streetViewControl: false,
+            rotateControl: false,
+            fullscreenControl: false
+        });
+
+        var features4 = [
+            {
+                position: new google.maps.LatLng(55.847757, 37.448378),
+                type: 'newFlat'
+            }, {
+                position: new google.maps.LatLng(55.820392, 37.741523),
+                type: 'newFlat'
+            }
+        ];
+
+        // Create markers.
+        features4.forEach(function (feature) {
+            var marker = new google.maps.Marker({
+                position: feature.position,
+                icon: icons[feature.type].icon,
+                map: map4
+            });
+        });
+    }
+}
+
+//  инициализация карт на странице map
+function initMap() {
+
+    var map,
+        myLatLng;
+
+    myLatLng = {
+        lat: 49.938829,
+        lng: 30.697245
+    };
+    if (document.getElementById('map-location-flat') !== null) {
+        // Create a map object and specify the DOM element for display.
+        map = new google.maps.Map(document.getElementById('map-location-flat'), {
+            center: myLatLng,
+            zoom: 8,
+            zoomControl: false,
+            mapTypeControl: false,
+            scaleControl: false,
+            streetViewControl: false,
+            rotateControl: false,
+            fullscreenControl: false
+        });
+
+        var icons = {
+            newFlat: {
+                name: 'newFlat',
+                icon: 'img/icons/map-location-flat.png'
+            }
+        };
+
+        var features = [
+            {
+                position: new google.maps.LatLng(50.103587, 29.929313),
+                type: 'newFlat'
+            }
+        ];
+
+        // Create markers.
+        features.forEach(function (feature) {
+            var marker = new google.maps.Marker({
+                position: feature.position,
+                icon: icons[feature.type].icon,
+                map: map
+            });
+        });
+    }
+}
 
 function initialize() {
 

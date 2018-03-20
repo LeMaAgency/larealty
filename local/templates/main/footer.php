@@ -1,38 +1,36 @@
+<?
+if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
+    die();
 
+global $APPLICATION;
 
-
+?>
     <footer class="footer">
         <div class="container">
             <div class="footer-top">
                 <div class="footer-logo"><img src="/assets/img/footer-logo.png" alt="img"></div>
-                <nav class="footer-menu">
-                    <a href="#" class="footer-menu-link link-hvr">Главная</a>
-                    <a href="#" class="footer-menu-link link-hvr">Каталог квартир</a>
-                    <a href="#" class="footer-menu-link link-hvr">Загородная недвижимость</a>
-                    <a href="#" class="footer-menu-link link-hvr">Аренда</a>
-                    <a href="#" class="footer-menu-link link-hvr">Ипотека</a>
-                    <a href="#" class="footer-menu-link link-hvr">Продавцу</a>
-                    <a href="#" class="footer-menu-link link-hvr">Покупателю</a>
-                </nav>
+                <? $APPLICATION->IncludeComponent('bitrix:menu', 'footer_menu', array(
+                    'ALLOW_MULTI_SELECT' => 'N',
+                    'ROOT_MENU_TYPE' => 'footer',
+                    'CHILD_MENU_TYPE' => 'footer',
+                    'DELAY' => 'N',
+                    'MAX_LEVEL' => '1',
+                    'MENU_CACHE_GET_VARS' => array(),
+                    'MENU_CACHE_TIME' => '3600',
+                    'MENU_CACHE_TYPE' => 'A',
+                    'MENU_CACHE_USE_GROUPS' => 'N',
+                    'USE_EXT' => 'Y',
+                    'COMPONENT_TEMPLATE' => 'footer_menu'
+                )); ?>
             </div>
             <div class="footer-bottom">
-                <div class="footer-copyright">Квартирный ответ. Все права защищены</div>
+                <div class="footer-copyright"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/footer/copyright.php'); ?></div>
                 <div class="footer-social">
-                    <a href="#" class="footer-social-link fb"></a>
-                    <a href="#" class="footer-social-link vk"></a>
-                    <a href="#" class="footer-social-link tw"></a>
-                    <a href="#" class="footer-social-link inst"></a>
+                    <? $APPLICATION->IncludeFile(SITE_DIR . 'include/footer/social.php'); ?>
                 </div>
             </div>
         </div>
     </footer>
-    <script src="/assets/js/jquery-3.2.1.min.js"></script>
-    <script src="/assets/js/jquery.fancybox.min.js"></script>
-    <script src="/assets/js/owl.carousel.min.js"></script>
-    <script src="/assets/js/nouislider.min.js"></script>
-    <script src="/assets/js/slick.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBr4vuLpC6apKgl5YdtNOgYqjiRerk8X_I&callback=initMap" async defer></script>
-    <script src="/assets/js/main.js"></script>
 
 </body>
 

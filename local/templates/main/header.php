@@ -1,57 +1,114 @@
-<!DOCTYPE html>
-<html lang="ru">
+<?
+if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
+    die();
+
+use Bitrix\Main\Localization\Loc;
+Loc::loadMessages(__FILE__);
+
+global $APPLICATION;
+
+?><!DOCTYPE html>
+<html lang="<?=LANGUAGE_ID;?>">
 
 <head>
-    <meta charset="utf-8">
+
+    <link href="/assets/css/imports.css" rel="stylesheet" media="all">
+
+    <?php
+    $APPLICATION->ShowHead();
+
+    \Lema\Common\AssetManager::get()
+        ->init(array('fx'))
+        ->addCssArray(array(
+            '//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i&amp;subset=cyrillic',
+            '/assets/css/fonts/fonts.css',
+            '/assets/css/normalize.css',
+            '/assets/css/bootstrap.min.css',
+            '/assets/css/slick.css',
+            '/assets/css/main.css',
+            '/assets/css/media.css',
+            '/assets/css/custom.css',
+        ))
+        ->addJsArray(array(
+            '/assets/js/jquery-3.2.1.min.js',
+            '/assets/js/jquery.fancybox.min.js',
+            '/assets/js/lib/fancybox/fancybox.min.js',
+            '/assets/js/owl.carousel.min.js',
+            '/assets/js/nouislider.min.js',
+            '/assets/js/slick.min.js',
+            '/assets/js/main.js',
+            '/assets/js/custom.js',
+        ));
+    ?>
+
+    <title><?$APPLICATION->ShowTitle();?></title>
+
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Загородная Объект Коттедж</title>
-    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i&amp;subset=cyrillic" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/fonts/fonts.css">
-    <link rel="stylesheet" href="/assets/css/normalize.css">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/slick.css">
-    <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="stylesheet" href="/assets/css/media.css">
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBr4vuLpC6apKgl5YdtNOgYqjiRerk8X_I&callback=initMap" async defer></script>
+
 </head>
 
 <body class="catalog">
+
+    <? $APPLICATION->ShowPanel(); ?>
+
     <header class="header">
         <div class="header-top-line">
             <div class="container">
-                <nav class="header-top-menu">
-                    <a href="#" class="header-top-menu-link">Контакты</a>
-                    <a href="#" class="header-top-menu-link">Акции</a>
-                    <a href="#" class="header-top-menu-link">Вакансии</a>
-                </nav>
+                <? $APPLICATION->IncludeComponent('bitrix:menu', 'top_menu', array(
+                    'ALLOW_MULTI_SELECT' => 'N',
+                    'ROOT_MENU_TYPE' => 'top',
+                    'CHILD_MENU_TYPE' => 'top',
+                    'DELAY' => 'N',
+                    'MAX_LEVEL' => '1',
+                    'MENU_CACHE_GET_VARS' => array(),
+                    'MENU_CACHE_TIME' => '3600',
+                    'MENU_CACHE_TYPE' => 'A',
+                    'MENU_CACHE_USE_GROUPS' => 'N',
+                    'USE_EXT' => 'Y',
+                    'COMPONENT_TEMPLATE' => 'top_menu'
+                )); ?>
             </div>
         </div>
         <div class="header-contacts container-index">
             <div class="header-logo"><img src="/assets/img/logo.png"></div>
             <div class="header-contacts-block">
-                <div class="header-phone">+7 (4242) 399-199</div>
+                <div class="header-phone"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/header/phone.php'); ?></div>
                 <div class="header-account">
-                    <a href="#" class="header-account-link signin-link link-hvr">Вход</a>
-                    <span class="header-account-border"></span>
-                    <a href="#" class="header-account-link signup-link link-hvr">Регистрация</a>
+                    <?if(\Lema\Common\User::isGuest()):?>
+                        <a href="#" class="header-account-link signin-link link-hvr">
+                            <?=Loc::getMessage('LEMA_HEADER_SIGNIN_LINK');?>
+                        </a>
+                        <span class="header-account-border"></span>
+                        <a href="#" class="header-account-link signup-link link-hvr">
+                            <?=Loc::getMessage('LEMA_HEADER_SIGNUP_LINK');?>
+                        </a>
+                    <?else:?>
+                        <a href="?logout=yes" class="header-account-link signin-link link-hvr">
+                            <?=Loc::getMessage('LEMA_HEADER_LOGOUT_LINK');?>
+                        </a>
+                    <?endif;?>
                 </div>
             </div>
         </div>
         <div class="header-main-menu">
             <div class="container">
                 <div class="mobile-menu"></div>
-                <nav class="header-menu">
-                    <a href="#" class="header-menu-link hvr-sweep-to-top">Главная</a>
-                    <a href="#" class="header-menu-link hvr-sweep-to-top">Каталог квартир</a>
-                    <a href="#" class="header-menu-link hvr-sweep-to-top">Загородная недвижимость</a>
-                    <a href="#" class="header-menu-link hvr-sweep-to-top">Аренда</a>
-                    <a href="#" class="header-menu-link hvr-sweep-to-top">Ипотека</a>
-                    <a href="#" class="header-menu-link hvr-sweep-to-top">Продавцу</a>
-                    <a href="#" class="header-menu-link hvr-sweep-to-top">Покупателю</a>
-                </nav>
+                <? $APPLICATION->IncludeComponent('bitrix:menu', 'header_menu', array(
+                    'ALLOW_MULTI_SELECT' => 'N',
+                    'ROOT_MENU_TYPE' => 'header',
+                    'CHILD_MENU_TYPE' => 'header',
+                    'DELAY' => 'N',
+                    'MAX_LEVEL' => '1',
+                    'MENU_CACHE_GET_VARS' => array(),
+                    'MENU_CACHE_TIME' => '3600',
+                    'MENU_CACHE_TYPE' => 'A',
+                    'MENU_CACHE_USE_GROUPS' => 'N',
+                    'USE_EXT' => 'Y',
+                    'COMPONENT_TEMPLATE' => 'header_menu'
+                )); ?>
             </div>
         </div>
     </header>
-
