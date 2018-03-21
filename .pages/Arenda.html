@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Аренда Главная</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i&amp;subset=cyrillic" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/normalize.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/assets/css/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/assets/css/nouislider.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/media.css">
+</head>
+
+<body class="catalog">
+    <header class="header">
+        <div class="header-top-line">
+            <div class="container">
+                <nav class="header-top-menu">
+                    <a href="#" class="header-top-menu-link">Контакты</a>
+                    <a href="#" class="header-top-menu-link">Акции</a>
+                    <a href="#" class="header-top-menu-link">Вакансии</a>
+                </nav>
+            </div>
+        </div>
+        <div class="header-contacts container-index">
+            <div class="header-logo"><img alt="img" src="/assets/img/logo.png"></div>
+            <div class="header-contacts-block">
+                <div class="header-phone">+7 (4242) 399-199</div>
+                <div class="header-account">
+                    <a href="#" class="header-account-link signin-link link-hvr">Вход</a>
+                    <span class="header-account-border"></span>
+                    <a href="#" class="header-account-link signup-link link-hvr">Регистрация</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main-menu">
+            <div class="container">
+                <div class="mobile-menu"></div>
+                <nav class="header-menu">
+                    <a href="#" class="header-menu-link hvr-sweep-to-top">Главная</a>
+                    <a href="#" class="header-menu-link hvr-sweep-to-top">Каталог квартир</a>
+                    <a href="#" class="header-menu-link hvr-sweep-to-top">Загородная недвижимость</a>
+                    <a href="#" class="header-menu-link hvr-sweep-to-top">Аренда</a>
+                    <a href="#" class="header-menu-link hvr-sweep-to-top">Ипотека</a>
+                    <a href="#" class="header-menu-link hvr-sweep-to-top">Продавцу</a>
+                    <a href="#" class="header-menu-link hvr-sweep-to-top">Покупателю</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <ol class="breadcrumb breadcrumb-catalog">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="#" class="breadcrumb-active">Каталог квартир</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <section class="filter filter_bg">
+        <div class="overlay"></div>
+        <div class="container">
+            <form class="filter-form">
+                <div class="filter-form__choose">
+                    <input type="radio" id="rent-id" class="filter-form__choose__item" name="type-rent" value="rent" checked>
+                    <label for="rent-id" class="filter-form__choose__item-label">снять</label>
+                    <input type="radio" id="rent-out-id" class="filter-form__choose__item" name="type-rent" value="rent-out">
+                    <label for="rent-out-id" class="filter-form__choose__item-label">сдать</label>
+                </div>
+                <div class="filter-form__type">
+                    <div class="filter-field-title">Тип недвижимости</div>
+                    <input type="radio" id="type-room" class="filter-form__type__item" name="type-building" value="room">
+                    <label for="type-room" class="filter-form__type__item-label">комната</label>
+                    <input type="radio" id="type-apartment" class="filter-form__type__item" name="type-building" value="apartment" checked>
+                    <label for="type-apartment" class="filter-form__type__item-label">квартира</label>
+                    <input type="radio" id="type-house" class="filter-form__type__item" name="type-building" value="house">
+                    <label for="type-house" class="filter-form__type__item-label">дом/коттедж</label>
+                    <input type="radio" id="type-office" class="filter-form__type__item" name="type-building" value="office">
+                    <label for="type-office" class="filter-form__type__item-label">офис</label>
+                </div>
+                <div class="filter-form-row">
+                    <div class="filter-form-column">
+                        <div class="filter-field-title">Кол-во комнат</div>
+                        <div class="filter-num-rooms">
+                            <input type="checkbox" id="1" class="filter-input">
+                            <label for="1" class="filter-label">1</label>
+                            <input type="checkbox" id="2" class="filter-input">
+                            <label for="2" class="filter-label">2</label>
+                            <input type="checkbox" id="3" class="filter-input">
+                            <label for="3" class="filter-label">3</label>
+                            <input type="checkbox" id="4" class="filter-input">
+                            <label for="4" class="filter-label">4+</label>
+                        </div>
+                    </div>
+                    <div class="filter-form-column">
+                        <div class="filter-field-title">Цена, руб</div>
+                        <div class="filter-price">
+                            <input type="number" class="filter-price-input filter-min-value-input" value="" placeholder="От">
+                            <input type="number" class="filter-price-input filter-max-value-input" value="" placeholder="До">
+                        </div>
+                        <div class="filter-price-slider"></div>
+                        <div class="filter-price">
+                            <span class="filter-price-value filter-min-value"></span>
+                            <span class="filter-price-value filter-max-value"></span>
+                        </div>
+                    </div>
+                    <div class="filter-form-column">
+                        <div class="filter-field-title">Месторасположение</div>
+                        <div class="filter-select">
+                            <a href="#" class="filter-select-link">Выбрать</a>
+                            <ul class="filter-select-drop">
+                                <li>Центральный район</li>
+                                <li>Любой</li>
+                                <li>Центральный район</li>
+                                <li>Любой</li>
+                            </ul>
+                            <input type="hidden" id="location" />
+                        </div>
+                    </div>
+                    <div class="filter-form-column">
+                        <div class="filter-field-title">Поиск по № объекта</div>
+                        <div class="filter-select">
+                            <a href="#" class="filter-select-link">Выбрать</a>
+                            <ul class="filter-select-drop">
+                                <li>Центральный район</li>
+                                <li>Любой</li>
+                                <li>Центральный район</li>
+                                <li>Любой</li>
+                            </ul>
+                            <input type="hidden" id="number" />
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="filter-submit-btn">Поиск</button>
+            </form>
+        </div>
+    </section>
+    <div class="content-page_color">
+        <div class="rent-feature">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="rent-feature__img rent-feature__img_1"></div>
+                        <div class="rent-feature__content">
+                            <div class="rent-feature__content__number">01</div>
+                            <div class="rent-feature__content__title">ОПЛАТА ПО ФАКТУ</div>
+                            <p class="rent-feature__content__text">Вы платите только за результат</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="rent-feature__img rent-feature__img_2"></div>
+                        <div class="rent-feature__content">
+                            <div class="rent-feature__content__number">02</div>
+                            <div class="rent-feature__content__title">БЫСТРО</div>
+                            <p class="rent-feature__content__text">Большая база предложений</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="rent-feature__img rent-feature__img_3"></div>
+                        <div class="rent-feature__content">
+                            <div class="rent-feature__content__number">03</div>
+                            <div class="rent-feature__content__title">БЕЗ РИСКОВ</div>
+                            <p class="rent-feature__content__text">С нами аренда будет безопасной</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="inquiry">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="inquiry__wrap">
+                            <h3 class="inquiry__h3">Оставить заявку<br><span>и мы перезвоним вам в ближайшее время </span></h3>
+                            <form action="#" class="connect-consultant__form connect-consultant__form_inline">
+                                <input type="text" class="connect-consultant__form__input" name="name" placeholder="Ваше имя ">
+                                <input type="tel" class="connect-consultant__form__input" name="tel" placeholder="Ваш телефон">
+                                <button class="connect-consultant__form__button" type="submit">Отправить заявку</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="offers offers_padding">
+            <div class="container-index">
+                <div class="section-title section-title_rent"><span>Лучшие предложения</span></div>
+            </div>
+            <div class="container-index no-pad">
+                <div class="offers-list offers-list_mb">
+                    <a href="#" class="offers-item">
+                        <h3 class="offers-item__h3">Однокомнатная квартира</h3>
+                        <div class="offers-item-img"><img alt="img" src="/assets/img/of-img.png"></div>
+                        <div class="offers-item-price"><b>7 900 000</b>руб</div>
+                        <div class="offers-item-info clearfix">
+                            <div class="item-info item-info_room">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_room"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Кол-во комнат</div>
+                                        <div class="item-info-value">5</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-info item-info_floor">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_floor"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Этаж</div>
+                                        <div class="item-info-value">3/9</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-info item-info_area">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_area"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Площадь</div>
+                                        <div class="item-info-value">90м<sup>2</sup></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="offers-item-location">г. Москва, ул. Руставели, д. 6 к. 6.<br> Район «Бутырский»</div>
+                        <div class="offers-item-more">Подробнее<i class="more-icon"></i></div>
+                    </a>
+                    <a href="#" class="offers-item">
+                        <h3 class="offers-item__h3">Однокомнатная квартира</h3>
+                        <div class="offers-item-img"><img alt="img" src="/assets/img/of-img.png"></div>
+                        <div class="offers-item-price"><b>7 900 000</b>руб</div>
+                        <div class="offers-item-info clearfix">
+                            <div class="item-info item-info_room">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_room"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Кол-во комнат</div>
+                                        <div class="item-info-value">5</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-info item-info_floor">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_floor"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Этаж</div>
+                                        <div class="item-info-value">3/9</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-info item-info_area">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_area"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Площадь</div>
+                                        <div class="item-info-value">90м<sup>2</sup></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="offers-item-location">г. Москва, ул. Руставели, д. 6 к. 6.<br> Район «Бутырский»</div>
+                        <div class="offers-item-more">Подробнее<i class="more-icon"></i></div>
+                    </a>
+                    <a href="#" class="offers-item">
+                        <h3 class="offers-item__h3">Однокомнатная квартира</h3>
+                        <div class="offers-item-img"><img alt="img" src="/assets/img/of-img.png"></div>
+                        <div class="offers-item-price"><b>7 900 000</b>руб</div>
+                        <div class="offers-item-info clearfix">
+                            <div class="item-info item-info_room">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_room"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Кол-во комнат</div>
+                                        <div class="item-info-value">5</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-info item-info_floor">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_floor"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Этаж</div>
+                                        <div class="item-info-value">3/9</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-info item-info_area">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_area"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Площадь</div>
+                                        <div class="item-info-value">90м<sup>2</sup></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="offers-item-location">г. Москва, ул. Руставели, д. 6 к. 6.<br> Район «Бутырский»</div>
+                        <div class="offers-item-more">Подробнее<i class="more-icon"></i></div>
+                    </a>
+                    <a href="#" class="offers-item">
+                        <h3 class="offers-item__h3">Однокомнатная квартира</h3>
+                        <div class="offers-item-img"><img alt="img" src="/assets/img/of-img.png"></div>
+                        <div class="offers-item-price"><b>7 900 000</b>руб</div>
+                        <div class="offers-item-info clearfix">
+                            <div class="item-info item-info_room">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_room"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Кол-во комнат</div>
+                                        <div class="item-info-value">5</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-info item-info_floor">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_floor"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Этаж</div>
+                                        <div class="item-info-value">3/9</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-info item-info_area">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_area"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Площадь</div>
+                                        <div class="item-info-value">90м<sup>2</sup></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="offers-item-location">г. Москва, ул. Руставели, д. 6 к. 6.<br> Район «Бутырский»</div>
+                        <div class="offers-item-more">Подробнее<i class="more-icon"></i></div>
+                    </a>
+                    <a href="#" class="offers-item">
+                        <h3 class="offers-item__h3">Однокомнатная квартира</h3>
+                        <div class="offers-item-img"><img alt="img" src="/assets/img/of-img.png"></div>
+                        <div class="offers-item-price"><b>7 900 000</b>руб</div>
+                        <div class="offers-item-info clearfix">
+                            <div class="item-info item-info_room">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_room"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Кол-во комнат</div>
+                                        <div class="item-info-value">5</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-info item-info_floor">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_floor"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Этаж</div>
+                                        <div class="item-info-value">3/9</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-info item-info_area">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_area"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Площадь</div>
+                                        <div class="item-info-value">90м<sup>2</sup></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="offers-item-location">г. Москва, ул. Руставели, д. 6 к. 6.<br> Район «Бутырский»</div>
+                        <div class="offers-item-more">Подробнее<i class="more-icon"></i></div>
+                    </a>
+                    <a href="#" class="offers-item">
+                        <h3 class="offers-item__h3">Однокомнатная квартира</h3>
+                        <div class="offers-item-img"><img alt="img" src="/assets/img/of-img.png"></div>
+                        <div class="offers-item-price"><b>7 900 000</b>руб</div>
+                        <div class="offers-item-info clearfix">
+                            <div class="item-info item-info_room">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_room"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Кол-во комнат</div>
+                                        <div class="item-info-value">5</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-info item-info_floor">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_floor"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Этаж</div>
+                                        <div class="item-info-value">3/9</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-info item-info_area">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_area"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Площадь</div>
+                                        <div class="item-info-value">90м<sup>2</sup></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="offers-item-location">г. Москва, ул. Руставели, д. 6 к. 6.<br> Район «Бутырский»</div>
+                        <div class="offers-item-more">Подробнее<i class="more-icon"></i></div>
+                    </a>
+                    <a href="#" class="offers-item">
+                        <h3 class="offers-item__h3">Однокомнатная квартира</h3>
+                        <div class="offers-item-img"><img alt="img" src="/assets/img/of-img.png"></div>
+                        <div class="offers-item-price"><b>7 900 000</b>руб</div>
+                        <div class="offers-item-info clearfix">
+                            <div class="item-info item-info_room">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_room"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Кол-во комнат</div>
+                                        <div class="item-info-value">5</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-info item-info_floor">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_floor"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Этаж</div>
+                                        <div class="item-info-value">3/9</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-info item-info_area">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_area"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Площадь</div>
+                                        <div class="item-info-value">90м<sup>2</sup></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="offers-item-location">г. Москва, ул. Руставели, д. 6 к. 6.<br> Район «Бутырский»</div>
+                        <div class="offers-item-more">Подробнее<i class="more-icon"></i></div>
+                    </a>
+                    <a href="#" class="offers-item">
+                        <h3 class="offers-item__h3">Однокомнатная квартира</h3>
+                        <div class="offers-item-img"><img alt="img" src="/assets/img/of-img.png"></div>
+                        <div class="offers-item-price"><b>7 900 000</b>руб</div>
+                        <div class="offers-item-info clearfix">
+                            <div class="item-info item-info_room">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_room"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Кол-во комнат</div>
+                                        <div class="item-info-value">5</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-info item-info_floor">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_floor"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Этаж</div>
+                                        <div class="item-info-value">3/9</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-info item-info_area">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_area"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Площадь</div>
+                                        <div class="item-info-value">90м<sup>2</sup></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="offers-item-location">г. Москва, ул. Руставели, д. 6 к. 6.<br> Район «Бутырский»</div>
+                        <div class="offers-item-more">Подробнее<i class="more-icon"></i></div>
+                    </a>
+                    <a href="#" class="offers-item">
+                        <h3 class="offers-item__h3">Однокомнатная квартира</h3>
+                        <div class="offers-item-img"><img alt="img" src="/assets/img/of-img.png"></div>
+                        <div class="offers-item-price"><b>7 900 000</b>руб</div>
+                        <div class="offers-item-info clearfix">
+                            <div class="item-info item-info_room">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_room"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Кол-во комнат</div>
+                                        <div class="item-info-value">5</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-info item-info_floor">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_floor"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Этаж</div>
+                                        <div class="item-info-value">3/9</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-info item-info_area">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_area"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">Площадь</div>
+                                        <div class="item-info-value">90м<sup>2</sup></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="offers-item-location">г. Москва, ул. Руставели, д. 6 к. 6.<br> Район «Бутырский»</div>
+                        <div class="offers-item-more">Подробнее<i class="more-icon"></i></div>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <div class="tenant">
+            <div class="container">
+                <div class="tenant__wrap">
+                    <div class="tenant__wrap__bg"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h2 class="tenant__h2">арендатору</h2>
+                            <ul class="tenant__list">
+                                <li class="tenant__list__elem">бесплатная консультация по ситуации на рынке аренды</li>
+                                <li class="tenant__list__elem">подберём Вам выгодный вариант в соответствии с вашими пожеланиями</li>
+                                <li class="tenant__list__elem">организуем просмотры предлагаемых объектов</li>
+                                <li class="tenant__list__elem">юридическое сопровождение отношений между арендатором и арендодателем</li>
+                                <li class="tenant__list__elem">предоставим гарантии</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tenant_landlord">
+            <div class="container">
+                <div class="tenant__wrap">
+                    <div class="tenant__wrap__bg_landlord"></div>
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-6">
+                            <h2 class="tenant__h2">Арендодателю</h2>
+                            <ul class="tenant__list">
+                                <li class="tenant__list__elem">бесплатно разместим Ваш объект в базу предложений</li>
+                                <li class="tenant__list__elem">оградим Вас от ненужных контактов</li>
+                                <li class="tenant__list__elem">организуем показы объекта потенциальным арендаторам</li>
+                                <li class="tenant__list__elem">юридическое сопровождение отношений между арендатором и арендодателем</li>
+                                <li class="tenant__list__elem">окажем услугу по доверительному управлению недвижимостью</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--    END    content-page_color    -->
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-logo"><img alt="img" src="/assets/img/footer-logo.png"></div>
+                <nav class="footer-menu">
+                    <a href="#" class="footer-menu-link link-hvr">Главная</a>
+                    <a href="#" class="footer-menu-link link-hvr">Каталог квартир</a>
+                    <a href="#" class="footer-menu-link link-hvr">Загородная недвижимость</a>
+                    <a href="#" class="footer-menu-link link-hvr">Аренда</a>
+                    <a href="#" class="footer-menu-link link-hvr">Ипотека</a>
+                    <a href="#" class="footer-menu-link link-hvr">Продавцу</a>
+                    <a href="#" class="footer-menu-link link-hvr">Покупателю</a>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">Квартирный ответ. Все права защищены</div>
+                <div class="footer-social">
+                    <a href="#" class="footer-social-link fb"></a>
+                    <a href="#" class="footer-social-link vk"></a>
+                    <a href="#" class="footer-social-link tw"></a>
+                    <a href="#" class="footer-social-link inst"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="/assets/js/jquery-3.2.1.min.js"></script>
+    <script src="/assets/js/jquery.fancybox.min.js"></script>
+    <script src="/assets/js/owl.carousel.min.js"></script>
+    <script src="/assets/js/nouislider.min.js"></script>
+    <script src="/assets/js/slick.min.js"></script>
+    <script src="/assets/js/main.js"></script>
+</body>
+
+</html>

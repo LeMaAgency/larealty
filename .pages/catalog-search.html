@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>catalog-search</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i&amp;subset=cyrillic" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/css/normalize.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/slick.css">
+    <link rel="stylesheet" href="/assets/css/cs-select.css">
+    <link rel="stylesheet" href="/assets/css/cs-skin-border.css">
+    <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/assets/css/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/assets/css/nouislider.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/media.css">
+</head>
+
+<body class="catalog">
+    <header class="header">
+        <div class="header-top-line">
+            <div class="container">
+                <nav class="header-top-menu">
+                    <a href="#" class="header-top-menu-link">Контакты</a>
+                    <a href="#" class="header-top-menu-link">Акции</a>
+                    <a href="#" class="header-top-menu-link">Вакансии</a>
+                </nav>
+            </div>
+        </div>
+        <div class="header-contacts container-index">
+            <div class="header-logo"><img alt="img" src="/assets/img/logo.png"></div>
+            <div class="header-contacts-block">
+                <div class="header-phone">+7 (4242) 399-199</div>
+                <div class="header-account">
+                    <a href="#" class="header-account-link signin-link link-hvr">Вход</a>
+                    <span class="header-account-border"></span>
+                    <a href="#" class="header-account-link signup-link link-hvr">Регистрация</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main-menu">
+            <div class="container">
+                <div class="mobile-menu"></div>
+                <nav class="header-menu">
+                    <a href="#" class="header-menu-link hvr-sweep-to-top">Главная</a>
+                    <a href="#" class="header-menu-link hvr-sweep-to-top">Каталог квартир</a>
+                    <a href="#" class="header-menu-link hvr-sweep-to-top">Загородная недвижимость</a>
+                    <a href="#" class="header-menu-link hvr-sweep-to-top">Аренда</a>
+                    <a href="#" class="header-menu-link hvr-sweep-to-top">Ипотека</a>
+                    <a href="#" class="header-menu-link hvr-sweep-to-top">Продавцу</a>
+                    <a href="#" class="header-menu-link hvr-sweep-to-top">Покупателю</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <ol class="breadcrumb breadcrumb-catalog">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="#" class="breadcrumb-active">Каталог квартир</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <section class="filter filter_bg">
+        <div class="overlay"></div>
+        <div class="container">
+            <form class="filter-form">
+                <div class="filter-form-row">
+                    <div class="filter-form-column">
+                        <div class="filter-field-title">Кол-во комнат</div>
+                        <div class="filter-num-rooms">
+                            <input type="checkbox" id="1" class="filter-input">
+                            <label for="1" class="filter-label">1</label>
+                            <input type="checkbox" id="2" class="filter-input">
+                            <label for="2" class="filter-label">2</label>
+                            <input type="checkbox" id="3" class="filter-input">
+                            <label for="3" class="filter-label">3</label>
+                            <input type="checkbox" id="4" class="filter-input">
+                            <label for="4" class="filter-label">4+</label>
+                        </div>
+                    </div>
+                    <div class="filter-form-column">
+                        <div class="filter-field-title">Цена, руб</div>
+                        <div class="filter-price">
+                            <input type="number" class="filter-price-input filter-min-value-input" value="" placeholder="От">
+                            <input type="number" class="filter-price-input filter-max-value-input" value="" placeholder="До">
+                        </div>
+                        <div class="filter-price-slider"></div>
+                        <div class="filter-price">
+                            <span class="filter-price-value filter-min-value"></span>
+                            <span class="filter-price-value filter-max-value"></span>
+                        </div>
+                    </div>
+                    <div class="filter-form-column">
+                        <div class="filter-field-title">Месторасположение</div>
+                        <div class="filter-select">
+                            <a href="#" class="filter-select-link">Выбрать</a>
+                            <ul class="filter-select-drop">
+                                <li>Центральный район</li>
+                                <li>Любой</li>
+                                <li>Центральный район</li>
+                                <li>Любой</li>
+                            </ul>
+                            <input type="hidden" id="location" />
+                        </div>
+                    </div>
+                    <div class="filter-form-column">
+                        <div class="filter-field-title">Поиск по № объекта</div>
+                        <div class="filter-select">
+                            <a href="#" class="filter-select-link">Выбрать</a>
+                            <ul class="filter-select-drop">
+                                <li>Центральный район</li>
+                                <li>Любой</li>
+                                <li>Центральный район</li>
+                                <li>Любой</li>
+                            </ul>
+                            <input type="hidden" id="number" />
+                        </div>
+                    </div>
+                    <div class="filter-form-column">
+                        <div class="filter-field-title">Этаж</div>
+                        <div class="filter-select color-green">
+                            <a href="#" class="filter-select-link">5</a>
+                            <ul class="filter-select-drop">
+                                <li>4</li>
+                                <li>3</li>
+                                <li>2</li>
+                                <li>1</li>
+                                <li>Любой</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="filter-form-column">
+                        <div class="filter-field-title">Этажность</div>
+                        <div class="filter-select">
+                            <a href="#" class="filter-select-link">Выбрать</a>
+                            <ul class="filter-select-drop">
+                                <li>5</li>
+                                <li>9</li>
+                                <li>12</li>
+                                <li>18</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="filter-submit-btn">Поиск</button>
+            </form>
+        </div>
+    </section>
+
+    <div class="content-page">
+        <div class="sort-catalog">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-8 col-lg-9">
+                        <div class="sort">
+                            <span class="sort__title">Сортировка:</span>
+                            <select name="price" id="price-id" class="sort__select cs-select cs-skin-border">
+                               <option value="" class="sort__option">от дешевых к дорогим </option>
+                               <option value="" class="sort__option">от дорогих к дешевым </option>
+                            </select>
+                            <select name="square-meters" id="square-meters-id" class="sort__select cs-select cs-skin-border">
+                               <option value="" class="sort__option">от 45м2</option>
+                               <option value="" class="sort__option">от 45м2</option>
+                               <option value="" class="sort__option">от 45м2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-3">
+                        <a href="" class="order-selection"><span>Заказать подбор квартир</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="cards-flat">
+            <div class="card-flat card-flat_bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <a class="card-flat__img">
+                                <img alt="img"  src="/assets/img/catalog/card-flat.png">
+                                <span class="card-flat__img__filter"></span>
+                            </a>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="card-flat__content">
+                                <div class="card-flat__content__head clearfix">
+                                    <h3 class="card-flat__content__head__title">Однокомнатная квартира</h3>
+                                    <div class="card-flat__content__head__price"><b>7 900 000</b> руб</div>
+                                </div>
+                                <div class="offers-item-info clearfix">
+                                    <div class="item-info item-info_room">
+                                        <div class="item-info__inner">
+                                            <div class="item-info__inner__img item-info__inner__img_room"></div>
+                                            <div class="item-info__inner__content">
+                                                <div class="item-info-name">Кол-во комнат</div>
+                                                <div class="item-info-value">5</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item-info item-info_floor">
+                                        <div class="item-info__inner">
+                                            <div class="item-info__inner__img item-info__inner__img_floor"></div>
+                                            <div class="item-info__inner__content">
+                                                <div class="item-info-name">Этаж</div>
+                                                <div class="item-info-value">3/9</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item-info item-info_area">
+                                        <div class="item-info__inner">
+                                            <div class="item-info__inner__img item-info__inner__img_area"></div>
+                                            <div class="item-info__inner__content">
+                                                <div class="item-info-name">Площадь</div>
+                                                <div class="item-info-value">90м<sup>2</sup></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="" class="card-flat__content__favorites"><span>Добавить в избранное</span></a>
+                                <p class="card-flat__content__address icon-location">г. Москва, ул. Руставели, д. 6 к. 6. Район «Бутырский»</p>
+                                <p class="card-flat__content__text">ЖК «Венский» – новый дом, который расположен вблизи пересечения ул. Заречанской и ул. Свободы. Жилой комплекс находится вблизи микрорайона с отлично развитой транспортной развязкой. </p>
+                                <div class="offers-item-more offers-item-more_text-right">Подробнее<i class="more-icon"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-flat">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <a class="card-flat__img">
+                                <img alt="img"  src="/assets/img/catalog/card-flat.png">
+                                <span class="card-flat__img__filter"></span>
+                            </a>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="card-flat__content">
+                                <div class="card-flat__content__head clearfix">
+                                    <h3 class="card-flat__content__head__title">Однокомнатная квартира</h3>
+                                    <div class="card-flat__content__head__price"><b>7 900 000</b> руб</div>
+                                </div>
+                                <div class="offers-item-info clearfix">
+                                    <div class="item-info item-info_room">
+                                        <div class="item-info__inner">
+                                            <div class="item-info__inner__img item-info__inner__img_room"></div>
+                                            <div class="item-info__inner__content">
+                                                <div class="item-info-name">Кол-во комнат</div>
+                                                <div class="item-info-value">5</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item-info item-info_floor">
+                                        <div class="item-info__inner">
+                                            <div class="item-info__inner__img item-info__inner__img_floor"></div>
+                                            <div class="item-info__inner__content">
+                                                <div class="item-info-name">Этаж</div>
+                                                <div class="item-info-value">3/9</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item-info item-info_area">
+                                        <div class="item-info__inner">
+                                            <div class="item-info__inner__img item-info__inner__img_area"></div>
+                                            <div class="item-info__inner__content">
+                                                <div class="item-info-name">Площадь</div>
+                                                <div class="item-info-value">90м<sup>2</sup></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="" class="card-flat__content__favorites"><span>Добавить в избранное</span></a>
+                                <p class="card-flat__content__address icon-location">г. Москва, ул. Руставели, д. 6 к. 6. Район «Бутырский»</p>
+                                <p class="card-flat__content__text">ЖК «Венский» – новый дом, который расположен вблизи пересечения ул. Заречанской и ул. Свободы. Жилой комплекс находится вблизи микрорайона с отлично развитой транспортной развязкой. </p>
+                                <div class="offers-item-more offers-item-more_text-right">Подробнее<i class="more-icon"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pagination-catalog">
+                <div class="container">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li>
+                                <a href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&#8249;</span>
+                                </a>
+                            </li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li>
+                                <a href="#" aria-label="Next">
+                                    <span aria-hidden="true">&#8250;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </section>
+        <section class="slider-services">
+            <div class="container">
+                <H2 class="slider-services__title">Ипотека в г. Южно-Сахалинске от компании &#171;Квартирный Ответ&#187;</H2>
+                <div class="slider-services__img">
+                    <div class="slider-services__img__item active" data-img="1"></div>
+                    <div class="slider-services__img__between"></div>
+                    <div class="slider-services__img__item" data-img="2"></div>
+                    <div class="slider-services__img__between slider-services__img__between_center"></div>
+                    <div class="slider-services__img__item" data-img="3"></div>
+                    <div class="slider-services__img__between"></div>
+                    <div class="slider-services__img__item" data-img="4"></div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="slider-services__slider">
+                    <div class="slider-services__slider__item" data-slider="1">
+                        <p class="slider-services__slider__item__text">Консультационные услуги по кредитным банковским ставкам бесплатно и без очереди</p>
+                    </div>
+                    <div class="slider-services__slider__item" data-slider="2">
+                        <p class="slider-services__slider__item__text">Консультационные услуги по кредитным банковским ставкам бесплатно и без очереди</p>
+                    </div>
+                    <div class="slider-services__slider__item" data-slider="3">
+                        <p class="slider-services__slider__item__text">Консультационные услуги по кредитным банковским ставкам бесплатно и без очереди</p>
+                    </div>
+                    <div class="slider-services__slider__item" data-slider="4">
+                        <p class="slider-services__slider__item__text">Консультационные услуги по кредитным банковским ставкам бесплатно и без очереди</p>
+                    </div>
+                    <div class="slider-services__slider__item" data-slider="5">
+                        <p class="slider-services__slider__item__text">Консультационные услуги по кредитным банковским ставкам бесплатно и без очереди</p>
+                    </div>
+                </div>
+                <div class="slider-services__btn-wrap">
+                    <a href="#" class="slider-services__btn">рассчитать</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-logo"><img alt="img" src="/assets/img/footer-logo.png"></div>
+                <nav class="footer-menu">
+                    <a href="#" class="footer-menu-link link-hvr">Главная</a>
+                    <a href="#" class="footer-menu-link link-hvr">Каталог квартир</a>
+                    <a href="#" class="footer-menu-link link-hvr">Загородная недвижимость</a>
+                    <a href="#" class="footer-menu-link link-hvr">Аренда</a>
+                    <a href="#" class="footer-menu-link link-hvr">Ипотека</a>
+                    <a href="#" class="footer-menu-link link-hvr">Продавцу</a>
+                    <a href="#" class="footer-menu-link link-hvr">Покупателю</a>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">Квартирный ответ. Все права защищены</div>
+                <div class="footer-social">
+                    <a href="#" class="footer-social-link fb"></a>
+                    <a href="#" class="footer-social-link vk"></a>
+                    <a href="#" class="footer-social-link tw"></a>
+                    <a href="#" class="footer-social-link inst"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="/assets/js/jquery-3.2.1.min.js"></script>
+    <script src="/assets/js/selectFx.js"></script>
+    <script src="/assets/js/classie.js"></script>
+    <script src="/assets/js/jquery.fancybox.min.js"></script>
+    <script src="/assets/js/owl.carousel.min.js"></script>
+    <script src="/assets/js/nouislider.min.js"></script>
+    <script src="/assets/js/slick.min.js"></script>
+    <script src="/assets/js/main.js"></script>
+</body>
+
+</html>
