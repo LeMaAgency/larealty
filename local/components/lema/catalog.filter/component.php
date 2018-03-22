@@ -556,6 +556,26 @@ foreach($arResult["arrProp"] as $prop_id => $arProp)
 	$values = "";
 	$list = array();
 	$arResult["arrInputNames"][$FILTER_NAME."_pf"]=true;
+
+    if($arProp['PROPERTY_TYPE'] == 'N' && !in_array($arProp['CODE'], array('PRICE', 'ROOMS_COUNT')))
+    {
+        $propName = 'PROPERTY_' . $arProp['CODE'];
+
+        foreach(array('MIN' => 'ASC', 'MAX' => 'DESC') as $k => $sortType)
+        {
+            $pRes = \CIBlockElement::GetList(
+                array($propName => $sortType),
+                array('IBLOCK_ID' => $arParams['IBLOCK_ID']),
+                false,
+                array('nTopCount' => 1),
+                array('ID', $propName)
+            );
+            if(($pRow = $pRes->Fetch()) && !empty($pRow[$propName . '_VALUE']))
+            {
+                $arProp[$k] = $pRow[$propName . '_VALUE'];
+            }
+        }
+    }
 	switch ($arProp["PROPERTY_TYPE"])
 	{
 		case "L":
@@ -638,7 +658,7 @@ foreach($arResult["arrProp"] as $prop_id => $arProp)
 		case "N":
 			$value = $arrPFV[$arProp["CODE"]];
 			$name_left = $FILTER_NAME."_pf[".$arProp["CODE"]."][LEFT]";
-			var_dump($value);
+
 			if(is_array($value) && isset($value["LEFT"]))
 				$value_left = $value["LEFT"];
 			else
@@ -682,6 +702,10 @@ foreach($arResult["arrProp"] as $prop_id => $arProp)
 	}
 	if($res)
 	{
+        if(!empty($arProp['MIN']) && !empty($arProp['MAX']) && !empty($values))
+        {
+            $values = array($arProp['MIN'], $arProp['MAX']);
+        }
 		$arResult["ITEMS"]["PROPERTY_".$prop_id] = array(
 			"NAME" => htmlspecialcharsbx($arProp["NAME"]),
 			"INPUT" => $res,

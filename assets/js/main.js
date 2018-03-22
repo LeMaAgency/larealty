@@ -53,7 +53,8 @@ $(document).ready(function () {
             dropBlock.slideDown();
             $(this).addClass('active filter-border-color');
             $('.filter-select-drop').find('li').click(function () {
-                var selectResult = $(this).html();
+                //var selectResult = $(this).html();
+                var selectResult = $(this).data('value') || $(this).html();
                 $(this).closest('.filter-select').find('input').val(selectResult);
                 $(this).closest('.filter-select').find('.filter-select-link').removeClass('active').html(selectResult);
                 dropBlock.slideUp();

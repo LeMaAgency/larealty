@@ -49,7 +49,7 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
                                     type="number"
                                     value="<?=$arItem["INPUT_VALUES"][1]?>"
                                     name="<?=$arItem["INPUT_NAMES"][1]?>" class="filter-price-input filter-max-value-input"
-                                    placeholder="<?=GetMessage("CT_BCF_FROM")?>"
+                                    placeholder="<?=GetMessage("CT_BCF_TO")?>"
                                 />
                             </div>
                             <div class="filter-price-slider"></div>
@@ -59,18 +59,18 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
                             </div>
                         <?else:?>
                             <?if(!empty($arItem['INPUT_VALUES'][0]) && !empty($arItem['INPUT_VALUES'][1])):?>
-                                <ul class="filter-select-drop">
-                                    <?for($i = $arItem['INPUT_VALUES'][0]; $i <= $arItem['INPUT_VALUES'][1]; ++$i):?>
-                                        <li data-value="<?=$i;?>"
-                                            <?if ($i == $arItem["INPUT_VALUE"]) echo ' class="selected"'?>
-                                        ><?=$i?></li>
-                                    <?endfor;?>
-                                </ul>
+                                <div class="filter-select">
+                                    <a href="#" class="filter-select-link">Выбрать</a>
+                                    <ul class="filter-select-drop">
+                                        <?for($i = $arItem['INPUT_VALUES'][0]; $i <= $arItem['INPUT_VALUES'][1]; ++$i):?>
+                                            <li data-value="<?=$i;?>"
+                                                <?if ($i == $arItem["INPUT_VALUE"]) echo ' class="selected"'?>
+                                            ><?=$i?></li>
+                                        <?endfor;?>
+                                    </ul>
+                                </div>
                             <?else:?>
-                                <?php
-                                var_dump($arItem);
-                                ?>
-                                Не указано ни одно значение
+
                             <?endif;?>
                         <?endif;?>
                     </div>
@@ -203,18 +203,7 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
             </div>
 
             <button type="submit" name="set_filter" class="filter-submit-btn">Поиск</button>
-            <div class="row">
-                <div class="col-xs-12 bx-filter-button-box">
-                    <div class="bx-filter-block">
-                        <div class="bx-filter-parameters-box-container">
-                            <input type="submit" name="set_filter" value="<?=GetMessage("CT_BCF_SET_FILTER")?>" class="btn btn-primary" />
-                            <input type="hidden" name="set_filter" value="Y" />
-                            <input type="submit" name="del_filter" value="<?=GetMessage("CT_BCF_DEL_FILTER")?>" class="btn btn-link" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--  -->
+            <input type="hidden" name="set_filter" value="Y" />
             <div class="clb"></div>
         </form>
     </div>
