@@ -47,15 +47,15 @@ $(document).ready(function () {
     }
 
     // Select
-    $('.filter-select-link').click(function () {
+    $(document).on('click', '.filter-select-link', function () {
         var dropBlock = $(this).parent().find('.filter-select-drop');
         if (dropBlock.is(':hidden')) {
             dropBlock.slideDown();
             $(this).addClass('active filter-border-color');
             $('.filter-select-drop').find('li').click(function () {
-                //var selectResult = $(this).html();
-                var selectResult = $(this).data('value') || $(this).html();
-                $(this).closest('.filter-select').find('input').val(selectResult);
+                var selectResult = $(this).html(),
+                    selectValue  = $(this).data('value') || $(this).html();
+                $(this).closest('.filter-select').find('input').val(selectValue);
                 $(this).closest('.filter-select').find('.filter-select-link').removeClass('active').html(selectResult);
                 dropBlock.slideUp();
             });
