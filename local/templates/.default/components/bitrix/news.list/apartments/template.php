@@ -42,7 +42,7 @@ $data = new TH($this);
                         <span class="card-flat__img__filter"></span>
                     </a>
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-8" <?=$item->getId();?>>
                     <div class="card-flat__content">
                         <div class="card-flat__content__head clearfix">
                             <h3 class="card-flat__content__head__title"><?=$item->getName();?></h3>
@@ -99,7 +99,7 @@ $data = new TH($this);
                                 <?=$item->propVal('ADDRESS');?>
                             </p>
                         <?endif;?>
-                        <p class="card-flat__content__text" <?=$item->getId();?>><?=$item->previewText();?></p>
+                        <p class="card-flat__content__text"><?=$item->previewText();?></p>
                         <div class="offers-item-more offers-item-more_text-right">
                             <?=Loc::getMessage('LEMA_APARTMENTS_MORE_BTN');?>
                             <i class="more-icon"></i>
