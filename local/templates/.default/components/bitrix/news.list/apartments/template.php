@@ -33,7 +33,7 @@ $data = new TH($this);
 ?>
 <section class="cards-flat">
 <?foreach($data->items() as $item):?>
-    <div class="card-flat card-flat_bg">
+    <div class="card-flat card-flat_bg" >
         <div class="container">
             <div class="row">
                 <div class="col-sm-4">
@@ -99,7 +99,7 @@ $data = new TH($this);
                                 <?=$item->propVal('ADDRESS');?>
                             </p>
                         <?endif;?>
-                        <p class="card-flat__content__text"><?=$item->detailText();?></p>
+                        <p class="card-flat__content__text" <?=$item->getId();?>><?=$item->previewText();?></p>
                         <div class="offers-item-more offers-item-more_text-right">
                             <?=Loc::getMessage('LEMA_APARTMENTS_MORE_BTN');?>
                             <i class="more-icon"></i>
