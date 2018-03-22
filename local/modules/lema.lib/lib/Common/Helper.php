@@ -236,4 +236,15 @@ abstract class Helper
         $value = static::propValue($code, $data, $propArrKey);
         return empty($value) ? null : static::enc($value, $encodeFlags);
     }
+
+    /**
+     * @param $price
+     * @param string $addPrice
+     *
+     * @return string
+     */
+    public static function formatPrice($price, $addPrice = ' руб')
+    {
+        return number_format((double) $price, 0, ' ', ' ') . $addPrice;
+    }
 }

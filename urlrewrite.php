@@ -3,13 +3,13 @@ $arUrlRewrite = array(
 	array(
 		"CONDITION" => "#^/apartments/#",
 		"RULE" => "",
-		"ID" => "bitrix:news",
+		"ID" => "bitrix:catalog",
 		"PATH" => "/apartments/index.php",
 	),
 	array(
 		"CONDITION" => "#^/apartments/#",
 		"RULE" => "",
-		"ID" => "bitrix:catalog",
+		"ID" => "bitrix:news",
 		"PATH" => "/apartments/index.php",
 	),
 );

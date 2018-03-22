@@ -41,8 +41,18 @@ $APPLICATION->SetTitle('Каталог квартир');
 			1 => "",
 		),
 		"LIST_PROPERTY_CODE" => array(
-			0 => "",
-			1 => "",
+            0 => "ROOMS_COUNT",
+            1 => "PRICE",
+            2 => "ADDRESS",
+            3 => "YEAR",
+            4 => "MAP",
+            5 => "PLACEMENT",
+            6 => "LAYOUT",
+            7 => "SQUARE",
+            8 => "SIDE",
+            9 => "RIELTY_TYPE",
+            10 => "STAGE",
+            11 => "STAGES_COUNT",
 		),
 		"HIDE_LINK_WHEN_NO_DETAIL" => "Y",
 		"DISPLAY_NAME" => "Y",
@@ -56,8 +66,18 @@ $APPLICATION->SetTitle('Каталог квартир');
 			1 => "",
 		),
 		"DETAIL_PROPERTY_CODE" => array(
-			0 => "",
-			1 => "",
+            0 => "ROOMS_COUNT",
+            1 => "PRICE",
+            2 => "ADDRESS",
+            3 => "YEAR",
+            4 => "MAP",
+            5 => "PLACEMENT",
+            6 => "LAYOUT",
+            7 => "SQUARE",
+            8 => "SIDE",
+            9 => "RIELTY_TYPE",
+            10 => "STAGE",
+            11 => "STAGES_COUNT",
 		),
 		"DETAIL_DISPLAY_TOP_PAGER" => "Y",
 		"DETAIL_DISPLAY_BOTTOM_PAGER" => "Y",
@@ -132,7 +152,7 @@ $APPLICATION->SetTitle('Каталог квартир');
 		"SEF_FOLDER" => "/apartments/",
 		"AJAX_OPTION_JUMP" => "N",
 		"AJAX_OPTION_STYLE" => "Y",
-		"AJAX_OPTION_HISTORY" => "N",
+		"AJAX_OPTION_HISTORY" => "Y",
 		"USE_SHARE" => "N",
 		"SHARE_HIDE" => "Y",
 		"SHARE_TEMPLATE" => "",
@@ -158,92 +178,7 @@ $APPLICATION->SetTitle('Каталог квартир');
 	),
 	false
 );?>
-    <section class="filter filter_bg">
-        <div class="overlay"></div>
-        <div class="container">
-            <form class="filter-form">
-                <div class="filter-form-row">
-                    <div class="filter-form-column">
-                        <div class="filter-field-title">Кол-во комнат</div>
-                        <div class="filter-num-rooms">
-                            <input type="checkbox" id="1" class="filter-input">
-                            <label for="1" class="filter-label">1</label>
-                            <input type="checkbox" id="2" class="filter-input">
-                            <label for="2" class="filter-label">2</label>
-                            <input type="checkbox" id="3" class="filter-input">
-                            <label for="3" class="filter-label">3</label>
-                            <input type="checkbox" id="4" class="filter-input">
-                            <label for="4" class="filter-label">4+</label>
-                        </div>
-                    </div>
-                    <div class="filter-form-column">
-                        <div class="filter-field-title">Цена, руб</div>
-                        <div class="filter-price">
-                            <input type="number" class="filter-price-input filter-min-value-input" value="" placeholder="От">
-                            <input type="number" class="filter-price-input filter-max-value-input" value="" placeholder="До">
-                        </div>
-                        <div class="filter-price-slider"></div>
-                        <div class="filter-price">
-                            <span class="filter-price-value filter-min-value"></span>
-                            <span class="filter-price-value filter-max-value"></span>
-                        </div>
-                    </div>
-                    <div class="filter-form-column">
-                        <div class="filter-field-title">Месторасположение</div>
-                        <div class="filter-select">
-                            <a href="#" class="filter-select-link">Выбрать</a>
-                            <ul class="filter-select-drop">
-                                <li>Центральный район</li>
-                                <li>Любой</li>
-                                <li>Центральный район</li>
-                                <li>Любой</li>
-                            </ul>
-                            <input type="hidden" id="location" />
-                        </div>
-                    </div>
-                    <div class="filter-form-column">
-                        <div class="filter-field-title">Поиск по № объекта</div>
-                        <div class="filter-select">
-                            <a href="#" class="filter-select-link">Выбрать</a>
-                            <ul class="filter-select-drop">
-                                <li>Центральный район</li>
-                                <li>Любой</li>
-                                <li>Центральный район</li>
-                                <li>Любой</li>
-                            </ul>
-                            <input type="hidden" id="number" />
-                        </div>
-                    </div>
-                    <div class="filter-form-column">
-                        <div class="filter-field-title">Этаж</div>
-                        <div class="filter-select color-green">
-                            <a href="#" class="filter-select-link">5</a>
-                            <ul class="filter-select-drop">
-                                <li>4</li>
-                                <li>3</li>
-                                <li>2</li>
-                                <li>1</li>
-                                <li>Любой</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="filter-form-column">
-                        <div class="filter-field-title">Этажность</div>
-                        <div class="filter-select">
-                            <a href="#" class="filter-select-link">Выбрать</a>
-                            <ul class="filter-select-drop">
-                                <li>5</li>
-                                <li>9</li>
-                                <li>12</li>
-                                <li>18</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <button type="submit" class="filter-submit-btn">Поиск</button>
-            </form>
-        </div>
-    </section>
+
     <section class="advantages">
         <div class="container">
             <div class="row">
