@@ -202,8 +202,7 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
             <?endforeach;?>
             </div>
 
-            <button type="submit" name="set_filter" class="filter-submit-btn">Поиск</button>
-            <input type="hidden" name="set_filter" value="Y" />
+            <button type="submit" name="set_filter" value="Y" class="filter-submit-btn">Поиск</button>
             <div class="clb"></div>
         </form>
     </div>
