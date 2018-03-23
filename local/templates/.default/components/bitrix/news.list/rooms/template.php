@@ -87,10 +87,10 @@ $data = new TH($this);
                                 <?=$item->propVal('ADDRESS');?>
                             </p>
                         <?endif;?>
-                        <div class="offers-item-more offers-item-more_min">
+                        <a href="<?=$item->detailUrl();?>" class="element-detail-link offers-item-more offers-item-more_min">
                             <?=Loc::getMessage('LEMA_ROOMS_MORE_BTN');?>
                             <i class="more-icon"></i>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>

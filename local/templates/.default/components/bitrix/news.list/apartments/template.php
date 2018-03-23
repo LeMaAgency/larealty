@@ -98,10 +98,10 @@ $data = new TH($this);
                                 </p>
                             <?endif;?>
                             <p class="card-flat__content__text"><?=$item->previewText();?></p>
-                            <div class="offers-item-more offers-item-more_text-right">
+                            <a href="<?=$item->detailUrl();?>" class="element-detail-link offers-item-more offers-item-more_text-right">
                                 <?=Loc::getMessage('LEMA_APARTMENTS_MORE_BTN');?>
                                 <i class="more-icon"></i>
-                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>
