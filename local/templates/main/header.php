@@ -35,7 +35,6 @@ global $APPLICATION;
         ->addJsArray(array(
             '/assets/js/jquery-3.2.1.min.js',
             '/assets/js/jquery.fancybox.min.js',
-            '/assets/js/lib/fancybox/fancybox.min.js',
             '/assets/js/owl.carousel.min.js',
             '/assets/js/nouislider.min.js',
             '/assets/js/slick.min.js',

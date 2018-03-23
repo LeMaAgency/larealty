@@ -122,7 +122,7 @@ $(document).ready(function () {
             var icons = {
                 newFlat: {
                     name: 'newFlat',
-                    icon: 'img/icons/place-mark.png'
+                    icon: '/assets/img/icons/place-mark.png'
                 }
             };
             var features = [
