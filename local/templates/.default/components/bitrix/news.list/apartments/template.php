@@ -26,10 +26,10 @@ $data = new TH($this);
 
 ?>
 
-<?if($arParams["DISPLAY_TOP_PAGER"]):?>
-	<?=$arResult["NAV_STRING"]?><br />
-<?endif;?>
 <section class="cards-flat">
+    <?if($arParams["DISPLAY_TOP_PAGER"]):?>
+        <?=$arResult["NAV_STRING"]?><br />
+    <?endif;?>
     <?foreach($data->items() as $item):?>
         <div class="card-flat card-flat_bg" <?=$item->editId();?> >
             <div class="container">
