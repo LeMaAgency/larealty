@@ -11,6 +11,8 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
+if(empty($arResult["ITEMS"]))
+    return;
 $data = new \Lema\Template\TemplateHelper($this);
 ?>
 <section class="services container-index no-pad">

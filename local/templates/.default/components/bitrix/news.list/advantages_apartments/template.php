@@ -12,6 +12,8 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 
+if(empty($arResult["ITEMS"]))
+    return;
 use Bitrix\Main\Localization\Loc;
 Loc::loadMessages(__FILE__);
 
