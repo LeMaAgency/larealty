@@ -1,0 +1,23 @@
+.feedback-form,.feedback-input,.feedback-checkbox{
+    width: fit-content;
+    margin: auto;
+}
+.feedback-input{
+    float: left;
+}
+.feedback-checkbox{
+    position: absolute;
+    bottom: -40px;
+}
+.feedback-input .it-error{
+    width: 250px;
+}
+@media (max-width:992px) {
+    .feedback-input{
+        float: none;
+    }
+    .feedback-checkbox {
+        position: relative;
+        bottom: 0;
+    }
+}
