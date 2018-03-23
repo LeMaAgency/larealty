@@ -22,15 +22,10 @@ $this->setFrameMode(true);
 $data = new TH($this);
 
 ?>
-<?/*
+
 <?if($arParams["DISPLAY_TOP_PAGER"]):?>
 	<?=$arResult["NAV_STRING"]?><br />
 <?endif;?>
-<?if($arParams["DISPLAY_BOTTOM_PAGER"]):?>
-	<br /><?=$arResult["NAV_STRING"]?>
-<?endif;?>
-*/
-?>
 <section class="cards-flat">
 <?foreach($data->items() as $item):?>
     <div class="card-flat card-flat_bg" >
@@ -110,26 +105,7 @@ $data = new TH($this);
         </div>
     </div>
 <?endforeach;?>
-    <div class="pagination-catalog">
-        <div class="container">
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&#8249;</span>
-                        </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&#8250;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </div>
+    <?if($arParams["DISPLAY_BOTTOM_PAGER"]):?>
+        <?=$arResult["NAV_STRING"]?>
+    <?endif;?>
 </section>
