@@ -3,6 +3,13 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php';
 
 $APPLICATION->SetTitle('Акции');
 ?>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <?\Lema\Components\Breadcrumbs::inc('breadcrumbs');?>
+            </div>
+        </div>
+    </div>
 <div class="container">
 	<div class="act__title">
 
@@ -11,8 +18,8 @@ $APPLICATION->SetTitle('Акции');
 	"bitrix:news", 
 	"stocks", 
 	array(
-		"ADD_ELEMENT_CHAIN" => "N",
-		"ADD_SECTIONS_CHAIN" => "Y",
+		"ADD_ELEMENT_CHAIN" => "Y",
+		"ADD_SECTIONS_CHAIN" => "N",
 		"AJAX_MODE" => "N",
 		"AJAX_OPTION_ADDITIONAL" => "",
 		"AJAX_OPTION_HISTORY" => "N",
@@ -48,7 +55,7 @@ $APPLICATION->SetTitle('Акции');
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 		"IBLOCK_ID" => "9",
 		"IBLOCK_TYPE" => "content",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
+		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"LIST_ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"LIST_FIELD_CODE" => array(
 			0 => "",
@@ -73,7 +80,7 @@ $APPLICATION->SetTitle('Акции');
 		"SEF_MODE" => "Y",
 		"SET_LAST_MODIFIED" => "N",
 		"SET_STATUS_404" => "N",
-		"SET_TITLE" => "Y",
+		"SET_TITLE" => "N",
 		"SHOW_404" => "N",
 		"SORT_BY1" => "ACTIVE_FROM",
 		"SORT_BY2" => "SORT",
