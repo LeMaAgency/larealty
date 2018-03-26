@@ -42,7 +42,7 @@ $data = new TH($this);
                             <a href="<?=$item->detailUrl()?>"><span><?=$item->getName();?></span></a>
                         </div>
                         <div class="act__list__item__inf">
-                            <span>Акция продлится с 30 ян до 14 (уточнить)</span>
+                            <span><?=$item->propVal('PREVIEW_SUBTITLE')?></span>
                         </div>
                         <div class="act__list__item__text">
                             <p><?=$item->previewText()?></p>
