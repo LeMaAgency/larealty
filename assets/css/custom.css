@@ -25,3 +25,11 @@
 .element-detail-link {
     display: block;
 }
+.request__form__button{
+    margin: 70px 14px 20px 0;
+}
+@media (max-width:1199px) {
+    .request__form__button{
+        margin: auto;
+    }
+}
