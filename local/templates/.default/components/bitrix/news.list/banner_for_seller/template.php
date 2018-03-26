@@ -20,13 +20,13 @@ $data = new \Lema\Template\TemplateHelper($this);
 ?>
 <div class="row">
     <? foreach ($data->items() as $key => $item): ?>
-        <div class="col-xs-12 col-sm-6 col-md-3">
+        <div class="col-xs-12 col-sm-6 col-md-3" <?=$item->editId();?>>
             <h4 class="seller_main__h4 seller_main__h4_<?=$key+1;?>">
                 <?=$item->getName();?>
             </h4>
-            <p class="seller_main__text">
+            <div class="seller_main__text">
                 <?=$item->previewText();?>
-            </p>
+            </div>
         </div>
     <? endforeach; ?>
 </div>
