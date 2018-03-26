@@ -70,8 +70,8 @@ $APPLICATION->SetTitle("Квартирный ответ - Главная стр�
 		"PAGER_SHOW_ALWAYS" => "N",
 		"PAGER_TEMPLATE" => ".default",
 		"PAGER_TITLE" => "Новости",
-		"PARENT_SECTION" => "7",
-		"PARENT_SECTION_CODE" => "",
+		"PARENT_SECTION" => "",
+		"PARENT_SECTION_CODE" => "banner-na-glavnoy",
 		"PREVIEW_TRUNCATE_LEN" => "",
 		"PROPERTY_CODE" => array(
 			0 => "SHARE",
