@@ -29,7 +29,7 @@
     padding-left: 56px;
 }
 
-.chosen__list__elem {
+.chosen__list__item {
     position: relative;
     margin-bottom: 30px;
     list-style: none;
@@ -37,7 +37,7 @@
     font-weight: 400;
 }
 
-.chosen__list__elem:before {
+.chosen__list__item:before {
     position: absolute;
     left: -56px;
     top: 0;

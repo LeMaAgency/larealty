@@ -11,24 +11,68 @@ $APPLICATION->SetTitle('Ипотека');
         </div>
     </div>
     <div class="content-page_color">
-
-    <div class="chosen">
-        <div class="container">
-            <div class="chosen__wrap">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h2 class="chosen__h2"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/hypothec/advantages/title.php'); ?></h2>
-                        <ul class="chosen__list">
-                            <li class="chosen__list__elem"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/hypothec/advantages/advantage_1.php'); ?></li>
-                            <li class="chosen__list__elem"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/hypothec/advantages/advantage_2.php'); ?></li>
-                            <li class="chosen__list__elem"> <? $APPLICATION->IncludeFile(SITE_DIR . 'include/hypothec/advantages/advantage_3.php'); ?></li>
-                            <li class="chosen__list__elem"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/hypothec/advantages/advantage_4.php'); ?></li>
-                            <li class="chosen__list__elem"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/hypothec/advantages/advantage_5.php'); ?></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <? $APPLICATION->IncludeComponent(
+	"bitrix:news.detail", 
+	"blocks_list", 
+	array(
+		"ACTIVE_DATE_FORMAT" => "d.m.Y",
+		"ADD_ELEMENT_CHAIN" => "N",
+		"ADD_SECTIONS_CHAIN" => "N",
+		"AJAX_MODE" => "N",
+		"AJAX_OPTION_ADDITIONAL" => "",
+		"AJAX_OPTION_HISTORY" => "N",
+		"AJAX_OPTION_JUMP" => "N",
+		"AJAX_OPTION_STYLE" => "Y",
+		"BROWSER_TITLE" => "-",
+		"CACHE_GROUPS" => "Y",
+		"CACHE_TIME" => "36000000",
+		"CACHE_TYPE" => "A",
+		"CHECK_DATES" => "Y",
+		"DETAIL_URL" => "",
+		"DISPLAY_BOTTOM_PAGER" => "Y",
+		"DISPLAY_DATE" => "N",
+		"DISPLAY_NAME" => "N",
+		"DISPLAY_PICTURE" => "N",
+		"DISPLAY_PREVIEW_TEXT" => "N",
+		"DISPLAY_TOP_PAGER" => "N",
+		"ELEMENT_CODE" => "chosen",
+		"ELEMENT_ID" => "",
+		"FIELD_CODE" => array(
+			0 => "CODE",
+			1 => "PREVIEW_TEXT",
+			2 => "DETAIL_TEXT",
+			3 => "",
+		),
+		"IBLOCK_ID" => "7",
+		"IBLOCK_TYPE" => "content",
+		"IBLOCK_URL" => "",
+		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+		"MESSAGE_404" => "",
+		"META_DESCRIPTION" => "-",
+		"META_KEYWORDS" => "-",
+		"PAGER_BASE_LINK_ENABLE" => "N",
+		"PAGER_SHOW_ALL" => "N",
+		"PAGER_TEMPLATE" => ".default",
+		"PAGER_TITLE" => "Страница",
+		"PROPERTY_CODE" => array(
+			0 => "LIST_ELEMENTS",
+			1 => "",
+		),
+		"SET_BROWSER_TITLE" => "N",
+		"SET_CANONICAL_URL" => "N",
+		"SET_LAST_MODIFIED" => "N",
+		"SET_META_DESCRIPTION" => "N",
+		"SET_META_KEYWORDS" => "N",
+		"SET_STATUS_404" => "N",
+		"SET_TITLE" => "N",
+		"SHOW_404" => "N",
+		"STRICT_SECTION_CHECK" => "N",
+		"USE_PERMISSIONS" => "N",
+		"USE_SHARE" => "N",
+		"COMPONENT_TEMPLATE" => "blocks_list"
+	),
+	false
+); ?>
     </div>
 
     <div class="calculator">
