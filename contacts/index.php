@@ -14,6 +14,7 @@ $APPLICATION->SetTitle('Контакты');
         <div class="map-wrapper">
             <div id="map_contacts"></div>
         </div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBr4vuLpC6apKgl5YdtNOgYqjiRerk8X_I&callback=initialize" async></script>
         <div class="container-fluid contacts_data">
             <div class="container">
                 <div class="row">

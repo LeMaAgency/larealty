@@ -403,7 +403,7 @@ function initMap() {
         var icons = {
             newFlat: {
                 name: 'newFlat',
-                icon: 'img/icons/map-location-flat.png'
+                icon: '/assets/img/icons/map-location-flat.png'
             }
         };
 
@@ -584,7 +584,7 @@ function initialize() {
     var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
-        icon: 'img/icons/map-marker.png'
+        icon: '/assets/img/icons/map-marker.png'
     });
 
     if (document.getElementById('map_contacts') !== null) {
