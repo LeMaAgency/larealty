@@ -12,7 +12,7 @@ $APPLICATION->SetTitle('Акции');
     </div>
 <div class="container">
 	<div class="act__title">
-
+        <h2 class="act__title"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/stocks/title.php'); ?></h2>
 	</div>
     <?$APPLICATION->IncludeComponent(
 	"bitrix:news", 
