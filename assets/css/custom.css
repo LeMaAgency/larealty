@@ -22,6 +22,10 @@
     width: 100%;
     max-width: 350px;
 }
+.vacancy_reply_form .checkbox{
+    max-width: 600px;
+    margin: 0 auto;
+}
 @media (max-width:992px) {
     .feedback-input{
         float: none;
