@@ -665,9 +665,6 @@ foreach($arResult["arrProp"] as $prop_id => $arProp)
 				$value_left = "";
 			$res .= '<div class="price"><p>'.GetMessage("CC_BCF_FROM").'</p><div class="left"><input type="text" name="'.$name_left.'" size="'.$arParams["NUMBER_WIDTH"].'" value="'.htmlspecialcharsbx($value_left).'" /></div>';
 
-			if (strlen($value_left) > 0)
-				${$FILTER_NAME}["PROPERTY"][">=".$arProp["CODE"]] = doubleval($value_left);
-
 			$name_right = $FILTER_NAME."_pf[".$arProp["CODE"]."][RIGHT]";
 			if(is_array($value) && isset($value["RIGHT"]))
 				$value_right = $value["RIGHT"];
@@ -675,8 +672,27 @@ foreach($arResult["arrProp"] as $prop_id => $arProp)
 				$value_right = "";
 			$res .= '<p>'.GetMessage("CC_BCF_BEFORE").'</p><div class="right"><input type="text" name="'.$name_right.'" size="'.$arParams["NUMBER_WIDTH"].'" value="'.htmlspecialcharsbx($value_right).'" /></div></div>';
 
-			if (strlen($value_right) > 0)
-				${$FILTER_NAME}["PROPERTY"]["<=".$arProp["CODE"]] = doubleval($value_right);
+			if($arProp['CODE'] == 'ROOMS_COUNT')
+            {
+                if(isset($value['LEFT'][4]))
+                {
+                    ${$FILTER_NAME}["PROPERTY"][">=" . $arProp["CODE"]] = 4.0;
+                    unset($value['LEFT'][4]);
+                }
+                if(!empty($value))
+                    ${$FILTER_NAME}["PROPERTY"][$arProp["CODE"]] = $value['LEFT'];
+            }
+            else
+            {
+                if(strlen($value_left) > 0)
+                {
+                    ${$FILTER_NAME}["PROPERTY"][">=" . $arProp["CODE"]] = doubleval($value_left);
+                }
+                if(strlen($value_right) > 0)
+                {
+                    ${$FILTER_NAME}["PROPERTY"]["<=" . $arProp["CODE"]] = doubleval($value_right);
+                }
+            }
 
 			$type = 'RANGE';
 			$names = array($name_left, $name_right);

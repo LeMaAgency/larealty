@@ -19,7 +19,7 @@ $APPLICATION->SetTitle('Каталог квартир');
 		"DISPLAY_PICTURE" => "Y",
 		"DISPLAY_PREVIEW_TEXT" => "Y",
 		"SEF_MODE" => "Y",
-		"AJAX_MODE" => "Y",
+		"AJAX_MODE" => "N",
 		"IBLOCK_TYPE" => "realty",
 		"IBLOCK_ID" => "2",
 		"NEWS_COUNT" => "6",

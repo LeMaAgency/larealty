@@ -25,19 +25,20 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
                     <?=$arItem["INPUT"]?>
                 <?elseif ($arItem["TYPE"] == "RANGE"):?>
                     <div class="filter-form-column">
-                        <div class="filter-field-title"><?=$arItem["NAME"]?></div>
                         <?if($arItem['CODE'] == 'ROOMS_COUNT'):?>
+                            <div class="filter-field-title"><?=$arItem["NAME"]?></div>
                             <div class="filter-num-rooms">
-                                <input name="<?=$arItem["INPUT_NAMES"][0]?>" type="checkbox" id="1" class="filter-input">
-                                <label for="1" class="filter-label">1</label>
-                                <input name="<?=$arItem["INPUT_NAMES"][0]?>" type="checkbox" id="2" class="filter-input">
-                                <label for="2" class="filter-label">2</label>
-                                <input name="<?=$arItem["INPUT_NAMES"][0]?>" type="checkbox" id="3" class="filter-input">
-                                <label for="3" class="filter-label">3</label>
-                                <input name="<?=$arItem["INPUT_NAMES"][0]?>" type="checkbox" id="4" class="filter-input">
-                                <label for="4" class="filter-label">4+</label>
+                                <input name="<?=$arItem["INPUT_NAMES"][0]?>[0]" type="checkbox" id="n1" value="1" class="filter-input">
+                                <label for="n1" class="filter-label">1</label>
+                                <input name="<?=$arItem["INPUT_NAMES"][0]?>[1]" type="checkbox" id="n2" value="2" class="filter-input">
+                                <label for="n2" class="filter-label">2</label>
+                                <input name="<?=$arItem["INPUT_NAMES"][0]?>[2]" type="checkbox" id="n3" value="3" class="filter-input">
+                                <label for="n3" class="filter-label">3</label>
+                                <input name="<?=$arItem["INPUT_NAMES"][0]?>[4]" type="checkbox" id="n4" value="4x" class="filter-input">
+                                <label for="n4" class="filter-label">4+</label>
                             </div>
                         <?elseif($arItem['CODE'] == 'PRICE'):?>
+                            <div class="filter-field-title"><?=$arItem["NAME"]?></div>
                             <div class="filter-price">
                                 <input
                                     type="number"
@@ -59,6 +60,7 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
                             </div>
                         <?else:?>
                             <?if(!empty($arItem['INPUT_VALUES'][0]) && !empty($arItem['INPUT_VALUES'][1])):?>
+                                <div class="filter-field-title"><?=$arItem["NAME"]?></div>
                                 <div class="filter-select">
                                     <a href="#" class="filter-select-link">Выбрать</a>
                                     <ul class="filter-select-drop">
