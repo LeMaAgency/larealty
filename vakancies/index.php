@@ -84,10 +84,29 @@ $APPLICATION->SetTitle('Вакансии');
     padding: 20px;">
         <br>
         <div class="call-order-title"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/form_title.php'); ?></div>
-        <input type="text" placeholder="Имя" class="call-order-input">
-        <input type="text" placeholder="Телефон" class="call-order-input">
-        <input type="submit" class="green-btn" value="Отправить">
-        </form>
+        <? $APPLICATION->IncludeComponent(
+	"lema:form.ajax", 
+	"vacancy_reply", 
+	array(
+		"COMPONENT_TEMPLATE" => "vacancy_reply",
+		"FORM_CLASS" => "ajax-form call-order vacancy_reply_form",
+		"FORM_ACTION" => "",
+		"FORM_152_FZ" => "Я ознакомлен <a target=\"_blank\" href=\"/contacts/apply.pdf\">c положением об обработке и защите персональных данных.</a>",
+		"FORM_BTN_TITLE" => "Отправить",
+		"FORM_SUCCESS_FUNCTION" => "\$.fancybox.open(\"Ваше сообщение успешно отправлено\")",
+		"FORM_SUCCESS_FUNCTION_CORRECT_JSON" => "Y",
+		"FORM_FIELDS" => "[
+                                {\"name\":\"name\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Ваше имя\",\"default\":\"\",\"required\":\"Y\"},
+                                {\"name\":\"phone\",\"type\":\"tel\",\"title\":\"\",\"placeholder\":\"Ваш телефон\",\"default\":\"\",\"required\":\"Y\"}
+                            ]",
+		"NEED_SAVE_TO_IBLOCK" => "N",
+		"NEED_SEND_EMAIL" => "Y",
+		"EVENT_TYPE" => "57",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "3600"
+	),
+	false
+); ?>
     </div>
     <br>
     </div>

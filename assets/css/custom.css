@@ -12,6 +12,16 @@
 .feedback-input .it-error{
     width: 250px;
 }
+.vacancy_reply_form_input{
+    display: inline-block;
+    height: 43px;
+    line-height: 43px;
+    border: 1px solid #ffffff;
+    margin: 0 auto 15px;
+    background-color: transparent;
+    width: 100%;
+    max-width: 350px;
+}
 @media (max-width:992px) {
     .feedback-input{
         float: none;
