@@ -6,7 +6,7 @@ use Bitrix\Main\Localization\Loc;
 
 Loc::loadMessages(__FILE__);
 ?>
-<form method="post" <?= $component->getFormAction(); ?> enctype="multipart/form-data">
+<form <?= $component->getFormClass(); ?> method="post" <?= $component->getFormAction(); ?> enctype="multipart/form-data">
     <div class="row">
         <? foreach ($component->getFields() as $field): ?>
             <div class="col-xs-12 input it-block">
