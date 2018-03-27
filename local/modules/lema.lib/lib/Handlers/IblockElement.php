@@ -61,6 +61,11 @@ class IblockElement
 
     }
 
+    /**
+     * Generates element code from its name, square and element ID. Only for objects iblock
+     *
+     * @param array $fields
+     */
     protected static function generateElementCode(array &$fields)
     {
         if(isset($fields['IBLOCK_ID']) && $fields['IBLOCK_ID'] === \LIblock::getId('objects'))
