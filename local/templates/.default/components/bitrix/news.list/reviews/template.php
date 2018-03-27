@@ -1,4 +1,5 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
+
 /** @var array $arParams */
 /** @var array $arResult */
 /** @global CMain $APPLICATION */
@@ -11,7 +12,7 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
-if(empty($arResult["ITEMS"]))
+if (empty($arResult["ITEMS"]))
     return;
 $data = new \Lema\Template\TemplateHelper($this);
 
@@ -23,16 +24,21 @@ $bxAjaxId = CAjax::GetComponentID($component->__name, $component->__template->__
 $sCode = $arResult['CODE'];
 ?>
 <div class="ajax_load">
-    <? if ($_REQUEST['showMore_' . $sCode] == '1')
-        $APPLICATION->RestartBuffer(); ?>
+
     <div class="customer-reviews <?= $sCode; ?>">
+
+        <? if ($_REQUEST['showMore_' . $sCode] == '1')
+            $GLOBALS['APPLICATION']->RestartBuffer(); ?>
         <div class="container">
-            <h2 class="customer-reviews__h2">
-                <?= Loc::getMessage("LEMA_REVIEWS_TITLE"); ?>
-            </h2>
+            <? if (!$_REQUEST['showMore_' . $sCode] == '1') { ?>
+                <h2 class="customer-reviews__h2">
+                    <?= Loc::getMessage("LEMA_REVIEWS_TITLE"); ?>
+                </h2>
+            <? } ?>
+
             <div class="row">
                 <? foreach ($data->items() as $item): ?>
-                    <div class="col-md-6">
+                    <div class="col-md-6" <?= $item->editId(); ?>>
                         <div class="customer-reviews__item">
                             <div class="customer-reviews__item__icon"></div>
                             <div class="customer-reviews__item__content">
@@ -40,8 +46,8 @@ $sCode = $arResult['CODE'];
                                     <?= $item->getName(); ?>
                                 </div>
                                 <span class="customer-reviews__item__content__time">
-                            <?= $item->get("ACTIVE_FROM"); ?>
-                        </span>
+                                    <?= $item->get("ACTIVE_FROM"); ?>
+                                </span>
                                 <p class="customer-reviews__item__content__text">
                                     <?= $item->previewText(); ?>
                                 </p>
@@ -54,15 +60,10 @@ $sCode = $arResult['CODE'];
                         </div>
                     </div>
                 <? endforeach; ?>
+
+
             </div>
-            <div class="bottom_nav" style="display: none;">
-                <? if ($arParams["DISPLAY_BOTTOM_PAGER"] == "Y") { ?>
-                    <?= $arResult["NAV_STRING"]; ?>
-                <? } ?>
-            </div>
-            <? if ($_REQUEST['showMore_' . $sCode] == '1')
-                die(); ?>
-            <? if (empty($_GET['showMore_' . $sCode])): ?>
+            <? if ($arResult["NAV_RESULT"]->NavPageNomer != $arResult["NAV_RESULT"]->nEndPage): ?>
                 <div class="css_text-center <?= $sCode; ?>">
                     <a class="customer-reviews__more icon-right-small ajax_load_btn_new"
                        href="#"
@@ -71,16 +72,23 @@ $sCode = $arResult['CODE'];
                        data-next-page="<?= ($arResult["NAV_RESULT"]->NavPageNomer + 1) ?>"
                        data-max-page="<?= $arResult["NAV_RESULT"]->nEndPage ?>"
                        data-section-code="<?= $sCode; ?>">
-            <span>
-                <?= Loc::getMessage("LEMA_REVIEWS_SHOW_MORE"); ?>
-            </span>
+                            <span>
+                                <?= Loc::getMessage("LEMA_REVIEWS_SHOW_MORE"); ?>
+                            </span>
                     </a>
                 </div>
             <? endif; ?>
         </div>
+        <div class="bottom_nav" style="display: none;">
+            <? if ($arParams["DISPLAY_BOTTOM_PAGER"] == "Y") { ?>
+                <?= $arResult["NAV_STRING"]; ?>
+            <? } ?>
+        </div>
+        <? if ($_REQUEST['showMore_' . $sCode] == '1')
+            die(); ?>
     </div>
 </div>
-<?/*
+
 <script>
 
     $(document).ready(function () {
@@ -113,7 +121,8 @@ $sCode = $arResult['CODE'];
                     btn.attr('data-next-page', page * 1 + 1);
                     //btn.remove();
                     $.when($('.ajax_load .customer-reviews.' + code).first().append(data)).then(function () {
-                        $('.bottom_nav').html($('.bottom_nav').eq(-2).html());
+                        $('.ajax_load_btn_new').html($('.ajax_load_btn_new').eq(-2).html());
+                        $('.ajax_load_btn_new').first().remove();
                         if (max == (page * 1))
                             $('.css_text-center.' + code).hide();
                     });
@@ -124,4 +133,3 @@ $sCode = $arResult['CODE'];
     });
 
 </script>
-*/?>
