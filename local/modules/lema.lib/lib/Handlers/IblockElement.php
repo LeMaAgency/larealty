@@ -18,7 +18,7 @@ class IblockElement
      */
     public static function beforeAdd(array &$fields)
     {
-
+        static::setElementRights($fields);
     }
 
     /**
@@ -27,6 +27,7 @@ class IblockElement
     public static function beforeUpdate(array &$fields)
     {
         static::generateElementCode($fields);
+        static::setElementRights($fields);
     }
 
     /**
@@ -68,10 +69,12 @@ class IblockElement
      */
     protected static function generateElementCode(array &$fields)
     {
+        //check iblock number
         if(isset($fields['IBLOCK_ID']) && $fields['IBLOCK_ID'] === \LIblock::getId('objects'))
         {
+            //get square property id
             $squareId = \LIblock::getPropId('objects', 'SQUARE');
-
+            //get square property value
             if(empty($fields['PROPERTY_VALUES'][$squareId]))
                 $square = 0;
             else
@@ -80,8 +83,48 @@ class IblockElement
                 $square = empty($tmp) || empty($tmp['VALUE']) ? 0 : $tmp['VALUE'];
             }
 
+            //generate element code for URL
             $id = empty($fields['ID']) ? 0 : $fields['ID'];
             $fields['CODE'] = \CUtil::translit($fields['NAME'] . '_' . $square . '_m_2_' . $id, 'ru');
+        }
+    }
+
+    /**
+     * Set element rights for specified user (or clean it)
+     *
+     * @param array $fields
+     */
+    protected static function setElementRights(array &$fields)
+    {
+        //check iblock number
+        if(isset($fields['IBLOCK_ID']) && $fields['IBLOCK_ID'] === \LIblock::getId('objects'))
+        {
+            //get rieltor property id
+            $rieltorPropId = \LIblock::getPropId('objects', 'RIELTOR');
+            //get rieltor property value
+            if(empty($fields['PROPERTY_VALUES'][$rieltorPropId]))
+                $rieltorId = 0;
+            else
+            {
+                $tmp = current($fields['PROPERTY_VALUES'][$rieltorPropId]);
+                $rieltorId = empty($tmp) || empty($tmp['VALUE']) ? 0 : (int) $tmp['VALUE'];
+            }
+            //rieltor not specified, clean rights
+            if(empty($rieltorId))
+            {
+                $fields['RIGHTS'] = array();
+            }
+            else
+            {
+                //set rights for specified rieltor
+                $fields['RIGHTS'] = array(
+                    'n0' => array(
+                        'GROUP_CODE' => 'U' . $rieltorId,
+                        'DO_CLEAN' => 'N',
+                        'TASK_ID' => 38
+                    )
+                );
+            }
         }
     }
 }
