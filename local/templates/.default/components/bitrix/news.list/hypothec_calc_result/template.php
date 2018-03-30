@@ -38,8 +38,10 @@ $data = new TH($this);
         </thead>
         <tbody>
         <?foreach($data->items() as $item):?>
-            <tr>
-                <td scope="row" data-label="<?=Loc::getMessage('LEMA_HYPOTHEC_CALC_RESULT_BANK');?>"><img src="<?=$item->get("BANK_PICTURE")?>" alt="<?=$item->get("BANK_NAME")?>"></td>
+            <tr <?=$item->editId()?>>
+                <td scope="row" data-label="<?=Loc::getMessage('LEMA_HYPOTHEC_CALC_RESULT_BANK');?>">
+                    <img src="<?=(!empty($item->get("SVG_PICTURE")))?$item->get("SVG_PICTURE"):$item->get("BANK_PICTURE") ?>" alt="<?=$item->get("BANK_NAME")?>">
+                </td>
                 <td data-label="<?=Loc::getMessage('LEMA_HYPOTHEC_CALC_RESULT_PROGRAM');?>"><?=$item->getName()?></td>
                 <td data-label="<?=Loc::getMessage('LEMA_HYPOTHEC_CALC_RESULT_BET');?>"><?=$item->propVal('BANK_BET')?> %</td>
                 <td data-label="<?=Loc::getMessage('LEMA_HYPOTHEC_CALC_RESULT_PAY');?>"><?=$item->propVal('MONTH_PAYMENT')?> руб</td>
