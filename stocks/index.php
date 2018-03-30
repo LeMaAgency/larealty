@@ -3,13 +3,6 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php';
 
 $APPLICATION->SetTitle('Акции');
 ?>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <?\Lema\Components\Breadcrumbs::inc('breadcrumbs');?>
-            </div>
-        </div>
-    </div>
 <div class="container">
 	<div class="act__title">
         <h2 class="act__title"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/stocks/title.php'); ?></h2>
