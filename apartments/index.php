@@ -25,7 +25,7 @@ $APPLICATION->SetTitle('Каталог квартир');
 		"NEWS_COUNT" => "6",
 		"USE_SEARCH" => "N",
 		"USE_RSS" => "N",
-		"USE_RATING" => "Y",
+		"USE_RATING" => "N",
 		"USE_CATEGORIES" => "N",
 		"USE_REVIEW" => "N",
 		"USE_FILTER" => "Y",

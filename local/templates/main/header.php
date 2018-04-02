@@ -12,8 +12,6 @@ global $APPLICATION;
 
 <head>
 
-    <link href="/assets/css/imports.css" rel="stylesheet" media="all">
-
     <?php
     $APPLICATION->ShowHead();
 
@@ -42,6 +40,8 @@ global $APPLICATION;
             '/assets/js/custom.js',
         ));
     ?>
+
+    <link href="/assets/css/imports.css" rel="stylesheet" media="all">
 
     <title><?$APPLICATION->ShowTitle();?></title>
 
