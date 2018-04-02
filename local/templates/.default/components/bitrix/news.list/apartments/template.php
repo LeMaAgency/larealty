@@ -52,49 +52,49 @@ $data = new TH($this);
                                 <?endif;?>
                             </div>
                             <div class="offers-item-info clearfix">
-                                <div class="item-info item-info_room">
-                                    <div class="item-info__inner">
-                                        <div class="item-info__inner__img item-info__inner__img_room"></div>
-                                        <div class="item-info__inner__content">
-                                            <?if($item->propFilled('ROOMS_COUNT')):?>
+                                <?if($item->propFilled('ROOMS_COUNT')):?>
+                                    <div class="item-info item-info_room">
+                                        <div class="item-info__inner">
+                                            <div class="item-info__inner__img item-info__inner__img_room"></div>
+                                            <div class="item-info__inner__content">
                                                 <div class="item-info-name"><?=$item->propName('ROOMS_COUNT');?></div>
                                                 <div class="item-info-value"><?=$item->propVal('ROOMS_COUNT');?></div>
-                                            <?endif;?>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="item-info item-info_floor">
-                                    <div class="item-info__inner">
-                                        <div class="item-info__inner__img item-info__inner__img_floor"></div>
-                                        <div class="item-info__inner__content">
-                                            <?if($item->propFilled('STAGE') && $item->propFilled('STAGES_COUNT')):?>
+                                <?endif;?>
+                                <?if($item->propFilled('STAGE') && $item->propFilled('STAGES_COUNT')):?>
+                                    <div class="item-info item-info_floor">
+                                        <div class="item-info__inner">
+                                            <div class="item-info__inner__img item-info__inner__img_floor"></div>
+                                            <div class="item-info__inner__content">
                                                 <div class="item-info-name"><?=$item->propName('STAGE');?></div>
                                                 <div class="item-info-value">
                                                     <?=$item->propVal('STAGE');?>/<?=$item->propVal('STAGES_COUNT');?>
                                                 </div>
-                                            <?endif;?>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="item-info item-info_area">
-                                    <div class="item-info__inner">
-                                        <div class="item-info__inner__img item-info__inner__img_area"></div>
-                                        <div class="item-info__inner__content">
-                                            <?if($item->propFilled('SQUARE')):?>
+                                <?endif;?>
+                                <?if($item->propFilled('SQUARE')):?>
+                                    <div class="item-info item-info_area">
+                                        <div class="item-info__inner">
+                                            <div class="item-info__inner__img item-info__inner__img_area"></div>
+                                            <div class="item-info__inner__content">
                                                 <div class="item-info-name"><?=$item->propName('SQUARE');?></div>
                                                 <div class="item-info-value">
                                                     <?=$item->propVal('SQUARE');?>
                                                     <?=Loc::getMessage('LEMA_SQUARE_M_SUP');?>
                                                 </div>
-                                            <?endif;?>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                <?endif;?>
                             </div>
                             <a href="" class="card-flat__content__favorites"><span><?=Loc::getMessage('LEMA_ADD_TO_FAVORITE');?></span></a>
-                            <?if($item->propFilled('ADDRESS')):?>
+                            <?if($item->get('ADDRESS')):?>
                                 <p class="card-flat__content__address icon-location">
-                                    <?=$item->propVal('ADDRESS');?>
+                                    <?=$item->get('ADDRESS');?>
                                 </p>
                             <?endif;?>
                             <p class="card-flat__content__text"><?=$item->previewText();?></p>
