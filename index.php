@@ -6,25 +6,27 @@ $APPLICATION->SetTitle("Квартирный ответ - Главная стр�
     <!-- FEEDBACK FORM -->
     <section class="top-slider-block">
         <? $APPLICATION->IncludeComponent(
-            "lema:form.ajax",
-            "feedback",
-            array(
-                "COMPONENT_TEMPLATE" => "feedback",
-                "FORM_CLASS" => "ajax-form call-order",
-                "FORM_ACTION" => "",
-                "FORM_152_FZ" => "Я ознакомлен <a target=\"_blank\" href=\"/contacts/apply.pdf\">c положением об обработке и защите персональных данных.</a>",
-                "FORM_BTN_TITLE" => "Отправить",
-                "FORM_SUCCESS_FUNCTION" => "\$.fancybox.open(\"Ваше сообщение успешно отправлено\")",
-                "FORM_SUCCESS_FUNCTION_CORRECT_JSON" => "Y",
-                "FORM_FIELDS" => "[{\"name\":\"name\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Имя\",\"default\":\"\",\"required\":\"Y\"},{\"name\":\"phone\",\"type\":\"tel\",\"title\":\"\",\"placeholder\":\"Телефон\",\"default\":\"\",\"required\":\"Y\"}]",
-                "NEED_SAVE_TO_IBLOCK" => "N",
-                "NEED_SEND_EMAIL" => "Y",
-                "EVENT_TYPE" => "57",
-                "CACHE_TYPE" => "A",
-                "CACHE_TIME" => "3600"
-            ),
-            false
-        ); ?>
+	"lema:form.ajax", 
+	"feedback", 
+	array(
+		"COMPONENT_TEMPLATE" => "feedback",
+		"FORM_CLASS" => "ajax-form call-order",
+		"FORM_ACTION" => "",
+		"FORM_152_FZ" => "Я ознакомлен <a target=\"_blank\" href=\"/contacts/apply.pdf\">c положением об обработке и защите персональных данных.</a>",
+		"FORM_BTN_TITLE" => "Отправить",
+		"FORM_SUCCESS_FUNCTION" => "\$.fancybox.open(\"Ваше сообщение успешно отправлено\")",
+		"FORM_SUCCESS_FUNCTION_CORRECT_JSON" => "Y",
+		"FORM_FIELDS" => "[{\"name\":\"name\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Имя\",\"default\":\"\",\"required\":\"Y\"},{\"name\":\"phone\",\"type\":\"tel\",\"title\":\"\",\"placeholder\":\"Телефон\",\"default\":\"\",\"required\":\"Y\"}]",
+		"NEED_SAVE_TO_IBLOCK" => "Y",
+		"NEED_SEND_EMAIL" => "Y",
+		"EVENT_TYPE" => "57",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "3600",
+		"IBLOCK_TYPE" => "feedback",
+		"IBLOCK_ID" => "12"
+	),
+	false
+); ?>
 
         <? $APPLICATION->IncludeComponent(
 	"bitrix:news.list", 

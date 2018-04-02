@@ -304,11 +304,13 @@ $APPLICATION->SetTitle("Покупателю");
 		"FORM_SUCCESS_FUNCTION" => "\$.fancybox.open(\"Ваше сообщение успешно отправлено\")",
 		"FORM_SUCCESS_FUNCTION_CORRECT_JSON" => "Y",
 		"FORM_FIELDS" => "[{\"name\":\"name\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Имя\",\"default\":\"\",\"required\":\"Y\"},{\"name\":\"phone\",\"type\":\"tel\",\"title\":\"\",\"placeholder\":\"Телефон\",\"default\":\"\",\"required\":\"Y\"}]",
-		"NEED_SAVE_TO_IBLOCK" => "N",
+		"NEED_SAVE_TO_IBLOCK" => "Y",
 		"NEED_SEND_EMAIL" => "Y",
-		"EVENT_TYPE" => "61",
+		"EVENT_TYPE" => "1",
 		"CACHE_TYPE" => "A",
-		"CACHE_TIME" => "3600"
+		"CACHE_TIME" => "3600",
+		"IBLOCK_TYPE" => "feedback",
+		"IBLOCK_ID" => "14"
 	),
 	false
 ); ?>
