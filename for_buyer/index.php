@@ -293,25 +293,25 @@ $APPLICATION->SetTitle("Покупателю");
                             <? $APPLICATION->IncludeFile(SITE_DIR . 'include/buyer/reviews/title.php'); ?>
                         </h3>
                         <? $APPLICATION->IncludeComponent(
-                            "lema:form.ajax",
-                            "consultation",
-                            array(
-                                "COMPONENT_TEMPLATE" => "consultation",
-                                "FORM_CLASS" => "ajax-form connect-consultant__form feedback-form",
-                                "FORM_ACTION" => "",
-                                "FORM_152_FZ" => "Я ознакомлен <a target=\"_blank\" href=\"/contacts/apply.pdf\">c положением об обработке и защите персональных данных.</a>",
-                                "FORM_BTN_TITLE" => "Получить консультацию",
-                                "FORM_SUCCESS_FUNCTION" => "\$.fancybox.open(\"Ваше сообщение успешно отправлено\")",
-                                "FORM_SUCCESS_FUNCTION_CORRECT_JSON" => "Y",
-                                "FORM_FIELDS" => "[{\"name\":\"name\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Имя\",\"default\":\"\",\"required\":\"Y\"},{\"name\":\"phone\",\"type\":\"tel\",\"title\":\"\",\"placeholder\":\"Телефон\",\"default\":\"\",\"required\":\"Y\"}]",
-                                "NEED_SAVE_TO_IBLOCK" => "N",
-                                "NEED_SEND_EMAIL" => "Y",
-                                "EVENT_TYPE" => "57",
-                                "CACHE_TYPE" => "A",
-                                "CACHE_TIME" => "3600"
-                            ),
-                            false
-                        ); ?>
+	"lema:form.ajax", 
+	"consultation", 
+	array(
+		"COMPONENT_TEMPLATE" => "consultation",
+		"FORM_CLASS" => "ajax-form connect-consultant__form feedback-form",
+		"FORM_ACTION" => "",
+		"FORM_152_FZ" => "Я ознакомлен <a target=\"_blank\" href=\"/contacts/apply.pdf\">c положением об обработке и защите персональных данных.</a>",
+		"FORM_BTN_TITLE" => "Получить консультацию",
+		"FORM_SUCCESS_FUNCTION" => "\$.fancybox.open(\"Ваше сообщение успешно отправлено\")",
+		"FORM_SUCCESS_FUNCTION_CORRECT_JSON" => "Y",
+		"FORM_FIELDS" => "[{\"name\":\"name\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Имя\",\"default\":\"\",\"required\":\"Y\"},{\"name\":\"phone\",\"type\":\"tel\",\"title\":\"\",\"placeholder\":\"Телефон\",\"default\":\"\",\"required\":\"Y\"}]",
+		"NEED_SAVE_TO_IBLOCK" => "N",
+		"NEED_SEND_EMAIL" => "Y",
+		"EVENT_TYPE" => "61",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "3600"
+	),
+	false
+); ?>
                     </div>
                 </div>
             </div>
