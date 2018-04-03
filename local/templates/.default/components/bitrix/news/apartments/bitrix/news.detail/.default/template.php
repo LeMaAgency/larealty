@@ -133,7 +133,7 @@ $item = $data->item();
                             <span><?=Loc::getMessage('LEMA_DETAIL_DESCRIPTION_TAB_TITLE');?></span>
                         </a>
                         <a href="#location-flat" class="flat-on-map__nav__item active">
-                            <span><?=Loc::getMessage('LEMA_DETAIL_MAP_TAB_TITLE');?></span
+                            <span><?=Loc::getMessage('LEMA_DETAIL_MAP_TAB_TITLE');?></span>
                         </a>
                     </div>
                     <div class="flat-on-map__content" id="description-flat">
