@@ -1751,6 +1751,9 @@ if (
 ?>
 <script>
     $(function() {
+        $('[id^="tr_PROPERTY_"], #tr_NAME, #tr_CODE').hide();
+        $('#tr_PROPERTY_1, #tr_PROPERTY_3, #tr_PROPERTY_28, #tr_PROPERTY_61').show();
+
         $('#tr_PROPERTY_1 select').on('change', function(e) {
             e.preventDefault();
             var hiddenProps = [];
@@ -1762,7 +1765,6 @@ if (
                     hiddenProps = [
                         9, 59, 36, 37, 57, 58, 38, 39, 40, 52, 53, 41, 42, 43, 44, 45, 46, 47, 48, 49, 51
                     ];
-                    console.log($(this).val())
                 break;
                 //Комнаты
                 case '2':
@@ -1802,6 +1804,11 @@ if (
                     hiddenProps = [
                         2, 56, 6, 9, 34, 59, 7, 21, 35, 22, 23, 37, 24, 25, 57, 8, 58, 33, 27, 44, 45, 50
                     ];
+                break;
+                default:
+                    $('[id^="tr_PROPERTY_"], #tr_NAME, #tr_CODE').hide();
+                    $('#tr_PROPERTY_1, #tr_PROPERTY_3, #tr_PROPERTY_28, #tr_PROPERTY_61').show();
+                    return ;
                 break;
             }
 

@@ -29,6 +29,20 @@ class LIblock
 
 
     /**
+     * @return array
+     */
+    public static function getPropEnumValues($propId = null)
+    {
+        if(empty(static::$propValues))
+            static::loadData();
+
+        if(isset($propId))
+            return isset(static::$propValues[$propId]) ? static::$propValues[$propId] : false;
+        else
+            return static::$propValues;
+    }
+
+    /**
      * @param $iblockCode string IBlock symbolic code
      * @return bool|int
      */

@@ -26,7 +26,7 @@ class IblockElement
      */
     public static function beforeUpdate(array &$fields)
     {
-        static::generateElementCode($fields);
+        static::generateElementNameAndCode($fields);
         static::setElementRights($fields);
     }
 
@@ -43,7 +43,7 @@ class IblockElement
      */
     public static function afterAdd(array &$fields)
     {
-        static::generateElementCode($fields);
+        static::generateElementNameAndCode($fields);
     }
 
     /**
@@ -67,13 +67,19 @@ class IblockElement
      *
      * @param array $fields
      */
-    protected static function generateElementCode(array &$fields)
+    protected static function generateElementNameAndCode(array &$fields)
     {
         //check iblock number
         if(isset($fields['IBLOCK_ID']) && $fields['IBLOCK_ID'] === \LIblock::getId('objects'))
         {
             //get square property id
             $squareId = \LIblock::getPropId('objects', 'SQUARE');
+            //get realty property id
+            $realtyId = \LIblock::getPropId('objects', 'RIELTY_TYPE');
+
+            if(empty($squareId) || empty($realtyId))
+                return ;
+
             //get square property value
             if(empty($fields['PROPERTY_VALUES'][$squareId]))
                 $square = 0;
@@ -81,6 +87,25 @@ class IblockElement
             {
                 $tmp = current($fields['PROPERTY_VALUES'][$squareId]);
                 $square = empty($tmp) || empty($tmp['VALUE']) ? 0 : $tmp['VALUE'];
+            }
+
+            //get realty property value
+            if(empty($fields['PROPERTY_VALUES'][$realtyId]))
+                $realty = 0;
+            else
+            {
+                $tmp = current($fields['PROPERTY_VALUES'][$realtyId]);
+                $realty = empty($tmp) || empty($tmp['VALUE']) ? 0 : $tmp['VALUE'];
+            }
+
+            //set name from choosen property value
+            foreach(\LIblock::getPropEnumValues($realtyId) as $propData)
+            {
+                if($propData['ID'] == $realty)
+                {
+                    $fields['NAME'] = $propData['VALUE'];
+                    break;
+                }
             }
 
             //generate element code for URL
@@ -101,30 +126,51 @@ class IblockElement
         {
             //get rieltor property id
             $rieltorPropId = \LIblock::getPropId('objects', 'RIELTOR');
-            //get rieltor property value
-            if(empty($fields['PROPERTY_VALUES'][$rieltorPropId]))
-                $rieltorId = 0;
+
+            /**
+             * Administrator can change rieltor for object
+             */
+            if(\Lema\Common\User::isAdmin())
+            {
+                //get rieltor property value
+                if(empty($fields['PROPERTY_VALUES'][$rieltorPropId]))
+                {
+                    $rieltorId = 0;
+                }
+                else
+                {
+                    $tmp = current($fields['PROPERTY_VALUES'][$rieltorPropId]);
+                    $rieltorId = empty($tmp) || empty($tmp['VALUE']) ? 0 : (int) $tmp['VALUE'];
+                }
+                //rieltor not specified, clean rights
+                if(empty($rieltorId))
+                {
+                    $fields['RIGHTS'] = array();
+                }
+                else
+                {
+                    //set rights for specified rieltor
+                    $fields['RIGHTS'] = array(
+                        'n0' => array(
+                            'GROUP_CODE' => 'U' . $rieltorId,
+                            'DO_CLEAN' => 'N',
+                            'TASK_ID' => 38
+                        )
+                    );
+                }
+            }
             else
             {
-                $tmp = current($fields['PROPERTY_VALUES'][$rieltorPropId]);
-                $rieltorId = empty($tmp) || empty($tmp['VALUE']) ? 0 : (int) $tmp['VALUE'];
+                /**
+                 * New object, set special section to it
+                 */
+                if(empty($fields['RIGHTS']))
+                {
+                    $fields['IBLOCK_SECTION'] = array(23);
+                    $fields['ACTIVE'] = 'Y';
+                }
             }
-            //rieltor not specified, clean rights
-            if(empty($rieltorId))
-            {
-                $fields['RIGHTS'] = array();
-            }
-            else
-            {
-                //set rights for specified rieltor
-                $fields['RIGHTS'] = array(
-                    'n0' => array(
-                        'GROUP_CODE' => 'U' . $rieltorId,
-                        'DO_CLEAN' => 'N',
-                        'TASK_ID' => 38
-                    )
-                );
-            }
+
         }
     }
 }
