@@ -70,7 +70,7 @@ class IblockElement
     protected static function generateElementNameAndCode(array &$fields)
     {
         //check iblock number
-        if(isset($fields['IBLOCK_ID']) && $fields['IBLOCK_ID'] === \LIblock::getId('objects'))
+        if(isset($fields['IBLOCK_ID']) && $fields['IBLOCK_ID'] === \LIblock::getId('objects') && !empty($fields['PROPERTY_VALUES']))
         {
             //get square property id
             $squareId = \LIblock::getPropId('objects', 'SQUARE');
@@ -122,7 +122,7 @@ class IblockElement
     protected static function setElementRights(array &$fields)
     {
         //check iblock number
-        if(isset($fields['IBLOCK_ID']) && $fields['IBLOCK_ID'] === \LIblock::getId('objects'))
+        if(isset($fields['IBLOCK_ID']) && $fields['IBLOCK_ID'] === \LIblock::getId('objects') && !empty($fields['PROPERTY_VALUES']))
         {
             //get rieltor property id
             $rieltorPropId = \LIblock::getPropId('objects', 'RIELTOR');

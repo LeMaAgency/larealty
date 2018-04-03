@@ -95,8 +95,8 @@ class LIblock
         if(!$propId)
             return false;
 
-        if(isset(static::$propValues[$propId][$xmlId]))
-            return static::$propValues[$propId][$xmlId];
+        if(isset(static::$propValues[$propId][$xmlId]['ID']))
+            return static::$propValues[$propId][$xmlId]['ID'];
 
         return false;
     }
@@ -188,7 +188,7 @@ class LIblock
                     while($arrProp = $resProp->Fetch())
                     {
                         if($arrProp['XML_ID'])
-                            static::$propValues[$row['ID']][$arrProp['XML_ID']] = (int) $arrProp['ID'];
+                            static::$propValues[$row['ID']][$arrProp['XML_ID']] = $arrProp;
                     }
                 }
             }
