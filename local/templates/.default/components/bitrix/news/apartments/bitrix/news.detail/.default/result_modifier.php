@@ -72,3 +72,17 @@ if($item->propFilled('BUILDING_NUMBER'))
         $arResult['ADDRESS'] .= $splitSymbol;
     $arResult['ADDRESS'] .= $item->propVal('BUILDING_NUMBER');
 }
+
+$arResult['RIELTOR'] = array();
+if($item->propFilled('RIELTOR'))
+{
+    $res = \CUser::GetByID($item->propVal('RIELTOR'));
+    if($row = $res->Fetch())
+    {
+        $arResult['RIELTOR'] = array(
+            'NAME' => htmlspecialcharsbx(trim($row['LAST_NAME'] . ' ' . $row['NAME'])),
+            'IMG' => (empty($row['WORK_LOGO']) ? null : \CFile::GetPath($row['WORK_LOGO'])),
+            'PHONE' => htmlspecialcharsbx($row['WORK_PHONE']),
+        );
+    }
+}

@@ -55,7 +55,9 @@ $item = $data->item();
                                 <?=Loc::getMessage('LEMA_APARTMENTS_RUB');?>
                             </div>
                         </div>
-                        <a href="" class="card-flat__content__favorites"><span>Добавить в избранное</span></a>
+                        <a href="#" class="card-flat__content__favorites">
+                            <span><?=Loc::getMessage('LEMA_DETAIL_ADD_TO_FAVOURITE');?></span>
+                        </a>
                         <p class="card-flat__content__address icon-location"><?=$item->get('ADDRESS');?></p>
                         <div class="offers-item-info clearfix">
                             <?if($item->propFilled('ROOMS_COUNT')):?>
@@ -110,8 +112,12 @@ $item = $data->item();
                             <?endforeach;?>
                         </div>
                         <div class="card-flat__content__buttons">
-                            <a href="#" class="card-flat__content__buttons__item"><span>Записаться на просмотр</span></a>
-                            <a href="#" class="card-flat__content__buttons__item"><span>Купить в ипотеку</span></a>
+                            <a href="#" class="card-flat__content__buttons__item">
+                                <span><?=Loc::getMessage('LEMA_DETAIL_ORDER_VIEWING');?></span>
+                            </a>
+                            <a href="#" class="card-flat__content__buttons__item">
+                                <span><?=Loc::getMessage('LEMA_DETAIL_HYPOTHEC_BUY');?></span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -123,28 +129,45 @@ $item = $data->item();
             <div class="row">
                 <div class="col-md-8">
                     <div class="flat-on-map__nav">
-                        <a href="#description-flat" class="flat-on-map__nav__item"><span>Описание</span></a>
-                        <a href="#location-flat" class="flat-on-map__nav__item active"><span>Объект на карте</span></a>
+                        <a href="#description-flat" class="flat-on-map__nav__item">
+                            <span><?=Loc::getMessage('LEMA_DETAIL_DESCRIPTION_TAB_TITLE');?></span>
+                        </a>
+                        <a href="#location-flat" class="flat-on-map__nav__item active">
+                            <span><?=Loc::getMessage('LEMA_DETAIL_MAP_TAB_TITLE');?></span
+                        </a>
                     </div>
                     <div class="flat-on-map__content" id="description-flat">
-                        <p class="flat-on-map__content__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis est sit adipisci debitis, ipsa obcaecati eveniet laborum velit animi perspiciatis ex consectetur necessitatibus cum officiis quod iure dolor, vitae ad?</p>
+                        <p class="flat-on-map__content__text">
+                            <?=$item->detailText();?>
+                        </p>
                     </div>
                     <div class="flat-on-map__content active" id="location-flat">
                         <div class="flat-on-map__content__location" id="map-location-flat"></div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="realtor-card">
-                        <div class="realtor-card__img"><img src="/assets/img/realtors/realtor.png" alt=""></div>
-                        <div class="realtor-card__name">Иванова Юлия</div>
-                        <div class="realtor-card__tagline">Связаться со мной!</div>
-                        <div class="realtor-card__tel">+7922 039 - 21 -68</div>
-                        <p class="realtor-card__text">или оставьте ваш номер, и я перезвонию вам в ближайшее время</p>
-                        <form class="realtor-card__form" action="#">
-                            <input class="realtor-card__form__input" type="tel" name="realtor-tel" placeholder="Ваш телефон">
-                            <button class="realtor-card__form__button" type="submit">Жду звонка</button>
-                        </form>
-                    </div>
+                    <?if(!empty($arResult['RIELTOR'])):?>
+                        <div class="realtor-card">
+                            <?if(!empty($arResult['RIELTOR']['IMG'])):?>
+                                <div class="realtor-card__img">
+                                    <img src="<?=$arResult['RIELTOR']['IMG'];?>" alt="<?=$arResult['RIELTOR']['NAME'];?>">
+                                </div>
+                            <?endif;?>
+                            <div class="realtor-card__name"><?=$arResult['RIELTOR']['NAME'];?></div>
+                            <div class="realtor-card__tagline"><?=Loc::getMessage('LEMA_DETAIL_RIELTOR_CALL_TITLE');?></div>
+                            <div class="realtor-card__tel"><?=$arResult['RIELTOR']['PHONE'];?></div>
+                            <p class="realtor-card__text"><?=Loc::getMessage('LEMA_DETAIL_RIELTOR_RECALL_TITLE');?></p>
+                            <form class="realtor-card__form js-rieltor-form" action="/ajax/rieltor_call.php" method="post">
+                                <input type="hidden" name="element_id" value="<?=(int) $item->getId();?>">
+                                <input type="hidden" name="element_name" value="<?=$item->getName();?>">
+                                <input class="realtor-card__form__input" type="tel" name="phone"
+                                       placeholder="<?=Loc::getMessage('LEMA_DETAIL_PHONE_PLACEHOLDER');?>">
+                                <button class="realtor-card__form__button" type="submit">
+                                    <?=Loc::getMessage('LEMA_DETAIL_RECALL_WAIT_TITLE');?>
+                                </button>
+                            </form>
+                        </div>
+                    <?endif;?>
                 </div>
             </div>
         </div>
