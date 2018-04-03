@@ -162,12 +162,13 @@ class IblockElement
             else
             {
                 /**
-                 * New object, set special section to it
+                 * New object, set special section to it and clear access rights
                  */
-                if(empty($fields['RIGHTS']))
+                if(empty($fields['ID']))
                 {
                     $fields['IBLOCK_SECTION'] = array(23);
                     $fields['ACTIVE'] = 'Y';
+                    $fields['RIGHTS'] = array();
                 }
                 else
                 {
