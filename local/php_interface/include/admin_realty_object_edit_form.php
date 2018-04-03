@@ -1581,7 +1581,10 @@ if ($arShowTabs['bizproc']):
     $tabControl->EndCustomField("BIZPROC", "");
 endif;
 
-if($arShowTabs['edit_rights']):
+/**
+ * Show access rights tab only for administrators
+ */
+if(\Lema\Common\User::isAdmin() && $arShowTabs['edit_rights']):
     $tabControl->BeginNextFormTab();
     if($ID > 0)
     {
