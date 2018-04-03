@@ -169,6 +169,16 @@ class IblockElement
                     $fields['IBLOCK_SECTION'] = array(23);
                     $fields['ACTIVE'] = 'Y';
                 }
+                else
+                {
+                    $fields['RIGHTS'] = array(
+                        'n0' => array(
+                            'GROUP_CODE' => 'U' . \Lema\Common\User::get()->GetId(),
+                            'DO_CLEAN' => 'N',
+                            'TASK_ID' => 38
+                        )
+                    );
+                }
             }
 
         }
