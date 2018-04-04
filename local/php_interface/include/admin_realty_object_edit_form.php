@@ -1751,11 +1751,17 @@ if (
 ?>
 <script>
     $(function() {
-        $('[id^="tr_PROPERTY_"], #tr_NAME, #tr_CODE').hide();
-        $('#tr_PROPERTY_1, #tr_PROPERTY_3, #tr_PROPERTY_28, #tr_PROPERTY_61').show();
+        /**
+         * Hide items for empty choose
+         */
+        if($.trim($('#tr_PROPERTY_1 select').val()) == '') {
+            $('[id^="tr_PROPERTY_"], #tr_NAME, #tr_CODE').hide();
+            $('#tr_PROPERTY_1, #tr_PROPERTY_3, #tr_PROPERTY_28, #tr_PROPERTY_61').show();
+        }
 
         $('#tr_PROPERTY_1 select').on('change', function(e) {
             e.preventDefault();
+
             var hiddenProps = [];
 
             switch($(this).val())
