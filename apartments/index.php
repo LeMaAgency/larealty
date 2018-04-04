@@ -104,7 +104,6 @@ $APPLICATION->SetTitle('Каталог квартир');
             'FIRE_EXT_SYSTEM',
             'SECURITY_VIDEO',
             'HAVINGS_TYPE',
-            'MAP',
 		),
 		"DETAIL_DISPLAY_TOP_PAGER" => "Y",
 		"DETAIL_DISPLAY_BOTTOM_PAGER" => "Y",

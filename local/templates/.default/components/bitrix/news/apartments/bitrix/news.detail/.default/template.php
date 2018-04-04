@@ -142,7 +142,7 @@ $item = $data->item();
                         </p>
                     </div>
                     <div class="flat-on-map__content active" id="location-flat">
-                        <div class="flat-on-map__content__location" id="map-location-flat"></div>
+                        <div class="flat-on-map__content__location" data-coords="<?=$arResult['PROPERTIES']['MAP']['VALUE'];?>" id="map-location-flat"></div>
                     </div>
                 </div>
                 <div class="col-md-4">

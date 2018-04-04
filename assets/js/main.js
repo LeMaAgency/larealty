@@ -199,7 +199,7 @@ $(document).ready(function () {
         $('.flat-on-map__content').hide();
         $(idActive).show();
         initMap();
-    });
+    }).trigger('click');
 
     //  выделение активной кнопки таб панели и активация карты во вкладке
     var newFlatsTabNav = $('.new-flats__tab-nav');
@@ -388,10 +388,18 @@ function initMap() {
         lng: 30.697245
     };
     if (document.getElementById('map-location-flat') !== null) {
+        var coords = $('#map-location-flat').data('coords');
+        if(coords && (coords = coords.split(',')))
+        {
+            myLatLng = {
+                lat: parseFloat(coords[0]),
+                lng: parseFloat(coords[1])
+            }
+        }
         // Create a map object and specify the DOM element for display.
         map = new google.maps.Map(document.getElementById('map-location-flat'), {
             center: myLatLng,
-            zoom: 8,
+            zoom: 15,
             zoomControl: false,
             mapTypeControl: false,
             scaleControl: false,
@@ -409,7 +417,7 @@ function initMap() {
 
         var features = [
             {
-                position: new google.maps.LatLng(50.103587, 29.929313),
+                position: new google.maps.LatLng(myLatLng.lat, myLatLng.lng),
                 type: 'newFlat'
             }
         ];
