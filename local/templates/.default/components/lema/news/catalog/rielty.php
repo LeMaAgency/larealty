@@ -53,7 +53,6 @@ $this->setFrameMode(true);
 ?>
 <?php
     $GLOBALS{$arParams['FILTER_NAME']}['=PROPERTY_RIELTY_TYPE.XML_ID'] = $arResult['VARIABLES']['RIELTY_TYPE'];
-    var_dump($GLOBALS{$arParams['FILTER_NAME']});
 ?>
 <br />
 <?endif?>
