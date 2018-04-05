@@ -103,6 +103,8 @@ $item = $data->item();
                             <?foreach($arResult['DISPLAY_PROPERTIES'] as $propCode => $propData):
                                 if($item->propEmpty($propCode))
                                     continue;
+                            if(is_array($item->propVal($propCode)))
+                                echo '<pre style="display:none">', print_r($item->propVal($propCode), 1), '</pre>';
                                 ?>
                                 <div class="card-flat__content__details__row">
                                     <div class="card-flat__content__details__row__name"><?=$item->propName($propCode);?></div>
