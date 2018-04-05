@@ -75,7 +75,7 @@ class IblockElement
             //get square property id
             $squareId = \LIblock::getPropId('objects', 'SQUARE');
             //get realty property id
-            $realtyId = \LIblock::getPropId('objects', 'RIELTY_TYPE');
+            $realtyId = \LIblock::getPropId('objects', 'REALTY_TYPE');
 
             if(empty($squareId) || empty($realtyId))
                 return ;

@@ -14,7 +14,7 @@ function getElementDetailUrl(\Lema\Template\Item $item, array $replace = array()
     {
         $replace = array(
             '#RENT_TYPE#' => $item->propXmlId('RENT_TYPE'),
-            '#RIELTY_TYPE#' => $item->propXmlId('RIELTY_TYPE'),
+            '#REALTY_TYPE#' => $item->propXmlId('REALTY_TYPE'),
         );
     }
 
