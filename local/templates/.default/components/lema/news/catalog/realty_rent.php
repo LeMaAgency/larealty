@@ -11,6 +11,24 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
+
+/**
+ * Search specified realty
+ */
+$realtyFilterId = LIblock::getPropEnumId('objects', 'REALTY_TYPE', $arResult['VARIABLES']['REALTY_TYPE']);
+$rentFilterId = LIblock::getPropEnumId('objects', 'RENT_TYPE', $arResult['VARIABLES']['RENT_TYPE']);
+
+if(empty($realtyFilterId) || empty($rentFilterId))
+{
+    \Bitrix\Iblock\Component\Tools::process404(
+        ""
+        ,($arParams["SET_STATUS_404"] === "Y")
+        ,($arParams["SET_STATUS_404"] === "Y")
+        ,($arParams["SHOW_404"] === "Y")
+        ,$arParams["FILE_404"]
+    );
+}
+
 ?>
 
 <?if($arParams["USE_RSS"]=="Y"):?>
@@ -53,9 +71,16 @@ $this->setFrameMode(true);
 ?>
 <br />
 <?endif?>
+<?php
+/**
+ * Set filter by rent & realty type
+ */
+$GLOBALS[$arParams['FILTER_NAME']]['=PROPERTY_REALTY_TYPE'] = $realtyFilterId;
+$GLOBALS[$arParams['FILTER_NAME']]['=PROPERTY_RENT_TYPE'] = $rentFilterId;
+?>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list",
-	"apartments",
+	"catalog",
 	Array(
 		"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 		"IBLOCK_ID" => $arParams["IBLOCK_ID"],
