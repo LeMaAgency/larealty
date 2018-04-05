@@ -103,13 +103,23 @@ $item = $data->item();
                             <?foreach($arResult['DISPLAY_PROPERTIES'] as $propCode => $propData):
                                 if($item->propEmpty($propCode))
                                     continue;
-                            if(is_array($item->propVal($propCode)))
-                                echo '<pre style="display:none">', print_r($arResult['PROPERTIES'][$propCode], 1), '</pre>';
                                 ?>
                                 <div class="card-flat__content__details__row">
                                     <div class="card-flat__content__details__row__name"><?=$item->propName($propCode);?></div>
                                     <div class="card-flat__content__details__row__dots"></div>
-                                    <div class="card-flat__content__details__row__val"><?=$item->propVal($propCode);?></div>
+                                    <div class="card-flat__content__details__row__val">
+                                        <?if($item->prop($propCode, 'MULTIPLE') == 'Y')
+                                        {
+                                            echo join(', ', $item->propVal($propCode));
+                                        }
+                                        else
+                                        {
+                                            $value = $item->propVal($propCode);
+                                            echo $value == 'Y' ? '✔' : $value;
+
+                                        }
+                                        ?>
+                                    </div>
                                 </div>
                             <?endforeach;?>
                         </div>
