@@ -7,6 +7,11 @@ use Bitrix\Main\Localization\Loc,
 
 Loc::loadMessages(__FILE__);
 
+/**
+ * @global $APPLICATION
+ * @global $arParams
+ * @global $arResult
+ */
 
 $data = new TH($this);
 
@@ -35,11 +40,21 @@ $props = array(
 
 $splitSymbol = ', ';
 
+$sefFolder = '/' . preg_quote(current(explode('/', trim($APPLICATION->GetCurDir(), '/')))) . '/';
+$rentCodes = array();
+$rentValues = \LIblock::getPropEnumValues(\LIblock::getPropId('objects', 'RENT_TYPE'));
+foreach($rentValues as $v)
+    $rentCodes[$v['VALUE']] = \CUtil::translit($v['VALUE'], 'ru');
+unset($rentValues);
+
 /**
- * Set address for items
+ * Set data for items
  */
 foreach($data->items() as $k => $item)
 {
+    /**
+     * Set address
+     */
     $arResult['ITEMS'][$k]['ADDRESS'] = null;
     foreach($props as $propCode => $propData)
     {
@@ -56,4 +71,14 @@ foreach($data->items() as $k => $item)
             $arResult['ITEMS'][$k]['ADDRESS'] .= $splitSymbol;
         $arResult['ITEMS'][$k]['ADDRESS'] .= $item->propVal('BUILDING_NUMBER');
     }
+
+    /**
+     * Set detail page url
+     */
+    $arResult['ITEMS'][$k]['DETAIL_PAGE_URL'] = preg_replace(
+        '~^' . $sefFolder . '~ui',
+            '$0' . $rentCodes[$item->propVal('RENT_TYPE')] . '/',
+        $item->detailUrl(),
+        1
+    );
 }

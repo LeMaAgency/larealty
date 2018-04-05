@@ -77,6 +77,7 @@ $this->setFrameMode(true);
 		"SHOW_404" => $arParams["SHOW_404"],
 		"FILE_404" => $arParams["FILE_404"],
 		"INCLUDE_IBLOCK_INTO_CHAIN" => $arParams["INCLUDE_IBLOCK_INTO_CHAIN"],
+		"ADD_SECTIONS_CHAIN" => $arParams["ADD_SECTIONS_CHAIN"],
 		"CACHE_TYPE" => $arParams["CACHE_TYPE"],
 		"CACHE_TIME" => $arParams["CACHE_TIME"],
 		"CACHE_FILTER" => $arParams["CACHE_FILTER"],
