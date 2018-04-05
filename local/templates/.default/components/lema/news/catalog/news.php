@@ -50,7 +50,6 @@ $this->setFrameMode(true);
 	),
 	$component
 );
-var_dump($GLOBALS{$arParams['FILTER_NAME']});
 ?>
 <br />
 <?endif?>
