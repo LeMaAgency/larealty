@@ -59,7 +59,11 @@ if(strlen($arParams["FILTER_NAME"])<=0|| !preg_match("/^[A-Za-z_][A-Za-z01-9_]*$
 $FILTER_NAME = $arParams["FILTER_NAME"];
 
 global ${$FILTER_NAME};
-${$FILTER_NAME} = array();
+/**
+ * Do not clear filter data if it is array
+ */
+if(!is_array(${$FILTER_NAME}))
+    ${$FILTER_NAME} = array();
 
 $arParams["NUMBER_WIDTH"] = intval($arParams["NUMBER_WIDTH"]);
 if($arParams["NUMBER_WIDTH"]<=0)

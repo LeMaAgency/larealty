@@ -1,7 +1,7 @@
 <?
 require_once $_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php';
 
-$APPLICATION->SetTitle('Каталог - Сниму');
+$APPLICATION->SetTitle('Каталог');
 ?>
     <div class="container">
         <div class="row">
@@ -12,8 +12,8 @@ $APPLICATION->SetTitle('Каталог - Сниму');
     </div>
 
 <?$APPLICATION->IncludeComponent(
-	"bitrix:news", 
-	"apartments", 
+	"lema:news",
+	"catalog",
 	array(
 		"DISPLAY_DATE" => "Y",
 		"DISPLAY_PICTURE" => "Y",
@@ -138,7 +138,7 @@ $APPLICATION->SetTitle('Каталог - Сниму');
 		"PAGER_DESC_NUMBERING" => "N",
 		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
 		"PAGER_SHOW_ALL" => "Y",
-		"FILTER_NAME" => "",
+		"FILTER_NAME" => "arrFilter",
 		"FILTER_FIELD_CODE" => array(
 			0 => "",
 			1 => "",
@@ -190,17 +190,19 @@ $APPLICATION->SetTitle('Каталог - Сниму');
 		),
 		"SHARE_SHORTEN_URL_LOGIN" => "",
 		"SHARE_SHORTEN_URL_KEY" => "",
-		"COMPONENT_TEMPLATE" => "apartments",
+		"COMPONENT_TEMPLATE" => "catalog",
 		"AJAX_OPTION_ADDITIONAL" => "",
-		"STRICT_SECTION_CHECK" => "Y",
+		"STRICT_SECTION_CHECK" => "N",
 		"DISPLAY_AS_RATING" => "rating",
 		"FILE_404" => "",
 		"SEF_URL_TEMPLATES" => array(
 			"news" => "",
 			"section" => "",
-			"detail" => "#ELEMENT_CODE#/",
+			"detail" => "#RIELTY_TYPE#/#RENT_TYPE#/#ELEMENT_CODE#/",
 			"search" => "search/",
-		)
+            'rielty' => '#RIELTY_TYPE#/',
+            'rielty_rent' => '#RIELTY_TYPE#/#RENT_TYPE#/',
+		),
 	),
 	false
 );?>
