@@ -107,7 +107,7 @@ $item = $data->item();
                                 <div class="card-flat__content__details__row">
                                     <div class="card-flat__content__details__row__name"><?=$item->propName($propCode);?></div>
                                     <div class="card-flat__content__details__row__dots"></div>
-                                    <div class="card-flat__content__details__row__val">
+                                    <div class="card-flat__content__details__row__val auto-widht">
                                         <?if($item->prop($propCode, 'MULTIPLE') == 'Y')
                                         {
                                             echo join(', ', $item->propVal($propCode));
