@@ -116,7 +116,6 @@ $item = $data->item();
                                         {
                                             $value = $item->propVal($propCode);
                                             echo $value == 'Y' ? '✔' : $value;
-
                                         }
                                         ?>
                                     </div>
