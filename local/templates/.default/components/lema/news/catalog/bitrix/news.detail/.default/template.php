@@ -100,6 +100,11 @@ $item = $data->item();
                             <?endif;?>
                         </div>
                         <div class="card-flat__content__details">
+                            <div class="card-flat__content__details__row">
+                                <div class="card-flat__content__details__row__name">ID объекта</div>
+                                <div class="card-flat__content__details__row__dots"></div>
+                                <div class="card-flat__content__details__row__val auto-widht"><?=$item->getId();?></div>
+                            </div>
                             <?foreach($arResult['DISPLAY_PROPERTIES'] as $propCode => $propData):
                                 if($item->propEmpty($propCode))
                                     continue;
