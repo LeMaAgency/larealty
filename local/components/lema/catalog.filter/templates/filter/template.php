@@ -72,7 +72,15 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
                                     </ul>
                                 </div>
                             <?else:?>
-
+                                <div class="filter-field-title"><?=$arItem["NAME"]?></div>
+                                <div class="filter-price">
+                                    <input
+                                            type="text"
+                                            value="<?=$arItem["INPUT_VALUE"]?>"
+                                            name="<?=$arItem["INPUT_NAME"]?>" class="filter-price-input filter-max-value-input"
+                                            placeholder="<?=$arItem['NAME']?>"
+                                    />
+                                </div>
                             <?endif;?>
                         <?endif;?>
                     </div>

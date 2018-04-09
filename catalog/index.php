@@ -140,7 +140,7 @@ $APPLICATION->SetTitle('Каталог');
 		"PAGER_SHOW_ALL" => "Y",
 		"FILTER_NAME" => "arrFilter",
 		"FILTER_FIELD_CODE" => array(
-			0 => "",
+			0 => "ID",
 			1 => "",
 		),
 		"FILTER_PROPERTY_CODE" => array(
