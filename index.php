@@ -168,6 +168,21 @@ $APPLICATION->SetTitle("Квартирный ответ - Главная стр�
 ); ?>
     <!-- /SERVICES -->
 
+<? $APPLICATION->IncludeComponent('lema:catalog.filter', 'filter', array(
+    'IBLOCK_TYPE' => 'realty',
+    'IBLOCK_ID' => '2',
+    'FILTER_NAME' => 'arrFilter',
+    'FIELD_CODE' => array(0 => 'ID',),
+    'PROPERTY_CODE' => array(
+        1 => 'ROOMS_COUNT', 2 => 'PLACEMENT', 3 => 'REALTY_TYPE', 0 => 'PRICE', 4 => 'STAGE', 5 => 'STAGES_COUNT',
+    ),
+    'CACHE_TYPE' => 'A',
+    'CACHE_TIME' => '3600',
+    'CACHE_GROUPS' => 'N',
+    'PAGER_PARAMS_NAME' => 'arrPager',
+    'SEF_MODE' => 'Y',
+    'SEF_FOLDER' => '/catalog/',
+));?>
 
     <!-- ABOUT BLOCK -->
     <section class="about">

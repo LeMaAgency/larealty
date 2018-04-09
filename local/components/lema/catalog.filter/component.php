@@ -405,6 +405,8 @@ if ($this->StartResultCache(false, ($arParams["CACHE_GROUPS"]==="N"? false: $USE
 }
 
 $arResult["FORM_ACTION"] = isset($_SERVER['REQUEST_URI'])? htmlspecialcharsbx($_SERVER['REQUEST_URI']): "";
+if(!empty($arParams['SEF_FOLDER']))
+    $arResult['FORM_ACTION'] = $arParams['SEF_FOLDER'] . ltrim($arResult['FORM_ACTION'], '/');
 $arResult["FILTER_NAME"] = $FILTER_NAME;
 
 /*************************************************************************
