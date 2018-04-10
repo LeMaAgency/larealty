@@ -82,9 +82,9 @@ $data = new TH($this);
                                 </div>
                             </div>
                         </div>
-                        <?if($item->propFilled('ADDRESS')):?>
+                        <?if($item->get('ADDRESS')):?>
                             <p class="card-flat__content__address card-flat__content__address_min icon-location">
-                                <?=$item->propVal('ADDRESS');?>
+                                <?=$item->get('ADDRESS');?>
                             </p>
                         <?endif;?>
                         <a href="<?=$item->detailUrl();?>" class="element-detail-link offers-item-more offers-item-more_min">
