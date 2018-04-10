@@ -39,6 +39,8 @@ $splitSymbol = ', ';
  */
 foreach($data->items() as $k => $item)
 {
+    $arResult['ITEMS'][$k]['DETAIL_PAGE_URL'] = getElementDetailUrl($item);
+
     $arResult['ITEMS'][$k]['ADDRESS'] = null;
     foreach($props as $propCode => $propData)
     {
