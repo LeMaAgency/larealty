@@ -33,15 +33,18 @@ $data = new TH($this);
     </div>
     <div class="container-index no-pad">
         <div class="offers-filter">
-            <div class="offers-filter-btn hvr-shutter-out-vertical">Квартиры</div>
-            <div class="offers-filter-btn hvr-shutter-out-vertical">Загородная недвижимость</div>
-            <div class="offers-filter-btn hvr-shutter-out-vertical">Аренда</div>
+            <div class="offers-filter-btn hvr-shutter-out-vertical" data-realty-type="1">Квартиры</div>
+            <div class="offers-filter-btn hvr-shutter-out-vertical" data-realty-type="3">Загородная недвижимость</div>
+            <div class="offers-filter-btn hvr-shutter-out-vertical" data-rent-type="29">Аренда</div>
         </div>
         <div class="offers-list">
     <?foreach($data->items() as $item):?>
 
 
-        <a href="<?=$item->detailUrl();?>" class="offers-item" <?=$item->editId();?>>
+        <a href="<?=$item->detailUrl();?>"
+           data-rent-type="<?=(int) $item->prop('RENT_TYPE', 'VALUE_ENUM_ID');?>"
+           data-realty-type="<?=(int) $item->prop('REALTY_TYPE', 'VALUE_ENUM_ID');?>"
+           class="offers-item" <?=$item->editId();?>>
             <h3 class="offers-item__h3"><?=$item->getName();?></h3>
             <div class="offers-item-img"><img alt="img" src="<?=$item->previewPicture();?>"></div>
             <div class="offers-item-price">

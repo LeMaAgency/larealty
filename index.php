@@ -226,7 +226,7 @@ $APPLICATION->SetTitle("Квартирный ответ - Главная стр�
     'ADD_SECTIONS_CHAIN' => 'N',
     'HIDE_LINK_WHEN_NO_DETAIL' => 'Y',
     'PARENT_SECTION' => '',
-    'PARENT_SECTION_CODE' => '',
+    'PARENT_SECTION_CODE' => 'active',
     'INCLUDE_SUBSECTIONS' => 'Y',
     'CACHE_TYPE' => 'A',
     'CACHE_TIME' => '36000000',
