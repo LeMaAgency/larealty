@@ -192,7 +192,7 @@ $APPLICATION->SetTitle("Квартирный ответ - Главная стр�
     'AJAX_MODE' => 'Y',
     'IBLOCK_TYPE' => 'realty',
     'IBLOCK_ID' => '2',
-    'NEWS_COUNT' => '3',
+    'NEWS_COUNT' => '9',
     'SORT_BY1' => 'ACTIVE_FROM',
     'SORT_ORDER1' => 'DESC',
     'SORT_BY2' => 'SORT',
