@@ -46,7 +46,9 @@ $data = new TH($this);
            data-realty-type="<?=(int) $item->prop('REALTY_TYPE', 'VALUE_ENUM_ID');?>"
            class="offers-item" <?=$item->editId();?>>
             <h3 class="offers-item__h3"><?=$item->getName();?></h3>
-            <div class="offers-item-img"><img alt="img" src="<?=$item->previewPicture();?>"></div>
+            <div class="offers-item-img<?if($item->propVal('IS_EXCLUSIVE') == 'Y'){?> offers-item-img_exclusive<?}?>">
+                <img alt="img" src="<?=$item->previewPicture();?>">
+            </div>
             <div class="offers-item-price">
                 <b><?=H::formatPrice($item->propVal('PRICE'), null);?></b>
                 <?=Loc::getMessage('LEMA_ROOMS_RUB');?>

@@ -73,7 +73,6 @@ $APPLICATION->SetTitle('Каталог');
             'CADASTRAL_NUMBER',
             'LIFT',
             'SEP_ENTRANCE',
-            'OWNER',
             'LAYOUT_TYPE',
             'BATHROOM',
             'BATHROOM_COUNT',

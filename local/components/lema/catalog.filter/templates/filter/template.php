@@ -134,13 +134,15 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
                         <div class="filter-select">
                             <a href="#" class="filter-select-link">Выбрать</a>
                             <ul class="filter-select-drop">
+                                <li data-value="">Выбрать</li>
                                 <?foreach ($arItem["LIST"] as $key => $value):?>
                                     <li data-value="<?=htmlspecialcharsBx($key)?>"
                                         <?if ($key == $arItem["INPUT_VALUE"]) echo ' class="selected"'?>
                                     ><?=htmlspecialcharsEx($value)?></li>
                                 <?endforeach;?>
                             </ul>
-                            <input type="hidden" name="<?=$arItem["INPUT_NAME"]?>" value="">
+                            <input type="hidden" name="<?=$arItem["INPUT_NAME"]?>"
+                                   value="<?=empty($arItem["INPUT_VALUE"]) ? null : $arItem["INPUT_VALUE"];?>">
                         </div>
                     </div>
                 <?elseif ($arItem["TYPE"] == "CHECKBOX"):

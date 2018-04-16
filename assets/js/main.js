@@ -54,7 +54,7 @@ $(document).ready(function () {
             $(this).addClass('active filter-border-color');
             $('.filter-select-drop').find('li').click(function () {
                 var selectResult = $(this).html(),
-                    selectValue  = $(this).data('value') || $(this).html();
+                    selectValue  = $(this).data('value');
                 $(this).closest('.filter-select').find('input').val(selectValue);
                 $(this).closest('.filter-select').find('.filter-select-link').removeClass('active').html(selectResult);
                 dropBlock.slideUp();

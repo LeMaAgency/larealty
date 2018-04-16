@@ -6,3 +6,4 @@ $MESS ['CC_BCF_TILL'] = "по";
 $MESS ['CC_BCF_TOP_LEVEL'] = "Верхний уровень";
 $MESS ['CC_BCF_INCLUDE_SUBSECTIONS'] = "включая подразделы";
 $MESS ['CC_BCF_MODULE_NOT_INSTALLED'] = "Модуль Информационных блоков не установлен";
+$MESS ['LEMA_IBLOCK_FIELD_ID'] = "Поиск по № объекта";

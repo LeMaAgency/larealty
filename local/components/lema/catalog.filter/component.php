@@ -13,6 +13,10 @@ global $USER;
 /** @global CMain $APPLICATION */
 global $APPLICATION;
 
+use Bitrix\Main\Localization\Loc;
+
+Loc::loadMessages(__FILE__);
+
 /*************************************************************************
 	Processing of received parameters
 *************************************************************************/
@@ -318,7 +322,6 @@ if ($this->StartResultCache(false, ($arParams["CACHE_GROUPS"]==="N"? false: $USE
 				$arResult["arrPrice"][$arProp["CODE"]] = array("ID"=>$arProp["ID"], "TITLE"=>$arProp["NAME"]);
 		}
 	}
-
 	// properties
 	$rsProp = CIBlockProperty::GetList(Array("sort"=>"asc", "name"=>"asc"), Array("ACTIVE"=>"Y", "IBLOCK_ID"=>$arParams["IBLOCK_ID"]));
 	while ($arProp = $rsProp->Fetch())
@@ -452,6 +455,16 @@ foreach($arParams["FIELD_CODE"] as $field_code)
 			}
 			break;
 		case "ID":
+            $field_res = true;
+            $field_type = "SELECT";
+            $field_names = "";
+            $field_values = "";
+            $field_list = \Lema\IBlock\Element::getAll(LIblock::getId('objects'), array(
+                'filter' => array('ACTIVE' => 'Y', 'SECTION_CODE' => 'active'),
+                'arSelect' => array('ID'),
+            ));
+            $field_list = array_combine(array_keys($field_list), array_keys($field_list));
+            break;
 		case "SORT":
 		case "SHOW_COUNTER":
 			$name_left = $FILTER_NAME."_ff[".$field_code."][LEFT]";
@@ -538,7 +551,7 @@ foreach($arParams["FIELD_CODE"] as $field_code)
 	if($field_res)
 	{
 		$arResult["ITEMS"][$field_code] = array(
-			"NAME" => htmlspecialcharsbx(GetMessage("IBLOCK_FIELD_".$field_code)),
+			"NAME" => htmlspecialcharsbx(GetMessage("LEMA_IBLOCK_FIELD_".$field_code)),
 			"INPUT" => $field_res,
 			"INPUT_NAME" => $name,
 			"INPUT_VALUE" => is_array($value)? array_map("htmlspecialcharsbx", $value): htmlspecialcharsbx($value),
@@ -628,7 +641,7 @@ foreach($arResult["arrProp"] as $prop_id => $arProp)
                     $res .= '<option value="">'.$arProp["NAME"].'</option>';
                 else
 				    $res .= '<option value="">'.GetMessage("CC_BCF_ALL").'</option>';
-				$list[""] = GetMessage("CC_BCF_ALL");
+				//$list[""] = GetMessage("CC_BCF_ALL");
 				foreach($arProp["VALUE_LIST"] as $key=>$val)
 				{
 					$res .= '<option';
@@ -1119,4 +1132,3 @@ foreach(array_merge($_GET, $_POST) as $key=>$value)
 }
 
 $this->IncludeComponentTemplate();
-?>
