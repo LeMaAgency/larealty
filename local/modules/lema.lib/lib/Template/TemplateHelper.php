@@ -1,6 +1,8 @@
 <?php
 
 namespace Lema\Template;
+use Bitrix\Main\Page\AssetLocation;
+use Lema\Common\Asset;
 
 /**
  * Class TemplateHelper
@@ -122,6 +124,15 @@ class TemplateHelper
     }
 
     /**
+     * @param $name
+     * @return mixed|null
+     */
+    public function getParam($name)
+    {
+        return isset($this->arParams[$name]) ? $this->arParams[$name] : null;
+    }
+
+    /**
      * @return mixed|null
      */
     public function getId()
@@ -135,6 +146,47 @@ class TemplateHelper
     public function getName()
     {
         return $this->get('NAME');
+    }
+
+    public function getShowMoreDataAttribs()
+    {
+        $navParams = $this->get('NAV_RESULT');
+        return sprintf(' data-nav-num="%d" data-page="%d" data-page-count="%d" data-ajax-id="%s" ',
+            $navParams->NavNum,
+            $navParams->NavPageNomer,
+            $navParams->NavPageCount,
+            $this->getParam('AJAX_ID')
+        );
+    }
+
+    public function setShowMoreScript()
+    {
+        $script = '
+        <script type="text/javascript">
+            $(function() {
+            
+                $(".js-th-show-more").on("click", function(e) {
+                    e.preventDefault();
+            
+                    var sendData = {}, _this = $(this), nextPage = $(this).data("page") + 1;
+                    sendData["PAGEN_" + $(this).data("nav-num")] = nextPage;
+                    sendData["bxajaxid"] = $(this).data("ajax-id");
+            
+                    $.get(window.location.href, sendData, function(ans) {
+                        $("[data-ajax-block-id=\'" + sendData["bxajaxid"] + "\']").append(ans);
+                        $(_this).data("page", nextPage);
+                    });
+                    
+                    if(nextPage >= $(this).data("page-count"))
+                    {
+                        $(this).hide();
+                        return false;
+                    }
+                })
+            });
+        </script>
+        ';
+        Asset::get()->addString($script, true, AssetLocation::AFTER_JS);
     }
 
 }
