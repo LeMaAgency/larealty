@@ -1754,9 +1754,14 @@ if (
         /**
          * Hide items for empty choose
          */
-        if($.trim($('#tr_PROPERTY_1 select').val()) == '') {
+        if($.trim($('#tr_PROPERTY_1 select').val()) == '')
+        {
             $('[id^="tr_PROPERTY_"], #tr_NAME, #tr_CODE').hide();
-            $('#tr_PROPERTY_1, #tr_PROPERTY_3, #tr_PROPERTY_28, #tr_PROPERTY_61').show();
+            var initShowedProps = [1, 3, 13, 28, 29, 30, 54, 63, 68, 69, 70, 71, 72, 73];
+
+            for(var propId in initShowedProps) {
+                $('#tr_PROPERTY_' + initShowedProps[propId]).hide();
+            }
         }
 
         $('#tr_PROPERTY_1 select').on('change', function(e) {
