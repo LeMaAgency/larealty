@@ -110,12 +110,14 @@ $data->setShowMoreScript();
         </div>
 
 
-        <a href="#"
-           <?=$data->getShowMoreDataAttribs();?>
-           class="offers-show-more js-th-show-more">
-            <span class="link-hvr">Показать больше</span>
-            <i class="offers-show-more-icon"></i>
-        </a>
+        <?if($data->hasPagination()):?>
+            <a href="#"
+               class="offers-show-more js-th-show-more"
+               <?=$data->getShowMoreDataAttribs();?>>
+                <span class="link-hvr">Показать больше</span>
+                <i class="offers-show-more-icon"></i>
+            </a>
+        <?endif;?>
 
     </div>
 </section>

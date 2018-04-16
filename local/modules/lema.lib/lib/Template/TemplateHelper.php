@@ -148,13 +148,20 @@ class TemplateHelper
         return $this->get('NAME');
     }
 
+    public function hasPagination()
+    {
+        $navParams = $this->get('NAV_RESULT');
+        return $navParams->NavPageCount != $navParams->NavPageNomer;
+    }
+
     public function getShowMoreDataAttribs()
     {
         $navParams = $this->get('NAV_RESULT');
-        return sprintf(' data-nav-num="%d" data-page="%d" data-page-count="%d" data-ajax-id="%s" ',
+        return sprintf(' data-nav-num="%d" data-page="%d" data-page-count="%d" data-th-ajax-id="%s" data-ajax-id="%s" ',
             $navParams->NavNum,
             $navParams->NavPageNomer,
             $navParams->NavPageCount,
+            $this->getParam('AJAX_ID'),
             $this->getParam('AJAX_ID')
         );
     }
@@ -165,12 +172,18 @@ class TemplateHelper
         <script type="text/javascript">
             $(function() {
             
-                $(".js-th-show-more").on("click", function(e) {
+                $("[data-th-ajax-id]").on("click", function(e) {
                     e.preventDefault();
             
                     var sendData = {}, _this = $(this), nextPage = $(this).data("page") + 1;
                     sendData["PAGEN_" + $(this).data("nav-num")] = nextPage;
                     sendData["bxajaxid"] = $(this).data("ajax-id");
+                    
+                    if($(this).data("page") == $(this).data("page-count"))
+                    {
+                        $(this).hide();
+                        return false;
+                    }
             
                     $.get(window.location.href, sendData, function(ans) {
                         $("[data-ajax-block-id=\'" + sendData["bxajaxid"] + "\']").append(ans);
