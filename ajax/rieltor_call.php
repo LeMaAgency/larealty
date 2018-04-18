@@ -36,6 +36,7 @@ if($form->validate())
         array(
             '#PHONE#' => $form->getField('phone'),
             '#OBJECT#' => $form->getField('element_name'),
+            '#OBJECT_ID#' => $form->getField('element_id'),
             '#EMAIL_TO#' => $rieltorEmail,
         )
     );
