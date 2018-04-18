@@ -21,6 +21,9 @@ $form = new \Lema\Forms\AjaxForm(array(
 if($form->validate())
 {
 
+    $res = \CUser::GetById($form->getField('rieltor_id'));
+    $rieltorEmail = ($row = $res->Fetch()) ? $row['EMAIL'] : false;
+
     $status = $form->formActionFull(
         LIblock::getId('object_call_wait'),
         array(
@@ -33,6 +36,7 @@ if($form->validate())
         array(
             '#PHONE#' => $form->getField('phone'),
             '#OBJECT#' => $form->getField('element_name'),
+            '#EMAIL_TO#' => $rieltorEmail,
         )
     );
 
