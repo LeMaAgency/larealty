@@ -179,8 +179,11 @@ $item = $data->item();
                             <form class="realtor-card__form js-rieltor-form" action="/ajax/rieltor_call.php" method="post">
                                 <input type="hidden" name="element_id" value="<?=(int) $item->getId();?>">
                                 <input type="hidden" name="element_name" value="<?=$item->getName();?>">
-                                <input class="realtor-card__form__input" type="tel" name="phone"
-                                       placeholder="<?=Loc::getMessage('LEMA_DETAIL_PHONE_PLACEHOLDER');?>">
+                                <div class="it-block">
+                                    <input class="realtor-card__form__input" type="tel" name="phone"
+                                           placeholder="<?=Loc::getMessage('LEMA_DETAIL_PHONE_PLACEHOLDER');?>">
+                                    <div class="it-error"></div>
+                                </div>
                                 <button class="realtor-card__form__button" type="submit">
                                     <?=Loc::getMessage('LEMA_DETAIL_RECALL_WAIT_TITLE');?>
                                 </button>

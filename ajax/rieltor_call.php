@@ -20,9 +20,22 @@ $form = new \Lema\Forms\AjaxForm(array(
 //check form fields
 if($form->validate())
 {
-    /**
-     * @TODO make handler
-     */
+
+    $status = $form->formActionFull(
+        LIblock::getId('object_call_wait'),
+        array(
+            'NAME' => $form->getField('phone'),
+            'PROPERTY_VALUES' => array(
+                'OBJECT' => $form->getField('element_id'),
+            ),
+        ),
+        'OBJECT_CALL_WAIT',
+        array(
+            '#PHONE#' => $form->getField('phone'),
+            '#OBJECT#' => $form->getField('element_name'),
+        )
+    );
+
     echo json_encode($status ? array('success' => true) : array('errors' => $form->getErrors()));
 }
 else
