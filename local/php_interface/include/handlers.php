@@ -28,3 +28,8 @@ foreach($events as $event)
         array('\\Lema\\Handlers\\IblockElement', 'after' . $event)
     );
 }
+$eventManager->addEventHandler(
+    'main',
+    'OnAdminListDisplay',
+    array('\\Lema\\Handlers\\Main', 'adminListDisplay')
+);
