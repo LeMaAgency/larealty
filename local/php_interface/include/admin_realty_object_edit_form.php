@@ -1854,5 +1854,11 @@ if (
                 }
             }
         })
+
+        <?if(empty($_GET['ID'])):?>
+            $('#tr_PROPERTY_54').hide();
+        <?else:?>
+            $('#tr_PROPERTY_54').show();
+        <?endif;?>
     })
 </script>
