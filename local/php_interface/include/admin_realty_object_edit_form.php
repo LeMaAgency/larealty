@@ -1745,9 +1745,9 @@ if (
 }
 
 /**
- * Show/hide neccessary properties
+ * Show/hide necessary properties
  */
-\CJSCore::init(array('fx', 'jquery'));
+\CJSCore::init(array('fx', 'jquery2'));
 ?>
 <script>
     $(function() {
@@ -1774,7 +1774,7 @@ if (
                 //Квартиры
                 case '1':
                     sortProps = {
-                        '#tr_edit1_csection4': [29, 13, 30, 31, 34, 84, 85], //Адрес
+                        '#tr_edit1_csection4': [29, 13, 30, 31, 34], //Адрес
                         '#tr_edit1_csection1': [2, 7, 19, 6, 5, 4, 22, 23, 8, 21, 35, 24, 25, 20], //Характеристики
                         '#tr_edit1_csection2': [38, 80, 42, 40, 81, 41, 27, 48, 49, 45, 44], //Наличие
                         '#tr_edit1_csection3': [3, 79, 50, 82, 83] //Условия
@@ -1783,7 +1783,7 @@ if (
                 //Комнаты
                 case '2':
                     sortProps = {
-                        '#tr_edit1_csection4': [29, 13, 30, 31, 32, 33, 84, 85], //Адрес
+                        '#tr_edit1_csection4': [29, 13, 30, 31, 32, 33], //Адрес
                         '#tr_edit1_csection1': [2, 86, 19, 6, 5, 20, 7, 21, 4, 24, 25, 57, 8], //Характеристики
                         '#tr_edit1_csection2': [68, 39, 43, 26, 27, 46, 47, 48, 51, 49], //Наличие
                         '#tr_edit1_csection3': [3, 50] //Условия
@@ -1810,7 +1810,7 @@ if (
                 //Офисы
                 case '49':
                     sortProps = {
-                        '#tr_edit1_csection4': [29, 13, 30, 31, 32, 84, 85], //Адрес
+                        '#tr_edit1_csection4': [29, 13, 30, 31, 32], //Адрес
                         '#tr_edit1_csection1': [58, 19, 6, 5, 20, 4, 59], //Характеристики
                         '#tr_edit1_csection2': [68, 39, 27, 47, 48, 51, 49], //Наличие
                         '#tr_edit1_csection3': [3] //Условия
@@ -1819,7 +1819,7 @@ if (
                 //Торговые площади
                 case '50':
                     sortProps = {
-                        '#tr_edit1_csection4': [29, 13, 30, 31, 32, 84, 85], //Адрес
+                        '#tr_edit1_csection4': [29, 13, 30, 31, 32], //Адрес
                         '#tr_edit1_csection1': [19, 6, 5, 20, 4, 59], //Характеристики
                         '#tr_edit1_csection2': [68, 39, 43, 26, 47, 48, 51, 49], //Наличие
                         '#tr_edit1_csection3': [3] //Условия
@@ -1853,8 +1853,11 @@ if (
                     )
                 }
             }
-        })
+        });
 
+        /**
+         * Hide deposit property for new object
+         */
         <?if(empty($_GET['ID'])):?>
             $('#tr_PROPERTY_54').hide();
         <?else:?>
