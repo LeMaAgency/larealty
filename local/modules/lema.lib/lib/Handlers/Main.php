@@ -17,13 +17,12 @@ class Main
      */
     public static function adminListDisplay(&$list)
     {
-        \Lema\Common\Dumper::dump($list->context);
         //add custom group action
-        $list->context->additional_items[] =(array(
-            'TEXT' => 'Excel 2',
-            'TITLE' => 'Выгрузить данные из списка в Excel',
-            'ONCLICK' => 'alert("FOO");',
-            'GLOBAL_ICON' => 'adm-menu-excel',
-        ));
+        $list->context->additional_items[] = array(
+            'TEXT' => 'Печать',
+            'TITLE' => 'Распечатать страницу',
+            'ONCLICK' => 'window.print();',
+            'GLOBAL_ICON' => 'adm-menu-copy',
+        );
     }
 }
