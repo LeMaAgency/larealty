@@ -1788,6 +1788,7 @@ if (
                     hiddenProps = [
                         56, 6, 9, 20, 59, 24, 25, 57, 8, 58, 32, 33, 26, 27, 52, 53, 51
                     ];
+                    $('#tr_PROPERTY_5').insertAfter('#tr_PROPERTY_2')
                 break;
                 //Земельный участок
                 case '4':
