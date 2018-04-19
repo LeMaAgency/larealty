@@ -1842,6 +1842,15 @@ if (
             }
 
             /**
+             * Hide not necessary properties & show required
+             */
+            $('[id^="tr_PROPERTY_"], #tr_NAME, #tr_CODE').hide();
+            var initShowedProps = [1, 3, 13, 28, 29, 30, 54, 63, 68, 69, 70, 71, 72, 73];
+            for(var propId in initShowedProps) {
+                $('#tr_PROPERTY_' + initShowedProps[propId]).show();
+            }
+
+            /**
              * Show & move props to their places
              */
             for(var propTrId in sortProps)
