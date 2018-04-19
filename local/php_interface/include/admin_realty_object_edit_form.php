@@ -1767,16 +1767,12 @@ if (
         $('#tr_PROPERTY_1 select').on('change', function(e) {
             e.preventDefault();
 
-            var hiddenProps = [];
-            var sortProps = [];
+            var sortProps = {};
 
             switch($(this).val())
             {
                 //Квартиры
                 case '1':
-                    hiddenProps = [
-                        9, 59, 36, 37, 57, 58, 38, 39, 40, 52, 53, 41, 42, 43, 44, 45, 46, 47, 48, 49, 51
-                    ];
                     sortProps = {
                         '#tr_edit1_csection4': [29, 13, 30, 31, 34, 84, 85], //Адрес
                         '#tr_edit1_csection1': [2, 7, 19, 6, 5, 4, 22, 23, 8, 21, 35, 24, 25, 20], //Характеристики
@@ -1786,9 +1782,6 @@ if (
                 break;
                 //Комнаты
                 case '2':
-                    hiddenProps = [
-                        9, 34, 59, 35, 22, 23, 36, 37, 58, 40, 52, 53, 41, 42, 44, 45
-                    ];
                     sortProps = {
                         '#tr_edit1_csection4': [29, 13, 30, 31, 32, 33, 84, 85], //Адрес
                         '#tr_edit1_csection1': [2, 86, 19, 6, 5, 20, 7, 21, 4, 24, 25, 57, 8], //Характеристики
@@ -1798,9 +1791,6 @@ if (
                 break;
                 //Дома/дачи
                 case '3':
-                    hiddenProps = [
-                        56, 6, 20, 59, 24, 25, 57, 8, 58, 32, 33, 26, 27, 52, 53, 51, 7
-                    ];
                     sortProps = {
                         '#tr_edit1_csection4': [29, 13, 30, 31, 34, 84, 85], //Адрес
                         '#tr_edit1_csection1': [2, 5, 19, 9, 4, 22, 23, 36, 21, 35, 24, 25], //Характеристики
@@ -1810,10 +1800,6 @@ if (
                 break;
                 //Земельный участок
                 case '4':
-                    hiddenProps = [
-                        2, 56, 19, 6, 5, 9, 34, 20, 59, 4, 7, 21, 35, 22, 23, 36, 24, 25, 57, 8, 58, 31, 32, 33,
-                        26, 27, 38, 39, 40, 53, 44, 45, 46, 47, 48, 49, 51
-                    ];
                     sortProps = {
                         '#tr_edit1_csection4': [29, 13, 30, 84, 85], //Адрес
                         '#tr_edit1_csection1': [36, 37], //Характеристики
@@ -1823,10 +1809,6 @@ if (
                 break;
                 //Офисы
                 case '49':
-                    hiddenProps = [
-                        2, 56, 9, 34, 7, 21, 35, 22, 23, 36, 37, 24, 25, 57, 8, 33, 26, 40, 52, 53,
-                        41, 42, 43, 44, 45, 46, 50
-                    ];
                     sortProps = {
                         '#tr_edit1_csection4': [29, 13, 30, 31, 32, 84, 85], //Адрес
                         '#tr_edit1_csection1': [58, 19, 6, 5, 20, 4, 59], //Характеристики
@@ -1836,10 +1818,6 @@ if (
                 break;
                 //Торговые площади
                 case '50':
-                    hiddenProps = [
-                        2, 56, 9, 34, 7, 21, 35, 22, 23, 36, 37, 24, 25, 57, 8, 58, 33, 27,
-                        40, 52, 53, 41, 42, 44, 45, 46, 50
-                    ];
                     sortProps = {
                         '#tr_edit1_csection4': [29, 13, 30, 31, 32, 84, 85], //Адрес
                         '#tr_edit1_csection1': [19, 6, 5, 20, 4, 59], //Характеристики
@@ -1849,9 +1827,6 @@ if (
                 break;
                 //Здания
                 case '51':
-                    hiddenProps = [
-                        2, 56, 6, 9, 34, 59, 7, 21, 35, 22, 23, 37, 24, 25, 57, 8, 58, 33, 27, 44, 45, 50
-                    ];
                     sortProps = {
                         '#tr_edit1_csection4': [29, 13, 30, 31, 84, 85], //Адрес
                         '#tr_edit1_csection1': [19, 5, 20, 4, 36], //Характеристики
@@ -1866,21 +1841,18 @@ if (
                 break;
             }
 
-            //$('[id^="tr_PROPERTY_"]').show();
-
+            /**
+             * Show & move props to their places
+             */
             for(var propTrId in sortProps)
             {
                 for(var i = 0, cnt = sortProps[propTrId].length; i < cnt; ++i)
                 {
                     $('#tr_PROPERTY_' + sortProps[propTrId][i]).show().insertAfter(
-                        i == 0 ? $(propTrId) : $('#tr_PROPERTY_' + sortProps[propTrId][i - 1])
+                        i === 0 ? $(propTrId) : $('#tr_PROPERTY_' + sortProps[propTrId][i - 1])
                     )
                 }
             }
-
-            /*for(var propId in hiddenProps) {
-                $('#tr_PROPERTY_' + hiddenProps[propId]).hide();
-            }*/
         })
     })
 </script>
