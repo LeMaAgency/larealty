@@ -1768,6 +1768,7 @@ if (
             e.preventDefault();
 
             var hiddenProps = [];
+            var sortProps = [];
 
             switch($(this).val())
             {
@@ -1776,19 +1777,36 @@ if (
                     hiddenProps = [
                         9, 59, 36, 37, 57, 58, 38, 39, 40, 52, 53, 41, 42, 43, 44, 45, 46, 47, 48, 49, 51
                     ];
+                    sortProps = {
+                        '#tr_edit1_csection4': [29, 13, 30, 31, 34, 84, 85], //Адрес
+                        '#tr_edit1_csection1': [2, 7, 19, 6, 5, 4, 22, 23, 8, 21, 35, 24, 25, 20], //Характеристики
+                        '#tr_edit1_csection2': [38, 80, 42, 40, 81, 41, 27, 48, 49, 45, 44], //Наличие
+                        '#tr_edit1_csection3': [3, 79, 50, 82, 83] //Условия
+                    };
                 break;
                 //Комнаты
                 case '2':
                     hiddenProps = [
                         9, 34, 59, 35, 22, 23, 36, 37, 58, 40, 52, 53, 41, 42, 44, 45
                     ];
+                    sortProps = {
+                        '#tr_edit1_csection4': [29, 13, 30, 31, 32, 33, 84, 85], //Адрес
+                        '#tr_edit1_csection1': [2, 86, 19, 6, 5, 20, 7, 21, 4, 24, 25, 57, 8], //Характеристики
+                        '#tr_edit1_csection2': [68, 39, 43, 26, 27, 46, 47, 48, 51, 49], //Наличие
+                        '#tr_edit1_csection3': [3, 50] //Условия
+                    };
                 break;
                 //Дома/дачи
                 case '3':
                     hiddenProps = [
-                        56, 6, 9, 20, 59, 24, 25, 57, 8, 58, 32, 33, 26, 27, 52, 53, 51
+                        56, 6, 20, 59, 24, 25, 57, 8, 58, 32, 33, 26, 27, 52, 53, 51, 7
                     ];
-                    $('#tr_PROPERTY_5').insertAfter('#tr_PROPERTY_2');
+                    sortProps = {
+                        '#tr_edit1_csection4': [29, 13, 30, 31, 34, 84, 85], //Адрес
+                        '#tr_edit1_csection1': [2, 5, 19, 9, 4, 22, 23, 36, 21, 35, 24, 25], //Характеристики
+                        '#tr_edit1_csection2': [38, 80, 42, 40, 81, 41, 27, 48, 49, 45, 44], //Наличие
+                        '#tr_edit1_csection3': [3, 79, 50, 82, 83] //Условия
+                    };
                 break;
                 //Земельный участок
                 case '4':
@@ -1796,6 +1814,12 @@ if (
                         2, 56, 19, 6, 5, 9, 34, 20, 59, 4, 7, 21, 35, 22, 23, 36, 24, 25, 57, 8, 58, 31, 32, 33,
                         26, 27, 38, 39, 40, 53, 44, 45, 46, 47, 48, 49, 51
                     ];
+                    sortProps = {
+                        '#tr_edit1_csection4': [29, 13, 30, 84, 85], //Адрес
+                        '#tr_edit1_csection1': [36, 37], //Характеристики
+                        '#tr_edit1_csection2': [42, 43, 41, 81], //Наличие
+                        '#tr_edit1_csection3': [3, 82] //Условия
+                    };
                 break;
                 //Офисы
                 case '49':
@@ -1803,6 +1827,12 @@ if (
                         2, 56, 9, 34, 7, 21, 35, 22, 23, 36, 37, 24, 25, 57, 8, 33, 26, 40, 52, 53,
                         41, 42, 43, 44, 45, 46, 50
                     ];
+                    sortProps = {
+                        '#tr_edit1_csection4': [29, 13, 30, 31, 32, 84, 85], //Адрес
+                        '#tr_edit1_csection1': [58, 19, 6, 5, 20, 4, 59], //Характеристики
+                        '#tr_edit1_csection2': [68, 39, 27, 47, 48, 51, 49], //Наличие
+                        '#tr_edit1_csection3': [3] //Условия
+                    };
                 break;
                 //Торговые площади
                 case '50':
@@ -1810,12 +1840,24 @@ if (
                         2, 56, 9, 34, 7, 21, 35, 22, 23, 36, 37, 24, 25, 57, 8, 58, 33, 27,
                         40, 52, 53, 41, 42, 44, 45, 46, 50
                     ];
+                    sortProps = {
+                        '#tr_edit1_csection4': [29, 13, 30, 31, 32, 84, 85], //Адрес
+                        '#tr_edit1_csection1': [19, 6, 5, 20, 4, 59], //Характеристики
+                        '#tr_edit1_csection2': [68, 39, 43, 26, 47, 48, 51, 49], //Наличие
+                        '#tr_edit1_csection3': [3] //Условия
+                    };
                 break;
                 //Здания
                 case '51':
                     hiddenProps = [
                         2, 56, 6, 9, 34, 59, 7, 21, 35, 22, 23, 37, 24, 25, 57, 8, 58, 33, 27, 44, 45, 50
                     ];
+                    sortProps = {
+                        '#tr_edit1_csection4': [29, 13, 30, 31, 84, 85], //Адрес
+                        '#tr_edit1_csection1': [19, 5, 20, 4, 36], //Характеристики
+                        '#tr_edit1_csection2': [38, 39, 40, 52, 53, 41, 42, 43, 26, 46, 47, 48, 51, 49], //Наличие
+                        '#tr_edit1_csection3': [3] //Условия
+                    };
                 break;
                 default:
                     $('[id^="tr_PROPERTY_"], #tr_NAME, #tr_CODE').hide();
@@ -1824,10 +1866,21 @@ if (
                 break;
             }
 
-            $('[id^="tr_PROPERTY_"]').show();
-            for(var propId in hiddenProps) {
-                $('#tr_PROPERTY_' + hiddenProps[propId]).hide();
+            //$('[id^="tr_PROPERTY_"]').show();
+
+            for(var propTrId in sortProps)
+            {
+                for(var i = 0, cnt = sortProps[propTrId].length; i < cnt; ++i)
+                {
+                    $('#tr_PROPERTY_' + sortProps[propTrId][i]).show().insertAfter(
+                        i == 0 ? $(propTrId) : $('#tr_PROPERTY_' + sortProps[propTrId][i - 1])
+                    )
+                }
             }
+
+            /*for(var propId in hiddenProps) {
+                $('#tr_PROPERTY_' + hiddenProps[propId]).hide();
+            }*/
         })
     })
 </script>
