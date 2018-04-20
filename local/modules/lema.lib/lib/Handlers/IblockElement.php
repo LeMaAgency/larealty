@@ -75,34 +75,13 @@ class IblockElement
         //check iblock number
         if(isset($fields['IBLOCK_ID']) && $fields['IBLOCK_ID'] === \LIblock::getId('objects') && !empty($fields['PROPERTY_VALUES']))
         {
-            //get square property id
-            $squareId = \LIblock::getPropId('objects', 'SQUARE');
-            //get realty property id
-            $realtyId = \LIblock::getPropId('objects', 'REALTY_TYPE');
-
-            if(empty($squareId) || empty($realtyId))
-                return ;
-
             //get square property value
-            if(empty($fields['PROPERTY_VALUES'][$squareId]))
-                $square = 0;
-            else
-            {
-                $tmp = current($fields['PROPERTY_VALUES'][$squareId]);
-                $square = empty($tmp) || empty($tmp['VALUE']) ? 0 : $tmp['VALUE'];
-            }
-
+            $square = static::getPropValue($fields, 'SQUARE');
             //get realty property value
-            if(empty($fields['PROPERTY_VALUES'][$realtyId]))
-                $realty = 0;
-            else
-            {
-                $tmp = current($fields['PROPERTY_VALUES'][$realtyId]);
-                $realty = empty($tmp) || empty($tmp['VALUE']) ? 0 : $tmp['VALUE'];
-            }
+            $realty = static::getPropValue($fields, 'REALTY_TYPE');
 
             //set name from choosen property value
-            foreach(\LIblock::getPropEnumValues($realtyId) as $propData)
+            foreach(\LIblock::getPropEnumValues(\LIblock::getPropId('objects', 'REALTY_TYPE')) as $propData)
             {
                 if($propData['ID'] == $realty)
                 {
@@ -129,23 +108,18 @@ class IblockElement
 
         if(isset($fields['IBLOCK_ID']) && $fields['IBLOCK_ID'] === \LIblock::getId('objects') && !empty($fields['PROPERTY_VALUES']))
         {
-            //get realty property id
-            $remindDateId = \LIblock::getPropId('objects', 'REMINDER_DATE');
-            //get realty property value
-            if(empty($fields['PROPERTY_VALUES'][$remindDateId]))
-                $remindDate = 0;
-            else
-            {
-                $tmp = current($fields['PROPERTY_VALUES'][$remindDateId]);
-                $remindDate = empty($tmp) || empty($tmp['VALUE']) ? 0 : $tmp['VALUE'];
-            }
-            $agentName = '\\' . get_class() . '::remind(' . $fields['ID'] . ', ';
+            //get remind date property value
+            $remindDate = static::getPropValue($fields, 'REMINDER_DATE', null);
 
+            //get rieltor property value
+            $rieltor = static::getPropValue($fields, 'RIELTOR', false);
+
+
+            $agentName = '\\' . get_class() . '::remind(' . $fields['ID'] . ', ';
 
             if($remindDate == date('d.m.Y'))
             {
                 $remindTimeStamp = strtotime('+1 hour');
-                $remindDate = date('d.m.Y', $remindTimeStamp);
             }
             else
             {
@@ -157,27 +131,29 @@ class IblockElement
             if($row = $res->Fetch())
             {
                 \CAgent::Update($row['ID'], array(
-                    $agentName . '"' . $remindDate . '");',
+                    $agentName . '"' . $remindTimeStamp . '");',
                     '',
                     'N',
-                    86400,
+                    60,
                     date('d.m.Y H:i:s', $remindTimeStamp),
                     'Y',
                     date('d.m.Y H:i:s', $remindTimeStamp),
-                    30
+                    30,
+                    $rieltor
                 ));
             }
 
             //Agent is not exists, create it now
             \CAgent::AddAgent(
-                $agentName . '"' . $remindDate . '");',
+                $agentName . '"' . $remindTimeStamp . '");',
                 '',
                 'N',
-                86400,
+                60,
                 date('d.m.Y H:i:s', $remindTimeStamp),
                 'Y',
                 date('d.m.Y H:i:s', $remindTimeStamp),
-                30
+                30,
+                $rieltor
             );
         }
     }
@@ -192,24 +168,15 @@ class IblockElement
         //check iblock number
         if(isset($fields['IBLOCK_ID']) && $fields['IBLOCK_ID'] === \LIblock::getId('objects') && !empty($fields['PROPERTY_VALUES']))
         {
-            //get rieltor property id
-            $rieltorPropId = \LIblock::getPropId('objects', 'RIELTOR');
-
             /**
              * Administrator can change rieltor for object
              */
             if(\Lema\Common\User::isAdmin())
             {
+
                 //get rieltor property value
-                if(empty($fields['PROPERTY_VALUES'][$rieltorPropId]))
-                {
-                    $rieltorId = 0;
-                }
-                else
-                {
-                    $tmp = current($fields['PROPERTY_VALUES'][$rieltorPropId]);
-                    $rieltorId = empty($tmp) || empty($tmp['VALUE']) ? 0 : (int) $tmp['VALUE'];
-                }
+                $rieltorId = static::getPropValue($fields, 'RIELTOR', 0);
+
                 //rieltor not specified, clean rights
                 if(empty($rieltorId))
                 {
@@ -253,12 +220,44 @@ class IblockElement
         }
     }
 
-    public static function remind($objectId, $date)
+    public static function remind($objectId, $timeStamp)
     {
+        $agentName = '\\' . get_class() . '::remind(' . $objectId . ', "' . strtotime('+1 hour') . '")';
+
+        \CModule::includeModule('iblock');
+
+        $res = \CIBlockElement::GetList(
+                array(),
+                array('IBLOCK_ID' => $objectId, '=ID' => $objectId),
+                false,
+                false,
+                array('PROPERTY_RIELTOR', 'PROPERTY_REMIND_TEXT')
+        );
+        if(!($row = $res->Fetch()))
+            /*return $agentName*/;
+
+        var_dump($agentName, $row);exit;
         ?>
         <script>
-            alert('OBJECT REMIND, ID: <?=$objectId;?>, DATE: <?=$date;?>');
+            alert('OBJECT REMIND, ID: <?=$objectId;?>, DATE: <?=date('d.m.Y H:i:s', $timeStamp);?>');
         </script>
-        <?exit;
+        <? exit;
+    }
+
+    protected static function getPropValue(array $fields = array(), $propCode, $defValue = 0, $iblockCode = 'objects')
+    {
+        //get property id
+        $propId = \LIblock::getPropId($iblockCode, $propCode);
+
+        //get property value
+        if(empty($fields['PROPERTY_VALUES'][$propId]))
+        {
+            return $defValue;
+        }
+        else
+        {
+            $tmp = current($fields['PROPERTY_VALUES'][$propId]);
+            return empty($tmp) || empty($tmp['VALUE']) ? $defValue : $tmp['VALUE'];
+        }
     }
 }

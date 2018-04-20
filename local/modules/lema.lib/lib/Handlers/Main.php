@@ -17,12 +17,13 @@ class Main
      */
     public static function adminListDisplay(&$list)
     {
-        //add custom group action
-        $list->context->additional_items[] = array(
-            'TEXT' => 'Печать',
-            'TITLE' => 'Распечатать страницу',
-            'ONCLICK' => 'window.print();',
-            'GLOBAL_ICON' => 'adm-menu-copy',
-        );
+        if(isset($list->context, $list->context->additional_items))
+        {
+            //add custom group action
+            $list->context->additional_items[] = array(
+                'TEXT' => 'Печать', 'TITLE' => 'Распечатать страницу', 'ONCLICK' => 'window.print();',
+                'GLOBAL_ICON' => 'adm-menu-copy',
+            );
+        }
     }
 }
