@@ -3,6 +3,7 @@
 namespace Lema\Handlers;
 
 use \Bitrix\Main\Localization\Loc;
+use Bitrix\Main\Page\Asset;
 use Bitrix\Main\Type\DateTime;
 use Lema\Common\Dumper;
 
@@ -97,68 +98,6 @@ class IblockElement
     }
 
     /**
-     * @param array $fields
-     *
-     * @return bool
-     */
-    protected static function setReminders(array $fields)
-    {
-        if(empty($fields['ID']))
-            return false;
-
-        if(isset($fields['IBLOCK_ID']) && $fields['IBLOCK_ID'] === \LIblock::getId('objects') && !empty($fields['PROPERTY_VALUES']))
-        {
-            //get remind date property value
-            $remindDate = static::getPropValue($fields, 'REMINDER_DATE', null);
-
-            //get rieltor property value
-            $rieltor = static::getPropValue($fields, 'RIELTOR', false);
-
-
-            $agentName = '\\' . get_class() . '::remind(' . $fields['ID'] . ', ';
-
-            if($remindDate == date('d.m.Y'))
-            {
-                $remindTimeStamp = strtotime('+1 hour');
-            }
-            else
-            {
-                $remindTimeStamp = strtotime($remindDate);
-            }
-
-            //search existing agent
-            $res = \CAgent::GetList(array('ID' => 'DESC'), array('NAME' => $agentName . '%'));
-            if($row = $res->Fetch())
-            {
-                \CAgent::Update($row['ID'], array(
-                    $agentName . '"' . $remindTimeStamp . '");',
-                    '',
-                    'N',
-                    60,
-                    date('d.m.Y H:i:s', $remindTimeStamp),
-                    'Y',
-                    date('d.m.Y H:i:s', $remindTimeStamp),
-                    30,
-                    $rieltor
-                ));
-            }
-
-            //Agent is not exists, create it now
-            \CAgent::AddAgent(
-                $agentName . '"' . $remindTimeStamp . '");',
-                '',
-                'N',
-                60,
-                date('d.m.Y H:i:s', $remindTimeStamp),
-                'Y',
-                date('d.m.Y H:i:s', $remindTimeStamp),
-                30,
-                $rieltor
-            );
-        }
-    }
-
-    /**
      * Set element rights for specified user (or clean it)
      *
      * @param array $fields
@@ -220,28 +159,98 @@ class IblockElement
         }
     }
 
-    public static function remind($objectId, $timeStamp)
+    /**
+     * @param array $fields
+     *
+     * @return bool
+     */
+    protected static function setReminders(array $fields)
     {
-        $agentName = '\\' . get_class() . '::remind(' . $objectId . ', "' . strtotime('+1 hour') . '")';
+        if(empty($fields['ID']))
+            return false;
 
-        \CModule::includeModule('iblock');
+        if(isset($fields['IBLOCK_ID']) && $fields['IBLOCK_ID'] === \LIblock::getId('objects') && !empty($fields['PROPERTY_VALUES']))
+        {
+            //get remind date property value
+            $remindDate = static::getPropValue($fields, 'REMINDER_DATE', null);
+
+            //get rieltor property value
+            $rieltor = static::getPropValue($fields, 'RIELTOR', false);
+
+
+            $agentName = '\\' . get_class() . '::remind(' . $fields['ID'] . ');';
+
+            $remindTimeStamp = strtotime($remindDate == date('d.m.Y') ? '+1 hour' : $remindDate);
+
+            $remindDate = date('d.m.Y H:i:s', $remindTimeStamp);
+
+            //search existing agent
+            $res = \CAgent::GetList(array('ID' => 'DESC'), array('NAME' => $agentName));
+            if($row = $res->Fetch())
+            {
+                \CAgent::Update($row['ID'], array(
+                    'NAME' => $agentName,
+                    'USER_ID' => $rieltor,
+                    'NEXT_EXEC' => $remindDate,
+                    'ACTIVE' => 'Y'
+                ));
+            }
+
+            //Agent is not exists, create it now
+            \CAgent::AddAgent(
+                $agentName,
+                '',
+                'N',
+                60,
+                $remindDate,
+                'Y',
+                $remindDate,
+                30,
+                $rieltor
+            );
+        }
+    }
+
+    /**
+     * @param $objectId
+     *
+     * @return string
+     */
+    public static function remind($objectId)
+    {
+        $agentName = '\\' . get_class() . '::remind(' . $objectId . ');';
+
+        if(!\CModule::includeModule('iblock'))
+            return $agentName;
 
         $res = \CIBlockElement::GetList(
                 array(),
-                array('IBLOCK_ID' => $objectId, '=ID' => $objectId),
+                array('IBLOCK_ID' => \LIblock::getId('objects'), '=ID' => $objectId),
                 false,
                 false,
-                array('PROPERTY_RIELTOR', 'PROPERTY_REMIND_TEXT')
+                array('NAME', 'PROPERTY_RIELTOR', 'PROPERTY_REMINDER_TEXT')
         );
         if(!($row = $res->Fetch()))
-            /*return $agentName*/;
+            return $agentName;
 
-        var_dump($agentName, $row);exit;
-        ?>
-        <script>
-            alert('OBJECT REMIND, ID: <?=$objectId;?>, DATE: <?=date('d.m.Y H:i:s', $timeStamp);?>');
-        </script>
-        <? exit;
+        /**
+         * This variables are used in modal template and should be defined
+         */
+        $objectName = $row['NAME'];
+        $text = $row['PROPERTY_REMINDER_TEXT_VALUE'];
+        if(!empty($text['TEXT']))
+            $text = $text['TEXT'];
+
+        /**
+         * include modal template
+         */
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/local/php_interface/include/modal_agent_template.php';
+
+        $res = \CAgent::GetList(array('ID' => 'DESC'), array('NAME' => $agentName));
+        if($row = $res->Fetch())
+            \CAgent::Delete($row['ID']);
+
+        exit;
     }
 
     protected static function getPropValue(array $fields = array(), $propCode, $defValue = 0, $iblockCode = 'objects')
