@@ -220,6 +220,13 @@ class IblockElement
     {
         $agentName = '\\' . get_class() . '::remind(' . $objectId . ');';
 
+        /**
+         * Delete agent
+         */
+        $res = \CAgent::GetList(array('ID' => 'DESC'), array('NAME' => $agentName));
+        if($row = $res->Fetch())
+            \CAgent::Delete($row['ID']);
+
         if(!\CModule::includeModule('iblock'))
             return $agentName;
 
@@ -245,10 +252,6 @@ class IblockElement
          * include modal template
          */
         require_once $_SERVER['DOCUMENT_ROOT'] . '/local/php_interface/include/modal_agent_template.php';
-
-        $res = \CAgent::GetList(array('ID' => 'DESC'), array('NAME' => $agentName));
-        if($row = $res->Fetch())
-            \CAgent::Delete($row['ID']);
 
         exit;
     }
