@@ -47,3 +47,7 @@
         margin: auto;
     }
 }
+
+.js-extend-filter-block {
+    display: none;
+}

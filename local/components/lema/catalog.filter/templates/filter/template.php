@@ -23,8 +23,13 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
                 <?foreach($arResult["ITEMS"] as $arItem):?>
                 <?if(array_key_exists("HIDDEN", $arItem)):?>
                     <?=$arItem["INPUT"]?>
-                <?elseif ($arItem["TYPE"] == "RANGE"):?>
-                    <div class="filter-form-column">
+                <?elseif ($arItem["TYPE"] == "RANGE"):
+                    $extendFilterClass = null;
+                    if(isset($arItem['CODE']) && in_array($arItem['CODE'], array('STAGE', 'STAGES_COUNT')))
+                        $extendFilterClass = ' js-extend-filter-block';
+
+                        ?>
+                    <div class="filter-form-column<?=$extendFilterClass;?>">
                         <?if($arItem['CODE'] == 'ROOMS_COUNT'):?>
                             <div class="filter-field-title"><?=$arItem["NAME"]?></div>
                             <div class="filter-num-rooms">
@@ -213,7 +218,7 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
                 <?endif?>
             <?endforeach;?>
             </div>
-
+            <a href="#" class="filter-extend-link js-extend-filter">Расширенный поиск <b>+</b></a>
             <button type="submit" name="set_filter" value="Y" class="filter-submit-btn">Поиск</button>
             <div class="clb"></div>
         </form>
