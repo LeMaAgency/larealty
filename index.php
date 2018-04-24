@@ -183,7 +183,9 @@ $APPLICATION->SetTitle("Квартирный ответ - Главная стр�
     'SEF_MODE' => 'Y',
     'SEF_FOLDER' => '/catalog/',
 ));?>
-
+<?php
+$GLOBALS['bestOffersFilter'] = array('=PROPERTY_IS_EXCLUSIVE_VALUE' => 'Y');
+?>
 <?$APPLICATION->IncludeComponent('bitrix:news.list', 'best_offers', array(
     'DISPLAY_DATE' => 'Y',
     'DISPLAY_NAME' => 'Y',
@@ -197,7 +199,7 @@ $APPLICATION->SetTitle("Квартирный ответ - Главная стр�
     'SORT_ORDER1' => 'DESC',
     'SORT_BY2' => 'SORT',
     'SORT_ORDER2' => 'ASC',
-    'FILTER_NAME' => 'roomNewElementFilter',
+    'FILTER_NAME' => 'bestOffersFilter',
     'FIELD_CODE' => array(),
     'PROPERTY_CODE' => array(
         0 => "ROOMS_COUNT",
