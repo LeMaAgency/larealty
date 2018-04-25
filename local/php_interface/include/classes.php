@@ -43,11 +43,13 @@ class HomeClickExport extends \Lema\Base\XmlExport
                 <address><?=$info['address']?></address>
             </location>
             <sales-agent>
-                <name></name>
-                <phone></phone>
+                <name><?=$info['PROPERTY_USER_NAME_VALUE'];?></name>
+                <phone><?=$info['PROPERTY_USER_PHONE_VALUE'];?></phone>
+                <email><?=$info['PROPERTY_USER_EMAIL_VALUE'];?></email>
                 <organization></organization>
                 <url></url>
                 <photo></photo>
+                <category>owner</category>
             </sales-agent>
             <price>
                 <value><?=$info['PROPERTY_PRICE_VALUE'];?></value>

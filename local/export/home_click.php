@@ -67,6 +67,9 @@ $yml->loadData(array(
         'PROPERTY_FIRE_EXT_SYSTEM',
         'PROPERTY_SECURITY_VIDEO',
         'PROPERTY_HAVINGS_TYPE',
+        'PROPERTY_USER_NAME',
+        'PROPERTY_USER_PHONE',
+        'PROPERTY_USER_EMAIL',
     ),
     'filter' => array('ACTIVE' => 'Y', 'SECTION_CODE' => 'active'),
     'callback' => function($data) use($rentAndRealtyTypes) {
