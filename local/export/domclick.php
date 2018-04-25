@@ -1,9 +1,9 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] .'/bitrix/modules/main/include/prolog_before.php';
 
-$yml = new \HomeClickExport(\LIblock::getId('objects'),array(
-    'storageDir' => '/bitrix/catalog_export/home_click',
-    //'additionalData' => array('siteTitle' => 'Funny-Hunny.RU - Детский трикотаж оптом от производителя 👕 👚 👗'),
+$yml = new \DomclickExport(\LIblock::getId('objects'),array(
+    'storageDir' => '/bitrix/catalog_export/domclick',
+    //'additionalData' => array('siteTitle' => 'KvOtvet'),
 ));
 
 $rentAndRealtyTypes = array();
@@ -26,12 +26,12 @@ $yml->loadData(array(
         'PROPERTY_STREET',
         'PROPERTY_HOUSE_NUMBER',
         'PROPERTY_BUILDING_NUMBER',
+        'PROPERTY_CADASTRAL_NUMBER',
         'PROPERTY_PROPOSED_ROOMS_COUNT',
         'PROPERTY_REALTY_TYPE',
         'PROPERTY_RENT_TYPE',
         'PROPERTY_MATERIAL',
         'PROPERTY_YEAR',
-        'PROPERTY_CADASTRAL_NUMBER',
         'PROPERTY_LIFT',
         'PROPERTY_SEP_ENTRANCE',
         'PROPERTY_OWNER',
@@ -83,7 +83,6 @@ $yml->loadData(array(
         else
             $data['type'] = 'аренда';
         $data['property-type'] = 'жилая';
-        $data['cadastral-number'] = $data['PROPERTY_CADASTRAL_NUMBER_VALUE'];
         //Get rent type
         $rentType = null;
         if(empty($rentAndRealtyTypes[$data['PROPERTY_RENT_TYPE_ENUM_ID']]))
@@ -124,11 +123,20 @@ $yml->loadData(array(
 
 $yml->showData(array(
     'sendHeader' => false,
-    /*'fields' => array(
-        'price' => 'CATALOG_PRICE_1',
-        'currencyId' => 'CATALOG_CURRENCY_1',
+    'fields' => array(
+        'CadastralNumber' => 'PROPERTY_CADASTRAL_NUMBER_VALUE',
+        'category' => 'PROPERTY_REALTY_TYPE_VALUE',
+        'renovation' => 'PROPERTY_REPAIR_TYPE_VALUE',
+        'rooms' => 'PROPERTY_ROOMS_COUNT_VALUE',
+        'floor' => 'PROPERTY_STAGE_VALUE',
+        'floors-total' => 'PROPERTY_STAGES_COUNT_VALUE',
+        'area' => 'PROPERTY_SQUARE_VALUE',
+        'living-space' => 'PROPERTY_SQUARE_RESIDENT_VALUE',
+        'kitchen-space' => 'PROPERTY_SQUARE_KITCHEN_VALUE',
+        'land-space' => 'PROPERTY_SQUARE_LAND_VALUE',
+        'bathroom-unit' => 'PROPERTY_BATHROOM_VALUE',
     ),
-    'params' => array(
+    /*'params' => array(
         array('Поставщик', 'PROPERTY_PROVIDER_VALUE'),
         array('Материал', 'PROPERTY_MATERIAL_VALUE'),
         array('Количество штук в упаковке', 'PROPERTY_COUNT_IN_BOX_VALUE', 'unit' => 'шт.'),
