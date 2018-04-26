@@ -80,11 +80,11 @@ global $APPLICATION;
                 <div class="header-phone"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/header/phone.php'); ?></div>
                 <div class="header-account">
                     <?if(\Lema\Common\User::isGuest()):?>
-                        <a href="#" class="header-account-link signin-link link-hvr">
+                        <a href="<?=SITE_DIR;?>auth/?login=yes" class="header-account-link signin-link link-hvr">
                             <?=Loc::getMessage('LEMA_HEADER_SIGNIN_LINK');?>
                         </a>
                         <span class="header-account-border"></span>
-                        <a href="#" class="header-account-link signup-link link-hvr">
+                        <a href="<?=SITE_DIR;?>auth/?register=yes" class="header-account-link signup-link link-hvr">
                             <?=Loc::getMessage('LEMA_HEADER_SIGNUP_LINK');?>
                         </a>
                     <?else:?>
