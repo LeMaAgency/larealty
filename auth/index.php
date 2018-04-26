@@ -1,7 +1,7 @@
 <?
 require_once $_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php';
 
-$APPLICATION->SetTitle('Статистика');
+$APPLICATION->SetTitle('Авторизация');
 ?>
     <div class="container">
         <div class="row">
