@@ -1754,11 +1754,11 @@ if (
         /**
          * Hide items for empty choose
          */
+        var initShowedProps = [1, 3, 13, 28, 29, 30, 54, 63, 68, 69, 70, 71, 72, 73];
         $('[id^="tr_PROPERTY_"], #tr_NAME, #tr_CODE').hide();
         if($.trim($('#tr_PROPERTY_1 select').val()) == '')
         {
             $('[id^="tr_PROPERTY_"], #tr_NAME, #tr_CODE').hide();
-            var initShowedProps = [1, 3, 13, 28, 29, 30, 54, 63, 68, 69, 70, 71, 72, 73];
 
             for(var propId in initShowedProps) {
                 $('#tr_PROPERTY_' + initShowedProps[propId]).show();
@@ -1846,7 +1846,6 @@ if (
              * Hide not necessary properties & show required
              */
             $('[id^="tr_PROPERTY_"], #tr_NAME, #tr_CODE').hide();
-            var initShowedProps = [1, 3, 13, 28, 29, 30, 54, 63, 68, 69, 70, 71, 72, 73];
             for(var propId in initShowedProps) {
                 $('#tr_PROPERTY_' + initShowedProps[propId]).show();
             }
@@ -1863,7 +1862,7 @@ if (
                     )
                 }
             }
-        });
+        }).trigger('change');
 
         /**
          * Hide deposit property for new object
