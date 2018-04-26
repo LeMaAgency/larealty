@@ -1862,6 +1862,18 @@ if (
                     )
                 }
             }
+
+            $('#tr_PROPERTY_61').show();
+
+            /**
+             * Hide deposit property for new object
+             */
+            <?if(empty($_GET['ID'])):?>
+            $('#tr_PROPERTY_54').hide();
+            <?else:?>
+            $('#tr_PROPERTY_54').show();
+            <?endif;?>
+
         }).trigger('change');
 
         /**
