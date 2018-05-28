@@ -33,3 +33,8 @@ $eventManager->addEventHandler(
     'OnAdminListDisplay',
     array('\\Lema\\Handlers\\Main', 'adminListDisplay')
 );
+$eventManager->addEventHandler(
+    'iblock',
+    'OnIBlockPropertyBuildList',
+    array('\\Lema\\IBlock\\TimePropertyType', 'staticCall')
+);

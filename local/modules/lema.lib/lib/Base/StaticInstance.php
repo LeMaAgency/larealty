@@ -23,6 +23,18 @@ abstract class StaticInstance
      */
     public static function get()
     {
+        return new static();
+    }
+
+    /**
+     * Returns singleton static instance of current object
+     *
+     * @return $this
+     *
+     * @access public
+     */
+    public static function getSingleton()
+    {
         if(static::$instance === null)
             static::$instance = new static();
         return static::$instance;
