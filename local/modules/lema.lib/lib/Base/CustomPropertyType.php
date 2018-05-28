@@ -65,18 +65,35 @@ class CustomPropertyType extends StaticInstance
         echo $html;*/
     }
 
-    //сохраняем в базу
+    /**
+     * Save to DB
+     *
+     * @param $arProperty
+     * @param $value
+     *
+     * @return mixed
+     */
     public function ConvertToDB($arProperty, $value)
     {
         return $value;
     }
 
-    //читаем из базы
+    /**
+     * Get from DB
+     *
+     * @param $arProperty
+     * @param $value
+     *
+     * @return mixed
+     */
     public function ConvertFromDB($arProperty, $value)
     {
         return $value;
     }
 
+    /**
+     * @return array
+     */
     public static function staticCall()
     {
         return static::get()->GetUserTypeDescription();

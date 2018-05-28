@@ -3,7 +3,6 @@
 namespace Lema\IBlock;
 
 use \Lema\Base\CustomPropertyType;
-use Lema\Common\Dumper;
 
 class TimePropertyType extends CustomPropertyType
 {
@@ -32,7 +31,7 @@ class TimePropertyType extends CustomPropertyType
         $APPLICATION->IncludeComponent('bitrix:main.clock','',Array(
                 'INPUT_ID' => '',
                 'INPUT_NAME' => $strHTMLControlName['VALUE'],
-                'INPUT_TITLE' => 'Время рассылки',
+                'INPUT_TITLE' => 'Время',
                 'INIT_TIME' => (empty($value['VALUE']) ? '00:00' : $value['VALUE']),
                 'STEP' => '0'
             )
