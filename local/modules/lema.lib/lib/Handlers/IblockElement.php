@@ -6,6 +6,7 @@ use \Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Page\Asset;
 use Bitrix\Main\Type\DateTime;
 use Lema\Common\Dumper;
+use Lema\Subscribe\AutoFit;
 
 Loc::loadMessages(__FILE__);
 
@@ -22,6 +23,8 @@ class IblockElement
     {
         static::setElementRights($fields);
         static::setReminders($fields);
+        static::setAutoFit($fields);
+
     }
 
     /**
@@ -32,6 +35,7 @@ class IblockElement
         static::generateElementNameAndCode($fields);
         static::setElementRights($fields);
         static::setReminders($fields);
+        static::setAutoFit($fields);
     }
 
     /**
@@ -155,6 +159,40 @@ class IblockElement
                     );
                 }
             }
+
+        }
+    }
+
+    /**
+     * Set auto fit agents
+     *
+     * @param array $fields
+     *
+     * @return bool
+     */
+    protected static function setAutoFit(array $fields)
+    {
+        if(empty($fields['ID']))
+            return false;
+
+        if(isset($fields['IBLOCK_ID']) && $fields['IBLOCK_ID'] === \LIblock::getId('requests') && !empty($fields['PROPERTY_VALUES']))
+        {
+            if(!static::getPropValue($fields, 'AUTOFIT', false, 'requests'))
+            {
+                AutoFit::removeAgent($fields['ID']);
+                return ;
+            }
+
+            $frequency = static::getPropValue($fields, 'SEND_FREQUENCY', false, 'requests');
+            $dateFrom = static::getPropValue($fields, 'SEND_DATE_FROM', false, 'requests');
+            $dateTo = static::getPropValue($fields, 'SEND_DATE_TO', false, 'requests');
+            $timeStart = static::getPropValue($fields, 'SEND_TIME_START', false, 'requests');
+
+            if(preg_match('~^\\d+$~', $timeStart))
+                $timeStart .= ':00';
+
+            if(!empty($frequency) && !empty($dateFrom) && !empty($dateTo) && !empty($timeStart))
+                AutoFit::addOrUpdateAgent($fields['ID'], $frequency, $dateFrom, $dateTo, $timeStart);
 
         }
     }

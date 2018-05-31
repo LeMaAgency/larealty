@@ -36,9 +36,24 @@ class Element
      *
      * @access public
      */
-    public static function getById($elementId, array $params = array())
+    public static function getByIdD7($elementId, array $params = array())
     {
         return \Bitrix\Iblock\ElementTable::getByPrimary($elementId, $params)->fetch();
+    }
+
+    /**
+     * Get element by id
+     *
+     * @param $elementId
+     * @param array $params
+     * @return mixed
+     *
+     * @access public
+     */
+    public static function getById($iblockId, $elementId, array $params = array())
+    {
+        $params['filter']['ID'] = (int) $elementId;
+        return current(static::getAll($iblockId, $params));
     }
 
     /**
