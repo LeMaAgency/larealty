@@ -102,7 +102,7 @@ class AutoFit
                 $agentName,
                 '',
                 'Y',
-                60,
+                $interval,
                 '',
                 'Y',
                 $startDateTime->format('d.m.Y H:i:s'),
