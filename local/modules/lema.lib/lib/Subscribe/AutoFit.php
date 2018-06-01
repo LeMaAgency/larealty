@@ -3,7 +3,6 @@
 namespace Lema\Subscribe;
 use Lema\Common\Helper;
 use Lema\IBlock\Element;
-use Lema\Template\Item;
 
 /**
  * Class AutoFit
