@@ -141,10 +141,10 @@ class AutoFit
         $arSelect = array(
             'ID', 'NAME', 'DETAIL_PAGE_URL',
             'PROPERTY_REALTY_TYPE', 'PROPERTY_RENT_TYPE', 'PROPERTY_ROOMS_COUNT', 'PROPERTY_LAYOUT_TYPE',
-            'PROPERTY_STAGE', 'PROPERTY_REGION', 'PROPERTY_PRICE_FROM', 'PROPERTY_PRICE_TO', 'PROPERTY_MATERIAL',
-            'PROPERTY_SQUARE_FROM', 'PROPERTY_LIFE_MASSIV_SNT', 'PROPERTY_HAVINGS_TYPE', 'PROPERTY_SEND_TIME_START',
-            'PROPERTY_SEND_FREQUENCY', 'PROPERTY_SEND_DATE_FROM', 'PROPERTY_SEND_DATE_TO', 'PROPERTY_AUTOFIT',
-            'PROPERTY_CLIENT_NAME', 'PROPERTY_CLIENT_PHONE', 'PROPERTY_CLIENT_PHONE',
+            'PROPERTY_STAGE', 'PROPERTY_STAGES_COUNT', 'PROPERTY_REGION', 'PROPERTY_PRICE_FROM', 'PROPERTY_PRICE_TO',
+            'PROPERTY_MATERIAL', 'PROPERTY_SQUARE_FROM', 'PROPERTY_LIFE_MASSIV_SNT', 'PROPERTY_HAVINGS_TYPE',
+            'PROPERTY_SEND_TIME_START', 'PROPERTY_SEND_FREQUENCY', 'PROPERTY_SEND_DATE_FROM', 'PROPERTY_SEND_DATE_TO',
+            'PROPERTY_AUTOFIT', 'PROPERTY_CLIENT_NAME', 'PROPERTY_CLIENT_PHONE', 'PROPERTY_CLIENT_PHONE',
         );
         $request = Element::getById(\LIblock::getId('requests'), $requestId, array(
             'arSelect' => $arSelect
@@ -158,7 +158,6 @@ class AutoFit
             'PROPERTY_RENT_TYPE_ID' => $request['PROPERTY_RENT_TYPE_ENUM_ID'],
             'PROPERTY_ROOMS_COUNT' => $request['PROPERTY_ROOMS_COUNT_VALUE'],
             'PROPERTY_LAYOUT_TYPE' => $request['PROPERTY_LAYOUT_TYPE_VALUE'],
-            'PROPERTY_STAGE' => $request['PROPERTY_STAGE_VALUE'],
             'PROPERTY_REGION' => $request['PROPERTY_REGION_VALUE'],
             'PROPERTY_PRICE_FROM' => $request['PROPERTY_PRICE_FROM_VALUE'],
             'PROPERTY_PRICE_TO' => $request['PROPERTY_PRICE_TO_VALUE'],
@@ -166,8 +165,6 @@ class AutoFit
             'PROPERTY_SQUARE_FROM' => $request['PROPERTY_SQUARE_FROM_VALUE'],
             'PROPERTY_LIFE_MASSIV_SNT' => $request['PROPERTY_LIFE_MASSIV_SNT_VALUE'],
             'PROPERTY_HAVINGS_TYPE_ID' => $request['PROPERTY_HAVINGS_TYPE_ENUM_ID'],
-            'PROPERTY_CLIENT_NAME' => $request['PROPERTY_CLIENT_NAME_VALUE'],
-            'PROPERTY_CLIENT_PHONE' => $request['PROPERTY_CLIENT_PHONE_VALUE'],
         );
 
         foreach($filter as $k => $value)
@@ -177,6 +174,11 @@ class AutoFit
                 unset($filter[$k]);
             }
         }
+        if(!empty($request['PROPERTY_PRICE_FROM_VALUE']))
+            $filter['>=PROPERTY_PRICE'] = $request['PROPERTY_PRICE_FROM_VALUE'];
+        if(!empty($request['PROPERTY_PRICE_TO_VALUE']))
+            $filter['<=PROPERTY_PRICE'] = $request['PROPERTY_PRICE_TO_VALUE'];
+
         $realtyTypes = $rentTypes = array();
         foreach(\LIblock::getPropEnumValues(\LIblock::getPropId('objects', 'REALTY_TYPE')) as $k => $v)
             $realtyTypes[$v['VALUE']] = $k;
@@ -186,6 +188,28 @@ class AutoFit
         $sendData = null;
         foreach(Element::getAll(\LIblock::getId('objects'), array('filter' => $filter, 'arSelect' => $arSelect)) as $item)
         {
+
+            switch($request['PROPERTY_STAGE_VALUE'])
+            {
+                case 'not_last':
+                case 'not_last_2':
+                    if($item['PROPERTY_STAGE_VALUE'] == $item['PROPERTY_STAGES_COUNT_VALUE'])
+                        continue;
+                break;
+                case 'not_first':
+                    if($item['PROPERTY_STAGE_VALUE'] == 1)
+                        continue;
+                break;
+                case 'first':
+                    if($item['PROPERTY_STAGE_VALUE'] != 1)
+                        continue;
+                break;
+                case 'last':
+                    if($item['PROPERTY_STAGE_VALUE'] != $item['PROPERTY_STAGES_COUNT_VALUE'])
+                        continue;
+                break;
+            }
+
             $sendData .= sprintf(
                 'Название: %s; Ссылка: %s ; Тип объекта: %s; Тип сделки: %s; Количество комнат: %s; Вид планировки: %s;' .
                 'Этаж: %s; Регион: %s; Материал: %s',
