@@ -162,7 +162,8 @@ class IblockElement
                  */
                 if(empty($fields['ID']))
                 {
-                    $fields['IBLOCK_SECTION'] = array(23);
+                    if($fields['IBLOCK_ID'] === \LIblock::getId('objects'))
+                        $fields['IBLOCK_SECTION'] = array(23);
                     $fields['ACTIVE'] = 'Y';
                     $fields['RIGHTS'] = array();
                 }
@@ -177,7 +178,8 @@ class IblockElement
                     );
                 }
             }
-
+            \Lema\Common\Dumper::dump($fields);
+            exit;
         }
     }
 
