@@ -16,6 +16,8 @@ Loc::loadMessages(__FILE__);
  */
 class IblockElement
 {
+    const DEFAULT_TASK_ID = 38;
+
     /**
      * @param array $fields
      */
@@ -108,8 +110,24 @@ class IblockElement
      */
     protected static function setElementRights(array &$fields)
     {
+        /**
+         * Get iblock code by id
+         */
+        if(!empty($fields['IBLOCK_ID']))
+        {
+            $iblockCode = null;
+            $checkIblockCodes = array('objects', 'object_call_wait');
+            foreach($checkIblockCodes as $tmpCode)
+            {
+                if($fields['IBLOCK_ID'] == \LIblock::getId($tmpCode))
+                {
+                    $iblockCode = $tmpCode;
+                    break;
+                }
+            }
+        }
         //check iblock number
-        if(isset($fields['IBLOCK_ID']) && $fields['IBLOCK_ID'] === \LIblock::getId('objects') && !empty($fields['PROPERTY_VALUES']))
+        if(!empty($iblockCode) && !empty($fields['PROPERTY_VALUES']))
         {
             /**
              * Administrator can change rieltor for object
@@ -118,7 +136,7 @@ class IblockElement
             {
 
                 //get rieltor property value
-                $rieltorId = static::getPropValue($fields, 'RIELTOR', 0);
+                $rieltorId = static::getPropValue($fields, 'RIELTOR', 0, $iblockCode);
 
                 //rieltor not specified, clean rights
                 if(empty($rieltorId))
@@ -132,7 +150,7 @@ class IblockElement
                         'n0' => array(
                             'GROUP_CODE' => 'U' . $rieltorId,
                             'DO_CLEAN' => 'N',
-                            'TASK_ID' => 38
+                            'TASK_ID' => static::DEFAULT_TASK_ID
                         )
                     );
                 }
@@ -154,7 +172,7 @@ class IblockElement
                         'n0' => array(
                             'GROUP_CODE' => 'U' . \Lema\Common\User::get()->GetId(),
                             'DO_CLEAN' => 'N',
-                            'TASK_ID' => 38
+                            'TASK_ID' => static::DEFAULT_TASK_ID
                         )
                     );
                 }
