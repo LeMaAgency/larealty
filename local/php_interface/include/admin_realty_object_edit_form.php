@@ -1854,7 +1854,6 @@ if (
              */
             $('[id^="tr_PROPERTY_"], #tr_NAME, #tr_CODE').hide();
             for(var propId in initShowedProps) {
-                console.log('#tr_PROPERTY_' + initShowedProps[propId]);
                 $('#tr_PROPERTY_' + initShowedProps[propId]).show();
             }
 
