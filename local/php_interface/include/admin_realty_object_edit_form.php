@@ -1754,7 +1754,7 @@ if (
         /**
          * Hide items for empty choose
          */
-        var initShowedProps = [1, 3, 13, 28, 29, 30, 54, 63, 68, 69, 70, 71, 72, 73];
+        var initShowedProps = [1, 3, 13, 28, 29, 30, 54, 61, 63, 68, 69, 70, 71, 72, 73, 74, 76];
         $('[id^="tr_PROPERTY_"], #tr_NAME, #tr_CODE').hide();
         if($.trim($('#tr_PROPERTY_1 select').val()) == '')
         {
@@ -1869,8 +1869,6 @@ if (
                     )
                 }
             }
-
-            $('#tr_PROPERTY_61').show();
 
             /**
              * Hide deposit property for new object
