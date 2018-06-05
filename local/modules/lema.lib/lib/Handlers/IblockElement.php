@@ -178,8 +178,6 @@ class IblockElement
                     );
                 }
             }
-            \Lema\Common\Dumper::dump($fields);
-            exit;
         }
     }
 
