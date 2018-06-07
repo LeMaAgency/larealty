@@ -144,7 +144,7 @@ class AutoFit
             'PROPERTY_STAGE', 'PROPERTY_STAGES_COUNT', 'PROPERTY_REGION', 'PROPERTY_PRICE_FROM', 'PROPERTY_PRICE_TO',
             'PROPERTY_MATERIAL', 'PROPERTY_SQUARE_FROM', 'PROPERTY_LIFE_MASSIV_SNT', 'PROPERTY_HAVINGS_TYPE',
             'PROPERTY_SEND_TIME_START', 'PROPERTY_SEND_FREQUENCY', 'PROPERTY_SEND_DATE_FROM', 'PROPERTY_SEND_DATE_TO',
-            'PROPERTY_AUTOFIT', 'PROPERTY_CLIENT_NAME', 'PROPERTY_CLIENT_PHONE', 'PROPERTY_CLIENT_PHONE',
+            'PROPERTY_AUTOFIT', 'PROPERTY_CLIENT_NAME', 'PROPERTY_CLIENT_EMAIL', 'PROPERTY_CLIENT_PHONE',
         );
         $request = Element::getById(\LIblock::getId('requests'), $requestId, array(
             'arSelect' => $arSelect
@@ -235,6 +235,7 @@ class AutoFit
         \CEvent::Send('AUTO_FIT', 's1', array(
             'DATE' => date('d.m.Y'),
             'OBJECTS' => $sendData,
+            'EMAIL_TO' => $request['PROPERTY_CLIENT_EMAIL_VALUE'],
         ));
 
         return sprintf(
