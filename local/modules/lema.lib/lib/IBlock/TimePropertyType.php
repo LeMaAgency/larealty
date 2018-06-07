@@ -32,8 +32,8 @@ class TimePropertyType extends CustomPropertyType
                 'INPUT_ID' => '',
                 'INPUT_NAME' => $strHTMLControlName['VALUE'],
                 'INPUT_TITLE' => 'Время',
-                'INIT_TIME' => (empty($value['VALUE']) ? '00:00' : $value['VALUE']),
-                'STEP' => '0'
+                'INIT_TIME' => (empty($value['VALUE']) ? '00:00' : $value['VALUE'] . ':00'),
+                'STEP' => 60
             )
         );
     }
