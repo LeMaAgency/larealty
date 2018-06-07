@@ -1752,11 +1752,10 @@ if (
 <script>
     $(function() {
 
-        if($('.adm-info-message-red').length &&
-            $('body:contains("У вас нет прав на редактирование данной записи в ее текущем статусе")').length
-        )
+        if($('#save').is(':disabled'))
         {
-            $('[id^="tr_PROPERTY_"], #tr_NAME, #tr_CODE').hide();
+            $('[id^="tr_PROPERTY_"]').hide();
+            $('.adm-detail-block').remove();
 
             return ;
         }
