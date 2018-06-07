@@ -122,6 +122,8 @@ $item = $data->item();
                                             $value = $item->propVal($propCode);
                                             echo $value == 'Y' ? '✔' : $value;
                                         }
+                                        if(false !== strpos($propCode, 'SQUARE'))
+                                            echo ' ' . Loc::getMessage('LEMA_SQUARE_M_SUP');
                                         ?>
                                     </div>
                                 </div>
