@@ -24,3 +24,5 @@ if (CModule::IncludeModule('subscribe'))
     $cPosting = new CPosting;
     $cPosting->AutoSend();
 }
+
+file_put_contents($DOCUMENT_ROOT . '/cron_run.txt', date('d.m.Y H:i:s'). PHP_EOL, FILE_APPEND);
