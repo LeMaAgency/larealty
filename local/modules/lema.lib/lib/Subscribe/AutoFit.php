@@ -154,17 +154,17 @@ class AutoFit
             return ;
 
         $filter = array (
-            'PROPERTY_REALTY_TYPE_ID' => $request['PROPERTY_REALTY_TYPE_ENUM_ID'],
-            'PROPERTY_RENT_TYPE_ID' => $request['PROPERTY_RENT_TYPE_ENUM_ID'],
+            'PROPERTY_REALTY_TYPE_VALUE' => array_values($request['PROPERTY_REALTY_TYPE_VALUE']),
+            'PROPERTY_RENT_TYPE_VALUE' => array_values($request['PROPERTY_RENT_TYPE_VALUE']),
             'PROPERTY_ROOMS_COUNT' => $request['PROPERTY_ROOMS_COUNT_VALUE'],
-            'PROPERTY_LAYOUT_TYPE' => $request['PROPERTY_LAYOUT_TYPE_VALUE'],
-            'PROPERTY_REGION' => $request['PROPERTY_REGION_VALUE'],
+            'PROPERTY_LAYOUT_TYPE_VALUE' => array_values($request['PROPERTY_LAYOUT_TYPE_VALUE']),
+            'PROPERTY_REGION_VALUE' => array_values($request['PROPERTY_REGION_VALUE']),
             'PROPERTY_PRICE_FROM' => $request['PROPERTY_PRICE_FROM_VALUE'],
             'PROPERTY_PRICE_TO' => $request['PROPERTY_PRICE_TO_VALUE'],
-            'PROPERTY_MATERIAL_ID' => $request['PROPERTY_MATERIAL_ENUM_ID'],
+            'PROPERTY_MATERIAL_VALUE' => array_values($request['PROPERTY_MATERIAL_ENUM_ID']),
             'PROPERTY_SQUARE_FROM' => $request['PROPERTY_SQUARE_FROM_VALUE'],
             'PROPERTY_LIFE_MASSIV_SNT' => $request['PROPERTY_LIFE_MASSIV_SNT_VALUE'],
-            'PROPERTY_HAVINGS_TYPE_ID' => $request['PROPERTY_HAVINGS_TYPE_ENUM_ID'],
+            'PROPERTY_HAVINGS_TYPE_VALUE' => array_values($request['PROPERTY_HAVINGS_TYPE_ENUM_ID']),
         );
 
         foreach($filter as $k => $value)
