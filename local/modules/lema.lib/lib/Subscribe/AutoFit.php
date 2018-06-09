@@ -185,7 +185,7 @@ class AutoFit
         foreach(\LIblock::getPropEnumValues(\LIblock::getPropId('objects', 'RENT_TYPE')) as $k => $v)
             $rentTypes[$v['VALUE']] = $k;
 
-        $splitLine = str_repeat('-', 125);
+        $splitLine = '<br>' . str_repeat('-', 125) . '<br>';
         $sendData = null;
         foreach(Element::getAll(\LIblock::getId('objects'), array('filter' => $filter, 'arSelect' => $arSelect)) as $item)
         {
@@ -211,15 +211,17 @@ class AutoFit
                 break;
             }
 
+            $url = Helper::getFullUrl(strtr($item['DETAIL_PAGE_URL'], array(
+                '#RENT_TYPE#' => $rentTypes[$item['PROPERTY_RENT_TYPE_VALUE']],
+                '#REALTY_TYPE#' => $realtyTypes[$item['PROPERTY_REALTY_TYPE_VALUE']],
+            )));
 
             $sendData .= sprintf(
-                'Название: %s<br> Ссылка: %s<br> Тип объекта: %s<br> Тип сделки: %s<br> Количество комнат: %s<br> Вид планировки: %s<br>' .
+                'Название: %s<br> Ссылка: <a href="%s">%s</a><br> Тип объекта: %s<br> Тип сделки: %s<br> Количество комнат: %s<br> Вид планировки: %s<br>' .
                 'Этаж: %s<br> Регион: %s<br> Материал: %s',
                 $item['NAME'],
-                Helper::getFullUrl(strtr($item['DETAIL_PAGE_URL'], array(
-                    '#RENT_TYPE#' => $rentTypes[$item['PROPERTY_RENT_TYPE_VALUE']],
-                    '#REALTY_TYPE#' => $realtyTypes[$item['PROPERTY_REALTY_TYPE_VALUE']],
-                ))),
+                $url,
+                $url,
                 (is_array($item['PROPERTY_REALTY_TYPE_VALUE'])  ? join(', ', $item['PROPERTY_REALTY_TYPE_VALUE'])   : $item['PROPERTY_REALTY_TYPE_VALUE']),
                 (is_array($item['PROPERTY_RENT_TYPE_VALUE'])    ? join(', ', $item['PROPERTY_RENT_TYPE_VALUE'])     : $item['PROPERTY_RENT_TYPE_VALUE']),
                 (is_array($item['PROPERTY_ROOMS_COUNT_VALUE'])  ? join(', ', $item['PROPERTY_ROOMS_COUNT_VALUE'])   : $item['PROPERTY_ROOMS_COUNT_VALUE']),
