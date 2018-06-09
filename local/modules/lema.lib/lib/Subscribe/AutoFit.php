@@ -185,6 +185,7 @@ class AutoFit
         foreach(\LIblock::getPropEnumValues(\LIblock::getPropId('objects', 'RENT_TYPE')) as $k => $v)
             $rentTypes[$v['VALUE']] = $k;
 
+        $splitLine = str_repeat('-', 125);
         $sendData = null;
         foreach(Element::getAll(\LIblock::getId('objects'), array('filter' => $filter, 'arSelect' => $arSelect)) as $item)
         {
@@ -210,9 +211,10 @@ class AutoFit
                 break;
             }
 
+
             $sendData .= sprintf(
-                'Название: %s; Ссылка: %s ; Тип объекта: %s; Тип сделки: %s; Количество комнат: %s; Вид планировки: %s;' .
-                'Этаж: %s; Регион: %s; Материал: %s',
+                'Название: %s<br> Ссылка: %s<br> Тип объекта: %s<br> Тип сделки: %s<br> Количество комнат: %s<br> Вид планировки: %s<br>' .
+                'Этаж: %s<br> Регион: %s<br> Материал: %s',
                 $item['NAME'],
                 Helper::getFullUrl(strtr($item['DETAIL_PAGE_URL'], array(
                     '#RENT_TYPE#' => $rentTypes[$item['PROPERTY_RENT_TYPE_VALUE']],
@@ -229,7 +231,7 @@ class AutoFit
             if(!empty($item['PROPERTY_LIFE_MASSIV_SNT_VALUE']))
                 $sendData .= ';Жилой массив, СНТ: ' . $item['PROPERTY_LIFE_MASSIV_SNT_VALUE'];
 
-            $sendData .= PHP_EOL;
+            $sendData .= $splitLine;
         }
 
         \CEvent::Send('AUTO_FIT', 's1', array(
