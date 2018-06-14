@@ -47,11 +47,15 @@ $data = new TH($this);
                         <div class="act__list__item__text">
                             <p><?=$item->previewText()?></p>
                         </div>
-
+                        <div class="stock-detail-btn">
+                            <a href="<?=$item->detailUrl();?>" class="stock-detail-btn">Подробнее</a>
+                        </div>
                     </div>
                 </div>
             </div>
         <?endforeach;?>
+        <div style="clear:both"></div>
+        <br><br>
     </div>
 <?if($arParams["DISPLAY_BOTTOM_PAGER"]):?>
     <?=$arResult["NAV_STRING"]?>

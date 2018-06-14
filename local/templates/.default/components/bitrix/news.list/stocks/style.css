@@ -1,12 +1,19 @@
-div.news-list
-{
-	word-wrap: break-word;
+.stock-detail-btn {
+	text-align: right;
 }
-div.news-list img.preview_picture
-{
-	float:left;
-	margin:0 4px 6px 0;
+.stock-detail-btn a {
+	color: #ffffff;
+	font-weight: 600;
+	font-size: 18px;
+	background-color: #07ba00;
+	text-decoration: none;
+	text-align: center;
+	padding: 15px 25px;
+	margin-right: 30px;
+	transition: 0.3s background-color linear;
 }
-.news-date-time {
-	color:#486DAA;
+.stock-detail-btn:hover a{
+	background-color: #0b9605;
+	color: #ffffff;
+	text-decoration: none;
 }
