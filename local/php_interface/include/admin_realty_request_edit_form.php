@@ -1829,6 +1829,8 @@ if (
                     )
                 }
             }
+            $('#tr_PROPERTY_87').insertAfter('#tr_IBLOCK_ELEMENT_PROP_VALUE');
+            $('#tr_PROPERTY_88').insertAfter('#tr_PROPERTY_87');
 
         }).trigger('change');
         $('#tr_PROPERTY_88').show();
