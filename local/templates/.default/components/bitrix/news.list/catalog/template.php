@@ -113,7 +113,7 @@ $data = new TH($this);
         <?endif;?>
     <?else:?>
         <div class="empty-section">
-            К сожалению, товаров не найдено
+            <?=Loc::getMessage('LEMA_NO_OBJECTS_FOUND');?>
         </div>
     <?endif;?>
 </section>
