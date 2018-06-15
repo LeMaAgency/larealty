@@ -1815,7 +1815,7 @@ if (
                 case '4':
                     sortProps = {
                         '#tr_edit1_csection4': [29, 13, 30, 84, 85], //Адрес
-                        '#tr_edit1_csection1': [36], //Характеристики
+                        '#tr_edit1_csection1': [4], //Характеристики
                         '#tr_edit1_csection2': [42, 41, 81, 43], //Наличие
                         '#tr_edit1_csection3': [3, 82, 83], //Условия
                         '#tr_edit1_csection5': [68, 69, 70, 71, 54, 72, 73] //Собственник
