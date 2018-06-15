@@ -38,7 +38,6 @@ $yml->loadData(array(
         'PROPERTY_LAYOUT_TYPE',
         'PROPERTY_BATHROOM',
         'PROPERTY_ROOMS_COUNT',
-        'PROPERTY_TOTAL_ROOMS_COUNT_VALUE',
         'PROPERTY_BATHROOM_COUNT',
         'PROPERTY_SQUARE',
         'PROPERTY_SQUARE_RESIDENT',
@@ -93,6 +92,9 @@ $yml->loadData(array(
             'дома/дачи' => 'дом',
             'комнаты' => 'комната',
             'земельный участок' => 'земля',
+            'офисы' => 'бизнес',
+            'торговые площади' => 'бизнес',
+            'здания' => 'бизнес',
         );
         $category = mb_strtolower($data['PROPERTY_REALTY_TYPE_VALUE'], 'UTF-8');
         $data['category'] = isset($categories[$category]) ? $categories[$category] : null;
@@ -128,6 +130,32 @@ $yml->loadData(array(
         }
         unset($data['DETAIL_PICTURE'], $data['PROPERTY_MORE_PHOTO_VALUE']);
 
+        $landTypes = array(
+            'ИЖС' => 'ИЖС',
+            'СНТ' => 'сельское хозяйство',
+            'Садовотство' => 'коммерческая застройка',
+        );
+        $landType = mb_strtolower($data['PROPERTY_LOT_CATEGORIES_VALUE'], 'UTF-8');
+        $data['land-type'] = isset($landTypes[$landType]) ? $landTypes[$landType] : null;
+
+        $propertyTypes = array(
+            'собственность' => 'в аренде',
+            'аренда' => 'в собственности',
+        );
+        $propertyType = mb_strtolower($data['PROPERTY_LOT_HAVINGS_TYPE_VALUE'], 'UTF-8');
+        $data['land-type'] = isset($propertyTypes[$propertyType]) ? $propertyTypes[$propertyType] : null;
+
+        if($data['PROPERTY_BALCONIES_COUNT_VALUE'] == 1)
+            $data['balkony'] = 'один';
+        elseif($data['PROPERTY_BALCONIES_COUNT_VALUE'] > 1)
+            $data['balkony'] = 'больше одного';
+        else
+            $data['balkony'] = $data['PROPERTY_LOGGIAS_COUNT_VALUE'] > 0 ? 'лоджия' : null;
+
+
+        $data['alarm'] = $data['PROPERTY_SECURITY_CONCIERGE_VALUE'] == 'Y' || $data['PROPERTY_SECURITY_ALARM_VALUE'] == 'Y';
+
+
         //\Lema\Common\Dumper::dump($data);
 
         return $data;
@@ -137,17 +165,31 @@ $yml->loadData(array(
 $yml->showData(array(
     'sendHeader' => false,
     'fields' => array(
+        'type' => 'type',
+        'category' => 'category',
+        'property-type' => 'property-type',
         'CadastralNumber' => 'PROPERTY_CADASTRAL_NUMBER_VALUE',
         'renovation' => 'PROPERTY_REPAIR_TYPE_VALUE',
         'rooms' => 'PROPERTY_ROOMS_COUNT_VALUE',
         'rooms-offered' => 'PROPERTY_OFFERED_ROOMS_COUNT_VALUE',
         'floor' => 'PROPERTY_STAGE_VALUE',
-        'floors-total' => 'PROPERTY_TOTAL_ROOMS_COUNT_VALUE',
+        'floors-total' => 'PROPERTY_STAGES_COUNT_VALUE',
         'bathroom-unit' => 'PROPERTY_BATHROOM_VALUE',
         'building-series' => 'PROPERTY_LAYOUT_TYPE_VALUE',
         'building-type' => 'PROPERTY_MATERIAL_VALUE',
-        'building-type' => 'PROPERTY_MATERIAL_VALUE',
-        'property-type' => 'PROPERTY_LOT_HAVINGS_TYPE_VALUE',
+        'balkony' => 'balkony',
+        'news' => 'PROPERTY_SIDE_VALUE',
+        'alarm' => 'alarm',
+        'heating' => 'PROPERTY_HEATING_VALUE',
+        'sewerage' => 'PROPERTY_SEWERAGE_VALUE',
+        'electricity' => 'PROPERTY_ELECTRIC_VALUE',
+    ),
+    'boolListFields' => array(
+        'phone' => 'PROPERTY_PHONE_VALUE',
+        'internet' => 'PROPERTY_INTERNET_VALUE',
+        'television' => 'PROPERTY_TV_VALUE',
+        'gas' => 'PROPERTY_GAZ_VALUE',
+        'mortgage' => 'PROPERTY_HYPOTHEC_VALUE',
     ),
     /*'params' => array(
         array('Поставщик', 'PROPERTY_PROVIDER_VALUE'),
