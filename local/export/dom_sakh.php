@@ -38,6 +38,7 @@ $yml->loadData(array(
         'PROPERTY_LAYOUT_TYPE',
         'PROPERTY_BATHROOM',
         'PROPERTY_ROOMS_COUNT',
+        'PROPERTY_TOTAL_ROOMS_COUNT_VALUE',
         'PROPERTY_BATHROOM_COUNT',
         'PROPERTY_SQUARE',
         'PROPERTY_SQUARE_RESIDENT',
@@ -96,7 +97,6 @@ $yml->loadData(array(
         $category = mb_strtolower($data['PROPERTY_REALTY_TYPE_VALUE'], 'UTF-8');
         $data['category'] = isset($categories[$category]) ? $categories[$category] : null;
 
-        $data['property-type'] = 'жилая';
         //Get rent type
         $rentType = null;
         if(empty($rentAndRealtyTypes[$data['PROPERTY_RENT_TYPE_ENUM_ID']]))
@@ -142,7 +142,12 @@ $yml->showData(array(
         'rooms' => 'PROPERTY_ROOMS_COUNT_VALUE',
         'rooms-offered' => 'PROPERTY_OFFERED_ROOMS_COUNT_VALUE',
         'floor' => 'PROPERTY_STAGE_VALUE',
+        'floors-total' => 'PROPERTY_TOTAL_ROOMS_COUNT_VALUE',
         'bathroom-unit' => 'PROPERTY_BATHROOM_VALUE',
+        'building-series' => 'PROPERTY_LAYOUT_TYPE_VALUE',
+        'building-type' => 'PROPERTY_MATERIAL_VALUE',
+        'building-type' => 'PROPERTY_MATERIAL_VALUE',
+        'property-type' => 'PROPERTY_LOT_HAVINGS_TYPE_VALUE',
     ),
     /*'params' => array(
         array('Поставщик', 'PROPERTY_PROVIDER_VALUE'),
