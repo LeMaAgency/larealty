@@ -149,7 +149,7 @@ class DomSakhExport extends \Lema\Base\XmlExport
                 continue;
             }
             ?>
-            <<?=$name;?>><?=isset($info[$key]) ? htmlspecialcharsbx($info[$key]) : null;?></<?=$name?>>
+            <<?=$name;?>><?=isset($info[$key]) ? htmlspecialcharsbx(is_array($info[$key]) ? join(', ', $info[$key]) : $info[$key]) : null;?></<?=$name?>>
         <? endforeach; ?>
         <type><?=$info['type']?></type>
         <category><?=$info['category']?></category>
