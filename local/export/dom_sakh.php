@@ -121,8 +121,8 @@ $yml->loadData(array(
         $data['creation-date'] = date('c', $data['DATE_CREATE_UNIX']);
         $data['last-update-date'] = date('c', $data['TIMESTAMP_X_UNIX']);
         $data['country'] = 'Россия';
-        $data['locality-name'] = 'PROPERTY_REGION_VALUE';
-        $data['sub-locality-name'] = 'PROPERTY_CITY_VALUE';
+        $data['locality-name'] = $data['PROPERTY_REGION_VALUE'];
+        $data['sub-locality-name'] = $data['PROPERTY_CITY_VALUE'];
         //$data['district'] = $data['PROPERTY_REGION_VALUE'];
         $data['address'] = trim('ул. ' . $data['PROPERTY_STREET_VALUE'] . ', ' . $data['PROPERTY_HOUSE_NUMBER_VALUE']);
 
