@@ -116,8 +116,6 @@ $yml->loadData(array(
         $data['last-update-date'] = date('c', $data['TIMESTAMP_X_UNIX']);
         $data['country'] = 'Россия';
         //$data['district'] = $data['PROPERTY_REGION_VALUE'];
-        $data['locality-name'] = $data['PROPERTY_CITY_VALUE'];
-        $data['sub-locality-name'] = $data['PROPERTY_REGION_VALUE'];
         $data['address'] = trim('ул. ' . $data['PROPERTY_STREET_VALUE'] . ', ' . $data['PROPERTY_HOUSE_NUMBER_VALUE']);
 
         $data['images'] = array();
@@ -168,6 +166,10 @@ $yml->showData(array(
         'type' => 'type',
         'category' => 'category',
         'property-type' => 'property-type',
+        'locality-name' => 'PROPERTY_CITY_VALUE',
+        'sub-locality-name' => 'PROPERTY_REGION_VALUE',
+        'creation-date' => 'creation-date',
+        'last-update-date' => 'last-update-date',
         'CadastralNumber' => 'PROPERTY_CADASTRAL_NUMBER_VALUE',
         'renovation' => 'PROPERTY_REPAIR_TYPE_VALUE',
         'rooms' => 'PROPERTY_ROOMS_COUNT_VALUE',

@@ -151,11 +151,6 @@ class DomSakhExport extends \Lema\Base\XmlExport
             ?>
             <<?=$name;?>><?=isset($info[$key]) ? htmlspecialcharsbx(is_array($info[$key]) ? join(', ', $info[$key]) : $info[$key]) : null;?></<?=$name?>>
         <? endforeach; ?>
-        <type><?=$info['type']?></type>
-        <category><?=$info['category']?></category>
-        <property-type><?=$info['property-type']?></property-type>
-        <creation-date><?=$info['creation-date']?></creation-date>
-        <last-update-date><?=$info['last-update-date']?></last-update-date>
         <location>
             <country><?=$info['country']?></country>
             <locality-name><?=$info['locality-name']?></locality-name>
@@ -191,8 +186,14 @@ class DomSakhExport extends \Lema\Base\XmlExport
             <? endforeach; ?>
         <? endif; ?>
 
-        <phone><?=(int) empty($info['PROPERTY_PHONE_VALUE']);?></phone>
-        <television><?=(int) empty($info['PROPERTY_PHONE_VALUE']);?></television>
+        <?if(!empty($params['boolListFields'])):?>
+            <?foreach($params['boolListFields'] as $name => $key):
+                if(empty($info[$key]))
+                    continue;
+                ?>
+                <<?=$name;?>><?=$info[$key] == 'Y' ? 'true' : 'false';?></<?=$name?>>
+            <? endforeach; ?>
+        <? endif; ?>
         <?
         if(!empty($params['params'])):?>
             <?
