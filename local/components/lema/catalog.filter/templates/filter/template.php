@@ -30,7 +30,19 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
 
                         ?>
                     <div class="filter-form-column<?=$extendFilterClass;?>">
-                        <?if($arItem['CODE'] == 'PRICE'):?>
+                        <?if($arItem['CODE'] == 'ROOMS_COUNT'):?>
+                            <div class="filter-field-title"><?=$arItem["NAME"]?></div>
+                            <div class="filter-num-rooms">
+                                <input name="<?=$arItem["INPUT_NAMES"][0]?>[0]" type="checkbox" id="n1" value="1" class="filter-input">
+                                <label for="n1" class="filter-label">1</label>
+                                <input name="<?=$arItem["INPUT_NAMES"][0]?>[1]" type="checkbox" id="n2" value="2" class="filter-input">
+                                <label for="n2" class="filter-label">2</label>
+                                <input name="<?=$arItem["INPUT_NAMES"][0]?>[2]" type="checkbox" id="n3" value="3" class="filter-input">
+                                <label for="n3" class="filter-label">3</label>
+                                <input name="<?=$arItem["INPUT_NAMES"][0]?>[4]" type="checkbox" id="n4" value="4x" class="filter-input">
+                                <label for="n4" class="filter-label">4+</label>
+                            </div>
+                        <?elseif($arItem['CODE'] == 'PRICE'):?>
                             <div class="filter-field-title"><?=$arItem["NAME"]?></div>
                             <div class="filter-price">
                                 <input
