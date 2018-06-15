@@ -78,10 +78,24 @@ $yml->loadData(array(
             if($k[0] === '~' || false !== strpos($k, '_VALUE_ID'))
                 unset($data[$k]);
         }
-        if(in_array(mb_strtolower($data['PROPERTY_RENT_TYPE_VALUE'], 'UTF-8'), array('куплю', 'продам')))
-            $data['type'] = 'продажа';
-        else
-            $data['type'] = 'аренда';
+        $types = array(
+            'куплю' => 'покупка',
+            'продам' => 'продажа',
+            'сдам' => 'сдача',
+            'сниму' => 'съем',
+        );
+        $type = mb_strtolower($data['PROPERTY_RENT_TYPE_VALUE'], 'UTF-8');
+        $data['type'] = isset($types[$type]) ? $types[$type] : null;
+
+        $categories = array(
+            'квартиры' => 'квартира',
+            'дома/дачи' => 'дом',
+            'комнаты' => 'комната',
+            'земельный участок' => 'земля',
+        );
+        $category = mb_strtolower($data['PROPERTY_REALTY_TYPE_VALUE'], 'UTF-8');
+        $data['category'] = isset($categories[$category]) ? $categories[$category] : null;
+
         $data['property-type'] = 'жилая';
         //Get rent type
         $rentType = null;
@@ -96,14 +110,13 @@ $yml->loadData(array(
         else
             $realtyType = $rentAndRealtyTypes[$data['PROPERTY_REALTY_TYPE_ENUM_ID']];
         $data['url'] = '/' . $realtyType . '/' . $rentType . '/' . $data['CODE'];
-        $data['category'] = $data['PROPERTY_REALTY_TYPE_VALUE'];
         $data['creation-date'] = date('c', $data['DATE_CREATE_UNIX']);
         $data['last-update-date'] = date('c', $data['TIMESTAMP_X_UNIX']);
         $data['country'] = 'Россия';
         //$data['district'] = $data['PROPERTY_REGION_VALUE'];
         $data['locality-name'] = $data['PROPERTY_CITY_VALUE'];
         $data['sub-locality-name'] = $data['PROPERTY_REGION_VALUE'];
-        $data['address'] = trim($data['PROPERTY_STREET_VALUE'] . ' ' . $data['PROPERTY_HOUSE_NUMBER_VALUE']);
+        $data['address'] = trim('ул. ' . $data['PROPERTY_STREET_VALUE'] . ', ' . $data['PROPERTY_HOUSE_NUMBER_VALUE']);
 
         $data['images'] = array();
         if(!empty($data['DETAIL_PICTURE']))
@@ -125,7 +138,6 @@ $yml->showData(array(
     'sendHeader' => false,
     'fields' => array(
         'CadastralNumber' => 'PROPERTY_CADASTRAL_NUMBER_VALUE',
-        'category' => 'PROPERTY_REALTY_TYPE_VALUE',
         'renovation' => 'PROPERTY_REPAIR_TYPE_VALUE',
         'rooms' => 'PROPERTY_ROOMS_COUNT_VALUE',
         'rooms-offered' => 'PROPERTY_OFFERED_ROOMS_COUNT_VALUE',

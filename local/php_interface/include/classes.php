@@ -152,6 +152,7 @@ class DomSakhExport extends \Lema\Base\XmlExport
             <<?=$name;?>><?=isset($info[$key]) ? htmlspecialcharsbx($info[$key]) : null;?></<?=$name?>>
         <? endforeach; ?>
         <type><?=$info['type']?></type>
+        <category><?=$info['category']?></category>
         <property-type><?=$info['property-type']?></property-type>
         <creation-date><?=$info['creation-date']?></creation-date>
         <last-update-date><?=$info['last-update-date']?></last-update-date>
@@ -176,6 +177,11 @@ class DomSakhExport extends \Lema\Base\XmlExport
             <currency>RUR</currency>
             <unit></unit>
         </price>
+        <?if(in_array($info['category'], array('дом', 'земля'))):?>
+            <land-space><?=$info['PROPERTY_SQUARE_VALUE'];?></land-space>
+        <?else:?>
+            <area><?=$info['PROPERTY_SQUARE_VALUE'];?></area>
+        <?endif;?>
 
         <?
         if(!empty($info['images'])):?>
