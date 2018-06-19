@@ -3880,15 +3880,36 @@ foreach($arProps as $arProp):
 	<td><?=$arProp["NAME"]?>:</td>
 	<td>
 		<?if(array_key_exists("GetAdminFilterHTML", $arProp["PROPERTY_USER_TYPE"])):
-			echo call_user_func_array($arProp["PROPERTY_USER_TYPE"]["GetAdminFilterHTML"], array(
-				$arProp,
-				array(
-					"VALUE" => "find_el_property_".$arProp["ID"],
-					"TABLE_ID" => $sTableID,
-				),
-			));
+
+            /**
+             * Show search form for rieltor property
+             */
+
+            if(isset($arProp['CODE']) && $arProp['CODE'] == 'RIELTOR'):
+                echo FindUserID(
+                    "find_el_property_".$arProp["ID"],
+                    intval(${"find_el_property_".$arProp["ID"]}),
+                    "",
+                    "find_form",
+                    "5",
+                    "",
+                    " ... ",
+                    "",
+                    ""
+                );
+            else:
+                echo call_user_func_array($arProp["PROPERTY_USER_TYPE"]["GetAdminFilterHTML"], array(
+                    $arProp,
+                    array(
+                        "VALUE" => "find_el_property_".$arProp["ID"],
+                        "TABLE_ID" => $sTableID,
+                    ),
+                ));
+            endif;
+
 		elseif($arProp["PROPERTY_TYPE"]=='S'):?>
 			<input type="text" name="find_el_property_<?=$arProp["ID"]?>" value="<?echo htmlspecialcharsex(${"find_el_property_".$arProp["ID"]})?>" size="30">&nbsp;<?=ShowFilterLogicHelp()?>
+
 		<?elseif($arProp["PROPERTY_TYPE"]=='N' || $arProp["PROPERTY_TYPE"]=='E'):?>
 			<input type="text" name="find_el_property_<?=$arProp["ID"]?>" value="<?echo htmlspecialcharsex(${"find_el_property_".$arProp["ID"]})?>" size="30">
 		<?elseif($arProp["PROPERTY_TYPE"]=='L'):?>
