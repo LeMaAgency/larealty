@@ -150,6 +150,7 @@ $APPLICATION->SetTitle('Каталог');
 			5 => "STAGES_COUNT",
 			6 => "RENT_TYPE",
 			7 => "REALTY_TYPE",
+			8 => "REGION",
 		),
 		"NUM_NEWS" => "20",
 		"NUM_DAYS" => "30",
