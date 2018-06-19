@@ -21,13 +21,13 @@ $aMenuLinks = array(
         array(),
         '',
     ),
-    /*array(
+    array(
         'Аренда',
         '/rent/',
         array(),
         array(),
         '',
-    ),*/
+    ),
     array(
         'Ипотека',
         '/hypothec/',
