@@ -3600,6 +3600,7 @@ CJSCore::Init('file_input');
 $arFindFields = Array();
 $arFindFields["IBLIST_A_PARENT"] = GetMessage("IBLIST_A_PARENT");
 $arFindFields["IBLIST_A_ID"] = GetMessage("IBLIST_A_ID");
+$arFindFields["IBLIST_A_PRICE"] = GetMessage("IBLIST_A_PRICE");
 $arFindFields["IBLIST_A_TS"] = GetMessage("IBLIST_A_TS");
 $arFindFields["IBLIST_A_CODE"] = GetMessage("IBLIST_A_CODE");
 $arFindFields["IBLIST_A_EXTCODE"] = GetMessage("IBLIST_A_EXTCODE");
@@ -3970,20 +3971,7 @@ $oFilter->Buttons(array(
 $oFilter->End();
 ?>
 </form>
-<?
-/**
- * ...
- */
-\CJSCore::init(array('fx', 'jquery2'));
-?>
-<script>
-    $(function() {
-        $('.js-find-price').show();
-        $('.adm-filter-tab').on('click', function(e) {
-            $('.js-find-price').show();
-        })
-    })
-</script>
+
 <?
 $lAdmin->DisplayList();
 if($bWorkFlow || $bBizproc):

@@ -24,6 +24,7 @@ $MESS["IBLIST_A_MODIFIED_BY"] = "Кем изменена";
 $MESS["IBLIST_A_DATE_CREATE"] = "Дата создания";
 $MESS["IBLIST_A_CREATED_USER_NAME"] = "Кем создана";
 $MESS["IBLIST_A_ID"] = "ID";
+$MESS["IBLIST_A_PRICE"] = "Цена (от и до)";
 $MESS["IBLIST_A_SHOW_COUNTER"] = "Количество показов";
 $MESS["IBLIST_A_SHOW_COUNTER_START"] = "Дата первого показа";
 $MESS["IBLIST_A_PREVIEW_PICTURE"] = "Картинка для анонса";
