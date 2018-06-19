@@ -78,10 +78,7 @@ $APPLICATION->SetTitle('Вакансии');
     </div>
     <br>
     <br>
-    <div style="    background: #002b4e;
-    background-size: cover;
-    text-align: center;
-    padding: 20px;">
+    <div class="vacancy_reply_block">
         <br>
         <div class="call-order-title"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/form_title.php'); ?></div>
         <? $APPLICATION->IncludeComponent(
@@ -111,12 +108,12 @@ $APPLICATION->SetTitle('Вакансии');
     <br>
     </div>
     <br>
-<?if(false):?>
+<?/*if(false):*/?><!--
     <div class="container">
         <div class="act__title">
-            <h2 class="act__title"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/vakancies_title.php'); ?></h2>
-        </div>
-        <?$APPLICATION->IncludeComponent("bitrix:news", "vakancies", array(
+            <h2 class="act__title"><?/* $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/vakancies_title.php'); */?></h2>
+        </div>test
+        <?/*$APPLICATION->IncludeComponent("bitrix:news", "vakancies", array(
             "ADD_ELEMENT_CHAIN" => "Y",
             "ADD_SECTIONS_CHAIN" => "N",
             "AJAX_MODE" => "N",
@@ -201,9 +198,9 @@ $APPLICATION->SetTitle('Вакансии');
                 "section" => "",
                 "detail" => "#ELEMENT_CODE#/",
             )
-        ));?>
+        ));*/?>
     </div>
-<?endif;?>
+--><?/*endif;*/?>
 
 <?
 require_once $_SERVER['DOCUMENT_ROOT'].'/bitrix/footer.php';
