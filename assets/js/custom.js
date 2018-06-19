@@ -49,11 +49,11 @@ $(document).ready(function () {
         if ($(this).hasClass("js-hidden")) {
             $(this).html("Все риэлторы");
             $(this).removeClass("js-hidden");
-            $(this).closest(".realtors").find(".spoiler").hide();
+            $(this).closest(".realtors").find(".spoiler").toggle(500);
         } else {
             $(this).html("Скрыть");
             $(this).addClass("js-hidden");
-            $(this).closest(".realtors").find(".spoiler").show();
+            $(this).closest(".realtors").find(".spoiler").toggle(500);
         }
     })
 });
