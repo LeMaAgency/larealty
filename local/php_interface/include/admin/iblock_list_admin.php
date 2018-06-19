@@ -3979,6 +3979,9 @@ $oFilter->End();
 <script>
     $(function() {
         $('.js-find-price').show();
+        $('.adm-filter-tab').on('click', function(e) {
+            $('.js-find-price').show();
+        })
     })
 </script>
 <?
