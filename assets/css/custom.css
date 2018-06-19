@@ -1,24 +1,29 @@
-.feedback-form,.feedback-input,.feedback-checkbox{
+.feedback-form, .feedback-input, .feedback-checkbox {
     width: fit-content;
     margin: auto;
 }
-.feedback-input{
+
+.feedback-input {
     float: left;
 }
-.feedback-checkbox{
+
+.feedback-checkbox {
     position: absolute;
     bottom: -40px;
 }
-.feedback-input .it-error{
+
+.feedback-input .it-error {
     width: 250px;
 }
-.vacancy_reply_block{
-    background-color:#205179;
+
+.vacancy_reply_block {
+    background-color: #205179;
     background-size: cover;
     text-align: center;
     padding: 20px;
 }
-.vacancy_reply_form_input{
+
+.vacancy_reply_form_input {
     display: inline-block;
     height: 43px;
     line-height: 43px;
@@ -28,14 +33,17 @@
     width: 100%;
     max-width: 350px;
 }
-.vacancy_reply_form .checkbox{
+
+.vacancy_reply_form .checkbox {
     max-width: 600px;
     margin: 0 auto;
 }
-@media (max-width:992px) {
-    .feedback-input{
+
+@media (max-width: 992px) {
+    .feedback-input {
         float: none;
     }
+
     .feedback-checkbox {
         position: relative;
         bottom: 0;
@@ -45,15 +53,42 @@
 .element-detail-link {
     display: block;
 }
-.request__form__button{
+
+.request__form__button {
     margin: 70px 14px 20px 0;
 }
-@media (max-width:1199px) {
-    .request__form__button{
+
+@media (max-width: 1199px) {
+    .request__form__button {
         margin: auto;
     }
 }
 
 .js-extend-filter-block {
     display: none;
+}
+
+.realtors__carousel {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.realtors__carousel__item {
+    text-align: center;
+    width: 20%;
+    float: left;
+}
+
+.realtors .spoiler {
+    display: none;
+}
+
+@media (max-width: 480px) {
+    .realtors__carousel {
+        display: inline-block;
+    }
+
+    .realtors__carousel__item {
+        width: auto;
+    }
 }

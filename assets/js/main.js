@@ -109,7 +109,7 @@ $(document).ready(function () {
     });
 
     //  слайдер риэлторов
-    $('.realtors__carousel').slick({
+    /*$('.realtors__carousel').slick({
         infinite: true,
         slidesToShow: 4,
         slidesToScroll: 1,
@@ -129,7 +129,7 @@ $(document).ready(function () {
                 }
             }
         ]
-    });
+    });*/
 
 
     // слайдер фото квартиры

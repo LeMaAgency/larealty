@@ -1,5 +1,5 @@
-$(function() {
-    $('.offers-filter-btn').on('click', function() {
+$(function () {
+    $('.offers-filter-btn').on('click', function () {
         var offersBlock = $(this).closest('.offers'),
             offers = offersBlock.find('.offers-list a'),
             selectors = ['realty-type', 'rent-type'],
@@ -7,7 +7,7 @@ $(function() {
 
         offers.hide();
 
-        for(var i in selectors) {
+        for (var i in selectors) {
             if ($(this).data(selectors[i]))
                 selector += '[data-' + selectors[i] + '="' + $(this).data(selectors[i]) + '"]'
         }
@@ -29,21 +29,31 @@ $(function() {
 
             curForm.find('input:not([type="submit"]):not([type="button"]), textarea').css({'border': '1px solid #dfcd7d'});
 
-            if (ans && ans.errors)
-            {
+            if (ans && ans.errors) {
                 curForm.find('.it-error').empty();
-                for(var inputName in ans.errors)
-                {
+                for (var inputName in ans.errors) {
                     curForm.find('[name="' + inputName + '"]').first().css({border: '1px solid red'})
                         .closest('.it-block').find('.it-error').html(ans.errors[inputName]);
                 }
             }
-            else
-            {
+            else {
                 //ok
                 $.fancybox.open('Спасибо за заявку. В ближайшее время мы Вам перезвоним')
             }
         }, 'json');
         return false;
+    })
+});
+$(document).ready(function () {
+    $("body").on("click", ".js-all-realtors", function () {
+        if ($(this).hasClass("js-hidden")) {
+            $(this).html("Все риэлторы");
+            $(this).removeClass("js-hidden");
+            $(this).closest(".realtors").find(".spoiler").hide();
+        } else {
+            $(this).html("Скрыть");
+            $(this).addClass("js-hidden");
+            $(this).closest(".realtors").find(".spoiler").show();
+        }
     })
 });
