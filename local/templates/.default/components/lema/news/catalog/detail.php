@@ -69,6 +69,8 @@ $this->setFrameMode(true);
         ),
         $component
     );?>
+
+    <? if (!preg_match('[/snimu|sdam/]', $APPLICATION->GetCurDir())): ?>
     <section class="slider-services">
         <div class="container">
             <H2 class="slider-services__title">Ипотека в г. Южно-Сахалинске от компании &#171;Квартирный Ответ&#187;</H2>
@@ -105,6 +107,7 @@ $this->setFrameMode(true);
             </div>
         </div>
     </section>
+    <?endif;?>
     <section class="offers offers_padding">
         <div class="container-index">
             <div class="section-title"><span>Похожие объекты</span></div>
