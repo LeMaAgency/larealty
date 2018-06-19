@@ -271,18 +271,18 @@ $APPLICATION->SetTitle('Каталог');
         <div class="container">
             <div class="row">
                 <div class="col-sm-3">
-                    <a class="new-flats__tab-nav" href="#one-room" data-toggle="tab"><i></i><span>Однокомнатные</span></a>
+                    <a class="new-flats__tab-nav" href="#one-room" data-toggle="tab"><span>Однокомнатные</span></a>
                 </div>
                 <div class="col-sm-3">
-                    <a class="new-flats__tab-nav active" href="#two-room" data-toggle="tab"><i></i><i></i><span>двухкомнатные</span></a>
+                    <a class="new-flats__tab-nav active" href="#two-room" data-toggle="tab"><span>двухкомнатные</span></a>
                 </div>
                 <div class="col-sm-3">
                     <a class="new-flats__tab-nav" href="#three-room" data-toggle="tab">
-                        <div class="new-flats__tab-nav__wrap-icon"><i class="new-flats__tab-nav__wrap-icon__hide"></i><i></i><i></i><i></i></div><span>трехкомнатные</span></a>
+                        <div class="new-flats__tab-nav__wrap-icon"></div><span>трехкомнатные</span></a>
                 </div>
                 <div class="col-sm-3">
                     <a class="new-flats__tab-nav" href="#four-room" data-toggle="tab">
-                        <div class="new-flats__tab-nav__wrap-icon"><i></i><i></i><i></i><i></i></div><span>четырехкомнатные</span></a>
+                        <div class="new-flats__tab-nav__wrap-icon"></div><span>четырехкомнатные</span></a>
                 </div>
             </div>
         </div>
