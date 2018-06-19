@@ -264,6 +264,20 @@ $APPLICATION->SetTitle("Продавцу");
     false
 ); ?>
     <!-- /SERVICES_PACKAGE -->
+    <div class="add-apartment">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="add-apartment__title"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/consultation_title.php'); ?></h3>
+                    <span><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/consultation_text.php'); ?></span>
+
+                    <button class="add-apartment__button" type="submit"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/consultation_button_text.php'); ?></button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- REALTORS -->
 <? $APPLICATION->IncludeComponent(
     "bitrix:news.list",
