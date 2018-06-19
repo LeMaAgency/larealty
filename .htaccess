@@ -12,9 +12,6 @@ ErrorDocument 404 /404.php
   Options +FollowSymLinks
   RewriteEngine On
 
-  RewriteCond %{REQUEST_FILENAME} -f [NC]
-  RewriteRule ^/bitrix/admin/iblock_list_admin\.php /bitrix/admin/la_iblock_list_admin.php [L,QSA]
-
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-l
   RewriteCond %{REQUEST_FILENAME} !-d
