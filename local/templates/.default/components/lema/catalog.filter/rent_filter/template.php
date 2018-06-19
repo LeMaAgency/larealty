@@ -20,7 +20,12 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
         <form name="<?echo $arResult["FILTER_NAME"]."_form"?>" class="filter-form" action="<?echo $arResult["FORM_ACTION"]?>" method="get">
 
             <div class="filter-form__choose">
-                <input type="radio"<? if(isset($_GET['arrFilter_pf'])) echo checked('RENT_TYPE', 29, $_GET['arrFilter_pf']);?>
+                <input type="radio"<?
+                if(isset($_GET['arrFilter_pf']))
+                    echo checked('RENT_TYPE', 29, $_GET['arrFilter_pf']);
+                else
+                    echo ' checked';
+                ?>
                        id="rent-id" class="filter-form__choose__item" name="arrFilter_pf[RENT_TYPE]" value="29">
                 <label for="rent-id" class="filter-form__choose__item-label">снять</label>
                 <input type="radio"<? if(isset($_GET['arrFilter_pf'])) echo checked('RENT_TYPE', 28, $_GET['arrFilter_pf']);?>
@@ -29,7 +34,12 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
             </div>
             <div class="filter-form__type">
                 <div class="filter-field-title">Тип недвижимости</div>
-                <input type="radio"<? if(isset($_GET['arrFilter_pf'])) echo checked('REALTY_TYPE', 2, $_GET['arrFilter_pf']);?>
+                <input type="radio"<?
+                if(isset($_GET['arrFilter_pf']))
+                    echo checked('REALTY_TYPE', 2, $_GET['arrFilter_pf']);
+                else
+                    echo ' checked';
+                ?>
                        id="type-room" class="filter-form__type__item" name="arrFilter_pf[REALTY_TYPE]" value="2">
                 <label for="type-room" class="filter-form__type__item-label">комната</label>
                 <input type="radio"<? if(isset($_GET['arrFilter_pf'])) echo checked('REALTY_TYPE', 1, $_GET['arrFilter_pf']);?>
