@@ -3,7 +3,7 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Квартирный ответ - Главная страница");
 
 ?>
-    <!-- FEEDBACK FORM -->
+    <!-- FEEDBACK FORM  -->
     <section class="top-slider-block">
         <? $APPLICATION->IncludeComponent(
 	"lema:form.ajax", 
