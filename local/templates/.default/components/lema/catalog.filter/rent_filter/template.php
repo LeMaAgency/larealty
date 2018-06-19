@@ -45,7 +45,13 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
 
             <div class="filter-form-row">
 
-                <?foreach($arResult["ITEMS"] as $arItem):?>
+                <?foreach($arResult["ITEMS"] as $arItem):
+                    if(empty($arItem['CODE']) && $arItem['INPUT_NAME'] == 'arrFilter_ff[ID]')
+                    {
+                        $item = $arItem;
+                        continue;
+                    }
+                    ?>
                     <?
                     if(isset($arItem['CODE']) && in_array($arItem['CODE'], array('RENT_TYPE', 'REALTY_TYPE')))
                         continue;
@@ -163,6 +169,10 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
                     </div>
                 <?elseif ($arItem["TYPE"] == "SELECT"):
                     ?>
+                    <?php
+                    if(isset($arItem['CODE']) && $arItem['CODE'] == 'REGION')
+                        $arItem['NAME'] = 'Месторасположение';
+                    ?>
                     <div class="filter-form-column">
                         <div class="filter-field-title"><?=$arItem["NAME"]?></div>
                         <div class="filter-select">
@@ -246,6 +256,24 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
                     </div>
                 <?endif?>
             <?endforeach;?>
+                <?if(!empty($item)):?>
+                    <div class="filter-form-column">
+                        <div class="filter-field-title"><?=$item["NAME"]?></div>
+                        <div class="filter-select">
+                            <a href="#" class="filter-select-link">Выбрать</a>
+                            <ul class="filter-select-drop">
+                                <li data-value="">Выбрать</li>
+                                <?foreach ($item["LIST"] as $key => $value):?>
+                                    <li data-value="<?=htmlspecialcharsBx($key)?>"
+                                        <?if ($key == $item["INPUT_VALUE"]) echo ' class="selected"'?>
+                                    ><?=htmlspecialcharsEx($value)?></li>
+                                <?endforeach;?>
+                            </ul>
+                            <input type="hidden" name="<?=$item["INPUT_NAME"]?>"
+                                   value="<?=empty($item["INPUT_VALUE"]) ? null : $item["INPUT_VALUE"];?>">
+                        </div>
+                    </div>
+                <?endif;?>
             </div>
             <a href="#" class="filter-extend-link js-extend-filter">Расширенный поиск <b>+</b></a>
             <button type="submit" name="set_filter" value="Y" class="filter-submit-btn">Поиск</button>
