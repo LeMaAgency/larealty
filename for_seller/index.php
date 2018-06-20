@@ -271,7 +271,7 @@ $APPLICATION->SetTitle("Продавцу");
                     <h3 class="add-apartment__title"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/consultation_title.php'); ?></h3>
                     <span><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/consultation_text.php'); ?></span>
 
-                    <a class="add-apartment__button"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/consultation_button_text.php'); ?></a>
+                    <a href="#" class="add-apartment__button"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/consultation_button_text.php'); ?></a>
 
                 </div>
             </div>
