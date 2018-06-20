@@ -55,5 +55,11 @@ $(document).ready(function () {
             $(this).addClass("js-hidden");
             $(this).closest(".realtors").find(".spoiler").toggle(500);
         }
-    })
+    });
+    $("body").on("click", ".js-realtors-feedback", function (e) {
+        e.preventDefault();
+        $.fancybox.open($("#realtors-feedback-form"));
+        $("#form_field_realtor_id").val($(this).data("id"));
+    });
+
 });

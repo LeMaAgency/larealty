@@ -102,3 +102,28 @@ a.add-apartment__button:hover{
         width: auto;
     }
 }
+.fancybox-feedback{
+    background-color: unset;
+}
+.fancybox-feedback .call-order-input::-webkit-input-placeholder {
+    color: #000000;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.fancybox-feedback .call-order-input {
+    background-color: white;
+}
+
+.fancybox-feedback .call-order-title {
+    color: #000000;
+}
+
+.fancybox-feedback .top-slider-form {
+    display: inline-block;
+    margin: auto;
+    vertical-align: middle;
+    background-color: #f3f3f3;
+    color: black;
+    position: unset;
+}
