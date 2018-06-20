@@ -108,12 +108,12 @@ $APPLICATION->SetTitle('Вакансии');
     <br>
     </div>
     <br>
-<?/*if(false):*/?><!--
+<?if(false):?>
     <div class="container">
         <div class="act__title">
-            <h2 class="act__title"><?/* $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/vakancies_title.php'); */?></h2>
+            <h2 class="act__title"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/vakancies_title.php'); ?></h2>
         </div>test
-        <?/*$APPLICATION->IncludeComponent("bitrix:news", "vakancies", array(
+        <?$APPLICATION->IncludeComponent("bitrix:news", "vakancies", array(
             "ADD_ELEMENT_CHAIN" => "Y",
             "ADD_SECTIONS_CHAIN" => "N",
             "AJAX_MODE" => "N",
@@ -198,9 +198,9 @@ $APPLICATION->SetTitle('Вакансии');
                 "section" => "",
                 "detail" => "#ELEMENT_CODE#/",
             )
-        ));*/?>
+        ));?>
     </div>
---><?/*endif;*/?>
+<?endif;?>
 
 <?
 require_once $_SERVER['DOCUMENT_ROOT'].'/bitrix/footer.php';
