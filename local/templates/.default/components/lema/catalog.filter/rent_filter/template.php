@@ -25,10 +25,9 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
                     echo checked('RENT_TYPE', 29, $_GET['arrFilter_pf']);
                 else
                     echo ' checked';
-                ?>
-                       id="rent-id" class="filter-form__choose__item" name="arrFilter_pf[RENT_TYPE]" value="29">
+                ?> data-code="snimu" id="rent-id" class="filter-form__choose__item"  name="arrFilter_pf[RENT_TYPE]" value="29">
                 <label for="rent-id" class="filter-form__choose__item-label">снять</label>
-                <input type="radio"<? if(isset($_GET['arrFilter_pf'])) echo checked('RENT_TYPE', 28, $_GET['arrFilter_pf']);?>
+                <input data-code="sdam" type="radio"<? if(isset($_GET['arrFilter_pf'])) echo checked('RENT_TYPE', 28, $_GET['arrFilter_pf']);?>
                        id="rent-out-id" class="filter-form__choose__item" name="arrFilter_pf[RENT_TYPE]" value="28">
                 <label for="rent-out-id" class="filter-form__choose__item-label">сдать</label>
             </div>
@@ -39,16 +38,15 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
                     echo checked('REALTY_TYPE', 2, $_GET['arrFilter_pf']);
                 else
                     echo ' checked';
-                ?>
-                       id="type-room" class="filter-form__type__item" name="arrFilter_pf[REALTY_TYPE]" value="2">
+                ?> data-code="komnaty" id="type-room" class="filter-form__type__item" name="arrFilter_pf[REALTY_TYPE]" value="2">
                 <label for="type-room" class="filter-form__type__item-label">комната</label>
-                <input type="radio"<? if(isset($_GET['arrFilter_pf'])) echo checked('REALTY_TYPE', 1, $_GET['arrFilter_pf']);?>
+                <input data-code="kvartiry" type="radio"<? if(isset($_GET['arrFilter_pf'])) echo checked('REALTY_TYPE', 1, $_GET['arrFilter_pf']);?>
                        id="type-apartment" class="filter-form__type__item" name="arrFilter_pf[REALTY_TYPE]" value="1">
                 <label for="type-apartment" class="filter-form__type__item-label">квартира</label>
-                <input type="radio"<? if(isset($_GET['arrFilter_pf'])) echo checked('REALTY_TYPE', 3, $_GET['arrFilter_pf']);?>
+                <input data-code="doma" type="radio"<? if(isset($_GET['arrFilter_pf'])) echo checked('REALTY_TYPE', 3, $_GET['arrFilter_pf']);?>
                        id="type-house" class="filter-form__type__item" name="arrFilter_pf[REALTY_TYPE]" value="3">
                 <label for="type-house" class="filter-form__type__item-label">дом/коттедж</label>
-                <input type="radio"<? if(isset($_GET['arrFilter_pf'])) echo checked('REALTY_TYPE', 49, $_GET['arrFilter_pf']);?>
+                <input data-code="ofisy" type="radio"<? if(isset($_GET['arrFilter_pf'])) echo checked('REALTY_TYPE', 49, $_GET['arrFilter_pf']);?>
                        id="type-office" class="filter-form__type__item" name="arrFilter_pf[REALTY_TYPE]" value="49">
                 <label for="type-office" class="filter-form__type__item-label">офис</label>
             </div>
