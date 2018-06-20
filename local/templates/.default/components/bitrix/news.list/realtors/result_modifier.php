@@ -4,7 +4,9 @@ $rsUsers = CUser::GetList(
     ($by = "NAME"),
     ($order = "desc"),
     Array("GROUPS_ID" => Array(3), 'ACTIVE' => 'Y'),
-    Array("FIELDS" => array("NAME",
+    Array("FIELDS" => array(
+        "ID",
+        "NAME",
         "LAST_NAME",
         "PERSONAL_PHOTO",
         "PERSONAL_PHONE")
