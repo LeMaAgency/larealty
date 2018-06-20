@@ -2,6 +2,60 @@
 require_once $_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php';
 
 $APPLICATION->SetTitle('Каталог');
+
+$rootDir = SITE_DIR . 'catalog';
+$currentDir = \Lema\Common\Request::get()->getRequestedPageDirectory();
+$inRootDir = $currentDir == $rootDir;
+
+/**
+ * Ordering sort for filter items
+ */
+$filterFields = array(
+    array('key' => 'ROOMS_COUNT', 'type' => 'property', 'expanded' => false),
+    array('key' => 'PRICE', 'type' => 'property', 'expanded' => false),
+    array('key' => 'REGION', 'type' => 'property', 'expanded' => false),
+    array('key' => 'ID', 'type' => 'field', 'expanded' => false),
+);
+
+if(!$inRootDir)
+{
+    /**
+     * Ordering sort for filter items
+     */
+    $filterFields = array(
+        array('key' => 'ROOMS_COUNT', 'type' => 'property', 'expanded' => false),
+        array('key' => 'PRICE', 'type' => 'property', 'expanded' => false),
+        array('key' => 'REGION', 'type' => 'property', 'expanded' => false),
+        array('key' => 'ID', 'type' => 'field', 'expanded' => false),
+    );
+
+    /**
+     * Load rent & realty types from iblock properties
+     */
+    $rentAndRealtyTypes = array();
+    $tmp = \LIblock::getPropEnumValues(LIblock::getPropId('objects', 'RENT_TYPE'));
+    foreach($tmp as $code => $data)
+        $rentAndRealtyTypes[$code] = $data['VALUE'];
+    $tmp = \LIblock::getPropEnumValues(LIblock::getPropId('objects', 'REALTY_TYPE'));
+    foreach($tmp as $code => $data)
+        $rentAndRealtyTypes[$code] = $data['VALUE'];
+    unset($tmp);
+
+    /**
+     * Add chain items
+     */
+    $uriParts = explode('/', trim($currentDir, '/'));
+    $lastUrl = $rootDir;
+    foreach($uriParts as $uriPart)
+    {
+        if(isset($rentAndRealtyTypes[$uriPart]))
+        {
+            $lastUrl .= '/' . $uriPart;
+            $APPLICATION->AddChainItem($rentAndRealtyTypes[$uriPart], $lastUrl . '/');
+        }
+    }
+}
+
 ?>
     <div class="container">
         <div class="row">

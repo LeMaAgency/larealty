@@ -2,7 +2,60 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
 
 $APPLICATION->SetTitle('Аренда');
-use Lema\Common\Config;
+
+$rootDir = SITE_DIR . 'rent';
+$currentDir = \Lema\Common\Request::get()->getRequestedPageDirectory();
+$inRootDir = $currentDir == $rootDir;
+
+/**
+ * Ordering sort for filter items
+ */
+$filterFields = array(
+    array('key' => 'ROOMS_COUNT', 'type' => 'property', 'expanded' => false),
+    array('key' => 'PRICE', 'type' => 'property', 'expanded' => false),
+    array('key' => 'REGION', 'type' => 'property', 'expanded' => false),
+    array('key' => 'ID', 'type' => 'field', 'expanded' => false),
+);
+
+if(!$inRootDir)
+{
+    /**
+     * Ordering sort for filter items
+     */
+    $filterFields = array(
+        array('key' => 'ROOMS_COUNT', 'type' => 'property', 'expanded' => false),
+        array('key' => 'PRICE', 'type' => 'property', 'expanded' => false),
+        array('key' => 'REGION', 'type' => 'property', 'expanded' => false),
+        array('key' => 'ID', 'type' => 'field', 'expanded' => false),
+    );
+
+    /**
+     * Load rent & realty types from iblock properties
+     */
+    $rentAndRealtyTypes = array();
+    $tmp = \LIblock::getPropEnumValues(LIblock::getPropId('objects', 'RENT_TYPE'));
+    foreach($tmp as $code => $data)
+        $rentAndRealtyTypes[$code] = $data['VALUE'];
+    $tmp = \LIblock::getPropEnumValues(LIblock::getPropId('objects', 'REALTY_TYPE'));
+    foreach($tmp as $code => $data)
+        $rentAndRealtyTypes[$code] = $data['VALUE'];
+    unset($tmp);
+
+    /**
+     * Add chain items
+     */
+    $uriParts = explode('/', trim($currentDir, '/'));
+    $lastUrl = $rootDir;
+    foreach($uriParts as $uriPart)
+    {
+        if(isset($rentAndRealtyTypes[$uriPart]))
+        {
+            $lastUrl .= '/' . $uriPart;
+            $APPLICATION->AddChainItem($rentAndRealtyTypes[$uriPart], $lastUrl . '/');
+        }
+    }
+}
+
 ?>
     <div class="container">
         <div class="row">
@@ -153,12 +206,7 @@ use Lema\Common\Config;
             7 => "REALTY_TYPE",
             8 => "REGION",
         ),
-        'FILTER_ORDER' => array(
-            array('key' => 'ROOMS_COUNT', 'type' => 'property', 'expanded' => false),
-            array('key' => 'PRICE', 'type' => 'property', 'expanded' => false),
-            array('key' => 'REGION', 'type' => 'property', 'expanded' => false),
-            array('key' => 'ID', 'type' => 'field', 'expanded' => false),
-        ),
+        'FILTER_ORDER' => $filterFields,
         "NUM_NEWS" => "20",
         "NUM_DAYS" => "30",
         "YANDEX" => "Y",
@@ -280,22 +328,14 @@ use Lema\Common\Config;
     ),
     false
 ); ?>
+<?if($inRootDir):?>
     <div class="inquiry">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="inquiry__wrap">
                         <h3 class="inquiry__h3">
-                            <? $APPLICATION->IncludeComponent(
-                                'bitrix:main.include',
-                                '',
-                                Config::getComponentParams(
-                                    'IncludeArea',
-                                    array(
-                                        'PATH' => SITE_DIR . 'include/rent/feedback-form-title.php',
-                                    )),
-                                false
-                            ); ?>
+                            <? $APPLICATION->IncludeFile(SITE_DIR . 'include/rent/feedback-form-title.php'); ?>
                         </h3>
                         <? $APPLICATION->IncludeComponent("lema:form.ajax", "send_application", Array(
                             "COMPONENT_TEMPLATE" => ".default",
@@ -321,61 +361,61 @@ use Lema\Common\Config;
             </div>
         </div>
     </div>
-<? $APPLICATION->IncludeComponent('bitrix:news.list', 'advantages_apartments', array(
-    'DISPLAY_DATE' => 'Y',
-    'DISPLAY_NAME' => 'Y',
-    'DISPLAY_PICTURE' => 'Y',
-    'DISPLAY_PREVIEW_TEXT' => 'Y',
-    'AJAX_MODE' => 'N',
-    'IBLOCK_TYPE' => 'content',
-    'IBLOCK_ID' => '3',
-    'NEWS_COUNT' => '20',
-    'SORT_BY1' => 'ACTIVE_FROM',
-    'SORT_ORDER1' => 'DESC',
-    'SORT_BY2' => 'SORT',
-    'SORT_ORDER2' => 'ASC',
-    'FILTER_NAME' => '',
-    'FIELD_CODE' => array(),
-    'PROPERTY_CODE' => array(),
-    'CHECK_DATES' => 'Y',
-    'DETAIL_URL' => '',
-    'PREVIEW_TRUNCATE_LEN' => '',
-    'ACTIVE_DATE_FORMAT' => 'd.m.Y',
-    'SET_TITLE' => 'N',
-    'SET_BROWSER_TITLE' => 'N',
-    'SET_META_KEYWORDS' => 'N',
-    'SET_META_DESCRIPTION' => 'N',
-    'SET_LAST_MODIFIED' => 'N',
-    'INCLUDE_IBLOCK_INTO_CHAIN' => 'N',
-    'ADD_SECTIONS_CHAIN' => 'N',
-    'HIDE_LINK_WHEN_NO_DETAIL' => 'Y',
-    'PARENT_SECTION' => '',
-    'PARENT_SECTION_CODE' => '',
-    'INCLUDE_SUBSECTIONS' => 'Y',
-    'CACHE_TYPE' => 'A',
-    'CACHE_TIME' => '36000000',
-    'CACHE_FILTER' => 'Y',
-    'CACHE_GROUPS' => 'N',
-    'DISPLAY_TOP_PAGER' => 'Y',
-    'DISPLAY_BOTTOM_PAGER' => 'Y',
-    'PAGER_TITLE' => 'Элементы',
-    'PAGER_SHOW_ALWAYS' => 'N',
-    'PAGER_TEMPLATE' => '',
-    'PAGER_DESC_NUMBERING' => 'N',
-    'PAGER_DESC_NUMBERING_CACHE_TIME' => '36000',
-    'PAGER_SHOW_ALL' => 'N',
-    'PAGER_BASE_LINK_ENABLE' => 'N',
-    'SET_STATUS_404' => 'N',
-    'SHOW_404' => 'N',
-    'MESSAGE_404' => '',
-    'PAGER_BASE_LINK' => '',
-    'PAGER_PARAMS_NAME' => 'arrPager',
-    'AJAX_OPTION_JUMP' => 'N',
-    'AJAX_OPTION_STYLE' => 'Y',
-    'AJAX_OPTION_HISTORY' => 'N',
-    'AJAX_OPTION_ADDITIONAL' => '',
-)); ?>
-
+    <? $APPLICATION->IncludeComponent('bitrix:news.list', 'advantages_apartments', array(
+        'DISPLAY_DATE' => 'Y',
+        'DISPLAY_NAME' => 'Y',
+        'DISPLAY_PICTURE' => 'Y',
+        'DISPLAY_PREVIEW_TEXT' => 'Y',
+        'AJAX_MODE' => 'N',
+        'IBLOCK_TYPE' => 'content',
+        'IBLOCK_ID' => '3',
+        'NEWS_COUNT' => '20',
+        'SORT_BY1' => 'ACTIVE_FROM',
+        'SORT_ORDER1' => 'DESC',
+        'SORT_BY2' => 'SORT',
+        'SORT_ORDER2' => 'ASC',
+        'FILTER_NAME' => '',
+        'FIELD_CODE' => array(),
+        'PROPERTY_CODE' => array(),
+        'CHECK_DATES' => 'Y',
+        'DETAIL_URL' => '',
+        'PREVIEW_TRUNCATE_LEN' => '',
+        'ACTIVE_DATE_FORMAT' => 'd.m.Y',
+        'SET_TITLE' => 'N',
+        'SET_BROWSER_TITLE' => 'N',
+        'SET_META_KEYWORDS' => 'N',
+        'SET_META_DESCRIPTION' => 'N',
+        'SET_LAST_MODIFIED' => 'N',
+        'INCLUDE_IBLOCK_INTO_CHAIN' => 'N',
+        'ADD_SECTIONS_CHAIN' => 'N',
+        'HIDE_LINK_WHEN_NO_DETAIL' => 'Y',
+        'PARENT_SECTION' => '',
+        'PARENT_SECTION_CODE' => '',
+        'INCLUDE_SUBSECTIONS' => 'Y',
+        'CACHE_TYPE' => 'A',
+        'CACHE_TIME' => '36000000',
+        'CACHE_FILTER' => 'Y',
+        'CACHE_GROUPS' => 'N',
+        'DISPLAY_TOP_PAGER' => 'Y',
+        'DISPLAY_BOTTOM_PAGER' => 'Y',
+        'PAGER_TITLE' => 'Элементы',
+        'PAGER_SHOW_ALWAYS' => 'N',
+        'PAGER_TEMPLATE' => '',
+        'PAGER_DESC_NUMBERING' => 'N',
+        'PAGER_DESC_NUMBERING_CACHE_TIME' => '36000',
+        'PAGER_SHOW_ALL' => 'N',
+        'PAGER_BASE_LINK_ENABLE' => 'N',
+        'SET_STATUS_404' => 'N',
+        'SHOW_404' => 'N',
+        'MESSAGE_404' => '',
+        'PAGER_BASE_LINK' => '',
+        'PAGER_PARAMS_NAME' => 'arrPager',
+        'AJAX_OPTION_JUMP' => 'N',
+        'AJAX_OPTION_STYLE' => 'Y',
+        'AJAX_OPTION_HISTORY' => 'N',
+        'AJAX_OPTION_ADDITIONAL' => '',
+    )); ?>
+<?endif;?>
     <section class="new-flats">
         <div class="container">
             <div class="row">
@@ -725,186 +765,133 @@ use Lema\Common\Config;
             </div>
         </div>
     </section>
-<? $APPLICATION->IncludeComponent(
-	"bitrix:news.detail", 
-	"tenant",
-	array(
-		"ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"ADD_ELEMENT_CHAIN" => "N",
-		"ADD_SECTIONS_CHAIN" => "N",
-		"AJAX_MODE" => "N",
-		"AJAX_OPTION_ADDITIONAL" => "",
-		"AJAX_OPTION_HISTORY" => "N",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_STYLE" => "Y",
-		"BROWSER_TITLE" => "-",
-		"CACHE_GROUPS" => "Y",
-		"CACHE_TIME" => "36000000",
-		"CACHE_TYPE" => "A",
-		"CHECK_DATES" => "Y",
-		"DETAIL_URL" => "",
-		"DISPLAY_BOTTOM_PAGER" => "Y",
-		"DISPLAY_DATE" => "N",
-		"DISPLAY_NAME" => "N",
-		"DISPLAY_PICTURE" => "N",
-		"DISPLAY_PREVIEW_TEXT" => "N",
-		"DISPLAY_TOP_PAGER" => "N",
-		"ELEMENT_CODE" => "lessee",
-		"ELEMENT_ID" => "",
-		"FIELD_CODE" => array(
-			0 => "CODE",
-			1 => "PREVIEW_TEXT",
-			2 => "DETAIL_TEXT",
-			3 => "",
-		),
-		"IBLOCK_ID" => "7",
-		"IBLOCK_TYPE" => "content",
-		"IBLOCK_URL" => "",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-		"MESSAGE_404" => "",
-		"META_DESCRIPTION" => "-",
-		"META_KEYWORDS" => "-",
-		"PAGER_BASE_LINK_ENABLE" => "N",
-		"PAGER_SHOW_ALL" => "N",
-		"PAGER_TEMPLATE" => ".default",
-		"PAGER_TITLE" => "Страница",
-		"PROPERTY_CODE" => array(
-			0 => "LIST_ELEMENTS",
-			1 => "",
-		),
-		"SET_BROWSER_TITLE" => "N",
-		"SET_CANONICAL_URL" => "N",
-		"SET_LAST_MODIFIED" => "N",
-		"SET_META_DESCRIPTION" => "N",
-		"SET_META_KEYWORDS" => "N",
-		"SET_STATUS_404" => "N",
-		"SET_TITLE" => "N",
-		"SHOW_404" => "N",
-		"STRICT_SECTION_CHECK" => "N",
-		"USE_PERMISSIONS" => "N",
-		"USE_SHARE" => "N",
-		"COMPONENT_TEMPLATE" => "tenant"
-	),
-	false
-); ?>
+<?if($inRootDir):?>
+    <? $APPLICATION->IncludeComponent(
+        "bitrix:news.detail",
+        "tenant",
+        array(
+            "ACTIVE_DATE_FORMAT" => "d.m.Y",
+            "ADD_ELEMENT_CHAIN" => "N",
+            "ADD_SECTIONS_CHAIN" => "N",
+            "AJAX_MODE" => "N",
+            "AJAX_OPTION_ADDITIONAL" => "",
+            "AJAX_OPTION_HISTORY" => "N",
+            "AJAX_OPTION_JUMP" => "N",
+            "AJAX_OPTION_STYLE" => "Y",
+            "BROWSER_TITLE" => "-",
+            "CACHE_GROUPS" => "Y",
+            "CACHE_TIME" => "36000000",
+            "CACHE_TYPE" => "A",
+            "CHECK_DATES" => "Y",
+            "DETAIL_URL" => "",
+            "DISPLAY_BOTTOM_PAGER" => "Y",
+            "DISPLAY_DATE" => "N",
+            "DISPLAY_NAME" => "N",
+            "DISPLAY_PICTURE" => "N",
+            "DISPLAY_PREVIEW_TEXT" => "N",
+            "DISPLAY_TOP_PAGER" => "N",
+            "ELEMENT_CODE" => "lessee",
+            "ELEMENT_ID" => "",
+            "FIELD_CODE" => array(
+                0 => "CODE",
+                1 => "PREVIEW_TEXT",
+                2 => "DETAIL_TEXT",
+                3 => "",
+            ),
+            "IBLOCK_ID" => "7",
+            "IBLOCK_TYPE" => "content",
+            "IBLOCK_URL" => "",
+            "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+            "MESSAGE_404" => "",
+            "META_DESCRIPTION" => "-",
+            "META_KEYWORDS" => "-",
+            "PAGER_BASE_LINK_ENABLE" => "N",
+            "PAGER_SHOW_ALL" => "N",
+            "PAGER_TEMPLATE" => ".default",
+            "PAGER_TITLE" => "Страница",
+            "PROPERTY_CODE" => array(
+                0 => "LIST_ELEMENTS",
+                1 => "",
+            ),
+            "SET_BROWSER_TITLE" => "N",
+            "SET_CANONICAL_URL" => "N",
+            "SET_LAST_MODIFIED" => "N",
+            "SET_META_DESCRIPTION" => "N",
+            "SET_META_KEYWORDS" => "N",
+            "SET_STATUS_404" => "N",
+            "SET_TITLE" => "N",
+            "SHOW_404" => "N",
+            "STRICT_SECTION_CHECK" => "N",
+            "USE_PERMISSIONS" => "N",
+            "USE_SHARE" => "N",
+            "COMPONENT_TEMPLATE" => "tenant"
+        ),
+        false
+    ); ?>
 
-<? $APPLICATION->IncludeComponent(
-	"bitrix:news.detail",
-	"tenant",
-	array(
-		"ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"ADD_ELEMENT_CHAIN" => "N",
-		"ADD_SECTIONS_CHAIN" => "N",
-		"AJAX_MODE" => "N",
-		"AJAX_OPTION_ADDITIONAL" => "",
-		"AJAX_OPTION_HISTORY" => "N",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_STYLE" => "Y",
-		"BROWSER_TITLE" => "-",
-		"CACHE_GROUPS" => "Y",
-		"CACHE_TIME" => "36000000",
-		"CACHE_TYPE" => "A",
-		"CHECK_DATES" => "Y",
-		"DETAIL_URL" => "",
-		"DISPLAY_BOTTOM_PAGER" => "Y",
-		"DISPLAY_DATE" => "N",
-		"DISPLAY_NAME" => "N",
-		"DISPLAY_PICTURE" => "N",
-		"DISPLAY_PREVIEW_TEXT" => "N",
-		"DISPLAY_TOP_PAGER" => "N",
-		"ELEMENT_CODE" => "_landlord",
-		"ELEMENT_ID" => "",
-		"FIELD_CODE" => array(
-			0 => "CODE",
-			1 => "PREVIEW_TEXT",
-			2 => "DETAIL_TEXT",
-			3 => "",
-		),
-		"IBLOCK_ID" => "7",
-		"IBLOCK_TYPE" => "content",
-		"IBLOCK_URL" => "",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-		"MESSAGE_404" => "",
-		"META_DESCRIPTION" => "-",
-		"META_KEYWORDS" => "-",
-		"PAGER_BASE_LINK_ENABLE" => "N",
-		"PAGER_SHOW_ALL" => "N",
-		"PAGER_TEMPLATE" => ".default",
-		"PAGER_TITLE" => "Страница",
-		"PROPERTY_CODE" => array(
-			0 => "LIST_ELEMENTS",
-			1 => "",
-		),
-		"SET_BROWSER_TITLE" => "N",
-		"SET_CANONICAL_URL" => "N",
-		"SET_LAST_MODIFIED" => "N",
-		"SET_META_DESCRIPTION" => "N",
-		"SET_META_KEYWORDS" => "N",
-		"SET_STATUS_404" => "N",
-		"SET_TITLE" => "N",
-		"SHOW_404" => "N",
-		"STRICT_SECTION_CHECK" => "N",
-		"USE_PERMISSIONS" => "N",
-		"USE_SHARE" => "N",
-		"COMPONENT_TEMPLATE" => "tenant"
-	),
-	false
-); ?>
-    <!--
-<section class="new-arrivals">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <h2 class="h2">Новые поступления</h2>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid">
-        <div class="row without-paddings">
-            <div class="col-md-6">
-                <div class="flat-card flat-card-revers">
-                    <a href="#"></a>
-                    <img src="/assets/img/smart-plan-22.png" class="img-flat-1" alt="plan-flat-1">
-                    <div class="flat-plan">
-                        <h3><span>1</span> <br> Комнатные квартиры</h3>
-                        <img src="/assets/img/scheme.png" alt="scheme">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="flat-card">
-                    <a href="#"></a>
-                    <img src="/assets/img/smart-plan-32.png" class="img-flat-2" alt="plan-flat-2">
-                    <div class="flat-plan pos-left">
-                        <h3><span>2</span> <br> Комнатные квартиры</h3>
-                        <img src="/assets/img/scheme.png" alt="scheme">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="flat-card">
-                    <a href="#"></a>
-                    <img src="/assets/img/planirovka-kvartir-foto-readgy-com-3.png" class="img-flat-3" alt="plan-flat-3">
-                    <div class="flat-plan">
-                        <h3><span>3</span> <br> Комнатные квартиры</h3>
-                        <img src="/assets/img/scheme.png" alt="scheme">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="flat-card flat-card-revers">
-                    <a href="#"></a>
-                    <img src="/assets/img/plan-4.png" class="img-flat-4" alt="plan-flat-4">
-                    <div class="flat-plan pos-left">
-                        <h3><span>4</span> <br> Комнатные квартиры</h3>
-                        <img src="/assets/img/scheme.png" alt="scheme">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
--->
+    <? $APPLICATION->IncludeComponent(
+        "bitrix:news.detail",
+        "tenant",
+        array(
+            "ACTIVE_DATE_FORMAT" => "d.m.Y",
+            "ADD_ELEMENT_CHAIN" => "N",
+            "ADD_SECTIONS_CHAIN" => "N",
+            "AJAX_MODE" => "N",
+            "AJAX_OPTION_ADDITIONAL" => "",
+            "AJAX_OPTION_HISTORY" => "N",
+            "AJAX_OPTION_JUMP" => "N",
+            "AJAX_OPTION_STYLE" => "Y",
+            "BROWSER_TITLE" => "-",
+            "CACHE_GROUPS" => "Y",
+            "CACHE_TIME" => "36000000",
+            "CACHE_TYPE" => "A",
+            "CHECK_DATES" => "Y",
+            "DETAIL_URL" => "",
+            "DISPLAY_BOTTOM_PAGER" => "Y",
+            "DISPLAY_DATE" => "N",
+            "DISPLAY_NAME" => "N",
+            "DISPLAY_PICTURE" => "N",
+            "DISPLAY_PREVIEW_TEXT" => "N",
+            "DISPLAY_TOP_PAGER" => "N",
+            "ELEMENT_CODE" => "_landlord",
+            "ELEMENT_ID" => "",
+            "FIELD_CODE" => array(
+                0 => "CODE",
+                1 => "PREVIEW_TEXT",
+                2 => "DETAIL_TEXT",
+                3 => "",
+            ),
+            "IBLOCK_ID" => "7",
+            "IBLOCK_TYPE" => "content",
+            "IBLOCK_URL" => "",
+            "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+            "MESSAGE_404" => "",
+            "META_DESCRIPTION" => "-",
+            "META_KEYWORDS" => "-",
+            "PAGER_BASE_LINK_ENABLE" => "N",
+            "PAGER_SHOW_ALL" => "N",
+            "PAGER_TEMPLATE" => ".default",
+            "PAGER_TITLE" => "Страница",
+            "PROPERTY_CODE" => array(
+                0 => "LIST_ELEMENTS",
+                1 => "",
+            ),
+            "SET_BROWSER_TITLE" => "N",
+            "SET_CANONICAL_URL" => "N",
+            "SET_LAST_MODIFIED" => "N",
+            "SET_META_DESCRIPTION" => "N",
+            "SET_META_KEYWORDS" => "N",
+            "SET_STATUS_404" => "N",
+            "SET_TITLE" => "N",
+            "SHOW_404" => "N",
+            "STRICT_SECTION_CHECK" => "N",
+            "USE_PERMISSIONS" => "N",
+            "USE_SHARE" => "N",
+            "COMPONENT_TEMPLATE" => "tenant"
+        ),
+        false
+    ); ?>
+<?endif;?>
 <?
 require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/footer.php';
 ?>
