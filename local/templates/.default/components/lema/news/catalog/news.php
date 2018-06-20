@@ -47,6 +47,7 @@ $this->setFrameMode(true);
 		"CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
 		"PAGER_PARAMS_NAME" => $arParams["PAGER_PARAMS_NAME"],
 		"SEF_MODE" => $arParams["SEF_MODE"],
+        "FILTER_ORDER" => $arParams["FILTER_ORDER"],
 	),
 	$component
 );

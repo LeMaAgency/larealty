@@ -42,15 +42,15 @@ if(!empty($arResult['ITEMS']) && !empty($arParams['FILTER_ORDER']))
             case 'property':
                 if(!empty($items['props'][$itemData['key']]))
                     $item = $items['props'][$itemData['key']];
-            break;
+                break;
             case 'field':
                 if(!empty($items['fields']['arrFilter_ff[' . $itemData['key'] . ']']))
                     $item = $items['fields']['arrFilter_ff[' . $itemData['key'] . ']'];
-            break;
+                break;
             default:
                 if(!empty($items['other'][$itemData['key']]))
                     $item = $items['other'][$itemData['key']];
-            break;
+                break;
         }
 
         /**

@@ -47,6 +47,7 @@ $this->setFrameMode(true);
 		"CACHE_TIME" => $arParams["CACHE_TIME"],
 		"CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
 		"PAGER_PARAMS_NAME" => $arParams["PAGER_PARAMS_NAME"],
+        "FILTER_ORDER" => $arParams["FILTER_ORDER"],
 	),
 	$component
 );
