@@ -331,6 +331,9 @@ if(!empty($find_price_1))
 if(!empty($find_price_2))
     $arFilter['<=PROPERTY_PRICE'] = $find_price_2;
 
+/*if(empty($find_el_property_61))
+    $arFilter['PROPERTY_RIELTOR'] = $GLOBALS['USER']->GetId();*/
+
 $arSubQuery = array();
 if ($boolSKU && $boolSKUFiltrable)
 {
@@ -3886,9 +3889,11 @@ foreach($arProps as $arProp):
              */
 
             if(isset($arProp['CODE']) && $arProp['CODE'] == 'RIELTOR'):
+                $userId = ${"find_el_property_".$arProp["ID"]};
+                $userId = (int) empty($userId) ? $GLOBALS['USER']->GetId() : $userId;
                 echo FindUserID(
                     "find_el_property_".$arProp["ID"],
-                    intval(${"find_el_property_".$arProp["ID"]}),
+                    $userId,
                     "",
                     "find_form",
                     "5",
@@ -3992,6 +3997,20 @@ $oFilter->Buttons(array(
 $oFilter->End();
 ?>
 </form>
+
+<?
+\CJSCore::Init(array('fx', 'jquery2'));
+?>
+<script>
+    $('.adm-content').trigger('click');
+    /**
+     * Toggle section by default
+     */
+    $('.adm-submenu-item-name-link-text:contains("Объекты")').closest('.adm-sub-submenu-block').addClass('adm-sub-submenu-open');
+    $('a[href^="iblock_list_admin.php?IBLOCK_ID=2"]').each(function(i, el) {
+        $(el).attr('href', 'la_' + $(el).attr('href'));
+    })
+</script>
 
 <?
 $lAdmin->DisplayList();
