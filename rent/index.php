@@ -1,7 +1,7 @@
 <?
 require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
 
-$APPLICATION->SetTitle('Каталог');
+$APPLICATION->SetTitle('Аренда');
 use Lema\Common\Config;
 ?>
     <div class="container">
@@ -152,6 +152,12 @@ use Lema\Common\Config;
             6 => "RENT_TYPE",
             7 => "REALTY_TYPE",
             8 => "REGION",
+        ),
+        'FILTER_ORDER' => array(
+            array('key' => 'ROOMS_COUNT', 'type' => 'property', 'expanded' => false),
+            array('key' => 'PRICE', 'type' => 'property', 'expanded' => false),
+            array('key' => 'REGION', 'type' => 'property', 'expanded' => false),
+            array('key' => 'ID', 'type' => 'field', 'expanded' => false),
         ),
         "NUM_NEWS" => "20",
         "NUM_DAYS" => "30",

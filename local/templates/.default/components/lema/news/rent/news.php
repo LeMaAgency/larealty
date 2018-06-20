@@ -47,6 +47,7 @@ $this->setFrameMode(true);
 		"CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
 		"PAGER_PARAMS_NAME" => $arParams["PAGER_PARAMS_NAME"],
 		"SEF_MODE" => $arParams["SEF_MODE"],
+		"FILTER_ORDER" => $arParams["FILTER_ORDER"],
 	),
 	$component
 );
@@ -66,9 +67,9 @@ $this->setFrameMode(true);
 		"SORT_ORDER2" => $arParams["SORT_ORDER2"],
 		"FIELD_CODE" => $arParams["LIST_FIELD_CODE"],
 		"PROPERTY_CODE" => $arParams["LIST_PROPERTY_CODE"],
-		"DETAIL_URL" => SITE_DIR . 'catalog/'.$arResult["URL_TEMPLATES"]["detail"],
-		"SECTION_URL" => SITE_DIR . 'catalog/'.$arResult["URL_TEMPLATES"]["section"],
-		"IBLOCK_URL" => SITE_DIR . 'catalog/'.$arResult["URL_TEMPLATES"]["news"],
+		"DETAIL_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["detail"],
+		"SECTION_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["section"],
+		"IBLOCK_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["news"],
 		"DISPLAY_PANEL" => $arParams["DISPLAY_PANEL"],
 		"SET_TITLE" => $arParams["SET_TITLE"],
 		"SET_LAST_MODIFIED" => $arParams["SET_LAST_MODIFIED"],

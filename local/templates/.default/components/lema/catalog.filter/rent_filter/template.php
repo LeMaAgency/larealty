@@ -55,14 +55,7 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
 
             <div class="filter-form-row">
 
-                <?foreach($arResult["ITEMS"] as $arItem):
-                    if(empty($arItem['CODE']) && $arItem['INPUT_NAME'] == 'arrFilter_ff[ID]')
-                    {
-                        $item = $arItem;
-                        continue;
-                    }
-                    ?>
-                    <?
+                <?foreach($arResult["ORDERED_ITEMS"] as $arItem):
                     if(isset($arItem['CODE']) && in_array($arItem['CODE'], array('RENT_TYPE', 'REALTY_TYPE')))
                         continue;
                     ?>
@@ -285,7 +278,9 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
                     </div>
                 <?endif;?>
             </div>
-            <a href="#" class="filter-extend-link js-extend-filter">Расширенный поиск <b>+</b></a>
+            <?if(!empty($arResult['HAS_EXPANDED'])):?>
+                <a href="#" class="filter-extend-link js-extend-filter">Расширенный поиск <b>+</b></a>
+            <?endif;?>
             <button type="submit" name="set_filter" value="Y" class="filter-submit-btn">Поиск</button>
             <div class="clb"></div>
         </form>
