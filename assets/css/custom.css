@@ -131,3 +131,6 @@ a.add-apartment__button:hover{
     width: fit-content;
     float:left
 }
+.rent-feature__content__title {
+    text-transform: uppercase;
+}
