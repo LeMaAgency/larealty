@@ -127,3 +127,7 @@ a.add-apartment__button:hover{
     color: black;
     position: unset;
 }
+.connect-consultant__form.connect-consultant__form_inline .it-block:not(.checkbox){
+    width: fit-content;
+    float:left
+}
