@@ -61,5 +61,11 @@ $(document).ready(function () {
         $.fancybox.open($("#realtors-feedback-form"));
         $("#form_field_realtor_id").val($(this).data("id"));
     });
+    $("body").on("click", ".js-feedback-form", function (e) {
+        e.preventDefault();
+        $.fancybox.open($("#feedback-form"));
+        $("#feedback-form").find(".call-order-title").html($(this).html());
+        $("#feedback-form").find("input[type='submit']").val("Отправить");
+    });
 
 });
