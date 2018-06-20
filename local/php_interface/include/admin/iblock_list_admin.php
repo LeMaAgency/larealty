@@ -331,8 +331,8 @@ if(!empty($find_price_1))
 if(!empty($find_price_2))
     $arFilter['<=PROPERTY_PRICE'] = $find_price_2;
 
-/*if(empty($find_el_property_61))
-    $arFilter['PROPERTY_RIELTOR'] = $GLOBALS['USER']->GetId();*/
+if(!$GLOBALS['USER']->IsAdmin() && empty($find_el_property_61))
+    $arFilter['PROPERTY_RIELTOR'] = $GLOBALS['USER']->GetId();
 
 $arSubQuery = array();
 if ($boolSKU && $boolSKUFiltrable)
@@ -3900,7 +3900,7 @@ foreach($arProps as $arProp):
                     "",
                     " ... ",
                     "",
-                    ""
+                    "tablebodybutton rieltor_search"
                 );
             else:
                 echo call_user_func_array($arProp["PROPERTY_USER_TYPE"]["GetAdminFilterHTML"], array(
@@ -4002,16 +4002,22 @@ $oFilter->End();
 \CJSCore::Init(array('fx', 'jquery2'));
 ?>
 <script>
-    $('.adm-content').trigger('click');
-    /**
-     * Toggle section by default
-     */
-    $('.adm-submenu-item-name-link-text:contains("Объекты")').closest('.adm-sub-submenu-block').addClass('adm-sub-submenu-open');
-    <?if(!empty($find_section_section)):?>
-        $('a[href*="find_section_section=<?=(int) $find_section_section;?>"]').closest('.adm-sub-submenu-block').addClass('adm-submenu-item-active');
-    <?endif;?>
-    $('a[href^="iblock_list_admin.php?IBLOCK_ID=2"]').each(function(i, el) {
-        $(el).attr('href', 'la_' + $(el).attr('href'));
+    $(function() {
+        $('.adm-content').trigger('click');
+        /**
+         * Toggle section by default
+         */
+        $('.adm-submenu-item-name-link-text:contains("Объекты")').closest('.adm-sub-submenu-block').addClass('adm-sub-submenu-open');
+        <?if(!empty($find_section_section)):?>
+            $('a[href*="find_section_section=<?=(int) $find_section_section;?>"]').closest('.adm-sub-submenu-block').addClass('adm-submenu-item-active');
+        <?endif;?>
+        <?if(!$GLOBALS['USER']->IsAdmin()):?>
+            $('#find_el_property_61').val(<?=(int) $GLOBALS['USER']->GetId();?>).attr('disabled', true)
+                .closest('.adm-filter-item-center').find('#FindUser').hide();
+        <?endif;?>
+        $('a[href^="iblock_list_admin.php?IBLOCK_ID=2"]').each(function(i, el) {
+            $(el).attr('href', 'la_' + $(el).attr('href'));
+        })
     })
 </script>
 
