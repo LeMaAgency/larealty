@@ -4007,6 +4007,9 @@ $oFilter->End();
      * Toggle section by default
      */
     $('.adm-submenu-item-name-link-text:contains("Объекты")').closest('.adm-sub-submenu-block').addClass('adm-sub-submenu-open');
+    <?if(!empty($find_section_section)):?>
+        $('a[href*="find_section_section=<?=(int) $find_section_section;?>"]').closest('.adm-sub-submenu-block').addClass('adm-submenu-item-active');
+    <?endif;?>
     $('a[href^="iblock_list_admin.php?IBLOCK_ID=2"]').each(function(i, el) {
         $(el).attr('href', 'la_' + $(el).attr('href'));
     })
