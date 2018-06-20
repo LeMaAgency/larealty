@@ -30,7 +30,7 @@ class Main
         /**
          * Auto-Redirect to our new page
          */
-        if($_GET['IBLOCK_ID'] == 2 && Request::get()->getPhpSelf() != static::ADMIN_LIST_FILENAME)
+        if(isset($_GET['IBLOCK_ID']) && $_GET['IBLOCK_ID'] == 2 && Request::get()->getPhpSelf() != static::ADMIN_LIST_FILENAME)
         {
             LocalRedirect(static::ADMIN_LIST_FILENAME . '?' . http_build_query($_GET));
             exit;
