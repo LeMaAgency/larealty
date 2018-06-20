@@ -67,7 +67,16 @@
 .js-extend-filter-block {
     display: none;
 }
-
+a.add-apartment__button{
+    display: inline-block;
+    background-color: #07ba00;
+    color: #ffffff;
+    text-decoration: none;
+    padding-top: 16px;
+}
+a.add-apartment__button:hover{
+    background-color: #0b9605;
+}
 .realtors__carousel {
     display: flex;
     margin-bottom: 10px;
