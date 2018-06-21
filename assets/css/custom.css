@@ -93,15 +93,6 @@ a.add-apartment__button:hover{
     display: none;
 }
 
-@media (max-width: 480px) {
-    .realtors__carousel {
-        display: inline-block;
-    }
-
-    .realtors__carousel__item {
-        width: auto;
-    }
-}
 .fancybox-feedback{
     background-color: unset;
 }
@@ -133,4 +124,26 @@ a.add-apartment__button:hover{
 }
 .rent-feature__content__title {
     text-transform: uppercase;
+}
+.connect-consultant__form.connect-consultant__form_inline .checkbox{
+    position: absolute;
+    bottom: 10px;
+}
+
+@media (max-width: 1025px) {
+    .connect-consultant__form.connect-consultant__form_inline .checkbox{
+        position: relative;
+        display: inline-block;
+    }
+
+}
+@media (max-width: 480px) {
+    .realtors__carousel {
+        display: inline-block;
+    }
+
+    .realtors__carousel__item {
+        width: auto;
+    }
+
 }
