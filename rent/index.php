@@ -64,7 +64,12 @@ if(!$inRootDir)
             </div>
         </div>
     </div>
+<?php
 
+if(empty($GLOBALS['arrFilter']))
+    $GLOBALS['arrFilter'] = array();
+$GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = array('Сдам', 'Сниму');
+?>
 <? $APPLICATION->IncludeComponent(
     "lema:news",
     "rent",
