@@ -13,6 +13,17 @@
 $this->setFrameMode(true);
 $this->addExternalCss("/bitrix/css/main/bootstrap.css");
 $this->addExternalCss("/bitrix/css/main/font-awesome.css");
+
+$rentType = $realtyType = null;
+
+$uriParts = explode('/', trim(\Lema\Common\Request::get()->getRequestedPageDirectory(), '/'));
+if(isset($uriParts[1]))
+{
+    $realtyType = $uriParts[1];
+    if(isset($uriParts[2]))
+        $rentType = $uriParts[2];
+}
+
 ?>
 <section class="filter filter_bg">
     <div class="overlay"></div>
@@ -20,33 +31,23 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
         <form name="<?echo $arResult["FILTER_NAME"]."_form"?>" class="filter-form" action="<?echo $arResult["FORM_ACTION"]?>" method="get">
 
             <div class="filter-form__choose">
-                <input type="radio"<?
-                if(isset($_GET['arrFilter_pf']))
-                    echo checked('RENT_TYPE', 29, $_GET['arrFilter_pf']);
-                else
-                    echo ' checked';
-                ?> data-code="snimu" id="rent-id" class="filter-form__choose__item"  name="arrFilter_pf[RENT_TYPE]" value="29">
+                <input type="radio"<?if(empty($rentType) || $rentType == 'snimu')echo ' checked';?> data-code="snimu" id="rent-id" class="filter-form__choose__item"  name="arrFilter_pf[RENT_TYPE]" value="29">
                 <label for="rent-id" class="filter-form__choose__item-label">снять</label>
-                <input data-code="sdam" type="radio"<? if(isset($_GET['arrFilter_pf'])) echo checked('RENT_TYPE', 28, $_GET['arrFilter_pf']);?>
+                <input data-code="sdam" type="radio"<?if(!empty($rentType) && $rentType == 'sdam')echo ' checked';?>
                        id="rent-out-id" class="filter-form__choose__item" name="arrFilter_pf[RENT_TYPE]" value="28">
                 <label for="rent-out-id" class="filter-form__choose__item-label">сдать</label>
             </div>
             <div class="filter-form__type">
                 <div class="filter-field-title">Тип недвижимости</div>
-                <input type="radio"<?
-                if(isset($_GET['arrFilter_pf']))
-                    echo checked('REALTY_TYPE', 2, $_GET['arrFilter_pf']);
-                else
-                    echo ' checked';
-                ?> data-code="komnaty" id="type-room" class="filter-form__type__item" name="arrFilter_pf[REALTY_TYPE]" value="2">
+                <input type="radio"<?if(empty($realtyType) || $realtyType == 'komnaty')echo ' checked';?> data-code="komnaty" id="type-room" class="filter-form__type__item" name="arrFilter_pf[REALTY_TYPE]" value="2">
                 <label for="type-room" class="filter-form__type__item-label">комната</label>
-                <input data-code="kvartiry" type="radio"<? if(isset($_GET['arrFilter_pf'])) echo checked('REALTY_TYPE', 1, $_GET['arrFilter_pf']);?>
+                <input data-code="kvartiry" type="radio"<?if(!empty($realtyType) && $realtyType == 'kvartiry')echo ' checked';?>
                        id="type-apartment" class="filter-form__type__item" name="arrFilter_pf[REALTY_TYPE]" value="1">
                 <label for="type-apartment" class="filter-form__type__item-label">квартира</label>
-                <input data-code="doma" type="radio"<? if(isset($_GET['arrFilter_pf'])) echo checked('REALTY_TYPE', 3, $_GET['arrFilter_pf']);?>
+                <input data-code="doma" type="radio"<?if(!empty($realtyType) && $realtyType == 'doma')echo ' checked';?>
                        id="type-house" class="filter-form__type__item" name="arrFilter_pf[REALTY_TYPE]" value="3">
                 <label for="type-house" class="filter-form__type__item-label">дом/коттедж</label>
-                <input data-code="ofisy" type="radio"<? if(isset($_GET['arrFilter_pf'])) echo checked('REALTY_TYPE', 49, $_GET['arrFilter_pf']);?>
+                <input data-code="ofisy" type="radio"<?if(!empty($realtyType) && $realtyType == 'ofisy')echo ' checked';?>
                        id="type-office" class="filter-form__type__item" name="arrFilter_pf[REALTY_TYPE]" value="49">
                 <label for="type-office" class="filter-form__type__item-label">офис</label>
             </div>
