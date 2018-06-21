@@ -267,6 +267,7 @@ if(!$inRootDir)
         "bitrix:news.list",
         "feature",
         array(
+            'ROOT_DIR' => $inRootDir,
             "ACTIVE_DATE_FORMAT" => "d.m.Y",
             "ADD_SECTIONS_CHAIN" => "N",
             "AJAX_MODE" => "N",
