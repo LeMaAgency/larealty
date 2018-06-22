@@ -69,42 +69,7 @@ $this->setFrameMode(true);
         ),
         $component
     );?>
-    <section class="slider-services">
-        <div class="container">
-            <H2 class="slider-services__title">Ипотека в г. Южно-Сахалинске от компании &#171;Квартирный Ответ&#187;</H2>
-            <div class="slider-services__img">
-                <div class="slider-services__img__item active" data-img="1"></div>
-                <div class="slider-services__img__between"></div>
-                <div class="slider-services__img__item" data-img="2"></div>
-                <div class="slider-services__img__between slider-services__img__between_center"></div>
-                <div class="slider-services__img__item" data-img="3"></div>
-                <div class="slider-services__img__between"></div>
-                <div class="slider-services__img__item" data-img="4"></div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="slider-services__slider">
-                <div class="slider-services__slider__item" data-slider="1">
-                    <p class="slider-services__slider__item__text">Консультационные услуги по кредитным банковским ставкам бесплатно и без очереди</p>
-                </div>
-                <div class="slider-services__slider__item" data-slider="2">
-                    <p class="slider-services__slider__item__text">Консультационные услуги по кредитным банковским ставкам бесплатно и без очереди</p>
-                </div>
-                <div class="slider-services__slider__item" data-slider="3">
-                    <p class="slider-services__slider__item__text">Консультационные услуги по кредитным банковским ставкам бесплатно и без очереди</p>
-                </div>
-                <div class="slider-services__slider__item" data-slider="4">
-                    <p class="slider-services__slider__item__text">Консультационные услуги по кредитным банковским ставкам бесплатно и без очереди</p>
-                </div>
-                <div class="slider-services__slider__item" data-slider="5">
-                    <p class="slider-services__slider__item__text">Консультационные услуги по кредитным банковским ставкам бесплатно и без очереди</p>
-                </div>
-            </div>
-            <div class="slider-services__btn-wrap">
-                <a href="#" class="slider-services__btn">рассчитать</a>
-            </div>
-        </div>
-    </section>
+
     <section class="offers offers_padding">
         <div class="container-index">
             <div class="section-title"><span>Похожие объекты</span></div>
