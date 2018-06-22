@@ -100,3 +100,5 @@ if($item->propFilled('RIELTOR'))
         );
     }
 }
+
+$arResult['SHOW_STAGES_COUNT'] = !in_array($item->propXmlId('REALTY_TYPE'), array('doma', 'dachi'));

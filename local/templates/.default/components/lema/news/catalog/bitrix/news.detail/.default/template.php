@@ -71,18 +71,34 @@ $item = $data->item();
                                     </div>
                                 </div>
                             <?endif;?>
-                            <?if($item->propFilled('STAGE') && $item->propFilled('STAGES_COUNT')):?>
-                                <div class="item-info item-info_floor">
-                                    <div class="item-info__inner">
-                                        <div class="item-info__inner__img item-info__inner__img_floor"></div>
-                                        <div class="item-info__inner__content">
-                                            <div class="item-info-name"><?=$item->propName('STAGE');?></div>
-                                            <div class="item-info-value">
-                                                <?=$item->propVal('STAGE');?>/<?=$item->propVal('STAGES_COUNT');?>
+                            <?if($item->get('SHOW_STAGES_COUNT')):?>
+                                <?if($item->propFilled('STAGE') && $item->propFilled('STAGES_COUNT')):?>
+                                    <div class="item-info item-info_floor">
+                                        <div class="item-info__inner">
+                                            <div class="item-info__inner__img item-info__inner__img_floor"></div>
+                                            <div class="item-info__inner__content">
+                                                <div class="item-info-name"><?=$item->propName('STAGE');?></div>
+                                                <div class="item-info-value">
+                                                    <?=$item->propVal('STAGE');?>/<?=$item->propVal('STAGES_COUNT');?>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                <?endif;?>
+                            <?else:?>
+                                <?if($item->propFilled('STAGE')):?>
+                                    <div class="item-info item-info_floor">
+                                        <div class="item-info__inner">
+                                            <div class="item-info__inner__img item-info__inner__img_floor"></div>
+                                            <div class="item-info__inner__content">
+                                                <div class="item-info-name"><?=$item->propName('STAGE');?></div>
+                                                <div class="item-info-value">
+                                                    <?=$item->propVal('STAGE');?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?endif;?>
                             <?endif;?>
                             <?if($item->propFilled('SQUARE')):?>
                                 <div class="item-info item-info_area">
