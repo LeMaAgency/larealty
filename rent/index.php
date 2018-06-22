@@ -460,6 +460,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = array('Сдам', 'Сним�
                         <?php
                         $roomNewElementFilter = array(
                             '=PROPERTY_ROOMS_COUNT' => 1,
+                            'PROPERTY_RENT_TYPE.XML_ID' => array('sdam', 'snimu'),
                         );
                         ?>
                         <? $APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
@@ -538,6 +539,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = array('Сдам', 'Сним�
                         <?php
                         $roomNewElementFilter = array(
                             '=PROPERTY_ROOMS_COUNT' => 2,
+                            'PROPERTY_RENT_TYPE.XML_ID' => array('sdam', 'snimu'),
                         );
                         ?>
                         <? $APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
@@ -616,6 +618,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = array('Сдам', 'Сним�
                         <?php
                         $roomNewElementFilter = array(
                             '=PROPERTY_ROOMS_COUNT' => 3,
+                            'PROPERTY_RENT_TYPE.XML_ID' => array('sdam', 'snimu'),
                         );
                         ?>
                         <? $APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
@@ -694,6 +697,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = array('Сдам', 'Сним�
                         <?php
                         $roomNewElementFilter = array(
                             '>=PROPERTY_ROOMS_COUNT' => 4,
+                            'PROPERTY_RENT_TYPE.XML_ID' => array('sdam', 'snimu'),
                         );
                         ?>
                         <? $APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
