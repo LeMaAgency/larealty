@@ -1,4 +1,4 @@
-<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
+<? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 /** @var array $arParams */
 /** @var array $arResult */
 /** @global CMain $APPLICATION */
@@ -13,7 +13,7 @@
 $this->setFrameMode(true);
 ?>
 <div class="content-page">
-    <?$ElementID = $APPLICATION->IncludeComponent(
+    <? $ElementID = $APPLICATION->IncludeComponent(
         "bitrix:news.detail",
         "",
         Array(
@@ -25,8 +25,8 @@ $this->setFrameMode(true);
             "IBLOCK_ID" => $arParams["IBLOCK_ID"],
             "FIELD_CODE" => $arParams["DETAIL_FIELD_CODE"],
             "PROPERTY_CODE" => $arParams["DETAIL_PROPERTY_CODE"],
-            "DETAIL_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["detail"],
-            "SECTION_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["section"],
+            "DETAIL_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["detail"],
+            "SECTION_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["section"],
             "META_KEYWORDS" => $arParams["META_KEYWORDS"],
             "META_DESCRIPTION" => $arParams["META_DESCRIPTION"],
             "BROWSER_TITLE" => $arParams["BROWSER_TITLE"],
@@ -57,7 +57,7 @@ $this->setFrameMode(true);
             "ELEMENT_CODE" => $arResult["VARIABLES"]["ELEMENT_CODE"],
             "SECTION_ID" => $arResult["VARIABLES"]["SECTION_ID"],
             "SECTION_CODE" => $arResult["VARIABLES"]["SECTION_CODE"],
-            "IBLOCK_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["news"],
+            "IBLOCK_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["news"],
             "USE_SHARE" => $arParams["USE_SHARE"],
             "SHARE_HIDE" => $arParams["SHARE_HIDE"],
             "SHARE_TEMPLATE" => $arParams["SHARE_TEMPLATE"],
@@ -68,166 +68,182 @@ $this->setFrameMode(true);
             'STRICT_SECTION_CHECK' => (isset($arParams['STRICT_SECTION_CHECK']) ? $arParams['STRICT_SECTION_CHECK'] : ''),
         ),
         $component
-    );?>
+    ); ?>
 
     <? if (!preg_match('[/snimu|sdam/]', $APPLICATION->GetCurDir())): ?>
-    <section class="slider-services">
-        <div class="container">
-            <H2 class="slider-services__title">Ипотека в г. Южно-Сахалинске от компании &#171;Квартирный Ответ&#187;</H2>
-            <div class="slider-services__img">
-                <div class="slider-services__img__item active" data-img="1"></div>
-                <div class="slider-services__img__between"></div>
-                <div class="slider-services__img__item" data-img="2"></div>
-                <div class="slider-services__img__between slider-services__img__between_center"></div>
-                <div class="slider-services__img__item" data-img="3"></div>
-                <div class="slider-services__img__between"></div>
-                <div class="slider-services__img__item" data-img="4"></div>
+        <? $APPLICATION->IncludeComponent(
+            "bitrix:news.detail",
+            "hypothec",
+            Array(
+                "ACTIVE_DATE_FORMAT" => "d.m.Y",
+                "ADD_ELEMENT_CHAIN" => "N",
+                "ADD_SECTIONS_CHAIN" => "N",
+                "AJAX_MODE" => "N",
+                "AJAX_OPTION_ADDITIONAL" => "",
+                "AJAX_OPTION_HISTORY" => "N",
+                "AJAX_OPTION_JUMP" => "N",
+                "AJAX_OPTION_STYLE" => "Y",
+                "BROWSER_TITLE" => "-",
+                "CACHE_GROUPS" => "Y",
+                "CACHE_TIME" => "36000000",
+                "CACHE_TYPE" => "A",
+                "CHECK_DATES" => "Y",
+                "DETAIL_URL" => "",
+                "DISPLAY_BOTTOM_PAGER" => "N",
+                "DISPLAY_DATE" => "Y",
+                "DISPLAY_NAME" => "Y",
+                "DISPLAY_PICTURE" => "Y",
+                "DISPLAY_PREVIEW_TEXT" => "Y",
+                "DISPLAY_TOP_PAGER" => "N",
+                "ELEMENT_CODE" => "hypothec",
+                "ELEMENT_ID" => "",
+                "FIELD_CODE" => array("", ""),
+                "IBLOCK_ID" => "7",
+                "IBLOCK_TYPE" => "content",
+                "IBLOCK_URL" => "",
+                "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+                "MESSAGE_404" => "",
+                "META_DESCRIPTION" => "-",
+                "META_KEYWORDS" => "-",
+                "PAGER_BASE_LINK_ENABLE" => "N",
+                "PAGER_SHOW_ALL" => "N",
+                "PAGER_TEMPLATE" => ".default",
+                "PAGER_TITLE" => "Страница",
+                "PROPERTY_CODE" => array("LIST_ELEMENTS", ""),
+                "SET_BROWSER_TITLE" => "N",
+                "SET_CANONICAL_URL" => "N",
+                "SET_LAST_MODIFIED" => "N",
+                "SET_META_DESCRIPTION" => "N",
+                "SET_META_KEYWORDS" => "N",
+                "SET_STATUS_404" => "N",
+                "SET_TITLE" => "N",
+                "SHOW_404" => "N",
+                "STRICT_SECTION_CHECK" => "N",
+                "USE_PERMISSIONS" => "N",
+                "USE_SHARE" => "N"
+            )
+        ); ?>
+        <!--<section class="slider-services">
+            <div class="container">
+                <H2 class="slider-services__title">
+                    Ипотека в г. Южно-Сахалинске от компании &#171;Квартирный Ответ&#187;
+                </H2>
+                <div class="slider-services__img">
+                    <div class="slider-services__img__item active" data-img="1"></div>
+                    <div class="slider-services__img__between"></div>
+                    <div class="slider-services__img__item" data-img="2"></div>
+                    <div class="slider-services__img__between slider-services__img__between_center"></div>
+                    <div class="slider-services__img__item" data-img="3"></div>
+                    <div class="slider-services__img__between"></div>
+                    <div class="slider-services__img__item" data-img="4"></div>
+                </div>
             </div>
-        </div>
-        <div class="container">
-            <div class="slider-services__slider">
-                <div class="slider-services__slider__item" data-slider="1">
-                    <p class="slider-services__slider__item__text">Консультационные услуги по кредитным банковским ставкам бесплатно и без очереди</p>
-                </div>
-                <div class="slider-services__slider__item" data-slider="2">
-                    <p class="slider-services__slider__item__text">Консультационные услуги по кредитным банковским ставкам бесплатно и без очереди</p>
-                </div>
-                <div class="slider-services__slider__item" data-slider="3">
-                    <p class="slider-services__slider__item__text">Консультационные услуги по кредитным банковским ставкам бесплатно и без очереди</p>
-                </div>
-                <div class="slider-services__slider__item" data-slider="4">
-                    <p class="slider-services__slider__item__text">Консультационные услуги по кредитным банковским ставкам бесплатно и без очереди</p>
-                </div>
-                <div class="slider-services__slider__item" data-slider="5">
-                    <p class="slider-services__slider__item__text">Консультационные услуги по кредитным банковским ставкам бесплатно и без очереди</p>
-                </div>
-            </div>
-            <div class="slider-services__btn-wrap">
-                <a href="#" class="slider-services__btn">рассчитать</a>
-            </div>
-        </div>
-    </section>
-    <?endif;?>
-    <section class="offers offers_padding">
-        <div class="container-index">
-            <div class="section-title"><span>Похожие объекты</span></div>
-        </div>
-        <div class="container-index no-pad">
-            <div class="offers-list">
-                <a href="#" class="offers-item">
-                    <h3 class="offers-item__h3">Однокомнатная квартира</h3>
-                    <div class="offers-item-img"><img src="/assets/img/of-img.png" alt="img"></div>
-                    <div class="offers-item-price"><b>7 900 000</b>руб</div>
-                    <div class="offers-item-info clearfix">
-                        <div class="item-info item-info_room">
-                            <div class="item-info__inner">
-                                <div class="item-info__inner__img item-info__inner__img_room"></div>
-                                <div class="item-info__inner__content">
-                                    <div class="item-info-name">Кол-во комнат</div>
-                                    <div class="item-info-value">5</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item-info item-info_floor">
-                            <div class="item-info__inner">
-                                <div class="item-info__inner__img item-info__inner__img_floor"></div>
-                                <div class="item-info__inner__content">
-                                    <div class="item-info-name">Этаж</div>
-                                    <div class="item-info-value">3/9</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item-info item-info_area">
-                            <div class="item-info__inner">
-                                <div class="item-info__inner__img item-info__inner__img_area"></div>
-                                <div class="item-info__inner__content">
-                                    <div class="item-info-name">Площадь</div>
-                                    <div class="item-info-value">90м<sup>2</sup></div>
-                                </div>
-                            </div>
-                        </div>
+            <div class="container">
+                <div class="slider-services__slider">
+                    <div class="slider-services__slider__item" data-slider="1">
+                        <p class="slider-services__slider__item__text">Консультационные услуги по кредитным банковским ставкам бесплатно и без очереди</p>
                     </div>
-                    <div class="offers-item-location">г. Москва, ул. Руставели, д. 6 к. 6.<br> Район «Бутырский»</div>
-                    <div class="offers-item-more">Подробнее<i class="more-icon"></i></div>
-                </a>
-                <a href="#" class="offers-item">
-                    <h3 class="offers-item__h3">Однокомнатная квартира</h3>
-                    <div class="offers-item-img"><img src="/assets/img/of-img.png" alt="img"></div>
-                    <div class="offers-item-price"><b>7 900 000</b>руб</div>
-                    <div class="offers-item-info clearfix">
-                        <div class="item-info item-info_room">
-                            <div class="item-info__inner">
-                                <div class="item-info__inner__img item-info__inner__img_room"></div>
-                                <div class="item-info__inner__content">
-                                    <div class="item-info-name">Кол-во комнат</div>
-                                    <div class="item-info-value">5</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item-info item-info_floor">
-                            <div class="item-info__inner">
-                                <div class="item-info__inner__img item-info__inner__img_floor"></div>
-                                <div class="item-info__inner__content">
-                                    <div class="item-info-name">Этаж</div>
-                                    <div class="item-info-value">3/9</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item-info item-info_area">
-                            <div class="item-info__inner">
-                                <div class="item-info__inner__img item-info__inner__img_area"></div>
-                                <div class="item-info__inner__content">
-                                    <div class="item-info-name">Площадь</div>
-                                    <div class="item-info-value">90м<sup>2</sup></div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="slider-services__slider__item" data-slider="2">
+                        <p class="slider-services__slider__item__text">Консультационные услуги по кредитным банковским ставкам бесплатно и без очереди</p>
                     </div>
-                    <div class="offers-item-location">г. Москва, ул. Руставели, д. 6 к. 6.<br> Район «Бутырский»</div>
-                    <div class="offers-item-more">Подробнее<i class="more-icon"></i></div>
-                </a>
-                <a href="#" class="offers-item">
-                    <h3 class="offers-item__h3">Однокомнатная квартира</h3>
-                    <div class="offers-item-img"><img src="/assets/img/of-img.png" alt="img"></div>
-                    <div class="offers-item-price"><b>7 900 000</b>руб</div>
-                    <div class="offers-item-info clearfix">
-                        <div class="item-info item-info_room">
-                            <div class="item-info__inner">
-                                <div class="item-info__inner__img item-info__inner__img_room"></div>
-                                <div class="item-info__inner__content">
-                                    <div class="item-info-name">Кол-во комнат</div>
-                                    <div class="item-info-value">5</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item-info item-info_floor">
-                            <div class="item-info__inner">
-                                <div class="item-info__inner__img item-info__inner__img_floor"></div>
-                                <div class="item-info__inner__content">
-                                    <div class="item-info-name">Этаж</div>
-                                    <div class="item-info-value">3/9</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item-info item-info_area">
-                            <div class="item-info__inner">
-                                <div class="item-info__inner__img item-info__inner__img_area"></div>
-                                <div class="item-info__inner__content">
-                                    <div class="item-info-name">Площадь</div>
-                                    <div class="item-info-value">90м<sup>2</sup></div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="slider-services__slider__item" data-slider="3">
+                        <p class="slider-services__slider__item__text">Консультационные услуги по кредитным банковским ставкам бесплатно и без очереди</p>
                     </div>
-                    <div class="offers-item-location">г. Москва, ул. Руставели, д. 6 к. 6.<br> Район «Бутырский»</div>
-                    <div class="offers-item-more">Подробнее<i class="more-icon"></i></div>
-                </a>
+                    <div class="slider-services__slider__item" data-slider="4">
+                        <p class="slider-services__slider__item__text">Консультационные услуги по кредитным банковским ставкам бесплатно и без очереди</p>
+                    </div>
+                    <div class="slider-services__slider__item" data-slider="5">
+                        <p class="slider-services__slider__item__text">Консультационные услуги по кредитным банковским ставкам бесплатно и без очереди</p>
+                    </div>
+                </div>
+                <div class="slider-services__btn-wrap">
+                    <a href="#" class="slider-services__btn">рассчитать</a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>-->
+    <? endif; ?>
+    <? global $arrResemblingFilter;
 
-    <?/*if($arParams["USE_RATING"]=="Y" && $ElementID):*/?><!--
-    <?/*$APPLICATION->IncludeComponent(
+    $arrResemblingFilter = array("ID" => $GLOBALS["ELEM_ID_CATALOG"]);
+
+    $APPLICATION->IncludeComponent(
+        "bitrix:news.list",
+        "resembling",
+        array(
+            "ACTIVE_DATE_FORMAT" => "d.m.Y",
+            "ADD_SECTIONS_CHAIN" => "N",
+            "AJAX_MODE" => "N",
+            "AJAX_OPTION_ADDITIONAL" => "",
+            "AJAX_OPTION_HISTORY" => "N",
+            "AJAX_OPTION_JUMP" => "N",
+            "AJAX_OPTION_STYLE" => "Y",
+            "CACHE_FILTER" => "N",
+            "CACHE_GROUPS" => "Y",
+            "CACHE_TIME" => "36000000",
+            "CACHE_TYPE" => "A",
+            "CHECK_DATES" => "Y",
+            "DETAIL_URL" => "",
+            "DISPLAY_BOTTOM_PAGER" => "N",
+            "DISPLAY_DATE" => "N",
+            "DISPLAY_NAME" => "N",
+            "DISPLAY_PICTURE" => "N",
+            "DISPLAY_PREVIEW_TEXT" => "N",
+            "DISPLAY_TOP_PAGER" => "N",
+            "FIELD_CODE" => array(
+                0 => "",
+                1 => "",
+            ),
+            "FILTER_NAME" => "arrResemblingFilter",
+            "HIDE_LINK_WHEN_NO_DETAIL" => "N",
+            "IBLOCK_ID" => "2",
+            "IBLOCK_TYPE" => "realty",
+            "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+            "INCLUDE_SUBSECTIONS" => "N",
+            "MESSAGE_404" => "",
+            "NEWS_COUNT" => "3",
+            "PAGER_BASE_LINK_ENABLE" => "N",
+            "PAGER_DESC_NUMBERING" => "N",
+            "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+            "PAGER_SHOW_ALL" => "N",
+            "PAGER_SHOW_ALWAYS" => "N",
+            "PAGER_TEMPLATE" => ".default",
+            "PAGER_TITLE" => "Новости",
+            "PARENT_SECTION" => "",
+            "PARENT_SECTION_CODE" => "",
+            "PREVIEW_TRUNCATE_LEN" => "",
+            "PROPERTY_CODE" => array(
+                0 => "REGION",
+                1 => "CITY",
+                2 => "STREET",
+                3 => "HOUSE_NUMBER",
+                4 => "BUILDING_NUMBER",
+                5 => "FLAT_NUMBER",
+                6 => "ROOMS_COUNT",
+                7 => "STAGE",
+                8 => "STAGES_COUNT",
+                9 => "SQUARE",
+                10 => "PRICE",
+                11 => "",
+            ),
+            "SET_BROWSER_TITLE" => "N",
+            "SET_LAST_MODIFIED" => "N",
+            "SET_META_DESCRIPTION" => "N",
+            "SET_META_KEYWORDS" => "N",
+            "SET_STATUS_404" => "N",
+            "SET_TITLE" => "N",
+            "SHOW_404" => "N",
+            "SORT_BY1" => "SORT",
+            "SORT_BY2" => "ID",
+            "SORT_ORDER1" => "ASC",
+            "SORT_ORDER2" => "ASC",
+            "STRICT_SECTION_CHECK" => "N",
+            "COMPONENT_TEMPLATE" => "resembling"
+        ),
+        false
+    ); ?>
+
+    <? /*if($arParams["USE_RATING"]=="Y" && $ElementID):*/ ?><!--
+    <? /*$APPLICATION->IncludeComponent(
         "bitrix:iblock.vote",
         "",
         Array(
@@ -240,9 +256,9 @@ $this->setFrameMode(true);
             "CACHE_TIME" => $arParams["CACHE_TIME"],
         ),
         $component
-    );*/?>
-    <?/*endif*/?>
-    <?/*if($arParams["USE_CATEGORIES"]=="Y" && $ElementID):
+    );*/ ?>
+    <? /*endif*/ ?>
+    <? /*if($arParams["USE_CATEGORIES"]=="Y" && $ElementID):
         global $arCategoryFilter;
         $obCache = new CPHPCache;
         $strCacheID = $componentPath.LANG.$arParams["IBLOCK_ID"].$ElementID.$arParams["CATEGORY_CODE"];
@@ -277,10 +293,10 @@ $this->setFrameMode(true);
                 "PROPERTY_".$arParams["CATEGORY_CODE"] => array_keys($arCategoryFilter),
                 "!"."ID" => $ElementID,
             );
-            */?>
-            <hr /><h3><?/*=GetMessage("CATEGORIES")*/?></h3>
-            <?/*foreach($arParams["CATEGORY_IBLOCK"] as $iblock_id):*/?>
-                <?/*$APPLICATION->IncludeComponent(
+            */ ?>
+            <hr /><h3><? /*=GetMessage("CATEGORIES")*/ ?></h3>
+            <? /*foreach($arParams["CATEGORY_IBLOCK"] as $iblock_id):*/ ?>
+                <? /*$APPLICATION->IncludeComponent(
                     "bitrix:news.list",
                     $arParams["CATEGORY_THEME_".$iblock_id],
                     Array(
@@ -297,13 +313,13 @@ $this->setFrameMode(true);
                         "DISPLAY_BOTTOM_PAGER" => "N",
                     ),
                     $component
-                );*/?>
-            <?/*endforeach*/?>
-        <?/*endif*/?>
-    <?/*endif*/?>
-    <?/*if($arParams["USE_REVIEW"]=="Y" && IsModuleInstalled("forum") && $ElementID):*/?>
+                );*/ ?>
+            <? /*endforeach*/ ?>
+        <? /*endif*/ ?>
+    <? /*endif*/ ?>
+    <? /*if($arParams["USE_REVIEW"]=="Y" && IsModuleInstalled("forum") && $ElementID):*/ ?>
     <hr />
-    <?/*$APPLICATION->IncludeComponent(
+    <? /*$APPLICATION->IncludeComponent(
         "bitrix:forum.topic.reviews",
         "",
         Array(
@@ -322,7 +338,7 @@ $this->setFrameMode(true);
             "URL_TEMPLATES_DETAIL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["detail"],
         ),
         $component
-    );*/?>
-    --><?/*endif*/?>
+    );*/ ?>
+    --><? /*endif*/ ?>
 
 </div>

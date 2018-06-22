@@ -70,7 +70,8 @@ $this->setFrameMode(true);
         $component
     ); ?>
     <? global $arrResemblingFilter;
-    $arrResemblingFilter = array("=PROPERTY_REALTY_TYPE_VALUE" => $arResult["VARIABLES"]["REALTY_TYPE"]);
+
+    $arrResemblingFilter = array("ID" => $GLOBALS["ELEM_ID_RENT"]);
 
     $APPLICATION->IncludeComponent(
         "bitrix:news.list",
@@ -99,7 +100,7 @@ $this->setFrameMode(true);
                 0 => "",
                 1 => "",
             ),
-            "FILTER_NAME" => "",
+            "FILTER_NAME" => "arrResemblingFilter",
             "HIDE_LINK_WHEN_NO_DETAIL" => "N",
             "IBLOCK_ID" => "2",
             "IBLOCK_TYPE" => "realty",
@@ -147,7 +148,7 @@ $this->setFrameMode(true);
         ),
         false
     ); ?>
-    <section class="offers offers_padding">
+    <!--<section class="offers offers_padding">
         <div class="container-index">
             <div class="section-title"><span>Похожие объекты</span></div>
         </div>
@@ -263,7 +264,7 @@ $this->setFrameMode(true);
                 </a>
             </div>
         </div>
-    </section>
+    </section>-->
 
     <? /*if($arParams["USE_RATING"]=="Y" && $ElementID):*/ ?><!--
     <? /*$APPLICATION->IncludeComponent(

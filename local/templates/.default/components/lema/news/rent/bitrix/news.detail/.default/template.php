@@ -214,6 +214,8 @@ $item = $data->item();
         </div>
     </div>
 
+<?$GLOBALS['ELEM_ID_RENT'] = $arResult["PROPERTIES"]["RESEMBLING"]["VALUE"];?>
+
 <?if(isset($arParams["USE_SHARE"]) && $arParams["USE_SHARE"] == "Y"):?>
     <div class="news-detail-share">
         <noindex>

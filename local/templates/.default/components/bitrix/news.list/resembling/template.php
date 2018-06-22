@@ -12,11 +12,16 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 
+global $arrResemblingFilter;
+if(!($arrResemblingFilter['ID']))
+    return;
+
 use Lema\Common\Helper as H,
     Lema\Template\TemplateHelper as TH,
     Bitrix\Main\Localization\Loc;
 
 $data = new TH($this);
+
 ?>
 
 <section class="offers offers_padding">
