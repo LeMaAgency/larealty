@@ -70,7 +70,6 @@ $this->setFrameMode(true);
         $component
     ); ?>
 
-    <? if (!preg_match('[/snimu|sdam/]', $APPLICATION->GetCurDir())): ?>
         <? $APPLICATION->IncludeComponent(
             "bitrix:news.detail",
             "hypothec",
@@ -161,7 +160,6 @@ $this->setFrameMode(true);
                 </div>
             </div>
         </section>-->
-    <? endif; ?>
     <? global $arrResemblingFilter;
 
     $arrResemblingFilter = array("ID" => $GLOBALS["ELEM_ID_CATALOG"]);
