@@ -4008,8 +4008,33 @@ $oFilter->End();
          * Toggle section by default
          */
         $('.adm-submenu-item-name-link-text:contains("Объекты")').closest('.adm-sub-submenu-block').addClass('adm-sub-submenu-open');
+
         <?if(!empty($find_section_section)):?>
-            $('a[href*="find_section_section=<?=(int) $find_section_section;?>"]').closest('.adm-sub-submenu-block').addClass('adm-submenu-item-active');
+            var $curSection = $('a[href*="find_section_section=<?=(int) $find_section_section;?>"]'),
+                $sectionBlock = $curSection.closest('.adm-sub-submenu-block'),
+                $class = 'adm-submenu-item-active',
+                $matches = null;
+
+            /**
+             * Open parent blocks
+             */
+            if(($matches = $sectionBlock.attr('class').match(/adm-submenu-level-(\d+)/i)))
+            {
+                for(var i = $matches[1] - 1; i > 2; --i)
+                    $curSection.closest('.adm-submenu-level-' + i).addClass('adm-sub-submenu-open');
+            }
+
+            /**
+             * Open parent block if it has childrens
+             */
+            if(!$sectionBlock.find(' > .adm-submenu-item-name').hasClass('adm-submenu-no-children'))
+                $class += ' adm-sub-submenu-open';
+
+            /**
+             * Set classes
+             */
+            $sectionBlock.addClass($class);
+
         <?endif;?>
         <?if(!$GLOBALS['USER']->IsAdmin()):?>
             $('#find_el_property_61').val(<?=(int) $GLOBALS['USER']->GetId();?>).attr('disabled', true)
