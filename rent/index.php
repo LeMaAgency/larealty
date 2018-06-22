@@ -17,6 +17,18 @@ $filterFields = array(
     array('key' => 'ID', 'type' => 'field', 'expanded' => false),
 );
 
+/**
+ * Load rent & realty types from iblock properties
+ */
+$rentAndRealtyTypes = array();
+$tmp = \LIblock::getPropEnumValues(LIblock::getPropId('objects', 'RENT_TYPE'));
+foreach($tmp as $code => $data)
+    $rentAndRealtyTypes[$code] = $data['VALUE'];
+$tmp = \LIblock::getPropEnumValues(LIblock::getPropId('objects', 'REALTY_TYPE'));
+foreach($tmp as $code => $data)
+    $rentAndRealtyTypes[$code] = $data['VALUE'];
+unset($tmp);
+
 if(!$inRootDir)
 {
     /**
@@ -28,18 +40,6 @@ if(!$inRootDir)
         array('key' => 'REGION', 'type' => 'property', 'expanded' => false),
         array('key' => 'ID', 'type' => 'field', 'expanded' => false),
     );
-
-    /**
-     * Load rent & realty types from iblock properties
-     */
-    $rentAndRealtyTypes = array();
-    $tmp = \LIblock::getPropEnumValues(LIblock::getPropId('objects', 'RENT_TYPE'));
-    foreach($tmp as $code => $data)
-        $rentAndRealtyTypes[$code] = $data['VALUE'];
-    $tmp = \LIblock::getPropEnumValues(LIblock::getPropId('objects', 'REALTY_TYPE'));
-    foreach($tmp as $code => $data)
-        $rentAndRealtyTypes[$code] = $data['VALUE'];
-    unset($tmp);
 
     /**
      * Add chain items
@@ -56,6 +56,15 @@ if(!$inRootDir)
     }
 }
 
+/**
+ * Filter by rent types
+ */
+$typeFilter = array();
+if(!empty($rentAndRealtyTypes['sdam']))
+    $typeFilter[] = $rentAndRealtyTypes['sdam'];
+if(!empty($rentAndRealtyTypes['snimu']))
+    $typeFilter[] = $rentAndRealtyTypes['snimu'];
+
 ?>
     <div class="container">
         <div class="row">
@@ -68,7 +77,7 @@ if(!$inRootDir)
 
 if(empty($GLOBALS['arrFilter']))
     $GLOBALS['arrFilter'] = array();
-$GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = array('Сдам', 'Сниму');
+$GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
 ?>
 <? $APPLICATION->IncludeComponent(
     "lema:news",
@@ -460,7 +469,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = array('Сдам', 'Сним�
                         <?php
                         $roomNewElementFilter = array(
                             '=PROPERTY_ROOMS_COUNT' => 1,
-                            'PROPERTY_RENT_TYPE.XML_ID' => array('sdam', 'snimu'),
+                            'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
                         );
                         ?>
                         <? $APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
@@ -539,7 +548,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = array('Сдам', 'Сним�
                         <?php
                         $roomNewElementFilter = array(
                             '=PROPERTY_ROOMS_COUNT' => 2,
-                            'PROPERTY_RENT_TYPE.XML_ID' => array('sdam', 'snimu'),
+                            'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
                         );
                         ?>
                         <? $APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
@@ -618,7 +627,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = array('Сдам', 'Сним�
                         <?php
                         $roomNewElementFilter = array(
                             '=PROPERTY_ROOMS_COUNT' => 3,
-                            'PROPERTY_RENT_TYPE.XML_ID' => array('sdam', 'snimu'),
+                            'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
                         );
                         ?>
                         <? $APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
@@ -697,7 +706,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = array('Сдам', 'Сним�
                         <?php
                         $roomNewElementFilter = array(
                             '>=PROPERTY_ROOMS_COUNT' => 4,
-                            'PROPERTY_RENT_TYPE.XML_ID' => array('sdam', 'snimu'),
+                            'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
                         );
                         ?>
                         <? $APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
