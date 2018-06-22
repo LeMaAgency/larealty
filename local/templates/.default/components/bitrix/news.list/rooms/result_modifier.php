@@ -61,5 +61,5 @@ foreach($data->items() as $k => $item)
         }
         $arResult['ITEMS'][$k]['ADDRESS'] .= $item->propVal('BUILDING_NUMBER');
     }
-    $arResult['ITEMS'][$k]['SHOW_STAGES_COUNT'] = !in_array($item->propXmlId('REALTY_TYPE'), array('doma', 'dachi'));
+    $arResult['ITEMS'][$k]['IS_HOUSE_OR_LOT'] = in_array($item->propXmlId('REALTY_TYPE'), array('doma', 'dachi'));
 }

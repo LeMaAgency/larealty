@@ -101,4 +101,4 @@ if($item->propFilled('RIELTOR'))
     }
 }
 
-$arResult['SHOW_STAGES_COUNT'] = !in_array($item->propXmlId('REALTY_TYPE'), array('doma', 'dachi'));
+$arResult['IS_HOUSE_OR_LOT'] = in_array($item->propXmlId('REALTY_TYPE'), array('doma', 'dachi'));

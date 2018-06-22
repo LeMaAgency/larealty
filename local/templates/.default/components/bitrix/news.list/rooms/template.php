@@ -58,18 +58,18 @@ $data = new TH($this);
                                 <div class="item-info__inner">
                                     <div class="item-info__inner__img item-info__inner__img_floor"></div>
                                     <div class="item-info__inner__content">
-                                        <?if($item->get('SHOW_STAGES_COUNT')):?>
-                                            <?if($item->propFilled('STAGE') && $item->propFilled('STAGES_COUNT')):?>
-                                                <div class="item-info-name"><?=$item->propName('STAGE');?></div>
-                                                <div class="item-info-value">
-                                                    <?=$item->propVal('STAGE');?>/<?=$item->propVal('STAGES_COUNT');?>
-                                                </div>
-                                            <?endif;?>
-                                        <?else:?>
+                                        <?if($item->get('IS_HOUSE_OR_LOT')):?>
                                             <?if($item->propFilled('STAGE')):?>
                                                 <div class="item-info-name"><?=$item->propName('STAGE');?></div>
                                                 <div class="item-info-value">
                                                     <?=$item->propVal('STAGE');?>
+                                                </div>
+                                            <?endif;?>
+                                        <?else:?>
+                                            <?if($item->propFilled('STAGE') && $item->propFilled('STAGES_COUNT')):?>
+                                                <div class="item-info-name"><?=$item->propName('STAGE');?></div>
+                                                <div class="item-info-value">
+                                                    <?=$item->propVal('STAGE');?>/<?=$item->propVal('STAGES_COUNT');?>
                                                 </div>
                                             <?endif;?>
                                         <?endif;?>
@@ -90,6 +90,20 @@ $data = new TH($this);
                                     </div>
                                 </div>
                             </div>
+                            <?if($item->get('IS_HOUSE_OR_LOT') && $item->propFilled('SQUARE_LAND')):?>
+                                <div class="item-info item-info_area">
+                                    <div class="item-info__inner">
+                                        <div class="item-info__inner__img item-info__inner__img_area"></div>
+                                        <div class="item-info__inner__content">
+                                            <div class="item-info-name"><?=$item->propName('SQUARE_LAND');?></div>
+                                            <div class="item-info-value">
+                                                <?=$item->propVal('SQUARE_LAND');?>
+                                                <?=Loc::getMessage('LEMA_SQUARE_M_SUP');?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?endif;?>
                         </div>
                         <?if($item->get('ADDRESS')):?>
                             <p class="card-flat__content__address card-flat__content__address_min icon-location">
