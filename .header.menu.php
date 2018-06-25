@@ -16,7 +16,7 @@ $aMenuLinks = array(
 	),
 	array(
 		'Загородная недвижимость',
-		'/catalog/doma_dachi/',
+		'/catalog/dachi/',
 		array(), 
 		array(), 
 		'',
