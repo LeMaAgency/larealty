@@ -78,7 +78,10 @@ class AutoFit
         );
 
         if($endDateTime->getTimestamp() < $startDateTime->getTimestamp())
-            return $agentName;
+        {
+            static::removeAgent($requestId);
+            return false;
+        }
 
         //search existing agent
         $res = \CAgent::GetList(array('ID' => 'DESC'), array('NAME' => '\\' . get_class() . '::start(' . $requestId . ', %'));
