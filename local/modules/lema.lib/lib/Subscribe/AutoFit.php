@@ -62,12 +62,22 @@ class AutoFit
          * Get start timestamp
          */
         $startDateTime = \DateTime::createFromFormat('d.m.Y H:i', $dateFrom . ' ' . $timeStart);
-        if($startDateTime->getTimestamp() < (new \DateTime('now'))->getTimestamp())
-            $startDateTime->modify('+1 day');
         /**
          * Get end timestamp
          */
         $endDateTime = \DateTime::createFromFormat('d.m.Y H:i', $dateTo . ' ' . $timeStart);
+        $now = (new \DateTime('now'))->getTimestamp();
+        /**
+         * Remove old agents and exit
+         */
+        if($startDateTime->getTimestamp() > $now || $endDateTime->getTimestamp() > $now)
+        {
+            static::removeAgent($requestId);
+            return false;
+        }
+
+        if($startDateTime->getTimestamp() < $now)
+            $startDateTime->modify('+1 day');
 
         $agentName = sprintf(
             '\\%s::start(%d, "%s", "%s");',
