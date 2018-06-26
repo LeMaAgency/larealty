@@ -68,4 +68,9 @@ $(document).ready(function () {
         $("#feedback-form").find("input[type='submit']").val("Отправить");
     });
 
+    $('body').on('click', '.js-change-text-slider-sync .slider-services__img__item', function(e) {
+        e.preventDefault();
+        $( '.slider-services__slider').slick('slickGoTo', parseInt($(this).data('img')) -1 )
+    })
+
 });

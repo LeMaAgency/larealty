@@ -19,7 +19,7 @@ Loc::loadMessages(__FILE__);
 $data = new \Lema\Template\TemplateHelper($this);
 $item = $data->item();
 ?>
-<section class="slider-services">
+<section class="slider-services js-change-text-slider-sync">
     <div class="container">
         <H2 class="slider-services__title">
             <?= $item->getName(); ?>
