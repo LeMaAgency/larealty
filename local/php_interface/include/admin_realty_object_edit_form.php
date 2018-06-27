@@ -1763,7 +1763,7 @@ if (
         /**
          * Hide items for empty choose
          */
-        var initShowedProps = [1, 3, 10, 13, 28, 29, 30, 54, 61, 63, 68, 69, 70, 71, 72, 73, 74, 76, 111];
+        var initShowedProps = [3, 10, 13, 28, 29, 30, 54, 61, 63, 68, 69, 70, 71, 72, 73, 74, 76, 111];
         $('[id^="tr_PROPERTY_"], #tr_NAME, #tr_CODE').hide();
         if($.trim($('#tr_PROPERTY_1 select').val()) == '')
         {
@@ -1774,12 +1774,28 @@ if (
             }
         }
 
-        $('#tr_PROPERTY_1 select').on('change', function(e) {
+        $('#tr_SECTIONS select[name="IBLOCK_SECTION[]"]').on('change', function(e) {
             e.preventDefault();
 
             var sortProps = {};
 
-            switch($(this).val())
+            var realtyTypes = {
+                'Дачи': 152,
+                'Дома': 3,
+                'Здания': 51,
+                'Земельный участок': 4,
+                'Квартиры': 1,
+                'Комнаты': 2,
+                'Офисы': 49,
+                'Торговые площади': 50
+            };
+            var realtyType = $(this).find('option:selected').first().text().replace(' .  . ', '');
+            if(!realtyType || !realtyTypes[realtyType])
+            {
+                alert('Укажите раздел для элемента!');
+            }
+
+            switch(String(realtyTypes[realtyType]))
             {
                 //Квартиры
                 case '1':
@@ -1854,7 +1870,7 @@ if (
                 break;
                 default:
                     $('[id^="tr_PROPERTY_"], #tr_NAME, #tr_CODE').hide();
-                    $('#tr_PROPERTY_1, #tr_PROPERTY_3, #tr_PROPERTY_28, #tr_PROPERTY_61').show();
+                    $('#tr_PROPERTY_3, #tr_PROPERTY_28, #tr_PROPERTY_61').show();
                     return ;
                 break;
             }

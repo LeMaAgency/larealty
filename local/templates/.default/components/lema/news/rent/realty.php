@@ -12,22 +12,6 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 
-/**
- * Search specified realty
- */
-$realtyFilterId = LIblock::getPropEnumId('objects', 'REALTY_TYPE', $arResult['VARIABLES']['REALTY_TYPE']);
-
-if(empty($realtyFilterId))
-{
-    \Bitrix\Iblock\Component\Tools::process404(
-        ""
-        ,($arParams["SET_STATUS_404"] === "Y")
-        ,($arParams["SET_STATUS_404"] === "Y")
-        ,($arParams["SHOW_404"] === "Y")
-        ,$arParams["FILE_404"]
-    );
-}
-
 ?>
 
 <?if($arParams["USE_RSS"]=="Y"):?>
@@ -71,12 +55,6 @@ if(empty($realtyFilterId))
 ?>
 <br />
 <?endif?>
-<?php
-/**
- * Set filter by realty type
- */
-$GLOBALS[$arParams['FILTER_NAME']]['=PROPERTY_REALTY_TYPE'] = $realtyFilterId;
-?>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"catalog",

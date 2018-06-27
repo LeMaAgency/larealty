@@ -6,6 +6,7 @@ use \Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Page\Asset;
 use Bitrix\Main\Type\DateTime;
 use Lema\Common\Dumper;
+use Lema\IBlock\Section;
 use Lema\Subscribe\AutoFit;
 
 Loc::loadMessages(__FILE__);
@@ -84,22 +85,20 @@ class IblockElement
         {
             //get square property value
             $square = static::getPropValue($fields, 'SQUARE');
-            //get realty property value
-            $realty = static::getPropValue($fields, 'REALTY_TYPE');
+            $sectionId = empty($fields['IBLOCK_SECTION']) ? false : (int) current($fields['IBLOCK_SECTION']);
+            //get realty type
+            $section = Section::getAllD7($fields['IBLOCK_ID'], array(
+                'filter' => array('=ID' => $sectionId),
+                'select' => array('ID', 'CODE', 'NAME'),
+            ));
 
-            //set name from choosen property value
-            foreach(\LIblock::getPropEnumValues(\LIblock::getPropId('objects', 'REALTY_TYPE')) as $propData)
-            {
-                if($propData['ID'] == $realty)
-                {
-                    $fields['NAME'] = $propData['VALUE'];
-                    break;
-                }
-            }
+            if(!empty($section[$sectionId]['NAME']))
+                $fields['NAME'] = $section[$sectionId]['NAME'];
 
             //generate element code for URL
             $id = empty($fields['ID']) ? 0 : $fields['ID'];
-            $fields['CODE'] = \CUtil::translit($fields['NAME'] . '_' . $square . '_m_2_' . $id, 'ru');
+
+            $fields['CODE'] = \CUtil::translit($section[$sectionId]['CODE'] . '_' . $square . '_m_2_' . $id, 'ru');
         }
     }
 
@@ -158,12 +157,12 @@ class IblockElement
             else
             {
                 /**
-                 * New object, set special section to it and clear access rights
+                 * New object, DO NOT set special section to it and clear access rights
                  */
                 if(empty($fields['ID']))
                 {
-                    if($fields['IBLOCK_ID'] === \LIblock::getId('objects'))
-                        $fields['IBLOCK_SECTION'] = array(23);
+                    /*if($fields['IBLOCK_ID'] === \LIblock::getId('objects'))
+                        $fields['IBLOCK_SECTION'] = array(23);*/
                     $fields['ACTIVE'] = 'Y';
                     $fields['RIGHTS'] = array();
                 }
