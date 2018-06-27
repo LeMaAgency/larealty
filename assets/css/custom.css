@@ -192,25 +192,24 @@ a.add-apartment__button:hover {
 .item img.img {width: 100%;}
 .job .item .img {height:auto;}
 }
-.form-admin .filter-price-input{
+.form-admin .filter-price-input{ max-width:310px; width:100%;
     color: #002b4e;
-    border: 1px solid #002b4e;}
-.form-admin input[type="text"]::-webkit-input-placeholder {color:#002b4e;}/* webkit */
-.form-admin input[type="text"]::-moz-placeholder {color:#002b4e;}/* Firefox 19+ */
-.form-admin input[type="text"]:-moz-placeholder {color:#002b4e;}/* Firefox 18- */
-.form-admin input[type="text"]:-ms-input-placeholder {color:#002b4e;}/* IE */	
+    border: 1px solid #002b4e; height:30px;}
+.form-admin input[type="text"]::-webkit-input-placeholder {color:#002b4e;font-size: 14px; font-family: 'Open Sans', sans-serif;}/* webkit */
+.form-admin input[type="text"]::-moz-placeholder {color:#002b4e;font-size: 14px; font-family: 'Open Sans', sans-serif;}/* Firefox 19+ */
+.form-admin input[type="text"]:-moz-placeholder {color:#002b4e;font-size: 14px; font-family: 'Open Sans', sans-serif;}/* Firefox 18- */
+.form-admin input[type="text"]:-ms-input-placeholder {color:#002b4e;font-size: 14px; font-family: 'Open Sans', sans-serif;}/* IE */	
 .form-admin .filter-label:before {border: 1px solid #002b4e;}
 .form-admin .filter-label{color: #002b4e;}
-.form-admin .gender {height:40px;margin-bottom:20px;}
 .form-admin .filter-border-color{
     border: 1px solid #002b4e;}
-.form-admin .filter-select-drop, .form-objects  .filter-select-drop {background: rgba(0, 43, 78, 0.85);border: 1px solid #002b4e;}
-.form-admin .filter-select-drop li, .form-objects  .filter-select-drop li {color:#fff;}
+.form-admin .filter-select-drop {background: rgba(0, 43, 78, 0.85);border: 1px solid #002b4e;}
+.form-admin .filter-select-drop li {color:#fff; height:30px;line-height:30px;}
 .form-admin .filter-select-drop li:hover,.form-objects  .filter-select-drop li:hover {color:#002b4e;}
-.form-admin .filter-field-title {display:inline-flex; width: 50%;}
-.form-admin .filter-price, .form-admin .filter-select {display:  inline-flex;}
-.form-admin .filter-select, .form-objects .filter-select {min-width:200px; margin-bottom:20px;}
-.form-admin .filter-select a, .form-objects .filter-select a {min-width:200px; }
+.form-admin .filter-field-title {display:inline-flex; width:150px; height:30px;}
+.form-admin .filter-price, .form-admin .filter-select {display:  inline-flex; width:310px; height:30px;}
+.form-admin .filter-select, .form-objects .filter-select {width:310px; margin-bottom:20px;}
+.form-admin .filter-select a, .form-objects .filter-select a {width:100%; height:30px;}
 
 @media (max-width: 1000px){
 .form-admin .filter-price-input, .form-objects .filter-price-input {
@@ -218,7 +217,7 @@ a.add-apartment__button:hover {
 	}
 .filter-submit-btn-admin{display: block;
     margin: 0;
-    height: 40px;
+    height: 35px;
     width: 165px;
     border: 0;
     color: #ffffff;
@@ -227,43 +226,32 @@ a.add-apartment__button:hover {
     background-color: #07ba00;
     -webkit-transition: 0.3s background-color linear;
     transition: 0.3s background-color linear;}
-.form-admin .form-contact {display:inline-flex; width: 50%;}
-.form-admin .form-contact-title {display:inline-flex; width: auto;}
-.form-admin .form-contact-email {min-width: 83px;}
 
 @media (max-width: 767px) {
 .form-admin .contact-info {display:flex; flex-direction:column; }
 .form-admin .filter-submit-btn-admin {width:100%;}
 }
 
-.form-objects   .objects-column {-webkit-box-flex: 1;
-    -ms-flex: 1 1 100%;
-    flex: 1 1 100%;
-    max-width: 100%;
-    padding: 0 ;
-    margin-bottom: 47px;display:inline-flex;justify-content:center; align-items:baseline;}
-.form-objects .filter-price-input{
-    color: #002b4e;
-    border: 1px solid #002b4e; margin:0;}
-.form-objects .filter-border-color {
-    border-color: #002b4e;}	
-.form-objects input[type="text"]::-webkit-input-placeholder {color:#002b4e;}/* webkit */
-.form-objects input[type="text"]::-moz-placeholder {color:#002b4e;}/* Firefox 19+ */
-.form-objects input[type="text"]:-moz-placeholder {color:#002b4e;}/* Firefox 18- */
-.form-objects input[type="text"]:-ms-input-placeholder {color:#002b4e;}/* IE */
-.form-objects .filter-field-title {text-align:right; margin-right:20px; }
-.form-objects .filter-price,  .form-objects .filter-select {margin-left:20px;}
 
-@media (max-width: 767px) {
-.form-objects .objects-column {display:flex; flex-direction:column; justify-content:flex-start; }
-.form-objects .filter-field-title {text-align:center; margin:0 auto;}
-.form-objects .filter-price, .form-objects .filter-select{width: 100%; margin:0 auto;}
-.form-objects .filter-num-rooms {margin:0 auto;}
-}
-.form-objects .filter-label:before {border: 1px solid #002b4e;}
-.form-objects .filter-label{color: #002b4e;}
-.form-objects .object-number1{width:315px;}
-.form-objects .filter-select, .form-objects .filter-field-title, .form-objects .filter-price, .form-objects .filter-num-rooms{width:50%;}
-.form-objects .filter-num-rooms {padding-left:20px;}
 .btn-reset {background-color: #fff; color:#002b4e;border: 1px solid #002b4e; display: inline-block; margin:0;}
 .btn-save {display: inline-block; margin:0;}
+.form-admin .filter-submit-btn {height:35px;}
+.form-admin .btn-accept{height:30px;}
+.form-admin .form-title{margin-bottom: 30px;font-size: 20px;}
+.form-admin .filter-num-rooms{display: inline-flex; height:30px; margin-bottom: 20px;}
+.form-admin .field-price {line-height:1; align-self:flex-start;}
+.form-admin .field-price .filter-price {margin-left:4px; }
+.form-admin .wrap-field-price{display:flex;}
+.form-admin .btn-object {width:205px;}
+.form-admin .filter-select a {height:30px; line-height:30px; color:#002b4e;}
+.form-admin .filter-select-link:after { margin-top: 14px;}
+@media (max-width: 992px) {
+.form-admin .filter-price, .form-admin .filter-select {width:600px;}
+.form-admin .filter-price-input{ max-width:600px;}
+.form-admin .col-md-6 {display:block;text-align:center;}
+.form-admin .filter-field-title {display:block;text-align:center;width:100%;}
+.form-admin .wrap-field-price {display: block;}
+}
+@media (max-width: 1199px) {
+.form-admin .wrap-field-price {display: block;}
+}
