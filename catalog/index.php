@@ -273,10 +273,10 @@ if(!empty($uriParts[1]) && in_array($uriParts[1], array('kvartiry-komnaty', 'dom
 			"kvartiry-komnaty" => "kvartiry-komnaty/",
 			"doma-dachi-zemelnyy_uchastok" => "doma-dachi-zemelnyy_uchastok/",
 			"section" => "",
-			"detail" => "#REALTY_TYPE#/#RENT_TYPE#/#ELEMENT_CODE#/",
+			"detail" => "#SECTION_CODE#/#RENT_TYPE#/#ELEMENT_CODE#/",
 			"search" => "search/",
-            'realty' => '#REALTY_TYPE#/',
-            'realty_rent' => '#REALTY_TYPE#/#RENT_TYPE#/',
+            'realty' => '#SECTION_CODE#/',
+            'realty_rent' => '#SECTION_CODE#/#RENT_TYPE#/',
 		),
 	),
 	false
