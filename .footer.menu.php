@@ -9,14 +9,14 @@ $aMenuLinks = array(
 	),
     array(
         'Каталог квартир',
-        '/catalog/kvartiry/',
+        '/catalog/kvartiry-komnaty/',
         array(),
         array(),
         '',
     ),
     array(
         'Загородная недвижимость',
-        '/catalog/dachi/',
+        '/catalog/doma-dachi-zemelnyy_uchastok/',
         array(),
         array(),
         '',

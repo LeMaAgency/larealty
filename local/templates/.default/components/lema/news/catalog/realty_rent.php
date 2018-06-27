@@ -15,10 +15,9 @@ $this->setFrameMode(true);
 /**
  * Search specified realty
  */
-$realtyFilterId = LIblock::getPropEnumId('objects', 'REALTY_TYPE', $arResult['VARIABLES']['REALTY_TYPE']);
 $rentFilterId = LIblock::getPropEnumId('objects', 'RENT_TYPE', $arResult['VARIABLES']['RENT_TYPE']);
 
-if(empty($realtyFilterId) || empty($rentFilterId))
+if(empty($rentFilterId))
 {
     \Bitrix\Iblock\Component\Tools::process404(
         ""
@@ -74,9 +73,8 @@ if(empty($realtyFilterId) || empty($rentFilterId))
 <?endif?>
 <?php
 /**
- * Set filter by rent & realty type
+ * Set filter by rent type
  */
-$GLOBALS[$arParams['FILTER_NAME']]['=PROPERTY_REALTY_TYPE'] = $realtyFilterId;
 $GLOBALS[$arParams['FILTER_NAME']]['=PROPERTY_RENT_TYPE'] = $rentFilterId;
 ?>
 <?$APPLICATION->IncludeComponent(

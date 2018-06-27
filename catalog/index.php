@@ -79,6 +79,11 @@ if(!empty($rentAndRealtyTypes['prodam']))
 if(empty($GLOBALS['arrFilter']))
     $GLOBALS['arrFilter'] = array();
 $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
+if(!empty($uriParts[1]) && in_array($uriParts[1], array('kvartiry-komnaty', 'doma-dachi-zemelnyy_uchastok')))
+{
+    $GLOBALS['arrFilter']['SECTION_CODE'] = explode('-', trim($uriParts[1]));
+    unset($uriParts[1]);
+}
 ?>
 <?$APPLICATION->IncludeComponent(
 	"lema:news",
@@ -264,7 +269,9 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
 		"DISPLAY_AS_RATING" => "rating",
 		"FILE_404" => "",
 		"SEF_URL_TEMPLATES" => array(
-			"news" => "",
+            "news" => "",
+			"kvartiry-komnaty" => "kvartiry-komnaty/",
+			"doma-dachi-zemelnyy_uchastok" => "doma-dachi-zemelnyy_uchastok/",
 			"section" => "",
 			"detail" => "#REALTY_TYPE#/#RENT_TYPE#/#ELEMENT_CODE#/",
 			"search" => "search/",
