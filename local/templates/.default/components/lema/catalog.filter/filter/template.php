@@ -13,13 +13,28 @@
 $this->setFrameMode(true);
 $this->addExternalCss("/bitrix/css/main/bootstrap.css");
 $this->addExternalCss("/bitrix/css/main/font-awesome.css");
+
 ?>
 <section class="filter filter_bg">
     <div class="overlay"></div>
     <div class="container">
         <form name="<?echo $arResult["FILTER_NAME"]."_form"?>" class="filter-form" action="<?echo $arResult["FORM_ACTION"]?>" method="get">
 
+            <?if(!empty($arParams['SHOW_BUTTON_TYPES'])):?>
+                <?php
+                $first = true;
+                ?>
+                <div class="filter-form__type">
+                    <div class="filter-field-title">Тип недвижимости</div>
+                    <?foreach($arParams['SHOW_BUTTON_TYPES'] as $code => $label):?>
+                        <input<?if($first){$first=false;?> checked<?}?> type="radio" id="type-<?=$code;?>" data-code="<?=$code;?>" class="filter-form__type__item" name="arrFilter_pf[REALTY_TYPE]" value="<?=$code;?>">
+                        <label for="type-<?=$code;?>" class="filter-form__type__item-label"><?=$label;?></label>
+                    <?endforeach;?>
+                </div>
+            <?endif;?>
+
             <div class="filter-form-row">
+
                 <?foreach($arResult["ORDERED_ITEMS"] as $arItem):?>
                     <?if(array_key_exists("HIDDEN", $arItem)):?>
                         <?=$arItem["INPUT"]?>

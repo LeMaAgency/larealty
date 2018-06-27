@@ -48,6 +48,10 @@ $this->setFrameMode(true);
 		"PAGER_PARAMS_NAME" => $arParams["PAGER_PARAMS_NAME"],
 		"SEF_MODE" => $arParams["SEF_MODE"],
         "FILTER_ORDER" => $arParams["FILTER_ORDER"],
+        'SHOW_BUTTON_TYPES' => array(
+            'kvartiry' => 'Квартиры',
+            'komnaty' => 'Комнаты',
+        ),
 	),
 	$component
 );

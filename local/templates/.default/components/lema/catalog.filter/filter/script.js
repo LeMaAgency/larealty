@@ -9,4 +9,28 @@ $(function() {
         $('.js-extend-filter-block').toggle();
         $(this).find('b').text($('.js-extend-filter-block').is(':visible') ? '-' : '+');
     })
+
+
+
+    $('form.filter-form').on('submit', function() {
+
+        if($('input[name="arrFilter_pf[REALTY_TYPE]"]').length)
+        {
+            /**
+             * Change form action url
+             */
+            $(this).attr(
+                'action',
+                '/catalog/'
+                + $('input[name="arrFilter_pf[REALTY_TYPE]"]:checked').data('code')
+                + '/'
+            );
+
+            /**
+             * Remove realty & rent types fields
+             */
+            $('input[name="arrFilter_pf[REALTY_TYPE]"], input[name="arrFilter_pf[RENT_TYPE]"]').remove();
+        }
+
+    })
 });
