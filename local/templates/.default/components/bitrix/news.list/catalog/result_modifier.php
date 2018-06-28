@@ -41,6 +41,11 @@ $props = array(
 $splitSymbol = ', ';
 $sefFolder = '/' . preg_quote(current(explode('/', trim($APPLICATION->GetCurDir(), '/')))) . '/';
 
+
+$sections = \Lema\IBlock\Section::getAllD7($arParams['IBLOCK_ID'], array(
+    'select' => array('ID', 'CODE'),
+));
+
 /**
  * Set data for items
  */
@@ -65,6 +70,13 @@ foreach($data->items() as $k => $item)
             $arResult['ITEMS'][$k]['ADDRESS'] .= $splitSymbol;
         $arResult['ITEMS'][$k]['ADDRESS'] .= $item->propVal('BUILDING_NUMBER');
     }
+
+    /**
+     * Set realty type
+     */
+    $arResult['ITEMS'][$k]['IS_HOUSE_OR_LOT'] = false;
+    if(isset($sections[$item->get('IBLOCK_SECTION_ID')]['CODE']))
+        $arResult['ITEMS'][$k]['IS_HOUSE_OR_LOT'] = in_array($sections[$item->get('IBLOCK_SECTION_ID')]['CODE'], array('doma', 'dachi'));
 
     /**
      * Set detail page url

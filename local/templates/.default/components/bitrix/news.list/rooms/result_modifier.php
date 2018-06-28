@@ -32,6 +32,11 @@ $props = array(
     ),
 );
 
+
+$sections = \Lema\IBlock\Section::getAllD7($arParams['IBLOCK_ID'], array(
+    'select' => array('ID', 'CODE'),
+));
+
 $splitSymbol = ', ';
 
 /**
@@ -61,5 +66,11 @@ foreach($data->items() as $k => $item)
         }
         $arResult['ITEMS'][$k]['ADDRESS'] .= $item->propVal('BUILDING_NUMBER');
     }
-    $arResult['ITEMS'][$k]['IS_HOUSE_OR_LOT'] = in_array($item->propXmlId('REALTY_TYPE'), array('doma', 'dachi'));
+
+    /**
+     * Set realty type
+     */
+    $arResult['ITEMS'][$k]['IS_HOUSE_OR_LOT'] = false;
+    if(isset($sections[$item->get('IBLOCK_SECTION_ID')]['CODE']))
+        $arResult['ITEMS'][$k]['IS_HOUSE_OR_LOT'] = in_array($sections[$item->get('IBLOCK_SECTION_ID')]['CODE'], array('doma', 'dachi'));
 }

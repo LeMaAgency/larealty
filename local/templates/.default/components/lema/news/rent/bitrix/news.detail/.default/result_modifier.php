@@ -101,4 +101,11 @@ if($item->propFilled('RIELTOR'))
     }
 }
 
-$arResult['IS_HOUSE_OR_LOT'] = in_array($item->propXmlId('REALTY_TYPE'), array('doma', 'dachi'));
+$sections = \Lema\IBlock\Section::getAllD7($arParams['IBLOCK_ID'], array(
+    'filter' => array('=ID' => $arResult['IBLOCK_SECTION_ID']),
+    'select' => array('ID', 'CODE'),
+));
+
+$arResult['IS_HOUSE_OR_LOT'] = false;
+if(isset($sections[$arResult['IBLOCK_SECTION_ID']]['CODE']))
+    $arResult['IS_HOUSE_OR_LOT'] = in_array($sections[$arResult['IBLOCK_SECTION_ID']]['CODE'], array('doma', 'dachi'));

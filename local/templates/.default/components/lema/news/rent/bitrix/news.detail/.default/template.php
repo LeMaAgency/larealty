@@ -114,6 +114,20 @@ $item = $data->item();
                                     </div>
                                 </div>
                             <?endif;?>
+                            <?if($item->get('IS_HOUSE_OR_LOT') && $item->propFilled('SQUARE_LAND')):?>
+                                <div class="item-info item-info_area">
+                                    <div class="item-info__inner">
+                                        <div class="item-info__inner__img item-info__inner__img_area"></div>
+                                        <div class="item-info__inner__content">
+                                            <div class="item-info-name"><?=$item->propName('SQUARE_LAND');?></div>
+                                            <div class="item-info-value">
+                                                <?=$item->propVal('SQUARE_LAND');?>
+                                                <?=Loc::getMessage('LEMA_SQUARE_M_SUP');?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?endif;?>
                         </div>
                         <div class="card-flat__content__details">
                             <div class="card-flat__content__details__row">

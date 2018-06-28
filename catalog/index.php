@@ -152,7 +152,6 @@ if(!empty($uriParts[1]) && in_array($uriParts[1], array('kvartiry-komnaty', 'dom
             'BATHROOM_COUNT',
             'SQUARE_RESIDENT',
             'SQUARE_KITCHEN',
-            'SQUARE_LAND',
             'LAND_STATUS',
             'BALCONIES_COUNT',
             'LOGGIAS_COUNT',
