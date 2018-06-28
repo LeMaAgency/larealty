@@ -33,8 +33,8 @@ $data->setShowMoreScript();
     </div>
     <div class="container-index no-pad">
         <div class="offers-filter">
-            <div class="offers-filter-btn hvr-shutter-out-vertical" data-realty-type="1">Квартиры</div>
-            <div class="offers-filter-btn hvr-shutter-out-vertical" data-realty-type="3">Загородная недвижимость</div>
+            <div class="offers-filter-btn hvr-shutter-out-vertical" data-realty-type="26">Квартиры</div>
+            <div class="offers-filter-btn hvr-shutter-out-vertical" data-realty-type="28">Загородная недвижимость</div>
             <div class="offers-filter-btn hvr-shutter-out-vertical" data-rent-type="29">Аренда</div>
         </div>
 
@@ -46,7 +46,7 @@ $data->setShowMoreScript();
 
                 <a href="<?=$item->detailUrl();?>"
                    data-rent-type="<?=(int) $item->prop('RENT_TYPE', 'VALUE_ENUM_ID');?>"
-                   data-realty-type="<?=(int) $item->prop('REALTY_TYPE', 'VALUE_ENUM_ID');?>"
+                   data-realty-type="<?=(int) $item->get('IBLOCK_SECTION_ID');?>"
                    class="offers-item" <?=$item->editId();?>>
                     <h3 class="offers-item__h3"><?=$item->getName();?></h3>
                     <div class="offers-item-img<?if($item->propVal('IS_EXCLUSIVE') == 'Y'){?> offers-item-img_exclusive<?}?>">
