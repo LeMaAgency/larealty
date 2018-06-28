@@ -36,9 +36,12 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
             <div class="filter-form-row">
 
                 <?foreach($arResult["ORDERED_ITEMS"] as $arItem):?>
+                    <?
+                    $extendFilterClass = empty($arItem['EXPANDED']) ? null : ' js-extend-filter-block';
+                    ?>
                     <?if(array_key_exists("HIDDEN", $arItem)):?>
                         <?=$arItem["INPUT"]?>
-                    <?elseif ($arItem["TYPE"] == "RANGE"):
+                    <?elseif (isset($arItem['CODE']) && $arItem["TYPE"] == "RANGE"):
                         $extendFilterClass = empty($arItem['EXPANDED']) ? null : ' js-extend-filter-block';
 
                         ?>
@@ -55,7 +58,7 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
                                     <input name="<?=$arItem["INPUT_NAMES"][0]?>[4]" type="checkbox" id="n4" value="4x" class="filter-input">
                                     <label for="n4" class="filter-label">4+</label>
                                 </div>
-                            <?elseif($arItem['CODE'] == 'PRICE'):?>
+                            <?elseif(isset($arItem['CODE']) && in_array($arItem['CODE'], array('PRICE'/*, 'SQUARE', 'SQUARE_LAND'*/))):?>
                                 <div class="filter-field-title"><?=$arItem["NAME"]?></div>
                                 <div class="filter-price">
                                     <input
@@ -104,7 +107,7 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
                         </div>
 
                     <?elseif ($arItem["TYPE"] == "DATE_RANGE"):?>
-                        <div class="col-sm-6 col-md-4 bx-filter-parameters-box active">
+                        <div class="col-sm-6 col-md-4 bx-filter-parameters-box active<?=$extendFilterClass;?>">
                             <div class="bx-filter-parameters-box-title"><span><?=$arItem["NAME"]?></span></div>
                             <div class="bx-filter-block">
                                 <div class="row bx-filter-parameters-box-container">
@@ -147,7 +150,7 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
                         </div>
                     <?elseif ($arItem["TYPE"] == "SELECT"):
                         ?>
-                        <div class="filter-form-column">
+                        <div class="filter-form-column<?=$extendFilterClass;?>">
                             <div class="filter-field-title"><?=$arItem["NAME"]?></div>
                             <div class="filter-select">
                                 <a href="#" class="filter-select-link">Выбрать</a>
@@ -165,7 +168,7 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
                         </div>
                     <?elseif ($arItem["TYPE"] == "CHECKBOX"):
                         ?>
-                        <div class="col-sm-6 col-md-4 bx-filter-parameters-box active">
+                        <div class="col-sm-6 col-md-4 bx-filter-parameters-box active<?=$extendFilterClass;?>">
                             <div class="bx-filter-parameters-box-title"><span><?=$arItem["NAME"]?></span></div>
                             <div class="bx-filter-block">
                                 <div class="row bx-filter-parameters-box-container">
@@ -191,7 +194,7 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
                         </div>
                     <?elseif ($arItem["TYPE"] == "RADIO"):
                         ?>
-                        <div class="col-sm-6 col-md-4 bx-filter-parameters-box active">
+                        <div class="col-sm-6 col-md-4 bx-filter-parameters-box active<?=$extendFilterClass;?>">
                             <div class="bx-filter-parameters-box-title"><span><?=$arItem["NAME"]?></span></div>
                             <div class="bx-filter-block">
                                 <div class="row bx-filter-parameters-box-container">
@@ -216,7 +219,7 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
                             </div>
                         </div>
                     <?else:?>
-                        <div class="col-sm-6 col-md-4 bx-filter-parameters-box active">
+                        <div class="col-sm-6 col-md-4 bx-filter-parameters-box active<?=$extendFilterClass;?>">
                             <div class="bx-filter-parameters-box-title"><span><?=$arItem["NAME"]?></span></div>
                             <div class="bx-filter-block">
                                 <div class="row bx-filter-parameters-box-container">

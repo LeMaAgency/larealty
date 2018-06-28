@@ -51,15 +51,6 @@ if($inRootDir)
 }
 else
 {
-    /**
-     * Ordering sort for filter items
-     */
-    $filterFields = array(
-        array('key' => 'ROOMS_COUNT', 'type' => 'property', 'expanded' => false),
-        array('key' => 'PRICE', 'type' => 'property', 'expanded' => false),
-        array('key' => 'REGION', 'type' => 'property', 'expanded' => false),
-        array('key' => 'ID', 'type' => 'field', 'expanded' => false),
-    );
 
     /**
      * Add chain items
@@ -249,14 +240,20 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
             1 => "",
         ),
         "FILTER_PROPERTY_CODE" => array(
-            1 => "ROOMS_COUNT",
-            2 => "PLACEMENT",
-            0 => "PRICE",
-            4 => "STAGE",
-            5 => "STAGES_COUNT",
-            6 => "RENT_TYPE",
-            7 => "REALTY_TYPE",
-            8 => "REGION",
+            'RENT_TYPE',
+            'ROOMS_COUNT',
+            'PRICE',
+            'REGION',
+            'STAGE',
+            'STAGES_COUNT',
+            'SQUARE_LAND',
+            'SQUARE',
+            'LOT_CATEGORIES',
+            'HEATING',
+            'WATER_SUPPLY',
+            'SEWERAGE',
+            'LOT_HAVINGS_TYPE',
+            'ELECTRIC',
         ),
         'FILTER_ORDER' => $filterFields,
         "NUM_NEWS" => "20",
