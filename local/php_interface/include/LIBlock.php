@@ -17,6 +17,10 @@ class LIblock
      * @var array
      */
     protected static $propValues = array();
+    /**
+     * @var array
+     */
+    protected static $iblockSections = array();
 
     /**
      * @var string
@@ -102,6 +106,66 @@ class LIblock
     }
 
     /**
+     * @param $iblockCode
+     * @param $sectionCode
+     *
+     * @return bool|mixed
+     */
+    public static function getSectionInfo($iblockCode, $sectionCode)
+    {
+        if(empty(static::$iblockSections))
+            static::loadData();
+
+        $iblockId = static::getId($iblockCode);
+        if(!$iblockId)
+            return false;
+
+        if(isset(static::$iblockSections[$iblockId][$sectionCode]))
+            return static::$iblockSections[$iblockId][$sectionCode];
+
+        return false;
+    }
+    /**
+     * @param $iblockCode
+     * @param $sectionCode
+     *
+     * @return bool|mixed
+     */
+    public static function getSectionsByIblockCode($iblockCode)
+    {
+        if(empty(static::$iblockSections))
+            static::loadData();
+
+        $iblockId = static::getId($iblockCode);
+        if(!$iblockId)
+            return false;
+
+        if(isset(static::$iblockSections[$iblockId]))
+            return static::$iblockSections[$iblockId];
+
+        return false;
+    }
+    /**
+     * @param $iblockCode
+     * @param $sectionCode
+     *
+     * @return bool|mixed
+     */
+    public static function getSectionsByIblockId($iblockId)
+    {
+        if(empty(static::$iblockSections))
+            static::loadData();
+
+        if(!$iblockId)
+            return false;
+
+        if(isset(static::$iblockSections[$iblockId]))
+            return static::$iblockSections[$iblockId];
+
+        return false;
+    }
+
+    /**
      * Load iblock data to variables
      */
     protected static function loadData()
@@ -119,6 +183,7 @@ class LIblock
             static::$iblocks = $cacheData['iblocks'];
             static::$props = $cacheData['props'];
             static::$propValues = $cacheData['propValues'];
+            static::$iblockSections = $cacheData['iblockSections'];
         }
         else
         {
@@ -126,11 +191,13 @@ class LIblock
 
             static::loadIBlocks();
             static::loadProperties();
+            static::loadIBlockSections();
 
             $cache->EndDataCache(array(
                 'iblocks' => static::$iblocks,
                 'props'  => static::$props,
                 'propValues' => static::$propValues,
+                'iblockSections' => static::$iblockSections,
             ));
         }
     }
@@ -192,6 +259,22 @@ class LIblock
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * Load iblock sections to variable
+     */
+    protected static function loadIBlockSections()
+    {
+        static::loadIBlocks();
+
+        $res = CIBlockSection::GetList(array(), array('ID', 'CODE', 'NAME', 'IBLOCK_ID'));
+
+        while($row = $res->Fetch())
+        {
+            if(!empty($row['CODE']))
+                static::$iblockSections[$row['IBLOCK_ID']][$row['CODE']] = $row;
         }
     }
 

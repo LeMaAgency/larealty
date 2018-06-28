@@ -44,14 +44,48 @@ if(!$inRootDir)
     /**
      * Add chain items
      */
-    $uriParts = explode('/', trim($currentDir, '/'));
+    $uriParts = explode('/', trim(ltrim($currentDir, $rootDir), '/'));
     $lastUrl = $rootDir;
-    foreach($uriParts as $uriPart)
+
+
+    if(!empty($uriParts[0]) && in_array($uriParts[0], array('kvartiry-komnaty', 'doma-dachi-zemelnyy_uchastok')))
     {
-        if(isset($rentAndRealtyTypes[$uriPart]))
+        $currentSectionCode = array_shift($uriParts);
+    }
+
+    if(!empty($uriParts))
+    {
+        $currentSectionCode = array_shift($uriParts);
+
+        $section = \LIblock::getSectionInfo('objects', $currentSectionCode);
+        if(!empty($section))
         {
-            $lastUrl .= '/' . $uriPart;
-            $APPLICATION->AddChainItem($rentAndRealtyTypes[$uriPart], $lastUrl . '/');
+            $lastUrl .= '/' . $section['CODE'];
+            $APPLICATION->AddChainItem($section['NAME'], $lastUrl . '/');
+        }
+        switch($currentSectionCode)
+        {
+            case 'doma':
+
+            break;
+            case 'dachi':
+
+            break;
+            case 'zemelnyy_uchastok':
+
+            break;
+        }
+
+        if(!empty($uriParts) && is_array($uriParts))
+        {
+            foreach($uriParts as $uriPart)
+            {
+                if(isset($rentAndRealtyTypes[$uriPart]))
+                {
+                    $lastUrl .= '/' . $uriPart;
+                    $APPLICATION->AddChainItem($rentAndRealtyTypes[$uriPart], $lastUrl . '/');
+                }
+            }
         }
     }
 }
@@ -79,10 +113,10 @@ if(!empty($rentAndRealtyTypes['prodam']))
 if(empty($GLOBALS['arrFilter']))
     $GLOBALS['arrFilter'] = array();
 $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
-if(!empty($uriParts[1]) && in_array($uriParts[1], array('kvartiry-komnaty', 'doma-dachi-zemelnyy_uchastok')))
+
+if(!empty($currentSectionCode) && in_array($currentSectionCode, array('kvartiry-komnaty', 'doma-dachi-zemelnyy_uchastok')))
 {
-    $GLOBALS['arrFilter']['SECTION_CODE'] = explode('-', trim($uriParts[1]));
-    unset($uriParts[1]);
+    $GLOBALS['arrFilter']['SECTION_CODE'] = explode('-', trim($currentSectionCode));
 }
 ?>
 <?$APPLICATION->IncludeComponent(
@@ -96,7 +130,7 @@ if(!empty($uriParts[1]) && in_array($uriParts[1], array('kvartiry-komnaty', 'dom
 		"AJAX_MODE" => "N",
 		"IBLOCK_TYPE" => "realty",
 		"IBLOCK_ID" => "2",
-		'PARENT_SECTION_CODE' => (isset($uriParts[1]) ? $uriParts[1] : null),
+		'PARENT_SECTION_CODE' => (isset($currentSectionCode) ? $currentSectionCode : null),
 		"NEWS_COUNT" => "6",
 		"USE_SEARCH" => "N",
 		"USE_RSS" => "N",

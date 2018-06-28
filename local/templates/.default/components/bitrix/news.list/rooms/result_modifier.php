@@ -32,10 +32,7 @@ $props = array(
     ),
 );
 
-
-$sections = \Lema\IBlock\Section::getAllD7($arParams['IBLOCK_ID'], array(
-    'select' => array('ID', 'CODE'),
-));
+$sections = \LIblock::getSectionsByIblockId($arParams['IBLOCK_ID']);
 
 $splitSymbol = ', ';
 
