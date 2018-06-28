@@ -916,7 +916,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
 	"rent_request",
 	array(
 		"COMPONENT_TEMPLATE" => "rent_request",
-		"FORM_CLASS" => "ajax-form call-order",
+		"FORM_CLASS" => "ajax-form rent-order",
 		"FORM_ACTION" => "",
 		"FORM_152_FZ" => "Я ознакомлен <a target=\"_blank\" href=\"/contacts/apply.pdf\">c положением об обработке и защите персональных данных.</a>",
 		"FORM_BTN_TITLE" => "Отправить",
