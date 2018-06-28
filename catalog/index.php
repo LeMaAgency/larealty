@@ -7,6 +7,9 @@ $rootDir = SITE_DIR . 'catalog';
 $currentDir = \Lema\Common\Request::get()->getRequestedPageDirectory();
 $inRootDir = $currentDir == $rootDir;
 
+if(empty($GLOBALS['arrFilter']))
+    $GLOBALS['arrFilter'] = array();
+
 /**
  * Ordering sort for filter items
  */
@@ -29,7 +32,24 @@ foreach($tmp as $code => $data)
     $rentAndRealtyTypes[$code] = $data['VALUE'];
 unset($tmp);
 
-if(!$inRootDir)
+if($inRootDir)
+{
+    /**
+     * We need to check for showing elements of "public" section only
+     */
+    $sections = LIblock::getSectionsByIblockCode('objects');
+    $rootSectionId = isset($sections['active']) ? $sections['active']['ID'] : 0;
+    if(!empty($rootSectionId))
+    {
+        $GLOBALS['arrFilter']['SECTION_ID'] = array();
+        foreach($sections as $section)
+        {
+            if($section['IBLOCK_SECTION_ID'] === $rootSectionId)
+                $GLOBALS['arrFilter']['SECTION_ID'][] = $section['ID'];
+        }
+    }
+}
+else
 {
     /**
      * Ordering sort for filter items
@@ -51,7 +71,9 @@ if(!$inRootDir)
     if(!empty($uriParts[0]) && in_array($uriParts[0], array('kvartiry-komnaty', 'doma-dachi-zemelnyy_uchastok')))
     {
         $currentSectionCode = array_shift($uriParts);
+        $GLOBALS['arrFilter']['SECTION_CODE'] = explode('-', trim($currentSectionCode));
     }
+
 
     if(!empty($uriParts))
     {
@@ -72,7 +94,13 @@ if(!$inRootDir)
 
             break;
             case 'zemelnyy_uchastok':
-
+                $filterFields = array(
+                    array('key' => 'PRICE', 'type' => 'property', 'expanded' => false),
+                    array('key' => 'REGION', 'type' => 'property', 'expanded' => false),
+                    array('key' => 'ID', 'type' => 'field', 'expanded' => false),
+                    array('key' => 'SQUARE_LAND', 'type' => 'property', 'expanded' => false),
+                    array('key' => 'SQUARE', 'type' => 'property', 'expanded' => false),
+                );
             break;
         }
 
@@ -99,7 +127,9 @@ if(!empty($rentAndRealtyTypes['kuplyu']))
 if(!empty($rentAndRealtyTypes['prodam']))
     $typeFilter[] = $rentAndRealtyTypes['prodam'];
 
+$GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
 ?>
+
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
@@ -108,17 +138,6 @@ if(!empty($rentAndRealtyTypes['prodam']))
         </div>
     </div>
 
-<?php
-
-if(empty($GLOBALS['arrFilter']))
-    $GLOBALS['arrFilter'] = array();
-$GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
-
-if(!empty($currentSectionCode) && in_array($currentSectionCode, array('kvartiry-komnaty', 'doma-dachi-zemelnyy_uchastok')))
-{
-    $GLOBALS['arrFilter']['SECTION_CODE'] = explode('-', trim($currentSectionCode));
-}
-?>
 <?$APPLICATION->IncludeComponent(
 	"lema:news",
 	"catalog",

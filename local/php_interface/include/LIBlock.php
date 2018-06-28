@@ -269,7 +269,7 @@ class LIblock
     {
         static::loadIBlocks();
 
-        $res = CIBlockSection::GetList(array(), array('ID', 'CODE', 'NAME', 'IBLOCK_ID'));
+        $res = CIBlockSection::GetList(array(), array('ID', 'CODE', 'NAME', 'IBLOCK_ID', 'IBLOCK_SECTION_ID'));
 
         while($row = $res->Fetch())
         {
