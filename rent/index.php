@@ -908,6 +908,33 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
         false
     ); ?>
 <?endif;?>
+
+
+    <div id="rent-form" class="fancybox-feedback" style="display: none;">
+        <? $APPLICATION->IncludeComponent(
+	"lema:form.ajax", 
+	"rent_request",
+	array(
+		"COMPONENT_TEMPLATE" => "feedback",
+		"FORM_CLASS" => "ajax-form call-order",
+		"FORM_ACTION" => "",
+		"FORM_152_FZ" => "Я ознакомлен <a target=\"_blank\" href=\"/contacts/apply.pdf\">c положением об обработке и защите персональных данных.</a>",
+		"FORM_BTN_TITLE" => "Отправить",
+		"FORM_SUCCESS_FUNCTION" => "\$.fancybox.open(\"Ваше сообщение успешно отправлено\")",
+		"FORM_SUCCESS_FUNCTION_CORRECT_JSON" => "Y",
+		"FORM_FIELDS" => "[{\"name\":\"name\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Ваше имя\",\"default\":\"\",\"required\":\"Y\"},{\"name\":\"email\",\"type\":\"email\",\"title\":\"\",\"placeholder\":\"Ваша электронная почта\",\"default\":\"\",\"required\":\"Y\"},{\"name\":\"phone\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Ваш номер телефона\",\"default\":\"\",\"required\":\"Y\"},{\"name\":\"comment\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Комментарий\",\"default\":\"\",\"required\":\"N\"}]",
+		"NEED_SAVE_TO_IBLOCK" => "Y",
+		"NEED_SEND_EMAIL" => "Y",
+		"EVENT_TYPE" => "69",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "3600",
+		"IBLOCK_TYPE" => "feedback",
+		"IBLOCK_ID" => "17"
+	),
+	false
+); ?>
+    </div>
+
 <?
 require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/footer.php';
 ?>

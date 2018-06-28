@@ -8,7 +8,7 @@ $(function() {
         e.preventDefault();
         $('.js-extend-filter-block').toggle();
         $(this).find('b').text($('.js-extend-filter-block').is(':visible') ? '-' : '+');
-    })
+    });
 
 
     $('form.filter-form').on('submit', function() {
@@ -29,4 +29,12 @@ $(function() {
          */
         $('input[name="arrFilter_pf[REALTY_TYPE]"], input[name="arrFilter_pf[RENT_TYPE]"]').remove()
     })
+
+    $(document).on('click', '#rent-out-id', function(e) {
+        e.preventDefault();
+
+        $.fancybox.open($("#rent-form"));
+
+        return false;
+    });
 });
