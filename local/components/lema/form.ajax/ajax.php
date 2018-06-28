@@ -53,7 +53,7 @@ if($form->validate())
     {
         $previewText = null;
         foreach($form->getFields() as $field => $value)
-            $previewText .= htmlspecialcharsbx((isset($orderedDataFields[$field]['title']) ? $orderedDataFields[$field]['title'] : $field) . ': ' . $value) . PHP_EOL;
+            $previewText .= htmlspecialcharsbx((!empty($orderedDataFields[$field]['title']) ? $orderedDataFields[$field]['title'] : $field) . ': ' . $value) . PHP_EOL;
         $status = $status && $form->addRecord($arParams['IBLOCK_ID'], array(
             'NAME' => $form->getField('name'),
             'PREVIEW_TEXT' => $previewText,
