@@ -783,8 +783,10 @@ input:focus:-ms-input-placeholder {
     padding: 12px 0;
     border: 1px solid #dddddd;
     text-align: center;
-    font-size: 16px;
-    font-weight: 300;
+    /*font-size: 16px;
+    font-weight: 300;*/
+    font-size: 15px;
+    font-weight: 400;
     text-transform: uppercase;
     width: 20%;
 
@@ -823,7 +825,7 @@ input:focus:-ms-input-placeholder {
     display: inline-block;
     width: 10px;
     height: 10px;
-    margin-right: 14px;
+    margin-right: 8px;
     color: #fff;
 
 }
