@@ -255,3 +255,34 @@ a.add-apartment__button:hover {
 @media (max-width: 1199px) {
 .form-admin .wrap-field-price {display: block;}
 }
+.anketa .filter-field-title {display:flex; width:100%;}
+.anketa .file-upload {
+     position: relative; 
+     overflow: hidden; 
+     width: 100%; 
+     height: 30px; 
+     background: #07ba00;
+     padding: 8px 4px;
+     color: #fff;
+     text-align: center;
+}
+.anketa .file-upload:hover {
+     background: #0b9605;
+}
+.anketa .file-upload input[type="file"]{
+    display: none; 
+}
+.anketa .file-upload label {
+     display: block;
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     cursor: pointer;
+}
+.anketa .file-upload span {
+     line-height: 30px; 
+}
+.anketa .filter-price, .anketa  .filter-select {width: 100%;}
+.anketa .filter-price-input, .anketa  .filter-select {max-width: 100%;}
