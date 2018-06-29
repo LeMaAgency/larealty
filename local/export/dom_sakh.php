@@ -138,18 +138,22 @@ $yml->loadData(array(
                 $data['images'][] = \CFile::GetPath($imgId);
         }
         unset($data['DETAIL_PICTURE'], $data['PROPERTY_MORE_PHOTO_VALUE']);
-
+//коммерческая застройка, ИЖС, сельское хозяйство, дачное, подсобное хозяйство, садоводство
         $landTypes = array(
             'ИЖС' => 'ИЖС',
             'СНТ' => 'сельское хозяйство',
-            'Садовотство' => 'коммерческая застройка',
+            'Садоводство' => 'сельское хозяйство',
+            'Коммерческая застройка' => 'коммерческая застройка',
+            'Сельское хозяйство' => 'сельское хозяйство',
+            'Дачное' => 'дачное',
+            'Подсобное хозяйство' => 'подсобное хозяйство',
         );
         $landType = mb_strtolower($data['PROPERTY_LOT_CATEGORIES_VALUE'], 'UTF-8');
         $data['land-type'] = isset($landTypes[$landType]) ? $landTypes[$landType] : null;
 
         $propertyTypes = array(
-            'собственность' => 'в аренде',
-            'аренда' => 'в собственности',
+            'собственность' => 'в собственности',
+            'аренда' => 'в аренде',
         );
         $propertyType = mb_strtolower($data['PROPERTY_LOT_HAVINGS_TYPE_VALUE'], 'UTF-8');
         $data['land-type'] = isset($propertyTypes[$propertyType]) ? $propertyTypes[$propertyType] : null;
