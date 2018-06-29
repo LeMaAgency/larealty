@@ -10,10 +10,9 @@ $rentAndRealtyTypes = array();
 $tmp = LIblock::getPropEnumValues(LIblock::getPropId('objects', 'RENT_TYPE'));
 foreach($tmp as $code => $data)
     $rentAndRealtyTypes[$data['ID']] = $code;
-$tmp = LIblock::getPropEnumValues(LIblock::getPropId('objects', 'REALTY_TYPE'));
-foreach($tmp as $code => $data)
-    $rentAndRealtyTypes[$data['ID']] = $code;
 unset($tmp);
+
+$sections = \LIblock::getSectionsByIblockCode('objects', false);
 
 $yml->loadData(array(
     'arSelect' => array(
@@ -29,7 +28,6 @@ $yml->loadData(array(
         'PROPERTY_BUILDING_NUMBER',
         'PROPERTY_CADASTRAL_NUMBER',
         'PROPERTY_PROPOSED_ROOMS_COUNT',
-        'PROPERTY_REALTY_TYPE',
         'PROPERTY_RENT_TYPE',
         'PROPERTY_MATERIAL',
         'PROPERTY_YEAR',
@@ -78,7 +76,7 @@ $yml->loadData(array(
         'PROPERTY_LOT_HAVINGS_TYPE',
     ),
     'filter' => array('ACTIVE' => 'Y', 'SECTION_CODE' => 'active'),
-    'callback' => function($data) use($rentAndRealtyTypes) {
+    'callback' => function($data) use($rentAndRealtyTypes, $sections) {
         foreach($data as $k => $v)
         {
             if($k[0] === '~' || false !== strpos($k, '_VALUE_ID'))
@@ -102,8 +100,12 @@ $yml->loadData(array(
             'торговые площади' => 'бизнес',
             'здания' => 'бизнес',
         );
-        $category = mb_strtolower($data['PROPERTY_REALTY_TYPE_VALUE'], 'UTF-8');
-        $data['category'] = isset($categories[$category]) ? $categories[$category] : null;
+
+        if(isset($sections[$data['IBLOCK_SECTION_ID']]))
+        {
+            $category = mb_strtolower($sections[$data['IBLOCK_SECTION_ID']], 'UTF-8');
+            $data['category'] = isset($categories[$category]) ? $categories[$category] : null;
+        }
 
         //Get rent type
         $rentType = null;
