@@ -76,8 +76,31 @@ class LIblock
         if(!$iblockId)
             return false;
 
-        if(isset(static::$props[$iblockId][$propCode]))
-            return static::$props[$iblockId][$propCode];
+        if(isset(static::$props[$iblockId]['BY_CODE'][$propCode]))
+            return static::$props[$iblockId]['BY_CODE'][$propCode];
+
+        return false;
+    }
+
+    /**
+     * @param $iblockCode string IBlock symbolic code
+     * @param $propCode string property symbolic code
+     *
+     * @return bool|null
+     */
+    public static function getProp($iblockCode, $propCodeOrId, $byCode = true)
+    {
+        if(empty(static::$props))
+            static::loadData();
+
+        $iblockId = static::getId($iblockCode);
+        if(!$iblockId)
+            return false;
+
+        $key = $byCode ? 'BY_CODE' : 'BY_ID';
+
+        if(isset(static::$props[$iblockId][$key][$propCodeOrId]))
+            return static::$props[$iblockId][$key][$propCodeOrId];
 
         return false;
     }
@@ -243,11 +266,12 @@ class LIblock
         while($row = $res->Fetch())
         {
             if(empty(static::$props[$row['IBLOCK_ID']]))
-                static::$props[$row['IBLOCK_ID']] = array();
+                static::$props[$row['IBLOCK_ID']] = array('BY_CODE' => array(), 'BY_ID' => array());
 
             if($row['CODE'])
             {
-                static::$props[$row['IBLOCK_ID']][$row['CODE']] = (int) $row['ID'];
+                static::$props[$row['IBLOCK_ID']]['BY_CODE'][$row['CODE']] = $row;
+                static::$props[$row['IBLOCK_ID']]['BY_ID'][$row['ID']] = $row;
 
                 if($row['PROPERTY_TYPE'] == 'L')
                 {
