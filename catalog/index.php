@@ -81,11 +81,9 @@ else
         {
             case 'kvartiry':
                 $showFields = array(
-                    'CITY', 'REGION', 'STREET', 'HOUSE_NUMBER', 'BUILDING_NUMBER', 'FLAT_NUMBER', 'CADASTRAL_NUMBER',
-                    'ROOMS_COUNT', 'LAYOUT_TYPE', 'MATERIAL', 'YEAR', 'STAGE', 'STAGES_COUNT', 'SQUARE',
-                    'SQUARE_RESIDENT', 'SQUARE_KITCHEN', 'SIDE', 'BATHROOM', 'BATHROOM_COUNT', 'BALCONIES_COUNT',
-                    'LOGGIAS_COUNT', 'PHONE', 'TV', 'INTERNET', 'LIFT_FLAG', 'PARKING', 'SECURITY_CONCIERGE', 'GAZ',
-                    'PRICE', 'HYPOTHEC', 'HAVINGS_TYPE',
+                    'LAYOUT_TYPE', 'MATERIAL', 'YEAR', 'SQUARE_RESIDENT', 'SQUARE_KITCHEN', 'SIDE', 'BATHROOM',
+                    'BATHROOM_COUNT', 'BALCONIES_COUNT', 'LOGGIAS_COUNT', 'PHONE', 'TV', 'INTERNET', 'LIFT_FLAG',
+                    'PARKING', 'SECURITY_CONCIERGE', 'GAZ', 'HYPOTHEC', 'HAVINGS_TYPE',
                 );
                 $filterFields = array(
                     array('key' => 'ROOMS_COUNT', 'type' => 'property', 'expanded' => false),
@@ -98,10 +96,9 @@ else
             break;
             case 'komnaty':
                 $showFields = array(
-                    'CITY', 'REGION', 'STREET', 'HOUSE_NUMBER', 'BUILDING_NUMBER', 'FLAT_NUMBER', 'CADASTRAL_NUMBER',
-                    'ROOMS_COUNT', 'OFFERED_ROOMS_COUNT', 'LAYOUT_TYPE', 'MATERIAL', 'YEAR', 'STAGE', 'STAGES_COUNT',
-                    'SQUARE', 'SIDE', 'BATHROOM', 'BALCONIES_COUNT', 'LOGGIAS_COUNT', 'REPAIR_TYPE', 'PHONE', 'TV',
-                    'INTERNET', 'LIFT_FLAG', 'PARKING', 'GAZ', 'SECURITY_CONCIERGE', 'PRICE', 'HAVINGS_TYPE', 'HYPOTHEC',
+                    'OFFERED_ROOMS_COUNT', 'LAYOUT_TYPE', 'MATERIAL', 'YEAR', 'SIDE', 'BATHROOM', 'BALCONIES_COUNT',
+                    'LOGGIAS_COUNT', 'REPAIR_TYPE', 'PHONE', 'TV', 'INTERNET', 'LIFT_FLAG', 'PARKING', 'GAZ',
+                    'SECURITY_CONCIERGE', 'HAVINGS_TYPE', 'HYPOTHEC',
                 );
                 $filterFields = array(
                     array('key' => 'ROOMS_COUNT', 'type' => 'property', 'expanded' => false),
@@ -114,12 +111,10 @@ else
             break;
             case 'dachi':
                 $showFields = array(
-                    'CITY', 'REGION', 'STREET', 'HOUSE_NUMBER', 'CADASTRAL_NUMBER', 'LIFE_MASSIV_SNT', 'ROOMS_COUNT',
-                    'STAGES_COUNT', 'MATERIAL', 'YEAR', 'SQUARE', 'SQUARE_RESIDENT', 'SQUARE_KITCHEN', 'SQUARE_LAND',
-                    'BATHROOM', 'BATHROOM_COUNT', 'BALCONIES_COUNT', 'LOGGIAS_COUNT', 'PHONE', 'TV', 'INTERNET',
-                    'ELECTRIC', 'HEATING', 'WATER_SUPPLY', 'SEWERAGE', 'GAZ', 'SECURITY_CONCIERGE', 'FIRE_ALARM',
-                    'SECURITY_VIDEO', 'GARAGE', 'SAUNA', 'PRICE', 'HYPOTHEC', 'HAVINGS_TYPE', 'LOT_HAVINGS_TYPE',
-                    'LOT_CATEGORIES',
+                    'LIFE_MASSIV_SNT', 'MATERIAL', 'YEAR', 'SQUARE_RESIDENT', 'SQUARE_KITCHEN', 'BATHROOM',
+                    'BATHROOM_COUNT', 'BALCONIES_COUNT', 'LOGGIAS_COUNT', 'PHONE', 'TV', 'INTERNET', 'ELECTRIC',
+                    'HEATING', 'WATER_SUPPLY', 'SEWERAGE', 'GAZ', 'SECURITY_CONCIERGE', 'FIRE_ALARM', 'SECURITY_VIDEO',
+                    'GARAGE', 'SAUNA', 'HYPOTHEC', 'HAVINGS_TYPE', 'LOT_HAVINGS_TYPE', 'LOT_CATEGORIES',
                 );
                 $filterFields = array(
                     array('key' => 'PRICE', 'type' => 'property', 'expanded' => false),
@@ -131,12 +126,10 @@ else
             break;
             case 'doma':
                 $showFields = array(
-                    'CITY', 'REGION', 'STREET', 'HOUSE_NUMBER', 'CADASTRAL_NUMBER', 'LIFE_MASSIV_SNT', 'ROOMS_COUNT',
-                    'STAGES_COUNT', 'MATERIAL', 'YEAR', 'SQUARE', 'SQUARE_RESIDENT', 'SQUARE_KITCHEN', 'SQUARE_LAND',
-                    'BATHROOM', 'BATHROOM_COUNT', 'BALCONIES_COUNT', 'LOGGIAS_COUNT', 'PHONE', 'TV', 'INTERNET',
-                    'ELECTRIC', 'HEATING', 'WATER_SUPPLY', 'SEWERAGE', 'GAZ', 'SECURITY_CONCIERGE', 'FIRE_ALARM',
-                    'SECURITY_VIDEO', 'GARAGE', 'SAUNA', 'PRICE', 'HYPOTHEC', 'HAVINGS_TYPE', 'LOT_HAVINGS_TYPE',
-                    'LOT_CATEGORIES',
+                    'LIFE_MASSIV_SNT', 'MATERIAL', 'YEAR', 'SQUARE_RESIDENT', 'SQUARE_KITCHEN', 'BATHROOM',
+                    'BATHROOM_COUNT', 'BALCONIES_COUNT', 'LOGGIAS_COUNT', 'PHONE', 'TV', 'INTERNET', 'ELECTRIC',
+                    'HEATING', 'WATER_SUPPLY', 'SEWERAGE', 'GAZ', 'SECURITY_CONCIERGE', 'FIRE_ALARM', 'SECURITY_VIDEO',
+                    'GARAGE', 'SAUNA', 'HYPOTHEC', 'HAVINGS_TYPE', 'LOT_HAVINGS_TYPE', 'LOT_CATEGORIES',
                 );
                 $filterFields = array(
                     array('key' => 'PRICE', 'type' => 'property', 'expanded' => false),
@@ -152,8 +145,8 @@ else
             break;
             case 'zemelnyy_uchastok':
                 $showFields = array(
-                    'CITY', 'REGION', 'STREET', 'LIFE_MASSIV_SNT', 'SQUARE', 'ELECTRIC', 'SEWERAGE', 'WATER_SUPPLY',
-                    'GAZ', 'PRICE', 'LOT_HAVINGS_TYPE', 'LOT_CATEGORIES',
+                    'LIFE_MASSIV_SNT', 'ELECTRIC', 'SEWERAGE', 'WATER_SUPPLY', 'GAZ', 'LOT_HAVINGS_TYPE',
+                    'LOT_CATEGORIES',
                 );
                 $filterFields = array(
                     array('key' => 'PRICE', 'type' => 'property', 'expanded' => false),
@@ -168,26 +161,22 @@ else
             break;
             case 'ofisy':
                 $showFields = array(
-                    'CITY', 'REGION', 'SHOPPING_CENTER', 'STREET', 'HOUSE_NUMBER', 'BUILDING_NUMBER', 'CLASS_TYPE',
-                    'MATERIAL', 'YEAR', 'STAGE', 'STAGES_COUNT', 'SQUARE', 'SEP_ENTRANCE', 'PHONE', 'TV', 'INTERNET',
-                    'LIFT', 'SECURITY_CONCIERGE', 'SECURITY_ALARM', 'FIRE_ALARM', 'FIRE_EXT_SYSTEM', 'SECURITY_VIDEO',
-                    'PRICE', 'HYPOTHEC',
+                    'CLASS_TYPE', 'MATERIAL', 'YEAR', 'SEP_ENTRANCE', 'PHONE', 'TV', 'INTERNET', 'LIFT',
+                    'SECURITY_CONCIERGE', 'SECURITY_ALARM', 'FIRE_ALARM', 'FIRE_EXT_SYSTEM', 'SECURITY_VIDEO',
+                    'HYPOTHEC',
                 );
             break;
             case 'torgovye_ploshchadi':
                 $showFields = array(
-                    'CITY', 'REGION', 'SHOPPING_CENTER', 'STREET', 'HOUSE_NUMBER', 'BUILDING_NUMBER', 'LIFE_MASSIV_SNT',
-                    'MATERIAL', 'YEAR', 'STAGE', 'STAGES_COUNT', 'SQUARE', 'SQUARE_LAND', 'SEP_ENTRANCE', 'PHONE', 'TV',
-                    'INTERNET', 'GAZ', 'PARKING', 'SECURITY_ALARM', 'FIRE_ALARM', 'FIRE_EXT_SYSTEM', 'SECURITY_VIDEO',
-                    'PRICE', 'HYPOTHEC',
+                    'SHOPPING_CENTER', 'LIFE_MASSIV_SNT', 'MATERIAL', 'YEAR', 'SEP_ENTRANCE', 'PHONE', 'TV', 'INTERNET',
+                    'GAZ', 'PARKING', 'SECURITY_ALARM', 'FIRE_ALARM', 'FIRE_EXT_SYSTEM', 'SECURITY_VIDEO', 'HYPOTHEC',
                 );
             break;
             case 'zdaniya':
                 $showFields = array(
-                    'CITY', 'REGION', 'SHOPPING_CENTER', 'STREET', 'HOUSE_NUMBER', 'LIFE_MASSIV_SNT', 'MATERIAL',
-                    'YEAR', 'STAGES_COUNT', 'SQUARE', 'SQUARE_LAND', 'PHONE', 'TV', 'INTERNET', 'HEATING', 'COLD_WATER',
-                    'HOT_WATER', 'SEWERAGE', 'ELECTRIC', 'GAZ', 'PARKING', 'CLOSED_TERRITORY', 'SECURITY_ALARM',
-                    'FIRE_ALARM', 'FIRE_EXT_SYSTEM', 'SECURITY_VIDEO', 'PRICE', 'HYPOTHEC',
+                    'SHOPPING_CENTER', 'LIFE_MASSIV_SNT', 'MATERIAL', 'YEAR', 'PHONE', 'TV', 'INTERNET', 'HEATING',
+                    'COLD_WATER', 'HOT_WATER', 'SEWERAGE', 'ELECTRIC', 'GAZ', 'PARKING', 'CLOSED_TERRITORY',
+                    'SECURITY_ALARM', 'FIRE_ALARM', 'FIRE_EXT_SYSTEM', 'SECURITY_VIDEO', 'HYPOTHEC',
                 );
             break;
         }
