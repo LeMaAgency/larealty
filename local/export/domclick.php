@@ -71,7 +71,7 @@ $yml->loadData(array(
         'PROPERTY_USER_PHONE',
         'PROPERTY_USER_EMAIL',
     ),
-    'filter' => array('ACTIVE' => 'Y', 'SECTION_CODE' => 'active'),
+    'filter' => array('ACTIVE' => 'Y', 'SECTION_CODE' => 'active', 'INCLUDE_SUBSECTIONS' => 'Y'),
     'callback' => function($data) use($rentAndRealtyTypes) {
         foreach($data as $k => $v)
         {
