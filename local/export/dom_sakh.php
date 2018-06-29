@@ -101,10 +101,16 @@ $yml->loadData(array(
             'здания' => 'бизнес',
         );
 
+
         if(isset($sections[$data['IBLOCK_SECTION_ID']]))
         {
-            $category = mb_strtolower($sections[$data['IBLOCK_SECTION_ID']], 'UTF-8');
+            $category = mb_strtolower($sections[$data['IBLOCK_SECTION_ID']]['NAME'], 'UTF-8');
             $data['category'] = isset($categories[$category]) ? $categories[$category] : null;
+        }
+        else
+        {
+            unset($data);
+            return ;
         }
 
         //Get rent type
@@ -113,13 +119,8 @@ $yml->loadData(array(
             $rentType = \CUtil::translit($data['PROPERTY_RENT_TYPE_VALUE'], 'ru');
         else
             $rentType = $rentAndRealtyTypes[$data['PROPERTY_RENT_TYPE_ENUM_ID']];
-        //Get realty type
-        $realtyType = null;
-        if(empty($rentAndRealtyTypes[$data['PROPERTY_REALTY_TYPE_ENUM_ID']]))
-            $realtyType = \CUtil::translit($data['PROPERTY_REALTY_TYPE_VALUE'], 'ru');
-        else
-            $realtyType = $rentAndRealtyTypes[$data['PROPERTY_REALTY_TYPE_ENUM_ID']];
-        $data['url'] = '/' . $realtyType . '/' . $rentType . '/' . $data['CODE'];
+
+        $data['url'] = '/catalog/' . $sections[$data['IBLOCK_SECTION_ID']]['CODE'] . '/' . $rentType . '/' . $data['CODE'];
         $data['creation-date'] = date('c', $data['DATE_CREATE_UNIX']);
         $data['last-update-date'] = date('c', $data['TIMESTAMP_X_UNIX']);
         $data['country'] = 'Россия';
