@@ -196,6 +196,7 @@ $yml->showData(array(
         'news' => 'PROPERTY_SIDE_VALUE',
         'alarm' => 'alarm',
         'heating' => 'PROPERTY_HEATING_VALUE',
+        'water' => 'PROPERTY_WATER_SUPPLY_VALUE',
         'sewerage' => 'PROPERTY_SEWERAGE_VALUE',
         'electricity' => 'PROPERTY_ELECTRIC_VALUE',
     ),
