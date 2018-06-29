@@ -126,7 +126,7 @@ $yml->loadData(array(
         $data['country'] = 'Россия';
         $data['locality-name'] = $data['PROPERTY_CITY_VALUE'];
         $data['sub-locality-name'] = $data['PROPERTY_REGION_VALUE'];
-        //$data['district'] = $data['PROPERTY_REGION_VALUE'];
+
         $data['address'] = trim('ул. ' . $data['PROPERTY_STREET_VALUE'] . ', ' . $data['PROPERTY_HOUSE_NUMBER_VALUE']);
 
         $data['images'] = array();
@@ -138,7 +138,7 @@ $yml->loadData(array(
                 $data['images'][] = \CFile::GetPath($imgId);
         }
         unset($data['DETAIL_PICTURE'], $data['PROPERTY_MORE_PHOTO_VALUE']);
-//коммерческая застройка, ИЖС, сельское хозяйство, дачное, подсобное хозяйство, садоводство
+
         $landTypes = array(
             'ИЖС' => 'ИЖС',
             'СНТ' => 'сельское хозяйство',
@@ -168,15 +168,12 @@ $yml->loadData(array(
 
         $data['alarm'] = $data['PROPERTY_SECURITY_CONCIERGE_VALUE'] == 'Y' || $data['PROPERTY_SECURITY_ALARM_VALUE'] == 'Y';
 
-
-        //\Lema\Common\Dumper::dump($data);
-
         return $data;
     },
 ));
 
 $yml->showData(array(
-    'sendHeader' => false,
+    'sendHeader' => true,
     'fields' => array(
         'type' => 'type',
         'category' => 'category',
@@ -207,12 +204,4 @@ $yml->showData(array(
         'gas' => 'PROPERTY_GAZ_VALUE',
         'mortgage' => 'PROPERTY_HYPOTHEC_VALUE',
     ),
-    /*'params' => array(
-        array('Поставщик', 'PROPERTY_PROVIDER_VALUE'),
-        array('Материал', 'PROPERTY_MATERIAL_VALUE'),
-        array('Количество штук в упаковке', 'PROPERTY_COUNT_IN_BOX_VALUE', 'unit' => 'шт.'),
-        array('Артикул', 'PROPERTY_ARTNUMBER_VALUE'),
-        array('Цвет', 'PROPERTY_COLOR_VALUE'),
-        array('Категория одежды', 'PROPERTY_CATEGORY_VALUE'),
-    ),*/
 ));
