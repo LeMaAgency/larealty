@@ -229,6 +229,9 @@ class IblockElement
             //get remind date property value
             $remindDate = static::getPropValue($fields, 'REMINDER_DATE', null);
 
+            if(empty($remindDate))
+                return false;
+
             //get rieltor property value
             $rieltor = static::getPropValue($fields, 'RIELTOR', false);
 
@@ -236,6 +239,9 @@ class IblockElement
             $agentName = '\\' . get_class() . '::remind(' . $fields['ID'] . ');';
 
             $remindTimeStamp = strtotime($remindDate == date('d.m.Y') ? '+1 hour' : $remindDate);
+
+            if($remindTimeStamp > time())
+                return false;
 
             $remindDate = date('d.m.Y H:i:s', $remindTimeStamp);
 
