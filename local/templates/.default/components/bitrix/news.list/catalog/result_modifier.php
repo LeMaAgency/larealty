@@ -41,7 +41,7 @@ $props = array(
 $splitSymbol = ', ';
 $sefFolder = '/' . preg_quote(current(explode('/', trim($APPLICATION->GetCurDir(), '/')))) . '/';
 
-$sections = \LIblock::getSectionsByIblockId($arParams['IBLOCK_ID']);
+$sections = \LIblock::getSectionsByIblockId($arParams['IBLOCK_ID'], false);
 
 /**
  * Set data for items
@@ -71,9 +71,14 @@ foreach($data->items() as $k => $item)
     /**
      * Set realty type
      */
-    $arResult['ITEMS'][$k]['IS_HOUSE_OR_LOT'] = false;
+    $arResult['ITEMS'][$k]['IS_HOUSE_OR_LOT'] = $arResult['ITEMS'][$k]['IS_LOT'] = false;
     if(isset($sections[$item->get('IBLOCK_SECTION_ID')]['CODE']))
-        $arResult['ITEMS'][$k]['IS_HOUSE_OR_LOT'] = in_array($sections[$item->get('IBLOCK_SECTION_ID')]['CODE'], array('doma', 'dachi'));
+    {
+        $arResult['ITEMS'][$k]['IS_HOUSE_OR_LOT'] = in_array($sections[$item->get('IBLOCK_SECTION_ID')]['CODE'], array(
+            'doma', 'dachi', 'zemelnyy_uchastok',
+        ));
+        $arResult['ITEMS'][$k]['IS_LOT'] = $sections[$item->get('IBLOCK_SECTION_ID')]['CODE'] == 'zemelnyy_uchastok';
+    }
 
     /**
      * Set detail page url

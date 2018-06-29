@@ -111,7 +111,7 @@ class LIblock
      *
      * @return bool|mixed
      */
-    public static function getSectionInfo($iblockCode, $sectionCode)
+    public static function getSectionInfo($iblockCode, $sectionCodeOrId, $byCode = true)
     {
         if(empty(static::$iblockSections))
             static::loadData();
@@ -120,8 +120,10 @@ class LIblock
         if(!$iblockId)
             return false;
 
-        if(isset(static::$iblockSections[$iblockId][$sectionCode]))
-            return static::$iblockSections[$iblockId][$sectionCode];
+        $key = $byCode ? 'BY_CODE' : 'BY_ID';
+
+        if(isset(static::$iblockSections[$iblockId][$key][$sectionCodeOrId]))
+            return static::$iblockSections[$iblockId][$key][$sectionCodeOrId];
 
         return false;
     }
@@ -131,7 +133,7 @@ class LIblock
      *
      * @return bool|mixed
      */
-    public static function getSectionsByIblockCode($iblockCode)
+    public static function getSectionsByIblockCode($iblockCode, $byCode = true)
     {
         if(empty(static::$iblockSections))
             static::loadData();
@@ -140,8 +142,10 @@ class LIblock
         if(!$iblockId)
             return false;
 
-        if(isset(static::$iblockSections[$iblockId]))
-            return static::$iblockSections[$iblockId];
+        $key = $byCode ? 'BY_CODE' : 'BY_ID';
+
+        if(isset(static::$iblockSections[$iblockId][$key]))
+            return static::$iblockSections[$iblockId][$key];
 
         return false;
     }
@@ -151,7 +155,7 @@ class LIblock
      *
      * @return bool|mixed
      */
-    public static function getSectionsByIblockId($iblockId)
+    public static function getSectionsByIblockId($iblockId, $byCode = true)
     {
         if(empty(static::$iblockSections))
             static::loadData();
@@ -159,8 +163,10 @@ class LIblock
         if(!$iblockId)
             return false;
 
-        if(isset(static::$iblockSections[$iblockId]))
-            return static::$iblockSections[$iblockId];
+        $key = $byCode ? 'BY_CODE' : 'BY_ID';
+
+        if(isset(static::$iblockSections[$iblockId][$key]))
+            return static::$iblockSections[$iblockId][$key];
 
         return false;
     }
@@ -274,7 +280,10 @@ class LIblock
         while($row = $res->Fetch())
         {
             if(!empty($row['CODE']))
-                static::$iblockSections[$row['IBLOCK_ID']][$row['CODE']] = $row;
+            {
+                static::$iblockSections[$row['IBLOCK_ID']]['BY_CODE'][$row['CODE']] = $row;
+                static::$iblockSections[$row['IBLOCK_ID']]['BY_ID'][$row['ID']] = $row;
+            }
         }
     }
 
