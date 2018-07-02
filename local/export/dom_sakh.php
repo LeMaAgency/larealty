@@ -140,13 +140,13 @@ $yml->loadData(array(
         unset($data['DETAIL_PICTURE'], $data['PROPERTY_MORE_PHOTO_VALUE']);
 
         $landTypes = array(
-            'ИЖС' => 'ИЖС',
-            'СНТ' => 'сельское хозяйство',
-            'Садоводство' => 'сельское хозяйство',
-            'Коммерческая застройка' => 'коммерческая застройка',
-            'Сельское хозяйство' => 'сельское хозяйство',
-            'Дачное' => 'дачное',
-            'Подсобное хозяйство' => 'подсобное хозяйство',
+            'ижс' => 'ИЖС',
+            'снт' => 'сельское хозяйство',
+            'садоводство' => 'сельское хозяйство',
+            'коммерческая застройка' => 'коммерческая застройка',
+            'сельское хозяйство' => 'сельское хозяйство',
+            'дачное' => 'дачное',
+            'подсобное хозяйство' => 'подсобное хозяйство',
         );
         $landType = mb_strtolower($data['PROPERTY_LOT_CATEGORIES_VALUE'], 'UTF-8');
         $data['land-type'] = isset($landTypes[$landType]) ? $landTypes[$landType] : null;
@@ -185,7 +185,6 @@ $yml->showData(array(
         //'land-space' => 'PROPERTY_SQUARE_LAND_VALUE',
         'built-year' => 'PROPERTY_YEAR_VALUE',
         'land-type' => 'land-type',
-        'property-type' => 'property-type',
         'CadastralNumber' => 'PROPERTY_CADASTRAL_NUMBER_VALUE',
         'renovation' => 'PROPERTY_REPAIR_TYPE_VALUE',
         'rooms' => 'PROPERTY_ROOMS_COUNT_VALUE',
