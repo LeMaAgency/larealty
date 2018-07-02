@@ -27,67 +27,60 @@ class DomclickExport extends \Lema\Base\XmlExport
         ?>
 
         <offer internal-id="<?=$id?>">
-            <url><?=$this->serverUrl?><?=$info['url']?>/</url>
+
             <?foreach($params['fields'] as $name => $key):
-                if(empty($info[$key]))
-                    continue;
             ?>
-                <<?=$name;?>><?=isset($info[$key]) ? htmlspecialcharsbx($info[$key]) : null;?></<?=$name?>>
+                <?if(is_array($key)):?>
+                    <<?=$name;?>>
+                        <?foreach($key as $innerName => $innerKey):
+                            $value = array_key_exists($innerKey, $info) ? htmlspecialcharsbx($info[$innerKey]) : $innerKey;
+                            if(empty($value))
+                                continue;
+                            ?>
+                            <<?=$innerName;?>><?=$value;?></<?=$innerName?>>
+                        <?endforeach;?>
+                    </<?=$name;?>>
+                <?else:
+                    if(!isset($info[$key]))
+                        continue;
+                    ?>
+                    <<?=$name;?>><?=isset($info[$key]) ? htmlspecialcharsbx($info[$key]) : null;?></<?=$name?>>
+                <?endif;?>
             <?endforeach;?>
-            <type><?=$info['type']?></type>
-            <property-type><?=$info['property-type']?></property-type>
-            <creation-date><?=$info['creation-date']?></creation-date>
-            <last-update-date><?=$info['last-update-date']?></last-update-date>
-            <location>
-                <country><?=$info['country']?></country>
-                <locality-name><?=$info['locality-name']?></locality-name>
-                <sub-locality-name><?=$info['sub-locality-name']?></sub-locality-name>
-                <address><?=$info['address']?></address>
-            </location>
-            <sales-agent>
-                <name><?=$info['PROPERTY_USER_NAME_VALUE'];?></name>
-                <phone><?=$info['PROPERTY_USER_PHONE_VALUE'];?></phone>
-                <email><?=$info['PROPERTY_USER_EMAIL_VALUE'];?></email>
-                <organization></organization>
-                <url></url>
-                <photo></photo>
-                <category>owner</category>
-            </sales-agent>
-            <price>
-                <value><?=$info['PROPERTY_PRICE_VALUE'];?></value>
-                <currency>RUR</currency>
-                <unit></unit>
-            </price>
-            <area>
+
+            <?foreach($params['checkValueFields'] as $name => $key):
+                ?>
+                <?if(is_array($key) && !empty($info[$key['value']])):?>
+                    <<?=$name;?>>
+                    <?foreach($key as $innerName => $innerKey):
+                        $value = array_key_exists($innerKey, $info) ? htmlspecialcharsbx($info[$innerKey]) : $innerKey;
+                        if(empty($value))
+                            continue;
+                        ?>
+                        <<?=$innerName;?>><?=$value;?></<?=$innerName?>>
+                    <?endforeach;?>
+                    </<?=$name;?>>
+                <?endif;?>
+            <?endforeach;?>
+            <<?=$info['areaTypeTag'];?>>
                 <value><?=$info['PROPERTY_SQUARE_VALUE'];?></value>
                 <unit>кв. м</unit>
-            </area>
-            <?if(!empty($info['PROPERTY_SQUARE_LAND_VALUE'])):?>
-                <living-space>
-                    <value><?=$info['PROPERTY_SQUARE_RESIDENT_VALUE'];?></value>
+            </<?=$info['areaTypeTag'];?>>
+
+
+            <?if(in_array($info['category'], array('дом с участком', 'участок'))):?>
+                <land-space>
+                    <value><?=$info['PROPERTY_SQUARE_VALUE'];?></value>
                     <unit>кв. м</unit>
-                </living-space>
+                </land-space>
             <?endif;?>
-             <?if(!empty($info['PROPERTY_SQUARE_LAND_VALUE'])):?>
-                <kitchen-space>
-                    <value><?=$info['PROPERTY_SQUARE_KITCHEN_VALUE'];?></value>
-                    <unit>кв. м</unit>
-                </kitchen-space>
-            <?endif;?>
-            <?if(!empty($info['PROPERTY_SQUARE_LAND_VALUE'])):?>
-                <lot-area>
-                    <value><?=$info['PROPERTY_SQUARE_LAND_VALUE'];?></value>
-                    <unit>кв. м</unit>
-                </lot-area>
-            <?endif;?>
+
             <?if(!empty($info['images'])):?>
                 <?foreach($info['images'] as $src):?>
                     <image><?=$this->serverUrl . $src;?></image>
                 <?endforeach;?>
             <?endif;?>
 
-            <phone><?=(int) empty($info['PROPERTY_PHONE_VALUE']);?></phone>
-            <television><?=(int) empty($info['PROPERTY_PHONE_VALUE']);?></television>
             <?if(!empty($params['params'])):?>
                     <?foreach($params['params'] as $data):
                         if(empty($info[$data[1]]))
@@ -141,7 +134,6 @@ class DomSakhExport extends \Lema\Base\XmlExport
         ?>
 
     <offer internal-id="<?=$id?>">
-        <url><?=$this->serverUrl?><?=$info['url']?>/</url>
         <?
         foreach($params['fields'] as $name => $key):
             if(!isset($info[$key]))
