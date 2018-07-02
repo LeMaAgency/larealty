@@ -184,6 +184,7 @@ $yml->showData(array(
         'kitchen-space' => 'PROPERTY_SQUARE_KITCHEN_VALUE',
         //'land-space' => 'PROPERTY_SQUARE_LAND_VALUE',
         'built-year' => 'PROPERTY_YEAR_VALUE',
+        'land-type' => 'land-type',
         'CadastralNumber' => 'PROPERTY_CADASTRAL_NUMBER_VALUE',
         'renovation' => 'PROPERTY_REPAIR_TYPE_VALUE',
         'rooms' => 'PROPERTY_ROOMS_COUNT_VALUE',
