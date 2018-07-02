@@ -191,7 +191,7 @@ class DomSakhExport extends \Lema\Base\XmlExport
                 if(!isset($info[$key]))
                     continue;
                 ?>
-                <<?=$name;?>><?=$info[$key] == 'Y' ? 'true' : 'false';?></<?=$name?>>
+                <<?=$name;?>><?=$info[$key] == 'Y' || $info[$key] === true ? 'true' : 'false';?></<?=$name?>>
             <? endforeach; ?>
         <? endif; ?>
         <?
