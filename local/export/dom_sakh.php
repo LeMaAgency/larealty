@@ -53,6 +53,7 @@ $yml->loadData(array(
         'PROPERTY_SECURITY_CONCIERGE',
         'PROPERTY_PHONE',
         'PROPERTY_INTERNET',
+        'PROPERTY_WATER_SUPPLY',
         'PROPERTY_HEATING',
         'PROPERTY_COLD_WATER',
         'PROPERTY_HOT_WATER',
