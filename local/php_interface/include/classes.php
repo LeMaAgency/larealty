@@ -144,7 +144,7 @@ class DomSakhExport extends \Lema\Base\XmlExport
         <url><?=$this->serverUrl?><?=$info['url']?>/</url>
         <?
         foreach($params['fields'] as $name => $key):
-            if(empty($info[$key]))
+            if(!isset($info[$key]))
             {
                 continue;
             }
@@ -188,7 +188,7 @@ class DomSakhExport extends \Lema\Base\XmlExport
 
         <?if(!empty($params['boolListFields'])):?>
             <?foreach($params['boolListFields'] as $name => $key):
-                if(empty($info[$key]))
+                if(!isset($info[$key]))
                     continue;
                 ?>
                 <<?=$name;?>><?=$info[$key] == 'Y' ? 'true' : 'false';?></<?=$name?>>
