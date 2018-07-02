@@ -156,7 +156,7 @@ $yml->loadData(array(
             'аренда' => 'в аренде',
         );
         $propertyType = mb_strtolower($data['PROPERTY_LOT_HAVINGS_TYPE_VALUE'], 'UTF-8');
-        $data['land-type'] = isset($propertyTypes[$propertyType]) ? $propertyTypes[$propertyType] : null;
+        $data['property-type'] = isset($propertyTypes[$propertyType]) ? $propertyTypes[$propertyType] : null;
 
         if($data['PROPERTY_BALCONIES_COUNT_VALUE'] == 1)
             $data['balkony'] = 'один';
@@ -185,6 +185,7 @@ $yml->showData(array(
         //'land-space' => 'PROPERTY_SQUARE_LAND_VALUE',
         'built-year' => 'PROPERTY_YEAR_VALUE',
         'land-type' => 'land-type',
+        'property-type' => 'property-type',
         'CadastralNumber' => 'PROPERTY_CADASTRAL_NUMBER_VALUE',
         'renovation' => 'PROPERTY_REPAIR_TYPE_VALUE',
         'rooms' => 'PROPERTY_ROOMS_COUNT_VALUE',
