@@ -1,15 +1,20 @@
 <?
 global $USER;
 $rsUsers = CUser::GetList(
-    ($by = "NAME"),
-    ($order = "desc"),
-    Array("GROUPS_ID" => Array(3), 'ACTIVE' => 'Y'),
-    Array("FIELDS" => array(
-        "ID",
-        "NAME",
-        "LAST_NAME",
-        "PERSONAL_PHOTO",
-        "PERSONAL_PHONE")
+    ($by = 'NAME'),
+    ($order = 'asc'),
+    Array('GROUPS_ID' => Array(3), 'ACTIVE' => 'Y'),
+    Array(
+        'FIELDS' => array(
+            'ID',
+            'NAME',
+            'LAST_NAME',
+            'PERSONAL_PHOTO',
+            'PERSONAL_PHONE'
+        ),
+        'NAV_PARAMS' => array(
+            'nTopCount' => $arParams['NEWS_COUNT'],
+        )
     )
 );
 while ($arUser = $rsUsers->Fetch()) {

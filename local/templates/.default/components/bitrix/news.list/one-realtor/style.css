@@ -1,0 +1,10 @@
+.new-rieltor .calculator__wrap {
+    background-color: #f4f3f3;
+}
+.new-rieltor .calculator__wrap .callback {
+    margin: inherit;
+    padding-top: 20px;
+}
+.new-rieltor .add-apartment {
+    padding: 146px 0;
+}
