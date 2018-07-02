@@ -152,7 +152,6 @@ class DomSakhExport extends \Lema\Base\XmlExport
             <<?=$name;?>><?=isset($info[$key]) ? htmlspecialcharsbx(is_array($info[$key]) ? join(', ', $info[$key]) : $info[$key]) : null;?></<?=$name?>>
         <? endforeach; ?>
         <location>
-            <country><?=$info['country']?></country>
             <locality-name><?=$info['locality-name']?></locality-name>
             <sub-locality-name><?=$info['sub-locality-name']?></sub-locality-name>
             <address><?=$info['address']?></address>
@@ -162,15 +161,9 @@ class DomSakhExport extends \Lema\Base\XmlExport
             <name><?=$info['PROPERTY_USER_NAME_VALUE'];?></name>
             <phone><?=$info['PROPERTY_USER_PHONE_VALUE'];?></phone>
             <email><?=$info['PROPERTY_USER_EMAIL_VALUE'];?></email>
-            <organization></organization>
-            <url></url>
-            <photo></photo>
-            <category>owner</category>
         </sales-agent>
         <price>
             <value><?=$info['PROPERTY_PRICE_VALUE'];?></value>
-            <currency>RUR</currency>
-            <unit></unit>
         </price>
         <?if(in_array($info['category'], array('дом', 'земля'))):?>
             <land-space><?=$info['PROPERTY_SQUARE_VALUE'];?></land-space>
