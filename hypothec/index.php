@@ -338,19 +338,20 @@ $APPLICATION->SetTitle('Ипотека');
                 </div>
             </div>
         </div>
+        <div class="row" style="text-align: center;">
+            <a href="<?=SITE_DIR;?>personal/hypothec/" class="add-apartment__button"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/consultation_button_text.php'); ?></a>
+        </div>
     </div>
     <div class="row new-rieltor">
         <div class="col-md-6 col-md-offset-2">
             <div class="add-apartment">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h3 class="add-apartment__title"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/consultation_title.php'); ?></h3>
-                            <span><? $APPLICATION->IncludeFile(SITE_DIR . 'include/hypothec/consultation_text.php'); ?></span>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="add-apartment__title"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/hypothec/consultation_title.php'); ?></h3>
+                        <span><? $APPLICATION->IncludeFile(SITE_DIR . 'include/hypothec/consultation_text.php'); ?></span>
 
-                            <a href="#" class="add-apartment__button js-feedback-form"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/consultation_button_text.php'); ?></a>
+                        <a href="#" class="add-apartment__button js-feedback-form"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/consultation_button_text.php'); ?></a>
 
-                        </div>
                     </div>
                 </div>
             </div>
