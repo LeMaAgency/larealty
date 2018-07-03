@@ -150,6 +150,10 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
                         </div>
                     <?elseif ($arItem["TYPE"] == "SELECT"):
                         ?>
+                        <?php
+                        if(isset($arItem['CODE']) && $arItem['CODE'] == 'REGION')
+                            $arItem['NAME'] = 'Месторасположение';
+                        ?>
                         <div class="filter-form-column<?=$extendFilterClass;?>">
                             <div class="filter-field-title"><?=$arItem["NAME"]?></div>
                             <div class="filter-select">

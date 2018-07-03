@@ -174,7 +174,7 @@ $APPLICATION->SetTitle("Квартирный ответ - Главная стр�
     'FILTER_NAME' => 'arrFilter',
     'FIELD_CODE' => array(0 => 'ID',),
     'PROPERTY_CODE' => array(
-        1 => 'ROOMS_COUNT', 2 => 'PLACEMENT', 3 => 'REALTY_TYPE', 0 => 'PRICE', 4 => 'STAGE', 5 => 'STAGES_COUNT',
+        1 => 'ROOMS_COUNT', 2 => 'REGION', 0 => 'PRICE', 4 => 'STAGE', 5 => 'STAGES_COUNT',
     ),
     'CACHE_TYPE' => 'A',
     'CACHE_TIME' => '3600',
@@ -182,6 +182,14 @@ $APPLICATION->SetTitle("Квартирный ответ - Главная стр�
     'PAGER_PARAMS_NAME' => 'arrPager',
     'SEF_MODE' => 'Y',
     'SEF_FOLDER' => '/catalog/',
+    'FILTER_ORDER' => array(
+        array('key' => 'ROOMS_COUNT', 'type' => 'property', 'expanded' => false),
+        array('key' => 'PRICE', 'type' => 'property', 'expanded' => false),
+        array('key' => 'STAGE', 'type' => 'property', 'expanded' => true),
+        array('key' => 'STAGES_COUNT', 'type' => 'property', 'expanded' => true),
+        array('key' => 'REGION', 'type' => 'property', 'expanded' => false),
+        array('key' => 'ID', 'type' => 'field', 'expanded' => false),
+    ),
 ));?>
 <?php
 $GLOBALS['bestOffersFilter'] = array('=PROPERTY_IS_EXCLUSIVE_VALUE' => 'Y');
