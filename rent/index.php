@@ -473,6 +473,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
         global $roomNewElementFilter;
         $roomNewElementFilter = array(
             'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
+            'PROPERTY_IS_EXCLUSIVE_VALUE' => 'Y',
         );
         ?>
         <? $APPLICATION->IncludeComponent('bitrix:news.list', 'resembling', array(
