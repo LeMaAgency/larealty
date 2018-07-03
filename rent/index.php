@@ -543,6 +543,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
             'AJAX_OPTION_HISTORY' => 'N',
             'AJAX_OPTION_ADDITIONAL' => '',
             'THE_BEST' => true,
+            'IS_RENT' => true,
         )); ?>
 
 <?if($inRootDir):?>

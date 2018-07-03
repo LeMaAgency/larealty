@@ -26,7 +26,7 @@ $data = new TH($this);
 
 <section class="offers offers_padding">
     <div class="container-index">
-        <div class="section-title">
+        <div class="section-title<?=empty($arParams['IS_RENT']) ? '' : ' section-title_rent';?>">
             <span>
                 <?= Loc::getMessage(empty($arParams['THE_BEST']) ? 'LEMA_RESEMBLING_TITLE' : 'LEMA_THE_BEST_TITLE'); ?>
             </span>
