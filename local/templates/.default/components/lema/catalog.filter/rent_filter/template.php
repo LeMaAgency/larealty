@@ -78,18 +78,21 @@ if(isset($uriParts[1]))
                                     <input name="<?=$arItem["INPUT_NAMES"][0]?>[4]" type="checkbox" id="n4" value="4x" class="filter-input">
                                     <label for="n4" class="filter-label">4+</label>
                                 </div>
-                            <?elseif(isset($arItem['CODE']) && in_array($arItem['CODE'], array('PRICE', 'SQUARE', 'SQUARE_LAND'))):?>
+                            <?elseif(isset($arItem['CODE']) && in_array($arItem['CODE'], array('PRICE', 'SQUARE', 'SQUARE_LAND'))):
+                                $currentMin = $arItem[(empty($arItem['REQUEST_VALUES'][0]) ? 'INPUT' : 'REQUEST') . '_VALUES'][0];
+                                $currentMax = $arItem[(empty($arItem['REQUEST_VALUES'][1]) ? 'INPUT' : 'REQUEST') . '_VALUES'][1];
+                                ?>
                                 <div class="filter-field-title"><?=$arItem["NAME"]?></div>
                                 <div class="filter-price">
                                     <input
                                             type="number"
-                                            value="<?=$arItem["INPUT_VALUES"][0]?>"
+                                            value="<?=$currentMin?>"
                                             name="<?=$arItem["INPUT_NAMES"][0]?>" class="filter-price-input filter-min-value-input"
                                             placeholder="<?=GetMessage("CT_BCF_FROM")?>"
                                     />
                                     <input
                                             type="number"
-                                            value="<?=$arItem["INPUT_VALUES"][1]?>"
+                                            value="<?=$currentMax?>"
                                             name="<?=$arItem["INPUT_NAMES"][1]?>" class="filter-price-input filter-max-value-input"
                                             placeholder="<?=GetMessage("CT_BCF_TO")?>"
                                     />
@@ -97,6 +100,8 @@ if(isset($uriParts[1]))
                                 <div
                                         data-min="<?=$arItem['INPUT_VALUES'][0];?>"
                                         data-max="<?=$arItem['INPUT_VALUES'][1];?>"
+                                        data-current-min="<?=$currentMin;?>"
+                                        data-current-max="<?=$currentMax;?>"
                                         class="filter-price-slider"></div>
                                 <div class="filter-price">
                                     <span class="filter-price-value filter-min-value"><?=$arItem['INPUT_VALUES'][0];?></span>

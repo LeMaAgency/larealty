@@ -18,16 +18,21 @@ $(document).ready(function () {
         ];
 
         if (doubleHandleSlider !== null) {
-            var start = + ($(el).data('min') || 8000000),
-                end = + ($(el).data('max') || 85000000);
+            var defaultMin = 0,
+                defaultMax = 999999999999,
+                start = + ($(el).data('current-min') || defaultMin),
+                end = + ($(el).data('current-max') || defaultMax),
+                min = + ($(el).data('min') || defaultMin),
+                max = + ($(el).data('max') || defaultMax);
+
             // Price Slider
             noUiSlider.create(doubleHandleSlider, {
                 start: [start, end],
                 connect: true,
                 step: 1,
                 range: {
-                    'min': [start],
-                    'max': [end]
+                    'min': [min],
+                    'max': [max]
                 }
             });
             doubleHandleSlider.noUiSlider.on('change', function (values, handle) {
@@ -36,20 +41,21 @@ $(document).ready(function () {
                 $(maxValInput).val(rangeValues[1]);
             });
 
+            doubleHandleSlider.noUiSlider.on('update', function (values, handle) {
+                snapValues[handle].innerHTML = values[handle];
+                $(minValInput).val(values[0]);
+                $(maxValInput).val(values[1]);
+            })
+
             $(minValInput).on('change', function () {
                 doubleHandleSlider.noUiSlider.set([this.value, null]);
             });
 
             $(maxValInput).on('change', function () {
                 doubleHandleSlider.noUiSlider.set([null, this.value]);
-            });
-            doubleHandleSlider.noUiSlider.on('update', function (values, handle) {
-                snapValues[handle].innerHTML = values[handle];
-                $(minValInput).val(values[0]);
-                $(maxValInput).val(values[1]);
-            });
+            })
         }
-    })
+    });
 
     // Select
     $(document).on('click', '.filter-select-link', function () {

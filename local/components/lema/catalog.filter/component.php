@@ -744,11 +744,20 @@ foreach($arResult["arrProp"] as $prop_id => $arProp)
     $value = is_array($value)? array_map("htmlspecialcharsbx", $value): htmlspecialcharsbx($value);
     $values = is_array($values)? array_map("htmlspecialcharsbx", $values): htmlspecialcharsbx($values);
 
+    $existsValues = array();
+
 	if($res)
 	{
         if(!empty($arProp['MIN']) && !empty($arProp['MAX']) && !empty($values))
         {
             $values = array($arProp['MIN'], $arProp['MAX']);
+        }
+
+        if(isset($_GET['arrFilter_pf'][$arProp['CODE']]['LEFT'], $_GET['arrFilter_pf'][$arProp['CODE']]['RIGHT']))
+        {
+            $existsValues = array(
+                $_GET['arrFilter_pf'][$arProp['CODE']]['LEFT'], $_GET['arrFilter_pf'][$arProp['CODE']]['RIGHT']
+            );
         }
 		$arResult["ITEMS"]["PROPERTY_".$prop_id] = array(
 			"NAME" => htmlspecialcharsbx($arProp["NAME"]),
@@ -762,6 +771,7 @@ foreach($arResult["arrProp"] as $prop_id => $arProp)
             "INPUT_VALUES" => $values,
             "~INPUT_VALUES" => $values,
 			"LIST" => $list,
+            'REQUEST_VALUES' => $existsValues
 		);
 	}
 
@@ -796,6 +806,7 @@ foreach($arResult["arrProp"] as $prop_id => $arProp)
             "INPUT_VALUES" => $values,
             "~INPUT_VALUES" => $values,
             "LIST" => $data[$arProp['CODE']],
+            'REQUEST_VALUES' => $existsValues
         );
     }
 }
