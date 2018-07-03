@@ -28,7 +28,7 @@ $data = new TH($this);
     <div class="container-index">
         <div class="section-title">
             <span>
-                <?= Loc::getMessage("LEMA_RESEMBLING_TITLE"); ?>
+                <?= Loc::getMessage(empty($arParams['THE_BEST']) ? 'LEMA_RESEMBLING_TITLE' : 'LEMA_THE_BEST_TITLE'); ?>
             </span>
         </div>
     </div>

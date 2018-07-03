@@ -6,4 +6,5 @@ $MESS['LEMA_RESEMBLING_APARTMENTS_MORE_BTN'] = 'Подробнее';
 $MESS['LEMA_RESEMBLING_SQUARE_M_SUP'] = 'м<sup>2</sup>';
 $MESS['LEMA_RESEMBLING_NO_OBJECTS_FOUND'] = 'К сожалению, объектов не найдено';
 $MESS['LEMA_RESEMBLING_TITLE'] = 'Похожие объекты';
+$MESS['LEMA_THE_BEST_TITLE'] = 'Лучшие предложения';
 $MESS['LEMA_RESEMBLING_SQUARE'] = 'Площадь';
