@@ -76,8 +76,8 @@ class LIblock
         if(!$iblockId)
             return false;
 
-        if(isset(static::$props[$iblockId]['BY_CODE'][$propCode]))
-            return static::$props[$iblockId]['BY_CODE'][$propCode];
+        if(isset(static::$props[$iblockId]['BY_CODE'][$propCode]['ID']))
+            return static::$props[$iblockId]['BY_CODE'][$propCode]['ID'];
 
         return false;
     }
