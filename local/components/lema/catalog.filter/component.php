@@ -460,7 +460,7 @@ foreach($arParams["FIELD_CODE"] as $field_code)
             $field_names = "";
             $field_values = "";
             $field_list = \Lema\IBlock\Element::getAll(LIblock::getId('objects'), array(
-                'filter' => array('ACTIVE' => 'Y', 'SECTION_CODE' => 'active'),
+                'filter' => array('ACTIVE' => 'Y', 'SECTION_CODE' => 'active', 'INCLUDE_SUBSECTIONS' => 'Y'),
                 'arSelect' => array('ID'),
             ));
             $field_list = array_combine(array_keys($field_list), array_keys($field_list));
@@ -565,6 +565,8 @@ foreach($arParams["FIELD_CODE"] as $field_code)
 	}
 }
 
+$allElements = array();
+
 foreach($arResult["arrProp"] as $prop_id => $arProp)
 {
 	$res = "";
@@ -595,6 +597,8 @@ foreach($arResult["arrProp"] as $prop_id => $arProp)
             }
         }
     }
+
+
 	switch ($arProp["PROPERTY_TYPE"])
 	{
 		case "L":
@@ -735,6 +739,10 @@ foreach($arResult["arrProp"] as $prop_id => $arProp)
 			$type = 'INPUT';
 			break;
 	}
+
+    $value = is_array($value)? array_map("htmlspecialcharsbx", $value): htmlspecialcharsbx($value);
+    $values = is_array($values)? array_map("htmlspecialcharsbx", $values): htmlspecialcharsbx($values);
+
 	if($res)
 	{
         if(!empty($arProp['MIN']) && !empty($arProp['MAX']) && !empty($values))
@@ -746,15 +754,49 @@ foreach($arResult["arrProp"] as $prop_id => $arProp)
 			"INPUT" => $res,
 			"CODE" => $arProp['CODE'],
 			"INPUT_NAME" => $name,
-			"INPUT_VALUE" => is_array($value)? array_map("htmlspecialcharsbx", $value): htmlspecialcharsbx($value),
-			"~INPUT_VALUE" => $value,
+            "INPUT_VALUE" => $value,
+            "~INPUT_VALUE" => $value,
 			"TYPE" => $type,
 			"INPUT_NAMES" => $names,
-			"INPUT_VALUES" => is_array($values)? array_map("htmlspecialcharsbx", $values): htmlspecialcharsbx($values),
-			"~INPUT_VALUES" => $values,
+            "INPUT_VALUES" => $values,
+            "~INPUT_VALUES" => $values,
 			"LIST" => $list,
 		);
 	}
+
+    if(in_array($arProp['CODE'], array('STAGE', 'STAGES_COUNT')))
+    {
+        if(empty($allElements))
+        {
+            $allElements = \Lema\IBlock\Element::getAll(LIblock::getId('objects'), array(
+                'filter' => array(
+                    'ACTIVE' => 'Y', 'SECTION_CODE' => 'active', 'INCLUDE_SUBSECTIONS' => 'Y',
+                ), 'arSelect' => array('ID', 'PROPERTY_STAGE', 'PROPERTY_STAGES_COUNT'),
+            ));
+        }
+        $data = array();
+        foreach($allElements as $element)
+        {
+            if(!empty($element['PROPERTY_' . $arProp['CODE'] . '_VALUE']))
+                $data[$arProp['CODE']][] = $element['PROPERTY_' . $arProp['CODE'] . '_VALUE'];
+            $data[$arProp['CODE']] = array_unique($data[$arProp['CODE']]);
+            natcasesort($data[$arProp['CODE']]);
+        }
+
+        $arResult["ITEMS"]["PROPERTY_".$prop_id] = array(
+            "NAME" => htmlspecialcharsbx($arProp["NAME"]),
+            "CODE" => $arProp['CODE'],
+            "INPUT_NAME" => $name,
+            "INPUT" => $res,
+            "INPUT_VALUE" => $value,
+            "~INPUT_VALUE" => $value,
+            "TYPE" => 'SELECT',
+            "INPUT_NAMES" => $names,
+            "INPUT_VALUES" => $values,
+            "~INPUT_VALUES" => $values,
+            "LIST" => $data[$arProp['CODE']],
+        );
+    }
 }
 
 $bHasOffersFilter = false;
