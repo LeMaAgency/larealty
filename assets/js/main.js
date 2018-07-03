@@ -8,43 +8,50 @@ $(document).ready(function () {
     });
 
 
-    var doubleHandleSlider = document.querySelector('.filter-price-slider');
-    var minValInput = document.querySelector('.filter-min-value-input');
-    var maxValInput = document.querySelector('.filter-max-value-input');
-    var snapValues = [
-        document.querySelector('.filter-min-value'),
-        document.querySelector('.filter-max-value')
-    ];
+    $('.filter-price-slider').each(function(i, el) {
+        var doubleHandleSlider = el;
+        var minValInput = $(doubleHandleSlider).siblings('.filter-price').find('.filter-min-value-input').get(0);
+        var maxValInput = $(doubleHandleSlider).siblings('.filter-price').find('.filter-max-value-input').get(0);
+        var snapValues = [
+            $(doubleHandleSlider).find('.filter-min-value'),
+            $(doubleHandleSlider).find('.filter-max-value')
+        ];
 
-    if (doubleHandleSlider !== null) {
-        // Price Slider
-        noUiSlider.create(doubleHandleSlider, {
-            start: [8000000, 85000000],
-            connect: true,
-            step: 1000,
-            range: {
-                'min': [8000000],
-                'max': [85000000]
-            }
-        });
-        doubleHandleSlider.noUiSlider.on('change', function (values, handle) {
-            var rangeValues = values;
-            minValInput.value = rangeValues[0];
-            maxValInput.value = rangeValues[1];
-        });
+        if (doubleHandleSlider !== null) {
+            var start = $(el).data('min') || 8000000,
+                end = $(el).data('max') || 85000000;
+            // Price Slider
+            noUiSlider.create(doubleHandleSlider, {
+                start: [start, end],
+                connect: true,
+                step: 1,
+                range: {
+                    'min': [start],
+                    'max': [end]
+                }
+            });
+            doubleHandleSlider.noUiSlider.on('change', function (values, handle) {
+                var rangeValues = values;
+                $(minValInput).val(rangeValues[0]);
+                $(maxValInput).val(rangeValues[1]);
+            });
 
+            console.log($(minValInput).length);
 
-        minValInput.addEventListener('change', function () {
-            doubleHandleSlider.noUiSlider.set([this.value, null]);
-        });
+            $(minValInput).on('change', function () {
+                doubleHandleSlider.noUiSlider.set([this.value, null]);
+            });
 
-        maxValInput.addEventListener('change', function () {
-            doubleHandleSlider.noUiSlider.set([null, this.value]);
-        });
-        doubleHandleSlider.noUiSlider.on('update', function (values, handle) {
-            snapValues[handle].innerHTML = values[handle];
-        });
-    }
+            $(maxValInput).on('change', function () {
+                doubleHandleSlider.noUiSlider.set([null, this.value]);
+            });
+            doubleHandleSlider.noUiSlider.on('update', function (values, handle) {
+                snapValues[handle].innerHTML = values[handle];
+                $(minValInput).val(values[0]);
+                $(maxValInput).val(values[1]);
+            });
+        }
+    })
 
     // Select
     $(document).on('click', '.filter-select-link', function () {

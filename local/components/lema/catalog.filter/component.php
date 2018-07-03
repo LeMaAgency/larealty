@@ -578,7 +578,7 @@ foreach($arResult["arrProp"] as $prop_id => $arProp)
 	$list = array();
 	$arResult["arrInputNames"][$FILTER_NAME."_pf"]=true;
 
-    if($arProp['PROPERTY_TYPE'] == 'N' && !in_array($arProp['CODE'], array('PRICE', /*'SQUARE', 'SQUARE_LAND', */'ROOMS_COUNT')))
+    if($arProp['PROPERTY_TYPE'] == 'N' && !in_array($arProp['CODE'], array('PRICE', 'ROOMS_COUNT')))
     {
         $propName = 'PROPERTY_' . $arProp['CODE'];
 
@@ -694,6 +694,7 @@ foreach($arResult["arrProp"] as $prop_id => $arProp)
 			else
 				$value_right = "";
 			$res .= '<p>'.GetMessage("CC_BCF_BEFORE").'</p><div class="right"><input type="text" name="'.$name_right.'" size="'.$arParams["NUMBER_WIDTH"].'" value="'.htmlspecialcharsbx($value_right).'" /></div></div>';
+
 
 			if($arProp['CODE'] == 'ROOMS_COUNT')
             {

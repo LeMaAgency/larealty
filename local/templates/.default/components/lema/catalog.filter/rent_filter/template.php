@@ -78,26 +78,29 @@ if(isset($uriParts[1]))
                                     <input name="<?=$arItem["INPUT_NAMES"][0]?>[4]" type="checkbox" id="n4" value="4x" class="filter-input">
                                     <label for="n4" class="filter-label">4+</label>
                                 </div>
-                            <?elseif(isset($arItem['CODE']) && in_array($arItem['CODE'], array('PRICE'/*, 'SQUARE', 'SQUARE_LAND'*/))):?>
+                            <?elseif(isset($arItem['CODE']) && in_array($arItem['CODE'], array('PRICE', 'SQUARE', 'SQUARE_LAND'))):?>
                                 <div class="filter-field-title"><?=$arItem["NAME"]?></div>
                                 <div class="filter-price">
                                     <input
-                                        type="number"
-                                        value="<?=$arItem["INPUT_VALUES"][0]?>"
-                                        name="<?=$arItem["INPUT_NAMES"][0]?>" class="filter-price-input filter-min-value-input"
-                                        placeholder="<?=GetMessage("CT_BCF_FROM")?>"
+                                            type="number"
+                                            value="<?=$arItem["INPUT_VALUES"][0]?>"
+                                            name="<?=$arItem["INPUT_NAMES"][0]?>" class="filter-price-input filter-min-value-input"
+                                            placeholder="<?=GetMessage("CT_BCF_FROM")?>"
                                     />
                                     <input
-                                        type="number"
-                                        value="<?=$arItem["INPUT_VALUES"][1]?>"
-                                        name="<?=$arItem["INPUT_NAMES"][1]?>" class="filter-price-input filter-max-value-input"
-                                        placeholder="<?=GetMessage("CT_BCF_TO")?>"
+                                            type="number"
+                                            value="<?=$arItem["INPUT_VALUES"][1]?>"
+                                            name="<?=$arItem["INPUT_NAMES"][1]?>" class="filter-price-input filter-max-value-input"
+                                            placeholder="<?=GetMessage("CT_BCF_TO")?>"
                                     />
                                 </div>
-                                <div class="filter-price-slider"></div>
+                                <div
+                                        data-min="<?=$arItem['INPUT_VALUES'][0];?>"
+                                        data-max="<?=$arItem['INPUT_VALUES'][1];?>"
+                                        class="filter-price-slider"></div>
                                 <div class="filter-price">
-                                    <span class="filter-price-value filter-min-value"></span>
-                                    <span class="filter-price-value filter-max-value"></span>
+                                    <span class="filter-price-value filter-min-value"><?=$arItem['INPUT_VALUES'][0];?></span>
+                                    <span class="filter-price-value filter-max-value"><?=$arItem['INPUT_VALUES'][1];?></span>
                                 </div>
                             <?else:?>
                                 <?if(!empty($arItem['INPUT_VALUES'][0]) && !empty($arItem['INPUT_VALUES'][1])):?>
