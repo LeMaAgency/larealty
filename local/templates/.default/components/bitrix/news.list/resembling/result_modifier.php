@@ -83,5 +83,5 @@ foreach($data->items() as $k => $item)
     /**
      * Set detail page url
      */
-    $arResult['ITEMS'][$k]['DETAIL_PAGE_URL'] = getElementDetailUrl($item);
+    $arResult['ITEMS'][$k]['DETAIL_PAGE_URL'] = getElementDetailUrl($item, array(), empty($arParams['IS_RENT']));
 }

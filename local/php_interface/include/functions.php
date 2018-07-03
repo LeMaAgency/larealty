@@ -8,7 +8,7 @@
  *
  * @return string
  */
-function getElementDetailUrl(\Lema\Template\Item $item, array $replace = array())
+function getElementDetailUrl(\Lema\Template\Item $item, array $replace = array(), $inCatalog = true)
 {
     if(empty($replace))
     {
@@ -17,6 +17,8 @@ function getElementDetailUrl(\Lema\Template\Item $item, array $replace = array()
             '#REALTY_TYPE#' => $item->propXmlId('REALTY_TYPE'),
         );
     }
+    if(!$inCatalog)
+        $replace['catalog'] = 'rent';
 
     return strtr($item->detailUrl(), $replace);
 }
