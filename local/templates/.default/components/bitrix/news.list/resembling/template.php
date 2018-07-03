@@ -13,7 +13,7 @@
 $this->setFrameMode(true);
 
 global $arrResemblingFilter;
-if(!($arrResemblingFilter['ID']))
+if(empty($arParams['THE_BEST']) && !($arrResemblingFilter['ID']))
     return;
 
 use Lema\Common\Helper as H,
