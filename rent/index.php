@@ -302,10 +302,10 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
         "SEF_URL_TEMPLATES" => array(
             "news" => "",
             "section" => "",
-            "detail" => "#REALTY_TYPE#/#RENT_TYPE#/#ELEMENT_CODE#/",
+            "detail" => "#SECTION_CODE#/#RENT_TYPE#/#ELEMENT_CODE#/",
             "search" => "search/",
-            'realty' => '#REALTY_TYPE#/',
-            'realty_rent' => '#REALTY_TYPE#/#RENT_TYPE#/',
+            'realty' => '#SECTION_CODE#/',
+            'realty_rent' => '#SECTION_CODE#/#RENT_TYPE#/',
         ),
     ),
     false
@@ -412,7 +412,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
             </div>
         </div>
     </div>
-    <? $APPLICATION->IncludeComponent('bitrix:news.list', 'advantages_apartments', array(
+    <? /*$APPLICATION->IncludeComponent('bitrix:news.list', 'advantages_apartments', array(
         'DISPLAY_DATE' => 'Y',
         'DISPLAY_NAME' => 'Y',
         'DISPLAY_PICTURE' => 'Y',
@@ -465,7 +465,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
         'AJAX_OPTION_STYLE' => 'Y',
         'AJAX_OPTION_HISTORY' => 'N',
         'AJAX_OPTION_ADDITIONAL' => '',
-    )); ?>
+    ));*/ ?>
 <?endif;?>
     <section class="new-flats">
         <div class="container">

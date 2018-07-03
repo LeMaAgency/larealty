@@ -14,12 +14,12 @@ if(empty($GLOBALS['arrFilter']))
  * Ordering sort for filter items
  */
 $filterFields = array(
-    array('key' => 'ID', 'type' => 'field', 'expanded' => false),
     array('key' => 'ROOMS_COUNT', 'type' => 'property', 'expanded' => false),
-    array('key' => 'STAGE', 'type' => 'property', 'expanded' => false),
-    array('key' => 'STAGES_COUNT', 'type' => 'property', 'expanded' => false),
     array('key' => 'PRICE', 'type' => 'property', 'expanded' => false),
     array('key' => 'REGION', 'type' => 'property', 'expanded' => false),
+    array('key' => 'ID', 'type' => 'field', 'expanded' => false),
+    array('key' => 'STAGE', 'type' => 'property', 'expanded' => true),
+    array('key' => 'STAGES_COUNT', 'type' => 'property', 'expanded' => true),
 );
 
 /**
@@ -64,6 +64,17 @@ else
     {
         $currentSectionCode = array_shift($uriParts);
         $GLOBALS['arrFilter']['SECTION_CODE'] = explode('-', trim($currentSectionCode));
+        if($currentSectionCode == 'doma-dachi-zemelnyy_uchastok')
+        {
+            $filterFields = array(
+                array('key' => 'ROOMS_COUNT', 'type' => 'property', 'expanded' => false),
+                array('key' => 'PRICE', 'type' => 'property', 'expanded' => false),
+                array('key' => 'REGION', 'type' => 'property', 'expanded' => false),
+                array('key' => 'ID', 'type' => 'field', 'expanded' => false),
+                array('key' => 'SQUARE_LAND', 'type' => 'property', 'expanded' => false),
+                array('key' => 'SQUARE', 'type' => 'property', 'expanded' => false),
+            );
+        }
     }
 
 
@@ -117,6 +128,7 @@ else
                     'GARAGE', 'SAUNA', 'HYPOTHEC', 'HAVINGS_TYPE', 'LOT_HAVINGS_TYPE', 'LOT_CATEGORIES',
                 );
                 $filterFields = array(
+                    array('key' => 'ROOMS_COUNT', 'type' => 'property', 'expanded' => false),
                     array('key' => 'PRICE', 'type' => 'property', 'expanded' => false),
                     array('key' => 'REGION', 'type' => 'property', 'expanded' => false),
                     array('key' => 'ID', 'type' => 'field', 'expanded' => false),
@@ -132,6 +144,7 @@ else
                     'GARAGE', 'SAUNA', 'HYPOTHEC', 'HAVINGS_TYPE', 'LOT_HAVINGS_TYPE', 'LOT_CATEGORIES',
                 );
                 $filterFields = array(
+                    array('key' => 'ROOMS_COUNT', 'type' => 'property', 'expanded' => false),
                     array('key' => 'PRICE', 'type' => 'property', 'expanded' => false),
                     array('key' => 'REGION', 'type' => 'property', 'expanded' => false),
                     array('key' => 'ID', 'type' => 'field', 'expanded' => false),
