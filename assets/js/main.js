@@ -18,8 +18,8 @@ $(document).ready(function () {
         ];
 
         if (doubleHandleSlider !== null) {
-            var start = $(el).data('min') || 8000000,
-                end = $(el).data('max') || 85000000;
+            var start = + ($(el).data('min') || 8000000),
+                end = + ($(el).data('max') || 85000000);
             // Price Slider
             noUiSlider.create(doubleHandleSlider, {
                 start: [start, end],
@@ -35,8 +35,6 @@ $(document).ready(function () {
                 $(minValInput).val(rangeValues[0]);
                 $(maxValInput).val(rangeValues[1]);
             });
-
-            console.log($(minValInput).length);
 
             $(minValInput).on('change', function () {
                 doubleHandleSlider.noUiSlider.set([this.value, null]);
