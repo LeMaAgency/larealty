@@ -39,6 +39,7 @@ global $APPLICATION;
             '/assets/js/nouislider.min.js',
             '/assets/js/slick.min.js',
             '/assets/js/selectFx.js',
+            '/assets/js/classie.js',
             '/assets/js/main.js',
             '/assets/js/custom.js',
         ));
