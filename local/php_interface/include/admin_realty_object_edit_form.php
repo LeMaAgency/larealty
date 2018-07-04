@@ -1763,7 +1763,7 @@ if (
         /**
          * Hide items for empty choose
          */
-        var initShowedProps = [3, 10, 13, 28, 29, 30, 54, 61, 63, 68, 69, 70, 71, 72, 73, 74, 76, 111];
+        var initShowedProps = [3, 10, 12, 13, 28, 29, 30, 54, 61, 63, 68, 69, 70, 71, 72, 73, 74, 76, 111];
         $('[id^="tr_PROPERTY_"], #tr_NAME, #tr_CODE').hide();
         if($.trim($('#tr_PROPERTY_1 select').val()) == '')
         {

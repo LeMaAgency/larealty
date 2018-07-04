@@ -7,6 +7,8 @@ Loc::loadMessages(__FILE__);
 
 $strNavQueryString = ($arResult["NavQueryString"] != "" ? $arResult["NavQueryString"] . "&amp;" : "");
 $strNavQueryStringFull = ($arResult["NavQueryString"] != "" ? "?" . $arResult["NavQueryString"] : "");
+$uri = trim(\Lema\Common\Request::get()->getRequestedPageDirectory(), '/');
+$arResult["sUrlPath"] = '/' . $uri . '/';
 ?>
 <div class="pagination-catalog">
     <nav class="container">
