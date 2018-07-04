@@ -4,9 +4,8 @@ defined('NEED_AUTH') or define('NEED_AUTH', true);
 
 require_once $_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php';
 
-$APPLICATION->SetTitle('Мои объекты');
-?>
-    <div class="container">
+$APPLICATION->SetTitle("Мои объекты");
+?>    <div class="container">
         <div class="row">
             <div class="col-sm-12">
                 <?\Lema\Components\Breadcrumbs::inc('breadcrumbs');?>
@@ -37,23 +36,16 @@ $APPLICATION->SetTitle('Мои объекты');
                         </ul>
                         <input type="hidden" name="" value="">
                     </div>
-                    <div class="filter-field-title">Общая площадь, м&sup2;</div>
+                    <div class="filter-field-title">Общая площадь, м²</div>
                     <div class="filter-price"  >
-                        <input type="text" value="" name="" class="filter-price-input filter-max-value-input" placeholder="Общая площадь, м&sup2;">
+                        <input type="text" value="" name="" class="filter-price-input filter-max-value-input" placeholder="Общая площадь, м²">
                     </div>
 
                 </div>
                 <div class="col-md-6">
                     <div class="filter-field-title object-number">Кол-во комнат</div>
-                    <div class="filter-num-rooms">
-                        <input name="" type="checkbox" id="n1" value="1" class="filter-input">
-                        <label for="n1" class="filter-label">1</label>
-                        <input name="" type="checkbox" id="n2" value="2" class="filter-input">
-                        <label for="n2" class="filter-label">2</label>
-                        <input name="" type="checkbox" id="n3" value="3" class="filter-input">
-                        <label for="n3" class="filter-label">3</label>
-                        <input name="" type="checkbox" id="n4" value="4x" class="filter-input">
-                        <label for="n4" class="filter-label">4+</label>
+                    <div class="filter-price"  >
+                        <input type="text" value="" name="" class="filter-price-input filter-max-value-input" placeholder="Кол-во комнат">
                     </div>
 
                     <div class="filter-field-title">Этаж</div>
