@@ -91,6 +91,12 @@ $sortBy = 'PROPERTY_PRICE';
 $sortOrder = 'asc';
 if(isset($_GET['sort']) && in_array(strtolower($_GET['sort']), array('asc', 'desc')))
     $sortOrder = strtolower($_GET['sort']);
+$squareFrom = 45;
+if(isset($_GET['square']) && in_array((int) $_GET['square'], array(45, 65, 95)))
+    $squareFrom = (int) $_GET['square'];
+if(empty($GLOBALS[$arParams['FILTER_NAME']]['PROPERTY']))
+    $GLOBALS[$arParams['FILTER_NAME']]['PROPERTY'] = array();
+$GLOBALS[$arParams['FILTER_NAME']]['PROPERTY']['>=SQUARE'] = $squareFrom;
 ?>
 <div class="content-page">
     <div class="sort-catalog">

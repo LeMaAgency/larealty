@@ -82,9 +82,9 @@ if(isset($_GET['sort']) && in_array(strtolower($_GET['sort']), array('asc', 'des
 $squareFrom = 45;
 if(isset($_GET['square']) && in_array((int) $_GET['square'], array(45, 65, 95)))
     $squareFrom = (int) $_GET['square'];
-if(empty($GLOBALS[$arParams['FILTER_NAME']]))
-    $GLOBALS[$arParams['FILTER_NAME']] = array();
-$GLOBALS[$arParams['FILTER_NAME']]['>=PROPERTY_SQUARE'] = $squareFrom;
+if(empty($GLOBALS[$arParams['FILTER_NAME']]['PROPERTY']))
+    $GLOBALS[$arParams['FILTER_NAME']]['PROPERTY'] = array();
+$GLOBALS[$arParams['FILTER_NAME']]['PROPERTY']['>=SQUARE'] = $squareFrom;
 ?>
 
 <div class="content-page">
