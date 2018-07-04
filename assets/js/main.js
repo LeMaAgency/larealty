@@ -98,6 +98,7 @@ $(document).ready(function () {
                 onChange: function() {
                     var optText = $.trim($(el).closest('.js-sort').siblings('.cs-placeholder').text()),
                         option = $('.js-sort option:contains("' + optText + '")');
+                    console.log(optText, option);
                     if(option && option.data('url'))
                         window.location.href = option.data('url');
                 }

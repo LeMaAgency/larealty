@@ -79,6 +79,12 @@ $sortBy = 'PROPERTY_PRICE';
 $sortOrder = 'asc';
 if(isset($_GET['sort']) && in_array(strtolower($_GET['sort']), array('asc', 'desc')))
     $sortOrder = strtolower($_GET['sort']);
+$squareFrom = 45;
+if(isset($_GET['square']) && in_array((int) $_GET['square'], array(45, 65, 95)))
+    $squareFrom = (int) $_GET['square'];
+if(empty($GLOBALS[$arParams['FILTER_NAME']]))
+    $GLOBALS[$arParams['FILTER_NAME']] = array();
+$GLOBALS[$arParams['FILTER_NAME']]['>=PROPERTY_SQUARE'] = $squareFrom;
 ?>
 
 <div class="content-page">
@@ -100,9 +106,18 @@ if(isset($_GET['sort']) && in_array(strtolower($_GET['sort']), array('asc', 'des
                                         class="sort__option">от дорогих к дешевым </option>
                             </select>
                             <select name="square-meters" id="square-meters-id" class="js-sort sort__select cs-select cs-skin-border">
-                                <option value="" class="sort__option">от 45м2</option>
-                                <option value="" class="sort__option">от 65м2</option>
-                                <option value="" class="sort__option">от 95м2</option>
+                                <option value=""
+                                    <?=selected('square', '45');?>
+                                        data-url="<?=$APPLICATION->GetCurPageParam('square=45', array('square'));?>"
+                                        class="sort__option">от 45м2</option>
+                                <option value=""
+                                    <?=selected('square', '65');?>
+                                        data-url="<?=$APPLICATION->GetCurPageParam('square=65', array('square'));?>"
+                                        class="sort__option">от 65м2</option>
+                                <option value=""
+                                    <?=selected('square', '95');?>
+                                        data-url="<?=$APPLICATION->GetCurPageParam('square=95', array('square'));?>"
+                                        class="sort__option">от 95м2</option>
                             </select>
                         </div>
                     </div>

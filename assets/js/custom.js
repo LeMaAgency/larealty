@@ -73,10 +73,4 @@ $(document).ready(function () {
         $( '.slider-services__slider').slick('slickGoTo', parseInt($(this).data('img')) -1 )
     })
 
-    $('.js-sort').on('change', function(e) {
-        e.preventDefault();
-        if($(this).data('url'))
-            window.location.href = $(this).data('url');
-    })
-
 });
