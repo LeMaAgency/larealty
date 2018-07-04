@@ -1789,10 +1789,20 @@ if (
                 'Офисы': 49,
                 'Торговые площади': 50
             };
+            $(this).find('option[value="0"]').first().attr('selected', false);
             var realtyType = $(this).find('option:selected').first().text().replace(' .  . ', '');
             if(!realtyType || !realtyTypes[realtyType])
             {
-                alert('Укажите раздел для элемента!');
+                <?php
+                $sectionId = isset($_GET['find_section_section']) ? (int) $_GET['find_section_section'] : 0;
+                $sectionInfo = \LIblock::getSectionInfo('objects', $sectionId, false);
+                $sectionName = isset($sectionInfo['NAME']) ? $sectionInfo['NAME'] : null;
+                ?>
+                realtyType = '<?= $sectionName;?>';
+                if(!realtyType || !realtyTypes[realtyType])
+                    alert('Укажите раздел для элемента!');
+                else
+                    $(this).find('option[value="<?=$sectionId;?>"]').first().attr('selected', true);
             }
 
             switch(String(realtyTypes[realtyType]))
