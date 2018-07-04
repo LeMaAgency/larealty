@@ -296,3 +296,5 @@ a.add-apartment__button:hover {
 .flat-details .flat-on-map {
     padding-top: 5px;
 }
+.top-slide {height: 600px;
+    background-size: cover;}
