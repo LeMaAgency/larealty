@@ -468,6 +468,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
     ));*/ ?>
 <?endif;?>
 
+<?if(empty($currentSectionCode)):?>
 
         <?php
         global $roomNewElementFilter;
@@ -545,7 +546,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
             'THE_BEST' => true,
             'IS_RENT' => true,
         )); ?>
-
+<?endif;?>
 <?if($inRootDir):?>
     <? $APPLICATION->IncludeComponent(
         "bitrix:news.detail",
