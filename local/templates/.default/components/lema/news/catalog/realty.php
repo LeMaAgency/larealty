@@ -12,6 +12,21 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 
+if(isset($arResult['VARIABLES']['SECTION_CODE']) && in_array($arResult['VARIABLES']['SECTION_CODE'], array('doma', 'dachi', 'zemelnyy_uchastok'))) {
+    $showButtonTypes = array(
+        'doma' => 'Дома',
+        'dachi' => 'Дачи',
+        'zemelnyy_uchastok' => 'Земельные участки',
+    );
+}
+else
+{
+    $showButtonTypes = array(
+        'kvartiry' => 'Квартиры',
+        'komnaty' => 'Комнаты',
+    );
+}
+
 ?>
 
 <?if($arParams["USE_RSS"]=="Y"):?>
@@ -49,6 +64,8 @@ $this->setFrameMode(true);
 		"PAGER_PARAMS_NAME" => $arParams["PAGER_PARAMS_NAME"],
 		"SEF_MODE" => $arParams["SEF_MODE"],
         "FILTER_ORDER" => $arParams["FILTER_ORDER"],
+        'SHOW_BUTTON_TYPES' => $showButtonTypes,
+        'SECTION_CODE' => $arParams['PARENT_SECTION_CODE'],
 	),
 	$component
 );
@@ -57,27 +74,29 @@ $this->setFrameMode(true);
 <?endif?>
 <div class="content-page">
     <div class="sort-catalog">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 col-md-8 col-lg-9">
-                    <div class="sort">
-                        <span class="sort__title">Сортировка:</span>
-                        <select name="price" id="price-id" class="sort__select cs-select cs-skin-border">
-                            <option value="" class="sort__option">от дешевых к дорогим </option>
-                            <option value="" class="sort__option">от дорогих к дешевым </option>
-                        </select>
-                        <select name="square-meters" id="square-meters-id" class="sort__select cs-select cs-skin-border">
-                            <option value="" class="sort__option">от 45м2</option>
-                            <option value="" class="sort__option">от 45м2</option>
-                            <option value="" class="sort__option">от 45м2</option>
-                        </select>
+        <form method="get">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-8 col-lg-9">
+                        <div class="sort">
+                            <span class="sort__title">Сортировка:</span>
+                            <select name="price" id="price-id" class="sort__select cs-select cs-skin-border">
+                                <option value="" class="sort__option">от дешевых к дорогим </option>
+                                <option value="" class="sort__option">от дорогих к дешевым </option>
+                            </select>
+                            <select name="square-meters" id="square-meters-id" class="sort__select cs-select cs-skin-border">
+                                <option value="" class="sort__option">от 45м2</option>
+                                <option value="" class="sort__option">от 45м2</option>
+                                <option value="" class="sort__option">от 45м2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-3">
+                        <a href="" class="order-selection"><span>Заказать подбор квартир</span></a>
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-4 col-lg-3">
-                    <a href="" class="order-selection"><span>Заказать подбор квартир</span></a>
-                </div>
             </div>
-        </div>
+        </form>
     </div>
 
     <?$APPLICATION->IncludeComponent(

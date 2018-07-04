@@ -28,6 +28,20 @@ if(empty($rentFilterId))
     );
 }
 
+if(isset($arResult['VARIABLES']['SECTION_CODE']) && in_array($arResult['VARIABLES']['SECTION_CODE'], array('doma', 'dachi', 'zemelnyy_uchastok'))) {
+    $showButtonTypes = array(
+        'doma' => 'Дома',
+        'dachi' => 'Дачи',
+        'zemelnyy_uchastok' => 'Земельные участки',
+    );
+}
+else
+{
+    $showButtonTypes = array(
+        'kvartiry' => 'Квартиры',
+        'komnaty' => 'Комнаты',
+    );
+}
 ?>
 
 <?if($arParams["USE_RSS"]=="Y"):?>
@@ -65,6 +79,8 @@ if(empty($rentFilterId))
 		"PAGER_PARAMS_NAME" => $arParams["PAGER_PARAMS_NAME"],
 		"SEF_MODE" => $arParams["SEF_MODE"],
         "FILTER_ORDER" => $arParams["FILTER_ORDER"],
+        'SHOW_BUTTON_TYPES' => $showButtonTypes,
+        'SECTION_CODE' => $arParams['PARENT_SECTION_CODE'],
 	),
 	$component
 );

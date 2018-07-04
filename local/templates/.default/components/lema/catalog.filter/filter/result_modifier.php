@@ -79,3 +79,4 @@ if(!empty($arResult['ITEMS']) && !empty($arParams['FILTER_ORDER']))
 }
 else
     $arResult['ORDERED_ITEMS'] = $arResult['ITEMS'];
+unset($arResult['ITEMS']);

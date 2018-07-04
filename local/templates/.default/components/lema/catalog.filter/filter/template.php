@@ -23,11 +23,21 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
             <?if(!empty($arParams['SHOW_BUTTON_TYPES'])):?>
                 <?php
                 $first = true;
+                $useSectionCode = !empty($arParams['SECTION_CODE']);
                 ?>
                 <div class="filter-form__type">
                     <div class="filter-field-title">Тип недвижимости</div>
-                    <?foreach($arParams['SHOW_BUTTON_TYPES'] as $code => $label):?>
-                        <input<?if($first){$first=false;?> checked<?}?> type="radio" id="type-<?=$code;?>" data-code="<?=$code;?>" class="filter-form__type__item" name="arrFilter_pf[REALTY_TYPE]" value="<?=$code;?>">
+                    <?foreach($arParams['SHOW_BUTTON_TYPES'] as $code => $label):
+                        if($useSectionCode)
+                            $active = $code === $arParams['SECTION_CODE'];
+                        else
+                        {
+                            $active = $first;
+                            if($first)
+                                $first = false;
+                        }
+                        ?>
+                        <input<?if($active){?> checked<?}?> type="radio" id="type-<?=$code;?>" data-code="<?=$code;?>" class="filter-form__type__item" name="arrFilter_pf[REALTY_TYPE]" value="<?=$code;?>">
                         <label for="type-<?=$code;?>" class="filter-form__type__item-label"><?=$label;?></label>
                     <?endforeach;?>
                 </div>
