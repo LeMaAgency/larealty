@@ -22,6 +22,8 @@ global $APPLICATION;
             '/assets/css/fonts/fonts.css',
             '/assets/css/normalize.css',
             '/assets/css/bootstrap.min.css',
+            '/assets/css/cs-select.css',
+            '/assets/css/cs-skin-border.css',
             '/assets/css/owl.carousel.min.css',
             '/assets/css/slick.css',
             '/assets/css/jquery.fancybox.min.css',
