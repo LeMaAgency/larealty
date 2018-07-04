@@ -59,6 +59,7 @@ $this->setFrameMode(true);
 ?>
 <br />
 <?endif?>
+<?if(false):?>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"catalog",
@@ -114,3 +115,4 @@ $this->setFrameMode(true);
 	),
 	$component
 );?>
+<?endif;?>
