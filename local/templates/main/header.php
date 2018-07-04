@@ -88,6 +88,10 @@ global $APPLICATION;
                             <?=Loc::getMessage('LEMA_HEADER_SIGNUP_LINK');?>
                         </a>
                     <?else:?>
+                        <a href="<?=SITE_DIR;?>personal/" class="header-account-link signin-link link-hvr">
+                            <?=Loc::getMessage('LEMA_HEADER_PERSONAL_LINK');?>
+                        </a>
+                        <span class="header-account-border"></span>
                         <a href="?logout=yes" class="header-account-link signin-link link-hvr">
                             <?=Loc::getMessage('LEMA_HEADER_LOGOUT_LINK');?>
                         </a>
