@@ -286,3 +286,4 @@ a.add-apartment__button:hover {
 }
 .anketa .filter-price, .anketa  .filter-select {width: 100%;}
 .anketa .filter-price-input, .anketa  .filter-select {max-width: 100%;}
+.offers-item-img_exclusive::after {top:30px; right: -70px;}

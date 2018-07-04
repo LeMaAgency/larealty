@@ -235,7 +235,7 @@ input:focus:-ms-input-placeholder {
     height: 400px;
     background-repeat: no-repeat !important;
     background-position: 50% 50% !important;
-    background-size: cover;
+    background-size: 100% 100%;
 }
 
 .top-slide__banner {
