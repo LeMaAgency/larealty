@@ -94,7 +94,14 @@ $(document).ready(function () {
     //  ативация SelectFx для кастомизации селектов
     (function () {
     [].slice.call(document.querySelectorAll('select.cs-select')).forEach(function (el) {
-            new SelectFx(el);
+            new SelectFx(el, {
+                onChange: function() {
+                    var optText = $.trim($(el).closest('.js-sort').siblings('.cs-placeholder').text()),
+                        option = $('.js-sort option:contains("' + optText + '")');
+                    if(option && option.data('url'))
+                        window.location.href = option.data('url');
+                }
+            });
         });
     })();
 

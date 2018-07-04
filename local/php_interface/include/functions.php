@@ -61,3 +61,14 @@ function checked($key, $value, array $data = null)
 {
     return isActive($key, $value, $data) ? ' checked' : null;
 }
+/**
+ * @param $key
+ * @param $value
+ * @param array|null $data
+ *
+ * @return null|string
+ */
+function selected($key, $value, array $data = null)
+{
+    return isActive($key, $value, $data) ? ' selected' : null;
+}

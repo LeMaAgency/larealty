@@ -85,8 +85,45 @@ else
 	$component
 );
 ?>
-<br />
 <?endif?>
+<?php
+$sortBy = 'PROPERTY_PRICE';
+$sortOrder = 'asc';
+if(isset($_GET['sort']) && in_array(strtolower($_GET['sort']), array('asc', 'desc')))
+    $sortOrder = strtolower($_GET['sort']);
+?>
+<div class="content-page">
+    <div class="sort-catalog">
+        <form method="get">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-8 col-lg-9">
+                        <div class="sort">
+                            <span class="sort__title">Сортировка:</span>
+                            <select name="price" id="price-id" class="js-sort sort__select cs-select cs-skin-border">
+                                <option value=""
+                                    <?=selected('sort', 'asc');?>
+                                        data-url="<?=$APPLICATION->GetCurPageParam('sort=asc', array('sort'));?>"
+                                        class="sort__option">от дешевых к дорогим </option>
+                                <option value=""
+                                    <?=selected('sort', 'desc');?>
+                                        data-url="<?=$APPLICATION->GetCurPageParam('sort=desc', array('sort'));?>"
+                                        class="sort__option">от дорогих к дешевым </option>
+                            </select>
+                            <select name="square-meters" id="square-meters-id" class="js-sort sort__select cs-select cs-skin-border">
+                                <option value="" class="sort__option">от 45м2</option>
+                                <option value="" class="sort__option">от 65м2</option>
+                                <option value="" class="sort__option">от 95м2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-3">
+                        <a href="" class="order-selection"><span>Заказать подбор квартир</span></a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 <?php
 /**
  * Set filter by rent type
@@ -100,8 +137,8 @@ $GLOBALS[$arParams['FILTER_NAME']]['=PROPERTY_RENT_TYPE'] = $rentFilterId;
 		"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 		"IBLOCK_ID" => $arParams["IBLOCK_ID"],
 		"NEWS_COUNT" => $arParams["NEWS_COUNT"],
-		"SORT_BY1" => 'ID',
-		"SORT_ORDER1" => 'ASC',
+		"SORT_BY1" => $sortBy,
+		"SORT_ORDER1" => $sortOrder,
 		"SORT_BY2" => $arParams["SORT_BY2"],
 		"SORT_ORDER2" => $arParams["SORT_ORDER2"],
 		"FIELD_CODE" => $arParams["LIST_FIELD_CODE"],

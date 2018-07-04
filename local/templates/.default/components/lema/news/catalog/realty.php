@@ -34,7 +34,8 @@ else
 	if(method_exists($APPLICATION, 'addheadstring'))
 		$APPLICATION->AddHeadString('<link rel="alternate" type="application/rss+xml" title="'.$arResult["FOLDER"].$arResult["URL_TEMPLATES"]["rss"].'" href="'.$arResult["FOLDER"].$arResult["URL_TEMPLATES"]["rss"].'" />');
 	?>
-	<a href="<?=$arResult["FOLDER"].$arResult["URL_TEMPLATES"]["rss"]?>" title="rss" target="_self"><img alt="RSS" src="<?=$templateFolder?>/images/gif-light/feed-icon-16x16.gif" border="0" align="right" /></a>
+	<!--suppress ALL -->
+    <a href="<?=$arResult["FOLDER"].$arResult["URL_TEMPLATES"]["rss"]?>" title="rss" target="_self"><img alt="RSS" src="<?=$templateFolder?>/images/gif-light/feed-icon-16x16.gif" border="0" align="right" /></a>
 <?endif?>
 
 <?if($arParams["USE_SEARCH"]=="Y"):?>
@@ -72,6 +73,14 @@ else
 ?>
 <br />
 <?endif?>
+
+<?php
+$sortBy = 'PROPERTY_PRICE';
+$sortOrder = 'asc';
+if(isset($_GET['sort']) && in_array(strtolower($_GET['sort']), array('asc', 'desc')))
+    $sortOrder = strtolower($_GET['sort']);
+?>
+
 <div class="content-page">
     <div class="sort-catalog">
         <form method="get">
@@ -80,14 +89,20 @@ else
                     <div class="col-sm-12 col-md-8 col-lg-9">
                         <div class="sort">
                             <span class="sort__title">Сортировка:</span>
-                            <select name="price" id="price-id" class="sort__select cs-select cs-skin-border">
-                                <option value="" class="sort__option">от дешевых к дорогим </option>
-                                <option value="" class="sort__option">от дорогих к дешевым </option>
+                            <select name="price" id="price-id" class="js-sort sort__select cs-select cs-skin-border">
+                                <option value=""
+                                    <?=selected('sort', 'asc');?>
+                                        data-url="<?=$APPLICATION->GetCurPageParam('sort=asc', array('sort'));?>"
+                                        class="sort__option">от дешевых к дорогим </option>
+                                <option value=""
+                                    <?=selected('sort', 'desc');?>
+                                        data-url="<?=$APPLICATION->GetCurPageParam('sort=desc', array('sort'));?>"
+                                        class="sort__option">от дорогих к дешевым </option>
                             </select>
-                            <select name="square-meters" id="square-meters-id" class="sort__select cs-select cs-skin-border">
+                            <select name="square-meters" id="square-meters-id" class="js-sort sort__select cs-select cs-skin-border">
                                 <option value="" class="sort__option">от 45м2</option>
-                                <option value="" class="sort__option">от 45м2</option>
-                                <option value="" class="sort__option">от 45м2</option>
+                                <option value="" class="sort__option">от 65м2</option>
+                                <option value="" class="sort__option">от 95м2</option>
                             </select>
                         </div>
                     </div>
@@ -106,8 +121,8 @@ else
             "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
             "IBLOCK_ID" => $arParams["IBLOCK_ID"],
             "NEWS_COUNT" => $arParams["NEWS_COUNT"],
-            "SORT_BY1" => 'ID',
-            "SORT_ORDER1" => 'ASC',
+            "SORT_BY1" => $sortBy,
+            "SORT_ORDER1" => $sortOrder,
             "SORT_BY2" => $arParams["SORT_BY2"],
             "SORT_ORDER2" => $arParams["SORT_ORDER2"],
             "FIELD_CODE" => $arParams["LIST_FIELD_CODE"],
