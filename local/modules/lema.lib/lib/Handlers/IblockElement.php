@@ -96,7 +96,7 @@ class IblockElement
                 $fields['NAME'] = $section[$sectionId]['NAME'];
 
             //generate element code for URL
-            $id = empty($fields['ID']) ? 0 : $fields['ID'];
+            $id = empty($fields['ID']) ? time() : $fields['ID'];
 
             $fields['CODE'] = \CUtil::translit($section[$sectionId]['CODE'] . '_' . $square . '_m_2_' . $id, 'ru');
         }
