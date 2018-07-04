@@ -62,16 +62,16 @@ $this->setFrameMode(true);
                 <div class="col-sm-12 col-md-8 col-lg-9">
                     <div class="sort">
                         <span class="sort__title">Сортировка:</span>
-
-
-                        <div class="sort__select cs-select cs-skin-border" tabindex="0"><span class="cs-placeholder">от дешевых к дорогим </span><div class="cs-options"><ul><li data-option="" data-value=""><span>от дешевых к дорогим </span></li><li data-option="" data-value=""><span>от дорогих к дешевым </span></li></ul></div><select name="price" id="price-id" class="sort__select cs-select cs-skin-border">
-                                <option value="" class="sort__option">от дешевых к дорогим </option>
-                                <option value="" class="sort__option">от дорогих к дешевым </option>
-                            </select></div><div class="sort__select cs-select cs-skin-border" tabindex="0"><span class="cs-placeholder">от 45м2</span><div class="cs-options"><ul><li data-option="" data-value=""><span>от 45м2</span></li><li data-option="" data-value=""><span>от 45м2</span></li><li data-option="" data-value=""><span>от 45м2</span></li></ul></div><select name="square-meters" id="square-meters-id" class="sort__select cs-select cs-skin-border">
-                                <option value="" class="sort__option">от 45м2</option>
-                                <option value="" class="sort__option">от 45м2</option>
-                                <option value="" class="sort__option">от 45м2</option>
-                            </select></div></div>
+                        <select name="price" id="price-id" class="sort__select cs-select cs-skin-border">
+                            <option value="" class="sort__option">от дешевых к дорогим </option>
+                            <option value="" class="sort__option">от дорогих к дешевым </option>
+                        </select>
+                        <select name="square-meters" id="square-meters-id" class="sort__select cs-select cs-skin-border">
+                            <option value="" class="sort__option">от 45м2</option>
+                            <option value="" class="sort__option">от 45м2</option>
+                            <option value="" class="sort__option">от 45м2</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="col-sm-12 col-md-4 col-lg-3">
                     <a href="" class="order-selection"><span>Заказать подбор квартир</span></a>

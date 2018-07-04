@@ -24,6 +24,7 @@ class IblockElement
      */
     public static function beforeAdd(array &$fields)
     {
+        static::generateElementNameAndCode($fields);
         static::setElementRights($fields);
         static::setReminders($fields);
         static::setAutoFit($fields);
