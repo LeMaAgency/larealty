@@ -72,11 +72,20 @@ $data->setShowMoreScript();
                             <div class="item-info__inner">
                                 <div class="item-info__inner__img item-info__inner__img_floor"></div>
                                 <div class="item-info__inner__content">
-                                    <?if($item->propFilled('STAGE') && $item->propFilled('STAGES_COUNT')):?>
-                                        <div class="item-info-name"><?=$item->propName('STAGE');?></div>
-                                        <div class="item-info-value">
-                                            <?=$item->propVal('STAGE');?>/<?=$item->propVal('STAGES_COUNT');?>
-                                        </div>
+                                    <?if($item->get('IS_HOUSE_OR_LOT')):?>
+                                        <?if($item->propFilled('STAGES_COUNT')):?>
+                                            <div class="item-info-name">Этажность</div>
+                                            <div class="item-info-value">
+                                                <?=$item->propVal('STAGES_COUNT');?>
+                                            </div>
+                                        <?endif;?>
+                                    <?else:?>
+                                        <?if($item->propFilled('STAGE') && $item->propFilled('STAGES_COUNT')):?>
+                                            <div class="item-info-name"><?=$item->propName('STAGE');?></div>
+                                            <div class="item-info-value">
+                                                <?=$item->propVal('STAGE');?>/<?=$item->propVal('STAGES_COUNT');?>
+                                            </div>
+                                        <?endif;?>
                                     <?endif;?>
                                 </div>
                             </div>

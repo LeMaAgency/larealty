@@ -56,10 +56,10 @@ $data = new TH($this);
                                         <div class="item-info__inner__img item-info__inner__img_floor"></div>
                                         <div class="item-info__inner__content">
                                             <?if($item->get('IS_HOUSE_OR_LOT')):?>
-                                                <?if($item->propFilled('STAGE')):?>
-                                                    <div class="item-info-name"><?=$item->propName('STAGE');?></div>
+                                                <?if($item->propFilled('STAGE_COUNT')):?>
+                                                    <div class="item-info-name">Этажность</div>
                                                     <div class="item-info-value">
-                                                        <?=$item->propVal('STAGE');?>
+                                                        <?=$item->propVal('STAGE_COUNT');?>
                                                     </div>
                                                 <?endif;?>
                                             <?else:?>
