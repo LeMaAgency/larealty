@@ -298,3 +298,5 @@ a.add-apartment__button:hover {
 }
 .top-slide {height: 600px;
     background-size: cover;}
+h2, h3, .card-flat__content__head__price_min,
+.card-flat__content__head__price {color:#002b4e! important;}
