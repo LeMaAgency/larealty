@@ -45,7 +45,11 @@ $data = new TH($this);
                 <td data-label="<?=Loc::getMessage('LEMA_HYPOTHEC_CALC_RESULT_PROGRAM');?>"><?=$item->getName()?></td>
                 <td data-label="<?=Loc::getMessage('LEMA_HYPOTHEC_CALC_RESULT_BET');?>"><?=$item->propVal('BANK_BET')?> %</td>
                 <td data-label="<?=Loc::getMessage('LEMA_HYPOTHEC_CALC_RESULT_PAY');?>"><?=$item->propVal('MONTH_PAYMENT')?> руб</td>
-                <td data-label="<?=Loc::getMessage('LEMA_HYPOTHEC_CALC_RESULT_MORE');?>"><a href=""><?=Loc::getMessage('LEMA_HYPOTHEC_CALC_RESULT_MORE');?></a></td>
+                <td data-label="<?=Loc::getMessage('LEMA_HYPOTHEC_CALC_RESULT_MORE');?>">
+                    <?if($item->propFilled('URL')):?>
+                        <a href="<?=$item->propVal('URL');?>"><?=Loc::getMessage('LEMA_HYPOTHEC_CALC_RESULT_MORE');?></a>
+                    <?endif;?>
+                </td>
             </tr>
         <?endforeach;?>
         </tbody>
