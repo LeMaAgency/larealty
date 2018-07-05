@@ -135,29 +135,46 @@ $item = $data->item();
                                 <div class="card-flat__content__details__row__dots"></div>
                                 <div class="card-flat__content__details__row__val auto-widht"><?=$item->getId();?></div>
                             </div>
+                            <?php
+                            $i = 0;
+                            $foldedCnt = 3;
+                            ?>
                             <?foreach($arResult['DISPLAY_PROPERTIES'] as $propCode => $propData):
                                 if($item->propEmpty($propCode))
                                     continue;
                                 ?>
-                                <div class="card-flat__content__details__row">
-                                    <div class="card-flat__content__details__row__name"><?=$item->propName($propCode);?></div>
-                                    <div class="card-flat__content__details__row__dots"></div>
-                                    <div class="card-flat__content__details__row__val auto-widht">
-                                        <?if($item->prop($propCode, 'MULTIPLE') == 'Y')
-                                        {
-                                            echo join(', ', $item->propVal($propCode));
-                                        }
-                                        else
-                                        {
-                                            $value = $item->propVal($propCode);
-                                            echo $value == 'Y' ? '✔' : $value;
-                                        }
-                                        if(false !== strpos($propCode, 'SQUARE'))
-                                            echo ' ' . Loc::getMessage('LEMA_SQUARE_M_SUP');
-                                        ?>
+
+                                <?if(++$i === $foldedCnt):?>
+                                    <div class="js-collapsed" style="display: none;">
+                                <?endif;?>
+
+                                    <div class="card-flat__content__details__row">
+                                        <div class="card-flat__content__details__row__name"><?=$item->propName($propCode);?></div>
+                                        <div class="card-flat__content__details__row__dots"></div>
+                                        <div class="card-flat__content__details__row__val auto-widht">
+                                            <?if($item->prop($propCode, 'MULTIPLE') == 'Y')
+                                            {
+                                                echo join(', ', $item->propVal($propCode));
+                                            }
+                                            else
+                                            {
+                                                $value = $item->propVal($propCode);
+                                                echo $value == 'Y' ? '✔' : $value;
+                                            }
+                                            if(false !== strpos($propCode, 'SQUARE'))
+                                                echo ' ' . Loc::getMessage('LEMA_SQUARE_M_SUP');
+                                            ?>
+                                        </div>
                                     </div>
-                                </div>
-                            <?endforeach;?>
+
+                                <?endforeach;?>
+
+                                <?if($i >= $foldedCnt):?>
+                                    </div>
+                                    <a href="#" class="js-collapse-props">
+                                        <span>Развернуть</span>
+                                    </a>
+                                <?endif;?>
                         </div>
                         <div class="card-flat__content__buttons">
                             <a href="#" class="card-flat__content__buttons__item">

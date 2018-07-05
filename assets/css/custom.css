@@ -288,12 +288,7 @@ a.add-apartment__button:hover {
 .anketa .filter-price-input, .anketa  .filter-select {max-width: 100%;}
 .offers-item-img_exclusive::after {top:30px; right: -70px;}
 
-
-.flat-details.collapsed {
-    max-height: 250px;
-}
-
-.flat-details .flat-on-map {
+.content-page .flat-on-map {
     padding-top: 5px;
 }
 .top-slide {height: 600px;

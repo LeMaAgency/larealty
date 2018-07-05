@@ -135,10 +135,19 @@ $item = $data->item();
                                 <div class="card-flat__content__details__row__dots"></div>
                                 <div class="card-flat__content__details__row__val auto-widht"><?=$item->getId();?></div>
                             </div>
+                            <?php
+                            $i = 0;
+                            $foldedCnt = 3;
+                            ?>
                             <?foreach($arResult['DISPLAY_PROPERTIES'] as $propCode => $propData):
                                 if($item->propEmpty($propCode))
                                     continue;
                                 ?>
+
+                                <?if(++$i === $foldedCnt):?>
+                                    <div class="js-collapsed" style="display: none;">
+                                <?endif;?>
+
                                 <div class="card-flat__content__details__row">
                                     <div class="card-flat__content__details__row__name"><?=$item->propName($propCode);?></div>
                                     <div class="card-flat__content__details__row__dots"></div>
@@ -157,7 +166,16 @@ $item = $data->item();
                                         ?>
                                     </div>
                                 </div>
+
                             <?endforeach;?>
+
+                            <?if($i >= $foldedCnt):?>
+                                </div>
+                                <a href="#" class="js-collapse-props">
+                                    <span>Развернуть</span>
+                                </a>
+                            <?endif;?>
+
                         </div>
                         <div class="card-flat__content__buttons">
                             <a href="#" class="card-flat__content__buttons__item">
