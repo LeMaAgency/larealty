@@ -399,58 +399,60 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
 );?>
 
 <?if(!empty($currentSectionCode) && empty($GLOBALS['arrFilter']['SECTION_CODE'])):?>
-    <? $APPLICATION->IncludeComponent(
-        "bitrix:news.detail",
-        "hypothec",
-        Array(
-            "ACTIVE_DATE_FORMAT" => "d.m.Y",
-            "ADD_ELEMENT_CHAIN" => "N",
-            "ADD_SECTIONS_CHAIN" => "N",
-            "AJAX_MODE" => "N",
-            "AJAX_OPTION_ADDITIONAL" => "",
-            "AJAX_OPTION_HISTORY" => "N",
-            "AJAX_OPTION_JUMP" => "N",
-            "AJAX_OPTION_STYLE" => "Y",
-            "BROWSER_TITLE" => "-",
-            "CACHE_GROUPS" => "Y",
-            "CACHE_TIME" => "36000000",
-            "CACHE_TYPE" => "A",
-            "CHECK_DATES" => "Y",
-            "DETAIL_URL" => "",
-            "DISPLAY_BOTTOM_PAGER" => "N",
-            "DISPLAY_DATE" => "Y",
-            "DISPLAY_NAME" => "Y",
-            "DISPLAY_PICTURE" => "Y",
-            "DISPLAY_PREVIEW_TEXT" => "Y",
-            "DISPLAY_TOP_PAGER" => "N",
-            "ELEMENT_CODE" => "hypothec",
-            "ELEMENT_ID" => "",
-            "FIELD_CODE" => array("", ""),
-            "IBLOCK_ID" => "7",
-            "IBLOCK_TYPE" => "content",
-            "IBLOCK_URL" => "",
-            "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-            "MESSAGE_404" => "",
-            "META_DESCRIPTION" => "-",
-            "META_KEYWORDS" => "-",
-            "PAGER_BASE_LINK_ENABLE" => "N",
-            "PAGER_SHOW_ALL" => "N",
-            "PAGER_TEMPLATE" => ".default",
-            "PAGER_TITLE" => "Страница",
-            "PROPERTY_CODE" => array("LIST_ELEMENTS", ""),
-            "SET_BROWSER_TITLE" => "N",
-            "SET_CANONICAL_URL" => "N",
-            "SET_LAST_MODIFIED" => "N",
-            "SET_META_DESCRIPTION" => "N",
-            "SET_META_KEYWORDS" => "N",
-            "SET_STATUS_404" => "N",
-            "SET_TITLE" => "N",
-            "SHOW_404" => "N",
-            "STRICT_SECTION_CHECK" => "N",
-            "USE_PERMISSIONS" => "N",
-            "USE_SHARE" => "N"
-        )
-    ); ?>
+    <?if(empty($uriParts[1])):?>
+        <? $APPLICATION->IncludeComponent(
+            "bitrix:news.detail",
+            "hypothec",
+            Array(
+                "ACTIVE_DATE_FORMAT" => "d.m.Y",
+                "ADD_ELEMENT_CHAIN" => "N",
+                "ADD_SECTIONS_CHAIN" => "N",
+                "AJAX_MODE" => "N",
+                "AJAX_OPTION_ADDITIONAL" => "",
+                "AJAX_OPTION_HISTORY" => "N",
+                "AJAX_OPTION_JUMP" => "N",
+                "AJAX_OPTION_STYLE" => "Y",
+                "BROWSER_TITLE" => "-",
+                "CACHE_GROUPS" => "Y",
+                "CACHE_TIME" => "36000000",
+                "CACHE_TYPE" => "A",
+                "CHECK_DATES" => "Y",
+                "DETAIL_URL" => "",
+                "DISPLAY_BOTTOM_PAGER" => "N",
+                "DISPLAY_DATE" => "Y",
+                "DISPLAY_NAME" => "Y",
+                "DISPLAY_PICTURE" => "Y",
+                "DISPLAY_PREVIEW_TEXT" => "Y",
+                "DISPLAY_TOP_PAGER" => "N",
+                "ELEMENT_CODE" => "hypothec",
+                "ELEMENT_ID" => "",
+                "FIELD_CODE" => array("", ""),
+                "IBLOCK_ID" => "7",
+                "IBLOCK_TYPE" => "content",
+                "IBLOCK_URL" => "",
+                "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+                "MESSAGE_404" => "",
+                "META_DESCRIPTION" => "-",
+                "META_KEYWORDS" => "-",
+                "PAGER_BASE_LINK_ENABLE" => "N",
+                "PAGER_SHOW_ALL" => "N",
+                "PAGER_TEMPLATE" => ".default",
+                "PAGER_TITLE" => "Страница",
+                "PROPERTY_CODE" => array("LIST_ELEMENTS", ""),
+                "SET_BROWSER_TITLE" => "N",
+                "SET_CANONICAL_URL" => "N",
+                "SET_LAST_MODIFIED" => "N",
+                "SET_META_DESCRIPTION" => "N",
+                "SET_META_KEYWORDS" => "N",
+                "SET_STATUS_404" => "N",
+                "SET_TITLE" => "N",
+                "SHOW_404" => "N",
+                "STRICT_SECTION_CHECK" => "N",
+                "USE_PERMISSIONS" => "N",
+                "USE_SHARE" => "N"
+            )
+        ); ?>
+    <?endif;?>
 <?else:?>
     <?$APPLICATION->IncludeComponent('bitrix:news.list', 'advantages_apartments', array(
         'DISPLAY_DATE' => 'Y',
@@ -516,27 +518,67 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-3">
-                    <a class="new-flats__tab-nav" href="#one-room" data-toggle="tab"><span>Однокомнатные</span></a>
-                </div>
-                <div class="col-sm-3">
-                    <a class="new-flats__tab-nav active" href="#two-room" data-toggle="tab"><span>двухкомнатные</span></a>
-                </div>
-                <div class="col-sm-3">
-                    <a class="new-flats__tab-nav" href="#three-room" data-toggle="tab">
-                        <div class="new-flats__tab-nav__wrap-icon"></div><span>трехкомнатные</span></a>
-                </div>
-                <div class="col-sm-3">
-                    <a class="new-flats__tab-nav" href="#four-room" data-toggle="tab">
-                        <div class="new-flats__tab-nav__wrap-icon"></div><span>четырехкомнатные</span></a>
+        <?if(isset($currentSectionCode) && $currentSectionCode === 'kvartiry-komnaty'):?>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <a class="new-flats__tab-nav" href="#one-room" data-toggle="tab">
+                            <i></i>
+                            <span>Однокомнатные</span>
+                        </a>
+                    </div>
+                    <div class="col-sm-3">
+                        <a class="new-flats__tab-nav active" href="#two-room" data-toggle="tab">
+                            <i></i><i></i>
+                            <span>двухкомнатные</span>
+                        </a>
+                    </div>
+                    <div class="col-sm-3">
+                        <a class="new-flats__tab-nav" href="#three-room" data-toggle="tab">
+                            <div class="new-flats__tab-nav__wrap-icon"><i></i><i></i><i></i></div>
+                            <span>трехкомнатные</span>
+                        </a>
+                    </div>
+                    <div class="col-sm-3">
+                        <a class="new-flats__tab-nav" href="#four-room" data-toggle="tab">
+                            <div class="new-flats__tab-nav__wrap-icon"><i></i><i></i><i></i><i></i></div>
+                            <span>четырехкомнатные</span>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
+        <?else:?>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <a class="new-flats__tab-nav" href="#one-room" data-toggle="tab">
+                            <span>Однокомнатные</span>
+                        </a>
+                    </div>
+                    <div class="col-sm-3">
+                        <a class="new-flats__tab-nav active" href="#two-room" data-toggle="tab">
+                            <span>двухкомнатные</span>
+                        </a>
+                    </div>
+                    <div class="col-sm-3">
+                        <a class="new-flats__tab-nav" href="#three-room" data-toggle="tab">
+                            <div class="new-flats__tab-nav__wrap-icon"></div>
+                            <span>трехкомнатные</span>
+                        </a>
+                    </div>
+                    <div class="col-sm-3">
+                        <a class="new-flats__tab-nav" href="#four-room" data-toggle="tab">
+                            <div class="new-flats__tab-nav__wrap-icon"></div>
+                            <span>четырехкомнатные</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <?endif;?>
 
         <?
         global $roomNewElementFilter;
+        $sectionCodes = explode('-', $currentSectionCode);
         ?>
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane" id="one-room">
@@ -546,6 +588,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                         $roomNewElementFilter = array(
                             '=PROPERTY_ROOMS_COUNT' => 1,
                             'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
+                            'SECTION_CODE' => $sectionCodes,
                         );
                         ?>
                         <?$APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
@@ -625,6 +668,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                         $roomNewElementFilter = array(
                             '=PROPERTY_ROOMS_COUNT' => 2,
                             'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
+                            'SECTION_CODE' => $sectionCodes,
                         );
                         ?>
                         <?$APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
@@ -704,6 +748,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                         $roomNewElementFilter = array(
                             '=PROPERTY_ROOMS_COUNT' => 3,
                             'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
+                            'SECTION_CODE' => $sectionCodes,
                         );
                         ?>
                         <?$APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
@@ -783,6 +828,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                         $roomNewElementFilter = array(
                             '>=PROPERTY_ROOMS_COUNT' => 4,
                             'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
+                            'SECTION_CODE' => $sectionCodes,
                         );
                         ?>
                         <?$APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
