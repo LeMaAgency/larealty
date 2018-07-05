@@ -91,9 +91,9 @@ $data = new TH($this);
                                 </div>
                             </div>
                             <?if($item->get('IS_HOUSE_OR_LOT') && $item->propFilled('SQUARE_LAND')):?>
-                                <div class="item-info item-info_area">
+                                <div class="item-info item-info_world">
                                     <div class="item-info__inner">
-                                        <div class="item-info__inner__img item-info__inner__img_area"></div>
+                                        <div class="item-info__inner__img item-info__inner__img_world"></div>
                                         <div class="item-info__inner__content">
                                             <div class="item-info-name"><?=$item->propName('SQUARE_LAND');?></div>
                                             <div class="item-info-value">
