@@ -7,6 +7,6 @@ $MESS['LEMA_DETAIL_HYPOTHEC_BUY'] = 'Купить в ипотеку';
 $MESS['LEMA_DETAIL_DESCRIPTION_TAB_TITLE'] = 'Описание';
 $MESS['LEMA_DETAIL_MAP_TAB_TITLE'] = 'Объект на карте';
 $MESS['LEMA_DETAIL_RIELTOR_CALL_TITLE'] = 'Связаться со мной!';
-$MESS['LEMA_DETAIL_RIELTOR_CALL_TITLE'] = 'или оставьте ваш номер, и я перезвонию вам в ближайшее время';
+$MESS['LEMA_DETAIL_RIELTOR_CALL_TITLE'] = 'или оставьте ваш номер, и я перезвоню вам в ближайшее время';
 $MESS['LEMA_DETAIL_RECALL_WAIT_TITLE'] = 'Жду звонка';
 $MESS['LEMA_DETAIL_PHONE_PLACEHOLDER'] = 'Ваш телефон';
