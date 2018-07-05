@@ -106,7 +106,7 @@ $APPLICATION->SetTitle('Ипотека');
 
                                 <div class="col-xs-12 col-sm-6 col-lg-4 input">
                                     <div class="table">
-                                        <div class="cell"><label>Первоначальный взнос (ЗУБ или %)</label></div>
+                                        <div class="cell"><label>Первоначальный взнос (РУБ или %)</label></div>
                                     </div>
                                     <select name=""><option value="">Выбрать</option><option value="3">1</option></select>
                                 </div>
