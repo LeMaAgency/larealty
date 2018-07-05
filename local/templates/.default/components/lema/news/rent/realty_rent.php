@@ -47,7 +47,6 @@ if(empty($rentFilterId))
 	),
 	$component
 );?>
-<br />
 <?endif?>
 <?if($arParams["USE_FILTER"]=="Y"):?>
 <?$APPLICATION->IncludeComponent(
@@ -69,20 +68,20 @@ if(empty($rentFilterId))
 	$component
 );
 ?>
-<br />
 <?endif?>
 <?php
 $sortBy = 'PROPERTY_PRICE';
 $sortOrder = 'asc';
 if(isset($_GET['sort']) && in_array(strtolower($_GET['sort']), array('asc', 'desc')))
     $sortOrder = strtolower($_GET['sort']);
-$squareFrom = 45;
-if(isset($_GET['square']) && in_array((int) $_GET['square'], array(45, 65, 95)))
+$squareFrom = 15;
+if(isset($_GET['square']) && in_array((int) $_GET['square'], array(15, 45, 80)))
     $squareFrom = (int) $_GET['square'];
 if(empty($GLOBALS[$arParams['FILTER_NAME']]['PROPERTY']))
     $GLOBALS[$arParams['FILTER_NAME']]['PROPERTY'] = array();
 $GLOBALS[$arParams['FILTER_NAME']]['PROPERTY']['>=SQUARE'] = $squareFrom;
 ?>
+
 <div class="content-page">
     <div class="sort-catalog">
         <form method="get">
@@ -103,85 +102,87 @@ $GLOBALS[$arParams['FILTER_NAME']]['PROPERTY']['>=SQUARE'] = $squareFrom;
                             </select>
                             <select name="square-meters" id="square-meters-id" class="js-sort sort__select cs-select cs-skin-border">
                                 <option value=""
+                                    <?=selected('square', '15');?>
+                                        data-url="<?=$APPLICATION->GetCurPageParam('square=15', array('square'));?>"
+                                        class="sort__option">от 15м2</option>
+                                <option value=""
                                     <?=selected('square', '45');?>
                                         data-url="<?=$APPLICATION->GetCurPageParam('square=45', array('square'));?>"
                                         class="sort__option">от 45м2</option>
                                 <option value=""
-                                    <?=selected('square', '65');?>
-                                        data-url="<?=$APPLICATION->GetCurPageParam('square=65', array('square'));?>"
-                                        class="sort__option">от 65м2</option>
-                                <option value=""
-                                    <?=selected('square', '95');?>
-                                        data-url="<?=$APPLICATION->GetCurPageParam('square=95', array('square'));?>"
-                                        class="sort__option">от 95м2</option>
+                                    <?=selected('square', '80');?>
+                                        data-url="<?=$APPLICATION->GetCurPageParam('square=80', array('square'));?>"
+                                        class="sort__option">от 80м2</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-4 col-lg-3">
-                        <a href="" class="order-selection"><span>Заказать подбор квартир</span></a>
+                        <a href="#" class="js-flat-fit-order order-selection"><span>Заказать подбор квартир</span></a>
                     </div>
                 </div>
             </div>
         </form>
     </div>
-<?php
-/**
- * Set filter by rent type
- */
-$GLOBALS[$arParams['FILTER_NAME']]['=PROPERTY_RENT_TYPE'] = $rentFilterId;
-?>
-<?$APPLICATION->IncludeComponent(
-	"bitrix:news.list",
-	"catalog",
-	Array(
-		"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
-		"IBLOCK_ID" => $arParams["IBLOCK_ID"],
-		"NEWS_COUNT" => $arParams["NEWS_COUNT"],
-		"SORT_BY1" => $sortBy,
-		"SORT_ORDER1" => $sortOrder,
-		"SORT_BY2" => $arParams["SORT_BY2"],
-		"SORT_ORDER2" => $arParams["SORT_ORDER2"],
-		"FIELD_CODE" => $arParams["LIST_FIELD_CODE"],
-		"PROPERTY_CODE" => $arParams["LIST_PROPERTY_CODE"],
-		"DETAIL_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["detail"],
-		"SECTION_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["section"],
-		"IBLOCK_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["news"],
-		"DISPLAY_PANEL" => $arParams["DISPLAY_PANEL"],
-		"SET_TITLE" => $arParams["SET_TITLE"],
-		"SET_LAST_MODIFIED" => $arParams["SET_LAST_MODIFIED"],
-		"MESSAGE_404" => $arParams["MESSAGE_404"],
-		"SET_STATUS_404" => $arParams["SET_STATUS_404"],
-		"SHOW_404" => $arParams["SHOW_404"],
-		"FILE_404" => $arParams["FILE_404"],
-		"INCLUDE_IBLOCK_INTO_CHAIN" => $arParams["INCLUDE_IBLOCK_INTO_CHAIN"],
-		"ADD_SECTIONS_CHAIN" => $arParams["ADD_SECTIONS_CHAIN"],
-		"CACHE_TYPE" => $arParams["CACHE_TYPE"],
-		"CACHE_TIME" => $arParams["CACHE_TIME"],
-		"CACHE_FILTER" => $arParams["CACHE_FILTER"],
-		"CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
-		"DISPLAY_TOP_PAGER" => $arParams["DISPLAY_TOP_PAGER"],
-		"DISPLAY_BOTTOM_PAGER" => $arParams["DISPLAY_BOTTOM_PAGER"],
-		"PAGER_TITLE" => $arParams["PAGER_TITLE"],
-		"PAGER_TEMPLATE" => $arParams["PAGER_TEMPLATE"],
-		"PAGER_SHOW_ALWAYS" => $arParams["PAGER_SHOW_ALWAYS"],
-		"PAGER_DESC_NUMBERING" => $arParams["PAGER_DESC_NUMBERING"],
-		"PAGER_DESC_NUMBERING_CACHE_TIME" => $arParams["PAGER_DESC_NUMBERING_CACHE_TIME"],
-		"PAGER_SHOW_ALL" => $arParams["PAGER_SHOW_ALL"],
-		"PAGER_BASE_LINK_ENABLE" => $arParams["PAGER_BASE_LINK_ENABLE"],
-		"PAGER_BASE_LINK" => $arParams["PAGER_BASE_LINK"],
-		"PAGER_PARAMS_NAME" => $arParams["PAGER_PARAMS_NAME"],
-		"DISPLAY_DATE" => $arParams["DISPLAY_DATE"],
-		"DISPLAY_NAME" => "Y",
-		"DISPLAY_PICTURE" => $arParams["DISPLAY_PICTURE"],
-		"DISPLAY_PREVIEW_TEXT" => $arParams["DISPLAY_PREVIEW_TEXT"],
-		"PREVIEW_TRUNCATE_LEN" => $arParams["PREVIEW_TRUNCATE_LEN"],
-		"ACTIVE_DATE_FORMAT" => $arParams["LIST_ACTIVE_DATE_FORMAT"],
-		"USE_PERMISSIONS" => $arParams["USE_PERMISSIONS"],
-		"GROUP_PERMISSIONS" => $arParams["GROUP_PERMISSIONS"],
-		"FILTER_NAME" => $arParams["FILTER_NAME"],
-		"HIDE_LINK_WHEN_NO_DETAIL" => $arParams["HIDE_LINK_WHEN_NO_DETAIL"],
-		"CHECK_DATES" => $arParams["CHECK_DATES"],
-        'PARENT_SECTION_CODE' => $arParams['PARENT_SECTION_CODE'],
-	),
-	$component
-);?>
+
+    <?php
+    /**
+     * Set filter by rent type
+     */
+    $GLOBALS[$arParams['FILTER_NAME']]['=PROPERTY_RENT_TYPE'] = $rentFilterId;
+    ?>
+    <?$APPLICATION->IncludeComponent(
+        "bitrix:news.list",
+        "catalog",
+        Array(
+            "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
+            "IBLOCK_ID" => $arParams["IBLOCK_ID"],
+            "NEWS_COUNT" => $arParams["NEWS_COUNT"],
+            "SORT_BY1" => $sortBy,
+            "SORT_ORDER1" => $sortOrder,
+            "SORT_BY2" => $arParams["SORT_BY2"],
+            "SORT_ORDER2" => $arParams["SORT_ORDER2"],
+            "FIELD_CODE" => $arParams["LIST_FIELD_CODE"],
+            "PROPERTY_CODE" => $arParams["LIST_PROPERTY_CODE"],
+            "DETAIL_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["detail"],
+            "SECTION_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["section"],
+            "IBLOCK_URL" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["news"],
+            "DISPLAY_PANEL" => $arParams["DISPLAY_PANEL"],
+            "SET_TITLE" => $arParams["SET_TITLE"],
+            "SET_LAST_MODIFIED" => $arParams["SET_LAST_MODIFIED"],
+            "MESSAGE_404" => $arParams["MESSAGE_404"],
+            "SET_STATUS_404" => $arParams["SET_STATUS_404"],
+            "SHOW_404" => $arParams["SHOW_404"],
+            "FILE_404" => $arParams["FILE_404"],
+            "INCLUDE_IBLOCK_INTO_CHAIN" => $arParams["INCLUDE_IBLOCK_INTO_CHAIN"],
+            "ADD_SECTIONS_CHAIN" => $arParams["ADD_SECTIONS_CHAIN"],
+            "CACHE_TYPE" => $arParams["CACHE_TYPE"],
+            "CACHE_TIME" => $arParams["CACHE_TIME"],
+            "CACHE_FILTER" => $arParams["CACHE_FILTER"],
+            "CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
+            "DISPLAY_TOP_PAGER" => $arParams["DISPLAY_TOP_PAGER"],
+            "DISPLAY_BOTTOM_PAGER" => $arParams["DISPLAY_BOTTOM_PAGER"],
+            "PAGER_TITLE" => $arParams["PAGER_TITLE"],
+            "PAGER_TEMPLATE" => $arParams["PAGER_TEMPLATE"],
+            "PAGER_SHOW_ALWAYS" => $arParams["PAGER_SHOW_ALWAYS"],
+            "PAGER_DESC_NUMBERING" => $arParams["PAGER_DESC_NUMBERING"],
+            "PAGER_DESC_NUMBERING_CACHE_TIME" => $arParams["PAGER_DESC_NUMBERING_CACHE_TIME"],
+            "PAGER_SHOW_ALL" => $arParams["PAGER_SHOW_ALL"],
+            "PAGER_BASE_LINK_ENABLE" => $arParams["PAGER_BASE_LINK_ENABLE"],
+            "PAGER_BASE_LINK" => $arParams["PAGER_BASE_LINK"],
+            "PAGER_PARAMS_NAME" => $arParams["PAGER_PARAMS_NAME"],
+            "DISPLAY_DATE" => $arParams["DISPLAY_DATE"],
+            "DISPLAY_NAME" => "Y",
+            "DISPLAY_PICTURE" => $arParams["DISPLAY_PICTURE"],
+            "DISPLAY_PREVIEW_TEXT" => $arParams["DISPLAY_PREVIEW_TEXT"],
+            "PREVIEW_TRUNCATE_LEN" => $arParams["PREVIEW_TRUNCATE_LEN"],
+            "ACTIVE_DATE_FORMAT" => $arParams["LIST_ACTIVE_DATE_FORMAT"],
+            "USE_PERMISSIONS" => $arParams["USE_PERMISSIONS"],
+            "GROUP_PERMISSIONS" => $arParams["GROUP_PERMISSIONS"],
+            "FILTER_NAME" => $arParams["FILTER_NAME"],
+            "HIDE_LINK_WHEN_NO_DETAIL" => $arParams["HIDE_LINK_WHEN_NO_DETAIL"],
+            "CHECK_DATES" => $arParams["CHECK_DATES"],
+            'PARENT_SECTION_CODE' => $arParams['PARENT_SECTION_CODE'],
+        ),
+        $component
+    );?>
+</div>

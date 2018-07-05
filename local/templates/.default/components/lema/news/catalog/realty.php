@@ -47,7 +47,6 @@ else
 	),
 	$component
 );?>
-<br />
 <?endif?>
 <?if($arParams["USE_FILTER"]=="Y"):?>
 <?$APPLICATION->IncludeComponent(
@@ -71,7 +70,6 @@ else
 	$component
 );
 ?>
-<br />
 <?endif?>
 
 <?php
@@ -79,8 +77,8 @@ $sortBy = 'PROPERTY_PRICE';
 $sortOrder = 'asc';
 if(isset($_GET['sort']) && in_array(strtolower($_GET['sort']), array('asc', 'desc')))
     $sortOrder = strtolower($_GET['sort']);
-$squareFrom = 45;
-if(isset($_GET['square']) && in_array((int) $_GET['square'], array(45, 65, 95)))
+$squareFrom = 15;
+if(isset($_GET['square']) && in_array((int) $_GET['square'], array(15, 45, 80)))
     $squareFrom = (int) $_GET['square'];
 if(empty($GLOBALS[$arParams['FILTER_NAME']]['PROPERTY']))
     $GLOBALS[$arParams['FILTER_NAME']]['PROPERTY'] = array();
@@ -107,22 +105,22 @@ $GLOBALS[$arParams['FILTER_NAME']]['PROPERTY']['>=SQUARE'] = $squareFrom;
                             </select>
                             <select name="square-meters" id="square-meters-id" class="js-sort sort__select cs-select cs-skin-border">
                                 <option value=""
+                                    <?=selected('square', '15');?>
+                                        data-url="<?=$APPLICATION->GetCurPageParam('square=15', array('square'));?>"
+                                        class="sort__option">от 15м2</option>
+                                <option value=""
                                     <?=selected('square', '45');?>
                                         data-url="<?=$APPLICATION->GetCurPageParam('square=45', array('square'));?>"
                                         class="sort__option">от 45м2</option>
                                 <option value=""
-                                    <?=selected('square', '65');?>
-                                        data-url="<?=$APPLICATION->GetCurPageParam('square=65', array('square'));?>"
-                                        class="sort__option">от 65м2</option>
-                                <option value=""
-                                    <?=selected('square', '95');?>
-                                        data-url="<?=$APPLICATION->GetCurPageParam('square=95', array('square'));?>"
-                                        class="sort__option">от 95м2</option>
+                                    <?=selected('square', '80');?>
+                                        data-url="<?=$APPLICATION->GetCurPageParam('square=80', array('square'));?>"
+                                        class="sort__option">от 80м2</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-4 col-lg-3">
-                        <a href="" class="order-selection"><span>Заказать подбор квартир</span></a>
+                        <a href="#" class="js-flat-fit-order order-selection"><span>Заказать подбор квартир</span></a>
                     </div>
                 </div>
             </div>
