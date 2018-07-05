@@ -167,7 +167,7 @@ else
                     array('key' => 'REGION', 'type' => 'property', 'expanded' => false),
                     array('key' => 'ID', 'type' => 'field', 'expanded' => false),
                     array('key' => 'SQUARE_LAND', 'type' => 'property', 'expanded' => false),
-                    array('key' => 'SQUARE', 'type' => 'property', 'expanded' => false),
+                    //array('key' => 'SQUARE', 'type' => 'property', 'expanded' => false),
                     array('key' => 'LOT_HAVINGS_TYPE', 'type' => 'property', 'expanded' => true),
                     array('key' => 'LOT_CATEGORIES', 'type' => 'property', 'expanded' => true),
                     array('key' => 'ELECTRIC', 'type' => 'property', 'expanded' => true),

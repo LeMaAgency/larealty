@@ -339,7 +339,9 @@ $APPLICATION->SetTitle('Ипотека');
             </div>
         </div>
         <div class="row" style="text-align: center;">
-            <a href="<?=SITE_DIR;?>personal/hypothec/" class="add-apartment__button"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/consultation_button_text.php'); ?></a>
+            <a href="<?=SITE_DIR;?>personal/hypothec/" class="add-apartment__button">
+                <? $APPLICATION->IncludeFile(SITE_DIR . 'include/hypothec/consultation_button_text.php'); ?>
+            </a>
         </div>
     </div>
     <div class="row new-rieltor">
