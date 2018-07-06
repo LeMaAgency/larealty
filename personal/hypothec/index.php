@@ -160,7 +160,7 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                         <a href="#" class="filter-select-link filter-border-color">Выбрать</a>
                         <ul class="filter-select-drop">
                             <li data-value="">Выбрать</li>
-                            <?foreach(\LIblock::getPropEnumValues(122) as $data):?>
+                            <?foreach(\LIblock::getPropEnumValues(\LIblock::getPropId('hypothec', 'EDUCATION_LEVEL')) as $data):?>
                                 <li data-value="<?= (int) $data['ID'];?>">
                                     <?=htmlspecialcharsbx($data['VALUE']);?>
                                 </li>
@@ -174,7 +174,7 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                         <a href="#" class="filter-select-link filter-border-color">Выбрать</a>
                         <ul class="filter-select-drop">
                             <li data-value="">Выбрать</li>
-                            <?foreach(\LIblock::getPropEnumValues(123) as $data):?>
+                            <?foreach(\LIblock::getPropEnumValues(\LIblock::getPropId('hypothec', 'MARITAL_STATUS')) as $data):?>
                                 <li data-value="<?= (int) $data['ID'];?>">
                                     <?=htmlspecialcharsbx($data['VALUE']);?>
                                 </li>
@@ -187,7 +187,7 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                 <div class="col-md-6">
                     <div class="filter-field-title object-number">Брачный договор</div>
                     <div class="filter-num-rooms it-block">
-                        <?foreach(\LIblock::getPropEnumValues(124) as $key => $data):?>
+                        <?foreach(\LIblock::getPropEnumValues(\LIblock::getPropId('hypothec', 'MARRIAGE_CONTRACT')) as $data):?>
                             <input name="MARRIAGE_CONTRACT"
                                    type="radio"
                                    id="n<?=$key+1;?>"
@@ -236,7 +236,7 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                         <a href="#" class="filter-select-link filter-border-color">Выбрать</a>
                         <ul class="filter-select-drop">
                             <li data-value="">Выбрать</li>
-                            <?foreach(\LIblock::getPropEnumValues(\LIblock::getPropId('hypothec', 'EDUCATION_LEVEL')) as $data):?>
+                            <?foreach(\LIblock::getPropEnumValues(\LIblock::getPropId('hypothec', 'STATUS_HOUSING')) as $data):?>
                                 <li data-value="<?= (int) $data['ID'];?>">
                                     <?=htmlspecialcharsbx($data['VALUE']);?>
                                 </li>
@@ -262,7 +262,7 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                         <a href="#" class="filter-select-link filter-border-color">Выбрать</a>
                         <ul class="filter-select-drop">
                             <li data-value="">Выбрать</li>
-                            <?foreach(\LIblock::getPropEnumValues(129) as $data):?>
+                            <?foreach(\LIblock::getPropEnumValues(\LIblock::getPropId('hypothec', 'EMPLOYMENT_TYPE')) as $data):?>
                                 <li data-value="<?= (int) $data['ID'];?>">
                                     <?=htmlspecialcharsbx($data['VALUE']);?>
                                 </li>
@@ -276,7 +276,7 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                         <a href="#" class="filter-select-link filter-border-color">Выбрать</a>
                         <ul class="filter-select-drop">
                             <li data-value="">Выбрать</li>
-                            <?foreach(\LIblock::getPropEnumValues(130) as $data):?>
+                            <?foreach(\LIblock::getPropEnumValues(\LIblock::getPropId('hypothec', 'TYPE_LABOR_CONTRACT')) as $data):?>
                                 <li data-value="<?= (int) $data['ID'];?>">
                                     <?=htmlspecialcharsbx($data['VALUE']);?>
                                 </li>
@@ -315,7 +315,7 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                         <a href="#" class="filter-select-link filter-border-color">Выбрать</a>
                         <ul class="filter-select-drop">
                             <li data-value="">Выбрать</li>
-                            <?foreach(\LIblock::getPropEnumValues(133) as $data):?>
+                            <?foreach(\LIblock::getPropEnumValues(\LIblock::getPropId('hypothec', 'SALARY_PROJECT_BANK')) as $data):?>
                                 <li data-value="<?= (int) $data['ID'];?>">
                                     <?=htmlspecialcharsbx($data['VALUE']);?>
                                 </li>
@@ -351,7 +351,7 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                         <a href="#" class="filter-select-link filter-border-color">Выбрать</a>
                         <ul class="filter-select-drop">
                             <li data-value="">Выбрать</li>
-                            <?foreach(\LIblock::getPropEnumValues(137) as $data):?>
+                            <?foreach(\LIblock::getPropEnumValues(\LIblock::getPropId('hypothec', 'METHOD_INCOME_CONFIRMATION')) as $data):?>
                                 <li data-value="<?= (int) $data['ID'];?>">
                                     <?=htmlspecialcharsbx($data['VALUE']);?>
                                 </li>
@@ -376,7 +376,7 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                         <a href="#" class="filter-select-link filter-border-color">Выбрать</a>
                         <ul class="filter-select-drop">
                             <li data-value="">Выбрать</li>
-                            <?foreach(\LIblock::getPropEnumValues(138) as $data):?>
+                            <?foreach(\LIblock::getPropEnumValues(\LIblock::getPropId('hypothec', 'PROGRAM_CREDIT')) as $data):?>
                                 <li data-value="<?= (int) $data['ID'];?>">
                                     <?=htmlspecialcharsbx($data['VALUE']);?>
                                 </li>

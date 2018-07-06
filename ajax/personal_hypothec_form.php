@@ -6,7 +6,7 @@ use \Lema\Common\Helper;
 
 //Is POST data sent ?
 empty($_POST) && exit;
-
+$errors = array();
 //set rules & fields for form
 $form = new \Lema\Forms\AjaxForm(array(
     array('NAME', 'required', array('message' => 'Имя обязательно к заполнению')),
@@ -42,9 +42,24 @@ $form = new \Lema\Forms\AjaxForm(array(
 ),
     $_POST
 );
+$file = empty($_FILES['file']['name']) ? null : $_FILES['file'];
 
+if(!empty($file['tmp_name'])) {
+    if (!preg_match('~\\.(?:docx?|txt|pdf)$~u', $file['name'])) {
+        $errors['file'] = 'Неверный формат файла. Допустимые форматы файла: txt,doc,docx,pdf';
+    } else {
+        if(($fileIdNew = CFile::SaveFile($file)))
+            $filePath = CFile::MakeFileArray($fileIdNew);
+        else $errors['file'] = 'Ошибка при сохранении файла';
+    }
+}
+else
+    $errors['file'] = 'Файл обязателен к заполнению';
+if(empty($errors)){
+    $status = true;
+}
 //check form fields
-if ($form->validate()) {
+if ($status && $form->validate()) {
     //REQUEST_EDIT_LINK
     $elementId = $form->addRecord(
         LIblock::getId('hypothec'),
@@ -58,28 +73,28 @@ if ($form->validate()) {
                 'DATE_BIRTH' => date("d.m.Y", strtotime($form->getField('date'))),
                 'PHONE' => $form->getField('PHONE'),
                 'EMAIL' => $form->getField('EMAIL'),
-                'EDUCATION_LEVEL' =>array('VALUE' => $form->getField('EDUCATION_LEVEL')),
-                'MARITAL_STATUS' => $form->getField('MARITAL_STATUS'),
-                'MARRIAGE_CONTRACT' => $form->getField('MARRIAGE_CONTRACT'),
+                'EDUCATION_LEVEL' => array('VALUE' => $form->getField('EDUCATION_LEVEL')),
+                'MARITAL_STATUS' => array('VALUE' => $form->getField('MARITAL_STATUS')),
+                'MARRIAGE_CONTRACT' => array('VALUE' => $form->getField('MARRIAGE_CONTRACT')),
                 'QUANTITY_MINOR_CHILDREN' => $form->getField('QUANTITY_MINOR_CHILDREN'),
                 'REGION' => $form->getField('REGION'),
                 'CITY' => $form->getField('CITY'),
-                'STATUS_HOUSING' => $form->getField('STATUS_HOUSING'),
-                'EMPLOYMENT_TYPE' => $form->getField('EMPLOYMENT_TYPE'),
-                'TYPE_LABOR_CONTRACT' => $form->getField('TYPE_LABOR_CONTRACT'),
+                'STATUS_HOUSING' => array('VALUE' => $form->getField('STATUS_HOUSING')),
+                'EMPLOYMENT_TYPE' => array('VALUE' => $form->getField('EMPLOYMENT_TYPE')),
+                'TYPE_LABOR_CONTRACT' => array('VALUE' => $form->getField('TYPE_LABOR_CONTRACT')),
                 'EXPERIENCE_CURRENT_WORK' => $form->getField('EXPERIENCE_CURRENT_WORK'),
                 'EXPERIENCE_TOTAL' => $form->getField('EXPERIENCE_TOTAL'),
-                'SALARY_PROJECT_BANK' => $form->getField('SALARY_PROJECT_BANK'),
+                'SALARY_PROJECT_BANK' => array('VALUE' => $form->getField('SALARY_PROJECT_BANK')),
                 'BASIC_SALARY' => $form->getField('BASIC_SALARY'),
                 'ADDITIONAL_INCOME' => $form->getField('ADDITIONAL_INCOME'),
                 'FAMILY_INCOME' => $form->getField('FAMILY_INCOME'),
-                'METHOD_INCOME_CONFIRMATION' => $form->getField('METHOD_INCOME_CONFIRMATION'),
-                'PROGRAM_CREDIT' => $form->getField('PROGRAM_CREDIT'),
+                'METHOD_INCOME_CONFIRMATION' => array('VALUE' => $form->getField('METHOD_INCOME_CONFIRMATION')),
+                'PROGRAM_CREDIT' => array('VALUE' => $form->getField('PROGRAM_CREDIT')),
                 'REQUESTED_AMOUNT' => $form->getField('REQUESTED_AMOUNT'),
                 'CREDIT_TERM' => $form->getField('CREDIT_TERM'),
                 'PRICE_REAL_ESTATE_OBJECT' => $form->getField('PRICE_REAL_ESTATE_OBJECT'),
                 'AMOUNT_INITIAL_CONTRIBUTION' => $form->getField('AMOUNT_INITIAL_CONTRIBUTION'),
-                'DOWNLOAD_DOCUMENT' => $form->getField('file')
+                'DOWNLOAD_DOCUMENT' => $filePath
             ),
             'ACTIVE' => 'N',
         ));
