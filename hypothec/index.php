@@ -179,10 +179,9 @@ $APPLICATION->SetTitle('Ипотека');
 
                     <div class="col-xs-12 col-md-3 callback">
                         <div class="avatar"></div>
-                        <h5>Иванова Юлия</h5>
+                        <h5>Иванова Юлия Андреевна</h5>
                         <span>Ваш ипотечный брокер</span>
                         <a href="tel:+7 (922) 039-21-68">+7 (922) 039-21-68</a>
-                        <label for="phone">заказать звонок</label>
                         <input type="text" placeholder="Ваш телефон" name="phone">
                         <button class="submit">Жду звонка</button>
                     </div>
