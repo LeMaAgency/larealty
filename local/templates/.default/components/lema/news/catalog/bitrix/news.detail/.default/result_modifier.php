@@ -94,9 +94,9 @@ if($item->propFilled('RIELTOR'))
     if($row = $res->Fetch())
     {
         $arResult['RIELTOR'] = array(
-            'NAME' => htmlspecialcharsbx(trim($row['LAST_NAME'] . ' ' . $row['NAME'])),
+            'NAME' => htmlspecialcharsbx(trim($row['LAST_NAME'] . ' ' . $row['SECOND_NAME'] . ' ' . $row['NAME'])),
             'IMG' => (empty($row['WORK_LOGO']) ? null : \CFile::GetPath($row['WORK_LOGO'])),
-            'PHONE' => htmlspecialcharsbx($row['WORK_PHONE']),
+            'PHONE' => htmlspecialcharsbx($row[empty($row['WORK_PHONE']) ? 'PERSONAL_PHONE' : 'WORK_PHONE']),
         );
     }
 }
