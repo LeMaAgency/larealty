@@ -51,17 +51,18 @@ $form = new \Lema\Forms\AjaxForm(array(
 ),
     $_POST
 );
-$file = empty($_FILES['file']['name']) ? null : $_FILES['file'];
+$file = empty($_FILES['file']['name']) ? array() : $_FILES['file'];
 
 $errors = array();
 
-if(!empty($file['tmp_name'])) {
+if(!empty($file['tmp_name'])){
     if (!preg_match('~\\.(?:docx?|txt|pdf)$~u', $file['name'])) {
         $errors['file'] = 'Неверный формат файла. Допустимые форматы файла: txt,doc,docx,pdf';
     } else {
         if(($fileIdNew = CFile::SaveFile($file)))
             $filePath = CFile::MakeFileArray($fileIdNew);
-        else $errors['file'] = 'Ошибка при сохранении файла';
+        else
+            $errors['file'] = 'Ошибка при сохранении файла';
     }
 }
 else
