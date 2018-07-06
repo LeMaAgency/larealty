@@ -25,6 +25,7 @@ $this->setFrameMode(true);
 $data = new TH($this);
 
 ?>
+<h2 class="calculator__h2">Выберите программу для получения одобрения</h2>
 <div class="result">
     <table>
         <thead>

@@ -295,3 +295,5 @@ a.add-apartment__button:hover {
     background-size: cover;}
 h2, h3, .card-flat__content__head__price_min,
 .card-flat__content__head__price {color:#002b4e! important;}
+.offers-item-info {
+	width: 470px;}
