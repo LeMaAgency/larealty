@@ -53,6 +53,8 @@ $form = new \Lema\Forms\AjaxForm(array(
 );
 $file = empty($_FILES['file']['name']) ? null : $_FILES['file'];
 
+$errors = array();
+
 if(!empty($file['tmp_name'])) {
     if (!preg_match('~\\.(?:docx?|txt|pdf)$~u', $file['name'])) {
         $errors['file'] = 'Неверный формат файла. Допустимые форматы файла: txt,doc,docx,pdf';
@@ -64,9 +66,9 @@ if(!empty($file['tmp_name'])) {
 }
 else
     $errors['file'] = 'Файл обязателен к заполнению';
-if(empty($errors)){
-    $status = true;
-}
+
+$status = empty($errors);
+
 //check form fields
 if ($status && $form->validate()) {
     //REQUEST_EDIT_LINK
@@ -124,4 +126,4 @@ if ($status && $form->validate()) {
     }
     echo json_encode($status ? array('success' => true) : array('errors' => $form->getErrors()));
 } else
-    echo json_encode(array('errors' => $form->getErrors()));
+    echo json_encode(array('errors' => array_merge($errors, $form->getErrors())));
