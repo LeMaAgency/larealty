@@ -44,9 +44,9 @@ $form = new \Lema\Forms\AjaxForm(array(
         array('CREDIT_TERM', 'required', array('message' => 'Срок кредита обязателен к заполнению')),
         array('CREDIT_TERM', 'numerical', array('message' => 'Срок кредита должен быть числом')),
         array('PRICE_REAL_ESTATE_OBJECT', 'required', array('message' => 'Стоимость объекта недвижимости обязателена к заполнению')),
-        array('PRICE_REAL_ESTATE_OBJECT', 'numerical', array('message' => 'Стоимость объекта недвижимости должен быть числом')),
+        array('PRICE_REAL_ESTATE_OBJECT', 'numerical', array('message' => 'Стоимость объекта недвижимости должна быть числом')),
         array('AMOUNT_INITIAL_CONTRIBUTION', 'required', array('message' => 'Сумма первоначального взноса обязателена к заполнению')),
-        array('AMOUNT_INITIAL_CONTRIBUTION', 'numerical', array('message' => 'Сумма первоначального взноса должен быть числом')),
+        array('AMOUNT_INITIAL_CONTRIBUTION', 'numerical', array('message' => 'Сумма первоначального взноса должна быть числом')),
         array('agreement', 'required', array('message' => 'Вы не согласились с условиями')),
     ),
     $_POST
