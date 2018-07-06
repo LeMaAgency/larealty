@@ -433,6 +433,7 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                     <input type="checkbox" value="1" name="agreement" class="checkbox-152-fz">
                     Я ознакомлен <a target="_blank" href="/contacts/apply.pdf">c положением об обработке и защите персональных данных.</a>
                 </label>
+                <div class="it-error"></div>
             </div>
 
 
