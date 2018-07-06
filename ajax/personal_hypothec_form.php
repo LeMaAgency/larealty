@@ -55,7 +55,7 @@ $file = empty($_FILES['file']['name']) ? array() : $_FILES['file'];
 
 $errors = array();
 
-if(!empty($file['tmp_name'])){
+if(!empty($file['tmp_name']) && is_uploaded_file($file['tmp_name'])){
     if (!preg_match('~\\.(?:docx?|txt|pdf)$~u', $file['name'])) {
         $errors['file'] = 'Неверный формат файла. Допустимые форматы файла: txt,doc,docx,pdf';
     } else {
@@ -138,6 +138,14 @@ if ($form->validate())
             'PHONE' => $form->getField('PHONE'),
             'REQUEST_EDIT_LINK' => $requestEditLink,
         ));
+    }
+    else
+    {
+        /**
+         * We need to remove uploaded file
+         */
+        if(!empty($fileIdNew))
+            \CFile::Delete($fileIdNew);
     }
     echo json_encode($status ? array('success' => true) : array('errors' => array_merge($errors, $form->getErrors())));
 } else
