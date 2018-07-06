@@ -279,7 +279,7 @@ class LIblock
                         static::$propValues[$row['ID']] = array();
 
                     $resProp = \CIBlockPropertyEnum::GetList(
-                        array(),
+                        array('SORT'=>'ASC', 'VALUE'=>'ASC'),
                         array('PROPERTY_ID' => $row['ID'])
                     );
                     while($arrProp = $resProp->Fetch())
