@@ -8,9 +8,11 @@ $rsUsers = CUser::GetList(
         'FIELDS' => array(
             'ID',
             'NAME',
+            'SECOND_NAME',
             'LAST_NAME',
             'PERSONAL_PHOTO',
-            'PERSONAL_PHONE'
+            'PERSONAL_PHONE',
+            'WORK_PHONE',
         ),
         'NAV_PARAMS' => array(
             'nTopCount' => $arParams['NEWS_COUNT'],
