@@ -297,3 +297,15 @@ h2, h3, .card-flat__content__head__price_min,
 .card-flat__content__head__price {color:#002b4e! important;}
 .offers-item-info {
 	width: 470px;}
+.link_arrow img {width: 10px;
+    height: 7px;
+	margin-left:5px;
+}
+.calculator__wrap .result table th {
+ font-family: 'ProximaNova'! important;
+    font-size: 18px! important;
+    letter-spacing: normal! important;
+}
+.slider-services__img__between {
+	width: 5%;}
+h2.seller_main__h2 {color:fff;}

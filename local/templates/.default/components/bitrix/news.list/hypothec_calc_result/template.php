@@ -24,8 +24,7 @@ $this->setFrameMode(true);
 
 $data = new TH($this);
 
-?>
-<h2 class="calculator__h2">Выберите программу для получения одобрения</h2>
+?><h2 class="calculator__h2">Выберите программу для получения одобрения</h2>
 <div class="result">
     <table>
         <thead>
@@ -41,6 +40,7 @@ $data = new TH($this);
         <?foreach($data->items() as $item):?>
             <tr <?=$item->editId()?>>
                 <td scope="row" data-label="<?=Loc::getMessage('LEMA_HYPOTHEC_CALC_RESULT_BANK');?>">
+					<input name="" type="checkbox" id="" value="1" class="filter-input">
                     <img src="<?=(!empty($item->get("SVG_PICTURE")))?$item->get("SVG_PICTURE"):$item->get("BANK_PICTURE") ?>" alt="<?=$item->get("BANK_NAME")?>">
                 </td>
                 <td data-label="<?=Loc::getMessage('LEMA_HYPOTHEC_CALC_RESULT_PROGRAM');?>"><?=$item->getName()?></td>
@@ -48,7 +48,7 @@ $data = new TH($this);
                 <td data-label="<?=Loc::getMessage('LEMA_HYPOTHEC_CALC_RESULT_PAY');?>"><?=$item->propVal('MONTH_PAYMENT')?> руб</td>
                 <td data-label="<?=Loc::getMessage('LEMA_HYPOTHEC_CALC_RESULT_MORE');?>">
                     <?if($item->propFilled('URL')):?>
-                        <a href="<?=$item->propVal('URL');?>"><?=Loc::getMessage('LEMA_HYPOTHEC_CALC_RESULT_MORE');?></a>
+					<a href="<?=$item->propVal('URL');?>" class="link_arrow"><?=Loc::getMessage('LEMA_HYPOTHEC_CALC_RESULT_MORE');?><img src="/assets/css/../img/more-icon.png" ></a>
                     <?endif;?>
                 </td>
             </tr>
