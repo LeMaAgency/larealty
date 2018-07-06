@@ -236,7 +236,7 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                         <a href="#" class="filter-select-link filter-border-color">Выбрать</a>
                         <ul class="filter-select-drop">
                             <li data-value="">Выбрать</li>
-                            <?foreach(\LIblock::getPropEnumValues(128) as $data):?>
+                            <?foreach(\LIblock::getPropEnumValues(LIblock::getPropId('hypothec', 'EDUCATION_LEVEL')) as $data):?>
                                 <li data-value="<?= (int) $data['ID'];?>">
                                     <?=htmlspecialcharsbx($data['VALUE']);?>
                                 </li>
