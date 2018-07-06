@@ -131,7 +131,7 @@ if ($form->validate())
                 . '&lang=ru&find_section_section=-1'
         );
         //send message
-        $status = $form->sendMessage('FEEDBACK', array(
+        $status = $form->sendMessage('PERSONAL_HYPOTHEC_FORM', array(
             'SURNAME' => $form->getField('SURNAME'),
             'NAME' => $form->getField('NAME'),
             'PATRONUMIC' => $form->getField('PATRONUMIC'),
