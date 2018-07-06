@@ -43,35 +43,41 @@ $(function () {
         }, 'json');
         return false;
     });
-    $('form.js-hypothec-form').on('submit', function (e) {
-
-        e.preventDefault();
-
-        var curForm = $(this),
-            waitElement = curForm.find('input[type="submit"], button[type="submit"]').get(0);
-
-        BX.showWait(waitElement);
-
-        $.post($(this).attr('action'), $(this).serialize(), function (ans) {
-
-            BX.closeWait(waitElement);
-
-            curForm.find('input:not([type="submit"]):not([type="button"]), textarea').css({'border': '1px solid #dfcd7d'});
-
-            if (ans && ans.errors) {
-                curForm.find('.it-error').empty();
-                for (var inputName in ans.errors) {
-                    curForm.find('[name="' + inputName + '"]').first().css({border: '1px solid red'})
-                        .closest('.it-block').find('.it-error').html(ans.errors[inputName]);
+        $('form.js-hypothec-form').on('submit', function(e) {
+            e.preventDefault();
+            var curForm = $(this),
+                waitElement = curForm.find('input[type="submit"], button[type="submit"]').get(0),
+                formData = new FormData($(this)[0]);
+            BX.showWait(waitElement);
+            $.ajax({
+                method: curForm.attr('method'),
+                url: curForm.attr('action'),
+                dataType: 'json',
+                data: formData,
+                async:false,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function(ans) {
+                    curForm.find('input:not([type="submit"]):not([type="button"]), textarea').css({'border': '3px solid #dfcd7d'});
+                    curForm.find('.it-error').empty();
+                    BX.closeWait(waitElement);
+                    if (ans && ans.errors) {
+                        curForm.find('.it-error').empty();
+                        for (var inputName in ans.errors) {
+                            curForm.find('[name="' + inputName + '"]').first().css({border: '1px solid red'})
+                                .closest('.it-block').find('.it-error').html(ans.errors[inputName]);
+                        }
+                    }
+                    else {
+                        //ok
+                        curForm.find('input:not([type="submit"]):not([type="button"]), textarea').val('');
+                        $.fancybox.open('Спасибо за заявку. В ближайшее время мы Вам перезвоним')
+                    }
                 }
-            }
-            else {
-                //ok
-                $.fancybox.open('Спасибо за заявку. В ближайшее время мы Вам перезвоним')
-            }
-        }, 'json');
-        return false;
-    })
+            });
+            return false;
+        });
 });
 $(document).ready(function () {
     $("body").on("click", ".js-all-realtors", function () {

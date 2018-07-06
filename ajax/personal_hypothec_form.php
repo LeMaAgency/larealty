@@ -8,7 +8,7 @@ use \Lema\Common\Helper;
 empty($_POST) && exit;
 //set rules & fields for form
 $form = new \Lema\Forms\AjaxForm(array(
-    /*array('NAME', 'required', array('message' => 'Имя обязательно к заполнению')),
+    array('NAME', 'required', array('message' => 'Имя обязательно к заполнению')),
     array('PATRONUMIC', 'required', array('message' => 'Отчество обязательно к заполнению')),
     array('SURNAME', 'required', array('message' => 'Фамилия обязательна к заполнению')),
     array('date', 'required', array('message' => 'Дата рождения обязателена к заполнению')),
@@ -32,6 +32,7 @@ $form = new \Lema\Forms\AjaxForm(array(
     array('EXPERIENCE_TOTAL', 'numerical', array('message' => 'Общий трудовой стаж должен быть числом')),
     array('SALARY_PROJECT_BANK', 'required', array('message' => 'Зарплатный проект банка обязателен к заполнению')),
     array('BASIC_SALARY', 'required', array('message' => 'Основная заработная плата обязателена к заполнению')),
+    array('BASIC_SALARY', 'numerical', array('message' => 'Основная заработная плата должна быть числом')),
     array('ADDITIONAL_INCOME', 'required', array('message' => 'Дополнительные доходы обязательны к заполнению')),
     array('ADDITIONAL_INCOME', 'numerical', array('message' => 'Дополнительные доходы должны быть числом')),
     array('FAMILY_INCOME', 'required', array('message' => 'Доход семьи обязателен к заполнению')),
@@ -39,12 +40,13 @@ $form = new \Lema\Forms\AjaxForm(array(
     array('METHOD_INCOME_CONFIRMATION', 'required', array('message' => 'Способ подтверждения дохода обязателен к заполнению')),
     array('PROGRAM_CREDIT', 'required', array('message' => 'Программа кредитования обязателена к заполнению')),
     array('REQUESTED_AMOUNT', 'required', array('message' => 'Запрашиваемая сумма обязателена к заполнению')),
+    array('REQUESTED_AMOUNT', 'numerical', array('message' => 'Запрашиваемая сумма должна быть числом')),
     array('CREDIT_TERM', 'required', array('message' => 'Срок кредита обязателен к заполнению')),
     array('CREDIT_TERM', 'numerical', array('message' => 'Срок кредита должен быть числом')),
     array('PRICE_REAL_ESTATE_OBJECT', 'required', array('message' => 'Стоимость объекта недвижимости обязателена к заполнению')),
     array('PRICE_REAL_ESTATE_OBJECT', 'numerical', array('message' => 'Стоимость объекта недвижимости должен быть числом')),
     array('AMOUNT_INITIAL_CONTRIBUTION', 'required', array('message' => 'Сумма первоначального взноса обязателена к заполнению')),
-    array('AMOUNT_INITIAL_CONTRIBUTION', 'numerical', array('message' => 'Сумма первоначального взноса должен быть числом')),*/
+    array('AMOUNT_INITIAL_CONTRIBUTION', 'numerical', array('message' => 'Сумма первоначального взноса должен быть числом')),
     array('agreement', 'required', array('message' => 'Вы не согласились с условиями')),
 ),
     $_POST
@@ -62,9 +64,7 @@ if(!empty($file['tmp_name'])) {
 }
 else
     $errors['file'] = 'Файл обязателен к заполнению';
-var_dump($file['tmp_name'],$filePath,$_FILES['file']);
-exit;
-if($errors){
+if(empty($errors)){
     $status = true;
 }
 //check form fields

@@ -187,13 +187,13 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                 <div class="col-md-6">
                     <div class="filter-field-title object-number">Брачный договор</div>
                     <div class="filter-num-rooms it-block">
-                        <?foreach(\LIblock::getPropEnumValues(\LIblock::getPropId('hypothec', 'MARRIAGE_CONTRACT')) as $data):?>
+                        <?foreach(\LIblock::getPropEnumValues(\LIblock::getPropId('hypothec', 'MARRIAGE_CONTRACT')) as $key => $data):?>
                             <input name="MARRIAGE_CONTRACT"
                                    type="radio"
-                                   id="n<?=$key+1;?>"
+                                   id="n<?= (int) $data['ID'];?>"
                                    value="<?= (int) $data['ID'];?>"
                                    class="filter-input">
-                            <label for="n1" class="filter-label">
+                            <label for="n<?= (int) $data['ID'];?>" class="filter-label">
                                 <?=htmlspecialcharsbx($data['VALUE']);?>
                             </label>
                         <?endforeach;?>
