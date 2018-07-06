@@ -422,8 +422,8 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                         <label>
                             <input type="file" name="file">
                             <span>Выберите файл</span>
-                            <div class="it-error"></div>
                         </label>
+                        <div class="it-error"></div>
                     </div>
                 </div>
 
