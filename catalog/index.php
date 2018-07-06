@@ -550,26 +550,20 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
         <?else:?>
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <a class="new-flats__tab-nav" href="#one-room" data-toggle="tab">
-                            <span>Однокомнатные</span>
+                            <span>Дома</span>
                         </a>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <a class="new-flats__tab-nav active" href="#two-room" data-toggle="tab">
-                            <span>двухкомнатные</span>
+                            <span>Дачи</span>
                         </a>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <a class="new-flats__tab-nav" href="#three-room" data-toggle="tab">
                             <div class="new-flats__tab-nav__wrap-icon"></div>
-                            <span>трехкомнатные</span>
-                        </a>
-                    </div>
-                    <div class="col-sm-3">
-                        <a class="new-flats__tab-nav" href="#four-room" data-toggle="tab">
-                            <div class="new-flats__tab-nav__wrap-icon"></div>
-                            <span>четырехкомнатные</span>
+                            <span>Земельные участки</span>
                         </a>
                     </div>
                 </div>
@@ -633,7 +627,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                             'ADD_SECTIONS_CHAIN' => 'N',
                             'HIDE_LINK_WHEN_NO_DETAIL' => 'Y',
                             'PARENT_SECTION' => '',
-                            'PARENT_SECTION_CODE' => '',
+                            'PARENT_SECTION_CODE' => 'doma',
                             'INCLUDE_SUBSECTIONS' => 'Y',
                             'CACHE_TYPE' => 'A',
                             'CACHE_TIME' => '36000000',
@@ -713,7 +707,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                             'ADD_SECTIONS_CHAIN' => 'N',
                             'HIDE_LINK_WHEN_NO_DETAIL' => 'Y',
                             'PARENT_SECTION' => '',
-                            'PARENT_SECTION_CODE' => '',
+                            'PARENT_SECTION_CODE' => 'dachi',
                             'INCLUDE_SUBSECTIONS' => 'Y',
                             'CACHE_TYPE' => 'A',
                             'CACHE_TIME' => '36000000',
@@ -793,7 +787,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                             'ADD_SECTIONS_CHAIN' => 'N',
                             'HIDE_LINK_WHEN_NO_DETAIL' => 'Y',
                             'PARENT_SECTION' => '',
-                            'PARENT_SECTION_CODE' => '',
+                            'PARENT_SECTION_CODE' => 'zemelnyy_uchastok',
                             'INCLUDE_SUBSECTIONS' => 'Y',
                             'CACHE_TYPE' => 'A',
                             'CACHE_TIME' => '36000000',

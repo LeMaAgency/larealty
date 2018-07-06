@@ -76,13 +76,13 @@ $(function () {
 $(document).ready(function () {
     $("body").on("click", ".js-all-realtors", function () {
         if ($(this).hasClass("js-hidden")) {
-            $(this).html("Все риэлторы");
-            $(this).removeClass("js-hidden");
-            $(this).closest(".realtors").find(".spoiler").toggle(500);
+            $(this).text($(this).data('expand-title'))
+                .removeClass("js-hidden")
+                .closest(".realtors").find(".spoiler").toggle(500);
         } else {
-            $(this).html("Скрыть");
-            $(this).addClass("js-hidden");
-            $(this).closest(".realtors").find(".spoiler").toggle(500);
+            $(this).text($(this).data('collapse-title'))
+                .addClass("js-hidden")
+                .closest(".realtors").find(".spoiler").toggle(500);
         }
     });
     $("body").on("click", ".js-realtors-feedback", function (e) {

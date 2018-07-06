@@ -42,9 +42,9 @@ $itemCount = $data->itemCount();
                     </div>
                     <div class="realtors__carousel__item__description">
                         <div class="realtors__carousel__item__description__name">
-                            <?= $item->getName(); ?>
-                            <br>
                             <?= $item->get("LAST_NAME"); ?>
+                            <br>
+                            <?= $item->getName() . ' ' . $item->get('SECOND_NAME'); ?>
                         </div>
                         <div class="realtors__carousel__item__description__title">
                             <?=\Lema\Common\Helper::pluralizeN($item->get('OBJECTS_COUNT'), array(
@@ -53,11 +53,13 @@ $itemCount = $data->itemCount();
                                 Loc::getMessage('LEMA_REALTORS_MANY_OBJECTS'),
                             ));?>
                         </div>
+                        <?/*
                         <div class="realtors__carousel__item__description__tel__text">
                             <?= Loc::getMessage("LEMA_REALTORS_CONTACT"); ?>
                         </div>
+                        */?>
                         <div class="realtors__carousel__item__description__tel">
-                            <?= $item->get("PERSONAL_PHONE"); ?>
+                            <?=$item->get($item->get('WORK_PHONE') ? 'WORK_PHONE' : 'PERSONAL_PHOTO');?>
                         </div>
                         <div class="realtors__carousel__item__description__link js-realtors-feedback"
                              data-id="<?= $item->getId(); ?>">
@@ -84,7 +86,10 @@ $itemCount = $data->itemCount();
         <? endforeach; ?>
 
     </div>
-    <button class="add-apartment__button js-all-realtors">
+    <button
+            data-expand-title="<?= Loc::getMessage("LEMA_REALTORS_ALL_REALTORS"); ?>"
+            data-collapse-title="<?= Loc::getMessage("LEMA_REALTORS_HIDE_ALL_REALTORS"); ?>"
+            class="add-apartment__button js-all-realtors">
         <?= Loc::getMessage("LEMA_REALTORS_ALL_REALTORS"); ?>
     </button>
     <div id="realtors-feedback-form" class="fancybox-feedback" style="display: none;">.

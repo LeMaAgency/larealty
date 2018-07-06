@@ -5,11 +5,14 @@ $rsUsers = CUser::GetList(
     ($order = "desc"),
     Array("GROUPS_ID" => Array(3), 'ACTIVE' => 'Y'),
     Array("FIELDS" => array(
-        "ID",
-        "NAME",
-        "LAST_NAME",
-        "PERSONAL_PHOTO",
-        "PERSONAL_PHONE")
+        'ID',
+        'NAME',
+        'SECOND_NAME',
+        'LAST_NAME',
+        'PERSONAL_PHOTO',
+        'PERSONAL_PHONE',
+        'WORK_PHONE',
+    )
     )
 );
 while ($arUser = $rsUsers->Fetch()) {
