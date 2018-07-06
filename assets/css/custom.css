@@ -293,8 +293,8 @@ a.add-apartment__button:hover {
 }
 .top-slide {height: 600px;
     background-size: cover;}
-h2, h3, .card-flat__content__head__price_min,
-.card-flat__content__head__price {color:#002b4e! important;}
+.card-flat__content__head__title, .new-flats__h2, .card-flat__content__head__price_min,
+.card-flat__content__head__price, .phases__h2 {color:#002b4e;}
 .offers-item-info {
 	width: 470px;}
 .link_arrow img {width: 10px;
