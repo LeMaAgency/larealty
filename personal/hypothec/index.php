@@ -160,14 +160,11 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                         <a href="#" class="filter-select-link filter-border-color">Выбрать</a>
                         <ul class="filter-select-drop">
                             <li data-value="">Выбрать</li>
-                            <li data-value="1">ниже среднего</li>
-                            <li data-value="2">среднее</li>
-                            <li data-value="3">средне специальное</li>
-                            <li data-value="4">неоконченное высшее</li>
-                            <li data-value="49">высшее</li>
-                            <li data-value="50">несколько высших</li>
-                            <li data-value="51">ученая степень/МВА</li>
-                            <li data-value="152">аспирантура</li>
+                            <?foreach(\LIblock::getPropEnumValues(122) as $data):?>
+                                <li data-value="<?= (int) $data['ID'];?>">
+                                    <?=htmlspecialcharsbx($data['VALUE']);?>
+                                </li>
+                            <?endforeach;?>
                         </ul>
                         <input type="hidden" name="EDUCATION_LEVEL" value="">
                         <div class="it-error"></div>
@@ -177,11 +174,11 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                         <a href="#" class="filter-select-link filter-border-color">Выбрать</a>
                         <ul class="filter-select-drop">
                             <li data-value="">Выбрать</li>
-                            <li data-value="1">женат/замужем</li>
-                            <li data-value="2">холост/не замужем</li>
-                            <li data-value="3">вдовец/вдова</li>
-                            <li data-value="4">гражданский брак</li>
-                            <li data-value="49">разведен/разведена</li>
+                            <?foreach(\LIblock::getPropEnumValues(123) as $data):?>
+                                <li data-value="<?= (int) $data['ID'];?>">
+                                    <?=htmlspecialcharsbx($data['VALUE']);?>
+                                </li>
+                            <?endforeach;?>
                         </ul>
                         <input type="hidden" name="MARITAL_STATUS" value="">
                         <div class="it-error"></div>
@@ -190,10 +187,16 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                 <div class="col-md-6">
                     <div class="filter-field-title object-number">Брачный договор</div>
                     <div class="filter-num-rooms it-block">
-                        <input name="MARRIAGE_CONTRACT" type="radio" id="n1" value="1" class="filter-input">
-                        <label for="n1" class="filter-label">да</label>
-                        <input name="MARRIAGE_CONTRACT" type="radio" id="n2" value="2" class="filter-input">
-                        <label for="n2" class="filter-label">нет</label>
+                        <?foreach(\LIblock::getPropEnumValues(124) as $key => $data):?>
+                            <input name="MARRIAGE_CONTRACT"
+                                   type="radio"
+                                   id="n<?=$key+1;?>"
+                                   value="<?= (int) $data['ID'];?>"
+                                   class="filter-input">
+                            <label for="n1" class="filter-label">
+                                <?=htmlspecialcharsbx($data['VALUE']);?>
+                            </label>
+                        <?endforeach;?>
                         <div class="it-error"></div>
                     </div>
                     <div class="filter-field-title">Количество детей до 18 лет</div>
@@ -233,13 +236,11 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                         <a href="#" class="filter-select-link filter-border-color">Выбрать</a>
                         <ul class="filter-select-drop">
                             <li data-value="">Выбрать</li>
-                            <li data-value="1">Собственное жилье</li>
-                            <li data-value="2">Аренда</li>
-                            <li data-value="3">Социальный найм</li>
-                            <li data-value="4">Жилье родственников</li>
-                            <li data-value="49">Коммунальная квартира</li>
-                            <li data-value="4">Общежитие</li>
-                            <li data-value="49">Воинская часть</li>
+                            <?foreach(\LIblock::getPropEnumValues(128) as $data):?>
+                                <li data-value="<?= (int) $data['ID'];?>">
+                                    <?=htmlspecialcharsbx($data['VALUE']);?>
+                                </li>
+                            <?endforeach;?>
                         </ul>
                         <input type="hidden" name="STATUS_HOUSING" value="">
                         <div class="it-error"></div>
@@ -261,10 +262,11 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                         <a href="#" class="filter-select-link filter-border-color">Выбрать</a>
                         <ul class="filter-select-drop">
                             <li data-value="">Выбрать</li>
-                            <li data-value="1">Наемный работник</li>
-                            <li data-value="2">ИП</li>
-                            <li data-value="3">Собственный бизнес</li>
-                            <li data-value="4">Пенсионер</li>
+                            <?foreach(\LIblock::getPropEnumValues(129) as $data):?>
+                                <li data-value="<?= (int) $data['ID'];?>">
+                                    <?=htmlspecialcharsbx($data['VALUE']);?>
+                                </li>
+                            <?endforeach;?>
                         </ul>
                         <input type="hidden" name="EMPLOYMENT_TYPE" value="">
                         <div class="it-error"></div>
@@ -274,8 +276,11 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                         <a href="#" class="filter-select-link filter-border-color">Выбрать</a>
                         <ul class="filter-select-drop">
                             <li data-value="">Выбрать</li>
-                            <li data-value="1">срочный (на определенный срок/сезон)</li>
-                            <li data-value="2">бессрочный (постоянная занятость)</li>
+                            <?foreach(\LIblock::getPropEnumValues(130) as $data):?>
+                                <li data-value="<?= (int) $data['ID'];?>">
+                                    <?=htmlspecialcharsbx($data['VALUE']);?>
+                                </li>
+                            <?endforeach;?>
                         </ul>
                         <input type="hidden" name="TYPE_LABOR_CONTRACT" value="">
                         <div class="it-error"></div>
@@ -310,14 +315,11 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                         <a href="#" class="filter-select-link filter-border-color">Выбрать</a>
                         <ul class="filter-select-drop">
                             <li data-value="">Выбрать</li>
-                            <li data-value="1">ПАО «Сбербанк»</li>
-                            <li data-value="2">ПАО «Втб24»</li>
-                            <li data-value="3">ПАО «Банк Москвы»</li>
-                            <li data-value="4">АО «Россельхозбанк»</li>
-                            <li data-value="5">ПАО «Дальневосточный банк»</li>
-                            <li data-value="6">АО «Газпромбанк»</li>
-                            <li data-value="7">ПАО «Росбанк»</li>
-                            <li data-value="8">ПАО «Азиатско-тихоокеанский банк»</li>
+                            <?foreach(\LIblock::getPropEnumValues(133) as $data):?>
+                                <li data-value="<?= (int) $data['ID'];?>">
+                                    <?=htmlspecialcharsbx($data['VALUE']);?>
+                                </li>
+                            <?endforeach;?>
                         </ul>
                         <input type="hidden" name="SALARY_PROJECT_BANK" value="">
                         <div class="it-error"></div>
@@ -349,8 +351,11 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                         <a href="#" class="filter-select-link filter-border-color">Выбрать</a>
                         <ul class="filter-select-drop">
                             <li data-value="">Выбрать</li>
-                            <li data-value="1">Справка 2-НДФЛ</li>
-                            <li data-value="2">Справка по форме банка</li>
+                            <?foreach(\LIblock::getPropEnumValues(137) as $data):?>
+                                <li data-value="<?= (int) $data['ID'];?>">
+                                    <?=htmlspecialcharsbx($data['VALUE']);?>
+                                </li>
+                            <?endforeach;?>
                         </ul>
                         <input type="hidden" name="METHOD_INCOME_CONFIRMATION" value="">
                         <div class="it-error"></div>
@@ -371,11 +376,11 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                         <a href="#" class="filter-select-link filter-border-color">Выбрать</a>
                         <ul class="filter-select-drop">
                             <li data-value="">Выбрать</li>
-                            <li data-value="1">приобретения готового жилья</li>
-                            <li data-value="2">приобретение строящегося жилья</li>
-                            <li data-value="3">кредит под залог недвижимости»</li>
-                            <li data-value="4">строительство жилого дома</li>
-                            <li data-value="5">загородная недвижимость</li>
+                            <?foreach(\LIblock::getPropEnumValues(138) as $data):?>
+                                <li data-value="<?= (int) $data['ID'];?>">
+                                    <?=htmlspecialcharsbx($data['VALUE']);?>
+                                </li>
+                            <?endforeach;?>
                         </ul>
                         <input type="hidden" name="PROGRAM_CREDIT" value="">
                         <div class="it-error"></div>
@@ -422,6 +427,12 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                     <div class="it-error"></div>
                 </div>
 
+            </div>
+            <div class="it-block checkbox" style="border:1px solid transparent">
+                <label style="margin:5px 10px;">
+                    <input type="checkbox" value="1" name="agreement" class="checkbox-152-fz">
+                    Я ознакомлен <a target="_blank" href="/contacts/apply.pdf">c положением об обработке и защите персональных данных.</a>
+                </label>
             </div>
 
 

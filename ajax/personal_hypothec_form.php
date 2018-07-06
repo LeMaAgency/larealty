@@ -38,30 +38,27 @@ $form = new \Lema\Forms\AjaxForm(array(
     array('CREDIT_TERM', 'required', array('message' => 'Срок кредита обязателен к заполнению')),
     array('PRICE_REAL_ESTATE_OBJECT', 'required', array('message' => 'Стоимость объекта недвижимости обязателена к заполнению')),
     array('AMOUNT_INITIAL_CONTRIBUTION', 'required', array('message' => 'Сумма первоначального взноса обязателена к заполнению')),
-    /*array('file', 'required', array('message' => 'Документ обязателен к заполнению')),*/
-    //array('agreement', 'required', array('message' => 'Вы не согласились с условиями')),
+    array('agreement', 'required', array('message' => 'Вы не согласились с условиями')),
 ),
     $_POST
 );
 
 //check form fields
-if($form->validate())
-{
-    $user = \CUser::GetID();
-
-    $status = $form->formActionFull(
+if ($form->validate()) {
+    //REQUEST_EDIT_LINK
+    $elementId = $form->addRecord(
         LIblock::getId('hypothec'),
         array(
-            'NAME' => $form->getField('SURNAME').' '.$form->getField('NAME').' '.$form->getField('PATRONUMIC'),
+            'NAME' => $form->getField('SURNAME') . ' ' . $form->getField('NAME') . ' ' . $form->getField('PATRONUMIC'),
             'PROPERTY_VALUES' => array(
-                'USER' => $user,
+                'USER' => \CUser::GetID(),
                 'SURNAME' => $form->getField('SURNAME'),
                 'NAME' => $form->getField('NAME'),
                 'PATRONUMIC' => $form->getField('PATRONUMIC'),
-                'DATE_BIRTH' => $form->getField('date'),
+                'DATE_BIRTH' => date("d.m.Y", strtotime($form->getField('date'))),
                 'PHONE' => $form->getField('PHONE'),
                 'EMAIL' => $form->getField('EMAIL'),
-                'EDUCATION_LEVEL' => $form->getField('EDUCATION_LEVEL'),
+                'EDUCATION_LEVEL' =>array('VALUE' => $form->getField('EDUCATION_LEVEL')),
                 'MARITAL_STATUS' => $form->getField('MARITAL_STATUS'),
                 'MARRIAGE_CONTRACT' => $form->getField('MARRIAGE_CONTRACT'),
                 'QUANTITY_MINOR_CHILDREN' => $form->getField('QUANTITY_MINOR_CHILDREN'),
@@ -84,12 +81,23 @@ if($form->validate())
                 'AMOUNT_INITIAL_CONTRIBUTION' => $form->getField('AMOUNT_INITIAL_CONTRIBUTION'),
                 'DOWNLOAD_DOCUMENT' => $form->getField('file')
             ),
-        ),
-        "",
-        array()
-    );
-
+            'ACTIVE' => 'N',
+        ));
+    $status = (bool)$elementId;
+    $requestEditLink = null;
+    if ($status) {
+        $requestEditLink = Helper::getFullUrl(
+            '/bitrix/admin/iblock_element_edit.php?IBLOCK_ID=18&type=personal_office&ID=' . $elementId . '&lang=ru&find_section_section=-1'
+        );
+        //send message
+        $status = $form->sendMessage('FEEDBACK', array(
+            'SURNAME' => $form->getField('SURNAME'),
+            'NAME' => $form->getField('NAME'),
+            'PATRONUMIC' => $form->getField('PATRONUMIC'),
+            'PHONE' => $form->getField('PHONE'),
+            'REQUEST_EDIT_LINK' => $requestEditLink,
+        ));
+    }
     echo json_encode($status ? array('success' => true) : array('errors' => $form->getErrors()));
-}
-else
+} else
     echo json_encode(array('errors' => $form->getErrors()));
