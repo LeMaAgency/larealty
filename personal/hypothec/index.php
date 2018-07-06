@@ -418,13 +418,13 @@ $APPLICATION->SetTitle('Оформить ипотеку');
 
                 <div class="col-md-6 it-block">
                     <div class="filter-field-title">Загрузить документ</div>
-                    <div class="file-upload">
+                    <div class="file-upload it-block">
                         <label>
-                            <input type="file" name="file" accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                            <input type="file" name="file">
                             <span>Выберите файл</span>
+                            <div class="it-error"></div>
                         </label>
                     </div>
-                    <div class="it-error"></div>
                 </div>
 
             </div>

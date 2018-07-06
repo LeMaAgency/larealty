@@ -6,10 +6,9 @@ use \Lema\Common\Helper;
 
 //Is POST data sent ?
 empty($_POST) && exit;
-$errors = array();
 //set rules & fields for form
 $form = new \Lema\Forms\AjaxForm(array(
-    array('NAME', 'required', array('message' => 'Имя обязательно к заполнению')),
+    /*array('NAME', 'required', array('message' => 'Имя обязательно к заполнению')),
     array('PATRONUMIC', 'required', array('message' => 'Отчество обязательно к заполнению')),
     array('SURNAME', 'required', array('message' => 'Фамилия обязательна к заполнению')),
     array('date', 'required', array('message' => 'Дата рождения обязателена к заполнению')),
@@ -21,23 +20,31 @@ $form = new \Lema\Forms\AjaxForm(array(
     array('MARITAL_STATUS', 'required', array('message' => 'Семейное положение обязательно к заполнению')),
     array('MARRIAGE_CONTRACT', 'required', array('message' => 'Брачный договор обязателен к заполнению')),
     array('QUANTITY_MINOR_CHILDREN', 'required', array('message' => 'Количество детей обязательно к заполнению')),
+    array('QUANTITY_MINOR_CHILDREN', 'numerical', array('message' => 'Количество детей должно быть числом')),
     array('REGION', 'required', array('message' => 'Область/Край обязателны к заполнению')),
     array('CITY', 'required', array('message' => 'Город/Поселок обязательны к заполнению')),
     array('STATUS_HOUSING', 'required', array('message' => 'Статус жилья обязателен к заполнению')),
     array('EMPLOYMENT_TYPE', 'required', array('message' => 'Тип занятости обязателен к заполнению')),
     array('TYPE_LABOR_CONTRACT', 'required', array('message' => 'Тип трудового договора обязателен к заполнению')),
     array('EXPERIENCE_CURRENT_WORK', 'required', array('message' => 'Стаж на текущем месте работы обязателен к заполнению')),
+    array('EXPERIENCE_CURRENT_WORK', 'numerical', array('message' => 'Стаж на текущем месте работы должен быть числом')),
     array('EXPERIENCE_TOTAL', 'required', array('message' => 'Общий трудовой стаж обязателен к заполнению')),
+    array('EXPERIENCE_TOTAL', 'numerical', array('message' => 'Общий трудовой стаж должен быть числом')),
     array('SALARY_PROJECT_BANK', 'required', array('message' => 'Зарплатный проект банка обязателен к заполнению')),
     array('BASIC_SALARY', 'required', array('message' => 'Основная заработная плата обязателена к заполнению')),
     array('ADDITIONAL_INCOME', 'required', array('message' => 'Дополнительные доходы обязательны к заполнению')),
+    array('ADDITIONAL_INCOME', 'numerical', array('message' => 'Дополнительные доходы должны быть числом')),
     array('FAMILY_INCOME', 'required', array('message' => 'Доход семьи обязателен к заполнению')),
+    array('FAMILY_INCOME', 'numerical', array('message' => 'Доход семьи должен быть числом')),
     array('METHOD_INCOME_CONFIRMATION', 'required', array('message' => 'Способ подтверждения дохода обязателен к заполнению')),
     array('PROGRAM_CREDIT', 'required', array('message' => 'Программа кредитования обязателена к заполнению')),
     array('REQUESTED_AMOUNT', 'required', array('message' => 'Запрашиваемая сумма обязателена к заполнению')),
     array('CREDIT_TERM', 'required', array('message' => 'Срок кредита обязателен к заполнению')),
+    array('CREDIT_TERM', 'numerical', array('message' => 'Срок кредита должен быть числом')),
     array('PRICE_REAL_ESTATE_OBJECT', 'required', array('message' => 'Стоимость объекта недвижимости обязателена к заполнению')),
+    array('PRICE_REAL_ESTATE_OBJECT', 'numerical', array('message' => 'Стоимость объекта недвижимости должен быть числом')),
     array('AMOUNT_INITIAL_CONTRIBUTION', 'required', array('message' => 'Сумма первоначального взноса обязателена к заполнению')),
+    array('AMOUNT_INITIAL_CONTRIBUTION', 'numerical', array('message' => 'Сумма первоначального взноса должен быть числом')),*/
     array('agreement', 'required', array('message' => 'Вы не согласились с условиями')),
 ),
     $_POST
@@ -55,7 +62,9 @@ if(!empty($file['tmp_name'])) {
 }
 else
     $errors['file'] = 'Файл обязателен к заполнению';
-if(empty($errors)){
+var_dump($file['tmp_name'],$filePath,$_FILES['file']);
+exit;
+if($errors){
     $status = true;
 }
 //check form fields

@@ -97,21 +97,19 @@ $(document).ready(function () {
         $("#feedback-form").find("input[type='submit']").val("Отправить");
     });
 
-    $('body').on('click', '.js-change-text-slider-sync .slider-services__img__item', function(e) {
+    $('body').on('click', '.js-change-text-slider-sync .slider-services__img__item', function (e) {
         e.preventDefault();
-        $( '.slider-services__slider').slick('slickGoTo', parseInt($(this).data('img')) -1 )
+        $('.slider-services__slider').slick('slickGoTo', parseInt($(this).data('img')) - 1)
     });
 
     $('body').on('click', '.js-collapse-props', function (e) {
         e.preventDefault();
-        if($(this).siblings('.js-collapsed').is(':visible'))
-        {
+        if ($(this).siblings('.js-collapsed').is(':visible')) {
             $(this).siblings('.js-collapsed').hide(400)
                 .end()
                 .find('span').text('Развернуть');
         }
-        else
-        {
+        else {
             $(this).siblings('.js-collapsed').show(400)
                 .end()
                 .find('span').text('Свернуть');
