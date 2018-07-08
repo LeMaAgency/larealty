@@ -207,7 +207,7 @@ a.add-apartment__button:hover {
 .form-admin .filter-select-drop li {color:#fff; height:30px;line-height:30px;}
 .form-admin .filter-select-drop li:hover,.form-objects  .filter-select-drop li:hover {color:#002b4e;}
 .form-admin .filter-field-title {display:inline-flex; width:150px; height:30px;}
-.form-admin .filter-price, .form-admin .filter-select {display:  inline-flex; width:310px; height:30px;}
+.form-admin .filter-price, .form-admin .filter-select {display:  inline-flex; width:310px; }
 .form-admin .filter-select, .form-objects .filter-select {width:310px; margin-bottom:20px;}
 .form-admin .filter-select a, .form-objects .filter-select a {width:100%; height:30px;}
 
@@ -238,13 +238,15 @@ a.add-apartment__button:hover {
 .form-admin .filter-submit-btn {height:35px;}
 .form-admin .btn-accept{height:30px;}
 .form-admin .form-title{margin-bottom: 30px;font-size: 20px;}
-.form-admin .filter-num-rooms{display: inline-flex; height:30px; margin-bottom: 20px;}
+.form-admin .filter-num-rooms.it-block{display: inline-flex; flex-direction:row; min-height:30px; margin-bottom: 20px;}
 .form-admin .field-price {line-height:1; align-self:flex-start;}
 .form-admin .field-price .filter-price {margin-left:4px; }
 .form-admin .wrap-field-price{display:flex;}
 .form-admin .btn-object {width:205px;}
 .form-admin .filter-select a {height:30px; line-height:30px; color:#002b4e;}
 .form-admin .filter-select-link:after { margin-top: 14px;}
+
+.anketa .file-upload.it-block1 .it-error {margin-top:30px;}
 @media (max-width: 992px) {
 .form-admin .filter-price, .form-admin .filter-select {width:600px;}
 .form-admin .filter-price-input{ max-width:600px;}
@@ -256,23 +258,25 @@ a.add-apartment__button:hover {
 .form-admin .wrap-field-price {display: block;}
 }
 .anketa .filter-field-title {display:flex; width:100%;}
-.anketa .file-upload {
+.anketa .file-upload label {
      position: relative; 
      overflow: hidden; 
      width: 100%; 
-     height: 30px; 
+	height:30px;
      background: #07ba00;
-     padding: 8px 4px;
+     padding: 5px 4px;
      color: #fff;
      text-align: center;
+	margin-bottom: 0px;
 }
-.anketa .file-upload:hover {
+
+.anketa .file-upload label:hover {
      background: #0b9605;
 }
 .anketa .file-upload input[type="file"]{
     display: none; 
 }
-.anketa .file-upload label {
+.anketa .file-upload label1 {
      display: block;
      position: absolute;
      top: 0;
@@ -282,7 +286,7 @@ a.add-apartment__button:hover {
      cursor: pointer;
 }
 .anketa .file-upload span {
-     line-height: 30px; 
+     line-height: 20px; 
 }
 .anketa .filter-price, .anketa  .filter-select {width: 100%;}
 .anketa .filter-price-input, .anketa  .filter-select {max-width: 100%;}
@@ -309,3 +313,6 @@ a.add-apartment__button:hover {
 .slider-services__img__between {
 	width: 5%;}
 h2.seller_main__h2 {color:fff;}
+
+.it-block {display:flex;flex-direction:column;height:auto;}
+.it-error {color:red;padding: 0 10px;}
