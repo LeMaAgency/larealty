@@ -43,41 +43,41 @@ $(function () {
         }, 'json');
         return false;
     });
-        $('form.js-hypothec-form').on('submit', function(e) {
-            e.preventDefault();
-            var curForm = $(this),
-                waitElement = curForm.find('input[type="submit"], button[type="submit"]').get(0),
-                formData = new FormData($(this)[0]);
-            BX.showWait(waitElement);
-            $.ajax({
-                method: curForm.attr('method'),
-                url: curForm.attr('action'),
-                dataType: 'json',
-                data: formData,
-                async:false,
-                cache: false,
-                processData: false,
-                contentType: false,
-                success: function(ans) {
-                    curForm.find('input:not([type="submit"]):not([type="button"]), textarea').css({'border': '3px solid #dfcd7d'});
+    $('form.js-hypothec-form').on('submit', function (e) {
+        e.preventDefault();
+        var curForm = $(this),
+            waitElement = curForm.find('input[type="submit"], button[type="submit"]').get(0),
+            formData = new FormData($(this)[0]);
+        BX.showWait(waitElement);
+        $.ajax({
+            method: curForm.attr('method'),
+            url: curForm.attr('action'),
+            dataType: 'json',
+            data: formData,
+            async: false,
+            cache: false,
+            processData: false,
+            contentType: false,
+            success: function (ans) {
+                curForm.find('input:not([type="submit"]):not([type="button"]), textarea').css({'border': '3px solid #dfcd7d'});
+                curForm.find('.it-error').empty();
+                BX.closeWait(waitElement);
+                if (ans && ans.errors) {
                     curForm.find('.it-error').empty();
-                    BX.closeWait(waitElement);
-                    if (ans && ans.errors) {
-                        curForm.find('.it-error').empty();
-                        for (var inputName in ans.errors) {
-                            curForm.find('[name="' + inputName + '"]').first().css({border: '1px solid red'})
-                                .closest('.it-block').find('.it-error').html(ans.errors[inputName]);
-                        }
-                    }
-                    else {
-                        //ok
-                        curForm.find('input:not([type="submit"]):not([type="button"]), textarea').val('');
-                        $.fancybox.open('Спасибо за заявку. В ближайшее время мы Вам перезвоним')
+                    for (var inputName in ans.errors) {
+                        curForm.find('[name="' + inputName + '"]').first().css({border: '1px solid red'})
+                            .closest('.it-block').find('.it-error').html(ans.errors[inputName]);
                     }
                 }
-            });
-            return false;
+                else {
+                    //ok
+                    curForm.find('input:not([type="submit"]):not([type="button"]), textarea').val('');
+                    $.fancybox.open('Спасибо за заявку. В ближайшее время мы Вам перезвоним')
+                }
+            }
         });
+        return false;
+    });
 });
 $(document).ready(function () {
     $("body").on("click", ".js-all-realtors", function () {
@@ -122,4 +122,14 @@ $(document).ready(function () {
         }
     })
 
+});
+
+$(document).on('click', '.filter-select-drop li', function () {
+    var type = $(this).data('value');
+    $('.all-properties-object .js-type').each(function () {
+        $(this).hide();
+    });
+    $('.all-properties-object .js-type-' + type).each(function () {
+        $(this).show();
+    });
 });

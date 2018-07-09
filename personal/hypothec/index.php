@@ -158,7 +158,7 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                     <div class="filter-field-title">Уровень образования</div>
                     <div class="filter-select it-block">
                         <a href="#" class="filter-select-link filter-border-color">Выбрать</a>
-                        <ul class="filter-select-drop">
+                        <ul class="filter-select-drop education_level">
                             <li data-value="">Выбрать</li>
                             <?foreach(\LIblock::getPropEnumValues(\LIblock::getPropId('hypothec', 'EDUCATION_LEVEL')) as $data):?>
                                 <li data-value="<?= (int) $data['ID'];?>">
