@@ -7,6 +7,8 @@ use \Lema\Common\Helper;
 //Is POST data sent ?
 empty($_POST) && exit;
 
+$errors = array();
+
 $arrObjectValidate = array(
     array('REALTY_TYPE', 'required', array('message' => 'Тип недвижимости обязателен к заполнению')),
     array('SQUARE', 'required', array('message' => 'Общая площадь обязательна к заполнению')),
@@ -33,135 +35,38 @@ $rulesData = array(
     ),
 );
 $realtyTypesRules = array(
-    1   => array('HOUSE_NUMBER', 'ROOMS_COUNT', 'STAGE'),
-    2   => array('HOUSE_NUMBER', 'ROOMS_COUNT', 'STAGE'),
-    3   => array('HOUSE_NUMBER', 'ROOMS_COUNT'),
-    4   => array('HOUSE_NUMBER', 'ROOMS_COUNT', 'STAGE'),
-    49  => array('HOUSE_NUMBER', 'STAGE'),
-    50  => array('HOUSE_NUMBER', 'STAGE'),
-    51  => array('HOUSE_NUMBER'),
+    1 => array('HOUSE_NUMBER', 'ROOMS_COUNT', 'STAGE'),
+    2 => array('HOUSE_NUMBER', 'ROOMS_COUNT', 'STAGE'),
+    3 => array('HOUSE_NUMBER', 'ROOMS_COUNT'),
+    4 => array('HOUSE_NUMBER', 'ROOMS_COUNT', 'STAGE'),
+    49 => array('HOUSE_NUMBER', 'STAGE'),
+    50 => array('HOUSE_NUMBER', 'STAGE'),
+    51 => array('HOUSE_NUMBER'),
     152 => array('HOUSE_NUMBER', 'ROOMS_COUNT'),
 );
+$arrFolderRealty = array(
+    1 => '41',
+    2 => '42',
+    3 => '43',
+    4 => '44',
+    49 => '45',
+    50 => '46',
+    51 => '47',
+    152 => '48'
+);
 
-$fields = array();
-if(isset($_POST['REALTY_TYPE'], $realtyTypesRules[$_POST['REALTY_TYPE']]))
-{
-    foreach($realtyTypesRules[$_POST['REALTY_TYPE']] as $field)
-    {
-        if(isset($realtyData[$field]))
+$fields = $folderRealty = array();
+if (isset($_POST['REALTY_TYPE'], $realtyTypesRules[$_POST['REALTY_TYPE']])) {
+    foreach ($realtyTypesRules[$_POST['REALTY_TYPE']] as $field) {
+        if (isset($rulesData[$field]))
             $arrObjectValidate = array_merge($arrObjectValidate, $rulesData[$field]);
     }
     $fields = $realtyTypesRules[$_POST['REALTY_TYPE']];
+    $folderRealty = $arrFolderRealty[$_POST['REALTY_TYPE']];
+} else {
+    $errors['REALTY_TYPE'] = "Некорректный тип недвижимости";
 }
-else
-{
-    //Unknown realty type!
-}
-/**
- * Switch теперь не нужен вообще. Оставляю его на всякий
- */
-switch ($_POST['REALTY_TYPE']):
-    case 1:
-        $arrObjectValidate = array_merge($arrObjectValidate, array(
-            array('HOUSE_NUMBER', 'required', array('message' => 'Номер дома обязателен к заполнению')),
-            array('HOUSE_NUMBER', 'numerical', array('message' => 'Номер дома должна быть числом')),
-            array('ROOMS_COUNT', 'required', array('message' => 'Кол-во комнат обязательно к заполнению')),
-            array('ROOMS_COUNT', 'numerical', array('message' => 'Кол-во комнат должно быть числом')),
-            array('STAGE', 'required', array('message' => 'Этаж обязателен к заполнению')),
-            array('STAGE', 'numerical', array('message' => 'Этаж должен быть числом')),
-        ));
-        $arrObjectAddRecord = array_merge($arrObjectAddRecord, array(
-            'HOUSE_NUMBER' => $form->getField('HOUSE_NUMBER'),
-            'ROOMS_COUNT' => $form->getField('ROOMS_COUNT'),
-            'STAGE' => $form->getField('STAGE'),
-        ));
-        $fields = array('HOUSE_NUMBER', 'ROOMS_COUNT', 'STAGE');
-        break;
-    case 2:
-        $arrObjectValidate = array_merge($arrObjectValidate, array(
-            array('HOUSE_NUMBER', 'required', array('message' => 'Номер дома обязателен к заполнению')),
-            array('HOUSE_NUMBER', 'numerical', array('message' => 'Номер дома должна быть числом')),
-            array('ROOMS_COUNT', 'required', array('message' => 'Кол-во комнат обязательно к заполнению')),
-            array('ROOMS_COUNT', 'numerical', array('message' => 'Кол-во комнат должно быть числом')),
-            array('STAGE', 'required', array('message' => 'Этаж обязателен к заполнению')),
-            array('STAGE', 'numerical', array('message' => 'Этаж должен быть числом')),
-        ));
-        $arrObjectAddRecord = array_merge($arrObjectAddRecord, array(
-            'HOUSE_NUMBER' => $form->getField('HOUSE_NUMBER'),
-            'ROOMS_COUNT' => $form->getField('ROOMS_COUNT'),
-            'STAGE' => $form->getField('STAGE'),
-        ));
-        $fields = array('HOUSE_NUMBER', 'ROOMS_COUNT', 'STAGE');
-        break;
-    case 3:
-        $arrObjectValidate = array_merge($arrObjectValidate, array(
-            array('HOUSE_NUMBER', 'required', array('message' => 'Номер дома обязателен к заполнению')),
-            array('HOUSE_NUMBER', 'numerical', array('message' => 'Номер дома должна быть числом')),
-            array('ROOMS_COUNT', 'required', array('message' => 'Кол-во комнат обязательно к заполнению')),
-            array('ROOMS_COUNT', 'numerical', array('message' => 'Кол-во комнат должно быть числом')),
-        ));
-        $arrObjectAddRecord = array_merge($arrObjectAddRecord, array(
-            'HOUSE_NUMBER' => $form->getField('HOUSE_NUMBER'),
-            'ROOMS_COUNT' => $form->getField('ROOMS_COUNT'),
-        ));
-        $fields = array('HOUSE_NUMBER', 'ROOMS_COUNT');
-        break;
-    case 4:
-        $arrObjectValidate = array_merge($arrObjectValidate, array());
-        $arrObjectAddRecord = array_merge($arrObjectAddRecord, array());
-        $fields = array('HOUSE_NUMBER', 'ROOMS_COUNT', 'STAGE');
-        break;
-    case 49:
-        $arrObjectValidate = array_merge($arrObjectValidate, array(
-            array('HOUSE_NUMBER', 'required', array('message' => 'Номер дома обязателен к заполнению')),
-            array('HOUSE_NUMBER', 'numerical', array('message' => 'Номер дома должна быть числом')),
-            array('STAGE', 'required', array('message' => 'Этаж обязателен к заполнению')),
-            array('STAGE', 'numerical', array('message' => 'Этаж должен быть числом')),
-        ));
-        $arrObjectAddRecord = array_merge($arrObjectAddRecord, array(
-            'HOUSE_NUMBER' => $form->getField('HOUSE_NUMBER'),
-            'STAGE' => $form->getField('STAGE'),
-        ));
-        $fields = array('HOUSE_NUMBER', 'STAGE');
-        break;
-    case 50:
-        $arrObjectValidate = array_merge($arrObjectValidate, array(
-            array('HOUSE_NUMBER', 'required', array('message' => 'Номер дома обязателен к заполнению')),
-            array('HOUSE_NUMBER', 'numerical', array('message' => 'Номер дома должна быть числом')),
-            array('STAGE', 'required', array('message' => 'Этаж обязателен к заполнению')),
-            array('STAGE', 'numerical', array('message' => 'Этаж должен быть числом')),
-        ));
-        $arrObjectAddRecord = array_merge($arrObjectAddRecord, array(
-            'HOUSE_NUMBER' => $form->getField('HOUSE_NUMBER'),
-            'STAGE' => $form->getField('STAGE'),
-        ));
-        $fields = array('HOUSE_NUMBER', 'STAGE');
-        break;
-    case 51:
-        $arrObjectValidate = array_merge($arrObjectValidate, array(
-            array('HOUSE_NUMBER', 'required', array('message' => 'Номер дома обязателен к заполнению')),
-            array('HOUSE_NUMBER', 'numerical', array('message' => 'Номер дома должна быть числом')),
-        ));
-        $arrObjectAddRecord = array_merge($arrObjectAddRecord, array(
-            'HOUSE_NUMBER' => $form->getField('HOUSE_NUMBER'),
-        ));
-        $fields = array('HOUSE_NUMBER');
-        break;
-    case 152:
-        $arrObjectValidate = array_merge($arrObjectValidate, array(
-            array('HOUSE_NUMBER', 'required', array('message' => 'Номер дома обязателен к заполнению')),
-            array('HOUSE_NUMBER', 'numerical', array('message' => 'Номер дома должна быть числом')),
-            array('ROOMS_COUNT', 'required', array('message' => 'Кол-во комнат обязательно к заполнению')),
-            array('ROOMS_COUNT', 'numerical', array('message' => 'Кол-во комнат должно быть числом')),
-        ));
-        $arrObjectAddRecord = array_merge($arrObjectAddRecord, array(
-            'HOUSE_NUMBER' => $form->getField('HOUSE_NUMBER'),
-            'ROOMS_COUNT' => $form->getField('ROOMS_COUNT'),
-        ));
-        $fields = array('HOUSE_NUMBER', 'ROOMS_COUNT');
-        break;
-endswitch;
-
+$status = empty($errors);
 //set rules & fields for form
 $form = new \Lema\Forms\AjaxForm($arrObjectValidate, $_POST);
 
@@ -172,20 +77,25 @@ $arrObjectAddRecord = array(
     'STREET' => $form->getField('STREET'),
     'PRICE' => $form->getField('PRICE'),
 );
-foreach($fields as $field)
+foreach ($fields as $field)
     $arrObjectAddRecord[$field] = $form->getField($field);
 
 //check form fields
 if ($form->validate()) {
+    if ($status) {
         $elementId = $form->addRecord(
             \LIblock::getId('objects'),
             array(
+                'IBLOCK_SECTION_ID' => $folderRealty,
                 'NAME' => $form->getField('REALTY_TYPE'),
                 'PROPERTY_VALUES' => $arrObjectAddRecord,
                 'ACTIVE' => 'N',
             ));
         $status = (bool)$elementId;
         $requestEditLink = null;
+
+    }
+    if ($status) {
         $requestEditLink = Helper::getFullUrl(
             '/bitrix/admin/iblock_element_edit.php?IBLOCK_ID='
             . \LIblock::getId('objects')
@@ -198,7 +108,7 @@ if ($form->validate()) {
             'REALTY_TYPE' => $form->getField('REALTY_TYPE'),
             'REQUEST_EDIT_LINK' => $requestEditLink,
         ));
-
+    }
     echo json_encode($status ? array('success' => true) : array('errors' => array_merge($errors, $form->getErrors())));
 } else
     echo json_encode(array('errors' => array_merge($errors, $form->getErrors())));
