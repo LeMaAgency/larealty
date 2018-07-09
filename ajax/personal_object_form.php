@@ -17,14 +17,49 @@ $arrObjectValidate = array(
     array('PRICE', 'numerical', array('message' => 'Стоимость должна быть числом')),
 
 );
-$arrObjectAddRecord = array(
-    'REALTY_TYPE' => array('VALUE' => $form->getField('REALTY_TYPE')),
-    'SQUARE' => $form->getField('SQUARE'),
-    'CITY' => $form->getField('CITY'),
-    'STREET' => $form->getField('STREET'),
-    'PRICE' => $form->getField('PRICE'),
+
+$rulesData = array(
+    'HOUSE_NUMBER' => array(
+        array('HOUSE_NUMBER', 'required', array('message' => 'Номер дома обязателен к заполнению')),
+        array('HOUSE_NUMBER', 'numerical', array('message' => 'Номер дома должна быть числом')),
+    ),
+    'ROOMS_COUNT' => array(
+        array('ROOMS_COUNT', 'required', array('message' => 'Кол-во комнат обязательно к заполнению')),
+        array('ROOMS_COUNT', 'numerical', array('message' => 'Кол-во комнат должно быть числом')),
+    ),
+    'STAGE' => array(
+        array('STAGE', 'required', array('message' => 'Этаж обязателен к заполнению')),
+        array('STAGE', 'numerical', array('message' => 'Этаж должен быть числом')),
+    ),
 );
-$fields = array('HOUSE_NUMBER', 'ROOMS_COUNT', 'STAGE');
+$realtyTypesRules = array(
+    1   => array('HOUSE_NUMBER', 'ROOMS_COUNT', 'STAGE'),
+    2   => array('HOUSE_NUMBER', 'ROOMS_COUNT', 'STAGE'),
+    3   => array('HOUSE_NUMBER', 'ROOMS_COUNT'),
+    4   => array('HOUSE_NUMBER', 'ROOMS_COUNT', 'STAGE'),
+    49  => array('HOUSE_NUMBER', 'STAGE'),
+    50  => array('HOUSE_NUMBER', 'STAGE'),
+    51  => array('HOUSE_NUMBER'),
+    152 => array('HOUSE_NUMBER', 'ROOMS_COUNT'),
+);
+
+$fields = array();
+if(isset($_POST['REALTY_TYPE'], $realtyTypesRules[$_POST['REALTY_TYPE']]))
+{
+    foreach($realtyTypesRules[$_POST['REALTY_TYPE']] as $field)
+    {
+        if(isset($realtyData[$field]))
+            $arrObjectValidate = array_merge($arrObjectValidate, $rulesData[$field]);
+    }
+    $fields = $realtyTypesRules[$_POST['REALTY_TYPE']];
+}
+else
+{
+    //Unknown realty type!
+}
+/**
+ * Switch теперь не нужен вообще. Оставляю его на всякий
+ */
 switch ($_POST['REALTY_TYPE']):
     case 1:
         $arrObjectValidate = array_merge($arrObjectValidate, array(
@@ -130,9 +165,15 @@ endswitch;
 //set rules & fields for form
 $form = new \Lema\Forms\AjaxForm($arrObjectValidate, $_POST);
 
-$addFields = array();
+$arrObjectAddRecord = array(
+    'REALTY_TYPE' => array('VALUE' => $form->getField('REALTY_TYPE')),
+    'SQUARE' => $form->getField('SQUARE'),
+    'CITY' => $form->getField('CITY'),
+    'STREET' => $form->getField('STREET'),
+    'PRICE' => $form->getField('PRICE'),
+);
 foreach($fields as $field)
-    $addFields[$field] = $form->getField($field);
+    $arrObjectAddRecord[$field] = $form->getField($field);
 
 //check form fields
 if ($form->validate()) {
