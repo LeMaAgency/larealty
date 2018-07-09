@@ -24,6 +24,7 @@ $arrObjectAddRecord = array(
     'STREET' => $form->getField('STREET'),
     'PRICE' => $form->getField('PRICE'),
 );
+$fields = array('HOUSE_NUMBER', 'ROOMS_COUNT', 'STAGE');
 switch ($_POST['REALTY_TYPE']):
     case 1:
         $arrObjectValidate = array_merge($arrObjectValidate, array(
@@ -39,7 +40,7 @@ switch ($_POST['REALTY_TYPE']):
             'ROOMS_COUNT' => $form->getField('ROOMS_COUNT'),
             'STAGE' => $form->getField('STAGE'),
         ));
-
+        $fields = array('HOUSE_NUMBER', 'ROOMS_COUNT', 'STAGE');
         break;
     case 2:
         $arrObjectValidate = array_merge($arrObjectValidate, array(
@@ -55,6 +56,7 @@ switch ($_POST['REALTY_TYPE']):
             'ROOMS_COUNT' => $form->getField('ROOMS_COUNT'),
             'STAGE' => $form->getField('STAGE'),
         ));
+        $fields = array('HOUSE_NUMBER', 'ROOMS_COUNT', 'STAGE');
         break;
     case 3:
         $arrObjectValidate = array_merge($arrObjectValidate, array(
@@ -67,10 +69,12 @@ switch ($_POST['REALTY_TYPE']):
             'HOUSE_NUMBER' => $form->getField('HOUSE_NUMBER'),
             'ROOMS_COUNT' => $form->getField('ROOMS_COUNT'),
         ));
+        $fields = array('HOUSE_NUMBER', 'ROOMS_COUNT');
         break;
     case 4:
         $arrObjectValidate = array_merge($arrObjectValidate, array());
         $arrObjectAddRecord = array_merge($arrObjectAddRecord, array());
+        $fields = array('HOUSE_NUMBER', 'ROOMS_COUNT', 'STAGE');
         break;
     case 49:
         $arrObjectValidate = array_merge($arrObjectValidate, array(
@@ -83,6 +87,7 @@ switch ($_POST['REALTY_TYPE']):
             'HOUSE_NUMBER' => $form->getField('HOUSE_NUMBER'),
             'STAGE' => $form->getField('STAGE'),
         ));
+        $fields = array('HOUSE_NUMBER', 'STAGE');
         break;
     case 50:
         $arrObjectValidate = array_merge($arrObjectValidate, array(
@@ -95,6 +100,7 @@ switch ($_POST['REALTY_TYPE']):
             'HOUSE_NUMBER' => $form->getField('HOUSE_NUMBER'),
             'STAGE' => $form->getField('STAGE'),
         ));
+        $fields = array('HOUSE_NUMBER', 'STAGE');
         break;
     case 51:
         $arrObjectValidate = array_merge($arrObjectValidate, array(
@@ -104,6 +110,7 @@ switch ($_POST['REALTY_TYPE']):
         $arrObjectAddRecord = array_merge($arrObjectAddRecord, array(
             'HOUSE_NUMBER' => $form->getField('HOUSE_NUMBER'),
         ));
+        $fields = array('HOUSE_NUMBER');
         break;
     case 152:
         $arrObjectValidate = array_merge($arrObjectValidate, array(
@@ -116,11 +123,16 @@ switch ($_POST['REALTY_TYPE']):
             'HOUSE_NUMBER' => $form->getField('HOUSE_NUMBER'),
             'ROOMS_COUNT' => $form->getField('ROOMS_COUNT'),
         ));
+        $fields = array('HOUSE_NUMBER', 'ROOMS_COUNT');
         break;
 endswitch;
 
 //set rules & fields for form
 $form = new \Lema\Forms\AjaxForm($arrObjectValidate, $_POST);
+
+$addFields = array();
+foreach($fields as $field)
+    $addFields[$field] = $form->getField($field);
 
 //check form fields
 if ($form->validate()) {
