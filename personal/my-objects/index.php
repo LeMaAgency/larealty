@@ -28,11 +28,14 @@ $APPLICATION->SetTitle("Мои объекты");
                         <a href="#" class="filter-select-link filter-border-color">Выбрать</a>
                         <ul class="filter-select-drop">
                             <li data-value="">Выбрать</li>
-                            <? foreach (\LIblock::getPropEnumValues(\LIblock::getPropId('objects', 'REALTY_TYPE')) as $data): ?>
+                            <? foreach(\LIblock::getSectionsByIblockCode('objects') as $code => $data):
+                                if(false === strpos($code, '-new'))
+                                    continue;
+                                ?>
                                 <li data-value="<?=(int)$data['ID']; ?>">
-                                    <?= htmlspecialcharsbx($data['VALUE']); ?>
+                                    <?= htmlspecialcharsbx($data['NAME']); ?>
                                 </li>
-                            <? endforeach; ?>
+                            <?endforeach;?>
                         </ul>
                         <input type="hidden" name="REALTY_TYPE" value="">
                         <div class="it-error"></div>
