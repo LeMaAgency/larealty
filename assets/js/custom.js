@@ -103,6 +103,7 @@ $(function () {
             }
             else {
                 //ok
+                curForm.find('input:not([type="submit"]):not([type="button"]), textarea').val('').css({'border':'1px solid black'});
                 $.fancybox.open('Спасибо за заявку. В ближайшее время мы Вам перезвоним')
             }
         }, 'json');
@@ -155,7 +156,11 @@ $(document).ready(function () {
 });
 
 $(document).on('click', '.filter-select-drop li', function () {
-    var type = $(this).data('value');
+    var type = $(this).data('value'),
+        name = $(this).data('name');
+
+    $(this).closest('.filter-select').find('input.js-realty_type_name').val(name);
+
     $('.all-properties-object .js-type').each(function () {
         $(this).hide();
     });

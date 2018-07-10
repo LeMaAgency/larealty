@@ -38,6 +38,7 @@ $APPLICATION->SetTitle("Мои объекты");
                             <?endforeach;?>
                         </ul>
                         <input type="hidden" name="REALTY_TYPE" value="">
+                        <input type="hidden" class="js-realty_type_name" name="REALTY_TYPE_NAME" value="">
                         <div class="it-error"></div>
                     </div>
                     <div class="filter-field-title">Общая площадь, м²</div>
@@ -73,14 +74,14 @@ $APPLICATION->SetTitle("Мои объекты");
                 </div>
 
                 <div class="all-properties-object">
-                    <div class="col-md-6 js-type js-type-1 js-type-2 js-type-3 js-type-49 js-type-50 js-type-51 js-type-152" style="display: none;">
+                    <div class="col-md-6 js-type js-type-41 js-type-42 js-type-43 js-type-45 js-type-46 js-type-47 js-type-48" style="display: none;">
                         <div class="filter-field-title">№ дома</div>
                         <div class="filter-price it-block">
                             <input type="text" value="" name="HOUSE_NUMBER" class="filter-price-input filter-max-value-input" placeholder="№ дома">
                             <div class="it-error"></div>
                         </div>
                     </div>
-                    <div class="col-md-6 js-type js-type-1 js-type-2 js-type-3 js-type-152" style="display: none;">
+                    <div class="col-md-6 js-type js-type-41 js-type-42 js-type-43 js-type-48" style="display: none;">
                         <div class="filter-field-title object-number">Кол-во комнат</div>
                         <div class="filter-price it-block">
                             <input type="text" value="" name="ROOMS_COUNT" class="filter-price-input filter-max-value-input"
@@ -88,7 +89,7 @@ $APPLICATION->SetTitle("Мои объекты");
                             <div class="it-error"></div>
                         </div>
                     </div>
-                    <div class="col-md-6 js-type js-type-1 js-type-2 js-type-49 js-type-50" style="display: none;">
+                    <div class="col-md-6 js-type js-type-41 js-type-42 js-type-45 js-type-46" style="display: none;">
                         <div class="filter-field-title">Этаж</div>
                         <div class="filter-price it-block">
                             <input type="text" value="" name="STAGE" class="filter-price-input filter-max-value-input" placeholder="Этаж">

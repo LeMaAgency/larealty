@@ -8,7 +8,7 @@ use \Lema\Common\Helper;
 empty($_POST) && exit;
 
 $errors = array();
-
+//Array to check common fields for validity
 $arrObjectValidate = array(
     array('REALTY_TYPE', 'required', array('message' => 'Тип недвижимости обязателен к заполнению')),
     array('SQUARE', 'required', array('message' => 'Общая площадь обязательна к заполнению')),
@@ -19,11 +19,11 @@ $arrObjectValidate = array(
     array('PRICE', 'numerical', array('message' => 'Стоимость должна быть числом')),
 
 );
-
+//Array for checking individual fields for validity
 $rulesData = array(
     'HOUSE_NUMBER' => array(
         array('HOUSE_NUMBER', 'required', array('message' => 'Номер дома обязателен к заполнению')),
-        array('HOUSE_NUMBER', 'numerical', array('message' => 'Номер дома должна быть числом')),
+        array('HOUSE_NUMBER', 'numerical', array('message' => 'Номер дома должен быть числом')),
     ),
     'ROOMS_COUNT' => array(
         array('ROOMS_COUNT', 'required', array('message' => 'Кол-во комнат обязательно к заполнению')),
@@ -34,15 +34,16 @@ $rulesData = array(
         array('STAGE', 'numerical', array('message' => 'Этаж должен быть числом')),
     ),
 );
+//Array of adding fields to the information block element
 $realtyTypesRules = array(
-    1 => array('HOUSE_NUMBER', 'ROOMS_COUNT', 'STAGE'),
-    2 => array('HOUSE_NUMBER', 'ROOMS_COUNT', 'STAGE'),
-    3 => array('HOUSE_NUMBER', 'ROOMS_COUNT'),
-    4 => array('HOUSE_NUMBER', 'ROOMS_COUNT', 'STAGE'),
-    49 => array('HOUSE_NUMBER', 'STAGE'),
-    50 => array('HOUSE_NUMBER', 'STAGE'),
-    51 => array('HOUSE_NUMBER'),
-    152 => array('HOUSE_NUMBER', 'ROOMS_COUNT'),
+    41 => array('HOUSE_NUMBER', 'ROOMS_COUNT', 'STAGE'),
+    42 => array('HOUSE_NUMBER', 'ROOMS_COUNT', 'STAGE'),
+    43 => array('HOUSE_NUMBER', 'ROOMS_COUNT'),
+    44 => array(),
+    45 => array('HOUSE_NUMBER', 'STAGE'),
+    46 => array('HOUSE_NUMBER', 'STAGE'),
+    47 => array('HOUSE_NUMBER'),
+    48 => array('HOUSE_NUMBER', 'ROOMS_COUNT'),
 );
 
 $fields = $folderRealty = array();
@@ -84,7 +85,8 @@ if ($form->validate()) {
 
     }
     if ($status) {
-        $rsUser = CUser::GetByID($USER->GetID());
+        //Output current user data
+        $rsUser = \CUser::GetByID($USER->GetID());
         $arUser = $rsUser->Fetch();
 
         $requestEditLink = Helper::getFullUrl(
@@ -96,11 +98,11 @@ if ($form->validate()) {
             . $form->getField('REALTY_TYPE')
         );
         //send message
-        $status = $form->sendMessage('PERSONAL_OBJECT_FORM', array(
-            'NAME' => $USER['NAME'],
-            'LAST_NAME' => $USER['LAST_NAME'],
-            'SECOND_NAME' => $USER['SECOND_NAME'],
-            'REALTY_TYPE' => $form->getField('REALTY_TYPE'),
+        $status = $form->sendMessage('FEEDBACK', array(
+            'NAME' => $arUser['NAME'],
+            'LAST_NAME' => $arUser['LAST_NAME'],
+            'SECOND_NAME' => $arUser['SECOND_NAME'],
+            'REALTY_TYPE' => $form->getField('REALTY_TYPE_NAME'),
             'REQUEST_EDIT_LINK' => $requestEditLink,
         ));
     }
