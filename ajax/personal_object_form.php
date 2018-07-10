@@ -96,7 +96,7 @@ if ($form->validate()) {
             . $form->getField('REALTY_TYPE')
         );
         //send message
-        $status = $form->sendMessage('FEEDBACK', array(
+        $status = $form->sendMessage('PERSONAL_OBJECT_FORM', array(
             'NAME' => $USER['NAME'],
             'LAST_NAME' => $USER['LAST_NAME'],
             'SECOND_NAME' => $USER['SECOND_NAME'],
