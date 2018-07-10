@@ -159,7 +159,7 @@ $(document).on('click', '.filter-select-drop li', function () {
     var type = $(this).data('value'),
         name = $(this).data('name');
 
-    $(this).closest('.filter-select').find('input.js-realty_type_name').val(name);
+    $(this).closest('.filter-select').find('.js-realty-type-name').val(name);
 
     $('.all-properties-object .js-type').each(function () {
         $(this).hide();

@@ -32,13 +32,14 @@ $APPLICATION->SetTitle("Мои объекты");
                                 if(false === strpos($code, '-new'))
                                     continue;
                                 ?>
-                                <li data-value="<?=(int)$data['ID']; ?>">
+                                <li data-name="<?= htmlspecialcharsbx($data['NAME']); ?>"
+                                    data-value="<?=(int)$data['ID']; ?>">
                                     <?= htmlspecialcharsbx($data['NAME']); ?>
                                 </li>
                             <?endforeach;?>
                         </ul>
                         <input type="hidden" name="REALTY_TYPE" value="">
-                        <input type="hidden" class="js-realty_type_name" name="REALTY_TYPE_NAME" value="">
+                        <input type="hidden" class="js-realty-type-name" name="REALTY_TYPE_NAME" value="">
                         <div class="it-error"></div>
                     </div>
                     <div class="filter-field-title">Общая площадь, м²</div>
