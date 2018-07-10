@@ -298,7 +298,7 @@ a.add-apartment__button:hover {
 .top-slide {height: 600px;
     background-size: cover;}
 .card-flat__content__head__title, .new-flats__h2, .card-flat__content__head__price_min,
-.card-flat__content__head__price, .phases__h2 {color:#002b4e;}
+.card-flat__content__head__price, .phases__h2, .calculator__wrap .calculator__h2, .calculator__wrap .calculator__h2 {color:#002b4e;}
 .offers-item-info {
 	width: 470px;}
 .link_arrow img {width: 10px;
@@ -316,3 +316,4 @@ h2.seller_main__h2 {color:fff;}
 
 .it-block {display:flex;flex-direction:column;height:auto;}
 .it-error {color:red;padding: 0 10px;}
+.calculator__wrap .result {margin-top: 60px;}
