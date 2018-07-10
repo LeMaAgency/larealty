@@ -44,16 +44,6 @@ $realtyTypesRules = array(
     51 => array('HOUSE_NUMBER'),
     152 => array('HOUSE_NUMBER', 'ROOMS_COUNT'),
 );
-$arrFolderRealty = array(
-    1 => '41',
-    2 => '42',
-    3 => '43',
-    4 => '44',
-    49 => '45',
-    50 => '46',
-    51 => '47',
-    152 => '48'
-);
 
 $fields = $folderRealty = array();
 if (isset($_POST['REALTY_TYPE'], $realtyTypesRules[$_POST['REALTY_TYPE']])) {
@@ -62,7 +52,6 @@ if (isset($_POST['REALTY_TYPE'], $realtyTypesRules[$_POST['REALTY_TYPE']])) {
             $arrObjectValidate = array_merge($arrObjectValidate, $rulesData[$field]);
     }
     $fields = $realtyTypesRules[$_POST['REALTY_TYPE']];
-    $folderRealty = $arrFolderRealty[$_POST['REALTY_TYPE']];
 } else {
     $errors['REALTY_TYPE'] = "Некорректный тип недвижимости";
 }
@@ -71,7 +60,6 @@ $status = empty($errors);
 $form = new \Lema\Forms\AjaxForm($arrObjectValidate, $_POST);
 
 $arrObjectAddRecord = array(
-    'REALTY_TYPE' => array('VALUE' => $form->getField('REALTY_TYPE')),
     'SQUARE' => $form->getField('SQUARE'),
     'CITY' => $form->getField('CITY'),
     'STREET' => $form->getField('STREET'),
@@ -86,7 +74,7 @@ if ($form->validate()) {
         $elementId = $form->addRecord(
             \LIblock::getId('objects'),
             array(
-                'IBLOCK_SECTION_ID' => $folderRealty,
+                'IBLOCK_SECTION_ID' => $form->getField('REALTY_TYPE'),
                 'NAME' => $form->getField('REALTY_TYPE'),
                 'PROPERTY_VALUES' => $arrObjectAddRecord,
                 'ACTIVE' => 'N',
@@ -96,15 +84,22 @@ if ($form->validate()) {
 
     }
     if ($status) {
+        $rsUser = CUser::GetByID($USER->GetID());
+        $arUser = $rsUser->Fetch();
+
         $requestEditLink = Helper::getFullUrl(
             '/bitrix/admin/iblock_element_edit.php?IBLOCK_ID='
             . \LIblock::getId('objects')
             . '&type=realty&ID='
             . $elementId
-            . '&lang=ru&find_section_section=-1'
+            . '&lang=ru&find_section_section='
+            . $form->getField('REALTY_TYPE')
         );
         //send message
         $status = $form->sendMessage('FEEDBACK', array(
+            'NAME' => $USER['NAME'],
+            'LAST_NAME' => $USER['LAST_NAME'],
+            'SECOND_NAME' => $USER['SECOND_NAME'],
             'REALTY_TYPE' => $form->getField('REALTY_TYPE'),
             'REQUEST_EDIT_LINK' => $requestEditLink,
         ));
