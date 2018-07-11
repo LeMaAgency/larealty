@@ -9,13 +9,13 @@ empty($_POST) && exit;
 
 $arrFields = $errors = array();
 
+$rulesData = array();
+
 if (isset($_POST['FORM_DATA'])) {
 
     if (!empty($_POST['PERSONAL_BIRTHDAY'])) {
         $_POST['PERSONAL_BIRTHDAY'] = date("d.m.Y", strtotime($_POST['PERSONAL_BIRTHDAY']));
     }
-    //Array for checking individual fields for validity
-    $rulesData = array();
 
     //Array of adding fields to the user data
     $realtyTypesRules = array(
@@ -28,9 +28,6 @@ if (isset($_POST['FORM_DATA'])) {
     );
 
 } elseif (isset($_POST['FORM_PHONE'])) {
-
-    //Array for checking individual fields for validity
-    $rulesData = array();
 
     //Array of adding fields to the user data
     $realtyTypesRules = array(
