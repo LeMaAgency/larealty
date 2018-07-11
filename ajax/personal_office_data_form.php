@@ -96,6 +96,19 @@ if ($form->validate()) {
 
         $status = $user->Update(User::get()->GetId(), $arrFields);
     }
+    if($status){
+        $user = \CUser::GetID();
+        $userData = CUser::GetByID($user)->Fetch();
+
+        $status = $form->sendMessage('PERSONAL_OFFICE_FORM', array(
+            'LAST_NAME' => $userData['LAST_NAME'],
+            'NAME' => $userData['NAME'],
+            'SECOND_NAME' => $userData['SECOND_NAME'],
+            'DATE' => date("m.d.y"),
+            'TIME' => date("H:i:s"),
+            'MAIL_TO' => $userData['EMAIL'],
+        ));
+    }
     echo json_encode($status ? array('success' => true) : array('errors' => array_merge($errors, $form->getErrors())));
 } else
     echo json_encode(array('errors' => array_merge($errors, $form->getErrors())));
