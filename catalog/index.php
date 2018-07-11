@@ -580,7 +580,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                     <div class="row">
                         <?php
                         $roomNewElementFilter = array(
-                            '=PROPERTY_ROOMS_COUNT' => 1,
+                            'PROPERTY_ROOMS_COUNT' => 1,
                             'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
                             'SECTION_CODE' => $sectionCodes,
                         );
@@ -744,7 +744,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                     <div class="row">
                         <?php
                         $roomNewElementFilter = array(
-                            '=PROPERTY_ROOMS_COUNT' => 3,
+                            'PROPERTY_ROOMS_COUNT' => 3,
                             'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
                             'SECTION_CODE' => $sectionCodes,
                         );
@@ -826,7 +826,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                     <div class="row">
                         <?php
                         $roomNewElementFilter = array(
-                            '>=PROPERTY_ROOMS_COUNT' => 4,
+                            '>PROPERTY_ROOMS_COUNT' => 4,
                             'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
                             'SECTION_CODE' => $sectionCodes,
                         );
