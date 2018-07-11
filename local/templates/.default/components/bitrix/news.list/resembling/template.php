@@ -50,21 +50,21 @@ $data = new TH($this);
                         <?= Loc::getMessage('LEMA_RESEMBLING_APARTMENTS_RUB'); ?>
                     </div>
 
-                    <? if ($item->propFilled('ROOMS_COUNT')): ?>
                     <div class="offers-item-info clearfix">
-                        <div class="item-info item-info_room">
-                            <div class="item-info__inner">
-                                <div class="item-info__inner__img item-info__inner__img_room"></div>
-                                <div class="item-info__inner__content">
-                                    <div class="item-info-name">
-                                        <?= $item->propName("ROOMS_COUNT"); ?>
-                                    </div>
-                                    <div class="item-info-value">
-                                        <?= $item->propVal("ROOMS_COUNT"); ?>
+                        <? if ($item->propFilled('ROOMS_COUNT')): ?>
+                            <div class="item-info item-info_room">
+                                <div class="item-info__inner">
+                                    <div class="item-info__inner__img item-info__inner__img_room"></div>
+                                    <div class="item-info__inner__content">
+                                        <div class="item-info-name">
+                                            <?= $item->propName("ROOMS_COUNT"); ?>
+                                        </div>
+                                        <div class="item-info-value">
+                                            <?= $item->propVal("ROOMS_COUNT"); ?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         <? endif; ?>
                         <?if($item->get('IS_HOUSE_OR_LOT')):?>
                             <?if($item->propFilled('STAGES_COUNT')):?>
