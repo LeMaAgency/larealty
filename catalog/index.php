@@ -584,6 +584,8 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                             'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
                             'SECTION_CODE' => $sectionCodes,
                         );
+                        if(isset($_GET['qdf']))
+                            echo '<pre style="display:none">', print_r($roomNewElementFilter, 1), '</pre>';
                         ?>
                         <?$APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
                             'DISPLAY_DATE' => 'Y',
@@ -664,6 +666,8 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                             'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
                             'SECTION_CODE' => $sectionCodes,
                         );
+                        if(isset($_GET['qdf']))
+                            echo '<pre style="display:none">', print_r($roomNewElementFilter, 1), '</pre>';
                         ?>
                         <?$APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
                             'DISPLAY_DATE' => 'Y',
@@ -744,6 +748,8 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                             'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
                             'SECTION_CODE' => $sectionCodes,
                         );
+                        if(isset($_GET['qdf']))
+                            echo '<pre style="display:none">', print_r($roomNewElementFilter, 1), '</pre>';
                         ?>
                         <?$APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
                             'DISPLAY_DATE' => 'Y',
