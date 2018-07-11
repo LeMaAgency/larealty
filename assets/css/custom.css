@@ -317,3 +317,7 @@ h2.seller_main__h2 {color:fff;}
 .it-block {display:flex;flex-direction:column;height:auto;}
 .it-error {color:red;padding: 0 10px;}
 .calculator__wrap .result {margin-top: 60px;}
+
+.add-bg-on-hover:hover {
+    background-color: #f6f6f6;
+}

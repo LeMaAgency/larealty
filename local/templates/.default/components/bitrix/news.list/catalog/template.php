@@ -31,7 +31,7 @@ $data = new TH($this);
             <?=$arResult["NAV_STRING"]?><br />
         <?endif;?>
         <?foreach($data->items() as $item):?>
-            <div class="card-flat card-flat_bg" <?=$item->editId();?> >
+            <div class="card-flat add-bg-on-hover" <?=$item->editId();?> >
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-4">
