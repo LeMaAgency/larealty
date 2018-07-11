@@ -212,3 +212,55 @@ class DomSakhExport extends \Lema\Base\XmlExport
         <?php
     }
 }
+        /**
+         * Class UserData
+         */
+        class UserData
+        {
+            /**
+             * @var null
+             */
+            private static $_instance = null;
+            /**
+             * @var null
+             */
+            protected $userData = null;
+            /**
+             * UserData constructor.
+             * @param null $id
+             */
+            public function __construct($id = null)
+            {
+                if(empty($id))
+                    $id = \Lema\Common\User::get()->GetId();
+                $this->loadUserData($id);
+            }
+            /**
+             * @param null $id
+             * @return $this
+             */
+            public static function instance($id = null)
+            {
+                if(null === static::$_instance)
+                    static::$_instance = new static($id);
+                return static::$_instance;
+            }
+            /**
+             * @param $id
+             * @throws \Bitrix\Main\ArgumentException
+             */
+            public function loadUserData($id)
+            {
+                $res = \Bitrix\Main\UserTable::getByPrimary($id, array('select' => array('*', 'UF_*')));
+                if($row = $res->fetch())
+                    $this->userData = $row;
+            }
+            /**
+             * @param $field
+             * @return null|string
+             */
+            public function get($field)
+            {
+                return isset($this->userData[$field]) ? htmlspecialcharsbx($this->userData[$field]) : null;
+            }
+        }

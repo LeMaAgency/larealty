@@ -1,20 +1,22 @@
-<?
+<? defined('NEED_AUTH') or define('NEED_AUTH', true);
 
-defined('NEED_AUTH') or define('NEED_AUTH', true);
-
-require_once $_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
 
 $APPLICATION->SetTitle('Личный профиль');
+
+use \Lema\Common\Helper;
+
+$user = new \UserData();
 ?>
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <?\Lema\Components\Breadcrumbs::inc('breadcrumbs');?>
+                <? \Lema\Components\Breadcrumbs::inc('breadcrumbs'); ?>
             </div>
         </div>
     </div>
     <div class="container">
-        <form name="" class="filter-form form-admin" action="" method="">
+        <form class="filter-form form-admin js-personal-office-form" action="<?=SITE_DIR.'ajax/personal_office_data_form.php'?>" method="POST">
             <div class="container-index">
                 <div class="section-title form-title"><span>* Персональные данные</span></div>
             </div>
@@ -22,64 +24,106 @@ $APPLICATION->SetTitle('Личный профиль');
                 <div class="col-md-6">
                     <div class="filter-field-title">Имя</div>
                     <div class="filter-price">
-                        <input type="text" value="" name="" class="filter-price-input filter-max-value-input" placeholder="Пользователь">
+                        <input type="text" value="<?= $user->get('NAME'); ?>" name="NAME" class="filter-price-input filter-max-value-input"
+                               placeholder="Пользователь">
                     </div>
                     <div class="filter-field-title">Отчество</div>
                     <div class="filter-price">
-                        <input type="text" value="" name="" class="filter-price-input filter-max-value-input" placeholder="Ваше отчество">
+                        <input type="text" value="<?= $user->get('SECOND_NAME'); ?>" name="SECOND_NAME"
+                               class="filter-price-input filter-max-value-input" placeholder="Ваше отчество">
                     </div>
                     <div class="filter-field-title">Фамилия</div>
                     <div class="filter-price">
-                        <input type="text" value="" name="" class="filter-price-input filter-max-value-input" placeholder="Введите свою фамилию">
+                        <input type="text" value="<?= $user->get('LAST_NAME'); ?>" name="LAST_NAME" class="filter-price-input filter-max-value-input"
+                               placeholder="Введите свою фамилию">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="filter-field-title">Пол</div>
                     <div class="filter-select">
-                        <a href="#" class="filter-select-link filter-border-color">Выбрать</a>
+                        <a href="#" class="filter-select-link filter-border-color">
+                            <? if (empty($user->get('PERSONAL_GENDER'))) { ?>
+                                Выбрать
+                            <? } elseif ($user->get('PERSONAL_GENDER') == "M") { ?>
+                                Мужской
+                            <? } else { ?>
+                                Женский
+                            <? } ?>
+                        </a>
                         <ul class="filter-select-drop">
-                            <li data-value="1">Не определен</li>
-                            <li data-value="2">Женский</li>
-                            <li data-value="3">Мужской</li>
+                            <li data-value="">Не определен</li>
+                            <li data-value="F">Женский</li>
+                            <li data-value="M">Мужской</li>
                         </ul>
+                        <input type="hidden" name="PERSONAL_GENDER" value="<?= $user->get('PERSONAL_GENDER'); ?>">
                     </div>
 
                     <div class="filter-field-title">Дата рождения</div>
                     <div class="filter-price">
-                        <input type="date" value="" name="date" id="date" class="filter-price-input filter-max-value-input" placeholder="Дата рождения">
+                        <input type="date"
+                               value="<?= date("Y-m-d", strtotime($user->get('PERSONAL_BIRTHDAY'))); ?>"
+                               name="PERSONAL_BIRTHDAY"
+                               id="PERSONAL_BIRTHDAY"
+                               class="filter-price-input filter-max-value-input"
+                               placeholder="Дата рождения">
                     </div>
-                    <div class="filter-field-title " >Город</div>
+                    <div class="filter-field-title ">Город</div>
                     <div class="filter-select">
-                        <a href="#" class="filter-select-link filter-border-color">Выбрать</a>
+                        <a href="#" class="filter-select-link filter-border-color">
+                            <? if (empty($user->get('PERSONAL_GENDER'))) { ?>
+                                Выбрать
+                            <? } else { ?>
+                                <?= $user->get('WORK_CITY'); ?>
+                            <? } ?>
+                        </a>
+                        <ul class="filter-select-drop">
+                            <li data-value="">Выбрать</li>
+                            <? foreach (\LIblock::getPropEnumValues(\LIblock::getPropId('objects', 'CITY')) as $data): ?>
+                                <li data-value="<?= htmlspecialcharsbx($data['VALUE']); ?>">
+                                    <?= htmlspecialcharsbx($data['VALUE']); ?>
+                                </li>
+                            <? endforeach; ?>
+                        </ul>
+                        <input type="hidden" name="WORK_CITY" value="<?= $user->get('WORK_CITY'); ?>">
+
                     </div>
                 </div>
             </div>
+
+            <div class="text-center margin30">
+                <button type="reset" name="" value="" class="filter-submit-btn margin30 btn-reset">Очистить</button>
+                <input type="submit" name="FORM_DATA" value="Сохранить" class="filter-submit-btn margin30 btn-save">
+            </div>
+        </form>
+
+        <div class="filter-form form-admin">
+
             <div class="container-index">
                 <div class="section-title  form-title"><span>* Контактная информация</span></div>
             </div>
             <div class="row">
-                <div class="col-md-6"><div class="filter-field-title ">№ телефона</div>
-                    <div class="filter-price">
-                        <input type="text" value="" name="" class="filter-price-input filter-max-value-input btn-accept" placeholder="№ телефона">
-                        <button type="submit" name="" value="" class="filter-submit-btn-admin btn-accept">Подтвердить</button>
-                    </div>
+                <div class="col-md-6">
+                    <form action="<?=SITE_DIR.'ajax/personal_office_data_form.php'?>" method="POST" class="filter-form form-admin">
+                        <div class="filter-field-title">№ телефона</div>
+                        <div class="filter-price">
+                            <input type="text" value="<?=$user->get('WORK_PHONE');?>" name="WORK_PHONE" class="filter-price-input filter-max-value-input btn-accept" placeholder="№ телефона">
+                            <input type="submit" name="FORM_PHONE" value="Сохранить" class="filter-submit-btn-admin btn-accept">
+                        </div>
+                    </form>
                 </div>
                 <div class="col-md-6">
-                    <div class="filter-field-title  ">Email</div>
-                    <div class="filter-price">
-                        <input type="text" value="" name="" class="filter-price-input filter-max-value-input" placeholder="Email">
-                        <button type="submit" name="" value="" class="filter-submit-btn-admin btn-accept">Подтвердить</button>
-                    </div>
+                    <form action="<?=SITE_DIR.'ajax/personal_office_data_form.php'?>" method="POST" class="filter-form form-admin">
+                        <div class="filter-field-title">Email</div>
+                        <div class="filter-price">
+                            <input type="text" value="<?=$user->get('EMAIL');?>" name="EMAIL" class="filter-price-input filter-max-value-input" placeholder="Email">
+                            <input type="submit" name="FORM_EMAIL" value="Сохранить" class="filter-submit-btn-admin btn-accept">
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="text-center margin30">
-                <button type="submit" name="" value="" class="filter-submit-btn margin30 btn-reset">Отменить</button>
-                <button type="submit" name="" value="" class="filter-submit-btn margin30 btn-save">Сохранить</button>
-            </div>
-        </form>
+        </div>
 
-
-        <form name="" class="filter-form form-admin" action="" method="">
+        <form action="<?=SITE_DIR.'ajax/personal_office_data_form.php'?>" method="POST" class="filter-form form-admin" >
             <div class="container-index">
                 <div class="section-title margin30 form-title"><span>* Сменить пароль</span></div>
             </div>
@@ -87,26 +131,26 @@ $APPLICATION->SetTitle('Личный профиль');
                 <div class="col-md-6">
                     <div class="filter-field-title">Старый пароль</div>
                     <div class="filter-price">
-                        <input type="text" value="" name="" class="filter-price-input filter-max-value-input" placeholder="Старый пароль">
-                    </div>
-                    <div class="filter-field-title">Повторите пароль</div>
-                    <div class="filter-price">
-                        <input type="text" value="" name="" class="filter-price-input filter-max-value-input" placeholder="Повторите пароль">
+                        <input type="text" value="" name="PASSWORD" class="filter-price-input filter-max-value-input" placeholder="Старый пароль">
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="filter-field-title">Новый пароль</div>
                     <div class="filter-price">
-                        <input type="text" value="" name="" class="filter-price-input filter-max-value-input" placeholder="Новый пароль">
+                        <input type="text" value="" name="NEW_PASS" class="filter-price-input filter-max-value-input" placeholder="Новый пароль">
+                    </div>
+                    <div class="filter-field-title">Повторите пароль</div>
+                    <div class="filter-price">
+                        <input type="text" value="" name="NEW_PASS_REPEAT" class="filter-price-input filter-max-value-input" placeholder="Повторите пароль">
                     </div>
                 </div>
             </div>
-            <button type="submit" name="" value="" class="filter-submit-btn">Сменить пароль</button>
+            <input type="submit" name="FORM_PASS" value="Сменить пароль" class="filter-submit-btn">
             <div class="clb margin30"></div>
         </form>
 
     </div>
 <?
-require_once $_SERVER['DOCUMENT_ROOT'].'/bitrix/footer.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/footer.php';
 ?>

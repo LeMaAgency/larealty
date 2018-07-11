@@ -438,7 +438,7 @@ $APPLICATION->SetTitle('Оформить ипотеку');
 
 
             <div class="text-center margin30">
-                <button type="submit" name="" value="" class="filter-submit-btn margin30 btn-reset">Отменить</button>
+                <button type="reset" name="" value="" class="filter-submit-btn margin30 btn-reset">Отменить</button>
                 <button type="submit" name="" value="" class="filter-submit-btn margin30 btn-save">Сохранить</button>
             </div>
         </form>

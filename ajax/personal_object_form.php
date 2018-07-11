@@ -58,7 +58,7 @@ if (isset($_POST['REALTY_TYPE'], $realtyTypesRules[$_POST['REALTY_TYPE']])) {
 }
 $status = empty($errors);
 //set rules & fields for form
-$form = new \Lema\Forms\AjaxForm($arrObjectValidate, $_POST);
+$form = new \Lema\Forms\AjaxForm(git, $_POST);
 
 $arrObjectAddRecord = array(
     'SQUARE' => $form->getField('SQUARE'),
