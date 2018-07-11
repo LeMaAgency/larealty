@@ -580,12 +580,10 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                     <div class="row">
                         <?php
                         $roomNewElementFilter = array(
-                            'PROPERTY_ROOMS_COUNT' => 1,
+                            '=PROPERTY_ROOMS_COUNT' => 1,
                             'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
                             'SECTION_CODE' => $sectionCodes,
                         );
-                        if(isset($_GET['qdf']))
-                            echo '<pre style="display:none">', print_r($roomNewElementFilter, 1), '</pre>';
                         ?>
                         <?$APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
                             'DISPLAY_DATE' => 'Y',
@@ -629,7 +627,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                             'ADD_SECTIONS_CHAIN' => 'N',
                             'HIDE_LINK_WHEN_NO_DETAIL' => 'Y',
                             'PARENT_SECTION' => '',
-                            'PARENT_SECTION_CODE' => 'doma',
+                            'PARENT_SECTION_CODE' => 'active',
                             'INCLUDE_SUBSECTIONS' => 'Y',
                             'CACHE_TYPE' => 'A',
                             'CACHE_TIME' => '36000000',
@@ -666,8 +664,6 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                             'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
                             'SECTION_CODE' => $sectionCodes,
                         );
-                        if(isset($_GET['qdf']))
-                            echo '<pre style="display:none">', print_r($roomNewElementFilter, 1), '</pre>';
                         ?>
                         <?$APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
                             'DISPLAY_DATE' => 'Y',
@@ -711,7 +707,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                             'ADD_SECTIONS_CHAIN' => 'N',
                             'HIDE_LINK_WHEN_NO_DETAIL' => 'Y',
                             'PARENT_SECTION' => '',
-                            'PARENT_SECTION_CODE' => 'dachi',
+                            'PARENT_SECTION_CODE' => 'active',
                             'INCLUDE_SUBSECTIONS' => 'Y',
                             'CACHE_TYPE' => 'A',
                             'CACHE_TIME' => '36000000',
@@ -744,12 +740,10 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                     <div class="row">
                         <?php
                         $roomNewElementFilter = array(
-                            'PROPERTY_ROOMS_COUNT' => 3,
+                            '=PROPERTY_ROOMS_COUNT' => 3,
                             'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
                             'SECTION_CODE' => $sectionCodes,
                         );
-                        if(isset($_GET['qdf']))
-                            echo '<pre style="display:none">', print_r($roomNewElementFilter, 1), '</pre>';
                         ?>
                         <?$APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
                             'DISPLAY_DATE' => 'Y',
@@ -793,7 +787,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                             'ADD_SECTIONS_CHAIN' => 'N',
                             'HIDE_LINK_WHEN_NO_DETAIL' => 'Y',
                             'PARENT_SECTION' => '',
-                            'PARENT_SECTION_CODE' => 'zemelnyy_uchastok',
+                            'PARENT_SECTION_CODE' => 'active',
                             'INCLUDE_SUBSECTIONS' => 'Y',
                             'CACHE_TYPE' => 'A',
                             'CACHE_TIME' => '36000000',
@@ -826,7 +820,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                     <div class="row">
                         <?php
                         $roomNewElementFilter = array(
-                            '>PROPERTY_ROOMS_COUNT' => 4,
+                            '>=PROPERTY_ROOMS_COUNT' => 4,
                             'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
                             'SECTION_CODE' => $sectionCodes,
                         );
@@ -873,7 +867,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                             'ADD_SECTIONS_CHAIN' => 'N',
                             'HIDE_LINK_WHEN_NO_DETAIL' => 'Y',
                             'PARENT_SECTION' => '',
-                            'PARENT_SECTION_CODE' => '',
+                            'PARENT_SECTION_CODE' => 'active',
                             'INCLUDE_SUBSECTIONS' => 'Y',
                             'CACHE_TYPE' => 'A',
                             'CACHE_TIME' => '36000000',
