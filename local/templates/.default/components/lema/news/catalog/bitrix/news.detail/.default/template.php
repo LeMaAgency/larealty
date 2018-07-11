@@ -223,7 +223,7 @@ $item = $data->item();
                                 </div>
                             <?endif;?>
                             <div class="realtor-card__name"><?=$arResult['RIELTOR']['NAME'];?></div>
-                            <div class="realtor-card__tagline"><?=Loc::getMessage('LEMA_DETAIL_RIELTOR_CALL_TITLE');?></div>
+                            <div class="realtor-card__tagline"><?//=Loc::getMessage('LEMA_DETAIL_RIELTOR_CALL_TITLE');?></div>
                             <div class="realtor-card__tel"><?=$arResult['RIELTOR']['PHONE'];?></div>
                             <p class="realtor-card__text"><?=Loc::getMessage('LEMA_DETAIL_RIELTOR_RECALL_TITLE');?></p>
                             <form class="realtor-card__form js-rieltor-form" action="/ajax/rieltor_call.php" method="post">
