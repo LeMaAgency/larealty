@@ -586,10 +586,12 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                     <div class="row">
                         <?php
                         $roomNewElementFilter = array(
-                            '=PROPERTY_ROOMS_COUNT' => 1,
                             'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
                             'SECTION_CODE' => $sectionCodes,
                         );
+
+                        if(empty($parentSections[0]))
+                            $roomNewElementFilter['=PROPERTY_ROOMS_COUNT'] = 1;
                         ?>
                         <?$APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
                             'DISPLAY_DATE' => 'Y',
@@ -666,10 +668,11 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                     <div class="row">
                         <?php
                         $roomNewElementFilter = array(
-                            '=PROPERTY_ROOMS_COUNT' => 2,
                             'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
                             'SECTION_CODE' => $sectionCodes,
                         );
+                        if(empty($parentSections[0]))
+                            $roomNewElementFilter['=PROPERTY_ROOMS_COUNT'] = 2;
                         ?>
                         <?$APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
                             'DISPLAY_DATE' => 'Y',
@@ -746,10 +749,11 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                     <div class="row">
                         <?php
                         $roomNewElementFilter = array(
-                            '=PROPERTY_ROOMS_COUNT' => 3,
                             'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
                             'SECTION_CODE' => $sectionCodes,
                         );
+                        if(empty($parentSections[0]))
+                            $roomNewElementFilter['=PROPERTY_ROOMS_COUNT'] = 3;
                         ?>
                         <?$APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
                             'DISPLAY_DATE' => 'Y',
