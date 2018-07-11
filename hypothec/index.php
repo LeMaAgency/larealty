@@ -80,6 +80,7 @@ $APPLICATION->SetTitle('Ипотека');
             <div class="calculator__wrap">
 
                 <div class="row">
+                    <a name="calc"></a>
                     <div class="col-xs-12">
                         <h2 class="calculator__h2"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/hypothec/calculator/title.php'); ?></h2>
                     </div>

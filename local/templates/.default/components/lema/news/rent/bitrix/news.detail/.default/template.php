@@ -177,10 +177,10 @@ $item = $data->item();
                                 <?endif;?>
                         </div>
                         <div class="card-flat__content__buttons">
-                            <a href="#" class="card-flat__content__buttons__item">
+                            <a href="<?=SITE_DIR?>hypothec/#calc" class="card-flat__content__buttons__item">
                                 <span><?=Loc::getMessage('LEMA_DETAIL_ORDER_VIEWING');?></span>
                             </a>
-                            <a href="#" class="card-flat__content__buttons__item">
+                            <a href="<?=SITE_DIR?>hypothec/#calc" class="card-flat__content__buttons__item">
                                 <span><?=Loc::getMessage('LEMA_DETAIL_HYPOTHEC_BUY');?></span>
                             </a>
                         </div>

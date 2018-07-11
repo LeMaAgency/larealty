@@ -50,7 +50,7 @@ $item = $data->item();
             <? endforeach; ?>
         </div>
         <div class="slider-services__btn-wrap">
-            <a href="#" class="slider-services__btn">
+            <a href="<?=SITE_DIR?>hypothec/#calc" class="slider-services__btn">
                 <?= Loc::getMessage("LEMA_HYPOTHEC_CALCULATE"); ?>
             </a>
         </div>
