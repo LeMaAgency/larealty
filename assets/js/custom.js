@@ -108,7 +108,8 @@ $(function () {
             }
         }, 'json');
         return false;
-    });$('form.js-personal-office-form').on('submit', function (e) {
+    });
+    $('form.js-personal-office-form').on('submit', function (e) {
 
         e.preventDefault();
 
@@ -132,6 +133,7 @@ $(function () {
             }
             else {
                 //ok
+                curForm.find('.it-error').empty();
                 $.fancybox.open('Данные успешно сохранены!')
             }
         }, 'json');

@@ -16,7 +16,7 @@ $user = new \UserData();
         </div>
     </div>
     <div class="container">
-        <form class="filter-form form-admin js-personal-office-form" action="<?=SITE_DIR.'ajax/personal_office_data_form.php'?>" method="POST">
+        <form class="filter-form form-admin js-personal-office-form" action="<?= SITE_DIR . 'ajax/personal_office_data_form.php' ?>" method="POST">
             <div class="container-index">
                 <div class="section-title form-title"><span>* Персональные данные</span></div>
             </div>
@@ -61,7 +61,10 @@ $user = new \UserData();
                     <div class="filter-field-title">Дата рождения</div>
                     <div class="filter-price">
                         <input type="date"
-                               value="<?= date("Y-m-d", strtotime($user->get('PERSONAL_BIRTHDAY'))); ?>"
+                               value="
+                               <? if (!empty($user->get('PERSONAL_BIRTHDAY'))){
+                                   echo date("Y-m-d", strtotime($user->get('PERSONAL_BIRTHDAY')));
+                               }?>"
                                name="PERSONAL_BIRTHDAY"
                                id="PERSONAL_BIRTHDAY"
                                class="filter-price-input filter-max-value-input"
@@ -91,8 +94,9 @@ $user = new \UserData();
             </div>
 
             <div class="text-center margin30">
+                <input type="hidden" name="FORM_DATA">
                 <button type="reset" name="" value="" class="filter-submit-btn margin30 btn-reset">Очистить</button>
-                <input type="submit" name="FORM_DATA" value="Сохранить" class="filter-submit-btn margin30 btn-save">
+                <input type="submit" value="Сохранить" class="filter-submit-btn margin30 btn-save">
             </div>
         </form>
 
@@ -103,50 +107,63 @@ $user = new \UserData();
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <form action="<?=SITE_DIR.'ajax/personal_office_data_form.php'?>" method="POST" class="filter-form form-admin">
+                    <form action="<?= SITE_DIR . 'ajax/personal_office_data_form.php' ?>" method="POST"
+                          class="filter-form form-admin js-personal-office-form">
                         <div class="filter-field-title">№ телефона</div>
-                        <div class="filter-price">
-                            <input type="text" value="<?=$user->get('WORK_PHONE');?>" name="WORK_PHONE" class="filter-price-input filter-max-value-input btn-accept" placeholder="№ телефона">
-                            <input type="submit" name="FORM_PHONE" value="Сохранить" class="filter-submit-btn-admin btn-accept">
+                        <div class="filter-price it-block">
+                            <input type="text" value="<?= $user->get('WORK_PHONE'); ?>" name="WORK_PHONE"
+                                   class="filter-price-input filter-max-value-input btn-accept" placeholder="№ телефона">
+                            <input type="submit" value="Сохранить" class="filter-submit-btn-admin btn-accept">
+                            <input type="hidden" name="FORM_PHONE">
+                            <div class="it-error"></div>
                         </div>
                     </form>
                 </div>
                 <div class="col-md-6">
-                    <form action="<?=SITE_DIR.'ajax/personal_office_data_form.php'?>" method="POST" class="filter-form form-admin">
+                    <form action="<?= SITE_DIR . 'ajax/personal_office_data_form.php' ?>" method="POST"
+                          class="filter-form form-admin js-personal-office-form">
                         <div class="filter-field-title">Email</div>
-                        <div class="filter-price">
-                            <input type="text" value="<?=$user->get('EMAIL');?>" name="EMAIL" class="filter-price-input filter-max-value-input" placeholder="Email">
-                            <input type="submit" name="FORM_EMAIL" value="Сохранить" class="filter-submit-btn-admin btn-accept">
+                        <div class="filter-price it-block">
+                            <input type="text" value="<?= $user->get('EMAIL'); ?>" name="EMAIL" class="filter-price-input filter-max-value-input"
+                                   placeholder="Email">
+                            <input type="submit" value="Сохранить" class="filter-submit-btn-admin btn-accept">
+                            <input type="hidden" name="FORM_EMAIL">
+                            <div class="it-error"></div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
 
-        <form action="<?=SITE_DIR.'ajax/personal_office_data_form.php'?>" method="POST" class="filter-form form-admin" >
+        <form action="<?= SITE_DIR . 'ajax/personal_office_data_form.php' ?>" method="POST" class="filter-form form-admin js-personal-office-form">
             <div class="container-index">
                 <div class="section-title margin30 form-title"><span>* Сменить пароль</span></div>
             </div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="filter-field-title">Старый пароль</div>
-                    <div class="filter-price">
-                        <input type="text" value="" name="PASSWORD" class="filter-price-input filter-max-value-input" placeholder="Старый пароль">
+                    <div class="filter-price it-block">
+                        <input type="text" value="" name="OLD_PASSWORD" class="filter-price-input filter-max-value-input" placeholder="Старый пароль">
+                        <div class="it-error"></div>
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="filter-field-title">Новый пароль</div>
-                    <div class="filter-price">
-                        <input type="text" value="" name="NEW_PASS" class="filter-price-input filter-max-value-input" placeholder="Новый пароль">
+                    <div class="filter-price it-block">
+                        <input type="text" value="" name="PASSWORD" class="filter-price-input filter-max-value-input" placeholder="Новый пароль">
+                        <div class="it-error"></div>
                     </div>
                     <div class="filter-field-title">Повторите пароль</div>
-                    <div class="filter-price">
-                        <input type="text" value="" name="NEW_PASS_REPEAT" class="filter-price-input filter-max-value-input" placeholder="Повторите пароль">
+                    <div class="filter-price it-block">
+                        <input type="text" value="" name="CONFIRM_PASSWORD" class="filter-price-input filter-max-value-input"
+                               placeholder="Повторите пароль">
+                        <div class="it-error"></div>
                     </div>
                 </div>
             </div>
-            <input type="submit" name="FORM_PASS" value="Сменить пароль" class="filter-submit-btn">
+            <input type="hidden" name="FORM_PASS">
+            <input type="submit" value="Сменить пароль" class="filter-submit-btn">
             <div class="clb margin30"></div>
         </form>
 
