@@ -65,10 +65,8 @@ if (isset($_POST['FORM_DATA'])) {
     if ($password != $realPassword) {
         $errors['OLD_PASSWORD'] = "Старый пароль введён неверно";
     }
-    if (isset($_POST['PASSWORD'],$_POST['CONFIRM_PASSWORD'])) {
-        if ($_POST['PASSWORD'] !== $_POST['CONFIRM_PASSWORD']) {
-            $errors['CONFIRM_PASSWORD'] = "Пароли не соответствуют";
-        }
+    if (isset($_POST['PASSWORD'], $_POST['CONFIRM_PASSWORD']) && $_POST['PASSWORD'] !== $_POST['CONFIRM_PASSWORD']) {
+        $errors['CONFIRM_PASSWORD'] = "Пароли не соответствуют";
     }
 
     //Array of adding fields to the user data
