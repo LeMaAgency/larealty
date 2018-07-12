@@ -1,16 +1,18 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
 
-use \Lema\Common\User;
+use Lema\Common\User;
 
 //Is POST data sent ?
 empty($_POST) && exit;
+
+$user = new \UserData();
 
 $realtyTypesRules = $rulesData = $arrFields = $errors = array();
 
 if (isset($_POST['FORM_DATA'])) {
 
-    if (!empty($_POST['PERSONAL_BIRTHDAY'])) {
+    if (isset($_POST['PERSONAL_BIRTHDAY']) && !empty($_POST['PERSONAL_BIRTHDAY'])) {
         $_POST['PERSONAL_BIRTHDAY'] = date("d.m.Y", strtotime($_POST['PERSONAL_BIRTHDAY']));
     }
     //Array of adding fields to the user data
@@ -56,18 +58,17 @@ if (isset($_POST['FORM_DATA'])) {
     ));
 
     //Checking the old password
-    $user = \CUser::GetID();
     $password = $_POST['OLD_PASSWORD'];
-    $userData = CUser::GetByID($user)->Fetch();
-    $salt = substr($userData['PASSWORD'], 0, (strlen($userData['PASSWORD']) - 32));
-    $realPassword = substr($userData['PASSWORD'], -32);
+    $salt = substr($user->get('PASSWORD'), 0, (strlen($user->get('PASSWORD')) - 32));
+    $realPassword = substr($user->get('PASSWORD'), -32);
     $password = md5($salt . $password);
     if ($password != $realPassword) {
         $errors['OLD_PASSWORD'] = "Старый пароль введён неверно";
     }
-
-    if ($_POST['PASSWORD'] !== $_POST['CONFIRM_PASSWORD']) {
-        $errors['CONFIRM_PASSWORD'] = "Пароли не соответствуют";
+    if (isset($_POST['PASSWORD'],$_POST['CONFIRM_PASSWORD'])) {
+        if ($_POST['PASSWORD'] !== $_POST['CONFIRM_PASSWORD']) {
+            $errors['CONFIRM_PASSWORD'] = "Пароли не соответствуют";
+        }
     }
 
     //Array of adding fields to the user data
@@ -90,21 +91,19 @@ foreach ($realtyTypesRules as $field) {
 if ($form->validate()) {
     if ($status) {
         \Bitrix\Main\Loader::includeModule('iblock');
-        $user = new \CUser();
+        $userUp = new \CUser();
 
-        $status = $user->Update(User::get()->GetId(), $arrFields);
+        $status = $userUp->Update(User::get()->GetId(), $arrFields);
     }
-    if($status){
-        $user = \CUser::GetID();
-        $userData = CUser::GetByID($user)->Fetch();
+    if ($status) {
 
         $status = $form->sendMessage('PERSONAL_OFFICE_FORM', array(
-            'LAST_NAME' => $userData['LAST_NAME'],
-            'NAME' => $userData['NAME'],
-            'SECOND_NAME' => $userData['SECOND_NAME'],
+            'LAST_NAME' => $user->get('LAST_NAME'),
+            'NAME' => $user->get('NAME'),
+            'SECOND_NAME' => $user->get('SECOND_NAME'),
             'DATE' => date("m.d.y"),
             'TIME' => date("H:i:s"),
-            'MAIL_TO' => $userData['EMAIL'],
+            'MAIL_TO' => $user->get('EMAIL'),
         ));
     }
     echo json_encode($status ? array('success' => true) : array('errors' => array_merge($errors, $form->getErrors())));
