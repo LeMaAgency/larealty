@@ -1,4 +1,4 @@
-<a href="#"
+<a href="/o-kompanii/"
    class="btn-outline hvr-shutter-out-vertical"
 >
     Подробнее
