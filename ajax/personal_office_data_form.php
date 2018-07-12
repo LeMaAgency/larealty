@@ -102,7 +102,7 @@ if ($form->validate()) {
             'LAST_NAME' => $user->get('LAST_NAME'),
             'NAME' => $user->get('NAME'),
             'SECOND_NAME' => $user->get('SECOND_NAME'),
-            'DATE' => date("m.d.y"),
+            'DATE' => date("d.m.Y"),
             'TIME' => date("H:i:s"),
             'MAIL_TO' => $user->get('EMAIL'),
         ));
