@@ -6,9 +6,7 @@ use \Lema\Common\User;
 //Is POST data sent ?
 empty($_POST) && exit;
 
-$rulesData = array();
-$arrFields = array();
-$errors = array();
+$realtyTypesRules = $rulesData = $arrFields = $errors = array();
 
 if (isset($_POST['FORM_DATA'])) {
 
