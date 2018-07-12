@@ -92,9 +92,9 @@ foreach ($realtyTypesRules as $field) {
 if ($form->validate()) {
     if ($status) {
         \Bitrix\Main\Loader::includeModule('iblock');
-        $userUp = new \CUser();
+        $userUpdate = new \CUser();
 
-        $status = $userUp->Update(User::get()->GetId(), $arrFields);
+        $status = $userUpdate->Update(User::get()->GetId(), $arrFields);
     }
     if ($status) {
 
