@@ -9,11 +9,12 @@ empty($_POST) && exit;
 $user = new \UserData();
 
 $realtyTypesRules = $rulesData = $arrFields = $errors = array();
+$data = $_POST;
 
-if (isset($_POST['FORM_DATA'])) {
+if (isset($data['FORM_DATA'])) {
 
-    if (!empty($_POST['PERSONAL_BIRTHDAY'])) {
-        $_POST['PERSONAL_BIRTHDAY'] = date("d.m.Y", strtotime($_POST['PERSONAL_BIRTHDAY']));
+    if (!empty($data['PERSONAL_BIRTHDAY'])) {
+        $data['PERSONAL_BIRTHDAY'] = date("d.m.Y", strtotime($data['PERSONAL_BIRTHDAY']));
     }
     //Array of adding fields to the user data
     $realtyTypesRules = array(
@@ -25,7 +26,7 @@ if (isset($_POST['FORM_DATA'])) {
         'WORK_CITY'
     );
 
-} elseif (isset($_POST['FORM_PHONE'])) {
+} elseif (isset($data['FORM_PHONE'])) {
 
     //Array for checking individual fields for validity
     $rulesData = array_merge($rulesData, array(
@@ -36,7 +37,7 @@ if (isset($_POST['FORM_DATA'])) {
         'WORK_PHONE'
     );
 
-} elseif (isset($_POST['FORM_EMAIL'])) {
+} elseif (isset($data['FORM_EMAIL'])) {
     //Array for checking individual fields for validity
     $rulesData = array_merge($rulesData, array(
         array('EMAIL', 'required', array('message' => 'Email обязателен к заполнению')),
@@ -46,7 +47,7 @@ if (isset($_POST['FORM_DATA'])) {
     $realtyTypesRules = array(
         'EMAIL'
     );
-} elseif (isset($_POST['FORM_PASS'])) {
+} elseif (isset($data['FORM_PASS'])) {
 
     //Array for checking individual fields for validity
     $rulesData = array_merge($rulesData, array(
@@ -58,14 +59,16 @@ if (isset($_POST['FORM_DATA'])) {
     ));
 
     //Checking the old password
-    $password = $_POST['OLD_PASSWORD'];
-    $salt = substr($user->get('PASSWORD'), 0, (strlen($user->get('PASSWORD')) - 32));
-    $realPassword = substr($user->get('PASSWORD'), -32);
-    $password = md5($salt . $password);
-    if ($password != $realPassword) {
-        $errors['OLD_PASSWORD'] = "Старый пароль введён неверно";
+    if (!empty($data['OLD_PASSWORD'])) {
+        $password = $data['OLD_PASSWORD'];
+        $salt = substr($user->get('PASSWORD'), 0, (strlen($user->get('PASSWORD')) - 32));
+        $realPassword = substr($user->get('PASSWORD'), -32);
+        $password = md5($salt . $password);
+        if ($password != $realPassword) {
+            $errors['OLD_PASSWORD'] = "Старый пароль введён неверно";
+        }
     }
-    if (isset($_POST['PASSWORD'], $_POST['CONFIRM_PASSWORD']) && $_POST['PASSWORD'] !== $_POST['CONFIRM_PASSWORD']) {
+    if (isset($data['PASSWORD'], $data['CONFIRM_PASSWORD']) && ($data['PASSWORD'] !== $data['CONFIRM_PASSWORD'])) {
         $errors['CONFIRM_PASSWORD'] = "Пароли не соответствуют";
     }
 
@@ -80,7 +83,7 @@ if (isset($_POST['FORM_DATA'])) {
 
 $status = empty($errors);
 //set rules & fields for form
-$form = new \Lema\Forms\AjaxForm($rulesData, $_POST);
+$form = new \Lema\Forms\AjaxForm($rulesData, $data);
 
 foreach ($realtyTypesRules as $field) {
     $arrFields[$field] = $form->getField($field);
