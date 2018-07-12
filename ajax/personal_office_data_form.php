@@ -12,7 +12,7 @@ $realtyTypesRules = $rulesData = $arrFields = $errors = array();
 
 if (isset($_POST['FORM_DATA'])) {
 
-    if (isset($_POST['PERSONAL_BIRTHDAY']) && !empty($_POST['PERSONAL_BIRTHDAY'])) {
+    if (!empty($_POST['PERSONAL_BIRTHDAY'])) {
         $_POST['PERSONAL_BIRTHDAY'] = date("d.m.Y", strtotime($_POST['PERSONAL_BIRTHDAY']));
     }
     //Array of adding fields to the user data
