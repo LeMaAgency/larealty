@@ -95,28 +95,36 @@ $APPLICATION->SetTitle('Ипотека');
                                     <div class="table">
                                         <div class="cell"><label>Тип недвижимости</label></div>
                                     </div>
-                                    <select name=""><option value="">Выбрать</option><option value="3">1</option></select>
+                                    <select name="realty_type">
+                                        <option value="">Выбрать</option>
+                                        <option value="room">Комната</option>
+                                        <option value="flat">Квартира</option>
+                                        <option value="house">Дом</option>
+                                        <option value="house_with_lot">Дача</option>
+                                        <option value="lot">Земельный участок</option>
+                                    </select>
                                 </div>
 
                                 <div class="col-xs-12 col-sm-6 col-lg-4 input">
                                     <div class="table">
                                         <div class="cell"><label>Стоимость</label></div>
                                     </div>
-                                    <select name=""><option value="">Выбрать</option><option value="3">1</option></select>
+                                    <input type="text" name="realty_cost">
                                 </div>
 
                                 <div class="col-xs-12 col-sm-6 col-lg-4 input">
                                     <div class="table">
                                         <div class="cell"><label>Первоначальный взнос (РУБ или %)</label></div>
                                     </div>
-                                    <select name=""><option value="">Выбрать</option><option value="3">1</option></select>
+                                    <input type="text" name="rub" value="150000">
+                                    <input type="text" name="percent" value="30">
                                 </div>
 
                                 <div class="col-xs-12 col-sm-6 col-lg-4 input">
                                     <div class="table">
                                         <div class="cell"><label>Сумма кредита</label></div>
                                     </div>
-                                    <select name=""><option value="">Выбрать</option><option value="3">1</option></select>
+                                    <input type="text" name="credit_cost">
                                 </div>
 
                                 <div class="col-xs-12 col-sm-6 col-lg-4 input">
@@ -130,28 +138,44 @@ $APPLICATION->SetTitle('Ипотека');
                                     <div class="table">
                                         <div class="cell"><label>Средний доход</label></div>
                                     </div>
-                                    <select name=""><option value="">Выбрать</option><option value="3">1</option></select>
+                                    <input type="text" name="avg_pay">
                                 </div>
 
                                 <div class="col-xs-12 col-sm-6 col-lg-4 input">
                                     <div class="table">
                                         <div class="cell"><label>Зарплатный проект</label></div>
                                     </div>
-                                    <select name=""><option value="">Выбрать</option><option value="3">1</option></select>
+                                    <select name="">
+                                        <option value="">Выбрать</option>
+                                        <option value="3">ПАО «Сбербанк»</option>
+                                        <option value="3">ПАО «Втб24»</option>
+                                        <option value="3">ПАО «Банк Москвы»</option>
+                                        <option value="3">АО «Россельхозбанк»</option>
+                                        <option value="3">ПАО «Дальневосточный банк»</option>
+                                        <option value="3">АО «Газпромбанк»</option>
+                                        <option value="3">ПАО «Росбанк»</option>
+                                        <option value="3">ПАО «Азиатско-тихоокеанский банк»</option>
+                                        <option value="3">другое</option>
+                                    </select>
                                 </div>
 
                                 <div class="col-xs-12 col-sm-6 col-lg-4 input">
                                     <div class="table">
-                                        <div class="cell"><label>Социальная программа</label></div>
+                                        <div class="cell"><label>Льготная программа</label></div>
                                     </div>
-                                    <select name=""><option value="">Выбрать</option><option value="3">1</option></select>
+                                    <select name="">
+                                        <option value="">Выбрать</option>
+                                        <option value="3">Ипотека «Молодая семья»</option>
+                                        <option value="3">Военная ипотека</option>
+                                        <option value="3">Сотрудник бюджетной сферы</option>
+                                    </select>
                                 </div>
 
                                 <div class="col-xs-12 col-sm-6 col-lg-4 input">
                                     <div class="table">
                                         <div class="cell"><label>Стаж на последнем месте работы</label></div>
                                     </div>
-                                    <select name=""><option value="">Выбрать</option><option value="3">1</option></select>
+                                    <input type="text" name="work_length">
                                 </div>
 
                                 <div class="col-xs-12 col-lg-8 confirmation">
