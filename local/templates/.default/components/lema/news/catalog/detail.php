@@ -218,7 +218,7 @@ $this->setFrameMode(true);
                 "FORM_FIELDS" => "[{\"name\":\"name\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Имя\",\"default\":\"\",\"required\":\"Y\"},{\"name\":\"phone\",\"type\":\"tel\",\"title\":\"\",\"placeholder\":\"Телефон\",\"default\":\"\",\"required\":\"Y\"},{\"name\":\"object\",\"type\":\"hidden\",\"title\":\"\",\"placeholder\":\"\",\"default\":\"\",\"required\":\"N\"}]",
                 "NEED_SAVE_TO_IBLOCK" => "Y",
                 "NEED_SEND_EMAIL" => "Y",
-                "EVENT_TYPE" => "61",
+                "EVENT_TYPE" => "77",
                 "CACHE_TYPE" => "A",
                 "CACHE_TIME" => "3600",
                 "IBLOCK_TYPE" => "feedback",

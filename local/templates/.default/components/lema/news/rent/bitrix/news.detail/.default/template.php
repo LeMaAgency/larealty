@@ -177,7 +177,8 @@ $item = $data->item();
                                 <?endif;?>
                         </div>
                         <div class="card-flat__content__buttons">
-                            <a href="<?=SITE_DIR?>hypothec/#calc" class="card-flat__content__buttons__item">
+                            <a href="#" class="card-flat__content__buttons__item js-order-viewing"
+                               data-object="<?=$item->getId();?>">
                                 <span><?=Loc::getMessage('LEMA_DETAIL_ORDER_VIEWING');?></span>
                             </a>
                             <a href="<?=SITE_DIR?>hypothec/#calc" class="card-flat__content__buttons__item">
