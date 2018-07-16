@@ -324,3 +324,13 @@ h2.seller_main__h2 {color:fff;}
 .js-personal-office-form .it-block{
     flex-direction: unset;
 }
+.item-info_area, .item-info_floor, .item-info_room, .item-info_world {
+    width: 25%;
+}
+.item-info__inner__img_world {
+    width: 35px;
+    background-image: url(../img/icons/card-flat/area.png);
+}
+.realtors__carousel__item__wrap {
+    text-align: center! important; 
+}
