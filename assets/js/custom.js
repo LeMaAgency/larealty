@@ -164,6 +164,12 @@ $(document).ready(function () {
         $("#feedback-form").find("input[type='submit']").val("Отправить");
     });
 
+    $("body").on("click", ".js-order-viewing", function (e) {
+        e.preventDefault();
+        $.fancybox.open($("#order-viewing"));
+        $("#order-viewing").find("input[name='object']").val($(this).data('object'));
+    });
+
     $('body').on('click', '.js-change-text-slider-sync .slider-services__img__item', function (e) {
         e.preventDefault();
         $('.slider-services__slider').slick('slickGoTo', parseInt($(this).data('img')) - 1)
