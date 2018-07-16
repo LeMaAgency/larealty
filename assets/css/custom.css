@@ -334,3 +334,8 @@ h2.seller_main__h2 {color:fff;}
 .realtors__carousel__item__wrap {
     text-align: center! important; 
 }
+.item-info__inner__content {
+	display: block;}
+
+.item-info__inner {
+	min-height: 97px;}
