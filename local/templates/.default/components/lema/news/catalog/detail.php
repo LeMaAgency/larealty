@@ -122,7 +122,7 @@ $this->setFrameMode(true);
         )
     ); ?>
 
-    <?if(!empty($GLOBALS["ELEM_ID_RENT"])):?>
+    <? if (!empty($GLOBALS["ELEM_ID_RENT"])): ?>
         <? global $arrResemblingFilter;
 
         $arrResemblingFilter = array("ID" => $GLOBALS["ELEM_ID_RENT"]);
@@ -202,29 +202,29 @@ $this->setFrameMode(true);
             ),
             false
         ); ?>
-    <?endif;?>
+    <? endif; ?>
     <div id="order-viewing" class="fancybox-feedback" style="display: none;">
         <? $APPLICATION->IncludeComponent(
-	"lema:form.ajax", 
-	"feedback", 
-	array(
-		"COMPONENT_TEMPLATE" => "feedback",
-		"FORM_CLASS" => "ajax-form call-order",
-		"FORM_ACTION" => "",
-		"FORM_152_FZ" => "Я ознакомлен <a target=\"_blank\" href=\"/contacts/apply.pdf\">c положением об обработке и защите персональных данных.</a>",
-		"FORM_BTN_TITLE" => "Отправить",
-		"FORM_SUCCESS_FUNCTION" => "\$.fancybox.open(\"Ваше сообщение успешно отправлено\")",
-		"FORM_SUCCESS_FUNCTION_CORRECT_JSON" => "Y",
-		"FORM_FIELDS" => "[{\"name\":\"name\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Имя\",\"default\":\"\",\"required\":\"Y\"},{\"name\":\"phone\",\"type\":\"tel\",\"title\":\"\",\"placeholder\":\"Телефон\",\"default\":\"\",\"required\":\"Y\"},{\"name\":\"object\",\"type\":\"hidden\",\"title\":\"\",\"placeholder\":\"\",\"default\":\"\",\"required\":\"N\"}]",
-		"NEED_SAVE_TO_IBLOCK" => "Y",
-		"NEED_SEND_EMAIL" => "Y",
-		"EVENT_TYPE" => "61",
-		"CACHE_TYPE" => "A",
-		"CACHE_TIME" => "3600",
-		"IBLOCK_TYPE" => "feedback",
-		"IBLOCK_ID" => "19"
-	),
-	false
-); ?>
+            "lema:form.ajax",
+            "feedback",
+            array(
+                "COMPONENT_TEMPLATE" => "feedback",
+                "FORM_CLASS" => "ajax-form empty",
+                "FORM_ACTION" => "",
+                "FORM_152_FZ" => "Я ознакомлен <a target=\"_blank\" href=\"/contacts/apply.pdf\">c положением об обработке и защите персональных данных.</a>",
+                "FORM_BTN_TITLE" => "Отправить",
+                "FORM_SUCCESS_FUNCTION" => "\$.fancybox.open(\"Ваше сообщение успешно отправлено\")",
+                "FORM_SUCCESS_FUNCTION_CORRECT_JSON" => "Y",
+                "FORM_FIELDS" => "[{\"name\":\"name\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Имя\",\"default\":\"\",\"required\":\"Y\"},{\"name\":\"phone\",\"type\":\"tel\",\"title\":\"\",\"placeholder\":\"Телефон\",\"default\":\"\",\"required\":\"Y\"},{\"name\":\"object\",\"type\":\"hidden\",\"title\":\"\",\"placeholder\":\"\",\"default\":\"\",\"required\":\"N\"}]",
+                "NEED_SAVE_TO_IBLOCK" => "Y",
+                "NEED_SEND_EMAIL" => "Y",
+                "EVENT_TYPE" => "61",
+                "CACHE_TYPE" => "A",
+                "CACHE_TIME" => "3600",
+                "IBLOCK_TYPE" => "feedback",
+                "IBLOCK_ID" => "19"
+            ),
+            false
+        ); ?>
     </div>
 </div>

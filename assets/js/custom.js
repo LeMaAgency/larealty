@@ -168,6 +168,12 @@ $(document).ready(function () {
         e.preventDefault();
         $.fancybox.open($("#order-viewing"));
         $("#order-viewing").find("input[name='object']").val($(this).data('object'));
+        console.log($("#order-viewing").find("input[name='object']").val());
+    });
+    $(document).on("click", "#order-viewing", function () {
+        if($("#order-viewing").find("input[name='object']").val() == ''){
+            $("#order-viewing").find("input[name='object']").val($(".js-order-viewing").data('object'));
+        }
     });
 
     $('body').on('click', '.js-change-text-slider-sync .slider-services__img__item', function (e) {
