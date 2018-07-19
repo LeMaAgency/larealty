@@ -34,7 +34,7 @@ $data->setShowMoreScript();
     <div class="container-index no-pad">
         <div class="offers-filter">
             <div class="offers-filter-btn hvr-shutter-out-vertical" data-realty-type="26">Квартиры</div>
-            <div class="offers-filter-btn hvr-shutter-out-vertical" data-realty-type="28">Загородная недвижимость</div>
+            <div class="offers-filter-btn hvr-shutter-out-vertical" data-realty-type="28, 29, 30">Загородная недвижимость</div>
             <div class="offers-filter-btn hvr-shutter-out-vertical" data-rent-type="29">Аренда</div>
         </div>
 
@@ -50,7 +50,8 @@ $data->setShowMoreScript();
                    class="offers-item" <?=$item->editId();?>>
                     <h3 class="offers-item__h3"><?=$item->getName();?></h3>
                     <div class="offers-item-img<?if($item->propVal('IS_EXCLUSIVE') == 'Y'){?> offers-item-img_exclusive<?}?>">
-                        <img alt="img" src="<?=$item->previewPicture();?>">
+                        <!--<img alt="img" src="<?/*=$item->previewPicture();*/?>">-->
+                        <img alt="img" src="<?=$arResult['PREVIEW_PICTURES'][$item->getId()]['src'];?>">
                     </div>
                     <div class="offers-item-price">
                         <b><?=H::formatPrice($item->propVal('PRICE'), null);?></b>

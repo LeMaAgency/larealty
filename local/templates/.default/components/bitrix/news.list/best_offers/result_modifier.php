@@ -77,3 +77,8 @@ foreach($data->items() as $k => $item)
         $arResult['ITEMS'][$k]['IS_LOT'] = $sections[$item->get('IBLOCK_SECTION_ID')]['CODE'] == 'zemelnyy_uchastok';
     }
 }
+$arResult['PREVIEW_PICTURES'] = array();
+foreach ($arResult['ITEMS'] as $item){
+
+    $arResult['PREVIEW_PICTURES'][$item['ID']] =\CFile::ResizeImageGet($item['PREVIEW_PICTURE'], array('width'=>900, 'height'=>660), BX_RESIZE_IMAGE_EXACT, true);
+}

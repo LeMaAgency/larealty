@@ -181,9 +181,9 @@ $item = $data->item();
                                data-object="<?=$item->getId();?>">
                                 <span><?=Loc::getMessage('LEMA_DETAIL_ORDER_VIEWING');?></span>
                             </a>
-                            <a href="<?=SITE_DIR?>hypothec/#calc" class="card-flat__content__buttons__item">
-                                <span><?=Loc::getMessage('LEMA_DETAIL_HYPOTHEC_BUY');?></span>
-                            </a>
+<!--                            <a href="<?/*=SITE_DIR*/?>hypothec/#calc" class="card-flat__content__buttons__item">
+                                <span><?/*=Loc::getMessage('LEMA_DETAIL_HYPOTHEC_BUY');*/?></span>
+                            </a>-->
                         </div>
                     </div>
                 </div>

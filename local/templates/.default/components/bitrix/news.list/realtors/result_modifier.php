@@ -1,8 +1,8 @@
 <?
 global $USER;
 $rsUsers = CUser::GetList(
-    ($by = "NAME"),
-    ($order = "desc"),
+    $by = array("UF_SORT"=>"asc","NAME"=>"desc"),
+    $order = "desc",
     Array("GROUPS_ID" => Array(3), 'ACTIVE' => 'Y'),
     Array("FIELDS" => array(
         'ID',

@@ -3,15 +3,31 @@ $(function () {
         var offersBlock = $(this).closest('.offers'),
             offers = offersBlock.find('.offers-list a'),
             selectors = ['realty-type', 'rent-type'],
+            arSelector = [],
             selector = '';
-
+        if($(this).data('realty-type')){
+            var arSelectors = JSON.parse("[" + $(this).data('realty-type') + "]");
+        }
         offers.hide();
 
         for (var i in selectors) {
-            if ($(this).data(selectors[i]))
-                selector += '[data-' + selectors[i] + '="' + $(this).data(selectors[i]) + '"]'
+            if ($(this).data(selectors[i])) {
+                if((typeof arSelectors !== 'undefined') && arSelectors.length > 1) {
+                    for(var j in arSelectors){
+                        arSelector[j]= '[data-' + selectors[i] + '="' + arSelectors[j] + '"]';
+                    }
+                }else{
+                    selector += '[data-' + selectors[i] + '="' + $(this).data(selectors[i]) + '"]';
+                }
+            }
         }
-        offersBlock.find(selector).show('slow');
+        if(arSelector.length>0){
+            for(var i in arSelector){
+                offersBlock.find(arSelector[i]).show('slow');
+            }
+        }else{
+            offersBlock.find(selector).show('slow');
+        }
     });
 
     $('form.js-rieltor-form').on('submit', function (e) {
