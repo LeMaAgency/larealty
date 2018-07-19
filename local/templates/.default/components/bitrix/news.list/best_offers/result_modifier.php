@@ -80,5 +80,5 @@ foreach($data->items() as $k => $item)
 $arResult['PREVIEW_PICTURES'] = array();
 foreach ($arResult['ITEMS'] as $item){
 
-    $arResult['PREVIEW_PICTURES'][$item['ID']] =\CFile::ResizeImageGet($item['PREVIEW_PICTURE'], array('width'=>1080, 'height'=>660), BX_RESIZE_IMAGE_EXACT, true);
+    $arResult['PREVIEW_PICTURES'][$item['ID']] =\CFile::ResizeImageGet($item['PREVIEW_PICTURE'], array('width'=>540, 'height'=>330), BX_RESIZE_IMAGE_EXACT, true);
 }
