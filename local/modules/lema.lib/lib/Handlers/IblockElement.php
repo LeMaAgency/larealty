@@ -82,18 +82,17 @@ class IblockElement
     protected static function generateElementNameAndCode(array &$fields)
     {
         //check iblock number
-        if(isset($fields['IBLOCK_ID']) && $fields['IBLOCK_ID'] === \LIblock::getId('objects') && !empty($fields['PROPERTY_VALUES']))
-        {
+        if (isset($fields['IBLOCK_ID']) && $fields['IBLOCK_ID'] === \LIblock::getId('objects') && !empty($fields['PROPERTY_VALUES'])) {
             //get square property value
             $square = static::getPropValue($fields, 'SQUARE');
-            $sectionId = empty($fields['IBLOCK_SECTION']) ? false : (int) current($fields['IBLOCK_SECTION']);
+            $sectionId = empty($fields['IBLOCK_SECTION']) ? false : (int)current($fields['IBLOCK_SECTION']);
             //get realty type
             $section = Section::getAllD7($fields['IBLOCK_ID'], array(
                 'filter' => array('=ID' => $sectionId),
                 'select' => array('ID', 'CODE', 'NAME'),
             ));
 
-            if(!empty($section[$sectionId]['NAME']))
+            if (!empty($section[$sectionId]['NAME']))
                 $fields['NAME'] = $section[$sectionId]['NAME'];
 
             //generate element code for URL
@@ -113,38 +112,51 @@ class IblockElement
         /**
          * Get iblock code by id
          */
-        if(!empty($fields['IBLOCK_ID']))
-        {
+        if (!empty($fields['IBLOCK_ID'])) {
             $iblockCode = null;
             $checkIblockCodes = array('objects', 'object_call_wait');
-            foreach($checkIblockCodes as $tmpCode)
-            {
-                if($fields['IBLOCK_ID'] == \LIblock::getId($tmpCode))
-                {
+            foreach ($checkIblockCodes as $tmpCode) {
+                if ($fields['IBLOCK_ID'] == \LIblock::getId($tmpCode)) {
                     $iblockCode = $tmpCode;
                     break;
                 }
             }
         }
         //check iblock number
-        if(!empty($iblockCode) && !empty($fields['PROPERTY_VALUES']))
-        {
+        if (!empty($iblockCode) && !empty($fields['PROPERTY_VALUES'])) {
+
+            $fields['ACTIVE'] = 'N';
+
+            $res = \CIBlockSection::GetByID($fields['IBLOCK_SECTION'][0]);
+            if($arSectionRes = $res->Fetch()){
+                $arSection = $arSectionRes;
+            }
+            if($arSection['IBLOCK_SECTION_ID'] == '23'){
+                $sectCodeNew = $arSection['CODE']."-new";
+            }else {
+                $sectCodeNew = stristr($arSection['CODE'], '-', true) . "-new";
+            }
+            if(!empty($sectCodeNew)){
+                $sectIdNew = \Liblock::getSectionInfo('objects', $sectCodeNew, true);
+                if ($sectIdNew) {
+                    $fields['IBLOCK_SECTION'][0] = $sectIdNew['ID'];
+                }
+            }
+
+
             /**
              * Administrator can change rieltor for object
              */
-            if(\Lema\Common\User::isAdmin())
-            {
+            if (\Lema\Common\User::isAdmin()) {
 
                 //get rieltor property value
                 $rieltorId = static::getPropValue($fields, 'RIELTOR', 0, $iblockCode);
 
+
                 //rieltor not specified, clean rights
-                if(empty($rieltorId))
-                {
+                if (empty($rieltorId)) {
                     $fields['RIGHTS'] = array();
-                }
-                else
-                {
+                } else {
                     //set rights for specified rieltor
                     $fields['RIGHTS'] = array(
                         'n0' => array(
@@ -154,21 +166,16 @@ class IblockElement
                         )
                     );
                 }
-            }
-            else
-            {
+            } else {
                 /**
                  * New object, DO NOT set special section to it and clear access rights
                  */
-                if(empty($fields['ID']))
-                {
-                    /*if($fields['IBLOCK_ID'] === \LIblock::getId('objects'))
-                        $fields['IBLOCK_SECTION'] = array(23);*/
-                    $fields['ACTIVE'] = 'Y';
+                if (empty($fields['ID'])) {
+                    /* if($fields['IBLOCK_ID'] === \LIblock::getId('objects'))
+                         $fields['IBLOCK_SECTION'] = ;
+                    $fields['ACTIVE'] = 'Y';*/
                     $fields['RIGHTS'] = array();
-                }
-                else
-                {
+                } else {
                     $fields['RIGHTS'] = array(
                         'n0' => array(
                             'GROUP_CODE' => 'U' . \Lema\Common\User::get()->GetId(),
@@ -190,15 +197,13 @@ class IblockElement
      */
     protected static function setAutoFit(array $fields)
     {
-        if(empty($fields['ID']))
+        if (empty($fields['ID']))
             return false;
 
-        if(isset($fields['IBLOCK_ID']) && $fields['IBLOCK_ID'] === \LIblock::getId('requests') && !empty($fields['PROPERTY_VALUES']))
-        {
-            if(!static::getPropValue($fields, 'AUTOFIT', false, 'requests'))
-            {
+        if (isset($fields['IBLOCK_ID']) && $fields['IBLOCK_ID'] === \LIblock::getId('requests') && !empty($fields['PROPERTY_VALUES'])) {
+            if (!static::getPropValue($fields, 'AUTOFIT', false, 'requests')) {
                 AutoFit::removeAgent($fields['ID']);
-                return ;
+                return;
             }
 
             $frequency = static::getPropValue($fields, 'SEND_FREQUENCY', false, 'requests');
@@ -206,10 +211,10 @@ class IblockElement
             $dateTo = static::getPropValue($fields, 'SEND_DATE_TO', false, 'requests');
             $timeStart = static::getPropValue($fields, 'SEND_TIME_START', false, 'requests');
 
-            if(preg_match('~^\\d+$~', $timeStart))
+            if (preg_match('~^\\d+$~', $timeStart))
                 $timeStart .= ':00';
 
-            if(!empty($frequency) && !empty($dateFrom) && !empty($dateTo) && !empty($timeStart))
+            if (!empty($frequency) && !empty($dateFrom) && !empty($dateTo) && !empty($timeStart))
                 AutoFit::addOrUpdateAgent($fields['ID'], $frequency, $dateFrom, $dateTo, $timeStart);
 
         }
@@ -222,15 +227,14 @@ class IblockElement
      */
     protected static function setReminders(array $fields)
     {
-        if(empty($fields['ID']))
+        if (empty($fields['ID']))
             return false;
 
-        if(isset($fields['IBLOCK_ID']) && $fields['IBLOCK_ID'] === \LIblock::getId('objects') && !empty($fields['PROPERTY_VALUES']))
-        {
+        if (isset($fields['IBLOCK_ID']) && $fields['IBLOCK_ID'] === \LIblock::getId('objects') && !empty($fields['PROPERTY_VALUES'])) {
             //get remind date property value
             $remindDate = static::getPropValue($fields, 'REMINDER_DATE', null);
 
-            if(empty($remindDate))
+            if (empty($remindDate))
                 return false;
 
             //get rieltor property value
@@ -241,15 +245,14 @@ class IblockElement
 
             $remindTimeStamp = strtotime($remindDate == date('d.m.Y') ? '+1 hour' : $remindDate);
 
-            if($remindTimeStamp > time())
+            if ($remindTimeStamp > time())
                 return false;
 
             $remindDate = date('d.m.Y H:i:s', $remindTimeStamp);
 
             //search existing agent
             $res = \CAgent::GetList(array('ID' => 'DESC'), array('NAME' => $agentName));
-            if($row = $res->Fetch())
-            {
+            if ($row = $res->Fetch()) {
                 \CAgent::Update($row['ID'], array(
                     'NAME' => $agentName,
                     'USER_ID' => $rieltor,
@@ -286,20 +289,20 @@ class IblockElement
          * Delete agent
          */
         $res = \CAgent::GetList(array('ID' => 'DESC'), array('NAME' => $agentName));
-        if($row = $res->Fetch())
+        if ($row = $res->Fetch())
             \CAgent::Delete($row['ID']);
 
-        if(!\CModule::includeModule('iblock'))
+        if (!\CModule::includeModule('iblock'))
             return $agentName;
 
         $res = \CIBlockElement::GetList(
-                array(),
-                array('IBLOCK_ID' => \LIblock::getId('objects'), '=ID' => $objectId),
-                false,
-                false,
-                array('NAME', 'PROPERTY_RIELTOR', 'PROPERTY_REMINDER_TEXT')
+            array(),
+            array('IBLOCK_ID' => \LIblock::getId('objects'), '=ID' => $objectId),
+            false,
+            false,
+            array('NAME', 'PROPERTY_RIELTOR', 'PROPERTY_REMINDER_TEXT')
         );
-        if(!($row = $res->Fetch()))
+        if (!($row = $res->Fetch()))
             return $agentName;
 
         /**
@@ -307,7 +310,7 @@ class IblockElement
          */
         $objectName = $row['NAME'];
         $text = $row['PROPERTY_REMINDER_TEXT_VALUE'];
-        if(!empty($text['TEXT']))
+        if (!empty($text['TEXT']))
             $text = $text['TEXT'];
 
         /**
@@ -324,12 +327,9 @@ class IblockElement
         $propId = \LIblock::getPropId($iblockCode, $propCode);
 
         //get property value
-        if(empty($fields['PROPERTY_VALUES'][$propId]))
-        {
+        if (empty($fields['PROPERTY_VALUES'][$propId])) {
             return $defValue;
-        }
-        else
-        {
+        } else {
             $tmp = current($fields['PROPERTY_VALUES'][$propId]);
             return empty($tmp) || empty($tmp['VALUE']) ? $defValue : $tmp['VALUE'];
         }
