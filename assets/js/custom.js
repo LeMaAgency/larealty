@@ -5,27 +5,30 @@ $(function () {
             selectors = ['realty-type', 'rent-type'],
             arSelector = [],
             selector = '';
-        if($(this).data('realty-type')){
+        if ($(this).data('realty-type')) {
             var arSelectors = JSON.parse("[" + $(this).data('realty-type') + "]");
+        }
+        if (!(offers.data('realty-type') || offers.data('rent-type'))) {
+            offers = offersBlock.find('.offers-list div.js-elem-favorites');
         }
         offers.hide();
 
         for (var i in selectors) {
             if ($(this).data(selectors[i])) {
-                if((typeof arSelectors !== 'undefined') && arSelectors.length > 1) {
-                    for(var j in arSelectors){
-                        arSelector[j]= '[data-' + selectors[i] + '="' + arSelectors[j] + '"]';
+                if ((typeof arSelectors !== 'undefined') && arSelectors.length > 1) {
+                    for (var j in arSelectors) {
+                        arSelector[j] = '[data-' + selectors[i] + '="' + arSelectors[j] + '"]';
                     }
-                }else{
+                } else {
                     selector += '[data-' + selectors[i] + '="' + $(this).data(selectors[i]) + '"]';
                 }
             }
         }
-        if(arSelector.length>0){
-            for(var i in arSelector){
+        if (arSelector.length > 0) {
+            for (var i in arSelector) {
                 offersBlock.find(arSelector[i]).show('slow');
             }
-        }else{
+        } else {
             offersBlock.find(selector).show('slow');
         }
     });
@@ -119,7 +122,7 @@ $(function () {
             }
             else {
                 //ok
-                curForm.find('input:not([type="submit"]):not([type="button"]), textarea').val('').css({'border':'1px solid black'});
+                curForm.find('input:not([type="submit"]):not([type="button"]), textarea').val('').css({'border': '1px solid black'});
                 $.fancybox.open('Спасибо за заявку. В ближайшее время мы Вам перезвоним')
             }
         }, 'json');
@@ -194,7 +197,7 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#order-viewing", function () {
-        if($("#order-viewing").find("input[name='object']").val() == ''){
+        if ($("#order-viewing").find("input[name='object']").val() == '') {
             $("#order-viewing").find("input[name='object']").val($(".js-order-viewing").data('object'));
         }
     });
@@ -217,7 +220,97 @@ $(document).ready(function () {
                 .find('span').text('Свернуть');
         }
     })
+    //js favorites
 
+    //add product to favorites
+    var addToFavoritesFunc = function () {
+        $(document).on('click', '.js-favorites-add', function (e) {
+            e.preventDefault();
+            var waitElement = this,
+                itemId = $(this).data('item-id') * 1;
+
+            //show ajax-loader
+            BX.showWait(waitElement);
+
+            //make request
+            $.get('/ajax/favorites.php?action=add', {ID: itemId}, function (ans) {
+
+                if (ans.status) {
+                    $('.elem-' + itemId).removeClass('js-favorites-add');
+                    $('.elem-' + itemId).addClass('js-favorites-delete active');
+                    $('.elem-' + itemId + ' span').html("Удалить из избранного");
+                    //set total count of positions
+                    /* $('.js-favorites-positions-count > span').text(ans.positionsCount);*/
+
+                    //hide ajax-loader
+                    BX.closeWait(waitElement);
+                    //show message
+                    var check = 0,
+                        positionId = '';
+                    for (var i in ans.products) {
+                        check++;
+                        if (check == ans.positionsCount) {
+                            positionId = ans.products[i].ID;
+                        } else {
+                            continue;
+                        }
+                    }
+                    $('.elem-' + itemId).attr('data-position-id', positionId);
+                }
+                $.fancybox.open('<div class="popup__success">' +
+                    (ans.inFavorites ? 'Объект уже находится в избранном' : ans.status ? 'Объект успешно добавлен в избранное' : 'Произошла ошибка при добавлении объекта') +
+                    '</div>');
+
+            }, 'json');
+
+        });
+    };
+    addToFavoritesFunc();
+
+    //delete item from favorites
+    $(document).on('click', '.js-favorites-delete', function (e) {
+        e.preventDefault();
+
+        var waitElement = this,
+            itemPosId = $(this).data('position-id') * 1,
+            itemId = $(this).data('item-id') * 1;
+
+        //show ajax-loader
+        BX.showWait(waitElement);
+
+        $.get('/ajax/favorites.php?action=delete', {ID: itemPosId}, function (ans) {
+            if (ans.status) {
+                $('.elem-' + itemId).removeClass('js-favorites-delete active');
+                $('.elem-' + itemId).addClass('js-favorites-add');
+                $('.elem-' + itemId + ' span').html("Добавить в избранное");
+
+                var $existsPositions = Object.keys(ans.products);
+
+                //remove deleted items
+                $('.js-favorites-list .card-flat__content__favorites').each(function (i, el) {
+
+                    if (!$(el).data('position-id'))
+                        return;
+
+                    if (-1 === $.inArray('' + $(el).data('position-id'), $existsPositions)) {
+                        $(el).closest('.favorites-elem-' + itemId).remove();
+                    }
+                });
+            /*
+                        //update total sum
+                        $('.sum-mega').text(ans.totalSumFormatted);
+
+                        $('.js-favorites-positions-count > span').text(ans.positionsCount);*/
+
+            //hide ajax-loader
+            BX.closeWait(waitElement);
+
+            }
+            $.fancybox.open('<div class="popup__success">' +
+                (ans.status ? 'Объект успешно удален из избранного' : 'Произошла ошибка при удалении объекта') +
+                '</div>');
+        }, 'json');
+    });
 });
 
 $(document).on('click', '.filter-select-drop li', function () {

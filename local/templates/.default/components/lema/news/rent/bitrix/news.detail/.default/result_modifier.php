@@ -109,3 +109,10 @@ $sections = \Lema\IBlock\Section::getAllD7($arParams['IBLOCK_ID'], array(
 $arResult['IS_HOUSE_OR_LOT'] = false;
 if(isset($sections[$arResult['IBLOCK_SECTION_ID']]['CODE']))
     $arResult['IS_HOUSE_OR_LOT'] = in_array($sections[$arResult['IBLOCK_SECTION_ID']]['CODE'], array('doma', 'dachi'));
+
+
+$basket = new \Lema\Basket\Basket();
+$arResult['IN_FAVORITES'] = array();
+foreach ($basket->getProducts() as $data){
+    $arResult['IN_FAVORITES'][$data['PRODUCT_ID']] = $data['ID'];
+}

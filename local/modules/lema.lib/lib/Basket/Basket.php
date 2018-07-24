@@ -331,7 +331,7 @@ class Basket extends HighloadBlock
         $checkId  = isset($data['UF_PRODUCT'])  ? (int) $data['UF_PRODUCT']  : 0;
         $quantity = isset($data['UF_QUANTITY']) ? (int) $data['UF_QUANTITY'] : 0;
 
-        if(empty($checkId) || empty($quantity))
+        if(empty($checkId)) // || empty($quantity)
             return false;
 
         //check exists
@@ -347,7 +347,7 @@ class Basket extends HighloadBlock
         }
 
         //record is found, just update count
-        if($foundId)
+        if(false && $foundId)
         {
             $status = $this->updateCount($foundId, $quantity);
         }

@@ -5,3 +5,4 @@ $MESS['LEMA_ADD_TO_FAVORITE'] = 'Добавить в избранное';
 $MESS['LEMA_APARTMENTS_MORE_BTN'] = 'Подробнее';
 $MESS['LEMA_SQUARE_M_SUP'] = 'м<sup>2</sup>';
 $MESS['LEMA_NO_OBJECTS_FOUND'] = 'К сожалению, объектов не найдено';
+$MESS['LEMA_DEL_TO_FAVORITE'] = 'Удалить из избранного';

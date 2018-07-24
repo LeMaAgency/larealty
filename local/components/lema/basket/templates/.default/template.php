@@ -2,93 +2,195 @@
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
     die();
 
-use Bitrix\Main\Localization\Loc;
+use Lema\Common\Helper as H,
+    Lema\Template\TemplateHelper as TH,
+    Bitrix\Main\Localization\Loc;
 
 Loc::loadMessages(__FILE__);
 
-$basket = new \Site\Basket\Basket();
-if($basket->hasProducts()):?>
-    <div class="basket-page__table">
-        <div class="basket-page__table_top">
-            <div class="basket-page__table__item">
-                <div class="basket-page__table__item__box name"><?=Loc::getMessage('BASKET_PRODUCT_TITLE');?></div>
-                <div class="basket-page__table__item__box price"><?=Loc::getMessage('BASKET_RPICE_TITLE');?></div>
-                <div class="basket-page__table__item__box header_text"><?=Loc::getMessage('BASKET_HEADER_TEXT_TITLE');?></div>
-                <div class="basket-page__table__item__box brand"><?=Loc::getMessage('BASKET_BRAND_TITLE');?></div>
-                <div class="basket-page__table__item__box x_fass"><?=Loc::getMessage('BASKET_X_FASS_TITLE');?></div>
-                <div class="basket-page__table__item__box count"><?=Loc::getMessage('BASKET_COUNT_TITLE');?></div>
-                <div class="basket-page__table__item__box sum"><?=Loc::getMessage('BASKET_SUM_TITLE');?></div>
-                <div class="basket-page__table__item__box delete"></div>
+$this->setFrameMode(true);
+
+$data = new TH($this);
+
+$data->setShowMoreScript();
+
+$basket = new \Lema\Basket\Basket();
+?>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <?\Lema\Components\Breadcrumbs::inc('breadcrumbs');?>
             </div>
         </div>
-        <div class="basket-page__table_main">
-            <?foreach($basket->getProducts() as $item):?>
-                <div class="basket-page__table__item" data-item-id="<?=$item['ID']?>">
-                    <div class="basket-page__table__item__box name"><?=$item['NAME']?></div>
-                    <div class="basket-page__table__item__box header_text"><?=TxtToHTML($item['HEADER_TEXT'])?></div>
-                    <div class="basket-page__table__item__box brand"><?=$item['BRAND']?></div>
-                    <div class="basket-page__table__item__box x_fass"><?=$item['X_FASS']?></div>
-                    <div class="basket-page__table__item__box price"><?=$item['PRICE_FORMATTED']?></div>
-                    <div class="basket-page__table__item__box count">
-                        <div class="box-short-num">
-                            <a class="box-short-num__minus js-quantity js-quantity-minus">-</a>
-                            <input class="box-short-num__control js-quantity-input" type="text" name="quantity" data-item-id="<?=$item['ID']?>"
-                                   size="1" maxlength="18" min="0" step="1" data-old-value="<?=$item['QUANTITY']?>" value="<?=$item['QUANTITY']?>">
-                            <a class="box-short-num__plus js-quantity js-quantity-plus">+</a>
+    </div>
+<?if ($basket->hasProducts()):?>
+
+    <section class="offers">
+        <div class="container-index">
+            <div class="section-title"><span>Избранное</span></div>
+        </div>
+        <div class="container-index no-pad">
+            <div class="offers-filter">
+                <div class="offers-filter-btn hvr-shutter-out-vertical" data-realty-type="26">Квартиры</div>
+                <div class="offers-filter-btn hvr-shutter-out-vertical" data-realty-type="28, 29, 30">Загородная
+                    недвижимость
+                </div>
+                <div class="offers-filter-btn hvr-shutter-out-vertical" data-rent-type="29">Аренда</div>
+            </div>
+
+            <div class="offers-list js-favorites-list" data-ajax-block-id="<?= $arParams['AJAX_ID']; ?>">
+                <? if (\Lema\Common\Request::get()->isAjaxRequest())
+                    $APPLICATION->RestartBuffer(); ?>
+                <? foreach ($basket->getProducts() as $item): ?>
+                    <div class="card-flat add-bg-on-hover js-elem-favorites favorites-elem-<?= $item['PRODUCT_ID']; ?>"
+                         data-rent-type="<?= (int)$item['RENT_TYPE']['ENUM_ID']; ?>"
+                         data-realty-type="<?= (int)$item['IBLOCK_SECTION_ID']; ?>">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <a href="<?= str_replace(
+                                        '#RENT_TYPE#',
+                                        $arResult['RENT_TYPE'][$item['RENT_TYPE']['ENUM_ID']]['XML_ID'],
+                                        $item['DETAIL_PAGE_URL']
+                                    ); ?>"
+                                       class="card-flat__img">
+                                        <img alt="<?= $item['NAME']; ?>"
+                                             src="<?= \CFile::GetPath($item['PREVIEW_PICTURE']); ?>">
+                                        <span class="card-flat__img__filter"></span>
+                                    </a>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="card-flat__content">
+                                        <div class="card-flat__content__head clearfix">
+                                            <h3 class="card-flat__content__head__title"><?= $item['NAME']; ?></h3>
+                                            <? if (isset($item['PRICE'])): ?>
+                                                <div class="card-flat__content__head__price">
+                                                    <b><?= H::formatPrice($item['PRICE'], null); ?></b>
+                                                    <?= Loc::getMessage('LEMA_FAVORITES_RUB'); ?>
+                                                </div>
+                                            <? endif; ?>
+                                        </div>
+                                        <div class="offers-item-info clearfix">
+                                            <? if (!empty($item['ROOMS_COUNT'])): ?>
+                                                <div class="item-info item-info_room">
+                                                    <div class="item-info__inner">
+                                                        <div class="item-info__inner__img item-info__inner__img_room"></div>
+                                                        <div class="item-info__inner__content">
+                                                            <div class="item-info-name"><?= Loc::getMessage('LEMA_FAV_ROOMS_COUNT'); ?></div>
+                                                            <div class="item-info-value"><?= $item['ROOMS_COUNT']; ?></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <? endif; ?>
+                                            <? if (isset($item['IS_HOUSE_OR_LOT'])): ?>
+                                                <? if (!empty($item['STAGES_COUNT'])): ?>
+                                                    <div class="item-info item-info_floor">
+                                                        <div class="item-info__inner">
+                                                            <div class="item-info__inner__img item-info__inner__img_floor"></div>
+                                                            <div class="item-info__inner__content">
+                                                                <div class="item-info-name">Этажность</div>
+                                                                <div class="item-info-value">
+                                                                    <?= $item['STAGES_COUNT']; ?>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <? endif; ?>
+                                            <? else: ?>
+                                                <? if (!empty($item['STAGE']) && !empty($item['STAGES_COUNT'])): ?>
+                                                    <div class="item-info item-info_floor">
+                                                        <div class="item-info__inner">
+                                                            <div class="item-info__inner__img item-info__inner__img_floor"></div>
+                                                            <div class="item-info__inner__content">
+                                                                <div class="item-info-name"><?= Loc::getMessage('LEMA_FAV_STAGE'); ?></div>
+                                                                <div class="item-info-value">
+                                                                    <?= $item['STAGE']; ?>/<?= $item['STAGES_COUNT']; ?>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <? endif; ?>
+                                            <? endif; ?>
+                                            <? if (!empty($item['SQUARE'])): ?>
+                                                <div class="item-info item-info_area">
+                                                    <div class="item-info__inner">
+                                                        <div class="item-info__inner__img item-info__inner__img_area"></div>
+                                                        <div class="item-info__inner__content">
+                                                            <div class="item-info-name"><?= Loc::getMessage('LEMA_FAV_SQUARE'); ?></div>
+                                                            <div class="item-info-value">
+                                                                <?= $item['SQUARE']; ?>
+                                                                <?= Loc::getMessage('LEMA_SQUARE_M_SUP'); ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <? endif; ?>
+                                            <? if (isset($item['IS_HOUSE_OR_LOT']) && !empty($item['SQUARE_LAND'])): ?>
+                                                <div class="item-info item-info_world">
+                                                    <div class="item-info__inner">
+                                                        <div class="item-info__inner__img item-info__inner__img_world"></div>
+                                                        <div class="item-info__inner__content">
+                                                            <div class="item-info-name"><?= Loc::getMessage('LEMA_FAV_SQUARE_LAND'); ?></div>
+                                                            <div class="item-info-value">
+                                                                <?= $item['SQUARE_LAND']; ?>
+                                                                <?= Loc::getMessage('LEMA_SQUARE_M_SUP'); ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <? endif; ?>
+                                        </div>
+                                        <a href=""
+                                           class="card-flat__content__favorites js-favorites-delete active elem-<?= $item['PRODUCT_ID']; ?>"
+                                           data-item-id="<?= $item['PRODUCT_ID']; ?>"
+                                           data-position-id="<?= $arResult['IN_FAVORITES'][$item['PRODUCT_ID']]; ?>">
+                                            <span>
+                                                <?= Loc::getMessage('LEMA_DEL_TO_FAVORITE'); ?>
+                                            </span>
+                                        </a>
+                                        <? if (isset($arResult['ADDRESS'][$item['PRODUCT_ID']])): ?>
+                                            <p class="card-flat__content__address icon-location">
+                                                <?= $arResult['ADDRESS'][$item['PRODUCT_ID']]; ?>
+                                            </p>
+                                        <? endif; ?>
+                                        <p class="card-flat__content__text"><?= $item['PREVIEW_TEXT']; ?></p>
+                                        <a href="<?= $item['DETAIL_PAGE_URL']; ?>"
+                                           class="element-detail-link offers-item-more offers-item-more_text-right">
+                                            <?= Loc::getMessage('LEMA_FAVORITES_MORE_BTN'); ?>
+                                            <i class="more-icon"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="basket-page__table__item__box sum"><?=$item['SUM_FORMATTED']?></div>
-                    <div class="basket-page__table__item__box delete">
-                        <a class="basket-page__table__item__btn__delete js-product-delete"></a>
-                    </div>
-                </div>
-            <?endforeach;?>
-        </div>
-        <div class="basket-page__table_footer">
-            <div class="basket-page__table__item">
-                <div class="basket-page__table__item__box name"></div>
-                <div class="basket-page__table__item__box price"></div>
-<!--                <div class="basket-page__table__item__box count">--><?//=Loc::getMessage('BASKET_TOTAL_SUM_TITLE');?><!--</div>-->
-                <div class="basket-page__table__item__box sum-mega"><?=$basket->getTotalPrice(true);?></div>
+                <? endforeach; ?>
+                <? if (\Lema\Common\Request::get()->isAjaxRequest())
+                    exit; ?>
             </div>
-        </div>
-    </div>
-    <div class="basket-page__form">
-        <form action="/ajax/basket.php?action=sendEmail" class="js-basket-form-send" method="post">
-            <div class="it-block">
-                <div class="it-error"></div>
-                <input type="text" name="name" placeholder="<?=Loc::getMessage('BASKET_FORM_NAME_PLACEHOLDER');?>">
-            </div>
-            <div class="it-block">
-                <div class="it-error"></div>
-                <input type="text" name="phone" placeholder="<?=Loc::getMessage('BASKET_FORM_PHONE_PLACEHOLDER');?>">
-            </div>
-            <div class="it-block">
-                <div class="it-error"></div>
-                <input type="hidden" name="empty_basket">
-            </div>
-            <input class="js-personal-data" type="submit" value="<?=Loc::getMessage('BASKET_FORM_BTN_TITLE');?>">
 
-            <div class="basket-page__form__personal-data">
-                <label>
-                    <input type="checkbox" class="basket-page__form__checkbox" name="checkbox" data-js-core-form-checkbox="js-personal-data">
-                </label>
-                <label class="basket-page__form__description">
-                    Я ознакомлен c положением об обработке и защите персональных данных.
-                </label>
-            </div>
-        </form>
-    </div>
-    <div class="basket-page__description">
-        <div class="basket-page__description__title">
-            <?=Loc::getMessage('BASKET_FORM_TITLE');?>
+
+            <? /* if ($data->hasPagination()): */
+            ?><!--
+                    <a href="#"
+                       class="offers-show-more js-th-show-more"
+                        <? /*= $data->getShowMoreDataAttribs(); */
+            ?>>
+                        <span class="link-hvr">Показать больше</span>
+                        <i class="offers-show-more-icon"></i>
+                    </a>
+                --><? /* endif; */
+            ?>
+
         </div>
-        <div class="basket-page__description__text">
-            <?=Loc::getMessage('BASKET_FORM_FZ_TITLE');?>
+    </section>
+
+<? else: ?>
+    <section class="offers">
+    <div class="container-index">
+        <div style="padding: 15px">
+            <?= Loc::getMessage('BASKET_EMPTY_BASKET'); ?>
         </div>
     </div>
-<?else:?>
-    <div style="padding: 15px">
-        <?=Loc::getMessage('BASKET_EMPTY_BASKET');?>
-    </div>
-<?endif;?>
+    </section>
+<? endif; ?>

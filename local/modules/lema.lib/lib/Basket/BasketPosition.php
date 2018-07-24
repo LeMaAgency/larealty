@@ -50,9 +50,33 @@ class BasketPosition extends HighloadBlock
             array('IBLOCK_ID' => Settings::PRODUCTS_IBLOCK_ID, 'ACTIVE' => 'Y', 'ID' => array_keys($products)),
             false,
             false,
-            array('ID', 'NAME', 'PROPERTY_PRICE','PROPERTY_HEADER_TEXT', 'PROPERTY_BRAND','PROPERTY_X_FASS')
+            array(
+                'ID',
+                'NAME',
+                'IBLOCK_SECTION_ID',
+                'PREVIEW_PICTURE',
+                'PREVIEW_TEXT',
+                'DETAIL_PAGE_URL',
+                'PROPERTY_RENT_TYPE',
+                'PROPERTY_VALUE_ENUM_ID',
+                'PROPERTY_IS_EXCLUSIVE',
+                'PROPERTY_PRICE',
+                'PROPERTY_ROOMS_COUNT',
+                'PROPERTY_IS_HOUSE_OR_LOT',
+                'PROPERTY_STAGES_COUNT',
+                'PROPERTY_STAGE',
+                'PROPERTY_SQUARE',
+                'PROPERTY_ADDRESS',
+                'PROPERTY_SQUARE_LAND',
+                'PROPERTY_ADDRESS',
+                'PROPERTY_CITY',
+                'PROPERTY_REGION',
+                'PROPERTY_STREET',
+                'PROPERTY_HOUSE_NUMBER',
+            )
         );
-        while($row = $res->fetch())
+
+        while($row = $res->GetNext())
         {
             $row['PRODUCT_ID'] = $row['ID'];
             unset($row['ID']);
@@ -70,6 +94,7 @@ class BasketPosition extends HighloadBlock
                     $text[] = $row['VALUE'];
 
                 $product = $products[$v['UF_PRODUCT']];
+
                 $price = (double) $product['PROPERTY_PRICE_VALUE'];
                 $sum = (double) $v['UF_QUANTITY'] * $product['PROPERTY_PRICE_VALUE'];
                 if(($brand = Element::getById($product['PROPERTY_BRAND_VALUE'], array('select' => array('NAME')))) && isset($brand['NAME']))
@@ -77,21 +102,35 @@ class BasketPosition extends HighloadBlock
                 else
                     $brand = null;
                 $return[$k] = array(
+
                     'ID' => $k,
                     'PRODUCT_ID' => $v['UF_PRODUCT'],
-                    'QUANTITY' => $v['UF_QUANTITY'],
-                    'NAME' => $product['NAME'],
+                    'NAME' =>$product['NAME'],
+                    'IBLOCK_SECTION_ID' =>$product['IBLOCK_SECTION_ID'],
+                    'PREVIEW_PICTURE'=>$product['PREVIEW_PICTURE'],
+                    'PREVIEW_TEXT'=>$product['PREVIEW_TEXT'],
+                    'DETAIL_PAGE_URL'=>$product['DETAIL_PAGE_URL'],
+                    'RENT_TYPE'=>array(
+                        'VALUE'=>$product['PROPERTY_RENT_TYPE_VALUE'],
+                        'ENUM_ID'=>$product['PROPERTY_RENT_TYPE_ENUM_ID'],
+                    ),
+                    'IS_EXCLUSIVE'=>$product['PROPERTY_IS_EXCLUSIVE_VALUE'],
+                    'ROOMS_COUNT'=>$product['PROPERTY_ROOMS_COUNT_VALUE'],
+                    'IS_HOUSE_OR_LOT'=>$product['PROPERTY_IS_HOUSE_OR_LOT_VALUE'],
+                    'STAGES_COUNT'=>$product['PROPERTY_STAGES_COUNT_VALUE'],
+                    'STAGE'=>$product['PROPERTY_STAGE_VALUE'],
+                    'SQUARE'=>$product['PROPERTY_SQUARE_VALUE'],
+                    'SQUARE_LAND'=>$product['PROPERTY_SQUARE_LAND_VALUE'],
+                    'CITY'=>$product['PROPERTY_CITY_VALUE'],
+                    'REGION'=>$product['PROPERTY_REGION_VALUE'],
+                    'STREET'=>$product['PROPERTY_STREET_VALUE'],
+                    'HOUSE_NUMBER'=>$product['PROPERTY_HOUSE_NUMBER_VALUE'],
                     'PRICE' => $price,
                     'PRICE_FORMATTED' => $this->formatPrice($price),
-                    'SUM' => $sum,
-                    'SUM_FORMATTED' => $this->formatPrice($sum),
-                    'HEADER_TEXT' => join(PHP_EOL, $text),
-                    'BRAND' => $brand,
-                    'X_FASS' => $product['PROPERTY_X_FASS_VALUE'],
+
                 );
             }
         }
-
         return $return;
     }
 

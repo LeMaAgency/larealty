@@ -55,8 +55,17 @@ $item = $data->item();
                                 <?=Loc::getMessage('LEMA_APARTMENTS_RUB');?>
                             </div>
                         </div>
-                        <a href="#" class="card-flat__content__favorites">
-                            <span><?=Loc::getMessage('LEMA_DETAIL_ADD_TO_FAVOURITE');?></span>
+                        <a href="#"
+                           class="card-flat__content__favorites elem-<?=$item->getId();?> <? if (isset($arResult['IN_FAVORITES'][$item->getId()])) { ?> js-favorites-delete active <? } else { ?> js-favorites-add <? } ?>"
+                           data-item-id="<?=$item->getId();?>"
+                           data-position-id="<?= $arResult['IN_FAVORITES'][$item->getId()];?>">
+                            <span>
+                                <? if (isset($arResult['IN_FAVORITES'][$item->getId()])) {
+                                    echo Loc::getMessage('LEMA_DEL_TO_FAVORITE');
+                                } else {
+                                    echo Loc::getMessage('LEMA_ADD_TO_FAVORITE');
+                                } ?>
+                            </span>
                         </a>
                         <p class="card-flat__content__address icon-location"><?=$item->get('ADDRESS');?></p>
                         <div class="offers-item-info clearfix">

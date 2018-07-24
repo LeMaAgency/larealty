@@ -85,3 +85,9 @@ foreach($data->items() as $k => $item)
      */
     $arResult['ITEMS'][$k]['DETAIL_PAGE_URL'] = getElementDetailUrl($item);
 }
+
+$basket = new \Lema\Basket\Basket();
+$arResult['IN_FAVORITES'] = array();
+foreach ($basket->getProducts() as $data){
+    $arResult['IN_FAVORITES'][$data['PRODUCT_ID']] = $data['ID'];
+}

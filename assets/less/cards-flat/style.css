@@ -151,7 +151,8 @@
   vertical-align: middle;
   font-weight: 400;
 }
-.card-flat__content__favorites:hover.card-flat__content__favorites:before {
+.card-flat__content__favorites:hover.card-flat__content__favorites:before,
+.card-flat__content__favorites.active.card-flat__content__favorites:before {
   content: '\e803';
   color: red;
 }
