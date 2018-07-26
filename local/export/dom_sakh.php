@@ -76,7 +76,7 @@ $yml->loadData(array(
         'PROPERTY_LOT_CATEGORIES',
         'PROPERTY_LOT_HAVINGS_TYPE',
     ),
-    'filter' => array('ACTIVE' => 'Y', 'SECTION_CODE' => 'active', 'INCLUDE_SUBSECTIONS' => 'Y'),
+    'filter' => array('ACTIVE' => 'Y', 'SECTION_CODE' => 'active', 'INCLUDE_SUBSECTIONS' => 'Y','PROPERTY_ADD_OBJECT_TO_EXPORT_VALUE' => 'Y'),
     'callback' => function($data) use($rentAndRealtyTypes, $sections) {
         foreach($data as $k => $v)
         {
