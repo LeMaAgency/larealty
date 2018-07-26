@@ -125,25 +125,6 @@ class IblockElement
         //check iblock number
         if (!empty($iblockCode) && !empty($fields['PROPERTY_VALUES'])) {
 
-            if (empty($fields['ID'])) {
-                $fields['ACTIVE'] = 'N';
-
-                $res = \CIBlockSection::GetByID($fields['IBLOCK_SECTION'][0]);
-                if ($arSectionRes = $res->Fetch()) {
-                    $arSection = $arSectionRes;
-                }
-                if ($arSection['IBLOCK_SECTION_ID'] == '23') {
-                    $sectCodeNew = $arSection['CODE'] . "-new";
-                } else {
-                    $sectCodeNew = stristr($arSection['CODE'], '-', true) . "-new";
-                }
-                if (!empty($sectCodeNew)) {
-                    $sectIdNew = \Liblock::getSectionInfo('objects', $sectCodeNew, true);
-                    if ($sectIdNew) {
-                        $fields['IBLOCK_SECTION'][0] = $sectIdNew['ID'];
-                    }
-                }
-            }
             /**
              * Administrator can change rieltor for object
              */
@@ -174,6 +155,23 @@ class IblockElement
                     /* if($fields['IBLOCK_ID'] === \LIblock::getId('objects'))
                          $fields['IBLOCK_SECTION'] = ;
                     $fields['ACTIVE'] = 'Y';*/
+                    $fields['ACTIVE'] = 'N';
+
+                    $res = \CIBlockSection::GetByID($fields['IBLOCK_SECTION'][0]);
+                    if ($arSectionRes = $res->Fetch()) {
+                        $arSection = $arSectionRes;
+                    }
+                    if ($arSection['IBLOCK_SECTION_ID'] == '23') {
+                        $sectCodeNew = $arSection['CODE'] . "-new";
+                    } else {
+                        $sectCodeNew = stristr($arSection['CODE'], '-', true) . "-new";
+                    }
+                    if (!empty($sectCodeNew)) {
+                        $sectIdNew = \Liblock::getSectionInfo('objects', $sectCodeNew, true);
+                        if ($sectIdNew) {
+                            $fields['IBLOCK_SECTION'][0] = $sectIdNew['ID'];
+                        }
+                    }
                     $fields['RIGHTS'] = array();
                 } else {
                     $fields['RIGHTS'] = array(
