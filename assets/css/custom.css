@@ -339,3 +339,6 @@ h2.seller_main__h2 {color:fff;}
 
 .item-info__inner {
 	min-height: 108px;}
+.realtors__carousel__item__img img {
+    border-radius: 0;
+}
