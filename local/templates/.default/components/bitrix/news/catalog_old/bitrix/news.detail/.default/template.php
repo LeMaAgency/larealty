@@ -56,7 +56,7 @@ $item = $data->item();
                             </div>
                         </div>
                         <a href="#" class="card-flat__content__favorites">
-                            <span><?=Loc::getMessage('LEMA_DETAIL_ADD_TO_FAVOURITE');?></span>
+                            <span><?=Loc::getMessage('LEMA_ADD_TO_FAVOURITE');?></span>
                         </a>
                         <p class="card-flat__content__address icon-location"><?=$item->get('ADDRESS');?></p>
                         <div class="offers-item-info clearfix">
