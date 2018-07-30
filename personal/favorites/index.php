@@ -1,9 +1,5 @@
-<?
-defined('NEED_AUTH') or define('NEED_AUTH', true);
-
-require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
-
-$APPLICATION->SetTitle('Личный кабинет');
+<? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
+$APPLICATION->SetTitle("Избранное");
 ?>
     <div class="container">
         <div class="row">
@@ -12,11 +8,7 @@ $APPLICATION->SetTitle('Личный кабинет');
             </div>
         </div>
     </div>
-
-
     <div class="container">
-        <h1><? $APPLICATION->ShowTitle(false); ?></h1>
-        <br><br>
         <? $APPLICATION->IncludeComponent('bitrix:menu', 'personal_buttons', array(
             'ALLOW_MULTI_SELECT' => 'N',
             'ROOT_MENU_TYPE' => 'personal',
@@ -30,8 +22,15 @@ $APPLICATION->SetTitle('Личный кабинет');
             'USE_EXT' => 'Y',
             'COMPONENT_TEMPLATE' => 'personal'
         )); ?>
-        <br><br>
+        <?
+        $APPLICATION->IncludeComponent('lema:basket', '', array(
+            'AJAX_MODE' => 'Y',
+            "AJAX_OPTION_ADDITIONAL" => "",    // Дополнительный идентификатор
+            "AJAX_OPTION_HISTORY" => "N",    // Включить эмуляцию навигации браузера
+            "AJAX_OPTION_JUMP" => "N",    // Включить прокрутку к началу компонента
+            "AJAX_OPTION_STYLE" => "Y",    // Включить подгрузку стилей
+            'CACHE_TYPE' => 'N'
+        )); ?>
+
     </div>
-<?
-require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/footer.php';
-?>
+<? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

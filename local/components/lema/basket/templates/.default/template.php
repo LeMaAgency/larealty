@@ -15,15 +15,7 @@ $data = new TH($this);
 $data->setShowMoreScript();
 
 $basket = new \Lema\Basket\Basket();
-?>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <?\Lema\Components\Breadcrumbs::inc('breadcrumbs');?>
-            </div>
-        </div>
-    </div>
-<?if ($basket->hasProducts()):?>
+if ($basket->hasProducts()):?>
 
     <section class="offers">
         <div class="container-index">

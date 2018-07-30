@@ -233,7 +233,8 @@
   font-size: 14px;
 }
 .card-flat__content__buttons__item:hover,
-.card-flat__content__buttons__item:focus {
+.card-flat__content__buttons__item:focus,
+.card-flat__content__buttons__item.selected {
   background-color: #07ba00;
   text-decoration: none;
   color: #fff;

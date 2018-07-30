@@ -1,24 +1,39 @@
 <?
-$aMenuLinks = array(
-	array(
-		'Оформить ипотеку',
-		'/personal/hypothec/',
-		array(), 
-		array(), 
-		'',
+$aMenuLinks = Array(
+	Array(
+		"Личный профиль", 
+		"/personal/profile/", 
+		Array(), 
+		Array(), 
+		"" 
 	),
-	array(
-		'Мои объекты',
-		'/personal/my-objects/',
-		array(), 
-		array(), 
-		'',
+	Array(
+		"Мои объекты", 
+		"/personal/my-objects/", 
+		Array(), 
+		Array(), 
+		"" 
 	),
-	array(
-		'Личный профиль',
-		'/personal/profile/',
-		array(), 
-		array(), 
-		'',
+	Array(
+		"Избранное", 
+		"/personal/favorites/", 
+		Array(), 
+		Array(), 
+		"" 
 	),
+	Array(
+		"Оформить ипотеку", 
+		"/personal/hypothec/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Подписки", 
+		"/personal/subscriptions/", 
+		Array(), 
+		Array(), 
+		"" 
+	)
 );
+?>

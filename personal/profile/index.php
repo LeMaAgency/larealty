@@ -16,6 +16,19 @@ $user = new \UserData();
         </div>
     </div>
     <div class="container">
+        <? $APPLICATION->IncludeComponent('bitrix:menu', 'personal_buttons', array(
+            'ALLOW_MULTI_SELECT' => 'N',
+            'ROOT_MENU_TYPE' => 'personal',
+            'CHILD_MENU_TYPE' => 'left',
+            'DELAY' => 'N',
+            'MAX_LEVEL' => '1',
+            'MENU_CACHE_GET_VARS' => array(),
+            'MENU_CACHE_TIME' => '3600',
+            'MENU_CACHE_TYPE' => 'A',
+            'MENU_CACHE_USE_GROUPS' => 'N',
+            'USE_EXT' => 'Y',
+            'COMPONENT_TEMPLATE' => 'personal'
+        )); ?>
         <form class="filter-form form-admin js-personal-office-form" action="<?= SITE_DIR . 'ajax/personal_office_data_form.php' ?>" method="POST">
             <div class="container-index">
                 <div class="section-title form-title"><span>* Персональные данные</span></div>

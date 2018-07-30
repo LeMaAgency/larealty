@@ -1,9 +1,6 @@
 <?
-defined('NEED_AUTH') or define('NEED_AUTH', true);
-
-require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
-
-$APPLICATION->SetTitle('Личный кабинет');
+require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
+$APPLICATION->SetTitle("Подписки");
 ?>
     <div class="container">
         <div class="row">
@@ -12,11 +9,7 @@ $APPLICATION->SetTitle('Личный кабинет');
             </div>
         </div>
     </div>
-
-
     <div class="container">
-        <h1><? $APPLICATION->ShowTitle(false); ?></h1>
-        <br><br>
         <? $APPLICATION->IncludeComponent('bitrix:menu', 'personal_buttons', array(
             'ALLOW_MULTI_SELECT' => 'N',
             'ROOT_MENU_TYPE' => 'personal',
@@ -30,8 +23,9 @@ $APPLICATION->SetTitle('Личный кабинет');
             'USE_EXT' => 'Y',
             'COMPONENT_TEMPLATE' => 'personal'
         )); ?>
-        <br><br>
+        <br/><br/><br/>
+        Страница находится в разработке!
+        <br/><br/><br/>
     </div>
 <?
-require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/footer.php';
-?>
+require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php");
