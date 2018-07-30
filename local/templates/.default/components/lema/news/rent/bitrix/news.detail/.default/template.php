@@ -241,6 +241,7 @@ $item = $data->item();
                                 <input type="hidden" name="element_id" value="<?= (int)$item->getId(); ?>">
                                 <input type="hidden" name="element_name" value="<?= $item->getName(); ?>">
                                 <input type="hidden" name="rieltor_id" value="<?= $item->propVal('RIELTOR'); ?>">
+                                <input type="hidden" name="rent_type" value="rent">
                                 <div class="it-block">
                                     <input class="realtor-card__form__input" type="tel" name="phone"
                                            placeholder="<?= Loc::getMessage('LEMA_DETAIL_PHONE_PLACEHOLDER'); ?>">

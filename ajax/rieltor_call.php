@@ -16,7 +16,11 @@ $form = new \Lema\Forms\AjaxForm(array(
     ),
     $_POST
 );
-
+if(!empty($form->getField('rent_type')) && $form->getField('rent_type')=="rent"){
+    $sectMess = 50;
+}else{
+    $sectMess = 51;
+}
 //check form fields
 if($form->validate())
 {
@@ -28,6 +32,7 @@ if($form->validate())
         LIblock::getId('object_call_wait'),
         array(
             'NAME' => $form->getField('phone'),
+            'IBLOCK_SECTION_ID'=>$sectMess,
             'PROPERTY_VALUES' => array(
                 'OBJECT' => $form->getField('element_id'),
             ),
