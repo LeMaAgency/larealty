@@ -382,19 +382,20 @@ class IblockElement
             }
             //Converting subarrays to String
             foreach ($emailFields as $key => $field){
-                $emailFieldsFinish["#".$key."#"] = implode(",", $field);
+                $emailFieldsFinish["#PROP_".$key."#"] = implode(",", $field);
             }
 
             //Change value of the "auto-fit" property in the message fields
-            if (!empty($emailFieldsFinish["#103#"])) {
-                $emailFieldsFinish["#103#"] = "Да";
+            if (!empty($emailFieldsFinish["#PROP_103#"])) {
+                $emailFieldsFinish["#PROP_103#"] = "Да";
             }else{
-                $emailFieldsFinish["#103#"] = "Нет";
+                $emailFieldsFinish["#PROP_103#"] = "Нет";
             }
             //Add the additional information in the message fields
             if (!empty($fields['PREVIEW_TEXT'])) {
                 $emailFieldsFinish['#ADD_INFO#'] = $fields['PREVIEW_TEXT'];
             }
+
             \CEvent::Send(
                 'REQUEST_MESSAGE',
                 's1',
