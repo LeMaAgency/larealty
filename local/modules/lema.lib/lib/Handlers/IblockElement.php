@@ -40,6 +40,7 @@ class IblockElement
         static::setElementRights($fields);
         static::setReminders($fields);
         static::setAutoFit($fields);
+        static::sendRequest($fields);
     }
 
     /**
@@ -55,6 +56,7 @@ class IblockElement
      */
     public static function afterAdd(array &$fields)
     {
+        static::sendRequest($fields);
         static::generateElementNameAndCode($fields);
     }
 
@@ -63,7 +65,7 @@ class IblockElement
      */
     public static function afterUpdate(array &$fields)
     {
-
+        static::sendRequest($fields);
     }
 
     /**
@@ -133,7 +135,6 @@ class IblockElement
                 //get rieltor property value
                 $rieltorId = static::getPropValue($fields, 'RIELTOR', 0, $iblockCode);
 
-
                 //rieltor not specified, clean rights
                 if (empty($rieltorId)) {
                     $fields['RIGHTS'] = array();
@@ -151,21 +152,26 @@ class IblockElement
                 /**
                  * New object, DO NOT set special section to it and clear access rights
                  */
-                if (empty($fields['ID'])) {
+                if (empty($fields['ID']) && $fields['IBLOCK_ID'] === \LIblock::getId('objects')) {
                     /* if($fields['IBLOCK_ID'] === \LIblock::getId('objects'))
                          $fields['IBLOCK_SECTION'] = ;
                     $fields['ACTIVE'] = 'Y';*/
                     $fields['ACTIVE'] = 'N';
 
+                    //get the fields of the current section
                     $res = \CIBlockSection::GetByID($fields['IBLOCK_SECTION'][0]);
                     if ($arSectionRes = $res->Fetch()) {
                         $arSection = $arSectionRes;
                     }
+
+                    //generate the name of the section of new objects from the current section
                     if ($arSection['IBLOCK_SECTION_ID'] == '23') {
                         $sectCodeNew = $arSection['CODE'] . "-new";
                     } else {
                         $sectCodeNew = stristr($arSection['CODE'], '-', true) . "-new";
                     }
+
+                    //overwrite the name of the section for this item
                     if (!empty($sectCodeNew)) {
                         $sectIdNew = \Liblock::getSectionInfo('objects', $sectCodeNew, true);
                         if ($sectIdNew) {
@@ -330,6 +336,66 @@ class IblockElement
         } else {
             $tmp = current($fields['PROPERTY_VALUES'][$propId]);
             return empty($tmp) || empty($tmp['VALUE']) ? $defValue : $tmp['VALUE'];
+        }
+    }
+
+    /**
+     * Creates and sends a request
+     *
+     * @param array $fields
+     */
+    protected static function sendRequest(array &$fields)
+    {
+        $checkMail = array_column($fields['PROPERTY_VALUES'][106], 'VALUE');
+        if (isset($fields['IBLOCK_ID']) && $fields['IBLOCK_ID'] === \LIblock::getId('requests') && !empty($checkMail[0])) {
+
+            //Adding the properties of an element to an array $arFieldsTemporary
+            foreach ($fields['PROPERTY_VALUES'] as $key => $prop) {
+                $arFieldsTemporary[$key] = array_column($prop, 'VALUE');
+            }
+
+            //Removes from the array the empty properties
+            foreach ($arFieldsTemporary as $key => $fieldTemporary) {
+                if (!empty($fieldTemporary[0])) {
+                    $emailFields[$key] = array_diff($fieldTemporary, array(''));
+                }
+            }
+
+            //Selects all values of properties of type "list"
+            $resProp = \CIBlockPropertyEnum::GetList(
+                false,
+                Array("IBLOCK_ID" => $fields['IBLOCK_ID'])
+            );
+            while ($propFields = $resProp->Fetch()) {
+                $properties[$propFields['PROPERTY_ID']][$propFields['ID']] = $propFields['VALUE'];
+            }
+            //Removes property 89 from property array (property row, multiple)
+            unset($properties[89]);
+
+
+            foreach ($emailFields as $key => $field) {
+                if (array_key_exists($key, $properties)) {
+                    foreach ($field as $keyField => $value) {
+                        $emailFields[$key][$keyField] = $properties[$key][$value];
+                    }
+                }
+            }
+
+            //Change value of the "auto-fit" property in the message fields
+            if (!empty($emailFields[103][0])) {
+                $emailFields[103][0] = "Да";
+            }else{
+                $emailFields[103][0] = "Нет";
+            }
+            //Add the additional information in the message fields
+            if (!empty($fields['PREVIEW_TEXT'])) {
+                $emailFields['ADD_INFO'] = $fields['PREVIEW_TEXT'];
+            }
+            \CEvent::Send(
+                'REQUEST_MESSAGE',
+                's1',
+                $emailFields
+            );
         }
     }
 }
