@@ -393,12 +393,12 @@ class IblockElement
             }
             //Add the additional information in the message fields
             if (!empty($fields['PREVIEW_TEXT'])) {
-                $emailFields['#ADD_INFO#'] = $fields['PREVIEW_TEXT'];
+                $emailFieldsFinish['#ADD_INFO#'] = $fields['PREVIEW_TEXT'];
             }
             \CEvent::Send(
                 'REQUEST_MESSAGE',
                 's1',
-                $emailFields
+                $emailFieldsFinish
             );
         }
     }
