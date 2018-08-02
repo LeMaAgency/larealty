@@ -372,7 +372,7 @@ class IblockElement
             //Removes property 89 from property array (property row, multiple)
             unset($properties[89]);
 
-
+            //Replaced the "property value id" with "value"
             foreach ($emailFields as $key => $field) {
                 if (array_key_exists($key, $properties)) {
                     foreach ($field as $keyField => $value) {
@@ -380,17 +380,23 @@ class IblockElement
                     }
                 }
             }
+            //Converting subarrays to String
+            foreach ($emailFields as $key => $field){
+                $emailFields[$key] = implode(",", $field);
+            }
+
 
             //Change value of the "auto-fit" property in the message fields
-            if (!empty($emailFields[103][0])) {
-                $emailFields[103][0] = "Да";
+            if (!empty($emailFields[103])) {
+                $emailFields[103] = "Да";
             }else{
-                $emailFields[103][0] = "Нет";
+                $emailFields[103] = "Нет";
             }
             //Add the additional information in the message fields
             if (!empty($fields['PREVIEW_TEXT'])) {
                 $emailFields['ADD_INFO'] = $fields['PREVIEW_TEXT'];
             }
+
             \CEvent::Send(
                 'REQUEST_MESSAGE',
                 's1',
