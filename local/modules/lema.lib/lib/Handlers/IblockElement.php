@@ -360,6 +360,8 @@ class IblockElement
                     $emailFields[$key] = array_diff($fieldTemporary, array(''));
                 }
             }
+            //Selects type of rent
+            $rentType = $emailFields[88][0];
 
             //Selects all values of properties of type "list"
             $resProp = \CIBlockPropertyEnum::GetList(
@@ -373,33 +375,145 @@ class IblockElement
             unset($properties[89]);
 
             //Replaced the "property value id" with "value"
-            foreach ($emailFields as $key => $field) {
+            foreach ($arFieldsTemporary as $key => $field) {
                 if (array_key_exists($key, $properties)) {
                     foreach ($field as $keyField => $value) {
                         $emailFields[$key][$keyField] = $properties[$key][$value];
                     }
                 }
             }
+
             //Converting subarrays to String
-            foreach ($emailFields as $key => $field){
-                $emailFieldsFinish["PROP_".$key] = implode(",", $field);
+            foreach ($emailFields as $key => $field) {
+                $emailFieldsFinish[$key] = implode(",", $field);
             }
 
+
             //Change value of the "auto-fit" property in the message fields
-            if (!empty($emailFieldsFinish["PROP_103"])) {
-                $emailFieldsFinish["PROP_103"] = "Да";
-            }else{
-                $emailFieldsFinish["PROP_103"] = "Нет";
+            if (!empty($emailFieldsFinish[103])) {
+                $emailFieldsFinish[103] = "Да";
+            } else {
+                $emailFieldsFinish[103] = "Нет";
             }
             //Add the additional information in the message fields
             if (!empty($fields['PREVIEW_TEXT'])) {
                 $emailFieldsFinish['ADD_INFO'] = $fields['PREVIEW_TEXT'];
             }
 
+            $sendData = null;
+            /*
+                #87# - Вид сделки
+                #88# - Тип недвижимости
+                #89# - Количество комнат
+                #90# - Вид планировки
+                #91# - Этаж
+                #92# - Район
+                #93# - Цена, от
+                #94# - Цена, до
+                #95# - Материал
+                #96# - Площадь, от
+                #97# - Жилой массив, СНТ
+                #98# - Тип собственности
+                #99# - Время начала рассылки
+                #100# - Частота рассылки
+                #101# - Дата рассылки, от
+                #102# - Дата рассылки, до
+                #103# - Автоподбор
+                #104# - Имя клиента
+                #105# - Телефон клиента
+                #106# - Email клиента
+                #ADD_INFO# - Дополнительная информация
+            */
+            switch ($rentType):
+                case 94:
+                    //APPARTMENTS
+                    $sendData .= sprintf(
+                        '<br>Вид сделки: %s<br>Тип недвижимости: %s<br>Количество комнат: %s<br>Вид планировки: %s<br>Этаж: %s<br>Район: %s<br>Цена, от: %s<br>Цена, до: %s<br>Время начала рассылки: %s<br>Частота рассылки: %s<br>Дата рассылки, от: %s<br>Дата рассылки, до: %s<br>Автоподбор: %s<br>Доп.информация:<br> %s',
+                        (empty($emailFieldsFinish['87']) ? "-" : $emailFieldsFinish['87']),
+                        (empty($emailFieldsFinish['88']) ? "-" : $emailFieldsFinish['88']),
+                        (empty($emailFieldsFinish['89']) ? "-" : $emailFieldsFinish['89']),
+                        (empty($emailFieldsFinish['90']) ? "-" : $emailFieldsFinish['90']),
+                        (empty($emailFieldsFinish['91']) ? "-" : $emailFieldsFinish['91']),
+                        (empty($emailFieldsFinish['92']) ? "-" : $emailFieldsFinish['92']),
+                        (empty($emailFieldsFinish['93']) ? "-" : $emailFieldsFinish['93']),
+                        (empty($emailFieldsFinish['94']) ? "-" : $emailFieldsFinish['94']),
+                        (empty($emailFieldsFinish['99']) ? "-" : $emailFieldsFinish['99']),
+                        (empty($emailFieldsFinish['100']) ? "-" : $emailFieldsFinish['100']),
+                        (empty($emailFieldsFinish['101']) ? "-" : $emailFieldsFinish['101']),
+                        (empty($emailFieldsFinish['102']) ? "-" : $emailFieldsFinish['102']),
+                        (empty($emailFieldsFinish['103']) ? "-" : $emailFieldsFinish['103']),
+                        (empty($emailFieldsFinish['ADD_INFO']) ? "-" : $emailFieldsFinish['ADD_INFO'])
+                    );
+                    break;
+                case 95:
+                    //ROOMS
+                    $sendData .= sprintf(
+                        'Вид сделки: %s<br>Тип недвижимости: %s<br>Вид планировки: %s<br>Этаж: %s<br>Район: %s<br>Цена, от: %s<br>Цена, до: %s<br>Время начала рассылки: %s<br>Частота рассылки: %s<br>Дата рассылки, от: %s<br>Дата рассылки, до: %s<br>Автоподбор: %s<br>Доп.информация:<br> %s',
+                        (empty($emailFieldsFinish['87']) ? "-" : $emailFieldsFinish['87']),
+                        (empty($emailFieldsFinish['88']) ? "-" : $emailFieldsFinish['88']),
+                        (empty($emailFieldsFinish['90']) ? "-" : $emailFieldsFinish['90']),
+                        (empty($emailFieldsFinish['91']) ? "-" : $emailFieldsFinish['91']),
+                        (empty($emailFieldsFinish['92']) ? "-" : $emailFieldsFinish['92']),
+                        (empty($emailFieldsFinish['93']) ? "-" : $emailFieldsFinish['93']),
+                        (empty($emailFieldsFinish['94']) ? "-" : $emailFieldsFinish['94']),
+                        (empty($emailFieldsFinish['99']) ? "-" : $emailFieldsFinish['99']),
+                        (empty($emailFieldsFinish['100']) ? "-" : $emailFieldsFinish['100']),
+                        (empty($emailFieldsFinish['101']) ? "-" : $emailFieldsFinish['101']),
+                        (empty($emailFieldsFinish['102']) ? "-" : $emailFieldsFinish['102']),
+                        (empty($emailFieldsFinish['103']) ? "-" : $emailFieldsFinish['103']),
+                        (empty($emailFieldsFinish['ADD_INFO']) ? "-" : $emailFieldsFinish['ADD_INFO'])
+                    );
+                    break;
+                case 96:
+                    //HOME
+                case 97:
+                    //BOWERS
+                    $sendData .= sprintf(
+                        'Вид сделки: %s<br>Тип недвижимости: %s<br>Количество комнат: %s<br>Материал: %s<br>Площадь, от: %s<br>Жилой массив, СНТ: %s<br>Цена, от: %s<br>Цена, до: %s<br>Время начала рассылки: %s<br>Частота рассылки: %s<br>Дата рассылки, от: %s<br>Дата рассылки, до: %s<br>Автоподбор: %s<br>Доп.информация:<br> %s',
+                        (empty($emailFieldsFinish['87']) ? "-" : $emailFieldsFinish['87']),
+                        (empty($emailFieldsFinish['88']) ? "-" : $emailFieldsFinish['88']),
+                        (empty($emailFieldsFinish['89']) ? "-" : $emailFieldsFinish['89']),
+                        (empty($emailFieldsFinish['95']) ? "-" : $emailFieldsFinish['95']),
+                        (empty($emailFieldsFinish['96']) ? "-" : $emailFieldsFinish['96']),
+                        (empty($emailFieldsFinish['97']) ? "-" : $emailFieldsFinish['97']),
+                        (empty($emailFieldsFinish['93']) ? "-" : $emailFieldsFinish['93']),
+                        (empty($emailFieldsFinish['94']) ? "-" : $emailFieldsFinish['94']),
+                        (empty($emailFieldsFinish['99']) ? "-" : $emailFieldsFinish['99']),
+                        (empty($emailFieldsFinish['100']) ? "-" : $emailFieldsFinish['100']),
+                        (empty($emailFieldsFinish['101']) ? "-" : $emailFieldsFinish['101']),
+                        (empty($emailFieldsFinish['102']) ? "-" : $emailFieldsFinish['102']),
+                        (empty($emailFieldsFinish['103']) ? "-" : $emailFieldsFinish['103']),
+                        (empty($emailFieldsFinish['ADD_INFO']) ? "-" : $emailFieldsFinish['ADD_INFO'])
+                    );
+                    break;
+                case 98:
+                    //LAND
+                    $sendData .= sprintf(
+                        'Вид сделки: %s<br>Тип недвижимости: %s<br>Площадь, от: %s<br>Жилой массив, СНТ: %s<br>Тип собственности: %s<br>Цена, от: %s<br>Цена, до: %s<br>Время начала рассылки: %s<br>Частота рассылки: %s<br>Дата рассылки, от: %s<br>Дата рассылки, до: %s<br>Автоподбор: %s<br>Доп.информация:<br> %s',
+                        (empty($emailFieldsFinish['87']) ? "-" : $emailFieldsFinish['87']),
+                        (empty($emailFieldsFinish['88']) ? "-" : $emailFieldsFinish['88']),
+                        (empty($emailFieldsFinish['96']) ? "-" : $emailFieldsFinish['96']),
+                        (empty($emailFieldsFinish['97']) ? "-" : $emailFieldsFinish['97']),
+                        (empty($emailFieldsFinish['98']) ? "-" : $emailFieldsFinish['98']),
+                        (empty($emailFieldsFinish['93']) ? "-" : $emailFieldsFinish['93']),
+                        (empty($emailFieldsFinish['94']) ? "-" : $emailFieldsFinish['94']),
+                        (empty($emailFieldsFinish['99']) ? "-" : $emailFieldsFinish['99']),
+                        (empty($emailFieldsFinish['100']) ? "-" : $emailFieldsFinish['100']),
+                        (empty($emailFieldsFinish['101']) ? "-" : $emailFieldsFinish['101']),
+                        (empty($emailFieldsFinish['102']) ? "-" : $emailFieldsFinish['102']),
+                        (empty($emailFieldsFinish['103']) ? "-" : $emailFieldsFinish['103']),
+                        (empty($emailFieldsFinish['ADD_INFO']) ? "-" : $emailFieldsFinish['ADD_INFO'])
+                    );
+                    break;
+            endswitch;
+
             \CEvent::Send(
                 'REQUEST_MESSAGE',
                 's1',
-                $emailFieldsFinish
+                array(
+                    "OBJECT" => $sendData,
+                    "EMAIL_TO" => $emailFieldsFinish[106]
+                )
             );
         }
     }
