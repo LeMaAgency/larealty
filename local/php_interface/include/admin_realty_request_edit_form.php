@@ -1754,7 +1754,7 @@ if (
         /**
          * Hide items for empty choose
          */
-        var initShowedProps = [87, 88, 99, 100, 101, 102, 103, 104, 105, 106];
+        var initShowedProps = [87, 88, 99, 100, 101, 102, 103, 104, 105, 106, 151];
         $('[id^="tr_PROPERTY_"], #tr_NAME, #tr_CODE').hide();
         if($.trim($('#tr_PROPERTY_88 select').val()) == '')
         {

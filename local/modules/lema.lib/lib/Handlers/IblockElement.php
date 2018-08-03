@@ -347,7 +347,8 @@ class IblockElement
     protected static function sendRequest(array &$fields)
     {
         $checkMail = array_column($fields['PROPERTY_VALUES'][106], 'VALUE');
-        if (isset($fields['IBLOCK_ID']) && $fields['IBLOCK_ID'] === \LIblock::getId('requests') && !empty($checkMail[0])) {
+        $checkSendMail = array_column($fields['PROPERTY_VALUES'][151], 'VALUE');
+        if (isset($fields['IBLOCK_ID']) && $fields['IBLOCK_ID'] === \LIblock::getId('requests') && !empty($checkMail[0]) && !empty($checkSendMail[0])) {
 
             //Adding the properties of an element to an array $arFieldsTemporary
             foreach ($fields['PROPERTY_VALUES'] as $key => $prop) {
