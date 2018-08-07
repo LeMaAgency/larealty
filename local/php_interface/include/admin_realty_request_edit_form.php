@@ -295,7 +295,7 @@ if (
                         echo $key ?>" <?
                         if ($str_IBLOCK_SECTION_ID == $key) echo 'selected' ?>><?
                             echo $val ?></option>
-                    <?endforeach ?>
+                    <? endforeach ?>
                 </select>
             </div>
             <script type="text/javascript">
@@ -377,7 +377,7 @@ if (!empty($PROP)):
         ?>
         <tr id="tr_PROPERTY_<?
         echo $prop_fields["ID"]; ?>"<?
-        if ($prop_fields["PROPERTY_TYPE"] == "F"):?> class="adm-detail-file-row"<?endif ?>>
+        if ($prop_fields["PROPERTY_TYPE"] == "F"):?> class="adm-detail-file-row"<? endif ?>>
             <td class="adm-detail-valign-top" width="40%"><?
                 if ($prop_fields["HINT"] != ""):
                     ?><span id="hint_<?
@@ -438,8 +438,8 @@ if (!$bAutocomplete && ($ID > 0 && !$bCopy)) {
             if ($elements_name == '')
                 $elements_name = GetMessage("IBLOCK_ELEMENT_EDIT_ELEMENTS");
             ?>
-            <tr id="tr_LINKED_PROP<?
-            echo $arLinkedProp["ID"] ?>">
+        <tr id="tr_LINKED_PROP<?
+        echo $arLinkedProp["ID"] ?>">
             <td colspan="2"><a title="<?= $linkedTitle; ?>"
                                href="/bitrix/admin/<?= htmlspecialcharsbx(CIBlock::GetAdminElementListLink($arLinkedProp["IBLOCK_ID"], array('set_filter' => 'Y', 'find_el_property_' . $arLinkedProp["ID"] => $ID, 'find_section_section' => -1))) ?>"><?= htmlspecialcharsbx(CIBlock::GetArrayByID($arLinkedProp["IBLOCK_ID"], "NAME") . ": " . $elements_name); ?></a>
             </td>
@@ -573,7 +573,7 @@ $tabControl->BeginCustomField("PREVIEW_TEXT", GetMessage("IBLOCK_FIELD_PREVIEW_T
                                                                                  value="html"<?
                 if ($str_PREVIEW_TEXT_TYPE == "html") echo " checked" ?>> <label for="PREVIEW_TEXT_TYPE_html"><?
                     echo GetMessage("IBLOCK_DESC_TYPE_HTML") ?></label>
-            <?endif ?>
+            <? endif ?>
         </td>
     </tr>
     <tr id="tr_PREVIEW_TEXT">
@@ -897,7 +897,7 @@ $tabControl->EndCustomField("TAGS",
                 </select>
             </td>
 
-        <? elseif ($arIBlock["SECTION_CHOOSER"] == "D"):?>
+        <? elseif ($arIBlock["SECTION_CHOOSER"] == "D"): ?>
             <td width="40%" class="adm-detail-valign-top"><?
                 echo $tabControl->GetCustomLabelHTML() ?></td>
             <td width="60%">
@@ -1085,7 +1085,7 @@ $tabControl->EndCustomField("TAGS",
                 </table>
             </td>
 
-        <? else:?>
+        <? else: ?>
             <td width="40%" class="adm-detail-valign-top"><?
                 echo $tabControl->GetCustomLabelHTML() ?></td>
             <td width="60%">
@@ -1157,7 +1157,7 @@ $tabControl->EndCustomField("TAGS",
                        echo LANGUAGE_ID ?>&amp;IBLOCK_ID=<?
                        echo $IBLOCK_ID ?>&amp;n=input_IBLOCK_SECTION&amp;m=y&amp;iblockfix=y&amp;tableId=iblocksection-<?= $IBLOCK_ID; ?>', 900, 700);">
             </td>
-        <?endif; ?>
+        <? endif; ?>
     </tr>
     <input type="hidden" name="IBLOCK_SECTION[]" value="">
     <script type="text/javascript">
@@ -1323,7 +1323,7 @@ if ($arShowTabs['workflow']):?>
                 endif;
                 ?></td>
         </tr>
-    <?endif; ?>
+    <? endif; ?>
     <?
     if (strlen($str_TIMESTAMP_X) > 0 && !$bCopy):?>
         <tr id="tr_WF_MODIFIED">
@@ -1338,7 +1338,7 @@ if ($arShowTabs['workflow']):?>
                 endif;
                 ?></td>
         </tr>
-    <?endif ?>
+    <? endif ?>
     <?
     if ($WF == "Y" && strlen($prn_WF_DATE_LOCK) > 0):?>
         <tr id="tr_WF_LOCKED">
@@ -1366,10 +1366,10 @@ if ($arShowTabs['workflow']):?>
                 if ($ID > 0 && !$bCopy):?>
                     <?
                     echo SelectBox("WF_STATUS_ID", CWorkflowStatus::GetDropDownList("N", "desc"), "", $str_WF_STATUS_ID); ?>
-                <? else:?>
+                <? else: ?>
                     <?
                     echo SelectBox("WF_STATUS_ID", CWorkflowStatus::GetDropDownList("N", "desc"), "", ""); ?>
-                <?endif ?>
+                <? endif ?>
             </td>
         </tr>
         <?
@@ -1398,10 +1398,10 @@ if ($arShowTabs['workflow']):?>
             if ($ID > 0 && !$bCopy):?>
                 <textarea name="WF_COMMENTS" style="width:100%" rows="10"><?
                     echo $str_WF_COMMENTS ?></textarea>
-            <? else:?>
+            <? else: ?>
                 <textarea name="WF_COMMENTS" style="width:100%" rows="10"><?
                     echo "" ?></textarea>
-            <?endif ?>
+            <? endif ?>
         </td>
     </tr>
     <?
@@ -1464,7 +1464,7 @@ if ($arShowTabs['bizproc']):
                             "stop_bizproc" => $arDocumentState["ID"],
                         ), "&" . bitrix_sessid_get())) ?>"><?
                         echo GetMessage("IBEL_BIZPROC_STOP") ?></a>)
-                <?endif; ?>
+                <? endif; ?>
             </td>
         </tr>
         <tr>
@@ -1479,7 +1479,7 @@ if ($arShowTabs['bizproc']):
                     echo GetMessage("IBEL_BIZPROC_DESC") ?></td>
                 <td width="60%"><?= htmlspecialcharsbx($arDocumentState["TEMPLATE_DESCRIPTION"]) ?></td>
             </tr>
-        <?endif ?>
+        <? endif ?>
         <?
         if (strlen($arDocumentState["STATE_MODIFIED"]) > 0):?>
             <tr>
@@ -1487,7 +1487,7 @@ if ($arShowTabs['bizproc']):
                     echo GetMessage("IBEL_BIZPROC_DATE") ?></td>
                 <td width="60%"><?= $arDocumentState["STATE_MODIFIED"] ?></td>
             </tr>
-        <?endif; ?>
+        <? endif; ?>
         <?
         if (strlen($arDocumentState["STATE_NAME"]) > 0):?>
             <tr>
@@ -1502,7 +1502,7 @@ if ($arShowTabs['bizproc']):
                 endif;
                 ?></td>
             </tr>
-        <?endif; ?>
+        <? endif; ?>
         <?
         if (strlen($arDocumentState["ID"]) <= 0) {
             CBPDocument::StartWorkflowParametersShow(
@@ -1795,40 +1795,41 @@ if (
 
             var arElemEmail = [],
                 email = $(this).val();
-
-            if ($('#edit1_edit_table tr:first-child() td.adm-detail-content-cell-l').html() == "ID:") {
-                var idRequest = $('#edit1_edit_table tr:first-child() td.adm-detail-content-cell-r').html();
-            }
-            <?
-            $res = \CIBlockElement::GetList(
-                false,
-                array("IBLOCK_ID" => 16),
-                false,
-                false,
-                array("PROPERTY_CLIENT_EMAIL", "ID")
-            );
-            while ($ar_res = $res->Fetch()) {
-                $arRequestEmail[$ar_res["ID"]] = $ar_res["PROPERTY_CLIENT_EMAIL_VALUE"];
-            }
-            foreach ($arRequestEmail as $key => $requestEmail){
-            ?>
-                arElemEmail[<?=$key?>] = "<?=$requestEmail?>";
-            <?
-            }
-            ?>
-
-            var similarEmail = [],
-                checkSimilarEmail = false;
-            for (var i in arElemEmail) {
-                if (arElemEmail[i].indexOf(email) != "-1"){
-                    checkSimilarEmail = true;
-                    similarEmail.push(i);
+            if (email.trim() != '') {
+                if ($('#edit1_edit_table tr:first-child() td.adm-detail-content-cell-l').html() == "ID:") {
+                    var idRequest = $('#edit1_edit_table tr:first-child() td.adm-detail-content-cell-r').html();
                 }
-            }
+                <?
+                $res = \CIBlockElement::GetList(
+                    false,
+                    array("IBLOCK_ID" => 16),
+                    false,
+                    false,
+                    array("PROPERTY_CLIENT_EMAIL", "ID")
+                );
+                while ($ar_res = $res->Fetch()) {
+                    $arRequestEmail[$ar_res["ID"]] = $ar_res["PROPERTY_CLIENT_EMAIL_VALUE"];
+                }
+                foreach ($arRequestEmail as $key => $requestEmail){
+                ?>
+                arElemEmail[<?=$key?>] = "<?=$requestEmail?>";
+                <?
+                }
+                ?>
 
-            if(checkSimilarEmail){
-                if(!(similarEmail.length == "1" && typeof(idRequest) !== "undefined" && similarEmail.indexOf(idRequest)!="-1")){
-                    alert("Заявка с таким email уже существует!");
+                var similarEmail = [],
+                    checkSimilarEmail = false;
+                for (var i in arElemEmail) {
+                    if (arElemEmail[i].indexOf(email) != "-1") {
+                        checkSimilarEmail = true;
+                        similarEmail.push(i);
+                    }
+                }
+
+                if (checkSimilarEmail) {
+                    if (!(similarEmail.length == "1" && typeof(idRequest) !== "undefined" && similarEmail.indexOf(idRequest) != "-1")) {
+                        alert("Заявка с таким email уже существует!");
+                    }
                 }
             }
         });
