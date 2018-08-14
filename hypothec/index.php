@@ -85,8 +85,108 @@ $APPLICATION->SetTitle('Ипотека');
                         <h2 class="calculator__h2"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/hypothec/calculator/title.php'); ?></h2>
                     </div>
                 </div>
-
                 <div class="row">
+                    <div class="col-xs-12 col-md-9 form_wrapper">
+                        <div class="form_wrapper__inner">
+                            <form action="" class="row">
+
+                                <div class="col-xs-12 col-sm-6 col-lg-4 input">
+                                    <div class="table">
+                                        <div class="cell"><label>Тип недвижимости</label></div>
+                                    </div>
+                                    <select name=""><option value="">Выбрать</option><option value="3">1</option></select>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-lg-4 input">
+                                    <div class="table">
+                                        <div class="cell"><label>Стоимость</label></div>
+                                    </div>
+                                    <select name=""><option value="">Выбрать</option><option value="3">1</option></select>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-lg-4 input">
+                                    <div class="table">
+                                        <div class="cell"><label>Первоначальный взнос (ЗУБ или %)</label></div>
+                                    </div>
+                                    <select name=""><option value="">Выбрать</option><option value="3">1</option></select>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-lg-4 input">
+                                    <div class="table">
+                                        <div class="cell"><label>Сумма кредита</label></div>
+                                    </div>
+                                    <select name=""><option value="">Выбрать</option><option value="3">1</option></select>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-lg-4 input">
+                                    <div class="table">
+                                        <div class="cell"><label>Срок кредита</label></div>
+                                    </div>
+                                    <select name=""><option value="">Выбрать</option><option value="3">1</option></select>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-lg-4 input">
+                                    <div class="table">
+                                        <div class="cell"><label>Средний доход</label></div>
+                                    </div>
+                                    <select name=""><option value="">Выбрать</option><option value="3">1</option></select>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-lg-4 input">
+                                    <div class="table">
+                                        <div class="cell"><label>Зарплатный проект</label></div>
+                                    </div>
+                                    <select name=""><option value="">Выбрать</option><option value="3">1</option></select>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-lg-4 input">
+                                    <div class="table">
+                                        <div class="cell"><label>Социальная программа</label></div>
+                                    </div>
+                                    <select name=""><option value="">Выбрать</option><option value="3">1</option></select>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-lg-4 input">
+                                    <div class="table">
+                                        <div class="cell"><label>Стаж на последнем месте работы</label></div>
+                                    </div>
+                                    <select name=""><option value="">Выбрать</option><option value="3">1</option></select>
+                                </div>
+
+                                <div class="col-xs-12 col-lg-8 confirmation">
+
+                                    <h5>Способ подтверждения дохода</h5>
+
+                                    <div class="checkbox_wrapper">
+                                        <input type="checkbox" value="value1">
+                                        <label for="styled-checkbox">2 - НДФЛ</label>
+                                    </div>
+
+                                    <div class="checkbox_wrapper">
+                                        <input type="checkbox" value="value1">
+                                        <label for="styled-checkbox">Справка по форме банка</label>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-xs-12 col-lg-4">
+                                    <input class="submit" type="submit" value="Рассчитать">
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-md-3 callback">
+                        <div class="avatar"></div>
+                        <h5>Иванова Юлия Андреевна</h5>
+                        <span>Ваш ипотечный брокер</span>
+                        <a href="tel:+7 (922) 039-21-68">+7 (922) 039-21-68</a>
+                        <input type="text" placeholder="Ваш телефон" name="phone">
+                        <button class="submit">Жду звонка</button>
+                    </div>
+                </div>
+                <!--<div class="row">
                     <div class="col-xs-12 col-md-9 form_wrapper">
                         <div class="form_wrapper__inner">
                             <form action="" class="row">
@@ -210,7 +310,7 @@ $APPLICATION->SetTitle('Ипотека');
                         <input type="text" placeholder="Ваш телефон" name="phone">
                         <button class="submit">Жду звонка</button>
                     </div>
-                </div>
+                </div>-->
 
                 <div class="row">
                     <?$APPLICATION->IncludeComponent(
