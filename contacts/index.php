@@ -110,7 +110,7 @@ $APPLICATION->SetTitle('Контакты');
 		"FORM_FIELDS" => "[{\"name\":\"name\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Ваше имя\",\"default\":\"\",\"required\":\"Y\"},{\"name\":\"phone\",\"type\":\"tel\",\"title\":\"\",\"placeholder\":\"Ваш телефон\",\"default\":\"\",\"required\":\"Y\"},{\"name\":\"email\",\"type\":\"email\",\"title\":\"\",\"placeholder\":\"Ваша почта\",\"default\":\"\",\"required\":\"Y\"},{\"name\":\"message\",\"type\":\"hidden\",\"title\":\"\",\"placeholder\":\"Текст сообщения\",\"default\":\"\",\"required\":\"Y\"}]",
 		"NEED_SAVE_TO_IBLOCK" => "Y",
 		"NEED_SEND_EMAIL" => "Y",
-		"EVENT_TYPE" => "57",
+		"EVENT_TYPE" => "83",
 		"CACHE_TYPE" => "A",
 		"CACHE_TIME" => "3600",
 		"IBLOCK_TYPE" => "feedback",

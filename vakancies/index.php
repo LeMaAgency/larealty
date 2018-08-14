@@ -98,7 +98,7 @@ $APPLICATION->SetTitle('Вакансии');
                             ]",
 		"NEED_SAVE_TO_IBLOCK" => "Y",
 		"NEED_SEND_EMAIL" => "Y",
-		"EVENT_TYPE" => "57",
+		"EVENT_TYPE" => "85",
 		"CACHE_TYPE" => "A",
 		"CACHE_TIME" => "3600",
 		"IBLOCK_TYPE" => "feedback",
