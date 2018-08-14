@@ -86,7 +86,7 @@ $APPLICATION->SetTitle('Вакансии');
 	"vacancy_reply", 
 	array(
 		"COMPONENT_TEMPLATE" => "vacancy_reply",
-		"FORM_CLASS" => "ajax-form call-order vacancy_reply_form",
+		"FORM_CLASS" => "ajax-form vacancy_reply_form classsss",
 		"FORM_ACTION" => "",
 		"FORM_152_FZ" => "Я ознакомлен <a target=\"_blank\" href=\"/contacts/apply.pdf\">c положением об обработке и защите персональных данных.</a>",
 		"FORM_BTN_TITLE" => "Отправить",
@@ -96,11 +96,13 @@ $APPLICATION->SetTitle('Вакансии');
                                 {\"name\":\"name\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Ваше имя\",\"default\":\"\",\"required\":\"Y\"},
                                 {\"name\":\"phone\",\"type\":\"tel\",\"title\":\"\",\"placeholder\":\"Ваш телефон\",\"default\":\"\",\"required\":\"Y\"}
                             ]",
-		"NEED_SAVE_TO_IBLOCK" => "N",
+		"NEED_SAVE_TO_IBLOCK" => "Y",
 		"NEED_SEND_EMAIL" => "Y",
 		"EVENT_TYPE" => "57",
 		"CACHE_TYPE" => "A",
-		"CACHE_TIME" => "3600"
+		"CACHE_TIME" => "3600",
+		"IBLOCK_TYPE" => "feedback",
+		"IBLOCK_ID" => "21"
 	),
 	false
 ); ?>

@@ -97,29 +97,31 @@ $APPLICATION->SetTitle('Контакты');
                 <div class="col-xs-12 col-sm-6 col-lg-4 col-lg-offset-2 contacts_bottom_feedback">
                     <h5><? $APPLICATION->IncludeFile(SITE_DIR . 'include/contacts/form/title.php'); ?></h5>
                     <? $APPLICATION->IncludeComponent(
-                        "lema:form.ajax",
-                        "to_manager",
-                        array(
-                            "COMPONENT_TEMPLATE" => "to_manager",
-                            "FORM_CLASS" => "ajax-form call-order",
-                            "FORM_ACTION" => "",
-                            "FORM_152_FZ" => "Я ознакомлен <a target=\"_blank\" href=\"/contacts/apply.pdf\">c положением об обработке и защите персональных данных.</a>",
-                            "FORM_BTN_TITLE" => "Отправить руководителю",
-                            "FORM_SUCCESS_FUNCTION" => "\$.fancybox.open(\"Ваше сообщение успешно отправлено\")",
-                            "FORM_SUCCESS_FUNCTION_CORRECT_JSON" => "Y",
-                            "FORM_FIELDS" => "[
+	"lema:form.ajax", 
+	"to_manager", 
+	array(
+		"COMPONENT_TEMPLATE" => "to_manager",
+		"FORM_CLASS" => "ajax-form",
+		"FORM_ACTION" => "",
+		"FORM_152_FZ" => "Я ознакомлен <a target=\"_blank\" href=\"/contacts/apply.pdf\">c положением об обработке и защите персональных данных.</a>",
+		"FORM_BTN_TITLE" => "Отправить руководителю",
+		"FORM_SUCCESS_FUNCTION" => "\$.fancybox.open(\"Ваше сообщение успешно отправлено\")",
+		"FORM_SUCCESS_FUNCTION_CORRECT_JSON" => "Y",
+		"FORM_FIELDS" => "[
                                 {\"name\":\"name\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Ваше имя\",\"default\":\"\",\"required\":\"Y\"},
                                 {\"name\":\"phone\",\"type\":\"tel\",\"title\":\"\",\"placeholder\":\"Ваш телефон\",\"default\":\"\",\"required\":\"Y\"},
                                 {\"name\":\"email\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Ваша почта\",\"default\":\"\",\"required\":\"Y\"}
                             ]",
-                            "NEED_SAVE_TO_IBLOCK" => "N",
-                            "NEED_SEND_EMAIL" => "Y",
-                            "EVENT_TYPE" => "57",
-                            "CACHE_TYPE" => "A",
-                            "CACHE_TIME" => "3600"
-                        ),
-                        false
-                    ); ?>
+		"NEED_SAVE_TO_IBLOCK" => "Y",
+		"NEED_SEND_EMAIL" => "Y",
+		"EVENT_TYPE" => "57",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "3600",
+		"IBLOCK_TYPE" => "feedback",
+		"IBLOCK_ID" => "22"
+	),
+	false
+); ?>
                 </div>
             </div>
         </div>
