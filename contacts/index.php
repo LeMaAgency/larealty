@@ -101,17 +101,13 @@ $APPLICATION->SetTitle('Контакты');
 	"to_manager", 
 	array(
 		"COMPONENT_TEMPLATE" => "to_manager",
-		"FORM_CLASS" => "ajax-form",
+		"FORM_CLASS" => "ajax-form js-textarea-crutch",
 		"FORM_ACTION" => "",
 		"FORM_152_FZ" => "Я ознакомлен <a target=\"_blank\" href=\"/contacts/apply.pdf\">c положением об обработке и защите персональных данных.</a>",
 		"FORM_BTN_TITLE" => "Отправить руководителю",
 		"FORM_SUCCESS_FUNCTION" => "\$.fancybox.open(\"Ваше сообщение успешно отправлено\")",
 		"FORM_SUCCESS_FUNCTION_CORRECT_JSON" => "Y",
-		"FORM_FIELDS" => "[
-                                {\"name\":\"name\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Ваше имя\",\"default\":\"\",\"required\":\"Y\"},
-                                {\"name\":\"phone\",\"type\":\"tel\",\"title\":\"\",\"placeholder\":\"Ваш телефон\",\"default\":\"\",\"required\":\"Y\"},
-                                {\"name\":\"email\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Ваша почта\",\"default\":\"\",\"required\":\"Y\"}
-                            ]",
+		"FORM_FIELDS" => "[{\"name\":\"name\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Ваше имя\",\"default\":\"\",\"required\":\"Y\"},{\"name\":\"phone\",\"type\":\"tel\",\"title\":\"\",\"placeholder\":\"Ваш телефон\",\"default\":\"\",\"required\":\"Y\"},{\"name\":\"email\",\"type\":\"email\",\"title\":\"\",\"placeholder\":\"Ваша почта\",\"default\":\"\",\"required\":\"Y\"},{\"name\":\"message\",\"type\":\"hidden\",\"title\":\"\",\"placeholder\":\"Текст сообщения\",\"default\":\"\",\"required\":\"Y\"}]",
 		"NEED_SAVE_TO_IBLOCK" => "Y",
 		"NEED_SEND_EMAIL" => "Y",
 		"EVENT_TYPE" => "57",

@@ -158,6 +158,9 @@ $(function () {
         }, 'json');
         return false;
     });
+    $('.js-textarea-crutch textarea').on('change',function () {
+       $(this).closest('.js-textarea-crutch').find('#form_field_message').val($(this).val());
+    });
 });
 $(document).ready(function () {
     $("body").on("click", ".js-all-realtors", function () {
