@@ -342,3 +342,7 @@ h2.seller_main__h2 {color:fff;}
 .realtors__carousel__item__img img {
     border-radius: 0;
 }
+.card-flat__img img{
+    max-height: 270px;
+    object-fit: cover;
+}
