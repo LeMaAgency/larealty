@@ -33,7 +33,7 @@ $data = new TH($this);
                     <div class="col-sm-12">
                         <div class="card-flat__content">
                             <div class="card-flat__content__head clearfix">
-                                <h3 class="card-flat__content__head__title_min"><?=$item->getName();?></h3>
+                                <h3 class="card-flat__content__head__title_min color_002b4e"><?=$item->getName();?></h3>
                                 <div class="card-flat__content__head__price card-flat__content__head__price_min">
                                     <b><?=H::formatPrice($item->propVal('PRICE'), null);?></b>
                                     <?=Loc::getMessage('LEMA_ROOMS_RUB');?>
