@@ -277,17 +277,4 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
             <div class="clb"></div>
         </form>
     </div>
-    <form action="/ajax/add_subscribe.php" method="POST" class="ajax-form subscribe__form js-subscribe-form">
-        <div class="subscribe">
-            <div class="it-block feedback-input">
-                <input required="" type="text" id="form_field_email" name="EMAIL" placeholder="Email"
-                       class="request__form__input margin_auto">
-                <div class="it-error"></div>
-            </div>
-            <input type="hidden" name="URL" value="<?=$APPLICATION->GetCurUri();?>">
-            <div class="it-block it-buttons feedback-input">
-                <input type="submit" value="Подписаться" class="request__form__button margin_auto">
-            </div>
-        </div>
-    </form>
 </section>
