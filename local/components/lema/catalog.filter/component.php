@@ -752,7 +752,14 @@ foreach($arResult["arrProp"] as $prop_id => $arProp)
         {
             $values = array($arProp['MIN'], $arProp['MAX']);
         }
-
+        if($arProp['CODE'] == "ROOMS_COUNT"){
+            if(isset($_GET['arrFilter_pf'][$arProp['CODE']]['LEFT'])){
+                $values = array();
+                foreach ($_GET['arrFilter_pf'][$arProp['CODE']]['LEFT'] as $key => $room){
+                    $values[$key] = $room;
+                }
+            }
+        }
         if(isset($_GET['arrFilter_pf'][$arProp['CODE']]['LEFT'], $_GET['arrFilter_pf'][$arProp['CODE']]['RIGHT']))
         {
             $existsValues = array(

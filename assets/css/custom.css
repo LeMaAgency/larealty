@@ -349,3 +349,13 @@ h2.seller_main__h2 {color:fff;}
 .color_002b4e{
     color: #002b4e;
 }
+.margin_auto{
+    margin: auto !important;
+}
+.subscribe{
+    display: inline-flex;
+    margin-top: 50px;
+}
+.subscribe__form{
+    text-align: center;
+}
