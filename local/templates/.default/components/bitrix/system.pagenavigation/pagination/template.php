@@ -8,13 +8,13 @@ Loc::loadMessages(__FILE__);
 $srtTemporaryUrlParam = DeleteParam(array("PAGEN_" . $arResult["NavNum"]));
 
 if (stripos($srtTemporaryUrlParam, "ROOMS_COUNT%5D%5BRIGHT")) {
-    $strTemporaryNavQieryString = str_replace("ROOMS_COUNT%5D%5BRIGHT", "ROOMS_COUNT%5D%5BLEFT", $srtTemporaryUrlParam);
+    $strTemporaryNavQueryString = str_replace("ROOMS_COUNT%5D%5BRIGHT", "ROOMS_COUNT%5D%5BLEFT", $srtTemporaryUrlParam);
 } else {
-    $strTemporaryNavQieryString = $srtTemporaryUrlParam;
+    $strTemporaryNavQueryString = $srtTemporaryUrlParam;
 }
-$strNavQueryString = ($strTemporaryNavQieryString != "" ? $strTemporaryNavQieryString . "&amp;" : "");
+$strNavQueryString = ($strTemporaryNavQueryString != "" ? $strTemporaryNavQueryString . "&amp;" : "");
 
-$strNavQueryStringFull = ($strTemporaryNavQieryString != "" ? "?" . $strTemporaryNavQieryString : "");
+$strNavQueryStringFull = ($strTemporaryNavQueryString != "" ? "?" . $strTemporaryNavQueryString : "");
 
 $uri = trim(\Lema\Common\Request::get()->getRequestedPageDirectory(), '/');
 $arResult["sUrlPath"] = '/' . $uri . '/';
