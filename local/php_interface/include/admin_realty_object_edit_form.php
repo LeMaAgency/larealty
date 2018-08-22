@@ -1803,7 +1803,6 @@ if (
 
             var sortProps = {};
             var checkProperty = [];
-
             var realtyTypes = {
                 'Дачи': 152,
                 'Дома': 3,
@@ -1813,6 +1812,17 @@ if (
                 'Комнаты': 2,
                 'Офисы': 49,
                 'Торговые площади': 50
+            };
+            //id of Section in Property: [valid id of section 'section_new','section','section_old']
+            var idSections = {
+                152:['48,29,40'],
+                3:['43,28,35'],
+                51:['47,49,39'],
+                4:['44,30,36'],
+                1:['41,26,33'],
+                2:['42,27,34'],
+                49:['45,31,37'],
+                50:['46,32,38']
             };
             $(this).find('option[value="0"]').first().attr('selected', false);
             var realtyType = $(this).find('option:selected').first().text().replace(' .  . ', '');
@@ -1978,7 +1988,9 @@ if (
                 }
                 if (checkNoEmpty) {
                     var checkSimilarAddress = false;
-
+                    if ($('#edit1_edit_table tr:first-child() td.adm-detail-content-cell-l').html() == "ID:") {
+                        var idObject = $('#edit1_edit_table tr:first-child() td.adm-detail-content-cell-r').html();
+                    }
                     //Selecting objects
                     <? $res = \CIBlockElement::GetList(
                     false,
@@ -1999,7 +2011,7 @@ if (
                         'PROPERTY_BUILDING_NUMBER',
                         'PROPERTY_FLAT_NUMBER',
                         'PROPERTY_USER_EMAIL',
-                        /*'PROPERTY_REALTY_TYPE',*/
+                        'IBLOCK_SECTION_ID',
                     )
                 );
                     while ($ar_res = $res->Fetch()) {
@@ -2010,7 +2022,7 @@ if (
                         isset($ar_res['PROPERTY_BUILDING_NUMBER_VALUE']) ? ($arAddress[$ar_res['ID']][32] = $ar_res['PROPERTY_BUILDING_NUMBER_VALUE']) : '';
                         isset($ar_res['PROPERTY_FLAT_NUMBER_VALUE']) ? ($arAddress[$ar_res['ID']][33] = $ar_res['PROPERTY_FLAT_NUMBER_VALUE']) : '';
                         isset($ar_res['PROPERTY_USER_EMAIL_VALUE']) ? ($arAddress[$ar_res['ID']][70] = $ar_res['PROPERTY_USER_EMAIL_VALUE']) : '';
-                        /*$arAddress[$ar_res['ID']]['REALTY_TYPE'] = $ar_res['PROPERTY_REALTY_TYPE_VALUE'];*/
+                        $arAddress[$ar_res['ID']]['SECTION_ID'] = $ar_res['IBLOCK_SECTION_ID'];
                     }?>
                     //We put values in the object "arElementsAddress"
                     var arElementsAddress = {
@@ -2023,14 +2035,23 @@ if (
                         },
                         <?}?>
                     };
+
                     //Search in existing objects of similar fields
-                    for (var elemAddress in arElementsAddress) {
-                        for (var idProp in arElementsAddress[elemAddress]) {
-                            //Checks for existence properties of the current object with id "idProp"
-                            if (typeof addressThisElem[idProp] == "undefined") {
+                    for (var idElemAddress in arElementsAddress) {
+                        for (var idProp in arElementsAddress[idElemAddress]) {
+
+                            //Сhecks whether an element is an element of the current or similar section
+                            if(idSections[String(realtyTypes[realtyType])][0].indexOf(arElementsAddress[idElemAddress]['SECTION_ID']) == "-1"){
+                                break;
+                            }
+
+                            /*Checks for existence properties of the current object with id "idProp"
+                            and excludes the current item*/
+
+                            if (typeof addressThisElem[idProp] == "undefined" || idElemAddress == idObject) {
                                 continue;
                             } else {
-                                if (arElementsAddress[elemAddress][idProp][0] == addressThisElem[idProp]) {
+                                if (arElementsAddress[idElemAddress][idProp][0] == addressThisElem[idProp]) {
                                     checkSimilarAddress = true;
                                 } else {
                                     checkSimilarAddress = false;
@@ -2038,9 +2059,11 @@ if (
                                 }
                             }
                         }
-                    }
-                    if (checkSimilarAddress) {
-                        alert("Объект с таким адресом уже существует!");
+
+                        if (checkSimilarAddress) {
+                            alert("Объект с таким адресом уже существует!");
+                            break;
+                        }
                     }
                 }
             });
