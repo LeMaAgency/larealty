@@ -77,7 +77,7 @@ $sortBy = 'PROPERTY_PRICE';
 $sortOrder = 'asc';
 if(isset($_GET['sort']) && in_array(strtolower($_GET['sort']), array('asc', 'desc')))
     $sortOrder = strtolower($_GET['sort']);
-$squareFrom = 15;
+$squareFrom = 8;
 if(isset($_GET['square']) && in_array((int) $_GET['square'], array(15, 45, 80)))
     $squareFrom = (int) $_GET['square'];
 if(empty($GLOBALS[$arParams['FILTER_NAME']]['PROPERTY']))
