@@ -90,13 +90,14 @@ $sortBy = 'PROPERTY_PRICE';
 $sortOrder = 'asc';
 if(isset($_GET['sort']) && in_array(strtolower($_GET['sort']), array('asc', 'desc')))
     $sortOrder = strtolower($_GET['sort']);
-$squareFrom = 15;
-if(isset($_GET['square']) && in_array((int) $_GET['square'], array(15, 45, 80)))
-    $squareFrom = (int) $_GET['square'];
+//$squareFrom = 15;
+if(isset($_GET['square_sort']) && in_array((int) $_GET['square_sort'], array(15, 45, 80)))
+    $squareFrom = (int) $_GET['square_sort'];
 if(empty($GLOBALS[$arParams['FILTER_NAME']]['PROPERTY']))
     $GLOBALS[$arParams['FILTER_NAME']]['PROPERTY'] = array();
-$GLOBALS[$arParams['FILTER_NAME']]['PROPERTY']['>=SQUARE'] = $squareFrom;
-?>
+if(isset($squareFrom)){
+    $GLOBALS[$arParams['FILTER_NAME']]['PROPERTY']['>=SQUARE'] = $squareFrom;
+}?>
 
 <div class="content-page">
     <div class="sort-catalog">
@@ -118,16 +119,16 @@ $GLOBALS[$arParams['FILTER_NAME']]['PROPERTY']['>=SQUARE'] = $squareFrom;
                             </select>
                             <select name="square-meters" id="square-meters-id" class="js-sort sort__select cs-select cs-skin-border">
                                 <option value=""
-                                    <?=selected('square', '15');?>
-                                        data-url="<?=$APPLICATION->GetCurPageParam('square=15', array('square'));?>"
+                                    <?=selected('square_sort', '15');?>
+                                        data-url="<?=$APPLICATION->GetCurPageParam('square_sort=15', array('square_sort'));?>"
                                         class="sort__option">от 15м2</option>
                                 <option value=""
-                                    <?=selected('square', '45');?>
-                                        data-url="<?=$APPLICATION->GetCurPageParam('square=45', array('square'));?>"
+                                    <?=selected('square_sort', '45');?>
+                                        data-url="<?=$APPLICATION->GetCurPageParam('square_sort=45', array('square_sort'));?>"
                                         class="sort__option">от 45м2</option>
                                 <option value=""
-                                    <?=selected('square', '80');?>
-                                        data-url="<?=$APPLICATION->GetCurPageParam('square=80', array('square'));?>"
+                                    <?=selected('square_sort', '80');?>
+                                        data-url="<?=$APPLICATION->GetCurPageParam('square_sort=80', array('square_sort'));?>"
                                         class="sort__option">от 80м2</option>
                             </select>
                         </div>
