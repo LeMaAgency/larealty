@@ -72,8 +72,6 @@ else
 ?>
 <?endif?>
 
-<?global $arrFilter; ?>
-<pre><?var_dump($arrFilter);?></pre>
 <?php
 $sortBy = 'PROPERTY_PRICE';
 $sortOrder = 'asc';
