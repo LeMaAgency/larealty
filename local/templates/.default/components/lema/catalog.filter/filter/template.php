@@ -50,6 +50,7 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
 
                 <? foreach ($arResult["ORDERED_ITEMS"] as $arItem): ?>
                     <?
+
                     $extendFilterClass = empty($arItem['EXPANDED']) ? null : ' js-extend-filter-block';
                     ?>
                     <? if (array_key_exists("HIDDEN", $arItem)): ?>
@@ -79,7 +80,13 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
                                 $currentMin = $arItem[(empty($arItem['REQUEST_VALUES'][0]) ? 'INPUT' : 'REQUEST') . '_VALUES'][0];
                                 $currentMax = $arItem[(empty($arItem['REQUEST_VALUES'][1]) ? 'INPUT' : 'REQUEST') . '_VALUES'][1];
                                 ?>
-                                <div class="filter-field-title"><?= $arItem["NAME"] ?></div>
+                                <div class="filter-field-title">
+                                    <?if($arItem['CODE'] == 'SQUARE' && $code =='zemelnyy_uchastok'){?>
+                                        Площадь участка
+                                    <?}else{
+                                        echo $arItem["NAME"];
+                                    }?>
+                                </div>
                                 <div class="filter-price">
                                     <input
                                             type="number"
@@ -275,6 +282,19 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
             <? endif; ?>
             <button type="submit" name="set_filter" value="Y" class="filter-submit-btn">Поиск</button>
             <div class="clb"></div>
+            <!--<div class="subscribe__form js-subscribe-form">
+                <div class="subscribe">
+                    <div class="it-block feedback-input">
+                        <input required="" type="text" id="form_field_email" name="EMAIL" placeholder="Email"
+                               class="request__form__input margin_auto">
+                        <div class="it-error"></div>
+                    </div>
+                    <div class="it-block it-buttons feedback-input">
+                        <input type="submit" name="subscribe" value="Подписаться" class="request__form__button margin_auto">
+                    </div>
+                </div>
+            </div>-->
         </form>
     </div>
+
 </section>
