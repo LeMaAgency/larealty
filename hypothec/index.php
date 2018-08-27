@@ -176,15 +176,28 @@ $APPLICATION->SetTitle('Ипотека');
                             </form>
                         </div>
                     </div>
-
-                    <div class="col-xs-12 col-md-3 callback">
-                        <div class="avatar"></div>
-                        <h5>Иванова Юлия Андреевна</h5>
-                        <span>Ваш ипотечный брокер</span>
-                        <a href="tel:+7 (922) 039-21-68">+7 (922) 039-21-68</a>
-                        <input type="text" placeholder="Ваш телефон" name="phone">
-                        <button class="submit">Жду звонка</button>
-                    </div>
+                    <?
+                    $res = \CUser::GetByID(8);
+                    if($row = $res->Fetch())
+                    {
+                        $arUser = array(
+                            'ID' =>$row['ID'],
+                            'NAME' => htmlspecialcharsbx(trim($row['LAST_NAME'] . ' ' . $row['NAME'] . ' ' . $row['SECOND_NAME'])),
+                            'IMG' => (empty($row['PERSONAL_PHOTO']) ? null : \CFile::GetPath($row['PERSONAL_PHOTO'])),
+                            'PHONE' => htmlspecialcharsbx($row[empty($row['WORK_PHONE']) ? 'PERSONAL_PHONE' : 'WORK_PHONE']),
+                        );
+                    }
+                        ?>
+                    <form class="realtor-card__form js-rieltor-form" action="/ajax/hypothec_form.php" method="post">
+                        <div class="col-xs-12 col-md-3 callback">
+                            <div class="avatar" <?if(!empty($arUser['IMG'])){?>style="background-image:url(<?=$arUser['IMG'];?>);"<?}?>></div>
+                            <h5><?=$arUser['NAME'];?></h5>
+                            <span>Ваш ипотечный брокер</span>
+                            <a href="tel:<?=$arUser['PHONE'];?>"><?=$arUser['PHONE'];?></a>
+                            <input type="text" placeholder="Ваш телефон" name="phone">
+                            <button class="submit">Жду звонка</button>
+                        </div>
+                    </form>
                 </div>
                 <!--<div class="row">
                     <div class="col-xs-12 col-md-9 form_wrapper">
