@@ -25,6 +25,7 @@ if($form->validate())
         'HYPOTHEC_FORM',
         array(
             '#PHONE#' => $form->getField('phone'),
+            '#EMAIL_TO#' => $rieltorEmail,
         )
     );
 

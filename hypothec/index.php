@@ -185,6 +185,7 @@ $APPLICATION->SetTitle('Ипотека');
                             'NAME' => htmlspecialcharsbx(trim($row['LAST_NAME'] . ' ' . $row['NAME'] . ' ' . $row['SECOND_NAME'])),
                             'IMG' => (empty($row['PERSONAL_PHOTO']) ? null : \CFile::GetPath($row['PERSONAL_PHOTO'])),
                             'PHONE' => htmlspecialcharsbx($row[empty($row['WORK_PHONE']) ? 'PERSONAL_PHONE' : 'WORK_PHONE']),
+                            'EMAIL' => $row['EMAIL'],
                         );
                     }
                         ?>
@@ -193,6 +194,7 @@ $APPLICATION->SetTitle('Ипотека');
                             <div class="avatar" <?if(!empty($arUser['IMG'])){?>style="background-image:url(<?=$arUser['IMG'];?>);"<?}?>></div>
                             <h5><?=$arUser['NAME'];?></h5>
                             <span>Ваш ипотечный брокер</span>
+                            <input type="hidden" name="EMAIL" value="<?=$arUser['EMAIL'];?>">
                             <a href="tel:<?=$arUser['PHONE'];?>"><?=$arUser['PHONE'];?></a>
                             <input type="text" placeholder="Ваш телефон" name="phone">
                             <button class="submit">Жду звонка</button>
