@@ -194,7 +194,7 @@ $APPLICATION->SetTitle('Ипотека');
                             <div class="avatar" <?if(!empty($arUser['IMG'])){?>style="background-image:url(<?=$arUser['IMG'];?>);"<?}?>></div>
                             <h5><?=$arUser['NAME'];?></h5>
                             <span>Ваш ипотечный брокер</span>
-                            <input type="hidden" name="EMAIL" value="<?=$arUser['EMAIL'];?>">
+                            <input type="hidden" name="email" value="<?=$arUser['EMAIL'];?>">
                             <a href="tel:<?=$arUser['PHONE'];?>"><?=$arUser['PHONE'];?></a>
                             <input type="text" placeholder="Ваш телефон" name="phone">
                             <button class="submit">Жду звонка</button>
