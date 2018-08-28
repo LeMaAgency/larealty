@@ -61,23 +61,24 @@ else
     {
         $currentSectionCode = array_shift($uriParts);
         $GLOBALS['arrFilter']['SECTION_CODE'] = explode('-', trim($currentSectionCode));
-        if($currentSectionCode == 'doma-dachi-zemelnyy_uchastok')
-        {
-            $filterFields = array(
-                array('key' => 'ROOMS_COUNT', 'type' => 'property', 'expanded' => false),
-                array('key' => 'PRICE', 'type' => 'property', 'expanded' => false),
-                array('key' => 'REGION', 'type' => 'property', 'expanded' => false),
-                array('key' => 'ID', 'type' => 'field', 'expanded' => false),
-                array('key' => 'SQUARE_LAND', 'type' => 'property', 'expanded' => false),
-                array('key' => 'SQUARE', 'type' => 'property', 'expanded' => false),
-                array('key' => 'LOT_CATEGORIES', 'type' => 'property', 'expanded' => true),
-                array('key' => 'HEATING', 'type' => 'property', 'expanded' => true),
-                array('key' => 'WATER_SUPPLY', 'type' => 'property', 'expanded' => true),
-                array('key' => 'SEWERAGE', 'type' => 'property', 'expanded' => true),
-            );
-        }
     }
 
+    $filterFields = array(
+        array('key' => 'ROOMS_COUNT', 'type' => 'property', 'expanded' => false),
+        array('key' => 'PRICE', 'type' => 'property', 'expanded' => false),
+        array('key' => 'REGION', 'type' => 'property', 'expanded' => false),
+        array('key' => 'ID', 'type' => 'field', 'expanded' => false),
+        array('key' => 'SQUARE_LAND', 'type' => 'property', 'expanded' => false),
+        array('key' => 'SQUARE', 'type' => 'property', 'expanded' => false),
+        array('key' => 'STAGE', 'type' => 'property', 'expanded' => true),
+        array('key' => 'STAGES_COUNT', 'type' => 'property', 'expanded' => true),
+        array('key' => 'LOT_HAVINGS_TYPE', 'type' => 'property', 'expanded' => true),
+        array('key' => 'LOT_CATEGORIES', 'type' => 'property', 'expanded' => true),
+        array('key' => 'HEATING', 'type' => 'property', 'expanded' => true),
+        array('key' => 'WATER_SUPPLY', 'type' => 'property', 'expanded' => true),
+        array('key' => 'SEWERAGE', 'type' => 'property', 'expanded' => true),
+        array('key' => 'ELECTRIC', 'type' => 'property', 'expanded' => true),
+    );
 
     if(!empty($uriParts))
     {
@@ -97,14 +98,14 @@ else
                     'BATHROOM_COUNT', 'BALCONIES_COUNT', 'LOGGIAS_COUNT', 'PHONE', 'TV', 'INTERNET', 'LIFT_FLAG',
                     'PARKING', 'SECURITY_CONCIERGE', 'GAZ', 'HYPOTHEC', 'HAVINGS_TYPE',
                 );
-                $filterFields = array(
+                /*$filterFields = array(
                     array('key' => 'ROOMS_COUNT', 'type' => 'property', 'expanded' => false),
                     array('key' => 'PRICE', 'type' => 'property', 'expanded' => false),
                     array('key' => 'REGION', 'type' => 'property', 'expanded' => false),
                     array('key' => 'ID', 'type' => 'field', 'expanded' => false),
                     array('key' => 'STAGE', 'type' => 'property', 'expanded' => true),
                     array('key' => 'STAGES_COUNT', 'type' => 'property', 'expanded' => true),
-                );
+                );*/
             break;
             case 'komnaty':
                 $showFields = array(
@@ -112,14 +113,14 @@ else
                     'LOGGIAS_COUNT', 'REPAIR_TYPE', 'PHONE', 'TV', 'INTERNET', 'LIFT_FLAG', 'PARKING', 'GAZ',
                     'SECURITY_CONCIERGE', 'HAVINGS_TYPE', 'HYPOTHEC',
                 );
-                $filterFields = array(
+                /*$filterFields = array(
                     array('key' => 'ROOMS_COUNT', 'type' => 'property', 'expanded' => false),
                     array('key' => 'PRICE', 'type' => 'property', 'expanded' => false),
                     array('key' => 'REGION', 'type' => 'property', 'expanded' => false),
                     array('key' => 'ID', 'type' => 'field', 'expanded' => false),
                     array('key' => 'STAGE', 'type' => 'property', 'expanded' => true),
                     array('key' => 'STAGES_COUNT', 'type' => 'property', 'expanded' => true),
-                );
+                );*/
             break;
             case 'dachi':
                 $showFields = array(
@@ -128,14 +129,14 @@ else
                     'HEATING', 'WATER_SUPPLY', 'SEWERAGE', 'GAZ', 'SECURITY_CONCIERGE', 'FIRE_ALARM', 'SECURITY_VIDEO',
                     'GARAGE', 'SAUNA', 'HYPOTHEC', 'HAVINGS_TYPE', 'LOT_HAVINGS_TYPE', 'LOT_CATEGORIES',
                 );
-                $filterFields = array(
+                /*$filterFields = array(
                     array('key' => 'ROOMS_COUNT', 'type' => 'property', 'expanded' => false),
                     array('key' => 'PRICE', 'type' => 'property', 'expanded' => false),
                     array('key' => 'REGION', 'type' => 'property', 'expanded' => false),
                     array('key' => 'ID', 'type' => 'field', 'expanded' => false),
                     array('key' => 'SQUARE_LAND', 'type' => 'property', 'expanded' => false),
                     array('key' => 'SQUARE', 'type' => 'property', 'expanded' => false),
-                );
+                );*/
             break;
             case 'doma':
                 $showFields = array(
@@ -144,7 +145,7 @@ else
                     'HEATING', 'WATER_SUPPLY', 'SEWERAGE', 'GAZ', 'SECURITY_CONCIERGE', 'FIRE_ALARM', 'SECURITY_VIDEO',
                     'GARAGE', 'SAUNA', 'HYPOTHEC', 'HAVINGS_TYPE', 'LOT_HAVINGS_TYPE', 'LOT_CATEGORIES',
                 );
-                $filterFields = array(
+                /*$filterFields = array(
                     array('key' => 'ROOMS_COUNT', 'type' => 'property', 'expanded' => false),
                     array('key' => 'PRICE', 'type' => 'property', 'expanded' => false),
                     array('key' => 'REGION', 'type' => 'property', 'expanded' => false),
@@ -155,14 +156,14 @@ else
                     array('key' => 'HEATING', 'type' => 'property', 'expanded' => true),
                     array('key' => 'WATER_SUPPLY', 'type' => 'property', 'expanded' => true),
                     array('key' => 'SEWERAGE', 'type' => 'property', 'expanded' => true),
-                );
+                );*/
             break;
             case 'zemelnyy_uchastok':
                 $showFields = array(
                     'LIFE_MASSIV_SNT', 'ELECTRIC', 'SEWERAGE', 'WATER_SUPPLY', 'GAZ', 'LOT_HAVINGS_TYPE',
                     'LOT_CATEGORIES',
                 );
-                $filterFields = array(
+                /*$filterFields = array(
                     array('key' => 'PRICE', 'type' => 'property', 'expanded' => false),
                     array('key' => 'REGION', 'type' => 'property', 'expanded' => false),
                     array('key' => 'ID', 'type' => 'field', 'expanded' => false),
@@ -171,7 +172,7 @@ else
                     array('key' => 'LOT_HAVINGS_TYPE', 'type' => 'property', 'expanded' => true),
                     array('key' => 'LOT_CATEGORIES', 'type' => 'property', 'expanded' => true),
                     array('key' => 'ELECTRIC', 'type' => 'property', 'expanded' => true),
-                );
+                );*/
             break;
             case 'ofisy':
                 $showFields = array(

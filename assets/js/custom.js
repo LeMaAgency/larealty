@@ -33,6 +33,43 @@ $(function () {
         }
     });
 
+    $('.js-filter-fields').on('click', function () {
+        var typeObject = $(this).attr('for').replace('type-', ''),
+            checkAddElem = false;
+        if(typeObject == 'zemelnyy_uchastok'){
+            $('.propSquare').html('Площадь участка');
+        }else{
+            $('.propSquare').html('Площадь');
+        }
+
+        $('.js-filter-elem').each(function () {
+            if ($(this).data('property-code').indexOf(typeObject) != '-1') {
+                if ($(this).hasClass('js-extend-filter-block')) {
+                    checkAddElem = true;
+                    $(this).removeClass('crutch-filter');
+                } else {
+                    $(this).show();
+                }
+                $(this).find('input').each(function () {
+                    $(this).attr('name',$(this).data('name'));
+                });
+            } else {
+                if ($(this).hasClass('js-extend-filter-block')) {
+                    $(this).addClass('crutch-filter');
+                } else {
+                    $(this).hide();
+                }
+                $(this).find('input').attr('name', '');
+            }
+            if (checkAddElem) {
+                $('a.filter-extend-link').show();
+            } else {
+                $('a.filter-extend-link').hide();
+            }
+        });
+    });
+
+
     $('form.js-rieltor-form').on('submit', function (e) {
 
         e.preventDefault();
@@ -158,11 +195,12 @@ $(function () {
         }, 'json');
         return false;
     });
-    $('.js-textarea-crutch textarea').on('change',function () {
-       $(this).closest('.js-textarea-crutch').find('#form_field_message').val($(this).val());
+    $('.js-textarea-crutch textarea').on('change', function () {
+        $(this).closest('.js-textarea-crutch').find('#form_field_message').val($(this).val());
     });
 });
 $(document).ready(function () {
+
     $("body").on("click", ".js-all-realtors", function () {
         if ($(this).hasClass("js-hidden")) {
             $(this).text($(this).data('expand-title'))
@@ -299,14 +337,14 @@ $(document).ready(function () {
                         $(el).closest('.favorites-elem-' + itemId).remove();
                     }
                 });
-            /*
-                        //update total sum
-                        $('.sum-mega').text(ans.totalSumFormatted);
+                /*
+                            //update total sum
+                            $('.sum-mega').text(ans.totalSumFormatted);
 
-                        $('.js-favorites-positions-count > span').text(ans.positionsCount);*/
+                            $('.js-favorites-positions-count > span').text(ans.positionsCount);*/
 
-            //hide ajax-loader
-            BX.closeWait(waitElement);
+                //hide ajax-loader
+                BX.closeWait(waitElement);
 
             }
             $.fancybox.open('<div class="popup__success">' +

@@ -13,7 +13,27 @@
 $this->setFrameMode(true);
 $this->addExternalCss("/bitrix/css/main/bootstrap.css");
 $this->addExternalCss("/bitrix/css/main/font-awesome.css");
+/*Массив "Свойство" => "Разделы в которых отображается это свойство"*/
+$filterFields = array(
+    'ROOMS_COUNT' => 'kvartiry,komnaty,dachi,doma',
+    'PRICE' => 'kvartiry,komnaty,dachi,doma,zemelnyy_uchastok',
+    'REGION' => 'kvartiry,komnaty,dachi,doma,zemelnyy_uchastok',
+    'ID' => 'kvartiry,komnaty,dachi,doma,zemelnyy_uchastok',
+    'STAGE' => 'kvartiry,komnaty',
+    'STAGES_COUNT' => 'kvartiry,komnaty',
+    'SQUARE_LAND' => 'dachi,doma',
+    'SQUARE' => 'dachi,doma,zemelnyy_uchastok',
+    'LOT_HAVINGS_TYPE' => 'zemelnyy_uchastok',
+    'LOT_CATEGORIES' => 'doma,zemelnyy_uchastok',
+    'HEATING' => 'doma',
+    'WATER_SUPPLY' => 'doma',
+    'SEWERAGE' => 'doma',
+    'ELECTRIC' => 'zemelnyy_uchastok',
+);
 
+//Проверка то, является ли текущий раздел одним из 'kvartiry-komnaty', 'doma-dachi-zemelnyy_uchastok'
+$arPageParentSectFilter = array('kvartiry-komnaty', 'doma-dachi-zemelnyy_uchastok');
+$checkPageParentSectFilter = in_array(explode('/', $APPLICATION->GetCurDir())[2], $arPageParentSectFilter);
 ?>
 <section class="filter filter_bg">
     <div class="overlay"></div>
@@ -28,117 +48,185 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
                 ?>
                 <div class="filter-form__type">
                     <div class="filter-field-title">Тип недвижимости</div>
+                    <? $i = 0; ?>
                     <? foreach ($arParams['SHOW_BUTTON_TYPES'] as $code => $label):
-                        if ($useSectionCode)
+                        if ($useSectionCode) {
                             $active = $code === $arParams['SECTION_CODE'];
-                        else {
+                            //Сохраняет текущий раздел, в качестве активного
+                            $codeActiveTypeObject = $arParams['SECTION_CODE'];
+                        } else {
                             $active = $first;
                             if ($first)
                                 $first = false;
                         }
+                        /*Если мы в одном из разделов 'kvartiry-komnaty', 'doma-dachi-zemelnyy_uchastok',
+                         то в качестве активного раздела берём первый
+                        */
+                        if ($checkPageParentSectFilter && !$i) {
+                            $codeActiveTypeObject = $code;
+                        }
+                        $i++;
                         ?>
                         <input<? if ($active) {
                             ?> checked<? } ?> type="radio" id="type-<?= $code; ?>" data-code="<?= $code; ?>"
                                               class="filter-form__type__item" name="arrFilter_pf[REALTY_TYPE]"
                                               value="<?= $code; ?>">
-                        <label for="type-<?= $code; ?>" class="filter-form__type__item-label"><?= $label; ?></label>
+                        <label for="type-<?= $code; ?>"
+                               class="filter-form__type__item-label js-filter-fields">
+                            <?= $label; ?>
+                        </label>
                     <? endforeach; ?>
                 </div>
             <? endif; ?>
 
             <div class="filter-form-row">
-
-                <? foreach ($arResult["ORDERED_ITEMS"] as $arItem): ?>
-                    <?
-
+                <?
+                $checkAddProp = false;
+                foreach ($arResult["ORDERED_ITEMS"] as $arItem):
+                    /*Если есть кнопки SHOW_BUTTON_TYPES(их нет в фильтре на главной и на странице "/catalog/")
+                      то идёт вариативность действий в зависимости от того, должно ли присутствовать текущее
+                      свойство у выбранного типа объекта
+                    */
+                    if ($arParams['SHOW_BUTTON_TYPES']) {
+                        if (isset($arItem['INPUT_NAME']) && $arItem['INPUT_NAME'] == 'arrFilter_ff[ID]') {
+                            $identifier = 'ID';
+                        } else {
+                            $identifier = $arItem['CODE'];
+                        }
+                        if (!!stristr($filterFields[$identifier], $codeActiveTypeObject)) {
+                            $checkTypeObject = true;
+                        } else {
+                            $checkTypeObject = false;
+                        }
+                    } else {
+                        $checkTypeObject = true;
+                    }
                     $extendFilterClass = empty($arItem['EXPANDED']) ? null : ' js-extend-filter-block';
-                    ?>
-                    <? if (array_key_exists("HIDDEN", $arItem)): ?>
-                        <?= $arItem["INPUT"] ?>
-                    <? elseif (isset($arItem['CODE']) && $arItem["TYPE"] == "RANGE"):
-                        $extendFilterClass = empty($arItem['EXPANDED']) ? null : ' js-extend-filter-block';
+                    //Проверка на то должно ли текущее свойсво быть в "Расширенном поиске"
+                    $checkTypeObjectExtend = ($extendFilterClass) ? true : false;
 
+                    if (array_key_exists("HIDDEN", $arItem)):
+                        $arItem["INPUT"];
+                    elseif (isset($arItem['CODE']) && $arItem["TYPE"] == "RANGE"):
+                        $extendFilterClass = empty($arItem['EXPANDED']) ? null : ' js-extend-filter-block';
+                        //Проверка на то должно ли текущее свойсво быть в "Расширенном поиске"
+                        $checkTypeObjectExtend = ($extendFilterClass) ? true : false;
                         ?>
-                        <div class="filter-form-column<?= $extendFilterClass; ?>">
-                            <? if ($arItem['CODE'] == 'ROOMS_COUNT'):?>
-                                <div class="filter-field-title"><?= $arItem["NAME"] ?></div>
-                                <div class="filter-num-rooms">
-                                    <input name="<?= $arItem["INPUT_NAMES"][0] ?>[0]" type="checkbox" id="n1" value="1"
-                                           class="filter-input" <?if(!empty($arItem["INPUT_VALUES"][0])){?>checked<?}?>>
-                                    <label for="n1" class="filter-label">1</label>
-                                    <input name="<?= $arItem["INPUT_NAMES"][0] ?>[1]" type="checkbox" id="n2" value="2"
-                                           class="filter-input" <?if(!empty($arItem["INPUT_VALUES"][1])){?>checked<?}?>>
-                                    <label for="n2" class="filter-label">2</label>
-                                    <input name="<?= $arItem["INPUT_NAMES"][0] ?>[2]" type="checkbox" id="n3" value="3"
-                                           class="filter-input" <?if(!empty($arItem["INPUT_VALUES"][2])){?>checked<?}?>>
-                                    <label for="n3" class="filter-label">3</label>
-                                    <input name="<?= $arItem["INPUT_NAMES"][0] ?>[4]" type="checkbox" id="n4" value="4x"
-                                           class="filter-input" <?if(!empty($arItem["INPUT_VALUES"][4])){?>checked<?}?>>
-                                    <label for="n4" class="filter-label">4+</label>
-                                </div>
-                            <? elseif (isset($arItem['CODE']) && in_array($arItem['CODE'], array('PRICE', 'SQUARE', 'SQUARE_LAND'))):
-                                $currentMin = $arItem[(empty($arItem['REQUEST_VALUES'][0]) ? 'INPUT' : 'REQUEST') . '_VALUES'][0];
-                                $currentMax = $arItem[(empty($arItem['REQUEST_VALUES'][1]) ? 'INPUT' : 'REQUEST') . '_VALUES'][1];
-                                ?>
-                                <div class="filter-field-title">
-                                    <?if($arItem['CODE'] == 'SQUARE' && $code =='zemelnyy_uchastok'){?>
-                                        Площадь участка
-                                    <?}else{
-                                        echo $arItem["NAME"];
-                                    }?>
-                                </div>
-                                <div class="filter-price">
-                                    <input
-                                            type="number"
-                                            value="<?= $currentMin ?>"
-                                            name="<?= $arItem["INPUT_NAMES"][0] ?>"
-                                            class="filter-price-input filter-min-value-input"
-                                            placeholder="<?= GetMessage("CT_BCF_FROM") ?>"
-                                    />
-                                    <input
-                                            type="number"
-                                            value="<?= $currentMax ?>"
-                                            name="<?= $arItem["INPUT_NAMES"][1] ?>"
-                                            class="filter-price-input filter-max-value-input"
-                                            placeholder="<?= GetMessage("CT_BCF_TO") ?>"
-                                    />
-                                </div>
-                                <div
-                                        data-min="<?= $arItem['INPUT_VALUES'][0]; ?>"
-                                        data-max="<?= $arItem['INPUT_VALUES'][1]; ?>"
-                                        data-current-min="<?= $currentMin; ?>"
-                                        data-current-max="<?= $currentMax; ?>"
-                                        class="filter-price-slider"></div>
-                                <div class="filter-price">
-                                    <span class="filter-price-value filter-min-value"><?= $arItem['INPUT_VALUES'][0]; ?></span>
-                                    <span class="filter-price-value filter-max-value"><?= $arItem['INPUT_VALUES'][1]; ?></span>
-                                </div>
-                            <? else:?>
-                                <? if (!empty($arItem['INPUT_VALUES'][0]) && !empty($arItem['INPUT_VALUES'][1])):?>
-                                    <div class="filter-field-title"><?= $arItem["NAME"] ?></div>
-                                    <div class="filter-select">
-                                        <a href="#" class="filter-select-link">Выбрать</a>
-                                        <ul class="filter-select-drop">
-                                            <? for ($i = $arItem['INPUT_VALUES'][0]; $i <= $arItem['INPUT_VALUES'][1]; ++$i):?>
-                                                <li data-value="<?= $i; ?>"
-                                                    <? if ($i == $arItem["INPUT_VALUE"]) echo ' class="selected"' ?>
-                                                ><?= $i ?></li>
-                                            <? endfor; ?>
-                                        </ul>
+                        <div class="capsule js-filter-elem filter-form-column<?= $extendFilterClass; ?>
+                        <?/*Если текущее свойство не принадлежит к текущему выбранному типу объекта
+                            и оно является "Расширенным", то добавляем свойство "crutch-filter"
+                        */?>
+                        <? if (!$checkTypeObject && $checkTypeObjectExtend) { ?>
+                                crutch-filter
+                            <? } else {
+                            if ($checkTypeObjectExtend)
+                                //Нужно для проверки на то, что хотя бы одно свойство "Расширенное" выведено
+                                $checkAddProp = true;
+                        } ?>"
+                             <?//Если этого свойства у текущего типа объекта нет, то скрываем его ?>
+                            <? if (!$checkTypeObject) { ?>
+                                style="display: none;"
+                            <? } ?>
+                             data-property-code="<?= $filterFields[$arItem['CODE']]; ?>">
+                            <div>
+                                <? if ($arItem['CODE'] == 'ROOMS_COUNT'): ?>
+                                    <div class="filter-field-title"><?= $arItem["NAME"]; ?></div>
+                                    <div class="filter-num-rooms">
+                                        <input name="<?= $checkTypeObject ? $arItem["INPUT_NAMES"][0] . '[0]' : ''; ?>"
+                                               data-name="<?= $arItem["INPUT_NAMES"][0] ?>[0]"
+                                               type="checkbox" id="n1"
+                                               value="1"
+                                               class="filter-input"
+                                               <? if (!empty($arItem["INPUT_VALUES"][0])){ ?>checked<? } ?>>
+                                        <label for="n1" class="filter-label">1</label>
+                                        <input name="<?= $checkTypeObject ? $arItem["INPUT_NAMES"][0] . '[1]' : ''; ?>"
+                                               data-name="<?= $arItem["INPUT_NAMES"][0] ?>[1]"
+                                               type="checkbox" id="n2"
+                                               value="2"
+                                               class="filter-input"
+                                               <? if (!empty($arItem["INPUT_VALUES"][1])){ ?>checked<? } ?>>
+                                        <label for="n2" class="filter-label">2</label>
+                                        <input name="<?= $checkTypeObject ? $arItem["INPUT_NAMES"][0] . '[2]' : ''; ?>"
+                                               data-name="<?= $arItem["INPUT_NAMES"][0] ?>[2]"
+                                               type="checkbox" id="n3"
+                                               value="3"
+                                               class="filter-input"
+                                               <? if (!empty($arItem["INPUT_VALUES"][2])){ ?>checked<? } ?>>
+                                        <label for="n3" class="filter-label">3</label>
+                                        <input name="<?= $checkTypeObject ? $arItem["INPUT_NAMES"][0] . '[4]' : ''; ?>"
+                                               data-name="<?= $arItem["INPUT_NAMES"][0] ?>[4]"
+                                               type="checkbox" id="n4"
+                                               value="4x"
+                                               class="filter-input"
+                                               <? if (!empty($arItem["INPUT_VALUES"][4])){ ?>checked<? } ?>>
+                                        <label for="n4" class="filter-label">4+</label>
                                     </div>
-                                <? else:?>
-                                    <div class="filter-field-title"><?= $arItem["NAME"] ?></div>
+                                <? elseif (isset($arItem['CODE']) && in_array($arItem['CODE'], array('PRICE', 'SQUARE', 'SQUARE_LAND'))):
+                                    $currentMin = $arItem[(empty($arItem['REQUEST_VALUES'][0]) ? 'INPUT' : 'REQUEST') . '_VALUES'][0];
+                                    $currentMax = $arItem[(empty($arItem['REQUEST_VALUES'][1]) ? 'INPUT' : 'REQUEST') . '_VALUES'][1];
+                                    ?>
+                                    <div class="filter-field-title <?= $arItem['CODE'] == 'SQUARE' ? 'propSquare' : ''; ?>">
+                                        <? if ($arItem['CODE'] == 'SQUARE' && $arParams['SECTION_CODE'] == 'zemelnyy_uchastok') { ?>
+                                            Площадь участка
+                                        <? } else {
+                                            echo $arItem["NAME"];
+                                        } ?>
+                                    </div>
                                     <div class="filter-price">
                                         <input
-                                                type="text"
-                                                value="<?= $arItem["INPUT_VALUE"] ?>"
-                                                name="<?= $arItem["INPUT_NAME"] ?>"
+                                                type="number"
+                                                value="<?= $currentMin ?>"
+                                                name="<?= $checkTypeObject ? $arItem["INPUT_NAMES"][0] : ''; ?>"
+                                                data-name="<?= $arItem["INPUT_NAMES"][0] ?>"
+                                                class="filter-price-input filter-min-value-input"
+                                                placeholder="<?= GetMessage("CT_BCF_FROM") ?>"
+                                        />
+                                        <input
+                                                type="number"
+                                                value="<?= $currentMax ?>"
+                                                name="<?= $checkTypeObject ? $arItem["INPUT_NAMES"][1] : ''; ?>"
+                                                data-name="<?= $arItem["INPUT_NAMES"][1] ?>"
                                                 class="filter-price-input filter-max-value-input"
-                                                placeholder="<?= $arItem['NAME'] ?>"
+                                                placeholder="<?= GetMessage("CT_BCF_TO") ?>"
                                         />
                                     </div>
+                                    <div
+                                            data-min="<?= $arItem['INPUT_VALUES'][0]; ?>"
+                                            data-max="<?= $arItem['INPUT_VALUES'][1]; ?>"
+                                            data-current-min="<?= $currentMin; ?>"
+                                            data-current-max="<?= $currentMax; ?>"
+                                            class="filter-price-slider"></div>
+                                    <div class="filter-price">
+                                        <span class="filter-price-value filter-min-value"><?= $arItem['INPUT_VALUES'][0]; ?></span>
+                                        <span class="filter-price-value filter-max-value"><?= $arItem['INPUT_VALUES'][1]; ?></span>
+                                    </div>
+                                <? else: ?>
+                                    <? if (!empty($arItem['INPUT_VALUES'][0]) && !empty($arItem['INPUT_VALUES'][1])): ?>
+                                        <div class="filter-field-title"><?= $arItem["NAME"] ?></div>
+                                        <div class="filter-select">
+                                            <a href="#" class="filter-select-link">Выбрать</a>
+                                            <ul class="filter-select-drop">
+                                                <? for ($i = $arItem['INPUT_VALUES'][0]; $i <= $arItem['INPUT_VALUES'][1]; ++$i): ?>
+                                                    <li data-value="<?= $i; ?>"
+                                                        <? if ($i == $arItem["INPUT_VALUE"]) echo ' class="selected"' ?>
+                                                    ><?= $i ?></li>
+                                                <? endfor; ?>
+                                            </ul>
+                                        </div>
+                                    <? else: ?>
+                                        <div class="filter-field-title"><?= $arItem["NAME"] ?></div>
+                                        <div class="filter-price">
+                                            <input
+                                                    type="text"
+                                                    value="<?= $arItem["INPUT_VALUE"] ?>"
+                                                    name="<?= $arItem["INPUT_NAME"] ?>"
+                                                    class="filter-price-input filter-max-value-input"
+                                                    placeholder="<?= $arItem['NAME'] ?>"
+                                            />
+                                        </div>
+                                    <? endif; ?>
                                 <? endif; ?>
-                            <? endif; ?>
+                            </div>
                         </div>
 
                     <? elseif ($arItem["TYPE"] == "DATE_RANGE"): ?>
@@ -193,20 +281,39 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
                         if (isset($arItem['CODE']) && $arItem['CODE'] == 'REGION')
                             $arItem['NAME'] = 'Месторасположение';
                         ?>
-                        <div class="filter-form-column<?= $extendFilterClass; ?>">
-                            <div class="filter-field-title"><?= $arItem["NAME"] ?></div>
-                            <div class="filter-select">
-                                <a href="#" class="filter-select-link">Выбрать</a>
-                                <ul class="filter-select-drop">
-                                    <li data-value="">Выбрать</li>
-                                    <? foreach ($arItem["LIST"] as $key => $value):?>
-                                        <li data-value="<?= htmlspecialcharsBx($key) ?>"
-                                            <? if ($key == $arItem["INPUT_VALUE"]) echo ' class="selected"' ?>
-                                        ><?= htmlspecialcharsEx($value) ?></li>
-                                    <? endforeach; ?>
-                                </ul>
-                                <input type="hidden" name="<?= $arItem["INPUT_NAME"] ?>"
-                                       value="<?= empty($arItem["INPUT_VALUE"]) ? null : $arItem["INPUT_VALUE"]; ?>">
+                        <div class="capsule js-filter-elem filter-form-column<?= $extendFilterClass; ?>
+                        <?/*Если текущее свойство не принадлежит к текущему выбранному типу объекта
+                            и оно является "Расширенным", то добавляем свойство "crutch-filter"
+                        */?>
+                        <? if (!$checkTypeObject && $checkTypeObjectExtend) { ?>
+                            crutch-filter
+                            <? } else {
+                            if ($checkTypeObjectExtend)
+                                //Нужно для проверки на то, что хотя бы одно свойство "Расширенное" выведено
+                                $checkAddProp = true;
+                        } ?>"
+                            <?//Если этого свойства у текущего типа объекта нет, то скрываем его ?>
+                            <? if (!$checkTypeObject) { ?>
+                                style="display: none;"
+                            <? } ?>
+                             data-property-code="<?= ($arItem['INPUT_NAME'] == "arrFilter_ff[ID]") ? $filterFields['ID'] : $filterFields[$arItem['CODE']] ?>">
+                            <div>
+                                <div class="filter-field-title"><?= $arItem["NAME"] ?></div>
+                                <div class="filter-select">
+                                    <a href="#" class="filter-select-link">Выбрать</a>
+                                    <ul class="filter-select-drop">
+                                        <li data-value="">Выбрать</li>
+                                        <? foreach ($arItem["LIST"] as $key => $value): ?>
+                                            <li data-value="<?= htmlspecialcharsBx($key) ?>"
+                                                <? if ($key == $arItem["INPUT_VALUE"]) echo ' class="selected"' ?>
+                                            ><?= htmlspecialcharsEx($value) ?></li>
+                                        <? endforeach; ?>
+                                    </ul>
+                                    <input type="hidden"
+                                           name="<?= $checkTypeObject ? $arItem["INPUT_NAME"] : ''; ?>"
+                                           data-name="<?= $arItem["INPUT_NAME"] ?>"
+                                           value="<?= empty($arItem["INPUT_VALUE"]) ? null : $arItem["INPUT_VALUE"]; ?>">
+                                </div>
                             </div>
                         </div>
                     <? elseif ($arItem["TYPE"] == "CHECKBOX"):
@@ -278,7 +385,10 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
                 <? endforeach; ?>
             </div>
             <? if (!empty($arResult['HAS_EXPANDED'])): ?>
-                <a href="#" class="filter-extend-link js-extend-filter">Расширенный поиск <b>+</b></a>
+                <a href="#"
+                   class="filter-extend-link js-extend-filter"
+                   <? if (!$checkAddProp){ ?>style="display:none;"<? } ?>
+                >Расширенный поиск <b>+</b></a>
             <? endif; ?>
             <button type="submit" name="set_filter" value="Y" class="filter-submit-btn">Поиск</button>
             <div class="clb"></div>

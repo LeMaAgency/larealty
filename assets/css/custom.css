@@ -359,3 +359,9 @@ h2.seller_main__h2 {color:fff;}
 .subscribe__form{
     text-align: center;
 }
+.crutch-filter{
+    display: none;
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
