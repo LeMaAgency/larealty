@@ -36,9 +36,9 @@ $(function () {
     $('.js-filter-fields').on('click', function () {
         var typeObject = $(this).attr('for').replace('type-', ''),
             checkAddElem = false;
-        if(typeObject == 'zemelnyy_uchastok'){
+        if (typeObject == 'zemelnyy_uchastok') {
             $('.propSquare').html('Площадь участка');
-        }else{
+        } else {
             $('.propSquare').html('Площадь');
         }
 
@@ -51,7 +51,7 @@ $(function () {
                     $(this).show();
                 }
                 $(this).find('input').each(function () {
-                    $(this).attr('name',$(this).data('name'));
+                    $(this).attr('name', $(this).data('name'));
                 });
             } else {
                 if ($(this).hasClass('js-extend-filter-block')) {
@@ -197,6 +197,46 @@ $(function () {
     });
     $('.js-textarea-crutch textarea').on('change', function () {
         $(this).closest('.js-textarea-crutch').find('#form_field_message').val($(this).val());
+    });
+
+
+    /*Subscribe form*/
+
+    $('form.js-subscribe-form').on('submit', function (e) {
+
+        if ($(this).find("input[type=submit]:focus").attr('name') == 'subscribe') {
+            e.preventDefault();
+            var curForm = $(this),
+                waitElement = curForm.find('input[type="submit"][name="subscribe"], button[type="submit"][name="subscribe"]').get(0);
+
+            BX.showWait(waitElement);
+
+            $.post('/ajax/add_subscribe.php', $(this).serialize(), function (ans) {
+
+                BX.closeWait(waitElement);
+
+                curForm.find('input[name="email"]').val('').css({'border': '0px solid'});
+
+                if (ans && ans.errors) {
+                    curForm.find('.it-error').empty();
+                    for (var inputName in ans.errors) {
+                        curForm.find('[name="' + inputName + '"]').first().css({border: '1px solid red'})
+                            .closest('.it-block').find('.it-error').html(ans.errors[inputName]);
+                    }
+                }
+                else {
+                    //ok
+                    curForm.find('input[name="email"]').val('').css({'border': '0px solid'});
+                    $.fancybox.open('Ваша подписка успешно сохранена!');
+                    $('.js-subcribe-block').html(
+                        ' Вы подписались на новые объявления.<br>\n' +
+                        'Изменить параметры уведомлений, отключить или удалить их можно в разделе\n' +
+                        '<a href="/personal/subscriptions/">подписки</a>.'
+                    );
+                }
+            }, 'json');
+            return false;
+        }
     });
 });
 $(document).ready(function () {

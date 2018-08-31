@@ -71,7 +71,31 @@ else
 );
 ?>
 <?endif?>
-
+<?/*
+    $arFilterParams = $GLOBALS[$arParams['FILTER_NAME']]['PROPERTY'];
+    $arFilterParams['REALTY_TYPE'] = $arParams['PARENT_SECTION_CODE'];
+?>
+<form class="js-subscribe-form"
+      action="/ajax/add_subscribe.php"
+      method="post">
+    <div class="subscribe__form js-subscribe-form">
+        <div class="subscribe">
+            <div class="it-block subscribe_block">
+                <div class="it-buttons feedback-input">
+                    <input type="text" id="email" name="email" placeholder="Email"
+                           class="request__form__input margin_auto">
+                    <input type="hidden"
+                           id="array_fields"
+                           name="array_fields"
+                           value='<?=json_encode($arFilterParams);?>'>
+                    <input type="submit" name="subscribe" value="Подписаться" class="request__form__button margin_auto">
+                </div>
+                <div class="it-error"></div>
+            </div>
+        </div>
+    </div>
+</form>
+<?*/?>
 <?php
 $sortBy = 'PROPERTY_PRICE';
 $sortOrder = 'asc';

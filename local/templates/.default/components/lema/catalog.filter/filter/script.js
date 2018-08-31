@@ -25,11 +25,12 @@ $(function() {
                 + $('input[name="arrFilter_pf[REALTY_TYPE]"]:checked').data('code')
                 + '/'
             );
-
-            /**
-             * Remove realty & rent types fields
-             */
-            $('input[name="arrFilter_pf[REALTY_TYPE]"], input[name="arrFilter_pf[RENT_TYPE]"]').remove();
+            if ($(this).find("input[type=submit]:focus").attr('name') != 'subscribe') {
+                /**
+                 * Remove realty & rent types fields
+                 */
+                $('input[name="arrFilter_pf[REALTY_TYPE]"], input[name="arrFilter_pf[RENT_TYPE]"]').remove();
+            }
         }
 
     })
