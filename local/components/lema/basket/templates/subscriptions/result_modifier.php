@@ -56,7 +56,7 @@ if (!empty($arResult['ITEMS']) && CModule::IncludeModule("iblock")) {
     $arTitle = array(
         'ID' => 'объект №',
         'REALTY_TYPE' => 'купить',
-        'ROOMS_COUNT' => '- комнатные',
+        'ROOMS_COUNT' => '-комнатные',
         'PRICE' => 'цена',
         'PRICE_UNIT' => 'руб.',
         'REGION' => 'месторасположение',
@@ -87,17 +87,27 @@ if (!empty($arResult['ITEMS']) && CModule::IncludeModule("iblock")) {
     );
     //Цикл по элементам
     foreach ($arResult['PARAMS'] as $keyItem => $itemParams) {
-        $realtyTypeTitle = '';
+        $addTitle = '';
         //Добавление типа объекта в заголовок
         if (isset($itemParams['UF_FILTER_PARAMS']['REALTY_TYPE'])) {
             if (isset($arTitleRealtyType[$itemParams['UF_FILTER_PARAMS']['REALTY_TYPE']])) {
-                $realtyTypeTitle .= $arTitle['REALTY_TYPE'] . ' ' . $arTitleRealtyType[$itemParams['UF_FILTER_PARAMS']['REALTY_TYPE']];
+                $addTitle .= $arTitle['REALTY_TYPE'] . ' ' . $arTitleRealtyType[$itemParams['UF_FILTER_PARAMS']['REALTY_TYPE']];
             }
             unset($itemParams['UF_FILTER_PARAMS']['REALTY_TYPE']);
         }
         if (isset($itemParams['UF_FILTER_PARAMS']['ID'])) {
             if (isset($arTitle['ID'])) {
-                $realtyTypeTitle .= ', '.$arTitle['ID'] . ' ' . $itemParams['UF_FILTER_PARAMS']['ID'];
+                $addTitle .= !empty($addTitle) ? ', ' : '';
+                $addTitle .= $arTitle['ID'] . ' ' . $itemParams['UF_FILTER_PARAMS']['ID'];
+            }
+            unset($itemParams['UF_FILTER_PARAMS']['ID']);
+        }
+        if (isset($itemParams['UF_FILTER_PARAMS']['ROOMS_COUNT'])) {
+            if (isset($arTitle['ROOMS_COUNT'])) {
+                foreach ($itemParams['UF_FILTER_PARAMS']['ROOMS_COUNT']['LEFT'] as $room) {
+                    $addTitle .= !empty($addTitle) ? ', ' : '';
+                    $addTitle .= $room.$arTitle['ROOMS_COUNT'];
+                }
             }
             unset($itemParams['UF_FILTER_PARAMS']['ID']);
         }
@@ -121,7 +131,7 @@ if (!empty($arResult['ITEMS']) && CModule::IncludeModule("iblock")) {
             }
             //Запись заголовка в элемент
             if ($keyParam == 'UF_FILTER_PARAMS') {
-                $arResult['ITEMS'][$keyItem][$keyParam . '_TITLE'] = !empty($title) ? $realtyTypeTitle . ', ' . $title : $realtyTypeTitle;
+                $arResult['ITEMS'][$keyItem][$keyParam . '_TITLE'] = !empty($title) ? $addTitle . ', ' . $title : $addTitle;
             } else {
                 $arResult['ITEMS'][$keyItem][$keyParam . '_TITLE'] = !empty($title) ? $title : '';
             }
