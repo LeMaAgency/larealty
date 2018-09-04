@@ -4,7 +4,7 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 
 use \Bitrix\Highloadblock as HL;
 
-$arResult = array();
+$arResult['ITEMS'] = $arResult['PARAMS'] = array();
 if (CModule::IncludeModule("highloadblock")) {
     $hlblock = HL\HighloadBlockTable::getById(6)->fetch();
     $entity = HL\HighloadBlockTable::compileEntity($hlblock);
@@ -25,11 +25,13 @@ if (CModule::IncludeModule("highloadblock")) {
             )
         ));
     while ($row = $res->fetch()) {
-        $arResult[] = $row;
+        $arResult['ITEMS'][$row['ID']] = $row;
+        $arResult['PARAMS'][$row['ID']]['UF_FILTER_PARAMS'] = json_decode($row['UF_FILTER_PARAMS'], true);
+        $arResult['PARAMS'][$row['ID']]['UF_EXT_FILTER_PARAMS'] = json_decode($row['UF_EXT_FILTER_PARAMS'], true);
     }
 }
-if (!empty($arResult)) {
-    if (CModule::IncludeModule("iblock")) {
+if (!empty($arResult['ITEMS']) && CModule::IncludeModule("iblock")) {
+    /*if (CModule::IncludeModule("iblock")) {
         $arSect = $arProp = array();
         $resSect = CIBlockSection::GetList(
             array(),
@@ -49,16 +51,19 @@ if (!empty($arResult)) {
         $resProp = CIBlockElement::GetProperty(2, false, array("sort" => "asc"));
         while ($rowProp = $resProp->Fetch()) {
         }
-    }
+    }*/
 
     $arTitle = array(
+        'ID' => 'объект №',
         'REALTY_TYPE' => 'купить',
         'ROOMS_COUNT' => '- комнатные',
         'PRICE' => 'цена',
+        'PRICE_UNIT' => 'руб.',
         'REGION' => 'месторасположение',
-        'ID' => 'объект №',
         'SQUARE_LAND' => 'площадь участка',
         'SQUARE' => 'площадь',
+        'SQUARE_UNIT' => 'м²',
+        'SQUARE_LAND_UNIT' => 'м²',
         'STAGE' => 'этаж',
         'STAGES_COUNT' => 'этажей в доме',
         'LOT_HAVINGS_TYPE' => 'тип собственности',
@@ -70,27 +75,56 @@ if (!empty($arResult)) {
         'LEFT' => 'от',
         'RIGHT' => 'до',
     );
-    foreach ($arResult as $keyItem => $item) {
-        $title = '';
-        $arFilterParams = json_decode($item['UF_FILTER_PARAMS'], true);
-        if (isset($arFilterParams['REALTY_TYPE'])) {
-            if (isset($arSect[$arFilterParams['REALTY_TYPE']])) {
-                $title .= $arTitle['REALTY_TYPE'] . ' ' . $arSect[$arFilterParams['REALTY_TYPE']];
+    $arTitleRealtyType = array(
+        'kvartiry' => 'квартиру',
+        'komnaty' => 'комнату',
+        'doma' => 'дом',
+        'dachi' => 'дачу',
+        'zemelnyy_uchastok' => 'земельный участок',
+        'ofisy' => 'офис',
+        'torgovye_ploshchadi' => 'торговую площадь',
+        'zdaniya' => 'здание',
+    );
+    //Цикл по элементам
+    foreach ($arResult['PARAMS'] as $keyItem => $itemParams) {
+        $realtyTypeTitle = '';
+        //Добавление типа объекта в заголовок
+        if (isset($itemParams['UF_FILTER_PARAMS']['REALTY_TYPE'])) {
+            if (isset($arTitleRealtyType[$itemParams['UF_FILTER_PARAMS']['REALTY_TYPE']])) {
+                $realtyTypeTitle .= $arTitle['REALTY_TYPE'] . ' ' . $arTitleRealtyType[$itemParams['UF_FILTER_PARAMS']['REALTY_TYPE']];
             }
-            unset($arFilterParams['REALTY_TYPE']);
+            unset($itemParams['UF_FILTER_PARAMS']['REALTY_TYPE']);
         }
-
-        foreach ($arFilterParams as $key => $itemValue) {
-            if (is_array($itemValue)) {
-
-            } else {
-                if (is_numeric($itemValue)) {
-                    $rowItem = CIBlockPropertyEnum::GetByID((int)$itemValue);
-                    $title .= $rowItem['VALUE'] ? ', ' . $arTitle[$key] . ' ' . $rowItem['VALUE'] : '';
+        if (isset($itemParams['UF_FILTER_PARAMS']['ID'])) {
+            if (isset($arTitle['ID'])) {
+                $realtyTypeTitle .= ', '.$arTitle['ID'] . ' ' . $itemParams['UF_FILTER_PARAMS']['ID'];
+            }
+            unset($itemParams['UF_FILTER_PARAMS']['ID']);
+        }
+        //Цикл по параметрам фильтра
+        foreach ($itemParams as $keyParam => $itemParam) {
+            $title = '';
+            //Цикл по типам параметра фильтра (Основные и Доп. свойства)
+            foreach ($itemParam as $keyParamValue => $itemTypeParamValue) {
+                if (is_array($itemTypeParamValue) && ($itemTypeParamValue['RIGHT'] > 0)) {
+                    $title .= !empty($title) ? ', ' . $arTitle[$keyParamValue] : $arTitle[$keyParamValue];
+                    $title .= (!empty($itemTypeParamValue['LEFT']) && $itemTypeParamValue['LEFT'] > 0) ? ' ' . $arTitle['LEFT'] . ' ' . +$itemTypeParamValue['LEFT'] : '';
+                    $title .= (!empty($itemTypeParamValue['RIGHT'])) ? ' ' . $arTitle['RIGHT'] . ' ' . +$itemTypeParamValue['RIGHT'] : '';
+                    $title .= ' ' . $arTitle[$keyParamValue . '_UNIT'];
+                } else {
+                    if (is_numeric($itemTypeParamValue)) {
+                        $rowItem = CIBlockPropertyEnum::GetByID((int)$itemTypeParamValue);
+                        $title .= !empty($title) ? ', ' : '';
+                        $title .= $rowItem['VALUE'] ? $arTitle[$keyParamValue] . ' ' . $rowItem['VALUE'] : '';
+                    }
                 }
             }
+            //Запись заголовка в элемент
+            if ($keyParam == 'UF_FILTER_PARAMS') {
+                $arResult['ITEMS'][$keyItem][$keyParam . '_TITLE'] = !empty($title) ? $realtyTypeTitle . ', ' . $title : $realtyTypeTitle;
+            } else {
+                $arResult['ITEMS'][$keyItem][$keyParam . '_TITLE'] = !empty($title) ? $title : '';
+            }
         }
-            var_dump($title);
-        $arResult[$keyItem]['TITLE'] = $title;
     }
 }

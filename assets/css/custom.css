@@ -630,25 +630,96 @@ h2.seller_main__h2 {
     display: flow-root;
 }
 
+.title span {
+    text-transform: lowercase;
+}
+
+.ext-title {
+    color: gray;
+    margin-top: 15px;
+}
+
 .title .filter-field-title {
     font-weight: bold;
-    margin: 15px;
-}
-
-.subscription-list form{
-    margin: 15px;
-}
-
-.title .filter-field-title {
-    font-weight: bold;
-    margin: 15px;
-}
-
-.block-left {
     float: left;
 }
 
-.block-right {
+.subscription-list {
+    margin: 45px 0;
+}
+
+.subscription-list form {
+    margin: 15px 0;
+    display: inline-block;
+}
+
+.title .filter-field-title {
+    font-weight: bold;
+    padding: 15px;
+}
+
+.settings {
+    margin: 15px 0;
+}
+
+.settings-popup {
+    font-size: 12px;
+}
+
+.setting-title-block .title {
+    font-weight: bold;
+    font-size: 15px;
+}
+.settings-popup{
+    max-width: 650px;
+}
+.button-block{
     float: right;
-    width: 180px;
+}
+.button-block .cancel{
+    background-color: #a4a4a4;
+}
+.button-block .cancel:hover{
+    background-color: grey;
+}
+.button-block .delete{
+    background-color: #ff0600;
+}
+.button-block .delete:hover{
+    background-color: #e60600;
+}
+.button-block .green-btn{
+    width: auto;
+    height: auto;
+    display: inline-block;
+    margin-top: 20px;
+}
+.tumbler-block{
+    width: 40px;
+    display: inline-block;
+}
+.right-block .del{
+    float: right;
+    background-image:url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2015%2016%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M0%202h15v2H0V2zm4-2h7v2H4V0zM1%204h13v10.998C14%2015.55%2013.553%2016%2013%2016H2c-.553%200-1-.456-1-1.002V4zm3%202h2v7H4V6zm5%200h2v7H9V6z%22%2F%3E%3C%2Fsvg%3E);
+    width: 18px;
+    height: 18px;
+    margin-top: 5px;
+    cursor: pointer;
+    transition: opacity .3s ease-out;
+    opacity: 0.2;
+    margin: 25px;
+}
+
+.right-block .del:hover{
+    opacity: 1;
+    background-image:url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2015%2016%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20fill%3D%22red%22%20d%3D%22M0%202h15v2H0V2zm4-2h7v2H4V0zM1%204h13v10.998C14%2015.55%2013.553%2016%2013%2016H2c-.553%200-1-.456-1-1.002V4zm3%202h2v7H4V6zm5%200h2v7H9V6z%22%2F%3E%3C%2Fsvg%3E);
+}
+#del-popup{
+    padding: 35px;
+    display: none;
+}
+#del-popup .button-block{
+    float: none;
+    width: 100%;
+    text-align: center;
 }

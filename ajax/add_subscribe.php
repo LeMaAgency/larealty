@@ -50,8 +50,7 @@ if ($form->validate()) {
             array(
                 'UF_USER_ID' => $USER->GetID(),
                 'UF_FILTER_PARAMS' => json_encode($arProps),
-                'UF_FREQUENCY_SEND' => '60',
-                'UF_ENABLE_SEND' => 'Y',
+                'UF_FREQUENCY_SEND' => '0',
                 'UF_LINK' => $_SERVER['HTTP_REFERER'],
                 'UF_EXT_FILTER_PARAMS' => json_encode($arExtProps),
                 'UF_EMAIL' => $form->getField('email'),

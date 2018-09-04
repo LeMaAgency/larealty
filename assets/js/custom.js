@@ -392,6 +392,141 @@ $(document).ready(function () {
                 '</div>');
         }, 'json');
     });
+    $('.js-settings').on('click', function (e) {
+        e.preventDefault();
+        $.fancybox.open($($(this).data('id')));
+    });
+
+    $('.js-subscribe-tumbler').each(function (i, el) {
+        var tumbler = el,
+            tumblerValue = $(tumbler).closest('.right-block').find('.js-subscribe-tumbler-value'),
+            defaultValue = $(this).data('default'),
+            arRange = {
+                0: 'Вкл.',
+                1: 'Откл.'
+            };
+
+        noUiSlider.create(tumbler, {
+            start: defaultValue,
+            range: {
+                'min': [0, 1],
+                'max': 1
+            }
+        });
+        tumbler.noUiSlider.on('set', function (values) {
+            var waitElement = $(tumbler),
+                itemId = $(tumbler).closest('.subscription-user').data('id') * 1;
+
+            //show ajax-loader
+            BX.showWait(waitElement);
+
+            //make request
+            $.get('/ajax/subscribe.php?action=tumbler', {ID: itemId, STATUS: Number(values)}, function (ans) {
+                if (ans.status) {
+                    //hide ajax-loader
+                    BX.closeWait(waitElement);
+                    tumblerValue[0].innerHTML = arRange[Number(values)];
+                }
+            }, 'json');
+        });
+
+    });
+    $('.js-frequency-send').each(function (i, el) {
+        var frequencySlider = el,
+            skipValues = $(frequencySlider).closest('.frequency-block').find('.js-frequency-block-value'),
+            defaultValue = skipValues.attr('data-default'),
+            arRange = {
+                0: '1 час',
+                1: '3 часа',
+                2: '6 часов',
+                3: '12 часов',
+                4: '1 день',
+                5: '2 дня',
+                6: '3 дня'
+            };
+
+        noUiSlider.create(frequencySlider, {
+            start: defaultValue,
+            snap: true,
+            range: {
+                'min': 0,
+                '16.666667%': 1,
+                '33.333334%': 2,
+                '50%': 3,
+                '66,666667%': 4,
+                '83,333334%': 5,
+                'max': 6
+            }
+        });
+        frequencySlider.noUiSlider.on('update', function (values) {
+            skipValues[0].innerHTML = arRange[Number(values)];
+            skipValues.attr('data-value',Number(values));
+        });
+        //Сброс параметров до начальных при нажитии кнопки "отмена"
+        $('.button-block .cancel').on('click', function () {
+            var mail = $(this).closest('.setting-input-block').find('.mail-block input');
+            mail.val(mail.data('default')).css({border:'1px solid #a8a9a9'});
+            mail.closest('.setting-input-block').find('.it-error').html('');
+            frequencySlider.noUiSlider.set(defaultValue);
+            $.fancybox.close();
+        });
+    });
+    $('.js-subscribe-delete-popup').on('click', function (e) {
+        e.preventDefault();
+        $.fancybox.open($('#del-popup').attr('data-id',$(this).closest('.subscription-user').data('id') * 1));
+    });
+
+    $(document).on('click', '.js-subscribe-delete', function (e) {
+        e.preventDefault();
+        var waitElement = this,
+            itemId = $(this).closest('#del-popup').data('id') * 1;
+        //show ajax-loader
+        BX.showWait(waitElement);
+
+        $.get('/ajax/subscribe.php?action=delete', {ID: itemId}, function (ans) {
+            if (ans.status) {
+                $.fancybox.close();
+                //remove deleted items
+                $('.js-subscribe-block').each(function (i, el) {
+                    if(($(el).find('.subscription-user').data('id')*1) == itemId){
+                        $(el).remove();
+                    }
+                });
+                //hide ajax-loader
+                BX.closeWait(waitElement);
+            }
+            $.fancybox.open(ans.status ? 'Подписка успешно удалена' : 'Произошла ошибка при удалении подписки');
+        }, 'json');
+    });
+
+    $(document).on('click', '.js-subscribe-settings-save', function (e) {
+        e.preventDefault();
+        var curForm = $(this).closest('.settings-popup .setting-input-block'),
+            waitElement = this,
+            itemEmail = $(this).closest('.setting-input-block').find('.mail-block input').val(),
+            itemFrequencySend = $(this).closest('.setting-input-block').find('.frequency-block .js-frequency-block-value').data('value'),
+            itemId = $(this).data('id') * 1;
+        //show ajax-loader
+        BX.showWait(waitElement);
+
+        $.get('/ajax/subscribe.php?action=setting_save', {ID: itemId,EMAIL:itemEmail,FREQUENCY:itemFrequencySend}, function (ans) {
+            if (ans && ans.errors) {
+                BX.closeWait(waitElement);
+                curForm.find('.it-error').empty();
+                for (var inputName in ans.errors) {
+                    curForm.find('[name="' + inputName + '"]').first().css({border: '1px solid red'})
+                        .closest('.it-block').find('.it-error').html(ans.errors[inputName]);
+                }
+            }
+            if(ans.status){
+                $.fancybox.close();
+                //hide ajax-loader
+                BX.closeWait(waitElement);
+                $.fancybox.open(ans.status ? 'Подписка успешно отредактирована' : 'Произошла ошибка при редактировании подписки');
+            }
+
+        }, 'json');
+    });
 });
 
 $(document).on('click', '.filter-select-drop li', function () {
