@@ -11,6 +11,7 @@ if (CModule::IncludeModule("highloadblock")) {
     $entity_data_class = $entity->getDataClass();
     $res = $entity_data_class::getList(
         array(
+            'order' => array('ID' => 'DESC'),
             'select' => array(
                 'ID',
                 'UF_EMAIL',
