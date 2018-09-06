@@ -81,7 +81,7 @@ if (isset($uriParts[1])) {
     if (isset($uriParts[2]))
         $rentType = $uriParts[2];
 }
-
+var_dump($realtyType);
 ?>
 <section class="filter filter_bg">
     <div class="overlay"></div>
@@ -106,7 +106,9 @@ if (isset($uriParts[1])) {
                 <? $first = true;
                 foreach ($arRealtyType as $key => $realtyTypeElem) { ?>
                     <input type="radio"
-                        <? if ((!empty($realtyType) || $realtyType == $key) || $first) echo 'checked'; ?>
+                        <? if ((empty($realtyType) && $first) ||(!empty($realtyType) && $realtyType == $key)) {
+                            echo 'checked';
+                        } ?>
                            data-code="<?= $key; ?>"
                            id="type-<?= $key; ?>"
                            class="filter-form__type__item"
