@@ -24,11 +24,13 @@ $(function() {
                 + '/'
         );
 
-        /**
-         * Remove realty & rent types fields
-         */
-        $('input[name="arrFilter_pf[REALTY_TYPE]"], input[name="arrFilter_pf[RENT_TYPE]"]').remove()
-    })
+        if ($(this).find("input[type=submit]:focus").attr('name') != 'subscribe') {
+            /**
+             * Remove realty & rent types fields
+             */
+            $('input[name="arrFilter_pf[REALTY_TYPE]"], input[name="arrFilter_pf[RENT_TYPE]"]').remove();
+        }
+    });
 
     $(document).on('click', '#rent-out-id', function(e) {
         e.preventDefault();

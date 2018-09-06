@@ -7,7 +7,7 @@ use Bitrix\Main\Localization\Loc;
 Loc::loadMessages(__FILE__);
 
 $this->setFrameMode(true);
-if (!empty($arResult)):?>
+if (!empty($arResult['ITEMS'])):?>
     <div class="container-index">
         <div class="section-title form-title form-title"><span>Мои подписки</span></div>
     </div>
@@ -23,11 +23,11 @@ if (!empty($arResult)):?>
                     <div class="left-block col-md-10">
                         <div class="title">
                             <a href="<?= $arItem['UF_LINK']; ?>">
-                                Объявления:<span> <?= $arItem['UF_FILTER_PARAMS_TITLE']; ?></span>
+                                Объявления:<span> <?= $arItem['UF_TITLE']; ?></span>
                             </a>
                         </div>
                         <div class="title ext-title">
-                            <?= $arItem['UF_EXT_FILTER_PARAMS_TITLE']; ?>
+                            <?= $arItem['UF_EXT_TITLE']; ?>
                         </div>
                         <div class="settings js-settings" data-id="#setting_<?= $arItem['ID']; ?>">
                             <a href="#">
@@ -40,10 +40,10 @@ if (!empty($arResult)):?>
                                     Настройка уведомлений для подписки
                                 </p>
                                 <p class="params">
-                                    Объявления:<span> <?= $arItem['UF_FILTER_PARAMS_TITLE']; ?></span>
+                                    Объявления:<span> <?= $arItem['UF_TITLE']; ?></span>
                                 </p>
                                 <p class="ext-params">
-                                    <?= $arItem['UF_EXT_FILTER_PARAMS_TITLE']; ?>
+                                    <?= $arItem['UF_EXT_TITLE']; ?>
                                 </p>
                             </div>
                             <hr>

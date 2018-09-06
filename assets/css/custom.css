@@ -645,7 +645,8 @@ h2.seller_main__h2 {
 }
 
 .subscription-list {
-    margin: 45px 0;
+    margin-bottom: 45px;
+    display: inline-block;
 }
 
 .subscription-list form {

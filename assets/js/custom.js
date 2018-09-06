@@ -215,18 +215,18 @@ $(function () {
 
                 BX.closeWait(waitElement);
 
-                curForm.find('input[name="email"]').val('').css({'border': '0px solid'});
+                curForm.find('input[name="email_subscription"]').val('').css({'border': '0px solid'});
 
                 if (ans && ans.errors) {
                     curForm.find('.it-error').empty();
                     for (var inputName in ans.errors) {
-                        curForm.find('[name="' + inputName + '"]').first().css({border: '1px solid red'})
+                        curForm.find('[name="' + inputName + '"]').first().css({'border': '1px solid red'})
                             .closest('.it-block').find('.it-error').html(ans.errors[inputName]);
                     }
-                }
-                else {
+                }else{
                     //ok
-                    curForm.find('input[name="email"]').val('').css({'border': '0px solid'});
+                    //curForm.find('input[name="email_subscription"]').val('').css({'border': '0px solid'});
+                    curForm.find('.it-error').empty();
                     $.fancybox.open('Ваша подписка успешно сохранена!');
                     $('.js-subcribe-block').html(
                         ' Вы подписались на новые объявления.<br>\n' +
@@ -479,7 +479,7 @@ $(document).ready(function () {
     $(document).on('click', '.js-subscribe-delete', function (e) {
         e.preventDefault();
         var waitElement = this,
-            itemId = $(this).closest('#del-popup').data('id') * 1;
+            itemId = $(this).closest('#del-popup').attr('data-id') * 1;
         //show ajax-loader
         BX.showWait(waitElement);
 
@@ -497,6 +497,7 @@ $(document).ready(function () {
             }
             $.fancybox.open(ans.status ? 'Подписка успешно удалена' : 'Произошла ошибка при удалении подписки');
         }, 'json');
+        BX.closeWait(waitElement);
     });
 
     $(document).on('click', '.js-subscribe-settings-save', function (e) {

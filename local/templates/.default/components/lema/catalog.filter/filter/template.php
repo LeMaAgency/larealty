@@ -16,77 +16,78 @@ use \Bitrix\Highloadblock as HL;
 
 $this->setFrameMode(true);
 
-if (CModule::IncludeModule("highloadblock")) {
-    $arProps = $arExtProps = $errors = array();
-    $recordId = false;
-    $expandedFields = array(
-        'STAGE',
-        'STAGES_COUNT',
-        'LOT_HAVINGS_TYPE',
-        'LOT_CATEGORIES',
-        'HEATING',
-        'WATER_SUPPLY',
-        'SEWERAGE',
-        'ELECTRIC',
-    );
-    $arParamsFields = $_GET;
-    foreach ($arParamsFields as $keyArray => $arProp) {
-        foreach ($arProp as $keyProp => $prop) {
-            if (!empty($prop)) {
-                if (in_array($keyProp, $expandedFields)) {
-                    $arExtProps[$keyProp] = $prop;
-                } else {
-                    $arProps[$keyProp] = $prop;
-                }
-            }
-        }
-    }
-    $arProps['REALTY_TYPE'] = $arParams['SECTION_CODE'];
-    ksort($arProps);
-
-
-    $hlblock = HL\HighloadBlockTable::getById(6)->fetch();
-    $entity = HL\HighloadBlockTable::compileEntity($hlblock);
-    $entity_data_class = $entity->getDataClass();
-    $res = $entity_data_class::getList(
-        array(
-            'select' => array('ID'),
-            'filter' => array(
-                'UF_USER_ID' => $USER->GetID(),
-                'UF_FILTER_PARAMS' => json_encode($arProps),
-                'UF_EXT_FILTER_PARAMS' => json_encode($arExtProps),
-            )
-        )
-    );
-    if ($row = $res->fetch()) {
-        $recordId = (bool)$row['ID'];
-    }
-}
-
-
-$this->addExternalCss("/bitrix/css/main/bootstrap.css");
-$this->addExternalCss("/bitrix/css/main/font-awesome.css");
-/*Массив "Свойство" => "Разделы в которых отображается это свойство"*/
-$filterFields = array(
-    'ROOMS_COUNT' => 'kvartiry,komnaty,dachi,doma',
-    'PRICE' => 'kvartiry,komnaty,dachi,doma,zemelnyy_uchastok',
-    'REGION' => 'kvartiry,komnaty,dachi,doma,zemelnyy_uchastok',
-    'ID' => 'kvartiry,komnaty,dachi,doma,zemelnyy_uchastok',
-    'STAGE' => 'kvartiry,komnaty',
-    'STAGES_COUNT' => 'kvartiry,komnaty',
-    'SQUARE_LAND' => 'dachi,doma',
-    'SQUARE' => 'dachi,doma,zemelnyy_uchastok',
-    'LOT_HAVINGS_TYPE' => 'zemelnyy_uchastok',
-    'LOT_CATEGORIES' => 'doma,zemelnyy_uchastok',
-    'HEATING' => 'doma',
-    'WATER_SUPPLY' => 'doma',
-    'SEWERAGE' => 'doma',
-    'ELECTRIC' => 'zemelnyy_uchastok',
-);
-
 //Проверка то, является ли текущий раздел одним из 'kvartiry-komnaty', 'doma-dachi-zemelnyy_uchastok'
 $arPageParentSectFilter = array('kvartiry-komnaty', 'doma-dachi-zemelnyy_uchastok');
 $checkPageParentSectFilter = in_array(explode('/', $APPLICATION->GetCurDir())[2], $arPageParentSectFilter);
+if (($APPLICATION->GetCurDir() != '/' && $APPLICATION->GetCurDir() != 'catalog') && !$checkPageParentSectFilter) {
+    if (CModule::IncludeModule("highloadblock")) {
+        $arProps = $arExtProps = $errors = array();
+        $recordId = false;
+        $expandedFields = array(
+            'STAGE',
+            'STAGES_COUNT',
+            'LOT_HAVINGS_TYPE',
+            'LOT_CATEGORIES',
+            'HEATING',
+            'WATER_SUPPLY',
+            'SEWERAGE',
+            'ELECTRIC',
+        );
+        $arParamsFields = $_GET;
+        foreach ($arParamsFields as $keyArray => $arProp) {
+            foreach ($arProp as $keyProp => $prop) {
+                if (!empty($prop)) {
+                    if (in_array($keyProp, $expandedFields)) {
+                        $arExtProps[$keyProp] = $prop;
+                    } else {
+                        $arProps[$keyProp] = $prop;
+                    }
+                }
+            }
+        }
+        $arProps['REALTY_TYPE'] = $arParams['SECTION_CODE'];
+        //Вид сделки "Продам"
+        $arProps['RENT_TYPE'] = '30';
+        ksort($arProps);
+
+        $hlblock = HL\HighloadBlockTable::getById(6)->fetch();
+        $entity = HL\HighloadBlockTable::compileEntity($hlblock);
+        $entity_data_class = $entity->getDataClass();
+        $res = $entity_data_class::getList(
+            array(
+                'select' => array('ID'),
+                'filter' => array(
+                    'UF_USER_ID' => $USER->GetID(),
+                    'UF_FILTER_PARAMS' => json_encode($arProps),
+                    'UF_EXT_FILTER_PARAMS' => json_encode($arExtProps),
+                )
+            )
+        );
+        if ($row = $res->fetch()) {
+            $recordId = (bool)$row['ID'];
+        }
+    }
+}
+
+    $this->addExternalCss("/bitrix/css/main/bootstrap.css");
+    $this->addExternalCss("/bitrix/css/main/font-awesome.css");
+    /*Массив "Свойство" => "Разделы в которых отображается это свойство"*/
+    $filterFields = array(
+        'ROOMS_COUNT' => 'kvartiry,komnaty,dachi,doma',
+        'PRICE' => 'kvartiry,komnaty,dachi,doma,zemelnyy_uchastok',
+        'REGION' => 'kvartiry,komnaty,dachi,doma,zemelnyy_uchastok',
+        'ID' => 'kvartiry,komnaty,dachi,doma,zemelnyy_uchastok',
+        'STAGE' => 'kvartiry,komnaty',
+        'STAGES_COUNT' => 'kvartiry,komnaty',
+        'SQUARE_LAND' => 'dachi,doma',
+        'SQUARE' => 'dachi,doma,zemelnyy_uchastok',
+        'LOT_HAVINGS_TYPE' => 'zemelnyy_uchastok',
+        'LOT_CATEGORIES' => 'doma,zemelnyy_uchastok',
+        'HEATING' => 'doma',
+        'WATER_SUPPLY' => 'doma',
+        'SEWERAGE' => 'doma',
+        'ELECTRIC' => 'zemelnyy_uchastok',
+    );
 ?>
 <section class="filter filter_bg">
     <div class="overlay"></div>
@@ -451,29 +452,30 @@ $checkPageParentSectFilter = in_array(explode('/', $APPLICATION->GetCurDir())[2]
             <? endif; ?>
             <button type="submit" name="set_filter" value="Y" class="filter-submit-btn">Поиск</button>
             <div class="clb"></div>
-            <? ?>
-            <? if ($USER->IsAuthorized()) { ?>
-                <div class="subscribe__form js-subscribe-form">
-                    <div class="subscribe">
-                        <div class="it-block subscribe_block">
-                            <? if ($recordId) { ?>
-                                <div class="it-buttons feedback-input js-subcribe-block">
-                                    Вы подписались на новые объявления.<br>
-                                    Изменить параметры уведомлений, отключить или удалить их можно в разделе
-                                    <a href="/personal/subscriptions/">подписки</a>.
-                                </div>
-                            <? } else { ?>
-                                <div class="it-buttons feedback-input js-subcribe-block">
-                                    <input type="text" id="form_field_email" name="email" placeholder="Email"
-                                           class="request__form__input margin_auto">
-                                    <input type="submit" name="subscribe" value="Подписаться"
-                                           class="request__form__button margin_auto">
-                                </div>
-                                <div class="it-error"></div>
-                            <? } ?>
+            <?if (($APPLICATION->GetCurDir() != '/' && $APPLICATION->GetCurDir() != 'catalog') && !$checkPageParentSectFilter) {?>
+                <? if ($USER->IsAuthorized()) { ?>
+                    <div class="subscribe__form js-subscribe-form">
+                        <div class="subscribe">
+                            <div class="it-block subscribe_block">
+                                <? if ($recordId) { ?>
+                                    <div class="it-buttons feedback-input js-subcribe-block">
+                                        Вы подписались на новые объявления.<br>
+                                        Изменить параметры уведомлений, отключить или удалить их можно в разделе
+                                        <a href="/personal/subscriptions/">подписки</a>.
+                                    </div>
+                                <? } else { ?>
+                                    <div class="it-buttons feedback-input js-subcribe-block">
+                                        <input type="text" id="form_field_email" name="email_subscription" placeholder="Email"
+                                               class="request__form__input margin_auto">
+                                        <input type="submit" name="subscribe" value="Подписаться"
+                                               class="request__form__button margin_auto">
+                                    </div>
+                                    <div class="it-error"></div>
+                                <? } ?>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <? } ?>
             <? } ?>
         </form>
     </div>

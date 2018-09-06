@@ -321,7 +321,6 @@ class LIblock
         $obCache->CleanDir('/' . static::$cacheKey . '/');
         return true;
     }
-
 }
 
 
