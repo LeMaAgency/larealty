@@ -81,7 +81,6 @@ if (isset($uriParts[1])) {
     if (isset($uriParts[2]))
         $rentType = $uriParts[2];
 }
-var_dump($realtyType);
 ?>
 <section class="filter filter_bg">
     <div class="overlay"></div>
