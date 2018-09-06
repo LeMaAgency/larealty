@@ -1,16 +1,19 @@
 <?php
+$_SERVER['DOCUMENT_ROOT'] = realpath(dirname(__FILE__).'/../..');
+
+$DOCUMENT_ROOT = $_SERVER['DOCUMENT_ROOT'];
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
 
 @set_time_limit(0);
 @ignore_user_abort(true);
 
-
 use \Bitrix\Highloadblock as HL;
-
-if(!isset($_GET['frequency'])){
+var_dump($argv);
+if(!isset($argv[1])){
     return;
 }
-switch ($_GET['frequency']):
+switch ($argv[1]):
     case hour_1:
         $date = new DateTime('-1 hour');
         break;
