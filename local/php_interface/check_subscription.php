@@ -13,33 +13,45 @@ var_dump($argv);
 if(!isset($argv[1])){
     return;
 }
+/*Входной параметр, для фильтрации по объектам, что были изменены/добавлены
+ в указанный период назад от текущего времени
+$frequency - это значение свойства "UF_FREQUENCY_SEND" у подписки, каждое
+идентифицирует максимальную частоту рассылки 0- это 1 час,1- это 3 часа,..., 4-это 1 день и т.д.
+*/
 switch ($argv[1]):
     case hour_1:
         $date = new DateTime('-1 hour');
+        $frequency = '0';
         break;
     case hour_3:
         $date = new DateTime('-3 hour');
+        $frequency = '1';
         break;
     case hour_6:
         $date = new DateTime('-6 hour');
+        $frequency = '2';
         break;
     case hour_12:
         $date = new DateTime('-12 hour');
+        $frequency = '3';
         break;
     case day_1:
         $date = new DateTime('-1 day');
+        $frequency = '4';
         break;
     case day_2:
         $date = new DateTime('-2 day');
+        $frequency = '5';
         break;
     case day_3:
         $date = new DateTime('-3 day');
+        $frequency = '6';
         break;
 endswitch;
 
 if (\CModule::IncludeModule("highloadblock") && \CModule::IncludeModule('iblock')) {
     $arSubscriptions = $arObjFilterParams = array();
-
+    //Имя раздела (типа объекта) => ID раздела
     $arRealtyType = array(
         'kvartiry' => '26',
         'komnaty' => '27',
@@ -57,7 +69,7 @@ if (\CModule::IncludeModule("highloadblock") && \CModule::IncludeModule('iblock'
     $resSub = $entity_data_class::getList(
         array(
             'filter' => array(
-                'UF_FREQUENCY_SEND' => (int)$_GET['frequency'],//'0'
+                'UF_FREQUENCY_SEND' => (int)$frequency,//'0'
                 'UF_ENABLE_SEND' => '0', //0 - включена отправка, 1 - отключена P.S. Так вышло =)
             ),
             'select' => array(
@@ -71,6 +83,8 @@ if (\CModule::IncludeModule("highloadblock") && \CModule::IncludeModule('iblock'
             )
         )
     );
+    /*Забиваем массив подписок, как нам надо и одновременно забиваем массив фильтрации по объектам
+     по общим для всех свойствам, скажем PRICE, RENT_TYPE, для уменьшения количества вывода объектов*/
     while ($rowSub = $resSub->fetch()) {
         $tempRowSub = array();
         $tempRowSub['ID'] = $rowSub['ID'];
@@ -152,6 +166,8 @@ if ($arSubscriptions) {
             'PROPERTY_ELECTRIC',
         )
     );
+    /* Проверяем подходит ли текущий объект под какую-нибудь из подписок, если объект не подходит хотябы
+       под один из параметров, то переходим к следующей подписке */
     while ($rowObj = $resObj->fetch()) {
         foreach ($arSubscriptions as $subscription) {
             if (isset($subscription['REALTY_TYPE'])) {
@@ -193,6 +209,7 @@ if ($arSubscriptions) {
                     }
                 }
             }
+            //Подсчёт количества объектов найдённых по подписке
             $arSubscriptionsSend[$subscription['ID']]++;
 
         }
