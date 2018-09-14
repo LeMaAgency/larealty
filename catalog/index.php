@@ -511,7 +511,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
     ));?>
 
 
-    <section class="new-flats">
+    <!--<section class="new-flats">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
@@ -520,9 +520,9 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
             </div>
         </div>
         <?php
-        $parentSections = array('', '', '');
-        ?>
-        <?if(isset($currentSectionCode) && $currentSectionCode === 'kvartiry-komnaty'):?>
+/*        $parentSections = array('', '', '');
+        */?>
+        <?/*if(isset($currentSectionCode) && $currentSectionCode === 'kvartiry-komnaty'):*/?>
             <div class="container">
                 <div class="row">
                     <div class="col-sm-3">
@@ -551,10 +551,10 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                     </div>
                 </div>
             </div>
-        <?else:?>
+        <?/*else:*/?>
             <?php
-                $parentSections = array('doma', 'dachi', 'zemelnyy_uchastok');
-            ?>
+/*                $parentSections = array('doma', 'dachi', 'zemelnyy_uchastok');
+            */?>
             <div class="container">
                 <div class="row">
                     <div class="col-sm-4">
@@ -575,26 +575,26 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                     </div>
                 </div>
             </div>
-        <?endif;?>
+        <?/*endif;*/?>
 
-        <?
+        <?/*
         global $roomNewElementFilter;
         $sectionCodes = explode('-', $currentSectionCode);
-        ?>
+        */?>
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane" id="one-room">
                 <div class="container">
                     <div class="row">
                         <?php
-                        $roomNewElementFilter = array(
+/*                        $roomNewElementFilter = array(
                             'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
                             'SECTION_CODE' => $sectionCodes,
                         );
 
                         if(empty($parentSections[0]))
                             $roomNewElementFilter['=PROPERTY_ROOMS_COUNT'] = 1;
-                        ?>
-                        <?$APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
+                        */?>
+                        <?/*$APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
                             'DISPLAY_DATE' => 'Y',
                             'DISPLAY_NAME' => 'Y',
                             'DISPLAY_PICTURE' => 'Y',
@@ -660,7 +660,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                             'AJAX_OPTION_STYLE' => 'Y',
                             'AJAX_OPTION_HISTORY' => 'N',
                             'AJAX_OPTION_ADDITIONAL' => '',
-                        ));?>
+                        ));*/?>
                     </div>
                 </div>
             </div>
@@ -668,14 +668,14 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                 <div class="container">
                     <div class="row">
                         <?php
-                        $roomNewElementFilter = array(
+/*                        $roomNewElementFilter = array(
                             'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
                             'SECTION_CODE' => $sectionCodes,
                         );
                         if(empty($parentSections[0]))
                             $roomNewElementFilter['=PROPERTY_ROOMS_COUNT'] = 2;
-                        ?>
-                        <?$APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
+                        */?>
+                        <?/*$APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
                             'DISPLAY_DATE' => 'Y',
                             'DISPLAY_NAME' => 'Y',
                             'DISPLAY_PICTURE' => 'Y',
@@ -741,7 +741,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                             'AJAX_OPTION_STYLE' => 'Y',
                             'AJAX_OPTION_HISTORY' => 'N',
                             'AJAX_OPTION_ADDITIONAL' => '',
-                        ));?>
+                        ));*/?>
                     </div>
                 </div>
             </div>
@@ -749,14 +749,14 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                 <div class="container">
                     <div class="row">
                         <?php
-                        $roomNewElementFilter = array(
+/*                        $roomNewElementFilter = array(
                             'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
                             'SECTION_CODE' => $sectionCodes,
                         );
                         if(empty($parentSections[0]))
                             $roomNewElementFilter['=PROPERTY_ROOMS_COUNT'] = 3;
-                        ?>
-                        <?$APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
+                        */?>
+                        <?/*$APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
                             'DISPLAY_DATE' => 'Y',
                             'DISPLAY_NAME' => 'Y',
                             'DISPLAY_PICTURE' => 'Y',
@@ -822,22 +822,22 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                             'AJAX_OPTION_STYLE' => 'Y',
                             'AJAX_OPTION_HISTORY' => 'N',
                             'AJAX_OPTION_ADDITIONAL' => '',
-                        ));?>
+                        ));*/?>
                     </div>
                 </div>
             </div>
-            <?if(empty($parentSections[0])):?>
+            <?/*if(empty($parentSections[0])):*/?>
                 <div role="tabpanel" class="tab-pane" id="four-room">
                     <div class="container">
                         <div class="row">
                             <?php
-                            $roomNewElementFilter = array(
+/*                            $roomNewElementFilter = array(
                                 '>=PROPERTY_ROOMS_COUNT' => 4,
                                 'PROPERTY_RENT_TYPE_VALUE' => $typeFilter,
                                 'SECTION_CODE' => $sectionCodes,
                             );
-                            ?>
-                            <?$APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
+                            */?>
+                            <?/*$APPLICATION->IncludeComponent('bitrix:news.list', 'rooms', array(
                                 'DISPLAY_DATE' => 'Y',
                                 'DISPLAY_NAME' => 'Y',
                                 'DISPLAY_PICTURE' => 'Y',
@@ -903,13 +903,16 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                                 'AJAX_OPTION_STYLE' => 'Y',
                                 'AJAX_OPTION_HISTORY' => 'N',
                                 'AJAX_OPTION_ADDITIONAL' => '',
-                            ));?>
+                            ));*/?>
                         </div>
                     </div>
                 </div>
-            <?endif;?>
+            <?/*endif;*/?>
         </div>
-    </section>
+    </section>-->
+
+
+
     <!--
 <section class="new-arrivals">
     <div class="container">
