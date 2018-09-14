@@ -1,6 +1,6 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-$APPLICATION->SetTitle("Сбербанк");
+$APPLICATION->SetTitle("ПАО «Сбербанк» ");
 ?>
     <div class="container">
         <div class="row">
