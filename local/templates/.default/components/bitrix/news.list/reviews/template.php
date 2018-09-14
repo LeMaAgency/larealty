@@ -19,7 +19,7 @@ $data = new \Lema\Template\TemplateHelper($this);
 use Bitrix\Main\Localization\Loc;
 
 Loc::loadMessages(__FILE__);
-$bxAjaxId = CAjax::GetComponentID($component->__name, $component->__template->__name);
+$bxAjaxId = CAjax::GetComponentID($component->__name, $component->__template->__name,$component->randString());
 
 $sCode = $arResult['CODE'];
 ?>
