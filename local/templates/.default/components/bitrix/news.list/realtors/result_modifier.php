@@ -53,7 +53,9 @@ while($row = $res->Fetch())
 foreach($users as $k => $v)
     $users[$k] = count($v);
 
+?><pre style="display:none;"><?var_dump($users);?></pre><?
 foreach($arResult['ITEMS'] as $k => $v)
 {
-    $arResult['ITEMS'][$k]['OBJECTS_COUNT'] = isset($users[$k]) ? (int) $users[$k] : 0;
+?><pre style="display:none;"><?var_dump($v);?></pre><?
+    $arResult['ITEMS'][$k]['OBJECTS_COUNT'] = isset($users[$v['ID']]) ? (int) $users[$v['ID']] : 0;
 }
