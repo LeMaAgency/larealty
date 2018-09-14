@@ -724,3 +724,12 @@ h2.seller_main__h2 {
     width: 100%;
     text-align: center;
 }
+.main-page-form .call-order-input, .main-page-form .checkbox{
+    color: white;
+}
+.main-page-form .call-order-input::placeholder{
+    color: #a4a4a4;
+}
+.main-page-form a:hover{
+    color: #4cabff;
+}
