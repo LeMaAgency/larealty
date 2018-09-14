@@ -10,7 +10,7 @@ $APPLICATION->SetTitle("Квартирный ответ - Главная стр�
 	"feedback", 
 	array(
 		"COMPONENT_TEMPLATE" => "feedback",
-		"FORM_CLASS" => "ajax-form call-order",
+		"FORM_CLASS" => "ajax-form main-page-form",
 		"FORM_ACTION" => "",
 		"FORM_152_FZ" => "Я ознакомлен <a target=\"_blank\" href=\"/contacts/apply.pdf\">c положением об обработке и защите персональных данных.</a>",
 		"FORM_BTN_TITLE" => "Отправить",
