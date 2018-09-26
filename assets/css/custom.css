@@ -733,3 +733,15 @@ h2.seller_main__h2 {
 .main-page-form a:hover{
     color: #4cabff;
 }
+.item-info-name{
+    min-height: 25px;
+}
+.reviews-block{
+    text-align: center;
+    padding: 15px;
+}
+#reviews-form textarea{
+    height:200px;
+    line-height: 25px !important;
+
+}

@@ -223,7 +223,7 @@ $(function () {
                         curForm.find('[name="' + inputName + '"]').first().css({'border': '1px solid red'})
                             .closest('.it-block').find('.it-error').html(ans.errors[inputName]);
                     }
-                }else{
+                } else {
                     //ok
                     //curForm.find('input[name="email_subscription"]').val('').css({'border': '0px solid'});
                     curForm.find('.it-error').empty();
@@ -257,11 +257,18 @@ $(document).ready(function () {
         $.fancybox.open($("#realtors-feedback-form"));
         $("#form_field_realtor_id").val($(this).data("id"));
     });
+
     $("body").on("click", ".js-feedback-form", function (e) {
         e.preventDefault();
         $.fancybox.open($("#feedback-form"));
         $("#feedback-form").find(".call-order-title").html($(this).html());
         $("#feedback-form").find("input[type='submit']").val("Отправить");
+    });
+
+    $("body").on("click", ".js-reviews-form", function (e) {
+        e.preventDefault();
+        $("#reviews-form").find(".call-order-title").html($(this).html());
+        $.fancybox.open($("#reviews-form"));
     });
 
     $("body").on("click", ".js-order-viewing", function (e) {
@@ -460,12 +467,12 @@ $(document).ready(function () {
         });
         frequencySlider.noUiSlider.on('update', function (values) {
             skipValues[0].innerHTML = arRange[Number(values)];
-            skipValues.attr('data-value',Number(values));
+            skipValues.attr('data-value', Number(values));
         });
         //Сброс параметров до начальных при нажитии кнопки "отмена"
         $('.button-block .cancel').on('click', function () {
             var mail = $(this).closest('.setting-input-block').find('.mail-block input');
-            mail.val(mail.data('default')).css({border:'1px solid #a8a9a9'});
+            mail.val(mail.data('default')).css({border: '1px solid #a8a9a9'});
             mail.closest('.setting-input-block').find('.it-error').html('');
             frequencySlider.noUiSlider.set(defaultValue);
             $.fancybox.close();
@@ -473,7 +480,7 @@ $(document).ready(function () {
     });
     $('.js-subscribe-delete-popup').on('click', function (e) {
         e.preventDefault();
-        $.fancybox.open($('#del-popup').attr('data-id',$(this).closest('.subscription-user').data('id') * 1));
+        $.fancybox.open($('#del-popup').attr('data-id', $(this).closest('.subscription-user').data('id') * 1));
     });
 
     $(document).on('click', '.js-subscribe-delete', function (e) {
@@ -488,7 +495,7 @@ $(document).ready(function () {
                 $.fancybox.close();
                 //remove deleted items
                 $('.js-subscribe-block').each(function (i, el) {
-                    if(($(el).find('.subscription-user').data('id')*1) == itemId){
+                    if (($(el).find('.subscription-user').data('id') * 1) == itemId) {
                         $(el).remove();
                     }
                 });
@@ -510,7 +517,11 @@ $(document).ready(function () {
         //show ajax-loader
         BX.showWait(waitElement);
 
-        $.get('/ajax/subscribe.php?action=setting_save', {ID: itemId,EMAIL:itemEmail,FREQUENCY:itemFrequencySend}, function (ans) {
+        $.get('/ajax/subscribe.php?action=setting_save', {
+            ID: itemId,
+            EMAIL: itemEmail,
+            FREQUENCY: itemFrequencySend
+        }, function (ans) {
             if (ans && ans.errors) {
                 BX.closeWait(waitElement);
                 curForm.find('.it-error').empty();
@@ -519,7 +530,7 @@ $(document).ready(function () {
                         .closest('.it-block').find('.it-error').html(ans.errors[inputName]);
                 }
             }
-            if(ans.status){
+            if (ans.status) {
                 $.fancybox.close();
                 //hide ajax-loader
                 BX.closeWait(waitElement);

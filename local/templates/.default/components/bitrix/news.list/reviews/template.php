@@ -49,7 +49,7 @@ $sCode = $arResult['CODE'];
                                     <?= $item->get("ACTIVE_FROM"); ?>
                                 </span>
                                 <p class="customer-reviews__item__content__text">
-                                    <?= $item->previewText(); ?>
+                                    <?= $item->propVal("REVIEW"); ?>
                                 </p>
                                 <a href="#" class="customer-reviews__item__content__detail">
                                 <span>

@@ -169,27 +169,27 @@ $APPLICATION->SetTitle("Продавцу");
 
                 <div class="col-xs-12 col-md-6 col-lg-8">
                     <? $APPLICATION->IncludeComponent(
-	"lema:form.ajax", 
-	"request", 
-	array(
-		"COMPONENT_TEMPLATE" => "request",
-		"FORM_CLASS" => "ajax-form request__form request-form",
-		"FORM_ACTION" => "",
-		"FORM_152_FZ" => "Я ознакомлен <a target=\"_blank\" href=\"/contacts/apply.pdf\">c положением об обработке и защите персональных данных.</a>",
-		"FORM_BTN_TITLE" => "Отправить заявку",
-		"FORM_SUCCESS_FUNCTION" => "\$.fancybox.open(\"Ваше сообщение успешно отправлено\")",
-		"FORM_SUCCESS_FUNCTION_CORRECT_JSON" => "Y",
-		"FORM_FIELDS" => "[{\"name\":\"name\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Имя\",\"default\":\"\",\"required\":\"Y\"},{\"name\":\"phone\",\"type\":\"tel\",\"title\":\"\",\"placeholder\":\"Телефон\",\"default\":\"\",\"required\":\"Y\"}]",
-		"NEED_SAVE_TO_IBLOCK" => "Y",
-		"NEED_SEND_EMAIL" => "Y",
-		"EVENT_TYPE" => "1",
-		"CACHE_TYPE" => "A",
-		"CACHE_TIME" => "3600",
-		"IBLOCK_TYPE" => "feedback",
-		"IBLOCK_ID" => "13"
-	),
-	false
-); ?>
+                        "lema:form.ajax",
+                        "request",
+                        array(
+                            "COMPONENT_TEMPLATE" => "request",
+                            "FORM_CLASS" => "ajax-form request__form request-form",
+                            "FORM_ACTION" => "",
+                            "FORM_152_FZ" => "Я ознакомлен <a target=\"_blank\" href=\"/contacts/apply.pdf\">c положением об обработке и защите персональных данных.</a>",
+                            "FORM_BTN_TITLE" => "Отправить заявку",
+                            "FORM_SUCCESS_FUNCTION" => "\$.fancybox.open(\"Ваше сообщение успешно отправлено\")",
+                            "FORM_SUCCESS_FUNCTION_CORRECT_JSON" => "Y",
+                            "FORM_FIELDS" => "[{\"name\":\"name\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Имя\",\"default\":\"\",\"required\":\"Y\"},{\"name\":\"phone\",\"type\":\"tel\",\"title\":\"\",\"placeholder\":\"Телефон\",\"default\":\"\",\"required\":\"Y\"}]",
+                            "NEED_SAVE_TO_IBLOCK" => "Y",
+                            "NEED_SEND_EMAIL" => "Y",
+                            "EVENT_TYPE" => "1",
+                            "CACHE_TYPE" => "A",
+                            "CACHE_TIME" => "3600",
+                            "IBLOCK_TYPE" => "feedback",
+                            "IBLOCK_ID" => "13"
+                        ),
+                        false
+                    ); ?>
                 </div>
 
             </div>
@@ -271,7 +271,8 @@ $APPLICATION->SetTitle("Продавцу");
                     <h3 class="add-apartment__title"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/consultation_title.php'); ?></h3>
                     <span><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/consultation_text.php'); ?></span>
 
-                    <a href="#" class="add-apartment__button js-feedback-form"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/consultation_button_text.php'); ?></a>
+                    <a href="#"
+                       class="add-apartment__button js-feedback-form"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/consultation_button_text.php'); ?></a>
 
                 </div>
             </div>
@@ -397,7 +398,7 @@ $APPLICATION->SetTitle("Продавцу");
 		"PARENT_SECTION_CODE" => "",
 		"PREVIEW_TRUNCATE_LEN" => "",
 		"PROPERTY_CODE" => array(
-			0 => "",
+			0 => "REVIEW",
 			1 => "",
 		),
 		"SET_BROWSER_TITLE" => "N",
@@ -407,15 +408,44 @@ $APPLICATION->SetTitle("Продавцу");
 		"SET_STATUS_404" => "N",
 		"SET_TITLE" => "N",
 		"SHOW_404" => "N",
-		"SORT_BY1" => "SORT",
-		"SORT_BY2" => "ACTIVE_FROM",
-		"SORT_ORDER1" => "ASC",
+		"SORT_BY1" => "ACTIVE_FROM",
+		"SORT_BY2" => "SORT",
+		"SORT_ORDER1" => "DESC",
 		"SORT_ORDER2" => "ASC",
 		"STRICT_SECTION_CHECK" => "N",
 		"COMPONENT_TEMPLATE" => "reviews"
 	),
 	false
 ); ?>
+    <div class="reviews-block">
+        <a href="#" class="add-apartment__button js-reviews-form">
+            Оставить отзыв
+        </a>
+        <div id="reviews-form" class="fancybox-feedback" style="display: none;">
+            <? $APPLICATION->IncludeComponent(
+                "lema:form.ajax",
+                "reviews",
+                Array(
+                    "COMPONENT_TEMPLATE" => "feedback",
+                    "FORM_CLASS" => "ajax-form empty reviews",    // Класс формы
+                    "FORM_ACTION" => "",    // URL формы (свой обработчик)
+                    "FORM_152_FZ" => "Я ознакомлен <a target=\"_blank\" href=\"/contacts/apply.pdf\">c положением об обработке и защите персональных данных.</a>",    // Текст соглашения (152-ФЗ)
+                    "FORM_BTN_TITLE" => "Отправить",    // Подпись кнопки формы
+                    "FORM_SUCCESS_FUNCTION" => "\$.fancybox.open(\"Ваше сообщение успешно отправлено\")",    // Функция при успешной отправке
+                    "FORM_SUCCESS_FUNCTION_CORRECT_JSON" => "Y",    // Функция в корректном JSON-формате
+                    "FORM_FIELDS" => "[{\"name\":\"name\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Имя\",\"default\":\"\",\"required\":\"Y\"},{\"name\":\"review\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Отзыв\",\"default\":\"\",\"required\":\"Y\"}]",    // Поля формы
+                    "NEED_SAVE_TO_IBLOCK" => "Y",    // Сохранять в инфоблок
+                    "NEED_SEND_EMAIL" => "Y",    // Отправка сообщения
+                    "EVENT_TYPE" => "1",    // Тип почтового события
+                    "CACHE_TYPE" => "A",    // Тип кеширования
+                    "CACHE_TIME" => "3600",    // Время кеширования (сек.)
+                    "IBLOCK_TYPE" => "content",    // Тип информационного блока
+                    "IBLOCK_ID" => "8",    // Код информационного блока
+                ),
+                false
+            ); ?>
+        </div>
+    </div>
     <!-- /REVIEWS -->
 
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

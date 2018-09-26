@@ -456,6 +456,35 @@ $APPLICATION->SetTitle("Покупателю");
 	),
 	false
 ); ?>
+        <div class="reviews-block">
+            <a href="#" class="add-apartment__button js-reviews-form">
+                Оставить отзыв
+            </a>
+            <div id="reviews-form" class="fancybox-feedback" style="display: none;">
+                <? $APPLICATION->IncludeComponent(
+                    "lema:form.ajax",
+                    "reviews",
+                    Array(
+                        "COMPONENT_TEMPLATE" => "feedback",
+                        "FORM_CLASS" => "ajax-form empty reviews",    // Класс формы
+                        "FORM_ACTION" => "",    // URL формы (свой обработчик)
+                        "FORM_152_FZ" => "Я ознакомлен <a target=\"_blank\" href=\"/contacts/apply.pdf\">c положением об обработке и защите персональных данных.</a>",    // Текст соглашения (152-ФЗ)
+                        "FORM_BTN_TITLE" => "Отправить",    // Подпись кнопки формы
+                        "FORM_SUCCESS_FUNCTION" => "\$.fancybox.open(\"Ваше сообщение успешно отправлено\")",    // Функция при успешной отправке
+                        "FORM_SUCCESS_FUNCTION_CORRECT_JSON" => "Y",    // Функция в корректном JSON-формате
+                        "FORM_FIELDS" => "[{\"name\":\"name\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Имя\",\"default\":\"\",\"required\":\"Y\"},{\"name\":\"review\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Отзыв\",\"default\":\"\",\"required\":\"Y\"}]",    // Поля формы
+                        "NEED_SAVE_TO_IBLOCK" => "Y",    // Сохранять в инфоблок
+                        "NEED_SEND_EMAIL" => "Y",    // Отправка сообщения
+                        "EVENT_TYPE" => "1",    // Тип почтового события
+                        "CACHE_TYPE" => "A",    // Тип кеширования
+                        "CACHE_TIME" => "3600",    // Время кеширования (сек.)
+                        "IBLOCK_TYPE" => "content",    // Тип информационного блока
+                        "IBLOCK_ID" => "8",    // Код информационного блока
+                    ),
+                    false
+                ); ?>
+            </div>
+        </div>
         <!-- /REVIEWS -->
 
     </div>

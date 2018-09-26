@@ -3,7 +3,7 @@ global $USER;
 $rsUsers = CUser::GetList(
     $by = array("UF_SORT"=>"asc","NAME"=>"desc"),
     $order = "desc",
-    Array("GROUPS_ID" => Array(3), 'ACTIVE' => 'Y'),
+    Array("GROUPS_ID" => Array(3), 'ACTIVE' => 'Y','!ID'=>'1'),
     Array("FIELDS" => array(
         'ID',
         'NAME',

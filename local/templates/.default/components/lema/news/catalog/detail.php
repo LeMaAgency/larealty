@@ -122,10 +122,10 @@ $this->setFrameMode(true);
         )
     ); ?>
 
-    <? if (!empty($GLOBALS["ELEM_ID_RENT"])): ?>
+    <? if (!empty($GLOBALS["ELEM_ID_CATALOG"])): ?>
         <? global $arrResemblingFilter;
 
-        $arrResemblingFilter = array("ID" => $GLOBALS["ELEM_ID_RENT"]);
+        $arrResemblingFilter = array("ID" => $GLOBALS["ELEM_ID_CATALOG"]);
 
         $APPLICATION->IncludeComponent(
             "bitrix:news.list",
