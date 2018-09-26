@@ -745,3 +745,6 @@ h2.seller_main__h2 {
     line-height: 25px !important;
 
 }
+.offers-item-img{
+    max-height: 270px;
+}
