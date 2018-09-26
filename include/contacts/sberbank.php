@@ -1,5 +1,3 @@
-
-
 <h2> <img width="300" alt="logosber.jpg" src="/upload/medialibrary/dc5/dc52cf97c70cbf6768c7806150bfd268.png" title="logosber.jpg" align="left" style="margin-right:10px;">Условия кредитования </h2>
 <p>
 </p>
@@ -12,7 +10,7 @@
 		 Процентная ставка
 	</td>
 	<td style="width: 30%;">
-		 от
+		 от 10 %
 	</td>
 </tr>
 <tr>
