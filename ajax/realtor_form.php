@@ -35,9 +35,9 @@ if($form->validate())
         ),
         'REALTOR_CALL_WAIT',
         array(
-            '#NAME#' => $form->getField('name'),
-            '#PHONE#' => $form->getField('phone'),
-            '#EMAIL_TO#' => $realtorEmail,
+            'NAME' => $form->getField('name'),
+            'PHONE' => $form->getField('phone'),
+            'EMAIL_TO' => $realtorEmail,
         )
     );
 
