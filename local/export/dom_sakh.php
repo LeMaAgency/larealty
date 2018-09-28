@@ -1,14 +1,14 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] .'/bitrix/modules/main/include/prolog_before.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
 
-$yml = new \DomSakhExport(\LIblock::getId('objects'),array(
+$yml = new \DomSakhExport(\LIblock::getId('objects'), array(
     'storageDir' => '/bitrix/catalog_export/dom_sakh',
     //'additionalData' => array('siteTitle' => 'KvOtvet'),
 ));
 
 $rentAndRealtyTypes = array();
 $tmp = LIblock::getPropEnumValues(LIblock::getPropId('objects', 'RENT_TYPE'));
-foreach($tmp as $code => $data)
+foreach ($tmp as $code => $data)
     $rentAndRealtyTypes[$data['ID']] = $code;
 unset($tmp);
 
@@ -18,6 +18,7 @@ $yml->loadData(array(
     'arSelect' => array(
         '*', 'DETAIL_PAGE_URL',
         'PROPERTY_PRICE',
+        'PROPERTY_RIELTOR',
         'PROPERTY_MORE_PHOTO',
         'PROPERTY_STAGE',
         'PROPERTY_STAGES_COUNT',
@@ -76,13 +77,29 @@ $yml->loadData(array(
         'PROPERTY_LOT_CATEGORIES',
         'PROPERTY_LOT_HAVINGS_TYPE',
     ),
-    'filter' => array('ACTIVE' => 'Y', 'SECTION_CODE' => 'active', 'INCLUDE_SUBSECTIONS' => 'Y','PROPERTY_ADD_OBJECT_TO_EXPORT_VALUE' => 'Y'),
-    'callback' => function($data) use($rentAndRealtyTypes, $sections) {
-        foreach($data as $k => $v)
-        {
-            if($k[0] === '~' || false !== strpos($k, '_VALUE_ID'))
+    'filter' => array('ACTIVE' => 'Y', 'SECTION_CODE' => 'active', 'INCLUDE_SUBSECTIONS' => 'Y', 'PROPERTY_ADD_OBJECT_TO_EXPORT_VALUE' => 'Y'),
+    'callback' => function ($data) use ($rentAndRealtyTypes, $sections) {
+        foreach ($data as $k => $v) {
+            if ($k[0] === '~' || false !== strpos($k, '_VALUE_ID'))
                 unset($data[$k]);
         }
+        if (!empty($data['PROPERTY_RIELTOR_VALUE'])) {
+            $rsUsers = \CUser::GetList(
+                $by = array("UF_SORT"=>"asc","NAME"=>"desc"),
+                $order = "desc",
+                Array("GROUPS_ID" => Array(3), 'ACTIVE' => 'Y', 'ID' => $data['PROPERTY_RIELTOR_VALUE']),
+                Array(
+                    "FIELDS" => array(
+                        'ID',
+                        'WORK_PHONE',
+                    )
+                )
+            );
+            if ($arUser = $rsUsers->Fetch()) {
+                $data['work_phone'] = $arUser['WORK_PHONE'];
+            }
+        }
+
         $types = array(
             'куплю' => 'покупка',
             'продам' => 'продажа',
@@ -104,20 +121,17 @@ $yml->loadData(array(
         );
 
 
-        if(isset($sections[$data['IBLOCK_SECTION_ID']]))
-        {
+        if (isset($sections[$data['IBLOCK_SECTION_ID']])) {
             $category = mb_strtolower($sections[$data['IBLOCK_SECTION_ID']]['NAME'], 'UTF-8');
             $data['category'] = isset($categories[$category]) ? $categories[$category] : null;
-        }
-        else
-        {
+        } else {
             unset($data);
-            return ;
+            return;
         }
 
         //Get rent type
         $rentType = null;
-        if(empty($rentAndRealtyTypes[$data['PROPERTY_RENT_TYPE_ENUM_ID']]))
+        if (empty($rentAndRealtyTypes[$data['PROPERTY_RENT_TYPE_ENUM_ID']]))
             $rentType = \CUtil::translit($data['PROPERTY_RENT_TYPE_VALUE'], 'ru');
         else
             $rentType = $rentAndRealtyTypes[$data['PROPERTY_RENT_TYPE_ENUM_ID']];
@@ -132,11 +146,10 @@ $yml->loadData(array(
         $data['address'] = trim('ул. ' . $data['PROPERTY_STREET_VALUE'] . ', ' . $data['PROPERTY_HOUSE_NUMBER_VALUE']);
 
         $data['images'] = array();
-        if(!empty($data['DETAIL_PICTURE']))
+        if (!empty($data['DETAIL_PICTURE']))
             $data['images'][] = \CFile::GetPath($data['DETAIL_PICTURE']);
-        if(!empty($data['PROPERTY_MORE_PHOTO_VALUE']))
-        {
-            foreach($data['PROPERTY_MORE_PHOTO_VALUE'] as $imgId)
+        if (!empty($data['PROPERTY_MORE_PHOTO_VALUE'])) {
+            foreach ($data['PROPERTY_MORE_PHOTO_VALUE'] as $imgId)
                 $data['images'][] = \CFile::GetPath($imgId);
         }
         unset($data['DETAIL_PICTURE'], $data['PROPERTY_MORE_PHOTO_VALUE']);
@@ -160,9 +173,9 @@ $yml->loadData(array(
         $propertyType = mb_strtolower($data['PROPERTY_LOT_HAVINGS_TYPE_VALUE'], 'UTF-8');
         $data['property-type'] = isset($propertyTypes[$propertyType]) ? $propertyTypes[$propertyType] : null;
 
-        if($data['PROPERTY_BALCONIES_COUNT_VALUE'] == 1)
+        if ($data['PROPERTY_BALCONIES_COUNT_VALUE'] == 1)
             $data['balkony'] = 'один';
-        elseif($data['PROPERTY_BALCONIES_COUNT_VALUE'] > 1)
+        elseif ($data['PROPERTY_BALCONIES_COUNT_VALUE'] > 1)
             $data['balkony'] = 'больше одного';
         else
             $data['balkony'] = $data['PROPERTY_LOGGIAS_COUNT_VALUE'] > 0 ? 'лоджия' : null;

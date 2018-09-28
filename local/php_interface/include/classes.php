@@ -151,7 +151,7 @@ class DomSakhExport extends \Lema\Base\XmlExport
         <sales-agent>
             <nick>Kv-otvet</nick>
             <name><?=$info['PROPERTY_USER_NAME_VALUE'];?></name>
-            <phone><?=$info['PROPERTY_USER_PHONE_VALUE'];?></phone>
+            <phone><?=$info['work_phone'];?></phone>
             <email><?=$info['PROPERTY_USER_EMAIL_VALUE'];?></email>
         </sales-agent>
         <price>
