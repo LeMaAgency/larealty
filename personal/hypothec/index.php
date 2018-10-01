@@ -294,6 +294,9 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                         <ul class="filter-select-drop">
                             <li data-value="">Выбрать</li>
                             <?foreach(\LIblock::getPropEnumValues(\LIblock::getPropId('hypothec', 'SALARY_PROJECT_BANK')) as $data):?>
+                                <?if($data['ID'] == 186 || $data['ID'] == 187){
+                                    continue;
+                                }?>
                                 <li data-value="<?= (int) $data['ID'];?>">
                                     <?=htmlspecialcharsbx($data['VALUE']);?>
                                 </li>
