@@ -87,7 +87,7 @@ $yml->loadData(array(
             $rsUsers = \CUser::GetList(
                 $by = array("UF_SORT"=>"asc","NAME"=>"desc"),
                 $order = "desc",
-                Array("GROUPS_ID" => Array(3), 'ACTIVE' => 'Y', 'ID' => $data['PROPERTY_RIELTOR_VALUE']),
+                Array("GROUPS_ID" => Array(5), 'ACTIVE' => 'Y', 'ID' => $data['PROPERTY_RIELTOR_VALUE']),
                 Array(
                     "FIELDS" => array(
                         'ID',

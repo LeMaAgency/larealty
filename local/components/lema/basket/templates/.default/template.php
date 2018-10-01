@@ -146,7 +146,11 @@ if ($basket->hasProducts()):?>
                                             </p>
                                         <? endif; ?>
                                         <p class="card-flat__content__text"><?= $item['PREVIEW_TEXT']; ?></p>
-                                        <a href="<?= $item['DETAIL_PAGE_URL']; ?>"
+                                        <a href="<?= str_replace(
+                                            '#RENT_TYPE#',
+                                            $arResult['RENT_TYPE'][$item['RENT_TYPE']['ENUM_ID']]['XML_ID'],
+                                            $item['DETAIL_PAGE_URL']
+                                        ); ?>"
                                            class="element-detail-link offers-item-more offers-item-more_text-right">
                                             <?= Loc::getMessage('LEMA_FAVORITES_MORE_BTN'); ?>
                                             <i class="more-icon"></i>

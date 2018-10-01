@@ -748,3 +748,13 @@ h2.seller_main__h2 {
 .offers-item-img{
     max-height: 270px;
 }
+.personal-hypotec .add-apartment{
+    padding: 143px 0;
+}
+.personal-hypotec .callback.new-rieltor{
+    margin: inherit;
+    padding-top: 20px;
+}
+.personal-hypotec.row.new-rieltor{
+    margin-bottom: 40px !important;
+}

@@ -64,9 +64,11 @@ if(!empty($file['tmp_name']) && is_uploaded_file($file['tmp_name'])){
         else
             $errors['file'] = 'Ошибка при сохранении файла';
     }
+}else{
+    $filePath="";
+    /*$errors['file'] = 'Файл обязателен к заполнению';*/
 }
-else
-    $errors['file'] = 'Файл обязателен к заполнению';
+
 
 $status = empty($errors);
 

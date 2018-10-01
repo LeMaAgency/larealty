@@ -541,7 +541,7 @@ $(document).ready(function () {
     });
 });
 
-$(document).on('click', '.filter-select-drop li', function () {
+$(document).on('click', '.js-filter-select-drop-realty-type li', function () {
     var type = $(this).data('value'),
         name = $(this).data('name');
 
