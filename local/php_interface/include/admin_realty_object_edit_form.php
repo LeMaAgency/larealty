@@ -1779,8 +1779,16 @@ if (
     $(function () {
 
         if ($('#save').is(':disabled')) {
-            $('[id^="tr_PROPERTY_"]').hide();
-            $('.adm-detail-block').remove();
+            /*$('[id^="tr_PROPERTY_"]').hide();
+            $('.adm-detail-block').remove();*/
+            /*
+            * Hiding a box with buttons (save,back,cancel, ...) and some fields with owner data
+            */
+            $('.adm-detail-content-btns').remove();
+            $('#tr_PROPERTY_68').remove();
+            $('#tr_PROPERTY_69').remove();
+            $('#tr_PROPERTY_70').remove();
+            $('#tr_PROPERTY_71').remove();
 
             return;
         }

@@ -330,10 +330,10 @@ if(!empty($find_price_1))
     $arFilter['>=PROPERTY_PRICE'] = $find_price_1;
 if(!empty($find_price_2))
     $arFilter['<=PROPERTY_PRICE'] = $find_price_2;
-
+/*
 if(!$GLOBALS['USER']->IsAdmin() && empty($find_el_property_61))
     $arFilter['PROPERTY_RIELTOR'] = $GLOBALS['USER']->GetId();
-
+*/
 $arSubQuery = array();
 if ($boolSKU && $boolSKUFiltrable)
 {
@@ -4036,10 +4036,10 @@ $oFilter->End();
             $sectionBlock.addClass($class);
 
         <?endif;?>
-        <?if(!$GLOBALS['USER']->IsAdmin()):?>
+        <?/*if(!$GLOBALS['USER']->IsAdmin()):?>
             $('#find_el_property_61').val(<?=(int) $GLOBALS['USER']->GetId();?>).attr('disabled', true)
                 .closest('.adm-filter-item-center').find('#FindUser').hide();
-        <?endif;?>
+        <?endif;*/?>
         $('a[href^="iblock_list_admin.php?IBLOCK_ID=2"]').each(function(i, el) {
             $(el).attr('href', 'la_' + $(el).attr('href'));
         })
