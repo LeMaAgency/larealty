@@ -1,5 +1,6 @@
 {
     "require": {
-        "duzun/hquery": "^2.2"
+        "voku/simple_html_dom": "^4.1",
+        "voku/portable-utf8": "^5.2"
     }
 }
