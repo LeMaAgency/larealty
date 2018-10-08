@@ -1,0 +1,18 @@
+.new-rieltor .calculator__wrap {
+    background-color: #f4f3f3;
+}
+.new-rieltor .calculator__wrap .callback {
+    margin: inherit;
+    padding-top: 20px;
+}
+.new-rieltor .add-apartment {
+    padding: 143px 0;
+}
+a.one-rieltor-phone:before {
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 11px;
+    background: url(/assets/img/icons/phone-call.png) no-repeat center;
+}

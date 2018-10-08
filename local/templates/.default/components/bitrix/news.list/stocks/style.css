@@ -1,0 +1,19 @@
+.stock-detail-btn {
+	text-align: right;
+}
+.stock-detail-btn a {
+	color: #ffffff;
+	font-weight: 600;
+	font-size: 18px;
+	background-color: #07ba00;
+	text-decoration: none;
+	text-align: center;
+	padding: 15px 25px;
+	margin-right: 30px;
+	transition: 0.3s background-color linear;
+}
+.stock-detail-btn:hover a{
+	background-color: #0b9605;
+	color: #ffffff;
+	text-decoration: none;
+}
