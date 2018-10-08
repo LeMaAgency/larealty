@@ -14,3 +14,7 @@ if(is_file(__DIR__ . '/include/functions.php'))
 //get overrided classes
 if(is_file(__DIR__ . '/include/classes.php'))
     require_once __DIR__ . '/include/classes.php';
+
+// Composer autoload
+if(is_file($_SERVER['DOCUMENT_ROOT'] . '/local/vendor/autoload.php'))
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/local/vendor/autoload.php';
