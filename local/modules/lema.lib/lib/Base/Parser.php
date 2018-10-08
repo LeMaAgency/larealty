@@ -37,9 +37,11 @@ class Parser extends StaticInstance
             $links[] = $hostUrl . $item->findOne('a')->getAttribute('href');
         }
         $i = 0;
+        $links = array_unique($links);
+
         foreach($links as $link)
         {
-            if(++$i === 2)
+            if(++$i === 3)
                 break;
             $data = HtmlDomParser::file_get_html($link);
             $props = [];
