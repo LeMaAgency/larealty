@@ -2,10 +2,6 @@
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Квартирный ответ - Главная страница");
 
-$data = \Lema\Base\Parser::get()->setUrl('http://blackwood.ru/catalog/city')->parse();
-\Lema\Common\Dumper::dump($data);
-exit;
-
 ?>
     <!-- FEEDBACK FORM  -->
     <section class="top-slider-block">
