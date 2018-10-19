@@ -9,8 +9,10 @@ function loadLemaLib()
     \Bitrix\Main\Loader::includeModule('lema.lib');
 }
 
-$events = array('Add', 'Update', 'Delete');
 
+return ;
+
+$events = array('Add', 'Update', 'Delete');
 
 foreach($events as $event)
 {

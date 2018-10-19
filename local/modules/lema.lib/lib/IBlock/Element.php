@@ -2,6 +2,8 @@
 
 namespace Lema\IBlock;
 
+use Bitrix\Iblock\ElementTable;
+
 \Bitrix\Main\Loader::includeModule('iblock');
 
 /**
@@ -198,5 +200,63 @@ class Element
     protected static function getData(array $params = array(), $key, $defValue = null)
     {
         return isset($params[$key]) ? $params[$key] : $defValue;
+    }
+
+    /**
+     * @param $iblockId
+     * @param array $data
+     * @return int
+     * @throws \Exception
+     */
+    public static function addElement($iblockId, array $data = array())
+    {
+        $el = new \CIBlockElement();
+
+        $data['IBLOCK_ID'] = $iblockId;
+        if(!($elementId = $el->Add($data)))
+            throw new \Exception($el->LAST_ERROR);
+        return $elementId;
+    }
+    /**
+     * @param $iblockId
+     * @param array $data
+     * @return int
+     * @throws \Exception
+     */
+    public static function addOrUpdateElement($iblockId, array $data = array())
+    {
+        if(empty($data['XML_ID']))
+            throw new \Exception('XML_ID must be specified.');
+
+        $el = new \CIBlockElement;
+
+        if(!empty($data['PROPERTY_VALUES']['MORE_PHOTO']))
+        {
+            $images = $data['PROPERTY_VALUES']['MORE_PHOTO'];
+            $data['PROPERTY_VALUES']['MORE_PHOTO'] = ['VALUE' => ['del' => 'Y']];
+        }
+
+        $res = ElementTable::getList(array(
+            'filter' => array('IBLOCK_ID' => $iblockId, 'XML_ID' => $data['XML_ID']),
+            'select' => array('ID'),
+            'limit' => 1,
+        ));
+        $data['IBLOCK_ID'] = $iblockId;
+
+        if(($row = $res->fetch()))
+        {
+            $elementId = $row['ID'];
+            if(!$el->Update($elementId, $data))
+                throw new \Exception($el->LAST_ERROR);
+        }
+        else
+        {
+            if(!($elementId = $el->Add($data)))
+                throw new \Exception($el->LAST_ERROR);
+        }
+        if(!empty($images))
+            \CIBlockElement::SetPropertyValuesEx($elementId, $iblockId, ['MORE_PHOTO' => $images]);
+
+        return $elementId;
     }
 }

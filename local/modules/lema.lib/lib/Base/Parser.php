@@ -6,6 +6,7 @@ namespace Lema\Base;
 use GuzzleHttp\Client;
 use function GuzzleHttp\Psr7\parse_query;
 use Lema\Common\Helper;
+use Lema\IBlock\Element;
 use Symfony\Component\DomCrawler\Crawler;
 
 class Parser extends StaticInstance
@@ -66,7 +67,6 @@ class Parser extends StaticInstance
         //load inner offers links
         $innerOffersLinks = $this->getInnerOffers($crawler, $offersNames);
         $innerOffersNames = [];
-        $i = 0;
 
         foreach($innerOffersLinks as $key => $innerOffersLink)
         {
@@ -144,91 +144,114 @@ class Parser extends StaticInstance
 
         return $links;
     }
-    public function getProperties($crawler, $offers, $needUpdate = false)
+    public function getProperties($crawler = null, $offers = [], $needUpdate = false)
     {
-        $return = [];
-
-        $replace = [
-            'Стоимость' => 'price',
-            'Станция метро' => 'metro',
-            'Название' => 'name',
-            'Район' => 'region',
-            'Этаж' => 'stage',
-            'Площадь' => 'square',
-            'Комнат' => 'rooms_count',
-            'Высота потолков' => 'height',
-            'Парковка' => 'parking',
-            'Материал дома' => 'material',
-            'Тип перекрытий' => 'slabs',
-            'Отделка' => 'finishing',
-            'Охрана' => 'security',
-            'Инфраструктура' => 'infrastructure',
-            'Благоустройство территории' => 'landscaping',
-            'Окна' => 'windows',
-            'Инфраструктура района' => 'region_infrastructure',
-        ];
-
-        foreach($offers as $url => $fileNames)
+        if($needUpdate || !is_file($this->storeDir . 'props.json'))
         {
-            $path = $this->propsStoreDir . md5($url) . '.json';
-            if($needUpdate || !is_file($path))
+            if(empty($crawler))
+                $crawler = new Crawler(null, $this->hostUrl);
+
+            $return = [];
+
+            $replace = [
+                'Стоимость' => 'price',
+                'Станция метро' => 'metro',
+                'Название' => 'name',
+                'Район' => 'region',
+                'Этаж' => 'stage',
+                'Площадь' => 'square',
+                'Комнат' => 'rooms_count',
+                'Высота потолков' => 'height',
+                'Парковка' => 'parking',
+                'Материал дома' => 'material',
+                'Тип перекрытий' => 'slabs',
+                'Отделка' => 'finishing',
+                'Охрана' => 'security',
+                'Инфраструктура' => 'infrastructure',
+                'Благоустройство территории' => 'landscaping',
+                'Окна' => 'windows',
+                'Инфраструктура района' => 'region_infrastructure',
+            ];
+
+            foreach ($offers as $url => $fileNames)
             {
-                $return[$url] = [];
-                foreach ($fileNames as $fileName)
+                $path = $this->propsStoreDir . md5($url) . '.json';
+                if ($needUpdate || !is_file($path))
                 {
-                    $crawler->clear();
-                    $crawler->addHtmlContent(file_get_contents($this->htmlStoreDir . $fileName), 'UTF-8');
-                    $data = $crawler->filter('.line.clearfix');
-                    $fields = $data->filter('.title')->each(function (Crawler $node) use ($replace) {
-                        $key = mb_substr(trim(strip_tags($node->text())), 0, -1, 'UTF-8');
-                        return isset($replace[$key]) ? $replace[$key] : Helper::translit($key);
-                    });
-                    $values = $data->filter('.value')->each(function (Crawler $node) {
-                        if (!($value = $node->filter('.ccy-option.ccy-rub'))->count())
-                            if (!($value = $node->filter('a'))->count())
-                                $value = $node;
-                        return trim(strip_tags($value->text()));
-                    });
-                    $return[$url][$fileName] = array_combine($fields, $values);
-                    $descriptionSearch = $data->filter('.description > p');
-                    $objectId = (int) preg_replace('~\\D+~', '', $crawler->filter('h1')->text());
-                    $return[$url][$fileName]['ID'] = $objectId;
-                    $return[$url][$fileName]['description'] = $descriptionSearch->count() ? $descriptionSearch->text() : null;
-                    //images
-                    /*
-                    if(!is_dir($this->imagesStoreDir . $objectId))
-                        mkdir($this->imagesStoreDir . $objectId);
-                    */
-                    $return[$url][$fileName]['images'] = [];
-
-                    $queryParams = parse_query($url);
-                    $imageDir = isset($queryParams['id']) ? (int) $queryParams['id'] : $objectId;
-
-                    if(!is_dir($this->imagesStoreDir . $imageDir))
-                        mkdir($this->imagesStoreDir . $imageDir);
-
-                    $images = array_unique($crawler->filter('a[rel="lightbox[a]"]')->each(function(Crawler $node) {
-                        return $node->link()->getUri();
-                    }));
-                    foreach($images as $image)
+                    $return[$url] = [];
+                    foreach ($fileNames as $fileName)
                     {
-                        $imagePath = $imageDir . '/' . basename($image);
-                        if($needUpdate || !is_file($this->imagesStoreDir . $imagePath))
+                        $crawler->clear();
+                        $crawler->addHtmlContent(file_get_contents($this->htmlStoreDir . $fileName), 'UTF-8');
+                        $data = $crawler->filter('.line.clearfix');
+                        $fields = $data->filter('.title')->each(function (Crawler $node) use ($replace) {
+                            $key = mb_substr(trim(strip_tags($node->text())), 0, -1, 'UTF-8');
+                            return isset($replace[$key]) ? $replace[$key] : Helper::translit($key);
+                        });
+                        $values = $data->filter('.value')->each(function (Crawler $node) {
+                            if (!($value = $node->filter('.ccy-option.ccy-rub'))->count())
+                                if (!($value = $node->filter('a'))->count())
+                                    $value = $node;
+                            return trim(($value->text()));
+                        });
+                        $return[$url][$fileName] = array_combine($fields, $values);
+
+                        foreach ($return[$url][$fileName] as $field => $value)
                         {
-                            if(file_put_contents($this->imagesStoreDir . $imagePath, file_get_contents($image)))
+                            if (in_array($field, ['price', 'square']))
+                            {
+                                $return[$url][$fileName][$field] = preg_replace(
+                                    '~[.,\\D]+~',
+                                    '',
+                                    mb_substr($value, 0, -2, 'UTF-8')
+                                );
+                            }
+                        }
+
+                        $descriptionSearch = $data->filter('.description > p');
+                        $objectId = (int)preg_replace('~\\D+~', '', $crawler->filter('h1')->text());
+                        $return[$url][$fileName]['ID'] = $objectId;
+                        $return[$url][$fileName]['description'] = $descriptionSearch->count() ? $descriptionSearch->text() : null;
+                        //images
+                        /*
+                        if(!is_dir($this->imagesStoreDir . $objectId))
+                            mkdir($this->imagesStoreDir . $objectId);
+                        */
+                        $return[$url][$fileName]['images'] = [];
+
+                        $queryParams = parse_query($url);
+                        $imageDir = isset($queryParams['id']) ? (int)$queryParams['id'] : $objectId;
+
+                        if (!is_dir($this->imagesStoreDir . $imageDir))
+                            mkdir($this->imagesStoreDir . $imageDir);
+
+                        $images = array_unique($crawler->filter('a[rel="lightbox[a]"]')->each(function (Crawler $node) {
+                            return $node->link()->getUri();
+                        }));
+                        foreach ($images as $image)
+                        {
+                            $imagePath = $imageDir . '/' . basename($image);
+                            if ($needUpdate || !is_file($this->imagesStoreDir . $imagePath))
+                            {
+                                if (file_put_contents($this->imagesStoreDir . $imagePath, file_get_contents($image)))
+                                    $return[$url][$fileName]['images'][] = $imagePath;
+                            }
+                            else
                                 $return[$url][$fileName]['images'][] = $imagePath;
                         }
-                    }
 
-                    //var_dump($url, $fileName, $images, $return[$url][$fileName]);exit;
+                        //var_dump($url, $fileName, $images, $return[$url][$fileName]);exit;
+                    }
+                    file_put_contents($path, json_encode($return[$url], JSON_UNESCAPED_UNICODE));
                 }
-                file_put_contents($path, json_encode($return[$url], JSON_UNESCAPED_UNICODE));
+                else
+                    $return[$url] = json_decode(file_get_contents($path), 1);
             }
-            else
-            {
-                $return[$url] = json_decode(file_get_contents($path), 1);
-            }
+            file_put_contents($this->storeDir . 'props.json', json_encode($return, JSON_UNESCAPED_UNICODE));
         }
+        else
+            $return = json_decode(file_get_contents($this->storeDir . 'props.json'), 1);
+
         return $return;
     }
     public function loadHtml($urls, $needUpdate = false)
@@ -255,6 +278,147 @@ class Parser extends StaticInstance
                 catch(\Exception $e) {
                     echo $e->getMessage();
                 }
+            }
+        }
+        return $return;
+    }
+
+    public function getCategories($needUpdate = false)
+    {
+        if($needUpdate || !is_file($this->storeDir . 'sections.json'))
+        {
+            if (!is_file($this->storeDir . 'links.json'))
+                throw new \Exception('You must run parser before.');
+
+            $links = json_decode(file_get_contents($this->storeDir . 'links.json'), 1);
+            $categories = array();
+            foreach ($links as $link) {
+                $categories[] = array_slice(explode('/', trim(parse_url($link, PHP_URL_PATH), '/')), 1, -1);
+            }
+            $result = [];
+            foreach ($categories as $category) {
+                $tmp = [];
+                $this->combineArr($category, $tmp);
+                $result = array_merge_recursive($result, $tmp);
+            }
+            file_put_contents($this->storeDir . 'sections.json', json_encode($result, JSON_UNESCAPED_UNICODE));
+        }
+        else
+            $result = json_decode(file_get_contents($this->storeDir . 'sections.json'), 1);
+        return $result;
+    }
+
+    public function combineArr($arr, &$res)
+    {
+        if(empty($arr))
+            return ;
+        $key = array_shift($arr);
+        $res = [$key => []];
+        return $this->combineArr($arr, $res[$key]);
+    }
+
+    public function loadCategories($iblockId, array $categories = [], $parent = null)
+    {
+        foreach($categories as $category => $innerCategories)
+        {
+            if(!empty($parent))
+                $sectionInfo = \LIblock::getSectionInfo('objects', $parent, 'XML_ID');
+            $new = [
+                'IBLOCK_SECTION_ID' => (empty($sectionInfo['ID']) ? false : $sectionInfo['ID']),
+                'NAME' => $category,
+                'CODE' => $category,
+                'XML_ID' => $category,
+            ];
+            \Lema\IBlock\Section::addOrUpdateSection($iblockId, $new);
+            if(is_array($innerCategories)) {
+                $this->loadCategories($iblockId, $categories[$category], $category);
+            }
+        }
+    }
+
+    /**
+     * @param $iblockId
+     * @param array $elements
+     * @throws \Exception
+     */
+    public function loadElements($iblockId, array $elements = [])
+    {
+        foreach($elements as $offers)
+        {
+            foreach ($offers as $element)
+            {
+                $props = $this->getInsertProperties($iblockId, $element);
+
+                $props['MORE_PHOTO'] = [];
+                foreach ($element['images'] as $image)
+                {
+                    if(is_file($this->imagesStoreDir . $image))
+                        $props['MORE_PHOTO'][] = \CFile::MakeFileArray($this->imagesStoreDir . $image);
+                }
+
+                $section = \LIblock::getSectionInfo($iblockId, strtolower(Helper::translit($element['region'])), 'XML_ID');
+
+                if (empty($section['ID']))
+                    throw new \Exception('Region must be specified.');
+
+                $data = [
+                    'ACTIVE' => 'Y',
+                    'IBLOCK_SECTION_ID' => $section['ID'],
+                    'NAME' => $element['name'],
+                    //'CODE' => \CUtil::translit($element['name'] . '_' . $element['ID'], 'ru'),
+                    'CODE' => strtolower(trim(str_replace(' ', '_', Helper::translit($element['name'])), '_') . '_' . $element['ID']),
+                    'XML_ID' => $element['ID'],
+                    'PROPERTY_VALUES' => $props,
+                    'PREVIEW_PICTURE' => current($props['MORE_PHOTO']),
+                    'DETAIL_PICTURE' => current($props['MORE_PHOTO']),
+                    'DETAIL_TEXT' => $element['description'],
+                    'PREVIEW_TEXT' => $element['description'],
+                ];
+                var_dump(Element::addOrUpdateElement($iblockId, $data));
+            }
+        }
+        echo PHP_EOL, 'Next offer...', PHP_EOL;
+    }
+
+    /**
+     * @param $iblockId
+     * @param array $element
+     * @param array $keys
+     * @return array
+     */
+    public function getInsertProperties($iblockId, array $element, array $keys = [])
+    {
+        if(empty($keys))
+        {
+            $keys = [
+                'price', 'metro', 'stage', 'square', 'rooms_count', 'height', 'parking', 'material', 'slabs',
+                'finishing', 'security', 'infrastructure', 'landscaping', 'windows', 'region_infrastructure',
+            ];
+        }
+        $return = [];
+        $ibp = new \CIBlockProperty;
+        foreach($keys as $key)
+        {
+            if(!empty($element[$key]))
+            {
+                $propCode = mb_strtoupper($key, 'UTF-8');
+                /**
+                 * We will add all unknown properties as new string property, you can change it later
+                 */
+                if(!($propId = \LIblock::getPropId($iblockId, $propCode)))
+                {
+                    $propId = $ibp->Add([
+                        'NAME' => $propCode,
+                        'ACTIVE' => 'Y',
+                        'SORT' => '100',
+                        'CODE' => $propCode,
+                        'PROPERTY_TYPE' => 'S',
+                        'IBLOCK_ID' => $iblockId
+                    ]);
+                }
+                //we use property id instead property code because it will be faster
+                //just for test u can use $propCode instead
+                $return[$propCode] = $element[$key];
             }
         }
         return $return;

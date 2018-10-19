@@ -62,17 +62,17 @@ class LIblock
     }
 
     /**
-     * @param $iblockCode string IBlock symbolic code
+     * @param $iblockCodeOrId string IBlock symbolic code
      * @param $propCode string property symbolic code
      *
      * @return bool|null
      */
-    public static function getPropId($iblockCode, $propCode)
+    public static function getPropId($iblockCodeOrId, $propCode)
     {
         if(empty(static::$props))
             static::loadData();
 
-        $iblockId = static::getId($iblockCode);
+        $iblockId = is_numeric($iblockCodeOrId) ? (int) $iblockCodeOrId : static::getId($iblockCodeOrId);
         if(!$iblockId)
             return false;
 
@@ -83,17 +83,17 @@ class LIblock
     }
 
     /**
-     * @param $iblockCode string IBlock symbolic code
-     * @param $propCode string property symbolic code
+     * @param $iblockCodeOrId string IBlock symbolic code
+     * @param $propCodeOrId string property symbolic code
      *
      * @return bool|null
      */
-    public static function getProp($iblockCode, $propCodeOrId, $byCode = true)
+    public static function getProp($iblockCodeOrId, $propCodeOrId, $byCode = true)
     {
         if(empty(static::$props))
             static::loadData();
 
-        $iblockId = static::getId($iblockCode);
+        $iblockId = is_numeric($iblockCodeOrId) ? (int) $iblockCodeOrId : static::getId($iblockCodeOrId);
         if(!$iblockId)
             return false;
 
@@ -129,32 +129,35 @@ class LIblock
     }
 
     /**
-     * @param $iblockCode
-     * @param $sectionCode
-     *
-     * @return bool|mixed
+     * @param $iblockCodeOrId
+     * @param $sectionCodeOrId
+     * @param string $byKey
+     * @return bool
      */
-    public static function getSectionInfo($iblockCode, $sectionCodeOrId, $byCode = true)
+    public static function getSectionInfo($iblockCodeOrId, $sectionCodeOrId, $byKey = 'CODE')
     {
         if(empty(static::$iblockSections))
             static::loadData();
 
-        $iblockId = static::getId($iblockCode);
+        $iblockId = is_numeric($iblockCodeOrId) ? (int) $iblockCodeOrId : static::getId($iblockCodeOrId);
         if(!$iblockId)
             return false;
 
-        $key = $byCode ? 'BY_CODE' : 'BY_ID';
+        if(!in_array($byKey, array('ID', 'XML_ID', 'CODE')))
+            $key = 'BY_CODE';
+        else
+            $key = 'BY_' . $byKey;
 
         if(isset(static::$iblockSections[$iblockId][$key][$sectionCodeOrId]))
             return static::$iblockSections[$iblockId][$key][$sectionCodeOrId];
 
         return false;
     }
+
     /**
      * @param $iblockCode
-     * @param $sectionCode
-     *
-     * @return bool|mixed
+     * @param bool $byCode
+     * @return bool
      */
     public static function getSectionsByIblockCode($iblockCode, $byCode = true)
     {
@@ -172,11 +175,11 @@ class LIblock
 
         return false;
     }
+
     /**
-     * @param $iblockCode
-     * @param $sectionCode
-     *
-     * @return bool|mixed
+     * @param $iblockId
+     * @param bool $byCode
+     * @return bool
      */
     public static function getSectionsByIblockId($iblockId, $byCode = true)
     {
@@ -299,7 +302,7 @@ class LIblock
     {
         static::loadIBlocks();
 
-        $res = CIBlockSection::GetList(array(), array('ID', 'CODE', 'NAME', 'IBLOCK_ID', 'IBLOCK_SECTION_ID'));
+        $res = CIBlockSection::GetList(array(), array('ID', 'XML_ID', 'CODE', 'NAME', 'IBLOCK_ID', 'IBLOCK_SECTION_ID'));
 
         while($row = $res->Fetch())
         {
@@ -307,6 +310,7 @@ class LIblock
             {
                 static::$iblockSections[$row['IBLOCK_ID']]['BY_CODE'][$row['CODE']] = $row;
                 static::$iblockSections[$row['IBLOCK_ID']]['BY_ID'][$row['ID']] = $row;
+                static::$iblockSections[$row['IBLOCK_ID']]['BY_XML_ID'][$row['XML_ID']] = $row;
             }
         }
     }
@@ -328,6 +332,10 @@ class LIblock
 \AddEventHandler('iblock', 'OnAfterIBlockAdd', array('LIblock', 'clearCache'));
 \AddEventHandler('iblock', 'OnAfterIBlockUpdate', array('LIblock', 'clearCache'));
 \AddEventHandler('iblock', 'OnBeforeIBlockDelete', array('LIblock', 'clearCache'));
+// IBlock section events
+\AddEventHandler('iblock', 'OnAfterIBlockSectionAdd', array('LIblock', 'clearCache'));
+\AddEventHandler('iblock', 'OnAfterIBlockSectionUpdate', array('LIblock', 'clearCache'));
+\AddEventHandler('iblock', 'OnBeforeIBlockSectionDelete', array('LIblock', 'clearCache'));
 // IBlock property events
 \AddEventHandler('iblock', 'OnAfterIBlockPropertyAdd', array('LIblock', 'clearCache'));
 \AddEventHandler('iblock', 'OnAfterIBlockPropertyUpdate', array('LIblock', 'clearCache'));

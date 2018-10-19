@@ -2,6 +2,8 @@
 
 namespace Lema\IBlock;
 
+use Bitrix\Iblock\SectionTable;
+
 \Bitrix\Main\Loader::includeModule('iblock');
 
 /**
@@ -117,5 +119,42 @@ class Section
     protected static function getData(array $params = array(), $key, $defValue = null)
     {
         return isset($params[$key]) ? $params[$key] : $defValue;
+    }
+
+    /**
+     * @param $iblockId
+     * @param array $data
+     * @return int
+     * @throws \Exception
+     */
+    public static function addOrUpdateSection($iblockId, array $data = array(), $excludedFields = array('NAME', 'CODE'))
+    {
+        if(empty($data['XML_ID']))
+            throw new \Exception('XML_ID must be specified.');
+
+        $bs = new \CIBlockSection;
+
+        $section = \LIblock::getSectionInfo($iblockId, $data['XML_ID'], 'XML_ID');
+
+        $data['IBLOCK_ID'] = $iblockId;
+
+        if(!empty($section))
+        {
+            $sectionId = $section['ID'];
+            /**
+             * Update only some fields
+             */
+            if(!empty($excludedFields))
+                $data = array_diff_key($data, array_flip($excludedFields));
+
+            if(!$bs->Update($sectionId, $data))
+                throw new \Exception($bs->LAST_ERROR);
+        }
+        else
+        {
+            if(!($sectionId = $bs->Add($data)))
+                throw new \Exception($bs->LAST_ERROR);
+        }
+        return $sectionId;
     }
 }

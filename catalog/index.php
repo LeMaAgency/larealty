@@ -1,6 +1,11 @@
 <?
 require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
 
+if(isset($_GET['test']))
+{
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/catalog/index_new.php';
+    return;
+}
 $APPLICATION->SetTitle('Каталог');
 
 $rootDir = SITE_DIR . 'catalog';
