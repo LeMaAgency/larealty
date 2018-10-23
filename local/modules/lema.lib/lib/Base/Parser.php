@@ -208,10 +208,23 @@ class Parser extends StaticInstance
                             }
                         }
 
-                        $descriptionSearch = $data->filter('.description > p');
+                        $descriptionSearch = $crawler->filter('.description > p');
                         $objectId = (int)preg_replace('~\\D+~', '', $crawler->filter('h1')->text());
                         $return[$url][$fileName]['ID'] = $objectId;
                         $return[$url][$fileName]['description'] = $descriptionSearch->count() ? $descriptionSearch->text() : null;
+
+                        $addressSearch = $crawler->filter('.description > .parent-link > a');
+
+                        $return[$url][$fileName]['address'] = null;
+                        if($addressSearch->count())
+                        {
+                            $return[$url][$fileName]['address'] = preg_replace(
+                                '~Все предложения в ~ui',
+                                '',
+                                $crawler->filter('.description > .parent-link > a')->text()
+                            );
+                        }
+
                         //images
                         /*
                         if(!is_dir($this->imagesStoreDir . $objectId))
@@ -231,7 +244,7 @@ class Parser extends StaticInstance
                         foreach ($images as $image)
                         {
                             $imagePath = $imageDir . '/' . basename($image);
-                            if ($needUpdate || !is_file($this->imagesStoreDir . $imagePath))
+                            if ($needUpdate || !is_file($this->imagesStoreDir . $imagePath) || !filesize($this->imagesStoreDir . $imagePath))
                             {
                                 if (file_put_contents($this->imagesStoreDir . $imagePath, file_get_contents($image)))
                                     $return[$url][$fileName]['images'][] = $imagePath;
@@ -239,8 +252,6 @@ class Parser extends StaticInstance
                             else
                                 $return[$url][$fileName]['images'][] = $imagePath;
                         }
-
-                        //var_dump($url, $fileName, $images, $return[$url][$fileName]);exit;
                     }
                     file_put_contents($path, json_encode($return[$url], JSON_UNESCAPED_UNICODE));
                 }
@@ -287,15 +298,31 @@ class Parser extends StaticInstance
     {
         if($needUpdate || !is_file($this->storeDir . 'sections.json'))
         {
-            if (!is_file($this->storeDir . 'links.json'))
+            if (!is_file($this->storeDir . 'inner_offers_links.json'))
                 throw new \Exception('You must run parser before.');
 
-            $links = json_decode(file_get_contents($this->storeDir . 'links.json'), 1);
+            $rootLinks = json_decode(file_get_contents($this->storeDir . 'inner_offers_links.json'), 1);
+            $innerLinks = json_decode(file_get_contents($this->storeDir . 'links.json'), 1);
             $categories = array();
-            foreach ($links as $link) {
+            foreach($rootLinks as $links)
+            {
+                foreach ($links as $link) {
+                    $categories[] = array_slice(explode('/', trim(parse_url($link, PHP_URL_PATH), '/')), 1, -1);
+                }
+            }
+            foreach ($innerLinks as $link) {
                 $categories[] = array_slice(explode('/', trim(parse_url($link, PHP_URL_PATH), '/')), 1, -1);
             }
             $result = [];
+
+            $categories = array_map('unserialize', array_unique(array_map('serialize', $categories)));
+            foreach($categories as $k => $category)
+            {
+                if(empty($category[1]))
+                    unset($categories[$k]);
+            }
+            $categories = array_values($categories);
+
             foreach ($categories as $category) {
                 $tmp = [];
                 $this->combineArr($category, $tmp);
@@ -359,7 +386,7 @@ class Parser extends StaticInstance
                 $section = \LIblock::getSectionInfo($iblockId, strtolower(Helper::translit($element['region'])), 'XML_ID');
 
                 if (empty($section['ID']))
-                    throw new \Exception('Region must be specified.');
+                    throw new \Exception('Region must be specified. Value is ' . $element['region'] . ' - ' . strtolower(Helper::translit($element['region'])));
 
                 $data = [
                     'ACTIVE' => 'Y',
@@ -374,7 +401,7 @@ class Parser extends StaticInstance
                     'DETAIL_TEXT' => $element['description'],
                     'PREVIEW_TEXT' => $element['description'],
                 ];
-                var_dump(Element::addOrUpdateElement($iblockId, $data));
+                Element::addOrUpdateElement($iblockId, $data);
             }
         }
         echo PHP_EOL, 'Next offer...', PHP_EOL;
@@ -391,13 +418,27 @@ class Parser extends StaticInstance
         if(empty($keys))
         {
             $keys = [
-                'price', 'metro', 'stage', 'square', 'rooms_count', 'height', 'parking', 'material', 'slabs',
-                'finishing', 'security', 'infrastructure', 'landscaping', 'windows', 'region_infrastructure',
+                'price' => 'Стоимость',
+                'metro' => 'Станция метро',
+                'region' => 'Район',
+                'stage' => 'Этаж',
+                'square' => 'Площадь',
+                'rooms_count' => 'Комнат',
+                'height' => 'Высота потолков',
+                'parking' => 'Парковка',
+                'material' => 'Материал дома',
+                'slabs' => 'Тип перекрытий',
+                'finishing' => 'Отделка',
+                'security' => 'Охрана',
+                'infrastructure' => 'Инфраструктура',
+                'landscaping' => 'Благоустройство территории',
+                'windows' => 'Окна',
+                'region_infrastructure' => 'Инфраструктура района',
+                'address' => 'Адрес',
             ];
         }
         $return = [];
-        $ibp = new \CIBlockProperty;
-        foreach($keys as $key)
+        foreach($keys as $key => $title)
         {
             if(!empty($element[$key]))
             {
@@ -407,8 +448,9 @@ class Parser extends StaticInstance
                  */
                 if(!($propId = \LIblock::getPropId($iblockId, $propCode)))
                 {
+                    $ibp = new \CIBlockProperty;
                     $propId = $ibp->Add([
-                        'NAME' => $propCode,
+                        'NAME' => $title,
                         'ACTIVE' => 'Y',
                         'SORT' => '100',
                         'CODE' => $propCode,

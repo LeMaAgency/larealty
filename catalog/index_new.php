@@ -57,7 +57,10 @@ $APPLICATION->SetTitle('Каталог');?>
             0 => "",
             1 => "",
         ),
-        "DETAIL_PROPERTY_CODE" => [],
+        "DETAIL_PROPERTY_CODE" => [
+            'METRO', 'HEIGHT', 'SLABS', 'FINISHING', 'SECURITY', 'INFRASTRUCTURE',
+            'LANDSCAPING', 'WINDOWS', 'REGION_INFRASTRUCTURE', 'ADDRESS',
+        ],
         "DETAIL_DISPLAY_TOP_PAGER" => "Y",
         "DETAIL_DISPLAY_BOTTOM_PAGER" => "Y",
         "DETAIL_PAGER_TITLE" => "Страница",

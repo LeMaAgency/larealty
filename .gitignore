@@ -1,6 +1,8 @@
 .idea
 /bitrix
 /upload
+/local/import/
+!/local/import/run.php
 !/robots.txt
 /*.html
 ~*.php
