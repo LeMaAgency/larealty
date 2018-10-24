@@ -7,10 +7,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_be
 \Bitrix\Main\Loader::includeModule('iblock');
 
 $parser = \Lema\Base\Parser::get();
-$data = $parser->setUrl('http://blackwood.ru/catalog/city')->parse();
+$properties = $parser->setUrl('http://blackwood.ru/catalog/city')->parse();
 
 $parser->loadCategories(\LIblock::getId('objects'), $parser->getCategories());
-$parser->loadElements(\LIblock::getId('objects'), $parser->getProperties());
-//foreach($categories as $category)
+$parser->loadElements(\LIblock::getId('objects'), $properties);
 
-//loadCategories(\LIblock::getId('objects'), $categories);
+\Lema\Common\Dumper::dump('Done.');

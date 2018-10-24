@@ -5,8 +5,11 @@ namespace Lema\Base;
 
 use GuzzleHttp\Client;
 use function GuzzleHttp\Psr7\parse_query;
+
 use Lema\Common\Helper;
 use Lema\IBlock\Element;
+use Lema\IBlock\Section;
+
 use Symfony\Component\DomCrawler\Crawler;
 
 class Parser extends StaticInstance
@@ -23,6 +26,9 @@ class Parser extends StaticInstance
 
     private $client = null;
 
+    /**
+     * Parser constructor.
+     */
     public function __construct()
     {
         $this->client = new Client();
@@ -44,6 +50,10 @@ class Parser extends StaticInstance
             mkdir($this->imagesStoreDir);
     }
 
+    /**
+     * @param $url
+     * @return $this
+     */
     public function setUrl($url)
     {
         $this->hostUrl = parse_url($url, PHP_URL_SCHEME) . '://' . parse_url($url, PHP_URL_HOST);
@@ -51,8 +61,15 @@ class Parser extends StaticInstance
         return $this;
     }
 
-    public function parse($step = 1)
+    /**
+     * @return array
+     * @throws \Exception
+     */
+    public function parse()
     {
+        if(empty($this->url))
+            throw new \Exception('You must to specify an url before run.');
+
         $crawler = new Crawler(null, $this->hostUrl);
 
         //first run
@@ -69,13 +86,16 @@ class Parser extends StaticInstance
         $innerOffersNames = [];
 
         foreach($innerOffersLinks as $key => $innerOffersLink)
-        {
             $innerOffersNames[$key] = $this->loadHtml($innerOffersLink);
-        }
+
+        //load element properties
         $props = $this->getProperties($crawler, $innerOffersNames);
         return $props;
     }
 
+    /**
+     * @return int
+     */
     public function getLinksCount()
     {
         if(!is_file($this->storeDir . 'inner_offers_links_count.json'))
@@ -83,25 +103,44 @@ class Parser extends StaticInstance
         return (int) file_get_contents($this->storeDir . 'inner_offers_links_count.json');
     }
 
-    public function getRootLinks($crawler, $fileName, $needUpdate = false)
+    /**
+     * @param Crawler|null $crawler
+     * @param $fileName
+     * @param bool $needUpdate
+     * @return array|mixed
+     */
+    public function getRootLinks(Crawler $crawler = null, $fileName, $needUpdate = false)
     {
         if($needUpdate || !is_file($this->storeDir . 'links.json'))
         {
+            if(empty($crawler))
+                $crawler = new Crawler(null, $this->hostUrl);
+
             $crawler->addHtmlContent(file_get_contents($this->htmlStoreDir . $fileName), 'UTF-8');
             $links = array_unique($crawler->filter('.object.teaser.city.buy.clearfix .image a')->each(function (Crawler $node) {
                 return $node->link()->getUri();
             }));
-            file_put_contents($this->storeDir . 'links.json', json_encode($links));
+            $this->saveJsonArray($this->storeDir . 'links.json', $links);
         }
         else
-            $links = json_decode(file_get_contents($this->storeDir . 'links.json'), 1);
+            $links = $this->loadJsonArray($this->storeDir . 'links.json');
 
         return $links;
     }
-    public function getOffersLinks($crawler, $fileNames, $needUpdate = false)
+
+    /**
+     * @param Crawler|null $crawler
+     * @param array $fileNames
+     * @param bool $needUpdate
+     * @return array|mixed
+     */
+    public function getOffersLinks(Crawler $crawler = null, array $fileNames, $needUpdate = false)
     {
         if($needUpdate || !is_file($this->storeDir . 'offers_links.json'))
         {
+            if(empty($crawler))
+                $crawler = new Crawler(null, $this->hostUrl);
+
             $links = [];
             foreach ($fileNames as $url => $fileName)
             {
@@ -116,16 +155,27 @@ class Parser extends StaticInstance
                     );
                 }
             }
-            file_put_contents($this->storeDir . 'offers_links.json', json_encode($links));
+            $this->saveJsonArray($this->storeDir . 'offers_links.json', $links);
         }
         else
-            $links = json_decode(file_get_contents($this->storeDir . 'offers_links.json'), 1);
+            $links = $this->loadJsonArray($this->storeDir . 'offers_links.json');
 
         return $links;
     }
-    public function getInnerOffers($crawler, $fileNames, $needUpdate = false)
+
+    /**
+     * @param Crawler|null $crawler
+     * @param array $fileNames
+     * @param bool $needUpdate
+     * @return array|mixed
+     */
+    public function getInnerOffers(Crawler $crawler = null, array $fileNames, $needUpdate = false)
     {
-        if($needUpdate || !is_file($this->storeDir . 'inner_offers_links.json')) {
+        if($needUpdate || !is_file($this->storeDir . 'inner_offers_links.json'))
+        {
+            if(empty($crawler))
+                $crawler = new Crawler(null, $this->hostUrl);
+
             $links = [];
             foreach ($fileNames as $url => $fileName) {
                 $crawler->clear();
@@ -134,17 +184,24 @@ class Parser extends StaticInstance
                     return $node->link()->getUri();
                 }));
             }
-            file_put_contents($this->storeDir . 'inner_offers_links.json', json_encode($links));
+            $this->saveJsonArray($this->storeDir . 'inner_offers_links.json', $links);
         }
         else
-            $links = json_decode(file_get_contents($this->storeDir . 'inner_offers_links.json'), 1);
+            $links = $this->loadJsonArray($this->storeDir . 'inner_offers_links.json');
 
         if($needUpdate || !is_file($this->storeDir . 'inner_offers_links_count.json'))
             file_put_contents($this->storeDir . 'inner_offers_links_count.json', count(array_keys($links)));
 
         return $links;
     }
-    public function getProperties($crawler = null, $offers = [], $needUpdate = false)
+
+    /**
+     * @param Crawler|null $crawler
+     * @param array $offers
+     * @param bool $needUpdate
+     * @return array
+     */
+    public function getProperties(Crawler $crawler = null, array $offers = [], $needUpdate = false)
     {
         if($needUpdate || !is_file($this->storeDir . 'props.json'))
         {
@@ -176,10 +233,11 @@ class Parser extends StaticInstance
             foreach ($offers as $url => $fileNames)
             {
                 $path = $this->propsStoreDir . md5($url) . '.json';
+
                 if ($needUpdate || !is_file($path))
                 {
                     $return[$url] = [];
-                    foreach ($fileNames as $fileName)
+                    foreach ($fileNames as $offerUrl => $fileName)
                     {
                         $crawler->clear();
                         $crawler->addHtmlContent(file_get_contents($this->htmlStoreDir . $fileName), 'UTF-8');
@@ -211,6 +269,8 @@ class Parser extends StaticInstance
                         $descriptionSearch = $crawler->filter('.description > p');
                         $objectId = (int)preg_replace('~\\D+~', '', $crawler->filter('h1')->text());
                         $return[$url][$fileName]['ID'] = $objectId;
+                        $return[$url][$fileName]['category'] = $this->getElementCategoryFromUrl($offerUrl);
+                        $return[$url][$fileName]['elementUrl'] = $offerUrl;
                         $return[$url][$fileName]['description'] = $descriptionSearch->count() ? $descriptionSearch->text() : null;
 
                         $addressSearch = $crawler->filter('.description > .parent-link > a');
@@ -253,18 +313,24 @@ class Parser extends StaticInstance
                                 $return[$url][$fileName]['images'][] = $imagePath;
                         }
                     }
-                    file_put_contents($path, json_encode($return[$url], JSON_UNESCAPED_UNICODE));
+                    $this->saveJsonArray($path, $return[$url]);
                 }
                 else
-                    $return[$url] = json_decode(file_get_contents($path), 1);
+                    $return[$url] = $this->loadJsonArray($path);
             }
-            file_put_contents($this->storeDir . 'props.json', json_encode($return, JSON_UNESCAPED_UNICODE));
+            $this->saveJsonArray($this->storeDir . 'props.json', $return);
         }
         else
-            $return = json_decode(file_get_contents($this->storeDir . 'props.json'), 1);
+            $return = $this->loadJsonArray($this->storeDir . 'props.json');
 
         return $return;
     }
+
+    /**
+     * @param $urls
+     * @param bool $needUpdate
+     * @return array
+     */
     public function loadHtml($urls, $needUpdate = false)
     {
         $urls = (array) $urls;
@@ -294,6 +360,11 @@ class Parser extends StaticInstance
         return $return;
     }
 
+    /**
+     * @param bool $needUpdate
+     * @return array|mixed
+     * @throws \Exception
+     */
     public function getCategories($needUpdate = false)
     {
         if($needUpdate || !is_file($this->storeDir . 'sections.json'))
@@ -301,18 +372,20 @@ class Parser extends StaticInstance
             if (!is_file($this->storeDir . 'inner_offers_links.json'))
                 throw new \Exception('You must run parser before.');
 
-            $rootLinks = json_decode(file_get_contents($this->storeDir . 'inner_offers_links.json'), 1);
-            $innerLinks = json_decode(file_get_contents($this->storeDir . 'links.json'), 1);
-            $categories = array();
-            foreach($rootLinks as $links)
+            //get categories from files with links
+            $categories = [];
+            
+            
+            $linksList = $this->loadJsonArray($this->storeDir . 'inner_offers_links.json');
+            foreach($linksList as $links)
             {
-                foreach ($links as $link) {
-                    $categories[] = array_slice(explode('/', trim(parse_url($link, PHP_URL_PATH), '/')), 1, -1);
-                }
+                foreach ($links as $link)
+                    $categories[] = $this->getCategoriesFromUrl($link);
             }
-            foreach ($innerLinks as $link) {
-                $categories[] = array_slice(explode('/', trim(parse_url($link, PHP_URL_PATH), '/')), 1, -1);
-            }
+            $links = $this->loadJsonArray($this->storeDir . 'links.json');
+            foreach ($links as $link)
+                $categories[] = $this->getCategoriesFromUrl($link);
+            
             $result = [];
 
             $categories = array_map('unserialize', array_unique(array_map('serialize', $categories)));
@@ -328,14 +401,18 @@ class Parser extends StaticInstance
                 $this->combineArr($category, $tmp);
                 $result = array_merge_recursive($result, $tmp);
             }
-            file_put_contents($this->storeDir . 'sections.json', json_encode($result, JSON_UNESCAPED_UNICODE));
+            $this->saveJsonArray($this->storeDir . 'sections.json', $result);
         }
         else
-            $result = json_decode(file_get_contents($this->storeDir . 'sections.json'), 1);
+            $result = $this->loadJsonArray($this->storeDir . 'sections.json');
         return $result;
     }
 
-    public function combineArr($arr, &$res)
+    /**
+     * @param array|null $arr
+     * @param $res
+     */
+    public function combineArr(array $arr = null, &$res)
     {
         if(empty($arr))
             return ;
@@ -344,6 +421,12 @@ class Parser extends StaticInstance
         return $this->combineArr($arr, $res[$key]);
     }
 
+    /**
+     * @param $iblockId
+     * @param array $categories
+     * @param null $parent
+     * @throws \Exception
+     */
     public function loadCategories($iblockId, array $categories = [], $parent = null)
     {
         foreach($categories as $category => $innerCategories)
@@ -356,7 +439,7 @@ class Parser extends StaticInstance
                 'CODE' => $category,
                 'XML_ID' => $category,
             ];
-            \Lema\IBlock\Section::addOrUpdateSection($iblockId, $new);
+            Section::addOrUpdateSection($iblockId, $new);
             if(is_array($innerCategories)) {
                 $this->loadCategories($iblockId, $categories[$category], $category);
             }
@@ -383,10 +466,14 @@ class Parser extends StaticInstance
                         $props['MORE_PHOTO'][] = \CFile::MakeFileArray($this->imagesStoreDir . $image);
                 }
 
-                $section = \LIblock::getSectionInfo($iblockId, strtolower(Helper::translit($element['region'])), 'XML_ID');
+                $section = \LIblock::getSectionInfo($iblockId, strtolower($element['category']), 'XML_ID');
 
                 if (empty($section['ID']))
-                    throw new \Exception('Region must be specified. Value is ' . $element['region'] . ' - ' . strtolower(Helper::translit($element['region'])));
+                {
+                    continue;
+                    //var_dump($element);
+                    //throw new \Exception('Region must be specified. Value is ' . $element['category'] . ' - ' . $element['elementUrl']);
+                }
 
                 $data = [
                     'ACTIVE' => 'Y',
@@ -404,7 +491,6 @@ class Parser extends StaticInstance
                 Element::addOrUpdateElement($iblockId, $data);
             }
         }
-        echo PHP_EOL, 'Next offer...', PHP_EOL;
     }
 
     /**
@@ -464,5 +550,47 @@ class Parser extends StaticInstance
             }
         }
         return $return;
+    }
+
+    /**
+     * @param $url
+     * @return mixed
+     */
+    protected function getCategoriesFromUrl($url)
+    {
+        return array_slice(explode('/', trim(parse_url($url, PHP_URL_PATH), '/')), 1, -1);
+    }
+
+    /**
+     * @param $url
+     * @return mixed
+     */
+    protected function getElementCategoryFromUrl($url)
+    {
+        return end($this->getCategoriesFromUrl($url));
+    }
+
+    /**
+     * @param $path
+     * @param bool $assoc
+     * @param int $depth
+     * @param int $options
+     * @return array|mixed
+     */
+    protected function loadJsonArray($path, $assoc = true, $depth = 512, $options = 0) {
+        if(is_file($path))
+            return json_decode(file_get_contents($path), $assoc, $depth, $options);
+        return [];
+    }
+
+    /**
+     * @param string $path
+     * @param array $data
+     * @param int $options
+     * @param int $depth
+     * @return bool|int
+     */
+    protected function saveJsonArray($path, array $data, $options = JSON_UNESCAPED_UNICODE, $depth = 512) {
+        return file_put_contents($path, json_encode($data, $options, $depth));
     }
 }
