@@ -489,6 +489,8 @@ class Parser extends StaticInstance
                     //var_dump($element);
                     //throw new \Exception('Region must be specified. Value is ' . $element['category'] . ' - ' . $element['elementUrl']);
                 }
+                if(empty($element['name']) || empty($element['name']))
+                    continue;
 
                 $data = [
                     'ACTIVE' => 'Y',

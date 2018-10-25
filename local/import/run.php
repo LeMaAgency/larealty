@@ -72,9 +72,13 @@ if(!empty($_GET['AJAX']))
                 $('#answer').append('<br><h3>Выгрузка товаров успешно завершена</h3>');
                 return ;
             }
-            $('#answer').append(
-                'Шаг ' + (elementsIndex + 1) + ' (' + offersIndex + ' - ' + (offersIndex + 10) + ') из ' + stepCount + ' шагов...<br>'
-            );
+            let msg = 'Шаг ' + (elementsIndex + 1) +' (' + offersIndex + ' - ' + (offersIndex + 10) + ') из ' + stepCount + ' шагов...';
+
+            if($('[data-step="' + (elementsIndex + 1) + '"]').length)
+                $('[data-step="' + (elementsIndex + 1) + '"]').text(msg);
+            else
+                $('#answer').append('<div data-step="' + (elementsIndex + 1) + '">' + msg + '</div>');
+
             $.get('<?=$scriptPath;?>', {AJAX: 1, elementsIndex: elementsIndex, offersIndex: offersIndex}, function(ans) {
                 if(typeof ans['elementsOffset'] !== 'undefined' && typeof ans['offersOffset'] !== 'undefined')
                     sendRequest(ans.elementsOffset, ans.offersOffset, stepCount);
