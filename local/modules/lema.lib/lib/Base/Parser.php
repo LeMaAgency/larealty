@@ -569,7 +569,6 @@ var_dump($props);
                 $return[$propCode] = $element[$key];
             }
         }
-        \LIblock::clearCache();
         return $return;
     }
 
