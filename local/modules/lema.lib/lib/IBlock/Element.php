@@ -233,7 +233,8 @@ class Element
         if(!empty($data['PROPERTY_VALUES']['MORE_PHOTO']))
         {
             $images = $data['PROPERTY_VALUES']['MORE_PHOTO'];
-            $data['PROPERTY_VALUES']['MORE_PHOTO'] = ['VALUE' => ['del' => 'Y']];
+            //$data['PROPERTY_VALUES']['MORE_PHOTO'] = ['VALUE' => ['del' => 'Y']];
+            $data['PROPERTY_VALUES']['MORE_PHOTO'] = [];
         }
 
         $res = ElementTable::getList(array(
@@ -254,8 +255,8 @@ class Element
             if(!($elementId = $el->Add($data)))
                 throw new \Exception($el->LAST_ERROR);
         }
-        if(!empty($images))
-            \CIBlockElement::SetPropertyValuesEx($elementId, $iblockId, ['MORE_PHOTO' => $images]);
+        //if(!empty($images))
+        //    \CIBlockElement::SetPropertyValuesEx($elementId, $iblockId, ['MORE_PHOTO' => $images]);
 
         return $elementId;
     }
