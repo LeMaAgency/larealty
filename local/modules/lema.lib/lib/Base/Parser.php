@@ -449,12 +449,26 @@ class Parser extends StaticInstance
     /**
      * @param $iblockId
      * @param array $elements
+     * @param array $elementsOffsets
+     * @param array $offersOffsets
+     * @return string
      * @throws \Exception
      */
-    public function loadElements($iblockId, array $elements = [])
+    public function loadElements($iblockId, array $elements = [], array $elementsOffsets = [0, 1], array $offersOffsets = [0, 10])
     {
+        if(!isset($elementsOffsets[0], $elementsOffsets[1], $offersOffsets[0], $offersOffsets[1]))
+            throw new \Exception('You must to specify offsets');
+
+        if($elementsOffsets[0] > count($elements))
+            return 'end_elements';
+
+        $elements = array_slice($elements, $elementsOffsets[0], $elementsOffsets[1]);
         foreach($elements as $offers)
         {
+            if($offersOffsets[0] > count($offers))
+                return 'end_offers';
+
+            $offers = array_slice($offers, $offersOffsets[0], $offersOffsets[1]);
             foreach ($offers as $element)
             {
                 $props = $this->getInsertProperties($iblockId, $element);
@@ -592,5 +606,13 @@ class Parser extends StaticInstance
      */
     protected function saveJsonArray($path, array $data, $options = JSON_UNESCAPED_UNICODE, $depth = 512) {
         return file_put_contents($path, json_encode($data, $options, $depth));
+    }
+
+    /**
+     * @return bool
+     */
+    public function needRunParser()
+    {
+        return !is_file($this->storeDir . 'props.json');
     }
 }
