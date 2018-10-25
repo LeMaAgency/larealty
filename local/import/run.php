@@ -34,8 +34,7 @@ $stepCount = $parser->getLinksCount();
 
 $elementsOffset = [$elementsIndex, ELEMENTS_BLOCK_COUNT];
 $offersOffset = [$offersIndex, OFFERS_BLOCK_COUNT];
-$result = $parser->loadElements(\LIblock::getId('objects'), $properties, $elementsOffset, $offersOffset);
-exit;
+
 if(!empty($_GET['AJAX']))
 {
     $result = $parser->loadElements(\LIblock::getId('objects'), $properties, $elementsOffset, $offersOffset);
