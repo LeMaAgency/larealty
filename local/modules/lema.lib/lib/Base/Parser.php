@@ -556,6 +556,7 @@ var_dump($props);
                     $ibp = new \CIBlockProperty;
                     $propId = $ibp->Add([
                         'NAME' => $title,
+                        'XML_ID' => $title,
                         'ACTIVE' => 'Y',
                         'SORT' => '100',
                         'CODE' => $propCode,
@@ -563,6 +564,7 @@ var_dump($props);
                         'IBLOCK_ID' => $iblockId
                     ]);
                 }
+                var_dump($propId);exit;
                 //we use property id instead property code because it will be faster
                 //just for test u can use $propCode instead
                 $return[$propCode] = $element[$key];
