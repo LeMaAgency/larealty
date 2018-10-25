@@ -469,15 +469,11 @@ class Parser extends StaticInstance
                 return 'end_offers';
 
             $offers = array_slice($offers, $offersOffsets[0], $offersOffsets[1]);
-            $i = 0;
+
             foreach ($offers as $element)
             {
                 $props = $this->getInsertProperties($iblockId, $element);
-var_dump($props);
-                if(++$i === 2)
-                    exit;
 
-                continue;
                 $props['MORE_PHOTO'] = [];
                 foreach ($element['images'] as $image)
                 {
