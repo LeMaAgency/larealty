@@ -3,6 +3,7 @@
 /upload
 /local/import/
 !/local/import/run.php
+!/local/import/delete_all_elements.php
 !/robots.txt
 /*.html
 ~*.php
