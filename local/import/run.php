@@ -69,7 +69,7 @@ if(!empty($_GET['AJAX']))
 
             if(elementsIndex + 1 > stepCount)
             {
-                $('#answer').append('<br><h3>Выгрузка товаров успешно завершена</h3>');
+                $('#answer').append('<h3>Выгрузка товаров успешно завершена</h3>');
                 return ;
             }
             let msg = 'Шаг ' + (elementsIndex + 1) +' (' + offersIndex + ' - ' + (offersIndex + 10) + ') из ' + stepCount + ' шагов...';
