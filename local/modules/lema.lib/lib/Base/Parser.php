@@ -563,6 +563,7 @@ class Parser extends StaticInstance
                 $return[$propCode] = $element[$key];
             }
         }
+        \LIblock::clearCache();
         return $return;
     }
 
