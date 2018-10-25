@@ -25,7 +25,7 @@ if(($hasElements = (bool) $res->getSelectedRowsCount()))
         else
             echo '<div>Ошибка удаления элемента ', $row['ID'], '</div>';
     }
-    exit('<div>Удаление элементов... </div> <script>document.location="?iblockId=' . $iblockId . '&limit=' . $limit .';</script>');
+    exit('<div>Удаление элементов... </div> <script>document.location="?iblockId=' . $iblockId . '&limit=' . $limit .'";</script>');
 }
 else
     echo '<div>Все элементы удалены</div>';
