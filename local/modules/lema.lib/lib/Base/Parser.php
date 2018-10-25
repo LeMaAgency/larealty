@@ -564,7 +564,6 @@ var_dump($props);
                         'IBLOCK_ID' => $iblockId
                     ]);
                 }
-                var_dump($propId);exit;
                 //we use property id instead property code because it will be faster
                 //just for test u can use $propCode instead
                 $return[$propCode] = $element[$key];
