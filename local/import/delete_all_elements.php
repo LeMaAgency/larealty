@@ -13,7 +13,7 @@ if(empty($iblockId))
 $res = \Bitrix\Iblock\ElementTable::getList(array(
     'filter' => array('IBLOCK_ID' => $iblockId),
     'select' => array('ID'),
-    'limit' => 100,
+    'limit' => $limit,
 ));
 
 if(($hasElements = (bool) $res->getSelectedRowsCount()))
