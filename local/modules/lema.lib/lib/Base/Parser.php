@@ -474,16 +474,28 @@ class Parser extends StaticInstance
             {
                 $props = $this->getInsertProperties($iblockId, $element);
 
+                /**
+                 * Take only first element instead loading all element images
+                 */
+                $image = null;
+                if(!empty($element['images']))
+                {
+                    $image = current($element['images']);
+                    if(empty($image) || !is_file($this->imagesStoreDir . $image))
+                        $image = null;
+                    else
+                        $image = \CFile::MakeFileArray($this->imagesStoreDir . $image);
+                }
+                /**
+                 * Old code for images is here..
+                 */
+                /**
                 $props['MORE_PHOTO'] = [];
                 foreach ($element['images'] as $image)
                 {
                     if(is_file($this->imagesStoreDir . $image))
                         $props['MORE_PHOTO'][] = \CFile::MakeFileArray($this->imagesStoreDir . $image);
-                    /**
-                     * Take only first element!
-                     */
-                    break;
-                }
+                }*/
 
                 $section = \LIblock::getSectionInfo($iblockId, strtolower($element['category']), 'XML_ID');
 
@@ -501,11 +513,13 @@ class Parser extends StaticInstance
                     'IBLOCK_SECTION_ID' => $section['ID'],
                     'NAME' => $element['name'],
                     //'CODE' => \CUtil::translit($element['name'] . '_' . $element['ID'], 'ru'),
-                    'CODE' => strtolower(trim(str_replace(' ', '_', Helper::translit($element['name'])), '_') . '_' . $element['ID']),
+                    'CODE' => strtolower(trim(preg_replace('~[^-_a-z0-9]~u', '_', Helper::translit($element['name'])), '_') . '_' . $element['ID']),
                     'XML_ID' => $element['ID'],
                     'PROPERTY_VALUES' => $props,
-                    'PREVIEW_PICTURE' => current($props['MORE_PHOTO']),
-                    'DETAIL_PICTURE' => current($props['MORE_PHOTO']),
+                    //'PREVIEW_PICTURE' => current($props['MORE_PHOTO']),
+                    //'DETAIL_PICTURE' => current($props['MORE_PHOTO']),
+                    'PREVIEW_PICTURE' => $image,
+                    'DETAIL_PICTURE' => $image,
                     'DETAIL_TEXT' => $element['description'],
                     'PREVIEW_TEXT' => $element['description'],
                 ];
