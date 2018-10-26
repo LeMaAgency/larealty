@@ -513,7 +513,7 @@ class Parser extends StaticInstance
                     'IBLOCK_SECTION_ID' => $section['ID'],
                     'NAME' => $element['name'],
                     //'CODE' => \CUtil::translit($element['name'] . '_' . $element['ID'], 'ru'),
-                    'CODE' => strtolower(trim(preg_replace('~[^-_a-z0-9]~u', '_', Helper::translit($element['name'])), '_') . '_' . $element['ID']),
+                    'CODE' => strtolower(trim(preg_replace('~[^-_A-Za-z0-9]~u', '_', Helper::translit($element['name'])), '_') . '_' . $element['ID']),
                     'XML_ID' => $element['ID'],
                     'PROPERTY_VALUES' => $props,
                     //'PREVIEW_PICTURE' => current($props['MORE_PHOTO']),
