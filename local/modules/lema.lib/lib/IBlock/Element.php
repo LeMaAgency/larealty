@@ -255,8 +255,8 @@ class Element
             if(!($elementId = $el->Add($data)))
                 throw new \Exception($el->LAST_ERROR);
         }
-        //if(!empty($images))
-        //    \CIBlockElement::SetPropertyValuesEx($elementId, $iblockId, ['MORE_PHOTO' => $images]);
+        if(!empty($images))
+            \CIBlockElement::SetPropertyValuesEx($elementId, $iblockId, ['MORE_PHOTO' => $images]);
 
         return $elementId;
     }
