@@ -479,6 +479,10 @@ class Parser extends StaticInstance
                 {
                     if(is_file($this->imagesStoreDir . $image))
                         $props['MORE_PHOTO'][] = \CFile::MakeFileArray($this->imagesStoreDir . $image);
+                    /**
+                     * Take only first element!
+                     */
+                    break;
                 }
 
                 $section = \LIblock::getSectionInfo($iblockId, strtolower($element['category']), 'XML_ID');
