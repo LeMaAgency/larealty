@@ -14,7 +14,7 @@ $item = $data->item();
 /**
  * Check URL
  */
-if($APPLICATION->GetCurDir() != getElementDetailUrl($item))
+/*if($APPLICATION->GetCurDir() != getElementDetailUrl($item))
 {
     \Bitrix\Iblock\Component\Tools::process404(
         ""
@@ -24,7 +24,7 @@ if($APPLICATION->GetCurDir() != getElementDetailUrl($item))
         ,$arParams["FILE_404"]
     );
     return ;
-}
+}*/
 
 /**
  * Slider images (detail picture + more photo
@@ -41,65 +41,7 @@ if(!empty($arResult['PROPERTIES']['MORE_PHOTO']['VALUE']))
 }
 
 
-/**
- * Collect address from parts:
- * City, Region, Street, House number and building number
- */
-$props = array(
-    'CITY' => array(
-        'prefix' => Loc::getMessage('LEMA_CITY_PREFIX'),
-        'postfix' => Loc::getMessage('LEMA_CITY_POSTFIX')
-    ),
-    'REGION' => array(
-        'prefix' => Loc::getMessage('LEMA_REGION_PREFIX'),
-        'postfix' => Loc::getMessage('LEMA_REGION_POSTFIX')
-    ),
-    'STREET' => array(
-        'prefix' => Loc::getMessage('LEMA_STREET_PREFIX'),
-        'postfix' => Loc::getMessage('LEMA_STREET_POSTFIX')
-    ),
-    'HOUSE_NUMBER' => array(
-        'prefix' => Loc::getMessage('LEMA_HOUSE_NUMBER_PREFIX'),
-        'postfix' => Loc::getMessage('LEMA_HOUSE_NUMBER_POSTFIX')
-    ),
-);
-
-$splitSymbol = ', ';
-
-/**
- * Set address for item
- */
-
-$arResult['ADDRESS'] = null;
-foreach($props as $propCode => $propData)
-{
-    if($item->propFilled($propCode))
-    {
-        if(!empty($arResult['ADDRESS']))
-            $arResult['ADDRESS'] .= $splitSymbol;
-        $arResult['ADDRESS'] .= $propData['prefix'] . $item->propVal($propCode) . $propData['postfix'];
-    }
-}
-if($item->propFilled('BUILDING_NUMBER'))
-{
-    if(0 !== strpos($item->propVal('BUILDING_NUMBER'), '/'))
-        $arResult['ADDRESS'] .= $splitSymbol;
-    $arResult['ADDRESS'] .= $item->propVal('BUILDING_NUMBER');
-}
-
-$arResult['RIELTOR'] = array();
-if($item->propFilled('RIELTOR'))
-{
-    $res = \CUser::GetByID($item->propVal('RIELTOR'));
-    if($row = $res->Fetch())
-    {
-        $arResult['RIELTOR'] = array(
-            'NAME' => htmlspecialcharsbx(trim($row['LAST_NAME'] . ' ' . $row['NAME'] . ' ' . $row['SECOND_NAME'])),
-            'IMG' => (empty($row['WORK_LOGO']) ? null : \CFile::GetPath($row['WORK_LOGO'])),
-            'PHONE' => htmlspecialcharsbx($row[empty($row['WORK_PHONE']) ? 'PERSONAL_PHONE' : 'WORK_PHONE']),
-        );
-    }
-}
+$arResult['ADDRESS'] = $arResult['PROPERTIES']['ADDRESS']['VALUE'];
 
 $sections = \Lema\IBlock\Section::getAllD7($arParams['IBLOCK_ID'], array(
     'filter' => array('=ID' => $arResult['IBLOCK_SECTION_ID']),

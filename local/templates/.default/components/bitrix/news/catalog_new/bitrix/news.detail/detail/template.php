@@ -151,6 +151,14 @@ $item = $data->item();
                             <?foreach($arResult['DISPLAY_PROPERTIES'] as $propCode => $propData):
                                 if($item->propEmpty($propCode))
                                     continue;
+                                if($item->prop($propCode, 'MULTIPLE') == 'Y')
+                                    $value = join(', ', $item->propVal($propCode));
+                                else
+                                {
+                                    $value = $item->propVal($propCode);
+                                    $value = $value == 'Y' ? '✔' : $value;
+                                }
+                                $addStyle = mb_strlen($value) > 20;
                                 ?>
 
                                 <?if(++$i === $foldedCnt):?>
@@ -160,16 +168,9 @@ $item = $data->item();
                                 <div class="card-flat__content__details__row">
                                     <div class="card-flat__content__details__row__name"><?=$item->propName($propCode);?></div>
                                     <div class="card-flat__content__details__row__dots"></div>
-                                    <div class="card-flat__content__details__row__val auto-widht">
-                                        <?if($item->prop($propCode, 'MULTIPLE') == 'Y')
-                                        {
-                                            echo join(', ', $item->propVal($propCode));
-                                        }
-                                        else
-                                        {
-                                            $value = $item->propVal($propCode);
-                                            echo $value == 'Y' ? '✔' : $value;
-                                        }
+                                    <div class="card-flat__content__details__row__val auto-widht"<?if($addStyle){?> style="position: static"<?}?>>
+                                        <?
+                                        echo $value;
                                         if(false !== strpos($propCode, 'SQUARE'))
                                             echo ' ' . Loc::getMessage('LEMA_SQUARE_M_SUP');
                                         ?>

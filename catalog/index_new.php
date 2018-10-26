@@ -59,7 +59,7 @@ $APPLICATION->SetTitle('Каталог');?>
         ),
         "DETAIL_PROPERTY_CODE" => [
             'METRO', 'HEIGHT', 'SLABS', 'FINISHING', 'SECURITY', 'INFRASTRUCTURE',
-            'LANDSCAPING', 'WINDOWS', 'REGION_INFRASTRUCTURE', 'ADDRESS',
+            'LANDSCAPING', 'WINDOWS', 'REGION_INFRASTRUCTURE',
         ],
         "DETAIL_DISPLAY_TOP_PAGER" => "Y",
         "DETAIL_DISPLAY_BOTTOM_PAGER" => "Y",
