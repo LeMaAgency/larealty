@@ -37,7 +37,7 @@ $data = new TH($this);
                     <div class="row">
                         <div class="col-sm-4">
                             <a href="<?= $item->detailUrl(); ?>" class="card-flat__img">
-                                <img alt="<?= $item->getName(); ?>" src="<?= $item->previewPicture(); ?>">
+                                <img alt="<?= $item->getName(); ?>" src="<?= $item->previewPicture() ?? $item->detailPicture(); ?>">
                                 <span class="card-flat__img__filter"></span>
                             </a>
                         </div>
