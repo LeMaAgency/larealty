@@ -18,15 +18,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_be
 
 $siteUrl = 'http://blackwood.ru/catalog';
 
-$parser = \Lema\Base\Parser::get()->setUrl($siteUrl);
-//var_dump($parser->loadHtml(['http://blackwood.ru']));exit;
-$properties = $parser->setCurrentSection('city')->parse();
-//$parser->loadElements(\LIblock::getId('objects'), $properties);
-//var_dump($parser->getInnerOffers(), count($properties));
-exit;
+$parser = \Lema\Base\Parser::get()->setUrl($siteUrl)->setCurrentSection('city');
+
 if ($parser->needRunParser())
 {
-    $properties = $parser->setUrl('http://blackwood.ru/catalog')->parse();
+    $properties = $parser->parse();
     $parser->loadCategories(\LIblock::getId('objects'), $parser->getCategories());
 }
 else
@@ -43,7 +39,7 @@ $offersOffset = [$offersIndex, OFFERS_BLOCK_COUNT];
 
 if(!empty($_GET['AJAX']))
 {
-    $result = $parser->loadElements(\LIblock::getId('objects'), $properties, $elementsOffset, $offersOffset);
+    $result = $parser->loadElements(\LIblock::getId('objects'), \LIblock::getId('objects_offers'), $properties, $elementsOffset, $offersOffset);
 
     if(empty($result))
     {

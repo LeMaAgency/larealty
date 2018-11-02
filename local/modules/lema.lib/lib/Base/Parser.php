@@ -256,7 +256,7 @@ class Parser extends StaticInstance
      */
     public function getProperties(Crawler $crawler = null, array $offers = [], array $offersNames = [], $needUpdate = false)
     {
-        if(1||$needUpdate || !is_file($this->storeDir . 'props.json'))
+        if($needUpdate || !is_file($this->storeDir . 'props.json'))
         {
             if(empty($crawler))
                 $crawler = new Crawler(null, $this->hostUrl);
@@ -296,17 +296,17 @@ class Parser extends StaticInstance
                     {
                         foreach ($fileName as $offerUrl => $file)
                         {
-                            $return[$url]['offers'][$file] = $this->getPropData($crawler, $file, $url, $return[$url]['ID'], $replace, $needUpdate);
+                            $return[$url]['offers'][$file] = $this->getOfferPropData($crawler, $file, $url, $return[$url]['ID'], $replace, $needUpdate);
                         }
                         $this->saveJsonArray($path, $return[$url]);
                     }
                     else
                     {
-                        $return[$url]['offers'][$fileName] = $this->getPropData($crawler, $fileName, $url, $return[$url]['ID'], $replace, $needUpdate);
+                        $return[$url]['offers'][$fileName] = $this->getOfferPropData($crawler, $fileName, $url, $return[$url]['ID'], $replace, $needUpdate);
                     }
                 }
                 else
-                    $return[$url]['offers'] = $this->loadJsonArray($path);
+                    $return[$url] = $this->loadJsonArray($path);
             }
             $this->saveJsonArray($this->storeDir . 'props.json', $return);
         }
@@ -316,7 +316,16 @@ class Parser extends StaticInstance
         return $return;
     }
 
-    protected function getPropData(Crawler $crawler, $fileName, $url, $parentId, array $replace, $needUpdate = false)
+    /**
+     * @param Crawler $crawler
+     * @param $fileName
+     * @param $url
+     * @param $parentId
+     * @param array $replace
+     * @param bool $needUpdate
+     * @return array
+     */
+    protected function getOfferPropData(Crawler $crawler, $fileName, $url, $parentId, array $replace, $needUpdate = false)
     {
         $crawler->clear();
         $crawler->addHtmlContent(file_get_contents($this->htmlStoreDir . $fileName), 'UTF-8');
@@ -406,6 +415,14 @@ class Parser extends StaticInstance
         return $return;
     }
 
+    /**
+     * @param Crawler $crawler
+     * @param $fileName
+     * @param array $replace
+     * @param $offerUrl
+     * @param bool $needUpdate
+     * @return array
+     */
     protected function getElementPropData(Crawler $crawler, $fileName, array $replace, $offerUrl, $needUpdate = false)
     {
         $crawler->clear();
@@ -607,13 +624,14 @@ class Parser extends StaticInstance
 
     /**
      * @param $iblockId
+     * @param $offersId
      * @param array $elements
      * @param array $elementsOffsets
      * @param array $offersOffsets
      * @return string
      * @throws \Exception
      */
-    public function loadElements($iblockId, array $elements = [], array $elementsOffsets = [0, 1], array $offersOffsets = [0, 10])
+    public function loadElements($iblockId, $offersId, array $elements = [], array $elementsOffsets = [0, 1], array $offersOffsets = [0, 10])
     {
         if(!isset($elementsOffsets[0], $elementsOffsets[1], $offersOffsets[0], $offersOffsets[1]))
             throw new \Exception('You must to specify offsets');
@@ -622,71 +640,105 @@ class Parser extends StaticInstance
             return 'end_elements';
 
         $elements = array_slice($elements, $elementsOffsets[0], $elementsOffsets[1]);
-        foreach($elements as $elementFilename => $offers)
+
+        foreach($elements as $elementFilename => $item)
         {
-            if($offersOffsets[0] > count($offers))
+            if(empty($item['offers']) || !is_array($item['offers']) || $offersOffsets[0] > count($item['offers']))
                 return 'end_offers';
 
-            $offers = array_slice($offers, $offersOffsets[0], $offersOffsets[1]);
+            $offers = array_slice($item['offers'], $offersOffsets[0], $offersOffsets[1]);
 
+            unset($item['offers']);
+            //add element
+            $this->addOrUpdateElement($iblockId, $item);
+            //add element offers
             foreach ($offers as $element)
             {
-                $props = $this->getInsertProperties($iblockId, $element);
-
-                /**
-                 * Take only first element instead loading all element images
-                 */
-                $image = null;
-                if(!empty($element['images']))
-                {
-                    $image = current($element['images']);
-                    if(empty($image) || !is_file($this->imagesStoreDir . $image))
-                        $image = null;
-                    else
-                        $image = \CFile::MakeFileArray($this->imagesStoreDir . $image);
-                }
-                /**
-                 * Old code for images is here..
-                 */
-                /**
-                $props['MORE_PHOTO'] = [];
-                foreach ($element['images'] as $image)
-                {
-                    if(is_file($this->imagesStoreDir . $image))
-                        $props['MORE_PHOTO'][] = \CFile::MakeFileArray($this->imagesStoreDir . $image);
-                }*/
-
-                $section = \LIblock::getSectionInfo($iblockId, strtolower($element['category']), 'XML_ID');
-
-                if (empty($section['ID']))
-                {
-                    continue;
-                    //var_dump($element);
-                    //throw new \Exception('Region must be specified. Value is ' . $element['category'] . ' - ' . $element['elementUrl']);
-                }
-                if(empty($element['name']) || empty($element['name']))
-                    continue;
-
-                $data = [
-                    'ACTIVE' => 'Y',
-                    'IBLOCK_SECTION_ID' => $section['ID'],
-                    'NAME' => $element['name'],
-                    //'CODE' => \CUtil::translit($element['name'] . '_' . $element['ID'], 'ru'),
-                    'CODE' => strtolower(trim(preg_replace('~[^-_A-Za-z0-9]~u', '_', Helper::translit($element['name'])), '_') . '_' . $element['ID']),
-                    'XML_ID' => $element['ID'],
-                    'PROPERTY_VALUES' => $props,
-                    //'PREVIEW_PICTURE' => current($props['MORE_PHOTO']),
-                    //'DETAIL_PICTURE' => current($props['MORE_PHOTO']),
-                    'PREVIEW_PICTURE' => $image,
-                    'DETAIL_PICTURE' => $image,
-                    'DETAIL_TEXT' => $element['description'],
-                    'PREVIEW_TEXT' => $element['description'],
-                ];
-                Element::addOrUpdateElement($iblockId, $data);
+                $this->addOrUpdateElement($offersId, $element, $item['ID']);
+                break;
             }
         }
     }
 
+    public function addOrUpdateElement($iblockId, $element, $offerElementId = false)
+    {
+        $props = $this->getInsertProperties($iblockId, $element);
+
+        /**
+         * Take only first element instead loading all element images
+         */
+        $image = null;
+        if(!empty($element['images']))
+        {
+            $image = current($element['images']);
+            if(empty($image) || !is_file($this->imagesStoreDir . $image))
+                $image = null;
+            else
+                $image = \CFile::MakeFileArray($this->imagesStoreDir . $image);
+        }
+        /**
+         * Old code for images is here..
+         */
+        /**
+        $props['MORE_PHOTO'] = [];
+        foreach ($element['images'] as $image)
+        {
+            if(is_file($this->imagesStoreDir . $image))
+            $props['MORE_PHOTO'][] = \CFile::MakeFileArray($this->imagesStoreDir . $image);
+        }*/
+
+        if (empty($element['name']))
+            return;
+        $elementCode = strtolower(trim(preg_replace('~[^-_A-Za-z0-9]~u', '_', Helper::translit($element['name'])), '_') . '_' . $element['ID']);
+        if($offerElementId)
+        {
+            $props['CML2_LINK'] = $offerElementId;
+            $data = [
+                'ACTIVE' => 'Y',
+                'NAME' => $element['name'],
+                //'CODE' => \CUtil::translit($element['name'] . '_' . $element['ID'], 'ru'),
+                'CODE' => $elementCode,
+                'XML_ID' => $element['ID'],
+                'PROPERTY_VALUES' => $props,
+                //'PREVIEW_PICTURE' => current($props['MORE_PHOTO']),
+                //'DETAIL_PICTURE' => current($props['MORE_PHOTO']),
+                'PREVIEW_PICTURE' => $image,
+                'DETAIL_PICTURE' => $image,
+                'DETAIL_TEXT' => $element['description'],
+                'PREVIEW_TEXT' => $element['description'],
+            ];
+        }
+        else
+        {
+            $section = \LIblock::getSectionInfo($iblockId, strtolower($element['category']), 'XML_ID');
+
+            if (empty($section['ID']))
+            {
+                return;
+                //var_dump($element);
+                //throw new \Exception('Region must be specified. Value is ' . $element['category'] . ' - ' . $element['elementUrl']);
+            }
+
+            $data = [
+                'ACTIVE' => 'Y',
+                'IBLOCK_SECTION_ID' => $section['ID'],
+                'NAME' => $element['name'],
+                //'CODE' => \CUtil::translit($element['name'] . '_' . $element['ID'], 'ru'),
+                'CODE' => $elementCode,
+                'XML_ID' => $element['ID'],
+                'PROPERTY_VALUES' => $props,
+                //'PREVIEW_PICTURE' => current($props['MORE_PHOTO']),
+                //'DETAIL_PICTURE' => current($props['MORE_PHOTO']),
+                'PREVIEW_PICTURE' => $image,
+                'DETAIL_PICTURE' => $image,
+                'DETAIL_TEXT' => $element['description'],
+                'PREVIEW_TEXT' => $element['description'],
+            ];
+        }
+        //var_dump($iblockId);
+        //\Lema\Common\Dumper::dump($data);
+        Element::addOrUpdateElement($iblockId, $data);
+    }
     /**
      * @param $iblockId
      * @param array $element
