@@ -655,7 +655,7 @@ class Parser extends StaticInstance
             foreach ($offers as $element)
             {
                 $this->addOrUpdateElement($offersId, $element, $item['ID']);
-                break;
+                //break;
             }
         }
     }
