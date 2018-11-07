@@ -1,7 +1,7 @@
 <?
 require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
 
-if(isset($_GET['test']))
+if(true || isset($_GET['test']))
 {
     require_once $_SERVER['DOCUMENT_ROOT'] . '/catalog/index_new.php';
     return;
