@@ -783,7 +783,7 @@ class Parser extends StaticInstance
                     $ibp = new \CIBlockProperty;
                     $propId = $ibp->Add([
                         'NAME' => $title,
-                        'XML_ID' => $title,
+                        'XML_ID' => $propCode,
                         'ACTIVE' => 'Y',
                         'SORT' => '100',
                         'CODE' => $propCode,
