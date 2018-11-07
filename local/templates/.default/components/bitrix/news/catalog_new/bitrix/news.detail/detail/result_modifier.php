@@ -58,3 +58,12 @@ $arResult['IN_FAVORITES'] = array();
 foreach ($basket->getProducts() as $data){
     $arResult['IN_FAVORITES'][$data['PRODUCT_ID']] = $data['ID'];
 }
+$arResult['OFFERS'] = \Lema\IBlock\Element::getList(LIblock::getId('objects_offers'), array(
+    'filter' => array('PROPERTY_CML2_LINK' => $arResult['ID']),
+    'arSelect' => array('ID', 'XML_ID',  'NAME', 'PREVIEW_PICTURE', 'PROPERTY_PRICE'),
+));
+foreach($arResult['OFFERS'] as $k => $arOffer)
+{
+    if(!empty($arOffer['PREVIEW_PICTURE']))
+        $arResult['OFFERS'][$k]['PREVIEW_PICTURE_SRC'] = \CFile::GetPath($arOffer['PREVIEW_PICTURE']);
+}

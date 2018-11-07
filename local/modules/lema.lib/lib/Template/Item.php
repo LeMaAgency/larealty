@@ -27,6 +27,20 @@ class Item
     {
         if(isset($editAreaId))
             $this->editAreaId = $editAreaId;
+        if(empty($arItem['PROPERTIES']))
+        {
+            $arItem['PROPERTIES'] = array();
+            foreach($arItem as $k => $v)
+            {
+                if(0 === strpos($k, '~'))
+                    unset($arItem[$k]);
+                if(preg_match('~^PROPERTY_(.+)_VALUE(?:_(.+))?$~ui', $k, $m))
+                {
+                    $arItem['PROPERTIES'][$m[1]][empty($m[2]) ? 'VALUE' : $m[2]] = $v;
+                    unset($arItem[$k]);
+                }
+            }
+        }
 
         $this->arItem = $arItem;
     }

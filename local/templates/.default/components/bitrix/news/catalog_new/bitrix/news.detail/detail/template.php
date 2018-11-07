@@ -19,6 +19,16 @@ use Lema\Common\Helper as H,
 $data = new TH($this);
 
 $item = $data->item();
+$isOffer = false;
+if(isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']]))
+{
+    $isOffer = true;
+    $offer = new \Lema\Template\Item($arResult['OFFERS'][$_GET['offerId']]);
+}
+else
+{
+    $offer = new \Lema\Template\Item(current($arResult['OFFERS']));
+}
 
 ?>
 
@@ -36,6 +46,15 @@ $item = $data->item();
                                     </div>
                                 </div>
                             <?endforeach;?>
+                            <?if(!empty($arResult['OFFERS'])):?>
+                                <?foreach($arResult['OFFERS'] as $arOffer):?>
+                                    <div class="flat-details__slider_nav__item">
+                                        <div class="flat-details__slider_nav__item__wrap">
+                                            <img src="<?=$arOffer['PREVIEW_PICTURE_SRC'];?>" alt="<?=$arOffer['NAME'];?>">
+                                        </div>
+                                    </div>
+                                <?endforeach;?>
+                            <?endif;?>
                         </div>
                         <div class="flat-details__slider">
                             <?foreach($arResult['SLIDER_IMAGES'] as $src):?>
@@ -43,6 +62,18 @@ $item = $data->item();
                                     <img src="<?=$src;?>" alt="<?=$item->getName();?>">
                                 </div>
                             <?endforeach;?>
+                            <?if(!empty($arResult['OFFERS'])):?>
+                                <?foreach($arResult['OFFERS'] as $arOffer):?>
+                                    <div class="flat-details__slider__item">
+                                        <img src="<?=$arOffer['PREVIEW_PICTURE_SRC'];?>" alt="<?=$arOffer['NAME'];?>">
+                                    </div>
+                                    <div class="flat-details__slider_nav__item">
+                                        <div class="flat-details__slider_nav__item__wrap">
+                                            <img src="<?=$arOffer['PREVIEW_PICTURE_SRC'];?>" alt="<?=$arOffer['NAME'];?>">
+                                        </div>
+                                    </div>
+                                <?endforeach;?>
+                            <?endif;?>
                         </div>
                     <?endif;?>
                 </div>
@@ -51,7 +82,11 @@ $item = $data->item();
                         <div class="card-flat__content__head clearfix">
                             <h3 class="card-flat__content__head__title"><?=$item->getName();?></h3>
                             <div class="card-flat__content__head__price card-flat__content__head__price_details">
-                                <b><?=H::formatPrice($item->propVal('PRICE'), null);?></b>
+                                <?if(!empty($item->propVal('PRICE'))):?>
+                                    <b><?=H::formatPrice($item->propVal('PRICE'), null);?></b>
+                                <?else:?>
+                                    <b><?=H::formatPrice($offer->propVal('PRICE'), null);?></b>
+                                <?endif;?>
                                 <?=Loc::getMessage('LEMA_APARTMENTS_RUB');?>
                             </div>
                         </div>
@@ -252,6 +287,29 @@ $item = $data->item();
                                 </button>
                             </form>
                         </div>
+                    <?endif;?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="container">
+                    <?if(!empty($arResult['OFFERS'])):?>
+                        <h3>Другие предложения в <?=$item->getName();?></h3>
+                        <hr>
+                        <br><br>
+                        <?foreach($arResult['OFFERS'] as $arOffer):?>
+                            <div class="row">
+                                <a href="<?=$APPLICATION->GetCurPageParam('offerId=' . $arOffer['ID'], ['offerId']);?>">
+                                    <div class="col-md-2"><img src="<?=\CFile::GetPath($arOffer['PREVIEW_PICTURE']);?>"></div>
+                                    <div class="col-md-2">ID: <?=$arOffer['ID'];?>/<?=$arOffer['XML_ID'];?></div>
+                                    <div class="col-md-2"><?=$arOffer['NAME'];?></div>
+                                    <div class="col-md-2">
+                                        <?=H::formatPrice($arOffer['PROPERTY_PRICE_VALUE'], null);?>
+                                        <?=Loc::getMessage('LEMA_APARTMENTS_RUB');?>
+                                    </div>
+                                </a>
+                            </div>
+                            <hr>
+                        <?endforeach;?>
                     <?endif;?>
                 </div>
             </div>
