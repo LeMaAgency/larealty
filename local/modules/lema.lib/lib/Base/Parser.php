@@ -793,7 +793,7 @@ class Parser extends StaticInstance
                 }
                 //we use property id instead property code because it will be faster
                 //just for test u can use $propCode instead
-                $return[$propCode] = $element[$key];
+                $return[$propCode] = mb_strimwidth($element[$key], 0, 257, '...', 'UTF-8');
             }
         }
         return $return;
