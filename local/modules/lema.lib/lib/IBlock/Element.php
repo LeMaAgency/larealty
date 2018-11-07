@@ -223,7 +223,7 @@ class Element
      * @return int
      * @throws \Exception
      */
-    public static function addOrUpdateElement($iblockId, array $data = array())
+    public static function addOrUpdateElement($iblockId, array $data = array(), $doNotUpdateExisting = false)
     {
         if(empty($data['XML_ID']))
             throw new \Exception('XML_ID must be specified.');
@@ -244,9 +244,14 @@ class Element
         ));
         $data['IBLOCK_ID'] = $iblockId;
 
+        if(!$doNotUpdateExisting && !empty($data['PREVIEW_PICTURE']))
+            $data['PREVIEW_PICTURE'] = $data['DETAIL_PICTURE'] = \CFile::MakeFileArray($data['PREVIEW_PICTURE']);
+
         if(($row = $res->fetch()))
         {
             $elementId = $row['ID'];
+            if($doNotUpdateExisting)
+                return $elementId;
             if(!$el->Update($elementId, $data))
                 throw new \Exception($el->LAST_ERROR);
         }

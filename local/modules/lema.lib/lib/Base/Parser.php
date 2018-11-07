@@ -24,6 +24,7 @@ class Parser extends StaticInstance
     protected $imagesStoreDir = null;
 
     protected $currentSection = null;
+    protected $currentPage = 1;
 
     const DATA_DIRECTORY = '/local/import/';
 
@@ -78,6 +79,14 @@ class Parser extends StaticInstance
     }
 
     /**
+     * @return int
+     */
+    public function getCurrentPage()
+    {
+        return $this->currentPage;
+    }
+
+    /**
      * @param string $url
      * @return $this
      * @throws \Exception
@@ -100,6 +109,25 @@ class Parser extends StaticInstance
     }
 
     /**
+     * @param $page
+     * @return $this
+     * @throws \Exception
+     */
+    public function setPage($page)
+    {
+        if($page < 1)
+            throw new \Exception('Empty page');
+
+        $this->currentPage = (int) $page;
+        $this->currentUrl = $this->url . '/' . $this->currentSection . '?count=84';
+        if($page > 1)
+            $this->currentUrl .= '&page=' . $page;
+        return $this;
+    }
+
+    /**
+     * @param int $page
+     * @param bool $needUpdate
      * @return array
      * @throws \Exception
      */
@@ -155,9 +183,9 @@ class Parser extends StaticInstance
      */
     public function getLinksCount()
     {
-        if(!is_file($this->storeDir . 'inner_offers_links_count.json'))
+        if(!is_file($this->getFileNameWithPage($this->storeDir . 'inner_offers_links_count')))
             return 0;
-        return (int) file_get_contents($this->storeDir . 'inner_offers_links_count.json');
+        return (int) file_get_contents($this->getFileNameWithPage($this->storeDir . 'inner_offers_links_count'));
     }
 
     /**
@@ -168,7 +196,7 @@ class Parser extends StaticInstance
      */
     public function getRootLinks(Crawler $crawler = null, $fileName, $needUpdate = false)
     {
-        if($needUpdate || !is_file($this->storeDir . 'links.json'))
+        if($needUpdate || !is_file($this->getFileNameWithPage($this->storeDir . 'links')))
         {
             if(empty($crawler))
                 $crawler = new Crawler(null, $this->hostUrl);
@@ -177,10 +205,10 @@ class Parser extends StaticInstance
             $links = array_unique($crawler->filter('.object.teaser.buy.clearfix .image a')->each(function (Crawler $node) {
                 return $node->link()->getUri();
             }));
-            $this->saveJsonArray($this->storeDir . 'links.json', $links);
+            $this->saveJsonArray($this->getFileNameWithPage($this->storeDir . 'links'), $links);
         }
         else
-            $links = $this->loadJsonArray($this->storeDir . 'links.json');
+            $links = $this->loadJsonArray($this->getFileNameWithPage($this->storeDir . 'links'));
 
         return $links;
     }
@@ -193,7 +221,7 @@ class Parser extends StaticInstance
      */
     public function getOffersLinks(Crawler $crawler = null, array $fileNames = [], $needUpdate = false)
     {
-        if($needUpdate || !is_file($this->storeDir . 'offers_links.json'))
+        if($needUpdate || !is_file($this->getFileNameWithPage($this->storeDir . 'offers_links')))
         {
             if(empty($crawler))
                 $crawler = new Crawler(null, $this->hostUrl);
@@ -212,10 +240,10 @@ class Parser extends StaticInstance
                     );
                 }
             }
-            $this->saveJsonArray($this->storeDir . 'offers_links.json', $links);
+            $this->saveJsonArray($this->getFileNameWithPage($this->storeDir . 'offers_links'), $links);
         }
         else
-            $links = $this->loadJsonArray($this->storeDir . 'offers_links.json');
+            $links = $this->loadJsonArray($this->getFileNameWithPage($this->storeDir . 'offers_links'));
 
         return $links;
     }
@@ -228,7 +256,7 @@ class Parser extends StaticInstance
      */
     public function getInnerOffers(Crawler $crawler = null, array $fileNames = [], $needUpdate = false)
     {
-        if($needUpdate || !is_file($this->storeDir . 'inner_offers_links.json'))
+        if($needUpdate || !is_file($this->getFileNameWithPage($this->storeDir . 'inner_offers_links')))
         {
             if(empty($crawler))
                 $crawler = new Crawler(null, $this->hostUrl);
@@ -241,13 +269,13 @@ class Parser extends StaticInstance
                     return $node->link()->getUri();
                 }));
             }
-            $this->saveJsonArray($this->storeDir . 'inner_offers_links.json', $links);
+            $this->saveJsonArray($this->getFileNameWithPage($this->storeDir . 'inner_offers_links'), $links);
         }
         else
-            $links = $this->loadJsonArray($this->storeDir . 'inner_offers_links.json');
+            $links = $this->loadJsonArray($this->getFileNameWithPage($this->storeDir . 'inner_offers_links'));
 
-        if($needUpdate || !is_file($this->storeDir . 'inner_offers_links_count.json'))
-            file_put_contents($this->storeDir . 'inner_offers_links_count.json', count(array_keys($links)));
+        if($needUpdate || !is_file($this->getFileNameWithPage($this->storeDir . 'inner_offers_links_count')))
+            file_put_contents($this->getFileNameWithPage($this->storeDir . 'inner_offers_links_count'), count(array_keys($links)));
 
         return $links;
     }
@@ -260,7 +288,7 @@ class Parser extends StaticInstance
      */
     public function getProperties(Crawler $crawler = null, array $offers = [], array $offersNames = [], $needUpdate = false)
     {
-        if($needUpdate || !is_file($this->storeDir . 'props.json'))
+        if($needUpdate || !is_file($this->getFileNameWithPage($this->storeDir . 'props')))
         {
             if(empty($crawler))
                 $crawler = new Crawler(null, $this->hostUrl);
@@ -312,10 +340,10 @@ class Parser extends StaticInstance
                 else
                     $return[$url] = $this->loadJsonArray($path);
             }
-            $this->saveJsonArray($this->storeDir . 'props.json', $return);
+            $this->saveJsonArray($this->getFileNameWithPage($this->storeDir . 'props'), $return);
         }
         else
-            $return = $this->loadJsonArray($this->storeDir . 'props.json');
+            $return = $this->loadJsonArray($this->getFileNameWithPage($this->storeDir . 'props'));
 
         return $return;
     }
@@ -547,22 +575,22 @@ class Parser extends StaticInstance
      */
     public function getCategories($needUpdate = false)
     {
-        if($needUpdate || !is_file($this->storeDir . 'sections.json'))
+        if($needUpdate || !is_file($this->getFileNameWithPage($this->storeDir . 'sections')))
         {
-            if (!is_file($this->storeDir . 'inner_offers_links.json'))
+            if (!is_file($this->getFileNameWithPage($this->storeDir . 'inner_offers_links')))
                 throw new \Exception('You must run parser before.');
 
             //get categories from files with links
             $categories = [];
             
             
-            $linksList = $this->loadJsonArray($this->storeDir . 'inner_offers_links.json');
+            $linksList = $this->loadJsonArray($this->getFileNameWithPage($this->storeDir . 'inner_offers_links'));
             foreach($linksList as $links)
             {
                 foreach ($links as $link)
                     $categories[] = $this->getCategoriesFromUrl($link);
             }
-            $links = $this->loadJsonArray($this->storeDir . 'links.json');
+            $links = $this->loadJsonArray($this->getFileNameWithPage($this->storeDir . 'links'));
             foreach ($links as $link)
                 $categories[] = $this->getCategoriesFromUrl($link);
             
@@ -581,10 +609,10 @@ class Parser extends StaticInstance
                 $this->combineArr($category, $tmp);
                 $result = array_merge_recursive($result, $tmp);
             }
-            $this->saveJsonArray($this->storeDir . 'sections.json', $result);
+            $this->saveJsonArray($this->getFileNameWithPage($this->storeDir . 'sections'), $result);
         }
         else
-            $result = $this->loadJsonArray($this->storeDir . 'sections.json');
+            $result = $this->loadJsonArray($this->getFileNameWithPage($this->storeDir . 'sections'));
         return $result;
     }
 
@@ -654,18 +682,31 @@ class Parser extends StaticInstance
 
             unset($item['offers']);
             //add element
-            $this->addOrUpdateElement($iblockId, $item);
+            $elementId = $this->addOrUpdateElement($iblockId, $item, false, false);
+            if(empty($elementId))
+                continue;
             //add element offers
             foreach ($offers as $element)
             {
-                $this->addOrUpdateElement($offersId, $element, $item['ID']);
+                $this->addOrUpdateElement($offersId, $element, $elementId, false);
                 //break;
             }
         }
     }
 
-    public function addOrUpdateElement($iblockId, $element, $offerElementId = false)
+    /**
+     * @param $iblockId
+     * @param $element
+     * @param bool $offerElementId
+     * @param bool $doNotUpdateExisting
+     * @return int|void
+     * @throws \Exception
+     */
+    public function addOrUpdateElement($iblockId, $element, $offerElementId = false, $doNotUpdateExisting = false)
     {
+        if (empty($element['name']))
+            return;
+
         $props = $this->getInsertProperties($iblockId, $element);
 
         /**
@@ -678,7 +719,7 @@ class Parser extends StaticInstance
             if(empty($image) || !is_file($this->imagesStoreDir . $image))
                 $image = null;
             else
-                $image = \CFile::MakeFileArray($this->imagesStoreDir . $image);
+                $image = $this->imagesStoreDir . $image;
         }
         /**
          * Old code for images is here..
@@ -687,12 +728,10 @@ class Parser extends StaticInstance
         $props['MORE_PHOTO'] = [];
         foreach ($element['images'] as $image)
         {
-            if(is_file($this->imagesStoreDir . $image))
-            $props['MORE_PHOTO'][] = \CFile::MakeFileArray($this->imagesStoreDir . $image);
+        if(is_file($this->imagesStoreDir . $image))
+        $props['MORE_PHOTO'][] = \CFile::MakeFileArray($this->imagesStoreDir . $image);
         }*/
 
-        if (empty($element['name']))
-            return;
         $elementCode = strtolower(trim(preg_replace('~[^-_A-Za-z0-9]~u', '_', Helper::translit($element['name'])), '_') . '_' . $element['ID']);
         if($offerElementId)
         {
@@ -706,8 +745,8 @@ class Parser extends StaticInstance
                 'PROPERTY_VALUES' => $props,
                 //'PREVIEW_PICTURE' => current($props['MORE_PHOTO']),
                 //'DETAIL_PICTURE' => current($props['MORE_PHOTO']),
-                'PREVIEW_PICTURE' => $image,
-                'DETAIL_PICTURE' => $image,
+                //'PREVIEW_PICTURE' => $image,
+                //'DETAIL_PICTURE' => $image,
                 'DETAIL_TEXT' => $element['description'],
                 'PREVIEW_TEXT' => $element['description'],
             ];
@@ -741,7 +780,7 @@ class Parser extends StaticInstance
         }
         //var_dump($iblockId);
         //\Lema\Common\Dumper::dump($data);
-        Element::addOrUpdateElement($iblockId, $data);
+        return Element::addOrUpdateElement($iblockId, $data, $doNotUpdateExisting);
     }
     /**
      * @param $iblockId
@@ -850,6 +889,18 @@ class Parser extends StaticInstance
      */
     public function needRunParser()
     {
-        return !is_file($this->storeDir . 'props.json');
+        return !is_file($this->getFileNameWithPage($this->storeDir . 'props'));
+    }
+
+    /**
+     * @param $path
+     * @param string $extension
+     * @return string
+     */
+    protected function getFileNameWithPage($path, $extension = 'json')
+    {
+        if($this->currentPage === 1)
+            return $path . '.' . $extension;
+        return $path . '_' . $this->currentPage . '.' . $extension;
     }
 }

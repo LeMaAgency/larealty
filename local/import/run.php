@@ -18,7 +18,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_be
 
 $siteUrl = 'http://blackwood.ru/catalog';
 
-$parser = \Lema\Base\Parser::get()->setUrl($siteUrl)->setCurrentSection('city');
+$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+
+$parser = \Lema\Base\Parser::get()->setUrl($siteUrl)->setCurrentSection('city')->setPage($page);
 
 if ($parser->needRunParser())
 {
@@ -33,6 +35,7 @@ $scriptPath = '/local/import/run.php';
 $elementsIndex = isset($_GET['elementsIndex']) ? (int) $_GET['elementsIndex'] : 0;
 $offersIndex = isset($_GET['offersIndex']) ? (int) $_GET['offersIndex'] : 0;
 $stepCount = $parser->getLinksCount();
+
 
 $elementsOffset = [$elementsIndex, ELEMENTS_BLOCK_COUNT];
 $offersOffset = [$offersIndex, OFFERS_BLOCK_COUNT];
@@ -65,7 +68,7 @@ if(!empty($_GET['AJAX']))
 <script>
     $(function()
     {
-        (function sendRequest(elementsIndex, offersIndex, stepCount)
+        (function sendRequest(elementsIndex, offersIndex, stepCount, page)
         {
             //history.pushState(null, document.title, '<?=$scriptPath;?>?AJAX=true');
 
@@ -81,10 +84,10 @@ if(!empty($_GET['AJAX']))
             else
                 $('#answer').append('<div data-step="' + (elementsIndex + 1) + '">' + msg + '</div>');
 
-            $.get('<?=$scriptPath;?>', {AJAX: 1, elementsIndex: elementsIndex, offersIndex: offersIndex}, function(ans) {
+            $.get('<?=$scriptPath;?>', {AJAX: 1, elementsIndex: elementsIndex, offersIndex: offersIndex, page: page}, function(ans) {
                 if(typeof ans['elementsOffset'] !== 'undefined' && typeof ans['offersOffset'] !== 'undefined')
-                    sendRequest(ans.elementsOffset, ans.offersOffset, stepCount);
+                    sendRequest(ans.elementsOffset, ans.offersOffset, stepCount, page);
             }, 'json');
-        })(<?=$elementsIndex?>, <?=$offersIndex?>, <?=$stepCount?>);
+        })(<?=$elementsIndex?>, <?=$offersIndex?>, <?=$stepCount?>, <?=$page?>);
     })
 </script>
