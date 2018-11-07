@@ -299,7 +299,7 @@ else
                         <?foreach($arResult['OFFERS'] as $arOffer):?>
                             <div class="row">
                                 <a href="<?=$APPLICATION->GetCurPageParam('offerId=' . $arOffer['ID'], ['offerId']);?>">
-                                    <div class="col-md-2"><img src="<?=\CFile::GetPath($arOffer['PREVIEW_PICTURE']);?>"></div>
+                                    <div class="col-md-2"><img src="<?=$arOffer['PREVIEW_PICTURE_SRC'];?>"></div>
                                     <div class="col-md-2">ID: <?=$arOffer['ID'];?>/<?=$arOffer['XML_ID'];?></div>
                                     <div class="col-md-2"><?=$arOffer['NAME'];?></div>
                                     <div class="col-md-2">
