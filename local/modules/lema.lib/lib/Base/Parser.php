@@ -745,8 +745,8 @@ class Parser extends StaticInstance
                 'PROPERTY_VALUES' => $props,
                 //'PREVIEW_PICTURE' => current($props['MORE_PHOTO']),
                 //'DETAIL_PICTURE' => current($props['MORE_PHOTO']),
-                //'PREVIEW_PICTURE' => $image,
-                //'DETAIL_PICTURE' => $image,
+                'PREVIEW_PICTURE' => $image,
+                'DETAIL_PICTURE' => $image,
                 'DETAIL_TEXT' => $element['description'],
                 'PREVIEW_TEXT' => $element['description'],
             ];
