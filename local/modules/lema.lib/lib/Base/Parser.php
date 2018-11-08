@@ -25,6 +25,7 @@ class Parser extends StaticInstance
 
     protected $currentSection = null;
     protected $currentPage = 1;
+    protected $perPage = 84;
 
     const DATA_DIRECTORY = '/local/import/';
 
@@ -38,7 +39,8 @@ class Parser extends StaticInstance
         $this->client = new Client([
             'headers' => [
                 'User-Agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/70.0.3538.77 Chrome/70.0.3538.77 Safari/537.36',
-            ]
+            ],
+            'http_errors' => false,
         ]);
     }
 
@@ -109,6 +111,24 @@ class Parser extends StaticInstance
     }
 
     /**
+     * @return int
+     */
+    public function getPerPage()
+    {
+        return $this->perPage;
+    }
+
+    /**
+     * @param $count
+     * @return $this
+     */
+    public function setPerPage($count)
+    {
+        $this->perPage = (int) $count;
+        return $this;
+    }
+
+    /**
      * @param $page
      * @return $this
      * @throws \Exception
@@ -119,7 +139,7 @@ class Parser extends StaticInstance
             throw new \Exception('Empty page');
 
         $this->currentPage = (int) $page;
-        $this->currentUrl = $this->url . '/' . $this->currentSection . '?count=84';
+        $this->currentUrl = $this->url . '/' . $this->getCurrentSection() . '?count=' . $this->getPerPage();
         if($page > 1)
             $this->currentUrl .= '&page=' . $page;
         return $this;
@@ -138,16 +158,13 @@ class Parser extends StaticInstance
 
         $crawler = new Crawler(null, $this->hostUrl);
 
+        $crawler->clear();
+
         //first run
         $fileName = current($this->loadHtml($this->currentUrl, $needUpdate));
-        $crawler->addHtmlContent(file_get_contents($this->htmlStoreDir . $fileName), 'UTF-8');
-        $objectCount = $crawler->filter('.content .object-count');
-        if(false&&$objectCount->count())
-        {
-            $objectCount = (int) current(explode(' ', trim($crawler->filter('.content .object-count')->text())));
-            $this->setObjectsCount($objectCount);
-            $fileName = current($this->loadHtml($this->currentUrl, $needUpdate));
-        }
+
+        $this->getPagesCount($crawler, $fileName, $needUpdate);
+
         $crawler->clear();
         //load root links
         $links = $this->getRootLinks($crawler, $fileName, $needUpdate);
@@ -178,6 +195,36 @@ class Parser extends StaticInstance
         return $props;
     }
 
+    /**
+     * @param Crawler|null $crawler
+     * @param null $fileName
+     * @param bool $needUpdate
+     * @return int
+     */
+    public function getPagesCount(Crawler $crawler = null, $fileName = null, $needUpdate = false)
+    {
+        $pagesCount = 1;
+        if($needUpdate || !is_file($this->storeDir . 'pages_count.json'))
+        {
+            if(empty($fileName))
+                return 0;
+            if(empty($crawler))
+                $crawler = new Crawler(null, $this->hostUrl);
+
+            $crawler->addHtmlContent(file_get_contents($this->htmlStoreDir . $fileName), 'UTF-8');
+            $objectCount = $crawler->filter('.content .object-count');
+            if ($objectCount->count())
+            {
+                $objectCount = (int)current(explode(' ', trim($crawler->filter('.content .object-count')->text())));
+                $pagesCount = (int) ceil($objectCount / $this->getPerPage());
+                file_put_contents($this->storeDir . 'pages_count.json', $pagesCount);
+            }
+        }
+        else
+            $pagesCount = (int) file_get_contents($this->storeDir . 'pages_count.json');
+
+        return $pagesCount;
+    }
     /**
      * @return int
      */
@@ -387,13 +434,15 @@ class Parser extends StaticInstance
         }
 
         $descriptionSearch = $crawler->filter('.description p');
-        $objectId = (int)preg_replace('~\\D+~', '', $crawler->filter('h1')->text());
+        $objectId = 0;
+        if($crawler->filter('h1')->count())
+            $objectId = (int)preg_replace('~\\D+~', '', $crawler->filter('h1')->text());
         $return['ID'] = $objectId;
         $return['parentId'] = $parentId;
 
 
-        $return['category'] = $this->getElementCategoryFromUrl($offerUrl);
-        $return['elementUrl'] = $offerUrl;
+        $return['category'] = $this->getElementCategoryFromUrl($url);
+        $return['elementUrl'] = $url;
         $descriptionsCount = $descriptionSearch->count();
         $return['description'] = $descriptionsCount ? $descriptionSearch->first()->text() : null;
         if ($descriptionsCount > 1)
@@ -899,8 +948,8 @@ class Parser extends StaticInstance
      */
     protected function getFileNameWithPage($path, $extension = 'json')
     {
-        if($this->currentPage === 1)
-            return $path . '.' . $extension;
+        //if($this->currentPage === 1)
+        //    return $path . '.' . $extension;
         return $path . '_' . $this->currentPage . '.' . $extension;
     }
 }

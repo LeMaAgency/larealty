@@ -46,15 +46,6 @@ else
                                     </div>
                                 </div>
                             <?endforeach;?>
-                            <?if(!empty($arResult['OFFERS'])):?>
-                                <?foreach($arResult['OFFERS'] as $arOffer):?>
-                                    <div class="flat-details__slider_nav__item">
-                                        <div class="flat-details__slider_nav__item__wrap">
-                                            <img src="<?=$arOffer['PREVIEW_PICTURE_SRC'];?>" alt="<?=$arOffer['NAME'];?>">
-                                        </div>
-                                    </div>
-                                <?endforeach;?>
-                            <?endif;?>
                         </div>
                         <div class="flat-details__slider">
                             <?foreach($arResult['SLIDER_IMAGES'] as $src):?>
@@ -62,18 +53,6 @@ else
                                     <img src="<?=$src;?>" alt="<?=$item->getName();?>">
                                 </div>
                             <?endforeach;?>
-                            <?if(!empty($arResult['OFFERS'])):?>
-                                <?foreach($arResult['OFFERS'] as $arOffer):?>
-                                    <div class="flat-details__slider__item">
-                                        <img src="<?=$arOffer['PREVIEW_PICTURE_SRC'];?>" alt="<?=$arOffer['NAME'];?>">
-                                    </div>
-                                    <div class="flat-details__slider_nav__item">
-                                        <div class="flat-details__slider_nav__item__wrap">
-                                            <img src="<?=$arOffer['PREVIEW_PICTURE_SRC'];?>" alt="<?=$arOffer['NAME'];?>">
-                                        </div>
-                                    </div>
-                                <?endforeach;?>
-                            <?endif;?>
                         </div>
                     <?endif;?>
                 </div>

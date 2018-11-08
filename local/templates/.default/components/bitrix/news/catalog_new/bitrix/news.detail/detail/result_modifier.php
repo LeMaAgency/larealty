@@ -62,8 +62,14 @@ $arResult['OFFERS'] = \Lema\IBlock\Element::getList(LIblock::getId('objects_offe
     'filter' => array('PROPERTY_CML2_LINK' => $arResult['ID']),
     'arSelect' => array('ID', 'XML_ID',  'NAME', 'PREVIEW_PICTURE', 'PROPERTY_PRICE'),
 ));
+
+$images = [];
 foreach($arResult['OFFERS'] as $k => $arOffer)
 {
     if(!empty($arOffer['PREVIEW_PICTURE']))
-        $arResult['OFFERS'][$k]['PREVIEW_PICTURE_SRC'] = \CFile::GetPath($arOffer['PREVIEW_PICTURE']);
+    {
+        if(!isset($images[$arOffer['PREVIEW_PICTURE']]))
+            $images[$arOffer['PREVIEW_PICTURE']] = \CFile::GetPath($arOffer['PREVIEW_PICTURE']);
+        $arResult['OFFERS'][$k]['PREVIEW_PICTURE_SRC'] = $images[$arOffer['PREVIEW_PICTURE']];
+    }
 }
