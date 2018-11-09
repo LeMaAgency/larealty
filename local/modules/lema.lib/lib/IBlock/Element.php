@@ -244,19 +244,23 @@ class Element
         ));
         $data['IBLOCK_ID'] = $iblockId;
 
-        if(!$doNotUpdateExisting && !empty($data['PREVIEW_PICTURE']))
-            $data['PREVIEW_PICTURE'] = $data['DETAIL_PICTURE'] = \CFile::MakeFileArray($data['PREVIEW_PICTURE']);
-
         if(($row = $res->fetch()))
         {
             $elementId = $row['ID'];
             if($doNotUpdateExisting)
                 return $elementId;
+
+            if(!empty($data['PREVIEW_PICTURE']))
+                $data['PREVIEW_PICTURE'] = $data['DETAIL_PICTURE'] = \CFile::MakeFileArray($data['PREVIEW_PICTURE']);
+
             if(!$el->Update($elementId, $data))
                 throw new \Exception($el->LAST_ERROR);
         }
         else
         {
+            if(!empty($data['PREVIEW_PICTURE']))
+                $data['PREVIEW_PICTURE'] = $data['DETAIL_PICTURE'] = \CFile::MakeFileArray($data['PREVIEW_PICTURE']);
+
             if(!($elementId = $el->Add($data)))
                 throw new \Exception($el->LAST_ERROR);
         }

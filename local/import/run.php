@@ -29,6 +29,7 @@ if(empty($pagesCount))
     $pagesCount = $parser->getPagesCount();
 }
 
+
 if ($parser->needRunParser())
 {
     $properties = $parser->parse();
@@ -110,6 +111,6 @@ if(!empty($_GET['AJAX']))
                 if(typeof ans['elementsOffset'] !== 'undefined' && typeof ans['offersOffset'] !== 'undefined')
                     sendRequest(ans.elementsOffset, ans.offersOffset, ans.stepCount, page, ans.pluralStepCount);
             }, 'json');
-        })(<?=$elementsIndex?>, <?=$offersIndex?>, <?=$stepCount?>, <?=$page?>);
+        })(<?=$elementsIndex?>, <?=$offersIndex?>, <?=$stepCount?>, <?=$page?>, '<?=\Lema\Common\Helper::pluralizeN($stepCount, ['шага', 'шагов', 'шагов'])?>');
     })
 </script>
