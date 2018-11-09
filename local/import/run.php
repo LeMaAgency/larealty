@@ -10,7 +10,7 @@ defined('NOT_CHECK_PERMISSIONS') or define('NOT_CHECK_PERMISSIONS', true);
 defined('CHK_EVENT') or define('CHK_EVENT', true);
 
 defined('ELEMENTS_BLOCK_COUNT') or define('ELEMENTS_BLOCK_COUNT', 1);
-defined('OFFERS_BLOCK_COUNT')   or define('OFFERS_BLOCK_COUNT',  50);
+defined('OFFERS_BLOCK_COUNT')   or define('OFFERS_BLOCK_COUNT',  30);
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
 

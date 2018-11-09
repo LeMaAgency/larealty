@@ -731,13 +731,13 @@ class Parser extends StaticInstance
 
             unset($item['offers']);
             //add element
-            $elementId = $this->addOrUpdateElement($iblockId, $item, false, true);
+            $elementId = $this->addOrUpdateElement($iblockId, $item, false, false);
             if(empty($elementId))
                 continue;
             //add element offers
             foreach ($offers as $element)
             {
-                $this->addOrUpdateElement($offersId, $element, $elementId, true);
+                $this->addOrUpdateElement($offersId, $element, $elementId, false);
                 //break;
             }
         }
