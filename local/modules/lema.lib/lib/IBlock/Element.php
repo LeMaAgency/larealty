@@ -247,26 +247,43 @@ class Element
         if(($row = $res->fetch()))
         {
             $elementId = $row['ID'];
+
             if($doNotUpdateExisting)
                 return $elementId;
 
-            if(!empty($data['PREVIEW_PICTURE']))
-                $data['PREVIEW_PICTURE'] = $data['DETAIL_PICTURE'] = \CFile::MakeFileArray($data['PREVIEW_PICTURE']);
+            if(!empty($images))
+                $data['PREVIEW_PICTURE'] = $data['DETAIL_PICTURE'] = \CFile::MakeFileArray(current($images));
+
+            static::deleteEmptyImages($data);
 
             if(!$el->Update($elementId, $data))
-                throw new \Exception($el->LAST_ERROR);
+                 new \Exception($el->LAST_ERROR);
         }
         else
         {
-            if(!empty($data['PREVIEW_PICTURE']))
-                $data['PREVIEW_PICTURE'] = $data['DETAIL_PICTURE'] = \CFile::MakeFileArray($data['PREVIEW_PICTURE']);
+            if(!empty($images))
+                $data['PREVIEW_PICTURE'] = $data['DETAIL_PICTURE'] = \CFile::MakeFileArray(current($images));
 
             if(!($elementId = $el->Add($data)))
                 throw new \Exception($el->LAST_ERROR);
         }
         if(!empty($images))
-            \CIBlockElement::SetPropertyValuesEx($elementId, $iblockId, ['MORE_PHOTO' => $images]);
+        {
+            \CIBlockElement::SetPropertyValuesEx($elementId, $iblockId, [
+                'MORE_PHOTO' => array_map(['\CFile', 'MakeFileArray'], $images)
+            ]);
+        }
 
         return $elementId;
+    }
+
+    protected static function deleteEmptyImages(array &$data, $keys = ['PREVIEW_PICTURE', 'DETAIL_PICTURE'])
+    {
+        $keys = (array)$keys;
+        foreach($keys as $key)
+        {
+            if(array_key_exists($key, $data) && empty($data[$key]))
+                $data[$key] = ['del' => 'Y'];
+        }
     }
 }

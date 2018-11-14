@@ -371,6 +371,7 @@ class Parser extends StaticInstance
                 if ($needUpdate || !is_file($path))
                 {
                     $return[$url]['offers'] = [];
+
                     if(is_array($fileName))
                     {
                         foreach ($fileName as $offerUrl => $file)
@@ -474,25 +475,34 @@ class Parser extends StaticInstance
         if (!is_dir($this->imagesStoreDir . $imageDir))
             mkdir($this->imagesStoreDir . $imageDir);
 
-        $images = array_unique($crawler->filter('a[rel="lightbox[a]"]')->each(function (Crawler $node) {
+        /**
+         * Offers will not have any images now, so we need to comment it..
+         */
+
+        /*$images = array_unique($crawler->filter('a[rel="lightbox[a]"]')->each(function (Crawler $node) {
             return $node->link()->getUri();
         }));
         shuffle($images);
         foreach ($images as $image)
         {
             $imagePath = $imageDir . '/' . basename($image);
-            if ($needUpdate || !is_file($this->imagesStoreDir . $imagePath) || !filesize($this->imagesStoreDir . $imagePath))
+
+            if(defined('DO_NOT_LOAD_NON_EXISTING_IMAGES') && DO_NOT_LOAD_NON_EXISTING_IMAGES)
             {
-                if (file_put_contents($this->imagesStoreDir . $imagePath, file_get_contents($image)))
+                if(is_file($this->imagesStoreDir . $imagePath) && filesize($this->imagesStoreDir . $imagePath))
                     $return['images'][] = $imagePath;
             }
             else
-                $return['images'][] = $imagePath;
-            /**
-             * We will take only first image
-             */
-            break;
-        }
+            {
+                if ($needUpdate || !is_file($this->imagesStoreDir . $imagePath) || !filesize($this->imagesStoreDir . $imagePath))
+                {
+                    if (file_put_contents($this->imagesStoreDir . $imagePath, file_get_contents($image)))
+                        $return['images'][] = $imagePath;
+                }
+                else
+                    $return['images'][] = $imagePath;
+            }
+        }*/
         return $return;
     }
 
@@ -553,36 +563,42 @@ class Parser extends StaticInstance
         }
 
         //images
-        /*
+
         if(!is_dir($this->imagesStoreDir . $objectId))
             mkdir($this->imagesStoreDir . $objectId);
-        */
+
         $return['images'] = [];
 
         $imageDir = $objectId;
 
-
-        if (!is_dir($this->imagesStoreDir . $imageDir))
-            mkdir($this->imagesStoreDir . $imageDir);
-
-        $images = array_unique($crawler->filter('a[rel="lightbox[a]"]')->each(function (Crawler $node) {
-            return $node->link()->getUri();
-        }));
-        shuffle($images);
-        foreach ($images as $image)
+        if(defined('DO_NOT_LOAD_NON_EXISTING_IMAGES') && DO_NOT_LOAD_NON_EXISTING_IMAGES)
         {
-            $imagePath = $imageDir . '/' . basename($image);
-            if ($needUpdate || !is_file($this->imagesStoreDir . $imagePath) || !filesize($this->imagesStoreDir . $imagePath))
+            if(is_dir($this->imagesStoreDir . $imageDir))
+                $return['images'] = array_map(function($v) use($imageDir) {
+                    return $imageDir . '/' . $v;
+                }, array_diff(scandir($this->imagesStoreDir . $imageDir), array('..', '.')));
+        }
+        else
+        {
+            if (!is_dir($this->imagesStoreDir . $imageDir))
+                mkdir($this->imagesStoreDir . $imageDir);
+
+            $images = array_unique($crawler->filter('a[rel="lightbox[a]"]')->each(function (Crawler $node) {
+                return $node->link()->getUri();
+            }));
+            //shuffle($images);
+            foreach ($images as $image)
             {
-                if (file_put_contents($this->imagesStoreDir . $imagePath, file_get_contents($image)))
+                $imagePath = $imageDir . '/' . basename($image);
+
+                if ($needUpdate || !is_file($this->imagesStoreDir . $imagePath) || !filesize($this->imagesStoreDir . $imagePath))
+                {
+                    if (file_put_contents($this->imagesStoreDir . $imagePath, file_get_contents($image)))
+                        $return['images'][] = $imagePath;
+                }
+                else
                     $return['images'][] = $imagePath;
             }
-            else
-                $return['images'][] = $imagePath;
-            /**
-             * We will take only first image
-             */
-            break;
         }
         return $return;
     }
@@ -729,6 +745,7 @@ class Parser extends StaticInstance
 
             $offers = array_slice($item['offers'], $offersOffsets[0], $offersOffsets[1]);
 
+
             unset($item['offers']);
             //add element
             $elementId = $this->addOrUpdateElement($iblockId, $item, false, false);
@@ -758,29 +775,6 @@ class Parser extends StaticInstance
 
         $props = $this->getInsertProperties($iblockId, $element);
 
-        /**
-         * Take only first element instead loading all element images
-         */
-        $image = null;
-        if(!empty($element['images']))
-        {
-            $image = current($element['images']);
-            if(empty($image) || !is_file($this->imagesStoreDir . $image))
-                $image = null;
-            else
-                $image = $this->imagesStoreDir . $image;
-        }
-        /**
-         * Old code for images is here..
-         */
-        /**
-        $props['MORE_PHOTO'] = [];
-        foreach ($element['images'] as $image)
-        {
-        if(is_file($this->imagesStoreDir . $image))
-        $props['MORE_PHOTO'][] = \CFile::MakeFileArray($this->imagesStoreDir . $image);
-        }*/
-
         $elementCode = strtolower(trim(preg_replace('~[^-_A-Za-z0-9]~u', '_', Helper::translit($element['name'])), '_') . '_' . $element['ID']);
         if($offerElementId)
         {
@@ -794,8 +788,8 @@ class Parser extends StaticInstance
                 'PROPERTY_VALUES' => $props,
                 //'PREVIEW_PICTURE' => current($props['MORE_PHOTO']),
                 //'DETAIL_PICTURE' => current($props['MORE_PHOTO']),
-                'PREVIEW_PICTURE' => $image,
-                'DETAIL_PICTURE' => $image,
+                'PREVIEW_PICTURE' => null,
+                'DETAIL_PICTURE' => null,
                 'DETAIL_TEXT' => $element['description'],
                 'PREVIEW_TEXT' => $element['description'],
             ];
@@ -811,6 +805,13 @@ class Parser extends StaticInstance
                 //throw new \Exception('Region must be specified. Value is ' . $element['category'] . ' - ' . $element['elementUrl']);
             }
 
+            $props['MORE_PHOTO'] = [];
+            foreach ($element['images'] as $image)
+            {
+                if(is_file($this->imagesStoreDir . $image))
+                    $props['MORE_PHOTO'][] = $this->imagesStoreDir . $image;
+            }
+
             $data = [
                 'ACTIVE' => 'Y',
                 'IBLOCK_SECTION_ID' => $section['ID'],
@@ -821,8 +822,8 @@ class Parser extends StaticInstance
                 'PROPERTY_VALUES' => $props,
                 //'PREVIEW_PICTURE' => current($props['MORE_PHOTO']),
                 //'DETAIL_PICTURE' => current($props['MORE_PHOTO']),
-                'PREVIEW_PICTURE' => $image,
-                'DETAIL_PICTURE' => $image,
+                'PREVIEW_PICTURE' => null,
+                'DETAIL_PICTURE' => null,
                 'DETAIL_TEXT' => $element['description'],
                 'PREVIEW_TEXT' => $element['description'],
             ];
