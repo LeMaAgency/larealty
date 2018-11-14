@@ -1,6 +1,9 @@
 <?php
-$DOCUMENT_ROOT = realpath(__DIR__ . '/../../');
-$_SERVER['DOCUMENT_ROOT'] = $DOCUMENT_ROOT;
+if(empty($_SERVER['DOCUMENT_ROOT']))
+{
+    $DOCUMENT_ROOT = realpath(__DIR__ . '/../../');
+    $_SERVER['DOCUMENT_ROOT'] = $DOCUMENT_ROOT;
+}
 
 @set_time_limit(0);
 ignore_user_abort(true);
@@ -19,6 +22,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_be
 \Bitrix\Main\Loader::includeModule('iblock');
 
 $siteUrl = 'http://blackwood.ru/catalog';
+$scriptPath = '/local/import/run.php';
 
 $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 
@@ -28,18 +32,21 @@ $pagesCount = $parser->getPagesCount();
 if(empty($pagesCount))
 {
     $parser->parse();
-    $pagesCount = $parser->getPagesCount();
+    $parser->loadCategories(\LIblock::getId('objects'), $parser->getCategories());
+    LocalRedirect($scriptPath);
+    exit;
 }
 
 if ($parser->needRunParser())
 {
     $properties = $parser->parse();
     $parser->loadCategories(\LIblock::getId('objects'), $parser->getCategories());
+    LocalRedirect($scriptPath);
+    exit;
 }
 else
     $properties = $parser->getProperties();
 
-$scriptPath = '/local/import/run.php';
 
 $elementsIndex = isset($_GET['elementsIndex']) ? (int) $_GET['elementsIndex'] : 0;
 $offersIndex = isset($_GET['offersIndex']) ? (int) $_GET['offersIndex'] : 0;
