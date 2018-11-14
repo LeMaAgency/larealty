@@ -33,16 +33,13 @@ if(empty($pagesCount))
 {
     $parser->parse();
     $parser->loadCategories(\LIblock::getId('objects'), $parser->getCategories());
-    LocalRedirect($scriptPath);
-    exit;
+    $pagesCount = $parser->getPagesCount();
 }
 
 if ($parser->needRunParser())
 {
     $properties = $parser->parse();
     $parser->loadCategories(\LIblock::getId('objects'), $parser->getCategories());
-    LocalRedirect($scriptPath);
-    exit;
 }
 else
     $properties = $parser->getProperties();
