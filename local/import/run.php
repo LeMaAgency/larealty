@@ -12,10 +12,13 @@ defined('NO_KEEP_STATISTIC') or define('NO_KEEP_STATISTIC', true);
 defined('NOT_CHECK_PERMISSIONS') or define('NOT_CHECK_PERMISSIONS', true);
 defined('CHK_EVENT') or define('CHK_EVENT', true);
 
-defined('ELEMENTS_BLOCK_COUNT') or define('ELEMENTS_BLOCK_COUNT', 1);
+defined('ELEMENTS_BLOCK_COUNT') or define('ELEMENTS_BLOCK_COUNT', 2);
 defined('OFFERS_BLOCK_COUNT')   or define('OFFERS_BLOCK_COUNT',  50);
 
 defined('DO_NOT_LOAD_NON_EXISTING_IMAGES')   or define('DO_NOT_LOAD_NON_EXISTING_IMAGES',  true);
+
+defined('USE_OFFERS')   or define('USE_OFFERS',  true);
+
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php';
 
@@ -32,14 +35,14 @@ $pagesCount = $parser->getPagesCount();
 if(empty($pagesCount))
 {
     $parser->parse();
-    $parser->loadCategories(\LIblock::getId('objects'), $parser->getCategories());
+    $parser->loadCategories(\LIblock::getId('objects'), $parser->getCategories(USE_OFFERS));
     $pagesCount = $parser->getPagesCount();
 }
 
 if ($parser->needRunParser())
 {
     $properties = $parser->parse();
-    $parser->loadCategories(\LIblock::getId('objects'), $parser->getCategories());
+    $parser->loadCategories(\LIblock::getId('objects'), $parser->getCategories(USE_OFFERS));
 }
 else
     $properties = $parser->getProperties();
@@ -47,19 +50,23 @@ else
 
 $elementsIndex = isset($_GET['elementsIndex']) ? (int) $_GET['elementsIndex'] : 0;
 $offersIndex = isset($_GET['offersIndex']) ? (int) $_GET['offersIndex'] : 0;
-$stepCount = $parser->getLinksCount();
+$stepCount = $parser->getLinksCount(USE_OFFERS);
 
 
 $elementsOffset = [$elementsIndex, ELEMENTS_BLOCK_COUNT];
 $offersOffset = [$offersIndex, OFFERS_BLOCK_COUNT];
-
+//$parser->loadElements(\LIblock::getId('objects'), \LIblock::getId('objects_offers'), $properties, $elementsOffset, $offersOffset);
+//exit;
 if(!empty($_GET['AJAX']))
 {
     $result = $parser->loadElements(\LIblock::getId('objects'), \LIblock::getId('objects_offers'), $properties, $elementsOffset, $offersOffset);
 
     if(empty($result))
     {
-        $offersOffset[0] += OFFERS_BLOCK_COUNT;
+        if(USE_OFFERS)
+            $offersOffset[0] += OFFERS_BLOCK_COUNT;
+        else
+            $elementsOffset[0] += ELEMENTS_BLOCK_COUNT;
     }
     else
     {
@@ -70,27 +77,29 @@ if(!empty($_GET['AJAX']))
         }
     }
     echo(json_encode([
+        'result' => $result,
         'elementsOffset' => $elementsOffset[0],
         'offersOffset' => $offersOffset[0],
-        'stepCount' => $parser->getLinksCount(),
-        'pluralStepCount' => \Lema\Common\Helper::pluralizeN($parser->getLinksCount(), ['шага', 'шагов', 'шагов']),
+        'stepCount' => $parser->getLinksCount(USE_OFFERS),
+        'pluralStepCount' => \Lema\Common\Helper::pluralizeN($parser->getLinksCount(USE_OFFERS), ['шага', 'шагов', 'шагов']),
     ]));
     exit;
 }
+
 ?>
 <div id="answer"></div>
 <script src="/assets/js/jquery-3.2.1.min.js"></script>
 <script>
     $(function()
     {
-        (function sendRequest(elementsIndex, offersIndex, stepCount, page, pluralStepCount)
+        (function sendRequest(elementsIndex, offersIndex, stepCount, page, pluralStepCount, firstRun)
         {
             //history.pushState(null, document.title, '<?=$scriptPath;?>?AJAX=true');
 
             if(!$('[data-page="1"]').length)
                 $('#answer').append('<div data-page="1"><hr>Страница 1 из <?=$pagesCount?><hr></div>');
 
-            if(elementsIndex + 1 > stepCount)
+            if(!firstRun && elementsIndex + 1 > stepCount)
             {
                 if(page < <?=$pagesCount?>)
                 {
@@ -113,9 +122,10 @@ if(!empty($_GET['AJAX']))
                 $('#answer').append('<div data-step="' + (elementsIndex + 1) + '" data-page="' + page + '">' + msg + '</div>');
 
             $.get('<?=$scriptPath;?>', {AJAX: 1, elementsIndex: elementsIndex, offersIndex: offersIndex, page: page}, function(ans) {
+                console.log(page, elementsIndex, ans);
                 if(typeof ans['elementsOffset'] !== 'undefined' && typeof ans['offersOffset'] !== 'undefined')
                     sendRequest(ans.elementsOffset, ans.offersOffset, ans.stepCount, page, ans.pluralStepCount);
             }, 'json');
-        })(<?=$elementsIndex?>, <?=$offersIndex?>, <?=$stepCount?>, <?=$page?>, '<?=\Lema\Common\Helper::pluralizeN($stepCount, ['шага', 'шагов', 'шагов'])?>');
+        })(<?=$elementsIndex?>, <?=$offersIndex?>, <?=$stepCount?>, <?=$page?>, '<?=\Lema\Common\Helper::pluralizeN($stepCount, ['шага', 'шагов', 'шагов'])?>', true);
     })
 </script>

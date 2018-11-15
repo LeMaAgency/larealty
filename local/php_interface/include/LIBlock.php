@@ -317,12 +317,51 @@ class LIblock
 
     /**
      * Clear cache
+     * @param string|null $cacheDir
      * @return boolean
      */
-    public static function clearCache()
+    public static function clearCache($cacheDir = null)
     {
+        if(empty($cacheDir))
+            $cacheDir = $_SERVER['DOCUMENT_ROOT'] . '/bitrix/cache/';
+        if(!is_dir($cacheDir))
+            return false;
+        if(($directories = glob($cacheDir . static::$cacheKey . '*')))
+        {
+            array_walk($directories, ['LIblock', 'recursiveRmCacheDir']);
+            return true;
+        }
+        /**
+         * CleanDir() is not delete directory. It's just renames a directory by adding some extra symbols.. Surprise!
+         * But, this will be executed if previous code isn't done.
+         */
         $obCache = new \CPHPCache();
         $obCache->CleanDir('/' . static::$cacheKey . '/');
+        return true;
+    }
+
+    /**
+     * @param $directory
+     * @return bool
+     */
+    public static function recursiveRmCacheDir($directory)
+    {
+        if(!is_dir($directory))
+            return false;
+
+        $files = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($directory, \RecursiveDirectoryIterator::SKIP_DOTS),
+            \RecursiveIteratorIterator::CHILD_FIRST
+        );
+
+        foreach ($files as $fileinfo)
+        {
+
+            $todo = ($fileinfo->isDir() ? 'rmdir' : 'unlink');
+            @$todo($fileinfo->getRealPath());
+        }
+        @rmdir($directory);
+
         return true;
     }
 }

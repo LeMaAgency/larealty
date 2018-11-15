@@ -225,14 +225,18 @@ class Parser extends StaticInstance
 
         return $pagesCount;
     }
+
     /**
+     * @param bool $useOffers
      * @return int
      */
-    public function getLinksCount()
+    public function getLinksCount($useOffers = true)
     {
-        if(!is_file($this->getFileNameWithPage($this->storeDir . 'inner_offers_links_count')))
+        $checkingFile = $useOffers ? 'inner_offers_links_count' : 'links_count';
+
+        if(!is_file($this->getFileNameWithPage($this->storeDir . $checkingFile)))
             return 0;
-        return (int) file_get_contents($this->getFileNameWithPage($this->storeDir . 'inner_offers_links_count'));
+        return (int) file_get_contents($this->getFileNameWithPage($this->storeDir . $checkingFile));
     }
 
     /**
@@ -256,6 +260,9 @@ class Parser extends StaticInstance
         }
         else
             $links = $this->loadJsonArray($this->getFileNameWithPage($this->storeDir . 'links'));
+
+        if($needUpdate || !is_file($this->getFileNameWithPage($this->storeDir . 'links_count')))
+            file_put_contents($this->getFileNameWithPage($this->storeDir . 'links_count'), count(array_keys($links)));
 
         return $links;
     }
@@ -360,20 +367,23 @@ class Parser extends StaticInstance
                 'Благоустройство территории' => 'landscaping',
                 'Окна' => 'windows',
                 'Инфраструктура района' => 'region_infrastructure',
-            ];
 
+                'Общая стоимость' => 'price',
+                'Тип здания' => 'building_type',
+                'Кондиционирование и вентиляция' => 'air_condition',
+            ];
             foreach ($offers as $url => $fileName)
             {
                 $path = $this->propsStoreDir . md5($url) . '.json';
 
-                $return[$url] = $this->getElementPropData($crawler, $url, $replace, (is_array($fileName) ? key($fileName) : $fileName), $needUpdate);
-
                 if ($needUpdate || !is_file($path))
                 {
-                    $return[$url]['offers'] = [];
 
                     if(is_array($fileName))
                     {
+                        $return[$url] = $this->getElementPropData($crawler, $url, $replace, (is_array($fileName) ? key($fileName) : $fileName), $needUpdate);
+
+                        $return[$url]['offers'] = [];
                         foreach ($fileName as $offerUrl => $file)
                         {
                             $return[$url]['offers'][$file] = $this->getOfferPropData($crawler, $file, $url, $return[$url]['ID'], $replace, $needUpdate);
@@ -382,7 +392,8 @@ class Parser extends StaticInstance
                     }
                     else
                     {
-                        $return[$url]['offers'][$fileName] = $this->getOfferPropData($crawler, $fileName, $url, $return[$url]['ID'], $replace, $needUpdate);
+                        $return[$url] = $this->getElementPropData($crawler, $fileName, $replace, $url, $needUpdate);
+                        $return[$url]['offers'] = [];
                     }
                 }
                 else
@@ -540,7 +551,12 @@ class Parser extends StaticInstance
         }
 
         $descriptionSearch = $crawler->filter('.description p');
-        $objectId = (int)preg_replace('~\\D+~', '', $crawler->filter('.object-id')->text());
+
+        $objectIdSearch = $crawler->filter('.object-id');
+        if(!$objectIdSearch->count())
+            $objectIdSearch = $crawler->filter('h1');
+
+        $objectId = (int)preg_replace('~\\D+~', '', $objectIdSearch->text());
         $return['ID'] = $objectId;
 
 
@@ -600,6 +616,12 @@ class Parser extends StaticInstance
                     $return['images'][] = $imagePath;
             }
         }
+
+        if(empty($return['name']) && ($nameSearch = $crawler->filter('h1'))->count())
+        {
+            $return['name'] = $nameSearch->text();
+        }
+
         return $return;
     }
     /**
@@ -638,22 +660,25 @@ class Parser extends StaticInstance
      * @return array|mixed
      * @throws \Exception
      */
-    public function getCategories($needUpdate = false)
+    public function getCategories($useOffers = true, $needUpdate = false)
     {
         if($needUpdate || !is_file($this->getFileNameWithPage($this->storeDir . 'sections')))
         {
-            if (!is_file($this->getFileNameWithPage($this->storeDir . 'inner_offers_links')))
+            $checkingFile = $useOffers ? 'inner_offers_links' : 'links';
+            if (!is_file($this->getFileNameWithPage($this->storeDir . $checkingFile)))
                 throw new \Exception('You must run parser before.');
 
             //get categories from files with links
             $categories = [];
             
-            
-            $linksList = $this->loadJsonArray($this->getFileNameWithPage($this->storeDir . 'inner_offers_links'));
-            foreach($linksList as $links)
+            if($useOffers)
             {
-                foreach ($links as $link)
-                    $categories[] = $this->getCategoriesFromUrl($link);
+                $linksList = $this->loadJsonArray($this->getFileNameWithPage($this->storeDir . 'inner_offers_links'));
+                foreach ($linksList as $links)
+                {
+                    foreach ($links as $link)
+                        $categories[] = $this->getCategoriesFromUrl($link);
+                }
             }
             $links = $this->loadJsonArray($this->getFileNameWithPage($this->storeDir . 'links'));
             foreach ($links as $link)
@@ -738,24 +763,50 @@ class Parser extends StaticInstance
 
         $elements = array_slice($elements, $elementsOffsets[0], $elementsOffsets[1]);
 
+
+
         foreach($elements as $elementFilename => $item)
         {
-            if(empty($item['offers']) || !is_array($item['offers']) || $offersOffsets[0] > count($item['offers']))
-                return 'end_offers';
-
-            $offers = array_slice($item['offers'], $offersOffsets[0], $offersOffsets[1]);
-
-
-            unset($item['offers']);
-            //add element
-            $elementId = $this->addOrUpdateElement($iblockId, $item, false, false);
-            if(empty($elementId))
-                continue;
-            //add element offers
-            foreach ($offers as $element)
+            /**
+             * If item hasn't offers then will add just a simple item. Othwerwise will need to add an item and him offers
+             */
+            if(empty($item['offers']))
             {
-                $this->addOrUpdateElement($offersId, $element, $elementId, false);
-                //break;
+                if(array_key_exists('offers', $item))
+                    unset($item['offers']);
+
+                $elementId = $this->addOrUpdateElement($iblockId, $item, false, false);
+                file_put_contents(
+                    './commercial/foo.txt',
+                    var_export(['item' => $item, 'ID' => $elementId, 'page' => $this->getCurrentPage()], 1) . PHP_EOL,
+                    FILE_APPEND
+                );
+                if (empty($elementId))
+                    continue;
+            }
+            else
+            {
+                /**
+                 * Element has offers
+                 */
+                if($offersOffsets[0] > count($item['offers']))
+                    return 'end_offers';
+
+                $offers = array_slice($item['offers'], $offersOffsets[0], $offersOffsets[1]);
+
+
+                unset($item['offers']);
+                //add element
+                $elementId = $this->addOrUpdateElement($iblockId, $item, false, false);
+                if (empty($elementId))
+                    continue;
+
+                //add element offers
+                foreach ($offers as $element)
+                {
+                    $this->addOrUpdateElement($offersId, $element, $elementId, false);
+                    //break;
+                }
             }
         }
     }
@@ -860,6 +911,9 @@ class Parser extends StaticInstance
                 'windows' => 'Окна',
                 'region_infrastructure' => 'Инфраструктура района',
                 'address' => 'Адрес',
+
+                'building_type' => 'Тип здания',
+                'air_condition' => 'Кондиционирование и вентиляция',
             ];
         }
         $return = [];
