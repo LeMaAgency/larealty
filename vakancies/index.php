@@ -72,15 +72,15 @@ $APPLICATION->SetTitle('Вакансии');
 ); ?>
     <br>
     <br>
-    <div class="container"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/our_offer.php'); ?></div>
+    <div class="container"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/vakancies/our_offer.php'); ?></div>
     <div class="container">
-        <? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/offer_list.php'); ?>
+        <? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/vakancies/offer_list.php'); ?>
     </div>
     <br>
     <br>
     <div class="vacancy_reply_block">
         <br>
-        <div class="call-order-title"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/form_title.php'); ?></div>
+        <div class="call-order-title"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/vakancies/form_title.php'); ?></div>
         <? $APPLICATION->IncludeComponent(
 	"lema:form.ajax", 
 	"vacancy_reply", 
@@ -113,7 +113,7 @@ $APPLICATION->SetTitle('Вакансии');
 <?if(false):?>
     <div class="container">
         <div class="act__title">
-            <h2 class="act__title"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/vakancies_title.php'); ?></h2>
+            <h2 class="act__title"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/vakancies/vakancies_title.php'); ?></h2>
         </div>test
         <?$APPLICATION->IncludeComponent("bitrix:news", "vakancies", array(
             "ADD_ELEMENT_CHAIN" => "Y",

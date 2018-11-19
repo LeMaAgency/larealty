@@ -21,7 +21,7 @@ $APPLICATION->SetTitle("О компании");
         </div>
         <div class="container">
             <div class="row">
-                <? $APPLICATION->IncludeFile(SITE_DIR . 'include/contacts/text_about_company.php'); ?>
+                <? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/contacts/text_about_company.php'); ?>
             </div>
 
         </div>

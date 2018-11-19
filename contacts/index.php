@@ -20,7 +20,7 @@ $APPLICATION->SetTitle('Контакты');
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="contacts_data__title">
-                            <h2> <? $APPLICATION->IncludeFile(SITE_DIR . 'include/contacts/our_contacts_block/title.php'); ?></h2>
+                            <h2> <? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/contacts/our_contacts_block/title.php'); ?></h2>
                         </div>
                     </div>
                 </div>
@@ -29,15 +29,15 @@ $APPLICATION->SetTitle('Контакты');
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-lg-4">
                         <div class="contacts_data_item contacts_data_item__address">
-                            <h5><? $APPLICATION->IncludeFile(SITE_DIR . 'include/contacts/our_contacts_block/address_title.php'); ?></h5>
-                            <div><? $APPLICATION->IncludeFile(SITE_DIR . 'include/contacts/our_contacts_block/address_text.php'); ?></div>
+                            <h5><? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/contacts/our_contacts_block/address_title.php'); ?></h5>
+                            <div><? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/contacts/our_contacts_block/address_text.php'); ?></div>
                         </div>
                     </div>
 
                     <div class="col-xs-12 col-sm-6 col-lg-3">
                         <div class="contacts_data_item contacts_data_item__time">
-                            <h5><? $APPLICATION->IncludeFile(SITE_DIR . 'include/contacts/our_contacts_block/work_schedule_title.php'); ?></h5>
-                            <? $APPLICATION->IncludeFile(SITE_DIR . 'include/contacts/our_contacts_block/work_schedule_text.php'); ?>
+                            <h5><? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/contacts/our_contacts_block/work_schedule_title.php'); ?></h5>
+                            <? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/contacts/our_contacts_block/work_schedule_text.php'); ?>
                         </div>
                     </div>
 
@@ -45,8 +45,8 @@ $APPLICATION->SetTitle('Контакты');
 
                     <div class="col-xs-12 col-sm-6 col-lg-3">
                         <div class="contacts_data_item contacts_data_item__phone">
-                            <h5><? $APPLICATION->IncludeFile(SITE_DIR . 'include/contacts/our_contacts_block/phone_title.php'); ?></h5>
-                            <? $APPLICATION->IncludeFile(SITE_DIR . 'include/contacts/our_contacts_block/phone_text.php'); ?>
+                            <h5><? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/contacts/our_contacts_block/phone_title.php'); ?></h5>
+                            <? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/contacts/our_contacts_block/phone_text.php'); ?>
                         </div>
                     </div>
 
@@ -54,7 +54,7 @@ $APPLICATION->SetTitle('Контакты');
                         <div class="contacts_data__instagram">
                             <a href="">
                                 <img src="<?=SITE_DIR.'assets/img/icons/instagram.png'?>" alt="">
-                                <span> <? $APPLICATION->IncludeFile(SITE_DIR . 'include/contacts/our_contacts_block/instagram_text.php'); ?></span>
+                                <span> <? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/contacts/our_contacts_block/instagram_text.php'); ?></span>
                             </a>
                         </div>
                     </div>
@@ -74,18 +74,18 @@ $APPLICATION->SetTitle('Контакты');
                         </div>
 
                         <div class="contacts_bottom_email__inner__text">
-                            <h5><? $APPLICATION->IncludeFile(SITE_DIR . 'include/contacts/email_block/title.php'); ?></h5>
-                            <span class="description"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/contacts/email_block/text.php'); ?></span>
+                            <h5><? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/contacts/email_block/title.php'); ?></h5>
+                            <span class="description"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/contacts/email_block/text.php'); ?></span>
                             <div class="row">
 
                                 <div class="col-xs-12 col-md-6">
-                                    <span class="purpose"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/contacts/email_block/general_mail_title.php'); ?></span>
-                                    <? $APPLICATION->IncludeFile(SITE_DIR . 'include/contacts/email_block/general_mail_text.php'); ?>
+                                    <span class="purpose"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/contacts/email_block/general_mail_title.php'); ?></span>
+                                    <? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/contacts/email_block/general_mail_text.php'); ?>
                                 </div>
 
                                 <div href="mailto:" class="col-xs-12 col-md-6">
-                                    <span class="purpose"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/contacts/email_block/resume_mail_title.php'); ?></span>
-                                    <? $APPLICATION->IncludeFile(SITE_DIR . 'include/contacts/email_block/resume_mail_text.php'); ?>
+                                    <span class="purpose"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/contacts/email_block/resume_mail_title.php'); ?></span>
+                                    <? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/contacts/email_block/resume_mail_text.php'); ?>
                                 </div>
 
                             </div>
@@ -95,7 +95,7 @@ $APPLICATION->SetTitle('Контакты');
                 </div>
 
                 <div class="col-xs-12 col-sm-6 col-lg-4 col-lg-offset-2 contacts_bottom_feedback">
-                    <h5><? $APPLICATION->IncludeFile(SITE_DIR . 'include/contacts/form/title.php'); ?></h5>
+                    <h5><? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/contacts/form/title.php'); ?></h5>
                     <? $APPLICATION->IncludeComponent(
 	"lema:form.ajax", 
 	"to_manager", 

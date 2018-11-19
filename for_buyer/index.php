@@ -11,10 +11,10 @@ $APPLICATION->SetTitle("Покупателю");
                 <div class="row">
                     <div class="col-lg-9">
                         <h2 class="why-not__h2">
-                            <? $APPLICATION->IncludeFile(SITE_DIR . 'include/buyer/why-not/title.php'); ?>
+                            <? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/buyer/why-not/title.php'); ?>
                         </h2>
                         <p class="why-not__title">
-                            <? $APPLICATION->IncludeFile(SITE_DIR . 'include/buyer/why-not/subtitle.php'); ?>
+                            <? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/buyer/why-not/subtitle.php'); ?>
                         </p>
                         <? $APPLICATION->IncludeComponent(
                             "bitrix:news.list",
@@ -290,7 +290,7 @@ $APPLICATION->SetTitle("Покупателю");
                 <div class="row">
                     <div class="col-md-12">
                         <h3 class="connect-consultant__title">
-                            <? $APPLICATION->IncludeFile(SITE_DIR . 'include/buyer/reviews/title.php'); ?>
+                            <? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/buyer/reviews/title.php'); ?>
                         </h3>
                         <? $APPLICATION->IncludeComponent(
 	"lema:form.ajax", 

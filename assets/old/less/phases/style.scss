@@ -1,0 +1,194 @@
+.phases {
+    padding-bottom: 50px;
+    text-align: center;
+    &__h2 {
+        margin: 110px auto 80px;
+        text-align: center;
+        font-size: 30px;
+        font-weight: 600;
+        line-height: 40px;
+        text-transform: uppercase;
+    }
+    &_wrapper {
+
+        &__item {
+            @media (min-width: 320px) {
+                width: 50%;
+            }
+            @media (min-width: 768px) {
+                width: 33.3333%;
+            }
+            @media (min-width: 992px) {
+                width: 20%;
+
+                &:before {
+                    content: '';
+                    display: block;
+                }
+            }
+            float: left;
+            vertical-align: top;
+            position: relative;
+
+            margin-bottom: 30px;
+
+            z-index: 2;
+
+            &:before {
+
+                position: absolute;
+                top: 42px;
+                right: -101px;
+
+                width: 200px;
+                height: 32px;
+
+                background-image: url(../../img/icons/phases-arrow.png);
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-size: cover;
+
+                z-index: -1;
+            }
+            &.nth5,
+            &.nth10 {
+                &:before {
+                    display: none;
+                }
+            }
+            &.nth6,
+            &.nth7,
+            &.nth8,
+            &.nth9,
+            &.nth10 {
+                float: right;
+                &:before {
+                    transform: rotate(180deg);
+                    right: auto;
+                    left: -101px;
+                }
+            }
+            &.nth5 {
+                &:after {
+                    content: '';
+                    display: block;
+
+                    position: absolute;
+                    top: 57px;
+                    right: -30px;
+
+                    width: 94px;
+                    height: 154px;
+
+                    background-image: url(../../img/icons/seller-phases/half-circe-top.png);
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+
+                    z-index: -2;
+                }
+            }
+            &.nth6 {
+                &:after {
+                    content: '';
+                    display: block;
+
+                    position: absolute;
+                    top: -95px;
+                    right: -30px;
+
+                    width: 94px;
+                    height: 154px;
+
+                    background-image: url(../../img/icons/seller-phases/half-circe-bottom.png);
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+
+                    z-index: -3;
+                }
+            }
+            &__img {
+                display: inline-block;
+                width: 108px;
+                height: 108px;
+                margin-bottom: 27px;
+                border: 2px solid #e6e6e6;
+                background-color: #fff;
+                background-position: center;
+                background-repeat: no-repeat;
+                -webkit-transition: .4s;
+                transition: .4s;
+                &:hover {
+                    background-color: #07ba00;
+                    transform: scale(1.1);
+                }
+                &_1 {
+                    background-image: url('../../img/icons/seller-phases/1.png');
+                    &:hover {
+                        background-image: url('../../img/icons/seller-phases/1_active.png');
+                    }
+                }
+                &_2 {
+                    background-image: url('../../img/icons/seller-phases/2.png');
+                    &:hover {
+                        background-image: url('../../img/icons/seller-phases/2_active.png');
+                    }
+                }
+                &_3 {
+                    background-image: url('../../img/icons/seller-phases/3.png');
+                    &:hover {
+                        background-image: url('../../img/icons/seller-phases/3_active.png');
+                    }
+                }
+                &_4 {
+                    background-image: url('../../img/icons/seller-phases/4.png');
+                    &:hover {
+                        background-image: url('../../img/icons/seller-phases/4_active.png');
+                    }
+                }
+                &_5 {
+                    background-image: url('../../img/icons/seller-phases/5.png');
+                    &:hover {
+                        background-image: url('../../img/icons/seller-phases/5_active.png');
+                    }
+                }
+                &_6 {
+                    background-image: url('../../img/icons/seller-phases/6.png');
+                    &:hover {
+                        background-image: url('../../img/icons/seller-phases/6_active.png');
+                    }
+                }
+                &_7 {
+                    background-image: url('../../img/icons/seller-phases/7.png');
+                    &:hover {
+                        background-image: url('../../img/icons/seller-phases/7_active.png');
+                    }
+                }
+                &_8 {
+                    background-image: url('../../img/icons/seller-phases/8.png');
+                    &:hover {
+                        background-image: url('../../img/icons/seller-phases/8_active.png');
+                    }
+                }
+                &_9 {
+                    background-image: url('../../img/icons/seller-phases/9.png');
+                    &:hover {
+                        background-image: url('../../img/icons/seller-phases/9_active.png');
+                    }
+                }
+                &_10 {
+                    background-image: url('../../img/icons/seller-phases/10.png');
+                    &:hover {
+                        background-image: url('../../img/icons/seller-phases/10_active.png');
+                    }
+                }
+            }
+            &__text {
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 20px;
+            }
+        }
+    }
+}

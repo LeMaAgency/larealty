@@ -33,10 +33,10 @@ $APPLICATION->SetTitle('Оформить ипотеку');
                 <div class="add-apartment">
                     <div class="row">
                         <div class="col-md-12">
-                            <h3 class="add-apartment__title"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/hypothec/consultation_title.php'); ?></h3>
-                            <span><? $APPLICATION->IncludeFile(SITE_DIR . 'include/hypothec/consultation_text.php'); ?></span>
+                            <h3 class="add-apartment__title"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/hypothec/consultation_title.php'); ?></h3>
+                            <span><? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/hypothec/consultation_text.php'); ?></span>
 
-                            <a href="#" class="add-apartment__button js-feedback-form"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/consultation_button_text.php'); ?></a>
+                            <a href="#" class="add-apartment__button js-feedback-form"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/vakancies/consultation_button_text.php'); ?></a>
 
                         </div>
                     </div>

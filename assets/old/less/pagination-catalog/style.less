@@ -1,0 +1,40 @@
+.pagination-catalog {
+    nav {
+        text-align: center;
+    }
+    .pagination {
+        margin-top: 25px;
+    }
+
+    .pagination > li > a {
+        width: 49px;
+        height: 49px;
+        border: 1px solid #e6e6e6;
+        opacity: 0.41;
+        color: #002b4e;
+        font-size: 24px;
+        margin: 0 4px;
+        span {
+            font-size: 60px;
+            font-weight: 100;
+            line-height: 0.45;
+        }
+    }
+    .pagination > li > a:focus,
+    .pagination > li > a:hover,
+    .pagination > li > span:focus,
+    .pagination > li > span:hover {
+        z-index: 3;
+        color: #002b4e;
+        cursor: default;
+        opacity: 1;
+        background-color: #fff;
+        border-color: #e6e6e6;
+    }
+    .pagination > li:first-child > a {
+        margin-right: 43px;
+    }
+    .pagination > li:last-child > a {
+        margin-left: 43px;
+    }
+}

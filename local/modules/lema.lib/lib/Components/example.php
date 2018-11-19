@@ -10,7 +10,7 @@ use Lema\Common\Config,
 
 <? /*include component*/ ?>
 <?$APPLICATION->IncludeComponent('bitrix:main.include', '', Config::getComponentParams('IncludeArea', array(
-    'PATH' => SITE_DIR . 'include/header/address.php',
+    'PATH' => SITE_DIR . 'include/old/header/address.php',
 )),
     false
 );?>

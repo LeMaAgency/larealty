@@ -20,7 +20,7 @@ $data = new \Lema\Template\TemplateHelper($this);
     <div class="container-index">
         <div class="section-title">
             <span>
-                <? $APPLICATION->IncludeFile(SITE_DIR . 'include/main/benefits.php'); ?>
+                <? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/main/benefits.php'); ?>
             </span>
         </div>
     </div>

@@ -1,0 +1,24 @@
+<?
+$aMenuLinks = array(
+	array(
+		'Контакты', 
+		'/contacts/',
+		array(), 
+		array(), 
+		'',
+	),
+	array(
+		'Акции', 
+		'/stocks/',
+		array(), 
+		array(), 
+		'',
+	),
+	array(
+		'Вакансии', 
+		'/vakancies/',
+		array(), 
+		array(), 
+		'',
+	),
+);

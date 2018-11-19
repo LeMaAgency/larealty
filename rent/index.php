@@ -386,7 +386,7 @@ $GLOBALS['arrFilter']['PROPERTY_RENT_TYPE_VALUE'] = $typeFilter;
                 <div class="col-sm-12">
                     <div class="inquiry__wrap">
                         <h3 class="inquiry__h3">
-                            <? $APPLICATION->IncludeFile(SITE_DIR . 'include/rent/feedback-form-title.php'); ?>
+                            <? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/rent/feedback-form-title.php'); ?>
                         </h3>
                         <? $APPLICATION->IncludeComponent("lema:form.ajax", "send_application", Array(
                             "COMPONENT_TEMPLATE" => ".default",

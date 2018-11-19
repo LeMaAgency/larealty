@@ -9,11 +9,11 @@ $APPLICATION->SetTitle("Продавцу");
                 <div class="row">
                     <div class="col-xs-12">
                         <h2 class="seller_main__h2">
-                            <? $APPLICATION->IncludeFile(SITE_DIR . 'include/seller/banner/title.php'); ?>
+                            <? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/seller/banner/title.php'); ?>
                         </h2>
 
                         <p class="seller_main__title">
-                            <? $APPLICATION->IncludeFile(SITE_DIR . 'include/seller/banner/subtitle.php'); ?>
+                            <? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/seller/banner/subtitle.php'); ?>
                         </p>
                         <? $APPLICATION->IncludeComponent(
                             "bitrix:news.list",
@@ -157,13 +157,13 @@ $APPLICATION->SetTitle("Продавцу");
                 <div class="col-xs-12 col-md-6 col-lg-4">
                     <h3 class="request__title">
                         <span class="request__title__small">
-                            <? $APPLICATION->IncludeFile(SITE_DIR . 'include/seller/title.php'); ?>
+                            <? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/seller/title.php'); ?>
                         </span>
                         <br>
-                        <? $APPLICATION->IncludeFile(SITE_DIR . 'include/seller/subtitle.php'); ?>
+                        <? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/seller/subtitle.php'); ?>
                     </h3>
                     <div class="request__text">
-                        <? $APPLICATION->IncludeFile(SITE_DIR . 'include/seller/description.php'); ?>
+                        <? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/seller/description.php'); ?>
                     </div>
                 </div>
 
@@ -268,11 +268,11 @@ $APPLICATION->SetTitle("Продавцу");
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="add-apartment__title"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/consultation_title.php'); ?></h3>
-                    <span><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/consultation_text.php'); ?></span>
+                    <h3 class="add-apartment__title"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/vakancies/consultation_title.php'); ?></h3>
+                    <span><? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/vakancies/consultation_text.php'); ?></span>
 
                     <a href="#"
-                       class="add-apartment__button js-feedback-form"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/vakancies/consultation_button_text.php'); ?></a>
+                       class="add-apartment__button js-feedback-form"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/vakancies/consultation_button_text.php'); ?></a>
 
                 </div>
             </div>

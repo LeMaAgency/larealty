@@ -1,344 +1,492 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-$APPLICATION->SetTitle("Квартирный ответ - Главная страница");
+$APPLICATION->SetTitle("Карточка товара");
 ?>
-    <!-- FEEDBACK FORM  -->
-    <section class="top-slider-block">
-        <? $APPLICATION->IncludeComponent(
-	"lema:form.ajax", 
-	"feedback", 
-	array(
-		"COMPONENT_TEMPLATE" => "feedback",
-		"FORM_CLASS" => "ajax-form main-page-form",
-		"FORM_ACTION" => "",
-		"FORM_152_FZ" => "Я ознакомлен <a target=\"_blank\" href=\"/contacts/apply.pdf\">c положением об обработке и защите персональных данных.</a>",
-		"FORM_BTN_TITLE" => "Отправить",
-		"FORM_SUCCESS_FUNCTION" => "\$.fancybox.open(\"Ваше сообщение успешно отправлено\")",
-		"FORM_SUCCESS_FUNCTION_CORRECT_JSON" => "Y",
-		"FORM_FIELDS" => "[{\"name\":\"name\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Имя\",\"default\":\"\",\"required\":\"Y\"},{\"name\":\"phone\",\"type\":\"tel\",\"title\":\"\",\"placeholder\":\"Телефон\",\"default\":\"\",\"required\":\"Y\"}]",
-		"NEED_SAVE_TO_IBLOCK" => "Y",
-		"NEED_SEND_EMAIL" => "Y",
-		"EVENT_TYPE" => "57",
-		"CACHE_TYPE" => "A",
-		"CACHE_TIME" => "3600",
-		"IBLOCK_TYPE" => "feedback",
-		"IBLOCK_ID" => "12"
-	),
-	false
-); ?>
-
-        <? $APPLICATION->IncludeComponent(
-	"bitrix:news.list", 
-	"banners", 
-	array(
-		"ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"ADD_SECTIONS_CHAIN" => "N",
-		"AJAX_MODE" => "N",
-		"AJAX_OPTION_ADDITIONAL" => "",
-		"AJAX_OPTION_HISTORY" => "N",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_STYLE" => "Y",
-		"CACHE_FILTER" => "N",
-		"CACHE_GROUPS" => "Y",
-		"CACHE_TIME" => "36000000",
-		"CACHE_TYPE" => "A",
-		"CHECK_DATES" => "Y",
-		"DETAIL_URL" => "",
-		"DISPLAY_BOTTOM_PAGER" => "Y",
-		"DISPLAY_DATE" => "N",
-		"DISPLAY_NAME" => "N",
-		"DISPLAY_PICTURE" => "N",
-		"DISPLAY_PREVIEW_TEXT" => "N",
-		"DISPLAY_TOP_PAGER" => "N",
-		"FIELD_CODE" => array(
-			0 => "NAME",
-			1 => "PREVIEW_TEXT",
-			2 => "PREVIEW_PICTURE",
-			3 => "",
-		),
-		"FILTER_NAME" => "",
-		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => "4",
-		"IBLOCK_TYPE" => "content",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-		"INCLUDE_SUBSECTIONS" => "N",
-		"MESSAGE_404" => "",
-		"NEWS_COUNT" => "20",
-		"PAGER_BASE_LINK_ENABLE" => "N",
-		"PAGER_DESC_NUMBERING" => "N",
-		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-		"PAGER_SHOW_ALL" => "N",
-		"PAGER_SHOW_ALWAYS" => "N",
-		"PAGER_TEMPLATE" => ".default",
-		"PAGER_TITLE" => "Новости",
-		"PARENT_SECTION" => "",
-		"PARENT_SECTION_CODE" => "banner-na-glavnoy",
-		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => array(
-			0 => "SHARE",
-			1 => "",
-		),
-		"SET_BROWSER_TITLE" => "N",
-		"SET_LAST_MODIFIED" => "N",
-		"SET_META_DESCRIPTION" => "N",
-		"SET_META_KEYWORDS" => "N",
-		"SET_STATUS_404" => "N",
-		"SET_TITLE" => "N",
-		"SHOW_404" => "N",
-		"SORT_BY1" => "SORT",
-		"SORT_BY2" => "ID",
-		"SORT_ORDER1" => "ASC",
-		"SORT_ORDER2" => "ASC",
-		"STRICT_SECTION_CHECK" => "N",
-		"COMPONENT_TEMPLATE" => "banners"
-	),
-	false
-); ?>
-
-    </section>
-    <!-- /FEEDBACK FORM -->
-    <!-- SERVICES -->
-<? $APPLICATION->IncludeComponent(
-	"bitrix:news.list", 
-	"services", 
-	array(
-		"ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"ADD_SECTIONS_CHAIN" => "N",
-		"AJAX_MODE" => "N",
-		"AJAX_OPTION_ADDITIONAL" => "",
-		"AJAX_OPTION_HISTORY" => "N",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_STYLE" => "Y",
-		"CACHE_FILTER" => "N",
-		"CACHE_GROUPS" => "Y",
-		"CACHE_TIME" => "36000000",
-		"CACHE_TYPE" => "A",
-		"CHECK_DATES" => "Y",
-		"DETAIL_URL" => "",
-		"DISPLAY_BOTTOM_PAGER" => "Y",
-		"DISPLAY_DATE" => "N",
-		"DISPLAY_NAME" => "N",
-		"DISPLAY_PICTURE" => "N",
-		"DISPLAY_PREVIEW_TEXT" => "N",
-		"DISPLAY_TOP_PAGER" => "N",
-		"FIELD_CODE" => array(
-			0 => "NAME",
-			1 => "PREVIEW_TEXT",
-			2 => "PREVIEW_PICTURE",
-			3 => "",
-		),
-		"FILTER_NAME" => "",
-		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => "5",
-		"IBLOCK_TYPE" => "content",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-		"INCLUDE_SUBSECTIONS" => "N",
-		"MESSAGE_404" => "",
-		"NEWS_COUNT" => "20",
-		"PAGER_BASE_LINK_ENABLE" => "N",
-		"PAGER_DESC_NUMBERING" => "N",
-		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-		"PAGER_SHOW_ALL" => "N",
-		"PAGER_SHOW_ALWAYS" => "N",
-		"PAGER_TEMPLATE" => ".default",
-		"PAGER_TITLE" => "Новости",
-		"PARENT_SECTION" => "",
-		"PARENT_SECTION_CODE" => "services",
-		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => array(
-			0 => "",
-			1 => "",
-		),
-		"SET_BROWSER_TITLE" => "N",
-		"SET_LAST_MODIFIED" => "N",
-		"SET_META_DESCRIPTION" => "N",
-		"SET_META_KEYWORDS" => "N",
-		"SET_STATUS_404" => "N",
-		"SET_TITLE" => "N",
-		"SHOW_404" => "N",
-		"SORT_BY1" => "SORT",
-		"SORT_BY2" => "ID",
-		"SORT_ORDER1" => "ASC",
-		"SORT_ORDER2" => "ASC",
-		"STRICT_SECTION_CHECK" => "N",
-		"COMPONENT_TEMPLATE" => "services"
-	),
-	false
-); ?>
-    <!-- /SERVICES -->
-
-<? $APPLICATION->IncludeComponent('lema:catalog.filter', 'filter', array(
-    'IBLOCK_TYPE' => 'realty',
-    'IBLOCK_ID' => '2',
-    'FILTER_NAME' => 'arrFilter',
-    'FIELD_CODE' => array(0 => 'ID',),
-    'PROPERTY_CODE' => array(
-        1 => 'ROOMS_COUNT', 2 => 'REGION', 0 => 'PRICE', 4 => 'STAGE', 5 => 'STAGES_COUNT',
-    ),
-    'CACHE_TYPE' => 'A',
-    'CACHE_TIME' => '3600',
-    'CACHE_GROUPS' => 'N',
-    'PAGER_PARAMS_NAME' => 'arrPager',
-    'SEF_MODE' => 'Y',
-    'SEF_FOLDER' => '/catalog/',
-    'FILTER_ORDER' => array(
-        array('key' => 'ROOMS_COUNT', 'type' => 'property', 'expanded' => false),
-        array('key' => 'PRICE', 'type' => 'property', 'expanded' => false),
-        array('key' => 'STAGE', 'type' => 'property', 'expanded' => true),
-        array('key' => 'STAGES_COUNT', 'type' => 'property', 'expanded' => true),
-        array('key' => 'REGION', 'type' => 'property', 'expanded' => false),
-        array('key' => 'ID', 'type' => 'field', 'expanded' => false),
-    ),
-));?>
-<?php
-$GLOBALS['bestOffersFilter'] = array('=PROPERTY_IS_EXCLUSIVE_VALUE' => 'Y');
-?>
-<?$APPLICATION->IncludeComponent('bitrix:news.list', 'best_offers', array(
-    'DISPLAY_DATE' => 'Y',
-    'DISPLAY_NAME' => 'Y',
-    'DISPLAY_PICTURE' => 'Y',
-    'DISPLAY_PREVIEW_TEXT' => 'Y',
-    'AJAX_MODE' => 'Y',
-    'IBLOCK_TYPE' => 'realty',
-    'IBLOCK_ID' => '2',
-    'NEWS_COUNT' => '9',
-    'SORT_BY1' => 'ACTIVE_FROM',
-    'SORT_ORDER1' => 'DESC',
-    'SORT_BY2' => 'SORT',
-    'SORT_ORDER2' => 'ASC',
-    'FILTER_NAME' => 'bestOffersFilter',
-    'FIELD_CODE' => array(),
-    'PROPERTY_CODE' => array(
-        0 => "ROOMS_COUNT",
-        1 => "PRICE",
-        2 => "ADDRESS",
-        3 => "YEAR",
-        4 => "MAP",
-        5 => "PLACEMENT",
-        6 => "LAYOUT",
-        7 => "SQUARE",
-        8 => "SIDE",
-        9 => "REALTY_TYPE",
-        10 => "STAGE",
-        11 => "STAGES_COUNT",
-    ),
-    'CHECK_DATES' => 'Y',
-    'DETAIL_URL' => '',
-    'PREVIEW_TRUNCATE_LEN' => '',
-    'ACTIVE_DATE_FORMAT' => 'd.m.Y',
-    'SET_TITLE' => 'N',
-    'SET_BROWSER_TITLE' => 'N',
-    'SET_META_KEYWORDS' => 'N',
-    'SET_META_DESCRIPTION' => 'N',
-    'SET_LAST_MODIFIED' => 'N',
-    'INCLUDE_IBLOCK_INTO_CHAIN' => 'N',
-    'ADD_SECTIONS_CHAIN' => 'N',
-    'HIDE_LINK_WHEN_NO_DETAIL' => 'Y',
-    'PARENT_SECTION' => '',
-    'PARENT_SECTION_CODE' => 'active',
-    'INCLUDE_SUBSECTIONS' => 'Y',
-    'CACHE_TYPE' => 'A',
-    'CACHE_TIME' => '36000000',
-    'CACHE_FILTER' => 'Y',
-    'CACHE_GROUPS' => 'N',
-    'DISPLAY_TOP_PAGER' => 'Y',
-    'DISPLAY_BOTTOM_PAGER' => 'Y',
-    'PAGER_TITLE' => 'Элементы',
-    'PAGER_SHOW_ALWAYS' => 'N',
-    'PAGER_TEMPLATE' => '',
-    'PAGER_DESC_NUMBERING' => 'N',
-    'PAGER_DESC_NUMBERING_CACHE_TIME' => '36000',
-    'PAGER_SHOW_ALL' => 'N',
-    'PAGER_BASE_LINK_ENABLE' => 'N',
-    'SET_STATUS_404' => 'N',
-    'SHOW_404' => 'N',
-    'MESSAGE_404' => '',
-    'PAGER_BASE_LINK' => '',
-    'PAGER_PARAMS_NAME' => 'arrPager',
-    'AJAX_OPTION_JUMP' => 'N',
-    'AJAX_OPTION_STYLE' => 'Y',
-    'AJAX_OPTION_HISTORY' => 'N',
-    'AJAX_OPTION_ADDITIONAL' => '',
-));?>
-
-    <!-- ABOUT BLOCK -->
-    <section class="about">
-        <div class="overlay"></div>
-        <div class="container-index about-container">
-            <div class="about-title">
-                <? $APPLICATION->IncludeFile(SITE_DIR . 'include/main/about/title.php'); ?>
-            </div>
-            <div class="about-text">
-                <? $APPLICATION->IncludeFile(SITE_DIR . 'include/main/about/description.php'); ?>
-            </div>
-            <? $APPLICATION->IncludeFile(SITE_DIR . 'include/main/about/button.php'); ?>
+<div class="item-card">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ul>
+                <li><a href="#">Главная</a></li>
+                <li><a href="#">Зарубежная недвижимость</a></li>
+                <li><a href="#">Элитные квартиры</a></li>
+                <li>Название объекта</li>
+            </ul>
         </div>
-    </section>
-    <!-- /ABOUT BLOCK -->
-    <!-- BENEFITS -->
-<? $APPLICATION->IncludeComponent("bitrix:news.list", "benefits", Array(
-	"ACTIVE_DATE_FORMAT" => "d.m.Y",	// Формат показа даты
-		"ADD_SECTIONS_CHAIN" => "N",	// Включать раздел в цепочку навигации
-		"AJAX_MODE" => "N",	// Включить режим AJAX
-		"AJAX_OPTION_ADDITIONAL" => "",	// Дополнительный идентификатор
-		"AJAX_OPTION_HISTORY" => "N",	// Включить эмуляцию навигации браузера
-		"AJAX_OPTION_JUMP" => "N",	// Включить прокрутку к началу компонента
-		"AJAX_OPTION_STYLE" => "Y",	// Включить подгрузку стилей
-		"CACHE_FILTER" => "N",	// Кешировать при установленном фильтре
-		"CACHE_GROUPS" => "Y",	// Учитывать права доступа
-		"CACHE_TIME" => "36000000",	// Время кеширования (сек.)
-		"CACHE_TYPE" => "A",	// Тип кеширования
-		"CHECK_DATES" => "Y",	// Показывать только активные на данный момент элементы
-		"DETAIL_URL" => "",	// URL страницы детального просмотра (по умолчанию - из настроек инфоблока)
-		"DISPLAY_BOTTOM_PAGER" => "Y",	// Выводить под списком
-		"DISPLAY_DATE" => "N",	// Выводить дату элемента
-		"DISPLAY_NAME" => "N",	// Выводить название элемента
-		"DISPLAY_PICTURE" => "N",	// Выводить изображение для анонса
-		"DISPLAY_PREVIEW_TEXT" => "N",	// Выводить текст анонса
-		"DISPLAY_TOP_PAGER" => "N",	// Выводить над списком
-		"FIELD_CODE" => array(	// Поля
-			0 => "NAME",
-			1 => "PREVIEW_TEXT",
-			2 => "PREVIEW_PICTURE",
-			3 => "",
-		),
-		"FILTER_NAME" => "",	// Фильтр
-		"HIDE_LINK_WHEN_NO_DETAIL" => "N",	// Скрывать ссылку, если нет детального описания
-		"IBLOCK_ID" => "6",	// Код информационного блока
-		"IBLOCK_TYPE" => "content",	// Тип информационного блока (используется только для проверки)
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",	// Включать инфоблок в цепочку навигации
-		"INCLUDE_SUBSECTIONS" => "N",	// Показывать элементы подразделов раздела
-		"MESSAGE_404" => "",	// Сообщение для показа (по умолчанию из компонента)
-		"NEWS_COUNT" => "20",	// Количество новостей на странице
-		"PAGER_BASE_LINK_ENABLE" => "N",	// Включить обработку ссылок
-		"PAGER_DESC_NUMBERING" => "N",	// Использовать обратную навигацию
-		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",	// Время кеширования страниц для обратной навигации
-		"PAGER_SHOW_ALL" => "N",	// Показывать ссылку "Все"
-		"PAGER_SHOW_ALWAYS" => "N",	// Выводить всегда
-		"PAGER_TEMPLATE" => ".default",	// Шаблон постраничной навигации
-		"PAGER_TITLE" => "Новости",	// Название категорий
-		"PARENT_SECTION" => "",	// ID раздела
-		"PARENT_SECTION_CODE" => "",	// Код раздела
-		"PREVIEW_TRUNCATE_LEN" => "",	// Максимальная длина анонса для вывода (только для типа текст)
-		"PROPERTY_CODE" => array(	// Свойства
-			0 => "",
-			1 => "",
-		),
-		"SET_BROWSER_TITLE" => "N",	// Устанавливать заголовок окна браузера
-		"SET_LAST_MODIFIED" => "N",	// Устанавливать в заголовках ответа время модификации страницы
-		"SET_META_DESCRIPTION" => "N",	// Устанавливать описание страницы
-		"SET_META_KEYWORDS" => "N",	// Устанавливать ключевые слова страницы
-		"SET_STATUS_404" => "N",	// Устанавливать статус 404
-		"SET_TITLE" => "N",	// Устанавливать заголовок страницы
-		"SHOW_404" => "N",	// Показ специальной страницы
-		"SORT_BY1" => "SORT",	// Поле для первой сортировки новостей
-		"SORT_BY2" => "ID",	// Поле для второй сортировки новостей
-		"SORT_ORDER1" => "ASC",	// Направление для первой сортировки новостей
-		"SORT_ORDER2" => "ASC",	// Направление для второй сортировки новостей
-		"STRICT_SECTION_CHECK" => "N",	// Строгая проверка раздела для показа списка
-		"COMPONENT_TEMPLATE" => ".default"
-	),
-	false
-); ?>
-    <!-- /BENEFITS -->
+        <h1 class="item-title">Новый Арбат, 27</h1>
+        <div class="item-id">ID: 23639</div>
+    </div>
+
+    <div class="item-card_photo">
+        <div><img src="/assets/img/photo1.png" alt=""></div>
+        <div><img src="/assets/img/photo1.png" alt=""></div>
+        <div><img src="/assets/img/photo1.png" alt=""></div>
+    </div>
+
+    <div class="container">
+        <div class="item-card_info">
+            <div class="item-card_left">
+                <div class="item-card_price">
+                    <div class="item-card_price-coutn"><span>361 977 000</span></div>
+                    <div class="item-card_price-for"><span>853 368</span></div>
+                </div>
+                <div class="button-currency">
+                    <div class="currency-item1"></div>
+                    <div class="currency-item2"></div>
+                    <div class="currency-item3"></div>
+                    <div class="currency-item4"></div>
+                    <div class="currency-item5"></div>
+                </div>
+            </div>
+            <div class="item-card_right">
+                <div class="item-card_button">
+                    <a class="hover-black" href="#">Назначить просмотр</a>
+                    <a class="hover-black" href="#">Предложить цену</a>
+                </div>
+                <div class="item-card_phone">
+                    <span>Или позвоните нам: </span><a href="#">+7 (495) 151-90-00</a>
+                </div>
+            </div>
+        </div>
+        <div class="item-card_list-icon">
+            <div class="item-card_icon"><img src="/assets/img/house.png" alt="">4 этаж</div>
+            <div class="item-card_icon"><img src="/assets/img/room.png" alt="">4 комнаты</div>
+            <div class="item-card_icon"><img src="/assets/img/valik.png" alt="">С отделкой</div>
+            <div class="item-card_icon"><img src="/assets/img/area-icon.png" alt="">283 м²</div>
+            <div class="item-card_icon"><img src="/assets/img/beds.png" alt="">3 спальни</div>
+            <div class="item-card_icon"><img src="/assets/img/room.png" alt="">Продажа</div>
+            <div class="item-card_icon"><img src="/assets/img/valik.png" alt="">С лифтом</div>
+            <div class="item-card_icon"><img src="/assets/img/area-icon.png" alt="">Паркинг</div>
+        </div>
+    </div>
+    <div class="card-characteristics">
+        <div class="container">
+            <h3>Характеристики</h3>
+            <div class="characteristics-list">
+                <div class="characteristics-item">
+                    <div class="characteristics-name"><span>Станция метро:</span></div>
+                    <div class="characteristics-info">Спортивная</div>
+                </div>
+                <div class="characteristics-item">
+                    <div class="characteristics-name"><span>Название:</span></div>
+                    <div class="characteristics-info">Вишневый сад</div>
+                </div>
+                <div class="characteristics-item">
+                    <div class="characteristics-name"><span>Район:</span></div>
+                    <div class="characteristics-info">ЗАО</div>
+                </div>
+                <div class="characteristics-item">
+                    <div class="characteristics-name"><span>Парковка:</span></div>
+                    <div class="characteristics-info">подземная</div>
+                </div>
+                <div class="characteristics-item">
+                    <div class="characteristics-name"><span>Сдача ГК:</span></div>
+                    <div class="characteristics-info">4-й квартал 2019 год</div>
+                </div>
+                <div class="characteristics-item">
+                    <div class="characteristics-name"><span>Материал дома:</span></div>
+                    <div class="characteristics-info">Монолит</div>
+                </div>
+                <div class="characteristics-item">
+                    <div class="characteristics-name"><span>Тип перекрытий:</span></div>
+                    <div class="characteristics-info">Ж/Б</div>
+                </div>
+                <div class="characteristics-item">
+                    <div class="characteristics-name"><span>Охрана:</span></div>
+                    <div class="characteristics-info">закрытая территория, круглосуточная охрана, видеонаблюдение, система контроля доступа</div>
+                </div>
+                <div class="characteristics-item">
+                    <div class="characteristics-name"><span>Инфраструктура:</span></div>
+                    <div class="characteristics-info">частный детский сад, детские и спортивные площадки, кафе, фитнес-зал с собственным бассейном и SPA</div>
+                </div>
+                <div class="characteristics-item">
+                    <div class="characteristics-name"><span>Благоустройство территории:</span></div>
+                    <div class="characteristics-info">ландшафтное озеленение</div>
+                </div>
+                <div class="characteristics-item">
+                    <div class="characteristics-name"><span>Окна:</span></div>
+                    <div class="characteristics-info">панорамные</div>
+                </div>
+                <div class="characteristics-item">
+                    <div class="characteristics-name"><span>Инфраструктура района:</span></div>
+                    <div class="characteristics-info">Воробьевы горы, МГУ. набережные Москвы-реки, Лужники, фитнес-клубы, магазины, школы, детские сады, аптеки, поликлиники, банки</div>
+                </div>
+            </div>
+            <div class="characteristics-link">
+                <a href="#" class="hover-black link-presentation">Презентация</a>
+                <a href="#" class="hover-black link-plan">Планировки</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-item_map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25381.010557235022!2d37.54320767114695!3d55.78654223964656!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54997e6b66aa1%3A0xa0f94d7b5f575b86!2z0KbQodCa0JA!5e0!3m2!1sru!2sus!4v1542443384427" width="100%" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div>
+    <div class="item-card_desc">
+        <div class="container">
+            <h2>Золотые Ключи-1</h2>
+            <p>Лот: 23639. - Панорамные виды на центр города
+                Видовая пятикомнатная квартира под отделку площадью 251,5 кв м расположена на восьмом этаже фешенебельного жилого дома на Новом Арбате. Квартира обладает уникальными видовыми характеристиками: обширное панорамное остекление открывает потрясающий обзор города 300 градусов, в том числе роскошные виды на исторический центр столицы, Москву-реку, Дом Правительства и гостиницу "Украина". Планировка включает большую кухню-столовую-гостиную с видами на Новый Арбат и Белый Дом, три спальни, три санузла, две гардеробные комнаты и постирочную. Два машиноместа в подземном паркинге входят с стоимость.</p>
+            <div class="desc-link">
+                <a href="#" class="hover-black link-share">Поделиться</a>
+                <a href="#" class="hover-black link-favorite">В избранное</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="more-offer">
+    <div class="container">
+        <h2>Другие предложения в этом ЖК</h2>
+        <table class="offer-table">
+            <thead>
+            <tr>
+                <td>ID</td>
+                <td>Тип</td>
+                <td>Этаж</td>
+                <td>Кол-во комнат</td>
+                <td>Площадь, кв.м.	</td>
+                <td>Цена</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><span class="dn">ID:</span><a href="#" class="table-link">51734</a></td>
+                <td><span class="dn">Тип:</span>Квартира</td>
+                <td><span class="dn">Этаж:</span>2</td>
+                <td><span class="dn">Кол-во комнат:</span>1</td>
+                <td><span class="dn">Площадь, кв.м.:</span>60</td>
+                <td><span class="dn">Цена:</span><span class="table-price">23 126 700 000</span></td>
+            </tr>
+            <tr>
+                <td><span class="dn">ID:</span><a href="#" class="table-link">51734</a></td>
+                <td><span class="dn">Тип:</span>Квартира</td>
+                <td><span class="dn">Этаж:</span>2</td>
+                <td><span class="dn">Кол-во комнат:</span>1</td>
+                <td><span class="dn">Площадь, кв.м.:</span>60</td>
+                <td><span class="dn">Цена:</span><span class="table-price">23 126 700 000</span></td>
+            </tr>
+            <tr>
+                <td><span class="dn">ID:</span><a href="#" class="table-link">51734</a></td>
+                <td><span class="dn">Тип:</span>Квартира</td>
+                <td><span class="dn">Этаж:</span>2</td>
+                <td><span class="dn">Кол-во комнат:</span>1</td>
+                <td><span class="dn">Площадь, кв.м.:</span>60</td>
+                <td><span class="dn">Цена:</span><span class="table-price">23 126 700 000</span></td>
+            </tr>
+            <tr>
+                <td><span class="dn">ID:</span><a href="#" class="table-link">51734</a></td>
+                <td><span class="dn">Тип:</span>Квартира</td>
+                <td><span class="dn">Этаж:</span>2</td>
+                <td><span class="dn">Кол-во комнат:</span>1</td>
+                <td><span class="dn">Площадь, кв.м.:</span>60</td>
+                <td><span class="dn">Цена:</span><span class="table-price">23 126 700 000</span></td>
+            </tr>
+            <tr>
+                <td><span class="dn">ID:</span><a href="#" class="table-link">51734</a></td>
+                <td><span class="dn">Тип:</span>Квартира</td>
+                <td><span class="dn">Этаж:</span>2</td>
+                <td><span class="dn">Кол-во комнат:</span>1</td>
+                <td><span class="dn">Площадь, кв.м.:</span>60</td>
+                <td><span class="dn">Цена:</span><span class="table-price">23 126 700 000</span></td>
+            </tr>
+            <tr>
+                <td><span class="dn">ID:</span><a href="#" class="table-link">51734</a></td>
+                <td><span class="dn">Тип:</span>Квартира</td>
+                <td><span class="dn">Этаж:</span>2</td>
+                <td><span class="dn">Кол-во комнат:</span>1</td>
+                <td><span class="dn">Площадь, кв.м.:</span>60</td>
+                <td><span class="dn">Цена:</span><span class="table-price">23 126 700 000</span></td>
+            </tr>
+            <tr>
+                <td><span class="dn">ID:</span><a href="#" class="table-link">51734</a></td>
+                <td><span class="dn">Тип:</span>Квартира</td>
+                <td><span class="dn">Этаж:</span>2</td>
+                <td><span class="dn">Кол-во комнат:</span>1</td>
+                <td><span class="dn">Площадь, кв.м.:</span>60</td>
+                <td><span class="dn">Цена:</span><span class="table-price">23 126 700 000</span></td>
+            </tr>
+            <tr>
+                <td><span class="dn">ID:</span><a href="#" class="table-link">51734</a></td>
+                <td><span class="dn">Тип:</span>Квартира</td>
+                <td><span class="dn">Этаж:</span>2</td>
+                <td><span class="dn">Кол-во комнат:</span>1</td>
+                <td><span class="dn">Площадь, кв.м.:</span>60</td>
+                <td><span class="dn">Цена:</span><span class="table-price">23 126 700 000</span></td>
+            </tr>
+            <tr>
+                <td><span class="dn">ID:</span><a href="#" class="table-link">51734</a></td>
+                <td><span class="dn">Тип:</span>Квартира</td>
+                <td><span class="dn">Этаж:</span>2</td>
+                <td><span class="dn">Кол-во комнат:</span>1</td>
+                <td><span class="dn">Площадь, кв.м.:</span>60</td>
+                <td><span class="dn">Цена:</span><span class="table-price">23 126 700 000</span></td>
+            </tr>
+            <tr>
+                <td><span class="dn">ID:</span><a href="#" class="table-link">51734</a></td>
+                <td><span class="dn">Тип:</span>Квартира</td>
+                <td><span class="dn">Этаж:</span>2</td>
+                <td><span class="dn">Кол-во комнат:</span>1</td>
+                <td><span class="dn">Площадь, кв.м.:</span>60</td>
+                <td><span class="dn">Цена:</span><span class="table-price">23 126 700 000</span></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="more-offer_link"><a class="hover-black" href="#">Показать все <span>(130 предложений)</span></a></div>
+    </div>
+</div>
+<section class="popularoffer">
+    <div class="container">
+        <h2>Популярные объекты</h2>
+        <div class="offer-tabs">
+            <div class="tabs">
+                <div class="tab active">По бюджету</div>
+                <div class="tab">В доме</div>
+                <div class="tab">В районе</div>
+            </div>
+            <div class="content">
+                <div class="tab-cont active">
+                    <div class="newoffer-slider">
+                        <div class="new-item">
+                            <div class="offer-item">
+                                <div class="offer-title"><a href="#"><span>Дом — Новахово</span><i class="click-area"></i></a></div>
+                                <div class="offer-adress"><img src="/assets/img/location-icon.png" alt=""><span>Новорижское шоссе</span></div>
+                                <div class="offer-img"><img src="/assets/img/o7.png" alt="offer-img"></div>
+                                <div class="offer-detail">
+                                    <div class="detail detail-metro"><img src="/assets/img/metro-icon.png" alt="metro"><span>Тульская</span></div>
+                                    <div class="detail detail-area"><img src="/assets/img/area-icon.png" alt="area"><span>68-6912 м2</span></div>
+                                    <div class="detail detail-class"><img src="/assets/img/class-icon.png" alt="class"><span>Класс А</span></div>
+                                </div>
+                                <div class="offer-price"><span>184 279 200</span></div>
+                            </div>
+                        </div>
+                        <div class="new-item">
+                            <div class="offer-item">
+                                <div class="offer-title"><a href="#"><span>Офис — ЖК Онегин</span><i class="click-area"></i></a></div>
+                                <div class="offer-adress"><img src="/assets/img/location-icon.png" alt=""><span>ЦАО, Якиманка, Полянка М. улица, д.2</span></div>
+                                <div class="offer-img"><img src="/assets/img/o8.png" alt="offer-img"></div>
+                                <div class="offer-detail">
+                                    <div class="detail detail-metro"><img src="/assets/img/metro-icon.png" alt="metro"><span>Тульская</span></div>
+                                    <div class="detail detail-area"><img src="/assets/img/area-icon.png" alt="area"><span>68-6912 м2</span></div>
+                                    <div class="detail detail-class"><img src="/assets/img/class-icon.png" alt="class"><span>Класс А</span></div>
+                                </div>
+                                <div class="offer-price"><span>182 350 000</span>за объект</div>
+                            </div>
+                        </div>
+                        <div class="new-item">
+                            <div class="offer-item">
+                                <div class="offer-title"><a href="#"><span>Дом — Новоалександрово</span><i class="click-area"></i></a></div>
+                                <div class="offer-adress"><img src="/assets/img/location-icon.png" alt=""><span>Дмитровское шоссе</span></div>
+                                <div class="offer-img"><img src="/assets/img/o6.png" alt="offer-img"></div>
+                                <div class="offer-detail">
+                                    <div class="detail detail-metro"><img src="/assets/img/metro-icon.png" alt="metro"><span>Тульская</span></div>
+                                    <div class="detail detail-area"><img src="/assets/img/area-icon.png" alt="area"><span>68-6912 м2</span></div>
+                                    <div class="detail detail-class"><img src="/assets/img/class-icon.png" alt="class"><span>Класс А</span></div>
+                                </div>
+                                <div class="offer-price"><span>361 977 000</span></div>
+                            </div>
+                        </div>
+                        <div class="new-item">
+                            <div class="offer-item">
+                                <div class="offer-title"><a href="#"><span>Дом — Новоалександрово</span><i class="click-area"></i></a></div>
+                                <div class="offer-adress"><img src="/assets/img/location-icon.png" alt=""><span>Дмитровское шоссе</span></div>
+                                <div class="offer-img"><img src="/assets/img/o6.png" alt="offer-img"></div>
+                                <div class="offer-detail">
+                                    <div class="detail detail-metro"><img src="/assets/img/metro-icon.png" alt="metro"><span>Тульская</span></div>
+                                    <div class="detail detail-area"><img src="/assets/img/area-icon.png" alt="area"><span>68-6912 м2</span></div>
+                                    <div class="detail detail-class"><img src="/assets/img/class-icon.png" alt="class"><span>Класс А</span></div>
+                                </div>
+                                <div class="offer-price"><span>361 977 000</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-cont">
+                    <div class="newoffer-slider">
+                        <div class="new-item">
+                            <div class="offer-item">
+                                <div class="offer-title"><a href="#"><span>Дом — Новахово</span><i class="click-area"></i></a></div>
+                                <div class="offer-adress"><img src="/assets/img/location-icon.png" alt=""><span>Новорижское шоссе</span></div>
+                                <div class="offer-img"><img src="/assets/img/o7.png" alt="offer-img"></div>
+                                <div class="offer-detail">
+                                    <div class="detail detail-metro"><img src="/assets/img/metro-icon.png" alt="metro"><span>Тульская</span></div>
+                                    <div class="detail detail-area"><img src="/assets/img/area-icon.png" alt="area"><span>68-6912 м2</span></div>
+                                    <div class="detail detail-class"><img src="/assets/img/class-icon.png" alt="class"><span>Класс А</span></div>
+                                </div>
+                                <div class="offer-price"><span>184 279 200</span></div>
+                            </div>
+                        </div>
+                        <div class="new-item">
+                            <div class="offer-item">
+                                <div class="offer-title"><a href="#"><span>Офис — ЖК Онегин</span><i class="click-area"></i></a></div>
+                                <div class="offer-adress"><img src="/assets/img/location-icon.png" alt=""><span>ЦАО, Якиманка, Полянка М. улица, д.2</span></div>
+                                <div class="offer-img"><img src="/assets/img/o8.png" alt="offer-img"></div>
+                                <div class="offer-detail">
+                                    <div class="detail detail-metro"><img src="/assets/img/metro-icon.png" alt="metro"><span>Тульская</span></div>
+                                    <div class="detail detail-area"><img src="/assets/img/area-icon.png" alt="area"><span>68-6912 м2</span></div>
+                                    <div class="detail detail-class"><img src="/assets/img/class-icon.png" alt="class"><span>Класс А</span></div>
+                                </div>
+                                <div class="offer-price"><span>182 350 000</span>за объект</div>
+                            </div>
+                        </div>
+                        <div class="new-item">
+                            <div class="offer-item">
+                                <div class="offer-title"><a href="#"><span>Дом — Новоалександрово</span><i class="click-area"></i></a></div>
+                                <div class="offer-adress"><img src="/assets/img/location-icon.png" alt=""><span>Дмитровское шоссе</span></div>
+                                <div class="offer-img"><img src="/assets/img/o6.png" alt="offer-img"></div>
+                                <div class="offer-detail">
+                                    <div class="detail detail-metro"><img src="/assets/img/metro-icon.png" alt="metro"><span>Тульская</span></div>
+                                    <div class="detail detail-area"><img src="/assets/img/area-icon.png" alt="area"><span>68-6912 м2</span></div>
+                                    <div class="detail detail-class"><img src="/assets/img/class-icon.png" alt="class"><span>Класс А</span></div>
+                                </div>
+                                <div class="offer-price"><span>361 977 000</span></div>
+                            </div>
+                        </div>
+                        <div class="new-item">
+                            <div class="offer-item">
+                                <div class="offer-title"><a href="#"><span>Дом — Новоалександрово</span><i class="click-area"></i></a></div>
+                                <div class="offer-adress"><img src="/assets/img/location-icon.png" alt=""><span>Дмитровское шоссе</span></div>
+                                <div class="offer-img"><img src="/assets/img/o6.png" alt="offer-img"></div>
+                                <div class="offer-detail">
+                                    <div class="detail detail-metro"><img src="/assets/img/metro-icon.png" alt="metro"><span>Тульская</span></div>
+                                    <div class="detail detail-area"><img src="/assets/img/area-icon.png" alt="area"><span>68-6912 м2</span></div>
+                                    <div class="detail detail-class"><img src="/assets/img/class-icon.png" alt="class"><span>Класс А</span></div>
+                                </div>
+                                <div class="offer-price"><span>361 977 000</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-cont">
+                    <div class="newoffer-slider">
+                        <div class="new-item">
+                            <div class="offer-item">
+                                <div class="offer-title"><a href="#"><span>Дом — Новахово</span><i class="click-area"></i></a></div>
+                                <div class="offer-adress"><img src="/assets/img/location-icon.png" alt=""><span>Новорижское шоссе</span></div>
+                                <div class="offer-img"><img src="/assets/img/o7.png" alt="offer-img"></div>
+                                <div class="offer-detail">
+                                    <div class="detail detail-metro"><img src="/assets/img/metro-icon.png" alt="metro"><span>Тульская</span></div>
+                                    <div class="detail detail-area"><img src="/assets/img/area-icon.png" alt="area"><span>68-6912 м2</span></div>
+                                    <div class="detail detail-class"><img src="/assets/img/class-icon.png" alt="class"><span>Класс А</span></div>
+                                </div>
+                                <div class="offer-price"><span>184 279 200</span></div>
+                            </div>
+                        </div>
+                        <div class="new-item">
+                            <div class="offer-item">
+                                <div class="offer-title"><a href="#"><span>Офис — ЖК Онегин</span><i class="click-area"></i></a></div>
+                                <div class="offer-adress"><img src="/assets/img/location-icon.png" alt=""><span>ЦАО, Якиманка, Полянка М. улица, д.2</span></div>
+                                <div class="offer-img"><img src="/assets/img/o8.png" alt="offer-img"></div>
+                                <div class="offer-detail">
+                                    <div class="detail detail-metro"><img src="/assets/img/metro-icon.png" alt="metro"><span>Тульская</span></div>
+                                    <div class="detail detail-area"><img src="/assets/img/area-icon.png" alt="area"><span>68-6912 м2</span></div>
+                                    <div class="detail detail-class"><img src="/assets/img/class-icon.png" alt="class"><span>Класс А</span></div>
+                                </div>
+                                <div class="offer-price"><span>182 350 000</span>за объект</div>
+                            </div>
+                        </div>
+                        <div class="new-item">
+                            <div class="offer-item">
+                                <div class="offer-title"><a href="#"><span>Дом — Новоалександрово</span><i class="click-area"></i></a></div>
+                                <div class="offer-adress"><img src="/assets/img/location-icon.png" alt=""><span>Дмитровское шоссе</span></div>
+                                <div class="offer-img"><img src="/assets/img/o6.png" alt="offer-img"></div>
+                                <div class="offer-detail">
+                                    <div class="detail detail-metro"><img src="/assets/img/metro-icon.png" alt="metro"><span>Тульская</span></div>
+                                    <div class="detail detail-area"><img src="/assets/img/area-icon.png" alt="area"><span>68-6912 м2</span></div>
+                                    <div class="detail detail-class"><img src="/assets/img/class-icon.png" alt="class"><span>Класс А</span></div>
+                                </div>
+                                <div class="offer-price"><span>361 977 000</span></div>
+                            </div>
+                        </div>
+                        <div class="new-item">
+                            <div class="offer-item">
+                                <div class="offer-title"><a href="#"><span>Дом — Новоалександрово</span><i class="click-area"></i></a></div>
+                                <div class="offer-adress"><img src="/assets/img/location-icon.png" alt=""><span>Дмитровское шоссе</span></div>
+                                <div class="offer-img"><img src="/assets/img/o6.png" alt="offer-img"></div>
+                                <div class="offer-detail">
+                                    <div class="detail detail-metro"><img src="/assets/img/metro-icon.png" alt="metro"><span>Тульская</span></div>
+                                    <div class="detail detail-area"><img src="/assets/img/area-icon.png" alt="area"><span>68-6912 м2</span></div>
+                                    <div class="detail detail-class"><img src="/assets/img/class-icon.png" alt="class"><span>Класс А</span></div>
+                                </div>
+                                <div class="offer-price"><span>361 977 000</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="catalog-text">
+    <div class="container bhelp">
+        <div class="help-form">
+            <form action="/">
+                <h2 class="section-h2">Затрудняетесь с выбором?</h2>
+                <div class="subtitle">Эксперты Knight Frank сэкономят ваше время и подберут оптимальные варианты недвижимости</div>
+                <div class="form-row">
+                    <input type="text" placeholder="Имя *" required>
+                    <input type="text" placeholder="Телефон *" required>
+                    <input type="text" placeholder="E-mail *" required>
+                </div>
+                <textarea placeholder="Расскажите о своих пожеланиях"></textarea>
+                <div class="help-consent">Нажимая на кнопку «Отправить», Вы даете согласие на обработку персональных данных<br> в соответствии с <a href="#">«Положением об обработке персональных данных»</a></div>
+                <div class="help-btn"><button class="hover-black">Отправить заявку</button></div>
+            </form>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="catalog-menu">
+                    <ul>
+                        <li><a href="#">Квартиры в центре</a></li>
+                        <li><a href="#">Однокомнатные </a></li>
+                        <li><a href="#">5-комнатные в центре</a></li>
+                        <li><a href="#">4-комнатные в новостройке</a></li>
+                        <li><a href="#">3-комнатные в ЦАО</a></li>
+                        <li><a href="#">4-комнатные в ЦАО</a></li>
+                        <li><a href="#">4-комнатные в новостройке</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="catalog-menu">
+                    <ul>
+                        <li><a href="#">Новостройк в ЦАО</a></li>
+                        <li><a href="#">ЖК Москвы </a></li>
+                        <li><a href="#">Квартиры в ЦАО</a></li>
+                        <li><a href="#">Остоженка</a></li>
+                        <li><a href="#">Плющиха</a></li>
+                        <li><a href="#">Якиманка</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="catalog-menu">
+                    <ul>
+                        <li><a href="#">Хамовники</a></li>
+                        <li><a href="#">Замоскворечье </a></li>
+                        <li><a href="#">Тверской р-н</a></li>
+                        <li><a href="#">Чистые пруды</a></li>
+                        <li><a href="#">Парк Культуры</a></li>
+                        <li><a href="#">Тверская</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-none col-6">
+                <div class="catalog-menu">
+                    <ul>
+                        <li><a href="#">Вторичка в хамовниках</a></li>
+                        <li><a href="#">Продажа по метро </a></li>
+                        <li><a href="#">Аренда по метро</a></li>
+                        <li><a href="#">Продажа по районам</a></li>
+                        <li><a href="#">Аренда по районам</a></li>
+                        <li><a href="#">Продажа по улицам</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

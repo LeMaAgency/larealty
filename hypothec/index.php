@@ -82,7 +82,7 @@ $APPLICATION->SetTitle('Ипотека');
                 <div class="row">
                     <a name="calc"></a>
                     <div class="col-xs-12">
-                        <h2 class="calculator__h2"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/hypothec/calculator/title.php'); ?></h2>
+                        <h2 class="calculator__h2"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/hypothec/calculator/title.php'); ?></h2>
                     </div>
                 </div>
                 <div class="row">
@@ -403,8 +403,8 @@ $APPLICATION->SetTitle('Ипотека');
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
-                    <h3 class="we-offer__title"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/hypothec/steps/title.php'); ?></h3>
-                    <h4 class="we-offer__title_sub"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/hypothec/steps/subtitle.php'); ?></h4>
+                    <h3 class="we-offer__title"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/hypothec/steps/title.php'); ?></h3>
+                    <h4 class="we-offer__title_sub"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/hypothec/steps/subtitle.php'); ?></h4>
                     <div class="row">
                         <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list", 
@@ -479,7 +479,7 @@ $APPLICATION->SetTitle('Ипотека');
         </div>
         <div class="row" style="text-align: center;">
             <a href="<?=SITE_DIR;?>personal/hypothec/" class="add-apartment__button">
-                <? $APPLICATION->IncludeFile(SITE_DIR . 'include/hypothec/consultation_button_text.php'); ?>
+                <? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/hypothec/consultation_button_text.php'); ?>
             </a>
         </div>
     </div>
@@ -489,9 +489,9 @@ $APPLICATION->SetTitle('Ипотека');
             <div class="tree__wrap">
                 <div class="row">
                     <div class="col-md-6">
-                        <h2 class="tree__h2"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/hypothec/notations/title.php'); ?></h2>
+                        <h2 class="tree__h2"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/hypothec/notations/title.php'); ?></h2>
 
-                        <p class="tree__description"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/hypothec/notations/text.php'); ?></p>
+                        <p class="tree__description"><? $APPLICATION->IncludeFile(SITE_DIR . 'include/old/hypothec/notations/text.php'); ?></p>
                     </div>
                 </div>
             </div>
