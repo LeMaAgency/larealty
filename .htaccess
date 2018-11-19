@@ -36,5 +36,5 @@ ErrorDocument 404 /404.php
   ExpiresByType image/gif "access plus 3 day"
   ExpiresByType image/png "access plus 3 day"
   ExpiresByType text/css "access plus 3 day"
-  ExpiresByType application/javascript "access plus 3 day"  
+  ExpiresByType application/javascript "access plus 3 day"
 </IfModule>
