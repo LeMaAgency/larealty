@@ -18,17 +18,22 @@ global $APPLICATION;
     \Lema\Common\AssetManager::get()
         ->init(array('fx'))
         ->addCssArray(array(
+            '/assets/css/jquery.fancybox.min.css',
             '/assets/css/libs.min.css',
             '/assets/css/slick.css',
             '/assets/css/slick-theme.css',
             '/assets/css/main.css',
             '/assets/fonts/stylesheet.css',
+            '/assets/css/custom.css',
         ))
         ->addJsArray(array(
+            '/assets/js/jquery-3.2.1.min.js',
+            '/assets/js/jquery.fancybox.min.js',
             '/assets/js/libs.min.js',
             '/assets/js/slick.min.js',
             '//use.fontawesome.com/acae6499e9.js',
             '/assets/js/common.js',
+            '/assets/js/custom.js',
         ));
     ?>
 
