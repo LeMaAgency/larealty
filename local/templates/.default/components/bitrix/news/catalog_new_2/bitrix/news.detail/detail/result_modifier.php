@@ -31,12 +31,11 @@ $item = $data->item();
  */
 $arResult['SLIDER_IMAGES'] = array();
 
-if(!empty($arResult['DETAIL_PICTURE']))
+if (!empty($arResult['DETAIL_PICTURE']))
     $arResult['SLIDER_IMAGES'][] = $arResult['DETAIL_PICTURE']['SRC'];
 
-if(!empty($arResult['PROPERTIES']['MORE_PHOTO']['VALUE']))
-{
-    foreach($arResult['PROPERTIES']['MORE_PHOTO']['VALUE'] as $imgId)
+if (!empty($arResult['PROPERTIES']['MORE_PHOTO']['VALUE'])) {
+    foreach ($arResult['PROPERTIES']['MORE_PHOTO']['VALUE'] as $imgId)
         $arResult['SLIDER_IMAGES'][] = \CFile::GetPath($imgId);
 }
 
@@ -49,20 +48,52 @@ $sections = \Lema\IBlock\Section::getAllD7($arParams['IBLOCK_ID'], array(
 ));
 
 $arResult['IS_HOUSE_OR_LOT'] = false;
-if(isset($sections[$arResult['IBLOCK_SECTION_ID']]['CODE']))
+if (isset($sections[$arResult['IBLOCK_SECTION_ID']]['CODE']))
     $arResult['IS_HOUSE_OR_LOT'] = in_array($sections[$arResult['IBLOCK_SECTION_ID']]['CODE'], array('doma', 'dachi'));
 
 
 $basket = new \Lema\Basket\Basket();
 $arResult['IN_FAVORITES'] = array();
-foreach ($basket->getProducts() as $data){
+foreach ($basket->getProducts() as $data) {
     $arResult['IN_FAVORITES'][$data['PRODUCT_ID']] = $data['ID'];
 }
+
 $arResult['OFFERS'] = \Lema\IBlock\Element::getList(LIblock::getId('objects_offers'), array(
     'filter' => array('PROPERTY_CML2_LINK' => $arResult['ID']),
-    'arSelect' => array('ID', 'XML_ID',  'NAME', 'PREVIEW_PICTURE', 'PROPERTY_PRICE'),
+    'arSelect' => array(
+        'ID',
+        'NAME',
+        'DETAIL_TEXT',
+        'PROPERTY_PRICE',
+        'PROPERTY_REALTY_TYPE',
+        'PROPERTY_ROOMS_COUNT',
+        'PROPERTY_STAGE',
+        'PROPERTY_SQUARE',
+        'PROPERTY_REGION',
+        'PROPERTY_SLABS',
+        'PROPERTY_FINISHING',
+        'PROPERTY_SECURITY',
+        'PROPERTY_INFRASTRUCTURE',
+        'PROPERTY_LANDSCAPING',
+        'PROPERTY_WINDOWS',
+        'PROPERTY_REGION_INFRASTRUCTURE',
+        'PROPERTY_ADDRESS',
+        'PROPERTY_METRO',
+        'PROPERTY_PARKING',
+        'PROPERTY_MATERIAL'
+    ),
 ));
-
+$res = \CIBlockProperty::GetList(
+    array(),
+    array(
+        'IBLOCK_ID' => \LIblock::getId('objects_offers'),
+    )
+);
+$arResult['OFFER_PROP_NAME'] = [];
+while ($ar_res = $res->Fetch()) {
+    $arResult['OFFER_PROP_NAME'][$ar_res['CODE']] = $ar_res['NAME'];
+}
+/*
 $images = [];
 foreach($arResult['OFFERS'] as $k => $arOffer)
 {
@@ -72,4 +103,4 @@ foreach($arResult['OFFERS'] as $k => $arOffer)
             $images[$arOffer['PREVIEW_PICTURE']] = \CFile::GetPath($arOffer['PREVIEW_PICTURE']);
         $arResult['OFFERS'][$k]['PREVIEW_PICTURE_SRC'] = $images[$arOffer['PREVIEW_PICTURE']];
     }
-}
+}*/

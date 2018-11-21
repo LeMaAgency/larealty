@@ -39,7 +39,6 @@ global $APPLICATION;
 
     <title><? $APPLICATION->ShowTitle(); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
 <body>
 <? $APPLICATION->ShowPanel(); ?>
 <header>

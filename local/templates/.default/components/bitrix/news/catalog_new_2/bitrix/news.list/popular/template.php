@@ -11,7 +11,7 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
-if(empty($arResult['ITEMS'])){
+if (empty($arResult['ITEMS'])) {
     return;
 }
 ?>
@@ -25,7 +25,7 @@ if(empty($arResult['ITEMS'])){
                 $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
                 $this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
 
-                if (isset($arResult['OFFERS'][$arItem['ID']]) && ($arResult['OFFERS'][$arItem['ID']]['MIN_PRICE'] > 0)) {
+                if (!empty($arItem['PROPERTIES']['PRICE']['VALUE']) || (isset($arResult['OFFERS'][$arItem['ID']]) && ($arResult['OFFERS'][$arItem['ID']]['MIN_PRICE'] > 0))) {
                     ?>
 
                     <div class="new-item" id="<?= $this->GetEditAreaId($arItem['ID']); ?>">
@@ -73,15 +73,15 @@ if(empty($arResult['ITEMS'])){
                                     ?>
                                     От
                                     <span>
-                            <?= $arResult['OFFERS'][$arItem['ID']]['MIN_PRICE']; ?>
-                        </span>
+                                        <?= $arResult['OFFERS'][$arItem['ID']]['MIN_PRICE']; ?>
+                                    </span>
                                     за объект
                                     <?
                                 } else {
                                     ?>
                                     <span>
-                            <?= $arItem['PRICE']; ?>
-                        </span>
+                                        <?= $arItem['PROPERTIES']['PRICE']['VALUE']; ?>
+                                    </span>
                                 <? } ?>
                             </div>
                         </div>

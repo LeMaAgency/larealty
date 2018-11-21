@@ -451,6 +451,7 @@ function initMap() {
         });
     }
 }
+initMap();
 
 function initialize() {
 

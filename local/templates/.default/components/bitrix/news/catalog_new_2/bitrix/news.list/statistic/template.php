@@ -21,75 +21,76 @@ Loc::loadMessages(__FILE__);
 <div class="catalog-head">
     <div class="container">
         <h1><?= $APPLICATION->ShowTitle(); ?></h1>
-        <div class="catalog-head_list">
-            <div class="flex-list">
-                <?
-                $count = 0;
-                foreach ($arResult["STATISTICS"] as $key => $arRegion):
-                    if ($count <= $arResult['STATISTICS_INFO']['ELEM_IN_BLOCK']) {
-                        $count++;
-                        switch ($count):
-                            case 1:
-                                ?>
-                                <ul>
-                                <li>
-                                    <a href="<?= $APPLICATION->GetCurPageParam('region=' . $key, array('region')); ?>">
+        <?if (!empty($arResult["STATISTICS"])) { ?>
+            <div class="catalog-head_list">
+                <div class="flex-list">
+                    <?
+                    $count = 0;
+                    foreach ($arResult["STATISTICS"] as $key => $arRegion):
+                        if ($count <= $arResult['STATISTICS_INFO']['ELEM_IN_BLOCK']) {
+                            $count++;
+                            switch ($count):
+                                case 1:
+                                    ?>
+                                    <ul>
+                                    <li>
+                                        <a href="<?= $APPLICATION->GetCurPageParam('region=' . $key, array('region')); ?>">
                                     <span>
                                         <?= $arRegion['NAME']; ?>
                                     </span>
-                                        <img src="/assets/img/d1.png" alt="">
-                                        <span class="count">
+                                            <img src="/assets/img/d1.png" alt="">
+                                            <span class="count">
                                         <?= $arRegion['COUNT']; ?>
                                     </span>
-                                    </a>
-                                </li>
-                                <?
-                                break;
-                            case $arResult['STATISTICS_INFO']['ELEM_IN_BLOCK']:
-                                ?>
-                                <li>
-                                    <a href="<?= $APPLICATION->GetCurPageParam('region=' . $key, array('region')); ?>">
+                                        </a>
+                                    </li>
+                                    <?
+                                    break;
+                                case $arResult['STATISTICS_INFO']['ELEM_IN_BLOCK']:
+                                    ?>
+                                    <li>
+                                        <a href="<?= $APPLICATION->GetCurPageParam('region=' . $key, array('region')); ?>">
                                         <span>
                                             <?= $arRegion['NAME']; ?>
                                         </span>
-                                        <img src="/assets/img/d1.png" alt="">
-                                        <span class="count">
+                                            <img src="/assets/img/d1.png" alt="">
+                                            <span class="count">
                                             <?= $arRegion['COUNT']; ?>
                                         </span>
-                                    </a>
-                                </li>
-                                </ul>
-                                <?
-                                break;
-                            default:
-                                ?>
-                                <li>
-                                    <a href="<?= $APPLICATION->GetCurPageParam('region=' . $key, array('region')); ?>">
+                                        </a>
+                                    </li>
+                                    </ul>
+                                    <?
+                                    break;
+                                default:
+                                    ?>
+                                    <li>
+                                        <a href="<?= $APPLICATION->GetCurPageParam('region=' . $key, array('region')); ?>">
                                     <span>
                                         <?= $arRegion['NAME']; ?>
                                     </span>
-                                        <img src="/assets/img/d1.png" alt="">
-                                        <span class="count">
+                                            <img src="/assets/img/d1.png" alt="">
+                                            <span class="count">
                                         <?= $arRegion['COUNT']; ?>
                                     </span>
-                                    </a>
-                                </li>
+                                        </a>
+                                    </li>
+                                    <?
+                                    break;
+                            endswitch;
+                            if ($arResult['STATISTICS_INFO']['LAST_COUNT_ID'] == $key) {
+                                ?>
+                                </ul>
                                 <?
-                                break;
-                        endswitch;
-                        if ($arResult['STATISTICS_INFO']['LAST_COUNT_ID'] == $key) {
-                            ?>
-                            </ul>
-                            <?
+                            }
+                            if ($count == $arResult['STATISTICS_INFO']['ELEM_IN_BLOCK']) {
+                                $count = 0;
+                            }
                         }
-                        if ($count == $arResult['STATISTICS_INFO']['ELEM_IN_BLOCK']) {
-                            $count = 0;
-                        }
-                    }
 
-                endforeach; ?>
-            </div>
-            <div class="count-object">
+                    endforeach; ?>
+                </div>
+                <div class="count-object">
                 <span>
                 <?= \Lema\Common\Helper::pluralizeN(
                     $arResult['STATISTICS_INFO']['ALL_COUNT'],
@@ -100,10 +101,12 @@ Loc::loadMessages(__FILE__);
                     )
                 ); ?>
                 </span>
+                </div>
             </div>
-        </div>
-        <? if ($arResult['STATISTICS_INFO']['ALL_COUNT'] > 6) { ?>
-            <!--<div class="catalog-head_link"><a href="#"><img src="/assets/img/plus.png" alt="plus"><span>Все районы</span></a></div>-->
+            <? if ($arResult['STATISTICS_INFO']['ALL_COUNT'] > 6) { ?>
+                <!--<div class="catalog-head_link"><a href="#"><img src="/assets/img/plus.png" alt="plus"><span>Все районы</span></a></div>-->
+            <? } ?>
         <? } ?>
+
     </div>
 </div>
