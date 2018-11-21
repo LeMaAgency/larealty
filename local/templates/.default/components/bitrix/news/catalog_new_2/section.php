@@ -134,7 +134,7 @@ while ($ar_res = $res->Fetch()) {
     ?>
     <br/>
 <? endif ?>
-<div class="catalog-filter">
+<!--<div class="catalog-filter">
     <div class="container">
         <div class="filter-list">
             <div class="filter-row">
@@ -194,7 +194,7 @@ while ($ar_res = $res->Fetch()) {
             </div>
         </div>
     </div>
-</div>
+</div>-->
 <?if(!empty($_REQUEST['region'])){
     $GLOBALS['arrFilter']['PROPERTY']['REGION'] = $_REQUEST['region'];
 };?>

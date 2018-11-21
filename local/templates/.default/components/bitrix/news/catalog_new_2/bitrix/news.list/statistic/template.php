@@ -25,7 +25,8 @@ Loc::loadMessages(__FILE__);
             <div class="catalog-head_list">
                 <div class="flex-list">
                     <?
-                    $count = 0;
+                    $count = $countColumn = 0;
+                    $maxCount = 3;
                     foreach ($arResult["STATISTICS"] as $key => $arRegion):
                         if ($count <= $arResult['STATISTICS_INFO']['ELEM_IN_BLOCK']) {
                             $count++;
@@ -78,13 +79,17 @@ Loc::loadMessages(__FILE__);
                                     <?
                                     break;
                             endswitch;
-                            if ($arResult['STATISTICS_INFO']['LAST_COUNT_ID'] == $key) {
+                            if ($arResult['STATISTICS_INFO']['LAST_COUNT_ID'] == $key || $count == $maxCount) {
                                 ?>
                                 </ul>
                                 <?
                             }
-                            if ($count == $arResult['STATISTICS_INFO']['ELEM_IN_BLOCK']) {
+                            if ($count == $arResult['STATISTICS_INFO']['ELEM_IN_BLOCK'] || $count == $maxCount) {
+                                $countColumn++;
                                 $count = 0;
+                            }
+                            if($countColumn == 2){
+                                break;
                             }
                         }
 
