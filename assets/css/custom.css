@@ -1,0 +1,22 @@
+.help-form .it-error {
+    font-size: 13px;
+}
+
+.catalog-item_photo img {
+    max-width: 400px !important;
+}
+
+.catalog-item_desc {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 767px) {
+    .nav-dots {
+        width: 20px !important;
+    }
+}

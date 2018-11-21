@@ -28,8 +28,8 @@ global $APPLICATION;
         ))
         ->addJsArray(array(
             '/assets/js/jquery-3.2.1.min.js',
-            '/assets/js/jquery.fancybox.min.js',
             '/assets/js/libs.min.js',
+            '/assets/js/jquery.fancybox.min.js',
             '/assets/js/slick.min.js',
             '//use.fontawesome.com/acae6499e9.js',
             '/assets/js/common.js',
@@ -38,6 +38,7 @@ global $APPLICATION;
     ?>
 
     <title><? $APPLICATION->ShowTitle(); ?></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <body>
 <? $APPLICATION->ShowPanel(); ?>

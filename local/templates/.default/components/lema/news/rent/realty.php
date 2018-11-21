@@ -115,7 +115,7 @@ if(isset($squareFrom)){
         Array(
             "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
             "IBLOCK_ID" => $arParams["IBLOCK_ID"],
-            "NEWS_COUNT" => $arParams["NEWS_COUNT"],
+            "NEWS_COUNT" => $_REQUEST $arParams["NEWS_COUNT"],
             "SORT_BY1" => $sortBy,
             "SORT_ORDER1" => $sortOrder,
             "SORT_BY2" => $arParams["SORT_BY2"],

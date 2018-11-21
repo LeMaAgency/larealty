@@ -1,10 +1,10 @@
 <?
 require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
-$APPLICATION->SetTitle('Каталог');?>
+$APPLICATION->SetTitle('Каталог'); ?>
 
 <? $APPLICATION->IncludeComponent(
     "bitrix:news",
-    "catalog_new",
+    "catalog_new_2",
     array(
         "DISPLAY_DATE" => "Y",
         "DISPLAY_PICTURE" => "Y",
@@ -29,7 +29,7 @@ $APPLICATION->SetTitle('Каталог');?>
         "PREVIEW_TRUNCATE_LEN" => "",
         "LIST_ACTIVE_DATE_FORMAT" => "d.m.Y",
         "LIST_FIELD_CODE" => array(
-            0 => "",
+            0 => "PREVIEW_PICTURE",
             1 => "",
         ),
         "LIST_PROPERTY_CODE" => array(
@@ -45,6 +45,8 @@ $APPLICATION->SetTitle('Каталог');?>
             9 => "REALTY_TYPE",
             10 => "STAGE",
             11 => "STAGES_COUNT",
+            12 => "POPULAR",
+            13 => "RENT_TYPE",
         ),
         "HIDE_LINK_WHEN_NO_DETAIL" => "Y",
         "DISPLAY_NAME" => "Y",
@@ -67,8 +69,8 @@ $APPLICATION->SetTitle('Каталог');?>
         "DETAIL_PAGER_TEMPLATE" => "",
         "DETAIL_PAGER_SHOW_ALL" => "Y",
         "DETAIL_STRICT_SECTION_CHECK" => "Y",
-        "SET_TITLE" => "Y",
-        "ADD_SECTIONS_CHAIN" => "N",
+        "SET_TITLE" => "N",
+        "ADD_SECTIONS_CHAIN" => "Y",
         "ADD_ELEMENT_CHAIN" => "Y",
         "SET_LAST_MODIFIED" => "Y",
         "PAGER_BASE_LINK_ENABLE" => "Y",
@@ -79,8 +81,7 @@ $APPLICATION->SetTitle('Каталог');?>
         "PAGER_PARAMS_NAME" => "arrPager",
         "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
         "USE_PERMISSIONS" => "N",
-        "GROUP_PERMISSIONS" => array(
-            //0 => "1",
+        "GROUP_PERMISSIONS" => array(//0 => "1",
         ),
         "CACHE_TYPE" => "A",
         "CACHE_TIME" => "3600",
@@ -161,7 +162,7 @@ $APPLICATION->SetTitle('Каталог');?>
         "FILE_404" => "",
         "SEF_URL_TEMPLATES" => array(
             "news" => "",
-            "section" => "",
+            "section" => "#SECTION_CODE#/",
             "detail" => "#SECTION_CODE#/#ELEMENT_CODE#/",
             "search" => "search/",
         ),
@@ -169,6 +170,8 @@ $APPLICATION->SetTitle('Каталог');?>
     ),
     false
 ); ?>
+
+
 
 <?
 require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/footer.php';

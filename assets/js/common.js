@@ -8,8 +8,8 @@ $(document).ready(function() {
 	  infinite: false,
 	  slidesToShow: 1,
 	  slidesToScroll: 1,
-	  prevArrow: '<div class="prev-stock"><img src="img/prev-b.png" alt="prev" /></div>',
-	  nextArrow: '<div class="next-stock"><img src="img/next-b.png" alt="next" /></div>',
+	  prevArrow: '<div class="prev-stock"><img src="/assets/img/prev-b.png" alt="prev" /></div>',
+	  nextArrow: '<div class="next-stock"><img src="/assets/img/next-b.png" alt="next" /></div>',
 	  dots: true
 	});
 
@@ -18,16 +18,16 @@ $(document).ready(function() {
 	  infinite: false,
 	  slidesToShow: 1,
 	  slidesToScroll: 1,
-	  prevArrow: '<div class="prev-stock"><img src="img/prev-b.png" alt="prev" /></div>',
-	  nextArrow: '<div class="next-stock"><img src="img/next-b.png" alt="next" /></div>',
+	  prevArrow: '<div class="prev-stock"><img src="/assets/img/prev-b.png" alt="prev" /></div>',
+	  nextArrow: '<div class="next-stock"><img src="/assets/img/next-b.png" alt="next" /></div>',
 	  dots: true
 	});
 
   $('.item-card_photo').slick({
     dots: true,
     infinite: false,
-    prevArrow: '<div class="prev-card"><img src="img/left-b.png" alt="prev" /></div>',
-    nextArrow: '<div class="next-card"><img src="img/right-b.png" alt="next" /></div>',
+    prevArrow: '<div class="prev-card"><img src="/assets/img/left-b.png" alt="prev" /></div>',
+    nextArrow: '<div class="next-card"><img src="/assets/img/right-b.png" alt="next" /></div>',
   });
 
 

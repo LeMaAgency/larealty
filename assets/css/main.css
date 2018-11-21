@@ -1735,7 +1735,7 @@ footer {
       width: 40px;
       height: 40px;
       margin: 0 3px; }
-      .pagination .pag-list a:hover {
+      .pagination .pag-list a:hover,.pagination .pag-list .active {
         background-color: #a49183;
         -webkit-border-radius: 2px;
                 border-radius: 2px;
@@ -3411,7 +3411,7 @@ footer {
         width: 40px;
         height: 40px;
         margin: 0 3px; }
-        .mobile-pagination .pag-list a:hover {
+        .mobile-pagination .pag-list a:hover,.mobile-pagination .pag-list .active {
           background-color: #a49183;
           -webkit-border-radius: 2px;
                   border-radius: 2px;

@@ -161,14 +161,20 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
                         <? $APPLICATION->IncludeFile(SITE_DIR . 'include/footer/subscribe-text.php'); ?>
                     </h3>
                     <?$APPLICATION->IncludeComponent(
-                        "bitrix:subscribe.form",
+                        "bitrix:subscribe.edit",
                         "",
                         Array(
+                            "AJAX_MODE" => "N",
+                            "AJAX_OPTION_ADDITIONAL" => "",
+                            "AJAX_OPTION_HISTORY" => "N",
+                            "AJAX_OPTION_JUMP" => "N",
+                            "AJAX_OPTION_STYLE" => "Y",
+                            "ALLOW_ANONYMOUS" => "Y",
                             "CACHE_TIME" => "3600",
                             "CACHE_TYPE" => "A",
-                            "PAGE" => "#SITE_DIR#about/subscr_edit.php",
-                            "SHOW_HIDDEN" => "N",
-                            "USE_PERSONALIZATION" => "Y"
+                            "SET_TITLE" => "N",
+                            "SHOW_AUTH_LINKS" => "N",
+                            "SHOW_HIDDEN" => "N"
                         )
                     );?>
                     <div class="form-txt">

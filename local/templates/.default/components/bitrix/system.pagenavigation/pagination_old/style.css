@@ -1,0 +1,16 @@
+.pagination .pagination__elem-active, .pagination .pagination__elem-deactive {
+    z-index: 3;
+    cursor: default;
+    opacity: 1;
+    background-color: #fff;
+    width: 49px;
+    height: 49px;
+    border: 1px solid #aaa;
+    border-radius: 2px;
+    color: #002b4e;
+    font-size: 24px;
+    margin: 0 4px;
+}
+.pagination .pagination__elem-deactive, .pagination li span.pagination__elem-deactive:hover {
+    border: 1px solid transparent;
+}
