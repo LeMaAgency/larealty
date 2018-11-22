@@ -2,6 +2,13 @@
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Главная");
 ?>
+<section class="expert">
+    <div class="expert-overlay"></div>
+    <div class="expert-txt">
+        <h2>Эксперты на рынке элитной недвижимости</h2>
+        <p>Международная консалтинговая компания Knight Frank была основана в Лондоне в 1896 году и является одним из лидеров мирового рынка коммерческой и жилой недвижимости. На сегодняшний день Knight Frank, совместно со своим стратегическим североамериканским партнером, компанией Newmark Grubb Knight Frank, насчитывает 523 офиса в 60 странах мира.</p>
+    </div>
+</section>
 <section class="popular">
     <div class="container">
         <h2 class="section-h2">Популярные объекты</h2>
