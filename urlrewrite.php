@@ -30,6 +30,12 @@ $arUrlRewrite = array(
 		"ID" => "lema:news",
 		"PATH" => "/rent/index.php",
 	),
+	array(
+		"CONDITION" => "#^/news/#",
+		"RULE" => "",
+		"ID" => "bitrix:news",
+		"PATH" => "/news/index.php",
+	),
 );
 
 ?>
