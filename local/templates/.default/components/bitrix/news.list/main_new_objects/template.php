@@ -83,5 +83,12 @@ $this->setFrameMode(true);
 
     <? endforeach; ?>
 </div>
-<div class="new-link"><a class="hlink" href="#">ВСЕ ПРЕДЛОЖЕНИЯ <span>(<?=$arResult['NEW_OBJ_COUNT']?>)</span></a></div>
+<div class="new-link">
+    <a class="hlink" href="/catalog/?show_new_objects=Y">
+        ВСЕ ПРЕДЛОЖЕНИЯ
+        <span>(<?=$arResult['NEW_OBJ_COUNT']?>
+            )
+        </span>
+    </a>
+</div>
 

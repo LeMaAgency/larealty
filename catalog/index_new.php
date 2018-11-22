@@ -2,7 +2,13 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php';
 $APPLICATION->SetTitle('Каталог'); ?>
 
-<? $APPLICATION->IncludeComponent(
+<?
+if($_GET['show_new_objects'] == 'Y')
+{
+    $GLOBALS['arrFilter'] = Array("PROPERTY" => array('!SHOW_IN_NEW_OBJ_BLOCK' => false));
+}
+
+$APPLICATION->IncludeComponent(
     "bitrix:news",
     "catalog_new_2",
     array(
