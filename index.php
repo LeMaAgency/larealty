@@ -157,4 +157,46 @@ $APPLICATION->SetTitle("Главная");
 );?>
     </div>
 </section>
+
+<section class="help">
+    <div class="container">
+        <div class="help-form">
+            <form action="<?= SITE_DIR; ?>ajax/feedback-form.php" class="js-feedback-form" method="POST">
+                <h2 class="section-h2">
+                    Затрудняетесь с выбором?
+                </h2>
+                <div class="subtitle">
+                    Эксперты Knight Frank сэкономят ваше время и подберут оптимальные варианты недвижимости
+                </div>
+                <div class="form-row">
+                    <div class="it-block">
+                        <input type="text" placeholder="Имя *" name="name" required>
+                        <div class="it-error"></div>
+                    </div>
+                    <div class="it-block">
+                        <input type="text" placeholder="Телефон *" name="phone" required>
+                        <div class="it-error"></div>
+                    </div>
+                    <div class="it-block">
+                        <input type="text" placeholder="E-mail *" name="email" required>
+                        <div class="it-error"></div>
+                    </div>
+                </div>
+                <div class="it-block">
+                    <textarea placeholder="Расскажите о своих пожеланиях" name="comment"></textarea>
+                    <div class="it-error"></div>
+                </div>
+                <div class="help-consent">
+                    Нажимая на кнопку «Отправить», Вы даете согласие на обработку персональных данных<br>
+                    в соответствии с <a href="#">«Положением об обработке персональных данных»</a>
+                </div>
+                <div class="help-btn">
+                    <button class="hover-black">
+                        Отправить заявку
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
