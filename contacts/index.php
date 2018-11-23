@@ -15,7 +15,7 @@ $APPLICATION->SetTitle("Контакты");
             <? $APPLICATION->IncludeFile(SITE_DIR . 'include/contacts/text.php'); ?>
         </p>
         <div class="help-form">
-            <form action="<?= SITE_DIR; ?>ajax/feedback-form.php" class="js-feedback-form" method="POST">
+            <form action="<?= SITE_DIR; ?>ajax/contacts.php" class="js-contacts-form" method="POST">
                 <h2 class="section-h2">
                     Остались вопросы?
                 </h2>
