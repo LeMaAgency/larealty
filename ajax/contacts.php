@@ -20,16 +20,14 @@ $form = new \Lema\Forms\AjaxForm(
 //check form fields
 if ($form->validate()) {
     $status = $form->formActionFull(
-        \LIblock::getId('assign_view'),
+        \LIblock::getId('contacts_form'),
         array(
             'NAME' => $form->getField('name'),
             'PROPERTY_VALUES' => array(
                 'PHONE' => $form->getField('phone'),
-                'OBJECT_LINK' => $form->getField('id'),
-                'OFFER_LINK' => $form->getField('offer-id'),
             ),
         ),
-        'ASSIGN_VIEW_NEW',
+        'CONTACTS_FORM_NEW',
         array(
             'NAME' => $form->getField('name'),
             'PHONE' => $form->getField('phone'),

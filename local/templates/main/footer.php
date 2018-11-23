@@ -228,6 +228,42 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
             <? $APPLICATION->IncludeFile(SITE_DIR . 'include/footer/bottom-text.php'); ?>
         </div>
     </div>
+    <div id="order-call-form" style="display: none;">
+        <section class="catalog-text assign-view-form">
+            <div class="container bhelp">
+                <div class="help-form">
+                    <form method="post" class="ajax-form js-assign-view-form" action="<?= SITE_DIR ?>ajax/order-call.php">
+                        <h2 class="section-h2">
+                            Заказать звонок
+                        </h2>
+                        <div class="form-row">
+                            <div class="it-block">
+                                <input required type="text" name="name" placeholder="Имя *" class="">
+                                <div class="it-error"></div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="it-block">
+                                <input required type="text" name="phone" placeholder="Телефон *" class="">
+                                <div class="it-error"></div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="id" value="">
+                        <input type="hidden" name="offer-id" value="">
+                        <div class="help-consent">
+                            Нажимая на кнопку «Отправить», Вы даете согласие на обработку персональных данных<br>
+                            в соответствии с <a href="#">«Положением об обработке персональных данных»</a>
+                        </div>
+                        <div class="help-btn">
+                            <button class="hover-black">
+                                Отправить
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
 </footer>
 </body>
 </html>

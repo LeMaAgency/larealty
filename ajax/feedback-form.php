@@ -31,7 +31,7 @@ if($form->validate()){
                 'EMAIL' => $form->getField('email'),
             ),
         ),
-        'REALTOR_CALL_WAIT',
+        'FEEDBACK_FORM_NEW',
         array(
             'NAME' => $form->getField('name'),
             'PHONE' => $form->getField('phone'),

@@ -463,7 +463,7 @@ $this->setFrameMode(true);
                         <div class="help-form">
                             <form method="post" class="ajax-form js-assign-view-form" action="<?= SITE_DIR ?>ajax/assign-view.php">
                                 <h2 class="section-h2">
-                                    Заказать звонок
+                                    Назначить просмотр
                                 </h2>
                                 <div class="form-row">
                                     <div class="it-block">
