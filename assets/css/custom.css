@@ -28,7 +28,9 @@
     width: 100%;
     text-align: center;
 }
-
+.bhelp h1{
+    margin-bottom: 25px;
+}
 @media (max-width: 767px) {
     .nav-dots {
         width: 20px !important;
