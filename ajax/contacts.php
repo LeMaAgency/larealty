@@ -13,6 +13,8 @@ $form = new \Lema\Forms\AjaxForm(
         array('name', 'required', array('message' => 'Имя обязательно к заполнению')),
         array('phone', 'required', array('message' => 'Телефон обязателен к заполнению')),
         array('phone', 'phone', array('message' => 'Телефон должен быть в формате +7 (999) 666-33-11')),
+        array('email', 'required', array('message' => 'Email обязателен к заполнению')),
+        array('email', 'email', array('message' => 'Email неверного формата')),
     ),
     $_POST
 );
@@ -23,14 +25,18 @@ if ($form->validate()) {
         \LIblock::getId('contacts_form'),
         array(
             'NAME' => $form->getField('name'),
+            'PREVIEW_TEXT' => $form->getField('comment'),
             'PROPERTY_VALUES' => array(
-                'PHONE' => $form->getField('phone'),
+                'PHONE'=>$form->getField('phone'),
+                'EMAIL' => $form->getField('email'),
             ),
         ),
         'CONTACTS_FORM_NEW',
         array(
             'NAME' => $form->getField('name'),
             'PHONE' => $form->getField('phone'),
+            'EMAIL' => $form->getField('email'),
+            'COMMENT' => $form->getField('comment'),
         )
     );
 
