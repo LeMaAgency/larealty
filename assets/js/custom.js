@@ -80,4 +80,17 @@ $(function () {
        });
        $(this).hide();
     });
+
+    $(document).off('click', '.button-list div').on('click', '.button-list div', function (e) {
+        var value = $(this).data('value');
+        $(this).closest('.filter-row').find('select.js-realty-type option').each(function (i,elem) {
+            if($(elem).val() == value){
+                $(elem).attr("selected",true);
+            }else{
+                $(elem).attr("selected",false);
+            }
+            console.log($(elem),$(elem).val(),value,$(elem).val() == value);
+        });
+    });
+
 });
