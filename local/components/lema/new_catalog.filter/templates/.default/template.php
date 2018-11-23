@@ -12,6 +12,12 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 
+$realtyTypeId = \LIblock::getPropId("objects", 'REALTY_TYPE');
+$priceId = \LIblock::getPropId("objects", 'PRICE');
+$cityId = \LIblock::getPropId("objects", 'CITY');
+$squareId = \LIblock::getPropId("objects", 'SQUARE');
+$bedroomId = \LIblock::getPropId("objects", 'BEDROOM');
+
 ?>
 <form name="<? echo $arResult["FILTER_NAME"] . "_form" ?>" action="<? echo $arResult["FORM_ACTION"] ?>" method="get">
     <? foreach ($arResult["ITEMS"] as $arItem):
@@ -43,16 +49,17 @@ $this->setFrameMode(true);
                             <? } ?>
                         </select>
                     <? } */?>
-                    <? if (isset($arResult['ITEMS']['PROPERTY_1'])) { ?>
-                        <select name="<?= $arResult['ITEMS']['PROPERTY_1']['INPUT_NAME']; ?>" class="btn-select dn js-realty-type">
-                            <? foreach ($arResult['ITEMS']['PROPERTY_1']['LIST'] as $key => $realtyType) { ?>
+                    <?
+                    if (isset($arResult['ITEMS']['PROPERTY_'.$realtyTypeId])) { ?>
+                        <select name="<?= $arResult['ITEMS']['PROPERTY_'.$realtyTypeId]['INPUT_NAME']; ?>" class="btn-select dn js-realty-type">
+                            <? foreach ($arResult['ITEMS']['PROPERTY_'.$realtyTypeId]['LIST'] as $key => $realtyType) { ?>
                                 <? if (empty($key)) {
                                     ?>
-                                    <option value="" style="display: none;"  <? if ($arResult['ITEMS']['PROPERTY_1']['INPUT_VALUE'] == $key){ ?>selected<? } ?>>
+                                    <option value="" style="display: none;"  <? if ($arResult['ITEMS']['PROPERTY_'.$realtyTypeId]['INPUT_VALUE'] == $key){ ?>selected<? } ?>>
                                     </option>
                                     <?
                                 } ?>
-                                <option value="<?= $key; ?>" <? if ($arResult['ITEMS']['PROPERTY_1']['INPUT_VALUE'] == $key){ ?>selected<? } ?>>
+                                <option value="<?= $key; ?>" <? if ($arResult['ITEMS']['PROPERTY_'.$realtyTypeId]['INPUT_VALUE'] == $key){ ?>selected<? } ?>>
                                     <?= $realtyType; ?>
                                 </option>
                             <? } ?>
@@ -60,12 +67,12 @@ $this->setFrameMode(true);
                         <div class="button-list">
                             <?
                             $i = 0;
-                            foreach ($arResult['ITEMS']['PROPERTY_1']['LIST'] as $key => $realtyType) { ?>
+                            foreach ($arResult['ITEMS']['PROPERTY_'.$realtyTypeId]['LIST'] as $key => $realtyType) { ?>
                                 <? if (!$i) {
                                     $i++;
                                     continue;
                                 } ?>
-                                <div class="btn-item<?= $i++; ?>  <? if ($arResult['ITEMS']['PROPERTY_1']['INPUT_VALUE'] == $key){ ?>btn__item--active<? } ?>" data-value="<?=$key;?>">
+                                <div class="btn-item<?= $i++; ?>  <? if ($arResult['ITEMS']['PROPERTY_'.$realtyTypeId]['INPUT_VALUE'] == $key){ ?>btn__item--active<? } ?>" data-value="<?=$key;?>">
                                     <?= $realtyType; ?>
                                 </div>
                             <? } ?>
@@ -80,41 +87,44 @@ $this->setFrameMode(true);
                         <div class="currency-item4"></div>
                         <div class="currency-item5"></div>
                     </div>-->
-                    <? if (isset($arResult['ITEMS']['PROPERTY_3'])) { ?>
+                    <?
+                    $priceId = \LIblock::getPropId("objects", 'PRICE');
+                    if (isset($arResult['ITEMS']['PROPERTY_'.$priceId])) { ?>
                         <div class="price-input">
-                            <input type="text" name="<?= $arResult['ITEMS']['PROPERTY_3']['INPUT_NAMES'][0]; ?>"
-                                   value="<?= $arResult['ITEMS']['PROPERTY_3']['INPUT_VALUES'][0]; ?>" class="price-min price"
+                            <input type="text" name="<?= $arResult['ITEMS']['PROPERTY_'.$priceId]['INPUT_NAMES'][0]; ?>"
+                                   value="<?= $arResult['ITEMS']['PROPERTY_'.$priceId]['INPUT_VALUES'][0]; ?>" class="price-min price"
                                    placeholder="Цена от">
                             <img src="/assets/img/line.png" alt="">
-                            <input type="text" name="<?= $arResult['ITEMS']['PROPERTY_3']['INPUT_NAMES'][1]; ?>"
-                                   value="<?= $arResult['ITEMS']['PROPERTY_3']['INPUT_VALUES'][1]; ?>" class="price-max price"
+                            <input type="text" name="<?= $arResult['ITEMS']['PROPERTY_'.$priceId]['INPUT_NAMES'][1]; ?>"
+                                   value="<?= $arResult['ITEMS']['PROPERTY_'.$priceId]['INPUT_VALUES'][1]; ?>" class="price-max price"
                                    placeholder="Цена до">
                         </div>
                     <? } ?>
 
-                    <? if (isset($arResult['ITEMS']['PROPERTY_4'])) { ?>
-                        <input type="text" name="<?= $arResult['ITEMS']['PROPERTY_4']['INPUT_NAME']; ?>" value="<?=$arResult['ITEMS']['PROPERTY_4']['INPUT_VALUE'];?>" class="filter-area" placeholder="Площадь">
+                    <?
+                    if (isset($arResult['ITEMS']['PROPERTY_'.$squareId])) { ?>
+                        <input type="text" name="<?= $arResult['ITEMS']['PROPERTY_'.$squareId]['INPUT_NAME']; ?>" value="<?=$arResult['ITEMS']['PROPERTY_'.$squareId]['INPUT_VALUE'];?>" class="filter-area" placeholder="Площадь">
                     <? } ?>
 
-                    <? if (isset($arResult['ITEMS']['PROPERTY_347'])) { ?>
-                        <select name="<?= $arResult['ITEMS']['PROPERTY_347']['INPUT_NAME']; ?>" class="beds-filter">
+                    <? if (isset($arResult['ITEMS']['PROPERTY_'.$bedroomId])) { ?>
+                        <select name="<?= $arResult['ITEMS']['PROPERTY_'.$bedroomId]['INPUT_NAME']; ?>" class="beds-filter">
                             <option value="">
                                 Спальни
                             </option>
                             <? for ($i = 1; $i <= 5; $i++) { ?>
-                                <option value="<?= $i; ?>" <? if ($arResult['ITEMS']['PROPERTY_347']['INPUT_VALUE'] == $i){ ?>selected<? } ?>>
+                                <option value="<?= $i; ?>" <? if ($arResult['ITEMS']['PROPERTY_'.$bedroomId]['INPUT_VALUE'] == $i){ ?>selected<? } ?>>
                                     <?= $i; ?>
                                 </option>
                             <? } ?>
                         </select>
                     <? } ?>
 
-                    <? if (isset($arResult['ITEMS']['PROPERTY_29'])) { ?>
-                        <select name="<?= $arResult['ITEMS']['PROPERTY_29']['INPUT_NAME']; ?>" class="city-filter">
-                            <? foreach ($arResult['ITEMS']['PROPERTY_29']['LIST'] as $key => $city) { ?>
-                                <option value="<?= $key; ?>" <? if ($arResult['ITEMS']['PROPERTY_29']['INPUT_VALUE'] == $key){ ?>selected<? } ?>>
+                    <? if (isset($arResult['ITEMS']['PROPERTY_'.$cityId])) { ?>
+                        <select name="<?= $arResult['ITEMS']['PROPERTY_'.$cityId]['INPUT_NAME']; ?>" class="city-filter">
+                            <? foreach ($arResult['ITEMS']['PROPERTY_'.$cityId]['LIST'] as $key => $city) { ?>
+                                <option value="<?= $key; ?>" <? if ($arResult['ITEMS']['PROPERTY_'.$cityId]['INPUT_VALUE'] == $key){ ?>selected<? } ?>>
                                     <? if (empty($key)) { ?>
-                                        <?= $arResult['ITEMS']['PROPERTY_29']['NAME']; ?>
+                                        <?= $arResult['ITEMS']['PROPERTY_'.$cityId]['NAME']; ?>
                                     <? } else { ?>
                                         <?= $city; ?>
                                     <? } ?>
