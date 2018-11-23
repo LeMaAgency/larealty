@@ -140,10 +140,10 @@ if (!empty($arResult['ITEMS'])) {
                             </a>
                         </div>
                     </div>
-                    <a class="favorite-catalog"
+                    <!--<a class="favorite-catalog"
                        href="#">
                         <img src="/assets/img/favorite.png" alt="">
-                    </a>
+                    </a>-->
                 </div>
             </div>
         </div>

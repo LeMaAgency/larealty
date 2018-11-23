@@ -23,7 +23,7 @@ $isOffer = false;
 if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
     $isOffer = true;
     $item = new \Lema\Template\Item($arResult['OFFERS'][$_GET['offerId']]);
-} else {
+} elseif(!empty($arResult['OFFERS'])){
     $offer = new \Lema\Template\Item(current($arResult['OFFERS']));
 }
 
