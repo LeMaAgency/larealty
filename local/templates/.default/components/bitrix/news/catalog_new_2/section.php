@@ -15,27 +15,9 @@ $this->setFrameMode(true);
 use \Bitrix\Main\Localization\Loc;
 
 Loc::loadMessages(__FILE__);
-$countElements = '0';
-$res = \CIblockElement::getList(
-    array(),
-    array(
-        'IBLOCK_ID' => $arParams['IBLOCK_ID'],
-        '=SECTION_CODE' => $arResult['VARIABLES']['SECTION_CODE'],
-        'INCLUDE_SUBSECTIONS' => 'Y',
-        'ACTIVE' => 'Y',
-    ),
-    false,
-    false,
-    array(
-        'ID'
-    )
-);
-while ($ar_res = $res->Fetch()) {
-    $countElements++;
-}
 ?>
 
-<?$APPLICATION->IncludeComponent(
+<? $APPLICATION->IncludeComponent(
     "bitrix:news.list",
     "statistic",
     Array(
@@ -132,11 +114,39 @@ while ($ar_res = $res->Fetch()) {
         $component
     );
     ?>
-    <br/>
 <? endif ?>
-<?if(!empty($_REQUEST['region'])){
+<?
+$arFilter =array(
+    'IBLOCK_ID' => $arParams['IBLOCK_ID'],
+    '=SECTION_CODE' => $arResult['VARIABLES']['SECTION_CODE'],
+    'INCLUDE_SUBSECTIONS' => 'Y',
+    'ACTIVE' => 'Y',
+);
+if(!empty($GLOBALS['arrFilter']['ID'])){
+    $arFilter['ID'] = $GLOBALS['arrFilter']['ID'];
+}elseif (!empty($GLOBALS['arrFilter']['PROPERTY'])) {
+    foreach ($GLOBALS['arrFilter']['PROPERTY'] as $prop => $val) {
+        $strProp = preg_replace("/[^a-zA-ZА-Яа-я0-9\s]/","",$prop);
+        $arFilter[str_replace($strProp,'PROPERTY_'.$strProp,$prop)] = $val;
+    }
+}
+$countElements = '0';
+$res = \CIblockElement::getList(
+    array(),
+    $arFilter,
+    false,
+    false,
+    array(
+        'ID'
+    )
+);
+while ($ar_res = $res->Fetch()) {
+    $countElements++;
+}
+?>
+<? if (!empty($_REQUEST['region'])) {
     $GLOBALS['arrFilter']['PROPERTY']['REGION'] = $_REQUEST['region'];
-};?>
+}; ?>
 <section class="catalog">
     <div class="container">
         <!-- Сортировка -->
@@ -159,23 +169,19 @@ while ($ar_res = $res->Fetch()) {
                 </select>-->
                 <div>
                     <div class="sort-list_count js-sort">
-                        <div class="sort-btn"
-                            <?= selected('count', '24'); ?>
+                        <div class="sort-btn <? if (!!selected('count', '24')) { ?>sort-list_count-active<? } ?>"
                              data-url="<?= $APPLICATION->GetCurPageParam('count=24', array('count')); ?>">
                             24
                         </div>
-                        <div class="sort-btn"
-                            <?= selected('count', '36'); ?>
+                        <div class="sort-btn <? if (!!selected('count', '36')) { ?>sort-list_count-active<? } ?>"
                              data-url="<?= $APPLICATION->GetCurPageParam('count=36', array('count')); ?>">
                             36
                         </div>
-                        <div class="sort-btn"
-                            <?= selected('count', '48'); ?>
+                        <div class="sort-btn <? if (!!selected('count', '48')) { ?>sort-list_count-active<? } ?>"
                              data-url="<?= $APPLICATION->GetCurPageParam('count=48', array('count')); ?>">
                             48
                         </div>
-                        <div class="sort-btn"
-                            <?= selected('count', '60'); ?>
+                        <div class="sort-btn <? if (!!selected('count', '60')) { ?>sort-list_count-active<? } ?>"
                              data-url="<?= $APPLICATION->GetCurPageParam('count=60', array('count')); ?>">
                             60
                         </div>

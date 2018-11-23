@@ -24,7 +24,7 @@ $this->setFrameMode(true);
             <div class="filter-list">
                 <div class="filter-row">
 
-                    <input type="text" class="input-search" name="arrFilter[SEARCH]" value="<?=!empty($_REQUEST['arrFilter_pf']['SEARCH'])?$_REQUEST['arrFilter_pf']['SEARCH']:'';?>" placeholder="Город или ID">
+                    <input type="text" class="input-search" name="arrFilter[SEARCH]" value="<?=!empty($_REQUEST['arrFilter']['SEARCH'])?$_REQUEST['arrFilter']['SEARCH']:'';?>" placeholder="Город или ID">
 
                     <!--Здесь могла быть Ваша страна-->
                     <?/* if (isset($arResult['ITEMS']['PROPERTY_1'])) { ?>
