@@ -116,7 +116,7 @@ while ($ar_res = $res->Fetch()) {
 <? endif ?>
 <? if ($arParams["USE_FILTER"] == "Y"): ?>
     <? $APPLICATION->IncludeComponent(
-        "bitrix:catalog.filter",
+        "lema:new_catalog.filter",
         "",
         Array(
             "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
@@ -134,67 +134,6 @@ while ($ar_res = $res->Fetch()) {
     ?>
     <br/>
 <? endif ?>
-<!--<div class="catalog-filter">
-    <div class="container">
-        <div class="filter-list">
-            <div class="filter-row">
-                <input type="text" class="input-search" placeholder="Страна, город или ID">
-                <select name="country" class="country-select">
-                    <option value="1">Все страны</option>
-                </select>
-                <select name="btn" class="btn-select dn">
-                    <option value="1">Вилла</option>
-                    <option value="1">Пентхаус</option>
-                    <option value="1">Таунхаус</option>
-                    <option value="1">Квартира</option>
-                    <option value="1">Участок</option>
-                </select>
-                <div class="button-list">
-                    <div class="btn-item1">Вилла</div>
-                    <div class="btn-item2">Пентхаус</div>
-                    <div class="btn-item3">Таунхаус</div>
-                    <div class="btn-item4">Квартира</div>
-                    <div class="btn-item5">Участок</div>
-                </div>
-            </div>
-            <div class="filter-row">
-                <div class="button-currency">
-                    <div class="currency-item1"></div>
-                    <div class="currency-item2"></div>
-                    <div class="currency-item3"></div>
-                    <div class="currency-item4"></div>
-                    <div class="currency-item5"></div>
-                </div>
-                <div class="price-input"><input type="text" class="price-min price" placeholder="Цена от"><img src="/assets/img/line.png" alt="">
-                    <input type="text" class="price-max price" placeholder="Цена до"></div>
-                <input type="text" class="filter-area" placeholder="Площадь">
-                <select name="beds" class="beds-filter">
-                    <option value="Спальни">Спальни</option>
-                </select>
-                <select name="city" class="city-filter">
-                    <option value="Город">Город</option>
-                </select>
-                <select name="ready" class="ready-filter tablet">
-                    <option value="Готовность">Готовность</option>
-                </select>
-            </div>
-            <div class="filter-row">
-                <div>
-                    <select name="ready" class="ready-filter pc">
-                        <option value="Готовность">Готовность</option>
-                    </select>
-                    <select name="view" class="view-filter">
-                        <option value="Вид">Вид</option>
-                    </select>
-                    <select name="infrastructure" class="infrastructure-filter">
-                        <option value="Инфраструктура">Инфраструктура</option>
-                    </select>
-                </div>
-                <button class="filter-button">Показать <span>(1 156)</span></button>
-            </div>
-        </div>
-    </div>
-</div>-->
 <?if(!empty($_REQUEST['region'])){
     $GLOBALS['arrFilter']['PROPERTY']['REGION'] = $_REQUEST['region'];
 };?>
