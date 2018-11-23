@@ -82,7 +82,7 @@ global $APPLICATION;
                         <? $APPLICATION->IncludeFile(SITE_DIR . 'include/header/phone.php'); ?>
                     </div>
                     <div class="header-callback">
-                        <a class="hlink" href="#">
+                        <a class="hlink js-order-call" href="#">
                             <? $APPLICATION->IncludeFile(SITE_DIR . 'include/header/phone-text.php'); ?>
                         </a>
                     </div>
@@ -135,7 +135,7 @@ global $APPLICATION;
                     <? $APPLICATION->IncludeFile(SITE_DIR . 'include/header/phone.php'); ?>
                 </div>
                 <div class="header-callback">
-                    <a class="hlink" href="#">
+                    <a class="hlink js-order-call" href="#">
                         <? $APPLICATION->IncludeFile(SITE_DIR . 'include/header/phone-text.php'); ?>
                     </a>
                 </div>

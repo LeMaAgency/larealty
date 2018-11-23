@@ -167,7 +167,7 @@ $this->setFrameMode(true);
             ); ?>
         <? endif ?>
 
-        <section class="popularoffer">
+        <!--<section class="popularoffer">
             <div class="container">
                 <h2>Популярные объекты</h2>
                 <div class="offer-tabs">
@@ -179,7 +179,7 @@ $this->setFrameMode(true);
                     <div class="content">
                         <div class="tab-cont active">
                             <div class="newoffer-slider">
-                                <?
+                                <?/*
                                 $GLOBALS['arPopularFilterAll'] = array('=PROPERTY_POPULAR_VALUE' => 'Y');
                                 $APPLICATION->IncludeComponent(
                                     "bitrix:news.list",
@@ -240,12 +240,12 @@ $this->setFrameMode(true);
                                         "IBLOCK_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["news"],
                                     ),
                                     $component
-                                ); ?>
+                                ); */?>
                             </div>
                         </div>
                         <div class="tab-cont">
                             <div class="newoffer-slider">
-                                <?
+                                <?/*
                                 $GLOBALS['arPopularFilterHome'] = array(
                                     '=PROPERTY_POPULAR_VALUE' => 'Y',
                                     '=PROPERTY_CML2_LINK_VALUE' => $GLOBALS['THIS_ELEM_ID']
@@ -310,12 +310,12 @@ $this->setFrameMode(true);
                                         "IBLOCK_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["news"],
                                     ),
                                     $component
-                                ); ?>
+                                ); */?>
                             </div>
                         </div>
                         <div class="tab-cont">
                             <div class="newoffer-slider">
-                                <?
+                                <?/*
                                 $GLOBALS['arPopularFilterRegion'] = array(
                                     '=PROPERTY_POPULAR_VALUE' => 'Y',
                                     '=PROPERTY_REGION_VALUE' => $GLOBALS['REGION_ELEM_VALUE'],
@@ -380,13 +380,13 @@ $this->setFrameMode(true);
                                         "IBLOCK_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["news"],
                                     ),
                                     $component
-                                ); ?>
+                                ); */?>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </section>-->
 
         <section class="catalog-text">
             <div class="container bhelp">
@@ -463,7 +463,7 @@ $this->setFrameMode(true);
                         <div class="help-form">
                             <form method="post" class="ajax-form js-assign-view-form" action="<?= SITE_DIR ?>ajax/assign-view.php">
                                 <h2 class="section-h2">
-                                    Заказать звонок
+                                    Назначить просмотр
                                 </h2>
                                 <div class="form-row">
                                     <div class="it-block">
