@@ -30,7 +30,7 @@ $aMenuLinks = Array(
 	),
 	Array(
 		"Аналитика, Консалтинг, Оценка недвижимости", 
-		"#", 
+		"/consult/", 
 		Array(), 
 		Array(), 
 		"" 
