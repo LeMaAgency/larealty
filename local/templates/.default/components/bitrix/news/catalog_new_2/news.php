@@ -15,22 +15,6 @@ use \Bitrix\Main\Localization\Loc;
 
 Loc::loadMessages(__FILE__);
 
-$countElements = '0';
-$res = \CIblockElement::getList(
-    array(),
-    array(
-        'IBLOCK_ID' => $arParams['IBLOCK_ID'],
-        'ACTIVE' => 'Y',
-    ),
-    false,
-    false,
-    array(
-        'ID'
-    )
-);
-while ($ar_res = $res->Fetch()) {
-    $countElements++;
-}
 ?>
 
 <?if($arParams["USE_RSS"]=="Y"):?>
@@ -52,26 +36,52 @@ while ($ar_res = $res->Fetch()) {
 );?>
 <br />
 <?endif?>
-<?if($arParams["USE_FILTER"]=="Y"):?>
-<?$APPLICATION->IncludeComponent(
-	"bitrix:catalog.filter",
-	"",
-	Array(
-		"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
-		"IBLOCK_ID" => $arParams["IBLOCK_ID"],
-		"FILTER_NAME" => $arParams["FILTER_NAME"],
-		"FIELD_CODE" => $arParams["FILTER_FIELD_CODE"],
-		"PROPERTY_CODE" => $arParams["FILTER_PROPERTY_CODE"],
-		"CACHE_TYPE" => $arParams["CACHE_TYPE"],
-		"CACHE_TIME" => $arParams["CACHE_TIME"],
-		"CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
-		"PAGER_PARAMS_NAME" => $arParams["PAGER_PARAMS_NAME"],
-	),
-	$component
+<? if ($arParams["USE_FILTER"] == "Y"): ?>
+    <? $APPLICATION->IncludeComponent(
+        "lema:new_catalog.filter",
+        "",
+        Array(
+            "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
+            "IBLOCK_ID" => $arParams["IBLOCK_ID"],
+            "FILTER_NAME" => 'arrFilter',
+            "FIELD_CODE" => $arParams["FILTER_FIELD_CODE"],
+            "PROPERTY_CODE" => $arParams["FILTER_PROPERTY_CODE"],
+            "CACHE_TYPE" => $arParams["CACHE_TYPE"],
+            "CACHE_TIME" => $arParams["CACHE_TIME"],
+            "CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
+            "PAGER_PARAMS_NAME" => $arParams["PAGER_PARAMS_NAME"],
+        ),
+        $component
+    );
+    ?>
+<? endif ?>
+<?
+$arFilter =array(
+    'IBLOCK_ID' => $arParams['IBLOCK_ID'],
+    'ACTIVE' => 'Y',
 );
+if(!empty($GLOBALS['arrFilter']['ID'])){
+    $arFilter['ID'] = $GLOBALS['arrFilter']['ID'];
+}elseif (!empty($GLOBALS['arrFilter']['PROPERTY'])) {
+    foreach ($GLOBALS['arrFilter']['PROPERTY'] as $prop => $val) {
+        $strProp = preg_replace("/[^a-zA-ZА-Яа-я0-9\s]/","",$prop);
+        $arFilter[str_replace($strProp,'PROPERTY_'.$strProp,$prop)] = $val;
+    }
+}
+$countElements = '0';
+$res = \CIblockElement::getList(
+    array(),
+    $arFilter,
+    false,
+    false,
+    array(
+        'ID'
+    )
+);
+while ($ar_res = $res->Fetch()) {
+    $countElements++;
+}
 ?>
-<br />
-<?endif?>
 <section class="catalog">
     <div class="container">
         <!-- Сортировка -->
@@ -94,23 +104,19 @@ while ($ar_res = $res->Fetch()) {
                 </select>-->
                 <div>
                     <div class="sort-list_count js-sort">
-                        <div class="sort-btn"
-                            <?= selected('count', '24'); ?>
+                        <div class="sort-btn <? if (!!selected('count', '24')) { ?>sort-list_count-active<? } ?>"
                              data-url="<?= $APPLICATION->GetCurPageParam('count=24', array('count')); ?>">
                             24
                         </div>
-                        <div class="sort-btn"
-                            <?= selected('count', '36'); ?>
+                        <div class="sort-btn <? if (!!selected('count', '36')) { ?>sort-list_count-active<? } ?>"
                              data-url="<?= $APPLICATION->GetCurPageParam('count=36', array('count')); ?>">
                             36
                         </div>
-                        <div class="sort-btn"
-                            <?= selected('count', '48'); ?>
+                        <div class="sort-btn <? if (!!selected('count', '48')) { ?>sort-list_count-active<? } ?>"
                              data-url="<?= $APPLICATION->GetCurPageParam('count=48', array('count')); ?>">
                             48
                         </div>
-                        <div class="sort-btn"
-                            <?= selected('count', '60'); ?>
+                        <div class="sort-btn <? if (!!selected('count', '60')) { ?>sort-list_count-active<? } ?>"
                              data-url="<?= $APPLICATION->GetCurPageParam('count=60', array('count')); ?>">
                             60
                         </div>
