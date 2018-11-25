@@ -17,12 +17,6 @@ $this->setFrameMode(true);
     <div class="container">
         <div class="main-form">
             <form name="<? echo $arResult["FILTER_NAME"] . "_form" ?>" action="<?= SITE_DIR; ?>catalog/" method="get">
-                <? foreach ($arResult["ITEMS"] as $arItem):
-                    if (array_key_exists("HIDDEN", $arItem)):
-                        echo $arItem["INPUT"];
-                    endif;
-                endforeach; ?>
-
                 <div class="form-row">
                     <? if (!empty($arResult['SECTIONS'])) { ?>
                         <select name="<?=$arResult['FILTER_NAME'];?>[SECTION]" class="type-select form-select js-select-sections">
@@ -69,6 +63,11 @@ $this->setFrameMode(true);
                         Показать
                         <!-- <span>(1 156)</span>-->
                     </button>
+                    <? foreach ($arResult["ITEMS"] as $arItem):
+                        if (array_key_exists("HIDDEN", $arItem)):
+                            echo $arItem["INPUT"];
+                        endif;
+                    endforeach; ?>
                 </div>
 
             </form>

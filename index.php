@@ -22,7 +22,7 @@ $APPLICATION->SetTitle("Главная");
         "TEXT_WIDTH" => "20"
     )
 );?>
-<section class="realties">
+<!--<section class="realties">
     <div class="container">
         <h2 class="section-h2">Все виды недвижимости</h2>
         <div class="row">
@@ -108,7 +108,7 @@ $APPLICATION->SetTitle("Главная");
             <div class="consultation-link"><a href="#">Получить консультацию</a></div>
         </div>-->
     </div>
-</section>
+</section>-->
 <section class="expert">
     <div class="expert-overlay"></div>
     <div class="expert-txt">
