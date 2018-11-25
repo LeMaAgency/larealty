@@ -30,7 +30,7 @@ $bedroomId = \LIblock::getPropId("objects", 'BEDROOM');
             <div class="filter-list">
                 <div class="filter-row">
 
-                    <input type="text" class="input-search" name="arrFilter[SEARCH]" value="<?=!empty($_REQUEST['arrFilter']['SEARCH'])?$_REQUEST['arrFilter']['SEARCH']:'';?>" placeholder="Город или ID">
+                    <input type="text" class="input-search" name="<?=$arResult['FILTER_NAME'];?>[SEARCH]" value="<?=!empty($_REQUEST[$arResult['FILTER_NAME']]['SEARCH'])?$_REQUEST[$arResult['FILTER_NAME']]['SEARCH']:'';?>" placeholder="Город или ID">
 
                     <!--Здесь могла быть Ваша страна-->
                     <?/* if (isset($arResult['ITEMS']['PROPERTY_1'])) { ?>
@@ -148,6 +148,7 @@ $bedroomId = \LIblock::getPropId("objects", 'BEDROOM');
                         <!--<select name="infrastructure" class="infrastructure-filter">
                             <option value="Инфраструктура">Инфраструктура</option>
                         </select>-->
+                        <br>
                     </div>
                     <button type="submit" value="Y" name="set_filter" class="filter-button">
                         Показать

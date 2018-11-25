@@ -14,31 +14,57 @@
     -webkit-box-orient: vertical;
     margin-bottom: 10px;
 }
-.assign-view-form{
+
+.assign-view-form {
     padding: 0px !important;
 }
-.assign-view-form .bhelp{
+
+.assign-view-form .bhelp {
     max-width: 550px !important;
     min-width: 515px !important;
     padding-bottom: 0px !important;
     margin-bottom: 0px !important;
 }
-.assign-view-form .form-row{
+
+.assign-view-form .form-row {
     display: inline-block !important;
     width: 100%;
     text-align: center;
 }
-.bhelp h1{
+
+.bhelp h1 {
     margin-bottom: 25px;
 }
+
 @media (max-width: 767px) {
     .nav-dots {
         width: 20px !important;
     }
-    .help-form .it-block{
+
+    .help-form .it-block {
         width: 100%;
     }
-    .assign-view-form .bhelp{
+
+    .assign-view-form .bhelp {
         min-width: 270px !important;
     }
+
+    .mobile-pagination .pag-list a {
+        width: 35px;
+        height: 35px;
+    }
+
+    /*
+    * Temporarily, until all properties and data are displayed.
+    BEGIN
+    */
+    .filter-row div {
+        display: none;
+    }
+
+    .catalog-sort .sort-list_count {
+        width: 93vw;
+    }
+
+    /*END*/
 }

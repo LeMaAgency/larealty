@@ -134,24 +134,61 @@ foreach ($arDateFields as $id => $arField) {
     $arrODFV[$id] = $arField;
 }
 
+if (isset($_GET[$FILTER_NAME]['MAIN_SEARCH'])) {
+    unset($GLOBALS[$FILTER_NAME]['MAIN_SEARCH']);
+    $mainSearch = $_GET[$FILTER_NAME]['MAIN_SEARCH'];
+    if (is_numeric($mainSearch)) {
+        $GLOBALS[$FILTER_NAME]['ID'] = $mainSearch;
+    } else {
+        $filterAddress = $filterName = array(
+            'ACTIVE' => 'Y',
+            'INCLUDE_SUBSECTIONS' => 'Y'
+        );
+        if (!empty($_GET[$FILTER_NAME]['SECTION'])) {
+            $filterAddress['SECTION_CODE'] = $filterName['SECTION_CODE'] = $_GET[$FILTER_NAME]['SECTION'];
+        }
+        $filterName['NAME'] = "%" . $DB->ForSql($mainSearch) . "%";
+        $name_list = \Lema\IBlock\Element::getAll(
+            LIblock::getId('objects'),
+            array(
+                'filter' => $filterName,
+                'arSelect' => array('ID'),
+            )
+        );
+        if (!empty($name_list)) {
+            $GLOBALS[$FILTER_NAME]['NAME'] = "%" . $DB->ForSql($mainSearch) . "%";
+        } else {
+            $filterAddress['PROPERTY_ADDRESS'] = "%" . $DB->ForSql($mainSearch) . "%";
+            $address_list = \Lema\IBlock\Element::getAll(
+                LIblock::getId('objects'),
+                array(
+                    'filter' => $filterAddress,
+                    'arSelect' => array('ID'),
+                )
+            );
+        }
+        if (!empty($address_list)) {
+            $GLOBALS[$FILTER_NAME]['PROPERTY_ADDRESS'] = "%" . $DB->ForSql($mainSearch) . "%";
+        }
+    }
+}
 
-if (!empty($_REQUEST['arrFilter']['SEARCH'])) {
-    if(isset($GLOBALS['arrFilter']['PROPERTY']['CITY'])){
-        unset($GLOBALS['arrFilter']['PROPERTY']['CITY']);
+if (!empty($_REQUEST[$FILTER_NAME]['SEARCH'])) {
+    if (isset($GLOBALS[$FILTER_NAME]['PROPERTY']['CITY'])) {
+        unset($GLOBALS[$FILTER_NAME]['PROPERTY']['CITY']);
     }
-    if(isset($GLOBALS['arrFilter']['ID'])){
-        unset($GLOBALS['arrFilter']['ID']);
+    if (isset($GLOBALS[$FILTER_NAME]['ID'])) {
+        unset($GLOBALS[$FILTER_NAME]['ID']);
     }
-    $search = $_REQUEST['arrFilter']['SEARCH'];
+    $search = $_REQUEST[$FILTER_NAME]['SEARCH'];
     if (is_numeric($search)) {
-        $_REQUEST['arrFilter_ff']['ID'] = $search;
-        $GLOBALS['arrFilter']['ID'] = $search;
+        $GLOBALS[$FILTER_NAME]['ID'] = $search;
     } else {
         $property_enums = CIBlockPropertyEnum::GetList(Array(), Array("IBLOCK_ID" => LIblock::getId('objects'), "CODE" => "CITY"));
         while ($enum_fields = $property_enums->GetNext()) {
-            if(strtolower($enum_fields["VALUE"]) === strtolower($search)){
+            if (strtolower($enum_fields["VALUE"]) === strtolower($search)) {
                 $_REQUEST['arrFilter_pf']['CITY'] = "";
-                $GLOBALS['arrFilter']['PROPERTY']['CITY'] = $enum_fields["ID"];
+                $GLOBALS[$FILTER_NAME]['PROPERTY']['CITY'] = $enum_fields["ID"];
                 break;
             }
         }
