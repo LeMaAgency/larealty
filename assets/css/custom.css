@@ -35,6 +35,10 @@
 .bhelp h1 {
     margin-bottom: 25px;
 }
+#map-location-flat{
+    width: 100%;
+    height: 600px;
+}
 
 @media (max-width: 767px) {
     .nav-dots {
@@ -64,6 +68,9 @@
 
     .catalog-sort .sort-list_count {
         width: 93vw;
+    }
+    #map-location-flat{
+        max-height: 400px;
     }
 
     /*END*/

@@ -158,3 +158,73 @@ $(function () {
     });
 
 });
+function initMap() {
+
+    var map,
+        myLatLng;
+
+    myLatLng = {
+        lat: 49.938829,
+        lng: 30.697245
+    };
+    if (document.getElementById('map-location-flat') !== null) {
+        var coords = $('#map-location-flat').data('coords'),
+            address = $('#map-location-flat').data('address');
+
+        if (coords && (coords = coords.split(','))) {
+            myLatLng = {
+                lat: parseFloat(coords[0]),
+                lng: parseFloat(coords[1])
+            }
+        }
+        // Create a map object and specify the DOM element for display.
+        map = new google.maps.Map(document.getElementById('map-location-flat'), {
+            center: myLatLng,
+            zoom: 15,
+            zoomControl: false,
+            mapTypeControl: false,
+            scaleControl: false,
+            streetViewControl: false,
+            rotateControl: false,
+            fullscreenControl: false
+        });
+
+        var icons = {
+            newFlat: {
+                name: 'newFlat',
+                /*icon: '/assets/img/icons/map-location-flat.png'*/
+            }
+        };
+
+        var features = [
+            {
+                position: new google.maps.LatLng(myLatLng.lat, myLatLng.lng),
+                type: 'newFlat'
+            }
+        ];
+
+        if(address.length) {
+            var infowindow = new google.maps.InfoWindow({
+                content: address,
+                maxWidth: 200
+            });
+        }
+
+        // Create markers.
+        features.forEach(function (feature) {
+            var marker = new google.maps.Marker({
+                position: feature.position,
+                icon: icons[feature.type].icon,
+                map: map
+            });
+            if(address.length) {
+                marker.addListener('click', function () {
+                    infowindow.open(map, marker);
+                });
+            }
+        });
+
+
+    }
+}
+

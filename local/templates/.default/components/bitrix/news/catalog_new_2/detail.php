@@ -166,227 +166,299 @@ $this->setFrameMode(true);
                 $component
             ); ?>
         <? endif ?>
+        <? $arTempBudgetId = $arTempHomeId = $arTempRegionId = [];
+        $intPriceRange = 1000000;
+        $res = \CIBlockElement::getList(
+            [],
+            [
+                'IBLOCK_ID' => $arParams['IBLOCK_ID'],
+                'ACTIVE' => 'Y',
+                'PROPERTY_POPULAR_VALUE' => 'Y',
+                '!ID' => $GLOBALS['THIS_ELEM_ID'],
+            ],
+            false,
+            false,
+            [
+                'ID',
+                'PROPERTY_REGION',
+                'PROPERTY_PRICE',
+            ]
+        );
+        while ($ar_res = $res->Fetch()) {
+            //По бюджету
+            if ($ar_res['PROPERTY_PRICE_VALUE'] && $GLOBALS['PRICE_ELEM_VALUE']) {
+                $minPrice = (int)$GLOBALS['PRICE_ELEM_VALUE'] - $intPriceRange;
+                $maxPrice = (int)$GLOBALS['PRICE_ELEM_VALUE'] + $intPriceRange;
+                if ((int)$ar_res['PROPERTY_PRICE_VALUE'] >= $minPrice && (int)$ar_res['PROPERTY_PRICE_VALUE'] <= $maxPrice) {
+                    $arTempBudgetId[] = $ar_res['ID'];
+                }
+            }
+            //По региону
+            if (!empty($ar_res['PROPERTY_REGION_VALUE']) && $ar_res['PROPERTY_REGION_VALUE'] == $GLOBALS['REGION_ELEM_VALUE']) {
+                $arTempRegionId[] = $ar_res['ID'];
+            }
+        }
 
-        <!--<section class="popularoffer">
-            <div class="container">
-                <h2>Популярные объекты</h2>
-                <div class="offer-tabs">
-                    <div class="tabs">
-                        <div class="tab active">По бюджету</div>
-                        <div class="tab">В доме</div>
-                        <div class="tab">В районе</div>
-                    </div>
-                    <div class="content">
-                        <div class="tab-cont active">
-                            <div class="newoffer-slider">
-                                <?/*
-                                $GLOBALS['arPopularFilterAll'] = array('=PROPERTY_POPULAR_VALUE' => 'Y');
-                                $APPLICATION->IncludeComponent(
-                                    "bitrix:news.list",
-                                    "detail_page_popular",
-                                    Array(
-                                        "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
-                                        "IBLOCK_ID" => $arParams["IBLOCK_ID"],
-                                        "NEWS_COUNT" => "",
-                                        "SORT_BY1" => "PROPERTY_PRICE",
-                                        "SORT_ORDER1" => "ASC",
-                                        "SORT_BY2" => $arParams["SORT_BY2"],
-                                        "SORT_ORDER2" => $arParams["SORT_ORDER2"],
-                                        "FIELD_CODE" => $arParams["LIST_FIELD_CODE"],
-                                        "PROPERTY_CODE" => $arParams["LIST_PROPERTY_CODE"],
-                                        "DISPLAY_PANEL" => $arParams["DISPLAY_PANEL"],
-                                        "SET_TITLE" => "N",
-                                        "SET_LAST_MODIFIED" => $arParams["SET_LAST_MODIFIED"],
-                                        "MESSAGE_404" => $arParams["MESSAGE_404"],
-                                        "SET_STATUS_404" => $arParams["SET_STATUS_404"],
-                                        "SHOW_404" => $arParams["SHOW_404"],
-                                        "FILE_404" => $arParams["FILE_404"],
-                                        "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-                                        "ADD_SECTIONS_CHAIN" => "N",
-                                        "CACHE_TYPE" => $arParams["CACHE_TYPE"],
-                                        "CACHE_TIME" => $arParams["CACHE_TIME"],
-                                        "CACHE_FILTER" => $arParams["CACHE_FILTER"],
-                                        "CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
-                                        "DISPLAY_TOP_PAGER" => "N",
-                                        "DISPLAY_BOTTOM_PAGER" => "N",
-                                        "SET_TITLE" => "N",
-                                        "SET_BROWSER_TITLE" => "N",
-                                        "PAGER_TITLE" => $arParams["PAGER_TITLE"],
-                                        "PAGER_TEMPLATE" => $arParams["PAGER_TEMPLATE"],
-                                        "PAGER_SHOW_ALWAYS" => "N",
-                                        "PAGER_DESC_NUMBERING" => $arParams["PAGER_DESC_NUMBERING"],
-                                        "PAGER_DESC_NUMBERING_CACHE_TIME" => $arParams["PAGER_DESC_NUMBERING_CACHE_TIME"],
-                                        "PAGER_SHOW_ALL" => $arParams["PAGER_SHOW_ALL"],
-                                        "PAGER_BASE_LINK_ENABLE" => $arParams["PAGER_BASE_LINK_ENABLE"],
-                                        "PAGER_BASE_LINK" => $arParams["PAGER_BASE_LINK"],
-                                        "PAGER_PARAMS_NAME" => $arParams["PAGER_PARAMS_NAME"],
-                                        "DISPLAY_DATE" => $arParams["DISPLAY_DATE"],
-                                        "DISPLAY_NAME" => "Y",
-                                        "DISPLAY_PICTURE" => $arParams["DISPLAY_PICTURE"],
-                                        "DISPLAY_PREVIEW_TEXT" => $arParams["DISPLAY_PREVIEW_TEXT"],
-                                        "PREVIEW_TRUNCATE_LEN" => $arParams["PREVIEW_TRUNCATE_LEN"],
-                                        "ACTIVE_DATE_FORMAT" => $arParams["LIST_ACTIVE_DATE_FORMAT"],
-                                        "USE_PERMISSIONS" => $arParams["USE_PERMISSIONS"],
-                                        "GROUP_PERMISSIONS" => $arParams["GROUP_PERMISSIONS"],
-                                        "FILTER_NAME" => 'arPopularFilterAll',
-                                        "HIDE_LINK_WHEN_NO_DETAIL" => $arParams["HIDE_LINK_WHEN_NO_DETAIL"],
-                                        "CHECK_DATES" => $arParams["CHECK_DATES"],
-                                        "STRICT_SECTION_CHECK" => $arParams["STRICT_SECTION_CHECK"],
 
-                                        "PARENT_SECTION" => '',
-                                        "PARENT_SECTION_CODE" => '',
-                                        "DETAIL_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["detail"],
-                                        "SECTION_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["section"],
-                                        "IBLOCK_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["news"],
-                                    ),
-                                    $component
-                                ); */?>
-                            </div>
+        $resOffer = \CIBlockElement::getList(
+            [],
+            [
+                'IBLOCK_ID' => \LIblock::getId('objects_offers'),
+                'ACTIVE' => 'Y',
+                'PROPERTY_POPULAR_VALUE' => 'Y',
+                'PROPERTY_CML2_LINK' => $GLOBALS['THIS_ELEM_ID'],
+                '!ID' => $GLOBALS['THIS_OFFER_ID'],
+            ],
+            false,
+            false,
+            [
+                'ID',
+                'PROPERTY_CML2_LINK',
+            ]
+        );
+        while ($ar_res_offer = $resOffer->Fetch()) {
+            //По дому
+            $arTempHomeId[] = $ar_res_offer['ID'];
+        }
+
+        ?>
+        <? if (!empty($arTempBudgetId) || !empty($arTempHomeId) || !empty($arTempRegionId)) { ?>
+            <section class="popularoffer">
+                <div class="container">
+                    <h2>Популярные объекты</h2>
+                    <div class="offer-tabs">
+                        <div class="tabs">
+                            <?
+                            if (!empty($arTempBudgetId)) { ?>
+                                <div class="tab active">По бюджету</div>
+                            <? } ?>
+                            <? if (!empty($arTempHomeId)) { ?>
+                                <div class="tab <?if(empty($arTempBudgetId)){?>active<?}?>">В доме</div>
+                            <? } ?>
+                            <? if (!empty($arTempRegionId)) { ?>
+                                <div class="tab <?if(empty($arTempBudgetId) && empty($arTempHomeId)){?>active<?}?>">В районе</div>
+                            <? } ?>
                         </div>
-                        <div class="tab-cont">
-                            <div class="newoffer-slider">
-                                <?/*
-                                $GLOBALS['arPopularFilterHome'] = array(
-                                    '=PROPERTY_POPULAR_VALUE' => 'Y',
-                                    '=PROPERTY_CML2_LINK_VALUE' => $GLOBALS['THIS_ELEM_ID']
-                                );
+                        <div class="content">
 
-                                $APPLICATION->IncludeComponent(
-                                    "bitrix:news.list",
-                                    "detail_page_popular",
-                                    Array(
-                                        "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
-                                        "IBLOCK_ID" => \LIblock::getId('objects_offers'),
-                                        "NEWS_COUNT" => "",
-                                        "SORT_BY1" => $arParams["SORT_BY1"],
-                                        "SORT_ORDER1" => $arParams["SORT_ORDER1"],
-                                        "SORT_BY2" => $arParams["SORT_BY2"],
-                                        "SORT_ORDER2" => $arParams["SORT_ORDER2"],
-                                        "FIELD_CODE" => $arParams["LIST_FIELD_CODE"],
-                                        "PROPERTY_CODE" => $arParams["LIST_PROPERTY_CODE"],
-                                        "DISPLAY_PANEL" => $arParams["DISPLAY_PANEL"],
-                                        "SET_TITLE" => "N",
-                                        "SET_LAST_MODIFIED" => $arParams["SET_LAST_MODIFIED"],
-                                        "MESSAGE_404" => $arParams["MESSAGE_404"],
-                                        "SET_STATUS_404" => $arParams["SET_STATUS_404"],
-                                        "SHOW_404" => $arParams["SHOW_404"],
-                                        "FILE_404" => $arParams["FILE_404"],
-                                        "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-                                        "ADD_SECTIONS_CHAIN" => "N",
-                                        "CACHE_TYPE" => $arParams["CACHE_TYPE"],
-                                        "CACHE_TIME" => $arParams["CACHE_TIME"],
-                                        "CACHE_FILTER" => $arParams["CACHE_FILTER"],
-                                        "CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
-                                        "DISPLAY_TOP_PAGER" => "N",
-                                        "DISPLAY_BOTTOM_PAGER" => "N",
-                                        "SET_TITLE" => "N",
-                                        "SET_BROWSER_TITLE" => "N",
-                                        "PAGER_TITLE" => $arParams["PAGER_TITLE"],
-                                        "PAGER_TEMPLATE" => $arParams["PAGER_TEMPLATE"],
-                                        "PAGER_SHOW_ALWAYS" => "N",
-                                        "PAGER_DESC_NUMBERING" => $arParams["PAGER_DESC_NUMBERING"],
-                                        "PAGER_DESC_NUMBERING_CACHE_TIME" => $arParams["PAGER_DESC_NUMBERING_CACHE_TIME"],
-                                        "PAGER_SHOW_ALL" => $arParams["PAGER_SHOW_ALL"],
-                                        "PAGER_BASE_LINK_ENABLE" => $arParams["PAGER_BASE_LINK_ENABLE"],
-                                        "PAGER_BASE_LINK" => $arParams["PAGER_BASE_LINK"],
-                                        "PAGER_PARAMS_NAME" => $arParams["PAGER_PARAMS_NAME"],
-                                        "DISPLAY_DATE" => $arParams["DISPLAY_DATE"],
-                                        "DISPLAY_NAME" => "Y",
-                                        "DISPLAY_PICTURE" => $arParams["DISPLAY_PICTURE"],
-                                        "DISPLAY_PREVIEW_TEXT" => $arParams["DISPLAY_PREVIEW_TEXT"],
-                                        "PREVIEW_TRUNCATE_LEN" => $arParams["PREVIEW_TRUNCATE_LEN"],
-                                        "ACTIVE_DATE_FORMAT" => $arParams["LIST_ACTIVE_DATE_FORMAT"],
-                                        "USE_PERMISSIONS" => $arParams["USE_PERMISSIONS"],
-                                        "GROUP_PERMISSIONS" => $arParams["GROUP_PERMISSIONS"],
-                                        "FILTER_NAME" => 'arPopularFilterHome',
-                                        "HIDE_LINK_WHEN_NO_DETAIL" => $arParams["HIDE_LINK_WHEN_NO_DETAIL"],
-                                        "CHECK_DATES" => $arParams["CHECK_DATES"],
-                                        "STRICT_SECTION_CHECK" => $arParams["STRICT_SECTION_CHECK"],
+                            <? if (!empty($arTempBudgetId)) { ?>
+                            <div class="tab-cont active">
+                                <div class="newoffer-slider">
+                                    <?
+                                    $GLOBALS['arPopularFilterAll'] = array(
+                                        '=ID' => $arTempBudgetId,
+                                    );
+                                    $APPLICATION->IncludeComponent(
+                                        "bitrix:news.list",
+                                        "detail_page_popular",
+                                        Array(
+                                            "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
+                                            "IBLOCK_ID" => $arParams["IBLOCK_ID"],
+                                            "NEWS_COUNT" => "",
+                                            "SORT_BY1" => "PROPERTY_PRICE",
+                                            "SORT_ORDER1" => "ASC",
+                                            "SORT_BY2" => $arParams["SORT_BY2"],
+                                            "SORT_ORDER2" => $arParams["SORT_ORDER2"],
+                                            "FIELD_CODE" => $arParams["LIST_FIELD_CODE"],
+                                            "PROPERTY_CODE" => $arParams["LIST_PROPERTY_CODE"],
+                                            "DISPLAY_PANEL" => $arParams["DISPLAY_PANEL"],
+                                            "SET_TITLE" => "N",
+                                            "SET_LAST_MODIFIED" => $arParams["SET_LAST_MODIFIED"],
+                                            "MESSAGE_404" => $arParams["MESSAGE_404"],
+                                            "SET_STATUS_404" => $arParams["SET_STATUS_404"],
+                                            "SHOW_404" => $arParams["SHOW_404"],
+                                            "FILE_404" => $arParams["FILE_404"],
+                                            "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+                                            "ADD_SECTIONS_CHAIN" => "N",
+                                            "CACHE_TYPE" => $arParams["CACHE_TYPE"],
+                                            "CACHE_TIME" => $arParams["CACHE_TIME"],
+                                            "CACHE_FILTER" => $arParams["CACHE_FILTER"],
+                                            "CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
+                                            "DISPLAY_TOP_PAGER" => "N",
+                                            "DISPLAY_BOTTOM_PAGER" => "N",
+                                            "SET_TITLE" => "N",
+                                            "SET_BROWSER_TITLE" => "N",
+                                            "PAGER_TITLE" => $arParams["PAGER_TITLE"],
+                                            "PAGER_TEMPLATE" => $arParams["PAGER_TEMPLATE"],
+                                            "PAGER_SHOW_ALWAYS" => "N",
+                                            "PAGER_DESC_NUMBERING" => $arParams["PAGER_DESC_NUMBERING"],
+                                            "PAGER_DESC_NUMBERING_CACHE_TIME" => $arParams["PAGER_DESC_NUMBERING_CACHE_TIME"],
+                                            "PAGER_SHOW_ALL" => $arParams["PAGER_SHOW_ALL"],
+                                            "PAGER_BASE_LINK_ENABLE" => $arParams["PAGER_BASE_LINK_ENABLE"],
+                                            "PAGER_BASE_LINK" => $arParams["PAGER_BASE_LINK"],
+                                            "PAGER_PARAMS_NAME" => $arParams["PAGER_PARAMS_NAME"],
+                                            "DISPLAY_DATE" => $arParams["DISPLAY_DATE"],
+                                            "DISPLAY_NAME" => "Y",
+                                            "DISPLAY_PICTURE" => $arParams["DISPLAY_PICTURE"],
+                                            "DISPLAY_PREVIEW_TEXT" => $arParams["DISPLAY_PREVIEW_TEXT"],
+                                            "PREVIEW_TRUNCATE_LEN" => $arParams["PREVIEW_TRUNCATE_LEN"],
+                                            "ACTIVE_DATE_FORMAT" => $arParams["LIST_ACTIVE_DATE_FORMAT"],
+                                            "USE_PERMISSIONS" => $arParams["USE_PERMISSIONS"],
+                                            "GROUP_PERMISSIONS" => $arParams["GROUP_PERMISSIONS"],
+                                            "FILTER_NAME" => 'arPopularFilterAll',
+                                            "HIDE_LINK_WHEN_NO_DETAIL" => $arParams["HIDE_LINK_WHEN_NO_DETAIL"],
+                                            "CHECK_DATES" => $arParams["CHECK_DATES"],
+                                            "STRICT_SECTION_CHECK" => $arParams["STRICT_SECTION_CHECK"],
 
-                                        "PARENT_SECTION" => '',
-                                        "PARENT_SECTION_CODE" => '',
-                                        "DETAIL_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["detail"],
-                                        "SECTION_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["section"],
-                                        "IBLOCK_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["news"],
-                                    ),
-                                    $component
-                                ); */?>
+                                            "PARENT_SECTION" => '',
+                                            "PARENT_SECTION_CODE" => '',
+                                            "DETAIL_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["detail"],
+                                            "SECTION_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["section"],
+                                            "IBLOCK_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["news"],
+                                        ),
+                                        $component
+                                    ); ?>
+                                </div>
                             </div>
-                        </div>
-                        <div class="tab-cont">
-                            <div class="newoffer-slider">
-                                <?/*
-                                $GLOBALS['arPopularFilterRegion'] = array(
-                                    '=PROPERTY_POPULAR_VALUE' => 'Y',
-                                    '=PROPERTY_REGION_VALUE' => $GLOBALS['REGION_ELEM_VALUE'],
-                                );
-                                $APPLICATION->IncludeComponent(
-                                    "bitrix:news.list",
-                                    "detail_page_popular",
-                                    Array(
-                                        "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
-                                        "IBLOCK_ID" => $arParams["IBLOCK_ID"],
-                                        "NEWS_COUNT" => "",
-                                        "SORT_BY1" => $arParams["SORT_BY1"],
-                                        "SORT_ORDER1" => $arParams["SORT_ORDER1"],
-                                        "SORT_BY2" => $arParams["SORT_BY2"],
-                                        "SORT_ORDER2" => $arParams["SORT_ORDER2"],
-                                        "FIELD_CODE" => $arParams["LIST_FIELD_CODE"],
-                                        "PROPERTY_CODE" => $arParams["LIST_PROPERTY_CODE"],
-                                        "DISPLAY_PANEL" => $arParams["DISPLAY_PANEL"],
-                                        "SET_TITLE" => "N",
-                                        "SET_LAST_MODIFIED" => $arParams["SET_LAST_MODIFIED"],
-                                        "MESSAGE_404" => $arParams["MESSAGE_404"],
-                                        "SET_STATUS_404" => $arParams["SET_STATUS_404"],
-                                        "SHOW_404" => $arParams["SHOW_404"],
-                                        "FILE_404" => $arParams["FILE_404"],
-                                        "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-                                        "CACHE_TYPE" => "N",
-                                        "CACHE_TIME" => $arParams["CACHE_TIME"],
-                                        "CACHE_FILTER" => $arParams["CACHE_FILTER"],
-                                        "CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
-                                        "DISPLAY_TOP_PAGER" => "N",
-                                        "DISPLAY_BOTTOM_PAGER" => "N",
-                                        "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-                                        "ADD_SECTIONS_CHAIN" => "N",
-                                        "SET_TITLE" => "N",
-                                        "SET_BROWSER_TITLE" => "N",
-                                        "PAGER_TITLE" => $arParams["PAGER_TITLE"],
-                                        "PAGER_TEMPLATE" => $arParams["PAGER_TEMPLATE"],
-                                        "PAGER_SHOW_ALWAYS" => "N",
-                                        "PAGER_DESC_NUMBERING" => $arParams["PAGER_DESC_NUMBERING"],
-                                        "PAGER_DESC_NUMBERING_CACHE_TIME" => $arParams["PAGER_DESC_NUMBERING_CACHE_TIME"],
-                                        "PAGER_SHOW_ALL" => $arParams["PAGER_SHOW_ALL"],
-                                        "PAGER_BASE_LINK_ENABLE" => $arParams["PAGER_BASE_LINK_ENABLE"],
-                                        "PAGER_BASE_LINK" => $arParams["PAGER_BASE_LINK"],
-                                        "PAGER_PARAMS_NAME" => $arParams["PAGER_PARAMS_NAME"],
-                                        "DISPLAY_DATE" => $arParams["DISPLAY_DATE"],
-                                        "DISPLAY_NAME" => "Y",
-                                        "DISPLAY_PICTURE" => $arParams["DISPLAY_PICTURE"],
-                                        "DISPLAY_PREVIEW_TEXT" => $arParams["DISPLAY_PREVIEW_TEXT"],
-                                        "PREVIEW_TRUNCATE_LEN" => $arParams["PREVIEW_TRUNCATE_LEN"],
-                                        "ACTIVE_DATE_FORMAT" => $arParams["LIST_ACTIVE_DATE_FORMAT"],
-                                        "USE_PERMISSIONS" => $arParams["USE_PERMISSIONS"],
-                                        "GROUP_PERMISSIONS" => $arParams["GROUP_PERMISSIONS"],
-                                        "FILTER_NAME" => 'arPopularFilterRegion',
-                                        "HIDE_LINK_WHEN_NO_DETAIL" => $arParams["HIDE_LINK_WHEN_NO_DETAIL"],
-                                        "CHECK_DATES" => $arParams["CHECK_DATES"],
-                                        "STRICT_SECTION_CHECK" => $arParams["STRICT_SECTION_CHECK"],
+                            <?}?>
 
-                                        "PARENT_SECTION" => '',
-                                        "PARENT_SECTION_CODE" => '',
-                                        "DETAIL_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["detail"],
-                                        "SECTION_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["section"],
-                                        "IBLOCK_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["news"],
-                                    ),
-                                    $component
-                                ); */?>
+                            <? if (!empty($arTempHomeId)) { ?>
+                            <div class="tab-cont <?if(empty($arTempBudgetId)){?>active<?}?>">
+                                <div class="newoffer-slider">
+                                    <?
+                                    $GLOBALS['arPopularFilterHome'] = array(
+                                        '=ID' => $arTempHomeId,
+                                    );
+                                    $APPLICATION->IncludeComponent(
+                                        "bitrix:news.list",
+                                        "detail_page_popular",
+                                        Array(
+                                            "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
+                                            "IBLOCK_ID" => \LIblock::getId('objects_offers'),
+                                            "NEWS_COUNT" => "",
+                                            "SORT_BY1" => $arParams["SORT_BY1"],
+                                            "SORT_ORDER1" => $arParams["SORT_ORDER1"],
+                                            "SORT_BY2" => $arParams["SORT_BY2"],
+                                            "SORT_ORDER2" => $arParams["SORT_ORDER2"],
+                                            "FIELD_CODE" => $arParams["LIST_FIELD_CODE"],
+                                            "PROPERTY_CODE" => $arParams["LIST_PROPERTY_CODE"],
+                                            "DISPLAY_PANEL" => $arParams["DISPLAY_PANEL"],
+                                            "SET_TITLE" => "N",
+                                            "SET_LAST_MODIFIED" => $arParams["SET_LAST_MODIFIED"],
+                                            "MESSAGE_404" => $arParams["MESSAGE_404"],
+                                            "SET_STATUS_404" => $arParams["SET_STATUS_404"],
+                                            "SHOW_404" => $arParams["SHOW_404"],
+                                            "FILE_404" => $arParams["FILE_404"],
+                                            "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+                                            "ADD_SECTIONS_CHAIN" => "N",
+                                            "CACHE_TYPE" => $arParams["CACHE_TYPE"],
+                                            "CACHE_TIME" => $arParams["CACHE_TIME"],
+                                            "CACHE_FILTER" => $arParams["CACHE_FILTER"],
+                                            "CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
+                                            "DISPLAY_TOP_PAGER" => "N",
+                                            "DISPLAY_BOTTOM_PAGER" => "N",
+                                            "SET_TITLE" => "N",
+                                            "SET_BROWSER_TITLE" => "N",
+                                            "PAGER_TITLE" => $arParams["PAGER_TITLE"],
+                                            "PAGER_TEMPLATE" => $arParams["PAGER_TEMPLATE"],
+                                            "PAGER_SHOW_ALWAYS" => "N",
+                                            "PAGER_DESC_NUMBERING" => $arParams["PAGER_DESC_NUMBERING"],
+                                            "PAGER_DESC_NUMBERING_CACHE_TIME" => $arParams["PAGER_DESC_NUMBERING_CACHE_TIME"],
+                                            "PAGER_SHOW_ALL" => $arParams["PAGER_SHOW_ALL"],
+                                            "PAGER_BASE_LINK_ENABLE" => $arParams["PAGER_BASE_LINK_ENABLE"],
+                                            "PAGER_BASE_LINK" => $arParams["PAGER_BASE_LINK"],
+                                            "PAGER_PARAMS_NAME" => $arParams["PAGER_PARAMS_NAME"],
+                                            "DISPLAY_DATE" => $arParams["DISPLAY_DATE"],
+                                            "DISPLAY_NAME" => "Y",
+                                            "DISPLAY_PICTURE" => $arParams["DISPLAY_PICTURE"],
+                                            "DISPLAY_PREVIEW_TEXT" => $arParams["DISPLAY_PREVIEW_TEXT"],
+                                            "PREVIEW_TRUNCATE_LEN" => $arParams["PREVIEW_TRUNCATE_LEN"],
+                                            "ACTIVE_DATE_FORMAT" => $arParams["LIST_ACTIVE_DATE_FORMAT"],
+                                            "USE_PERMISSIONS" => $arParams["USE_PERMISSIONS"],
+                                            "GROUP_PERMISSIONS" => $arParams["GROUP_PERMISSIONS"],
+                                            "FILTER_NAME" => 'arPopularFilterHome',
+                                            "HIDE_LINK_WHEN_NO_DETAIL" => $arParams["HIDE_LINK_WHEN_NO_DETAIL"],
+                                            "CHECK_DATES" => $arParams["CHECK_DATES"],
+                                            "STRICT_SECTION_CHECK" => $arParams["STRICT_SECTION_CHECK"],
+
+                                            "PARENT_SECTION" => '',
+                                            "PARENT_SECTION_CODE" => '',
+                                            "DETAIL_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["detail"],
+                                            "SECTION_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["section"],
+                                            "IBLOCK_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["news"],
+                                        ),
+                                        $component
+                                    ); ?>
+                                </div>
                             </div>
+                            <?}?>
+                            <? if (!empty($arTempRegionId)) { ?>
+                            <div class="tab-cont <?if(empty($arTempBudgetId) && empty($arTempHomeId)){?>active<?}?>">
+                                <div class="newoffer-slider">
+                                    <?
+                                    $GLOBALS['arPopularFilterRegion'] = array(
+                                        '=ID' => $arTempRegionId,
+                                    );
+                                    $APPLICATION->IncludeComponent(
+                                        "bitrix:news.list",
+                                        "detail_page_popular",
+                                        Array(
+                                            "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
+                                            "IBLOCK_ID" => $arParams["IBLOCK_ID"],
+                                            "NEWS_COUNT" => "",
+                                            "SORT_BY1" => $arParams["SORT_BY1"],
+                                            "SORT_ORDER1" => $arParams["SORT_ORDER1"],
+                                            "SORT_BY2" => $arParams["SORT_BY2"],
+                                            "SORT_ORDER2" => $arParams["SORT_ORDER2"],
+                                            "FIELD_CODE" => $arParams["LIST_FIELD_CODE"],
+                                            "PROPERTY_CODE" => $arParams["LIST_PROPERTY_CODE"],
+                                            "DISPLAY_PANEL" => $arParams["DISPLAY_PANEL"],
+                                            "SET_TITLE" => "N",
+                                            "SET_LAST_MODIFIED" => $arParams["SET_LAST_MODIFIED"],
+                                            "MESSAGE_404" => $arParams["MESSAGE_404"],
+                                            "SET_STATUS_404" => $arParams["SET_STATUS_404"],
+                                            "SHOW_404" => $arParams["SHOW_404"],
+                                            "FILE_404" => $arParams["FILE_404"],
+                                            "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+                                            "CACHE_TYPE" => "N",
+                                            "CACHE_TIME" => $arParams["CACHE_TIME"],
+                                            "CACHE_FILTER" => $arParams["CACHE_FILTER"],
+                                            "CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
+                                            "DISPLAY_TOP_PAGER" => "N",
+                                            "DISPLAY_BOTTOM_PAGER" => "N",
+                                            "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+                                            "ADD_SECTIONS_CHAIN" => "N",
+                                            "SET_TITLE" => "N",
+                                            "SET_BROWSER_TITLE" => "N",
+                                            "PAGER_TITLE" => $arParams["PAGER_TITLE"],
+                                            "PAGER_TEMPLATE" => $arParams["PAGER_TEMPLATE"],
+                                            "PAGER_SHOW_ALWAYS" => "N",
+                                            "PAGER_DESC_NUMBERING" => $arParams["PAGER_DESC_NUMBERING"],
+                                            "PAGER_DESC_NUMBERING_CACHE_TIME" => $arParams["PAGER_DESC_NUMBERING_CACHE_TIME"],
+                                            "PAGER_SHOW_ALL" => $arParams["PAGER_SHOW_ALL"],
+                                            "PAGER_BASE_LINK_ENABLE" => $arParams["PAGER_BASE_LINK_ENABLE"],
+                                            "PAGER_BASE_LINK" => $arParams["PAGER_BASE_LINK"],
+                                            "PAGER_PARAMS_NAME" => $arParams["PAGER_PARAMS_NAME"],
+                                            "DISPLAY_DATE" => $arParams["DISPLAY_DATE"],
+                                            "DISPLAY_NAME" => "Y",
+                                            "DISPLAY_PICTURE" => $arParams["DISPLAY_PICTURE"],
+                                            "DISPLAY_PREVIEW_TEXT" => $arParams["DISPLAY_PREVIEW_TEXT"],
+                                            "PREVIEW_TRUNCATE_LEN" => $arParams["PREVIEW_TRUNCATE_LEN"],
+                                            "ACTIVE_DATE_FORMAT" => $arParams["LIST_ACTIVE_DATE_FORMAT"],
+                                            "USE_PERMISSIONS" => $arParams["USE_PERMISSIONS"],
+                                            "GROUP_PERMISSIONS" => $arParams["GROUP_PERMISSIONS"],
+                                            "FILTER_NAME" => 'arPopularFilterRegion',
+                                            "HIDE_LINK_WHEN_NO_DETAIL" => $arParams["HIDE_LINK_WHEN_NO_DETAIL"],
+                                            "CHECK_DATES" => $arParams["CHECK_DATES"],
+                                            "STRICT_SECTION_CHECK" => $arParams["STRICT_SECTION_CHECK"],
+
+                                            "PARENT_SECTION" => '',
+                                            "PARENT_SECTION_CODE" => '',
+                                            "DETAIL_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["detail"],
+                                            "SECTION_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["section"],
+                                            "IBLOCK_URL" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["news"],
+                                        ),
+                                        $component
+                                    ); ?>
+                                </div>
+                            </div>
+                            <?}?>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>-->
+
+            </section>
+        <? } ?>
 
         <section class="catalog-text">
             <div class="container bhelp">
@@ -461,7 +533,8 @@ $this->setFrameMode(true);
                 <section class="catalog-text assign-view-form">
                     <div class="container bhelp">
                         <div class="help-form">
-                            <form method="post" class="ajax-form js-assign-view-form" action="<?= SITE_DIR ?>ajax/assign-view.php">
+                            <form method="post" class="ajax-form js-assign-view-form"
+                                  action="<?= SITE_DIR ?>ajax/assign-view.php">
                                 <h2 class="section-h2">
                                     Назначить просмотр
                                 </h2>
@@ -480,7 +553,8 @@ $this->setFrameMode(true);
                                 <input type="hidden" name="id" value="">
                                 <input type="hidden" name="offer-id" value="">
                                 <div class="help-consent">
-                                    Нажимая на кнопку «Отправить», Вы даете согласие на обработку персональных данных<br>
+                                    Нажимая на кнопку «Отправить», Вы даете согласие на обработку персональных
+                                    данных<br>
                                     в соответствии с <a href="#">«Положением об обработке персональных данных»</a>
                                 </div>
                                 <div class="help-btn">

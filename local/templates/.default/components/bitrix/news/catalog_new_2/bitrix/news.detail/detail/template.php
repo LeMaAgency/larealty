@@ -23,7 +23,7 @@ $isOffer = false;
 if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
     $isOffer = true;
     $item = new \Lema\Template\Item($arResult['OFFERS'][$_GET['offerId']]);
-} elseif(!empty($arResult['OFFERS'])){
+} elseif (!empty($arResult['OFFERS'])) {
     $offer = new \Lema\Template\Item(current($arResult['OFFERS']));
 }
 
@@ -56,24 +56,26 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
         <div class='item-card_info'>
             <div class='item-card_left'>
                 <div class='item-card_price'>
-                    <div class='item-card_price-coutn'>
-                        <? if ($item->propVal('PRICE')) { ?>
-                            <span>
+                    <? if ($item->propVal('PRICE') || $offer->propVal('PRICE')) { ?>
+                        <div class='item-card_price-coutn'>
+                            <? if ($item->propVal('PRICE')) { ?>
+                                <span>
                                 <?= $item->propVal('PRICE'); ?>
                             </span>
-                        <? } else { ?>
-                            <span>
+                            <? } else { ?>
+                                <span>
                                 <?= $offer->propVal('PRICE'); ?>
                             </span>
-                        <? } ?>
-                    </div>
-                    <div class='item-card_price-for'>
-                        <? if (!empty($item->propVal('PRICE')) && !empty($item->propVal('SQUARE'))) { ?>
-                            <span>
+                            <? } ?>
+                        </div>
+                        <div class='item-card_price-for'>
+                            <? if (!empty($item->propVal('PRICE')) && !empty($item->propVal('SQUARE'))) { ?>
+                                <span>
                                 <?= intdiv($item->propVal('PRICE'), $item->propVal('SQUARE')); ?>
                             </span>
-                        <? } ?>
-                    </div>
+                            <? } ?>
+                        </div>
+                    <? } ?>
                 </div>
                 <!--<div class='button-currency'>
                     <div class='currency-item1'></div>
@@ -86,7 +88,8 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
             <div class='item-card_right'>
                 <div class='item-card_button'>
                     <!--<a class='hover-black' href='#'>Предложить цену</a>-->
-                    <a class='hover-black js-assign-view' href='#' <?=$isOffer?'data-offer-id=\''.$item->getId().'\'':'data-id=\''.$item->getId().'\'';?>>
+                    <a class='hover-black js-assign-view'
+                       href='#' <?= $isOffer ? 'data-offer-id=\'' . $item->getId() . '\'' : 'data-id=\'' . $item->getId() . '\''; ?>>
                         Назначить просмотр
                     </a>
                 </div>
@@ -100,8 +103,8 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
             <? if (!empty($item->propVal('STAGE'))) { ?>
                 <div class='item-card_icon'>
                     <img src='/assets/img/house.png' alt=''>
-                    <?=$item->propVal('STAGE')?>
-                    <?=Loc::getMessage('LEMA_DETAIL_STAGE_NEW_ONE_OBJECT');?>
+                    <?= $item->propVal('STAGE') ?>
+                    <?= Loc::getMessage('LEMA_DETAIL_STAGE_NEW_ONE_OBJECT'); ?>
                 </div>
             <? } ?>
             <? if (!empty($item->propVal('ROOMS_COUNT'))) { ?>
@@ -165,23 +168,19 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
     <div class='card-characteristics'>
         <div class='container'>
             <h3>Характеристики</h3>
-            <? $arSpecifications = [
-                'METRO', 'REGION', 'MATERIAL', 'SLABS', 'SECURITY', 'INFRASTRUCTURE', 'LANDSCAPING', 'WINDOWS', 'REGION_INFRASTRUCTURE'
-
-            ]; ?>
             <div class='characteristics-list'>
-                <? foreach ($arSpecifications as $specification) { ?>
-                    <? if (!empty($item->propVal($specification))) { ?>
+                <? foreach ($arResult['PROPERTIES'] as $property) { ?>
+                    <? if (!empty($property['VALUE']) && $property['CODE'] != 'MAP') { ?>
                         <div class='characteristics-item'>
                             <div class='characteristics-name'>
-                                <? if (!empty($item->propName($specification))) { ?>
-                                    <span><?= $item->propName($specification); ?>:</span>
+                                <? if (!empty($property['NAME'])) { ?>
+                                    <span><?= $property['NAME']; ?>:</span>
                                 <? } else { ?>
-                                    <span><?= $arResult['OFFER_PROP_NAME'][$specification]; ?></span>
+                                    <span><?= $arResult['OFFER_PROP_NAME'][$property['CODE']]; ?></span>
                                 <? } ?>
                             </div>
                             <div class='characteristics-info'>
-                                <?= $item->propVal($specification); ?>
+                                <?= $property['VALUE']; ?>
                             </div>
                         </div>
                     <? } ?>
@@ -195,13 +194,13 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
         </div>
     </div>
     <div class='card-item_map'>
-        <? /*if(!empty($item->propVal('MAP'))):*/ ?><!--
+        <? if (!empty($item->propVal('MAP'))): ?>
             <div class='flat-on-map__content__location' id='map-location-flat'
-                 data-coords='<? /*=$item->propVal('MAP');*/ ?>'>
+                 data-coords='<?= $item->propVal('MAP'); ?>'
+                 data-address='<?= $item->propVal('ADDRESS'); ?>'>
             </div>
-        --><? /*endif;*/ ?>
-        <iframe src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25381.010557235022!2d37.54320767114695!3d55.78654223964656!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54997e6b66aa1%3A0xa0f94d7b5f575b86!2z0KbQodCa0JA!5e0!3m2!1sru!2sus!4v1542443384427'
-                width='100%' height='600' frameborder='0' style='border:0' allowfullscreen></iframe>
+        <? endif; ?>
+
     </div>
     <div class='item-card_desc'>
         <div class='container'>
@@ -233,11 +232,11 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                     </tr>
                     </thead>
                     <tbody>
-                    <?$countShow = 10;
+                    <? $countShow = 10;
                     $i = 1;
                     foreach ($arResult['OFFERS'] as $arOffer) { ?>
 
-                        <tr <?if($i>$countShow){?>style="display:none;"<?}?>>
+                        <tr <? if ($i > $countShow){ ?>style="display:none;"<? } ?>>
                             <td>
                                 <span class='dn'>
                                     ID:
@@ -280,29 +279,29 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                                 </span>
                             </td>
                         </tr>
-                        <?$i++;?>
+                        <? $i++; ?>
                     <? } ?>
                     </tbody>
                 </table>
-                <?if(count($arResult['OFFERS']) > $countShow){?>
-                <div class='more-offer_link js-show-offer'>
-                    <a class='hover-black' href='#'>
-                        Показать все
-                        <span>
+                <? if (count($arResult['OFFERS']) > $countShow) { ?>
+                    <div class='more-offer_link js-show-offer'>
+                        <a class='hover-black' href='#'>
+                            Показать все
+                            <span>
                             (
-                            <?= \Lema\Common\Helper::pluralizeN(
-                                count($arResult['OFFERS']),
-                                array(
-                                    Loc::getMessage('LEMA_ELEM_NEW_ONE_OBJECT'),
-                                    Loc::getMessage('LEMA_ELEM_NEW_TWO_OBJECTS'),
-                                    Loc::getMessage('LEMA_ELEM_NEW_MANY_OBJECTS'),
+                                <?= \Lema\Common\Helper::pluralizeN(
+                                    count($arResult['OFFERS']),
+                                    array(
+                                        Loc::getMessage('LEMA_ELEM_NEW_ONE_OBJECT'),
+                                        Loc::getMessage('LEMA_ELEM_NEW_TWO_OBJECTS'),
+                                        Loc::getMessage('LEMA_ELEM_NEW_MANY_OBJECTS'),
+                                    )
+                                ); ?>
                                 )
-                            ); ?>
-                            )
                         </span>
-                    </a>
-                </div>
-                <?}?>
+                        </a>
+                    </div>
+                <? } ?>
             </div>
         <? } ?>
     </div>
@@ -572,8 +571,13 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
         </div>
     </div>-->
 <? $GLOBALS['ELEM_ID_CATALOG'] = $arResult['PROPERTIES']['RESEMBLING']['VALUE'];
-$GLOBALS['THIS_ELEM_ID']= $arResult['ID'];
-$GLOBALS['REGION_ELEM_VALUE']= $arResult['PROPERTIES']['REGION']['VALUE'];
+$GLOBALS['THIS_ELEM_ID'] = $item->getId();;
+$GLOBALS['THIS_OFFER_ID'] = '';
+if($isOffer){
+    $GLOBALS['THIS_OFFER_ID'] = $item->getId();
+}
+$GLOBALS['REGION_ELEM_VALUE'] = $item->propVal('REGION');
+$GLOBALS['PRICE_ELEM_VALUE'] = $item->propVal('PRICE') ? $item->propVal('PRICE') : $offer->propVal('PRICE');
 ?>
 
 <? if (isset($arParams['USE_SHARE']) && $arParams['USE_SHARE'] == 'Y'): ?>
