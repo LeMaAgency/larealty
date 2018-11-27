@@ -1155,6 +1155,7 @@ footer {
   display: flex; }
 
 .catalog-head {
+  height: 328px;
   background: transparent url(../img/catalog-bg.png);
   background-repeat: no-repeat;
   -webkit-background-size: contain;
