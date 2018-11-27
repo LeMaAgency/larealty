@@ -17,8 +17,27 @@ use \Lema\Common\Helper,
 
 Loc::loadMessages(__FILE__);
 ?>
-
-<div class="catalog-head">
+<?
+    $bannerSrc = '/assets/css/../img/banners/';
+    switch ($APPLICATION->GetCurPage()) {
+        case '/catalog/city/':
+            $bannerSrc .='1-jilaya.jpg';
+            break;
+        case '/catalog/cottage/':
+            $bannerSrc .='2-zagorod.jpg';
+            break;
+        case '/catalog/commercial/':
+            $bannerSrc .='3-kommerciya.jpg';
+            break;
+        case '/catalog/foreign/':
+            $bannerSrc .='4-zarubejnaya.jpg';
+            break;
+        default:
+            $bannerSrc .='1-jilaya.jpg';
+            break;
+    }
+?>
+<div class="catalog-head" style="background-image:  url(<?=$bannerSrc?>);">
     <div class="container">
         <h1><?= $APPLICATION->ShowTitle(); ?></h1>
         <?if (!empty($arResult["STATISTICS"])) { ?>
