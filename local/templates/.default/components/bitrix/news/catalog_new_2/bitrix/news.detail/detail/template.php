@@ -170,7 +170,7 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
             <h3>Характеристики</h3>
             <div class='characteristics-list'>
                 <? foreach ($arResult['PROPERTIES'] as $property) { ?>
-                    <? if (!empty($property['VALUE']) && $property['CODE'] != 'MAP') { ?>
+                    <? if (!empty($property['VALUE']) && ($property['CODE'] != 'MAP' && $property['NAME'] != 'CML2_LINK')) { ?>
                         <div class='characteristics-item'>
                             <div class='characteristics-name'>
                                 <? if (!empty($property['NAME'])) { ?>
@@ -571,9 +571,10 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
         </div>
     </div>-->
 <? $GLOBALS['ELEM_ID_CATALOG'] = $arResult['PROPERTIES']['RESEMBLING']['VALUE'];
-$GLOBALS['THIS_ELEM_ID'] = $item->getId();;
+$GLOBALS['THIS_ELEM_ID'] = $item->getId();
 $GLOBALS['THIS_OFFER_ID'] = '';
 if($isOffer){
+    $GLOBALS['THIS_ELEM_ID'] = $item->propVal('CML2_LINK');
     $GLOBALS['THIS_OFFER_ID'] = $item->getId();
 }
 $GLOBALS['REGION_ELEM_VALUE'] = $item->propVal('REGION');

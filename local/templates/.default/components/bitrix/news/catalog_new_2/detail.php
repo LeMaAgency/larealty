@@ -167,6 +167,7 @@ $this->setFrameMode(true);
             ); ?>
         <? endif ?>
         <? $arTempBudgetId = $arTempHomeId = $arTempRegionId = [];
+        //Диапазон цены (вкладка по бюджету)
         $intPriceRange = 1000000;
         $res = \CIBlockElement::getList(
             [],

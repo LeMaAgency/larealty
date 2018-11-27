@@ -80,7 +80,8 @@ $arResult['OFFERS'] = \Lema\IBlock\Element::getList(LIblock::getId('objects_offe
         'PROPERTY_ADDRESS',
         'PROPERTY_METRO',
         'PROPERTY_PARKING',
-        'PROPERTY_MATERIAL'
+        'PROPERTY_MATERIAL',
+        'PROPERTY_CML2_LINK',
     ),
 ));
 $res = \CIBlockProperty::GetList(
