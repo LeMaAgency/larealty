@@ -108,7 +108,7 @@ $APPLICATION->SetTitle("Главная");
             <div class="consultation-link"><a href="#">Получить консультацию</a></div>
         </div>-->
     </div>
-</section>-->
+</section>
 <section class="expert">
     <div class="expert-overlay"></div>
     <div class="expert-txt">
