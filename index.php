@@ -126,7 +126,9 @@ $APPLICATION->SetTitle("Главная");
 <section class="popular">
     <div class="container">
         <h2 class="section-h2">Популярные объекты</h2>
-        <?$APPLICATION->IncludeComponent(
+        <?
+        $GLOBALS['arPopularMainPage']['=PROPERTY_POPULAR_VALUE']='Y';
+        $APPLICATION->IncludeComponent(
 	"bitrix:news.list", 
 	"main_popular_objects", 
 	array(
@@ -153,7 +155,7 @@ $APPLICATION->SetTitle("Главная");
 			0 => "",
 			1 => "",
 		),
-		"FILTER_NAME" => "",
+		"FILTER_NAME" => "arPopularMainPage",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 		"IBLOCK_ID" => "2",
 		"IBLOCK_TYPE" => "realty",
