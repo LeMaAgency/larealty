@@ -71,7 +71,6 @@ if(!empty($GLOBALS['arrFilter']['ID'])){
     foreach ($GLOBALS['arrFilter']['PROPERTY'] as $prop => $val) {
         $strProp = preg_replace("/[^a-zA-ZА-Яа-я0-9\s]/","",$prop);
         $arFilter[str_replace($strProp,'PROPERTY_'.$strProp,$prop)] = $val;
-        var_dump($arFilter);
     }
 }
 $countElements = '0';
