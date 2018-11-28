@@ -156,7 +156,68 @@ $(function () {
             console.log($(elem),$(elem).val(),value,$(elem).val() == value);
         });
     });
+    $('form.js-subscribe-form').on('submit', function (e) {
+        e.preventDefault();
+        var curForm = $(this),
+            waitElement = curForm.find('input[type="submit"], button[type="submit"]').get(0);
+        BX.showWait(waitElement);
+        $.post($(this).attr('action'), $(this).serialize(), function (ans) {
+            BX.closeWait(waitElement);
+            curForm.find('.core__form__input__log_danger').empty();
+            if (ans && ans['errors']) {
+                //show errors on inputs
+                for (var inputName in ans.errors) {
+                    curForm.find('[name="' + inputName + '"]').closest('.js-field-block').find('.core__form__input__log_danger').html(ans['errors'][inputName]);                }
+                //show message with errors
+                $.fancybox.open(
+                    '<div style="margin:25px;padding:35px;color:red;">' +
+                    $.map(ans.errors, function (e) {
+                        return e;
+                    }).join('<br>') +
+                    '</div>'
+                )
+            }
+            else {
+                //show success message
+                $.fancybox.open('<div style="margin:25px;padding:35px;color:green;text-align:center;">Вы успешно подписались!</div>');
+            }
 
+        }, 'json');
+        return false;
+    });
+
+    $('form.js-order-call-form').on('submit', function (e) {
+
+        e.preventDefault();
+
+        var curForm = $(this),
+            waitElement = curForm.find('input[type="submit"], button[type="submit"]').get(0);
+
+        BX.showWait(waitElement);
+
+        $.post($(this).attr('action'), $(this).serialize(), function (ans) {
+
+            BX.closeWait(waitElement);
+
+            curForm.find('input:not([type="submit"]):not([type="button"]), textarea').css({'border': '1px solid #dfcd7d'});
+
+            if (ans && ans.errors) {
+                $.fancybox.open(
+                    '<div style="margin:25px;padding:35px;color:red;">' +
+                    $.map(ans.errors, function (e) {
+                        return e;
+                    }).join('<br>') +
+                    '</div>'
+                )
+            }
+            else {
+                //ok
+                curForm.find('input:not([type="submit"]):not([type="button"]), textarea').val('').css({'border': '1px solid black'});
+                $.fancybox.open('Спасибо за заявку. В ближайшее время мы Вам перезвоним')
+            }
+        }, 'json');
+        return false;
+    });
 });
 function initMap() {
 

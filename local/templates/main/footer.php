@@ -201,21 +201,16 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
                     <h3>
                         <? $APPLICATION->IncludeFile(SITE_DIR . 'include/footer/subscribe-text.php'); ?>
                     </h3>
+
                     <? $APPLICATION->IncludeComponent(
-                        "bitrix:subscribe.edit",
-                        ".default",
-                        array(
-                            "AJAX_MODE" => "Y",
-                            "AJAX_OPTION_ADDITIONAL" => "",
-                            "AJAX_OPTION_HISTORY" => "N",
-                            "AJAX_OPTION_JUMP" => "N",
-                            "AJAX_OPTION_STYLE" => "Y",
-                            "ALLOW_ANONYMOUS" => "Y",
+                        "bitrix:subscribe.form",
+                        "subscribe_footer",
+                        Array(
                             "CACHE_TIME" => "3600",
                             "CACHE_TYPE" => "A",
-                            "SET_TITLE" => "N",
-                            "SHOW_AUTH_LINKS" => "N",
+                            "PAGE" => "#SITE_DIR#ajax/subscribe_new.php",
                             "SHOW_HIDDEN" => "N",
+                            "USE_PERSONALIZATION" => "Y",
                             "COMPONENT_TEMPLATE" => ".default"
                         ),
                         false
@@ -234,7 +229,8 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
         <section class="catalog-text assign-view-form">
             <div class="container bhelp">
                 <div class="help-form">
-                    <form method="post" class="ajax-form js-assign-view-form" action="<?= SITE_DIR ?>ajax/order-call.php">
+                    <form method="post" class="ajax-form js-assign-view-form"
+                          action="<?= SITE_DIR ?>ajax/order-call.php">
                         <h2 class="section-h2">
                             Заказать звонок
                         </h2>
