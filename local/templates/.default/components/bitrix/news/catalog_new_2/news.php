@@ -81,6 +81,11 @@ $res = \CIblockElement::getList(
 while ($ar_res = $res->Fetch()) {
     $countElements++;
 }
+
+if($_GET['show_new_objects'] == 'Y')
+{
+    $GLOBALS['arrFilter']["=PROPERTY_SHOW_IN_NEW_OBJ_BLOCK_VALUE"] = 'Y';
+}
 ?>
 <section class="catalog">
     <div class="container">
