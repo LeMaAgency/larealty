@@ -149,7 +149,7 @@ while ($ar_res = $res->Fetch()) {
 };
 if($_GET['show_new_objects'] == 'Y')
 {
-    $GLOBALS['arrFilter']["!PROPERTY_SHOW_IN_NEW_OBJ_BLOCK_VALUE"] = false;
+    $GLOBALS['arrFilter']["=PROPERTY_SHOW_IN_NEW_OBJ_BLOCK_VALUE"] = 'Y';
 } ?>
 
 <section class="catalog">
