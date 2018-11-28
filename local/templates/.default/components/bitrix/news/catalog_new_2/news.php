@@ -56,6 +56,7 @@ Loc::loadMessages(__FILE__);
     ?>
 <? endif ?>
 <?
+
 $arFilter =array(
     'IBLOCK_ID' => $arParams['IBLOCK_ID'],
     'ACTIVE' => 'Y',
@@ -67,6 +68,10 @@ if(!empty($GLOBALS['arrFilter']['ID'])){
         $strProp = preg_replace("/[^a-zA-ZА-Яа-я0-9\s]/","",$prop);
         $arFilter[str_replace($strProp,'PROPERTY_'.$strProp,$prop)] = $val;
     }
+}
+if($_GET['show_new_objects'] == 'Y')
+{
+    $arFilter['PROPERTY_SHOW_IN_NEW_OBJ_BLOCK_VALUE'] = 'Y';
 }
 $countElements = '0';
 $res = \CIblockElement::getList(
@@ -82,10 +87,6 @@ while ($ar_res = $res->Fetch()) {
     $countElements++;
 }
 
-if($_GET['show_new_objects'] == 'Y')
-{
-    $GLOBALS['arrFilter']["=PROPERTY_SHOW_IN_NEW_OBJ_BLOCK_VALUE"] = 'Y';
-}
 ?>
 <section class="catalog">
     <div class="container">
