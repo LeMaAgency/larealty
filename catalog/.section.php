@@ -1,5 +1,6 @@
-<?php
-$sSectionName = 'Каталог';
-$arDirProperties = array(
+<?
+$sSectionName = "Каталог";
+$arDirProperties = Array(
 
 );
+?>

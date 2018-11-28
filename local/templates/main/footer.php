@@ -249,8 +249,7 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
                         <input type="hidden" name="id" value="">
                         <input type="hidden" name="offer-id" value="">
                         <div class="help-consent">
-                            Нажимая на кнопку «Отправить», Вы даете согласие на обработку персональных данных<br>
-                            в соответствии с <a href="#">«Положением об обработке персональных данных»</a>
+                            <? $APPLICATION->IncludeFile(SITE_DIR . 'include/footer/personal_data_text.php'); ?>
                         </div>
                         <div class="help-btn">
                             <button class="hover-black">

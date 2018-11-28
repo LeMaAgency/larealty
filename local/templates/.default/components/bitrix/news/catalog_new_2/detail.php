@@ -466,10 +466,10 @@ $this->setFrameMode(true);
                 <div class="help-form">
                     <form action="<?= SITE_DIR; ?>ajax/feedback-form.php" class="js-feedback-form" method="POST">
                         <h2 class="section-h2">
-                            Затрудняетесь с выбором?
+                            <? $APPLICATION->IncludeFile(SITE_DIR . 'include/footer/feedback_title.php'); ?>
                         </h2>
                         <div class="subtitle">
-                            Эксперты Knight Frank сэкономят ваше время и подберут оптимальные варианты недвижимости
+                            <? $APPLICATION->IncludeFile(SITE_DIR . 'include/footer/feedback_subtitle.php'); ?>
                         </div>
                         <div class="form-row">
                             <div class="it-block">
@@ -490,8 +490,7 @@ $this->setFrameMode(true);
                             <div class="it-error"></div>
                         </div>
                         <div class="help-consent">
-                            Нажимая на кнопку «Отправить», Вы даете согласие на обработку персональных данных<br>
-                            в соответствии с <a href="#">«Положением об обработке персональных данных»</a>
+                            <? $APPLICATION->IncludeFile(SITE_DIR . 'include/footer/personal_data_text.php'); ?>
                         </div>
                         <div class="help-btn">
                             <button class="hover-black">
@@ -554,9 +553,7 @@ $this->setFrameMode(true);
                                 <input type="hidden" name="id" value="">
                                 <input type="hidden" name="offer-id" value="">
                                 <div class="help-consent">
-                                    Нажимая на кнопку «Отправить», Вы даете согласие на обработку персональных
-                                    данных<br>
-                                    в соответствии с <a href="#">«Положением об обработке персональных данных»</a>
+                                    <? $APPLICATION->IncludeFile(SITE_DIR . 'include/footer/personal_data_text.php'); ?>
                                 </div>
                                 <div class="help-btn">
                                     <button class="hover-black">
