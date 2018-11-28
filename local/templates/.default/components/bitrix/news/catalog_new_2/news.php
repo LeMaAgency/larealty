@@ -63,7 +63,7 @@ $arFilter =array(
 );
 if($_GET['show_new_objects'] == 'Y')
 {
-    $GLOBALS['arrFilter']['PROPERTY']['SHOW_IN_NEW_OBJ_BLOCK_VALUE'] = 'Y';
+    $GLOBALS['arrFilter']['PROPERTY_SHOW_IN_NEW_OBJ_BLOCK_VALUE'] = 'Y';
 }
 if(!empty($GLOBALS['arrFilter']['ID'])){
     $arFilter['ID'] = $GLOBALS['arrFilter']['ID'];
