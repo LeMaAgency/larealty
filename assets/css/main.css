@@ -490,11 +490,21 @@ header {
       display: inline-block;
       margin-right: 20px; }
       .offer-item .offer-price span:after {
-        content: url(../img/ruble.png);
+        content: url(../img/rublenew.png);
         position: absolute;
         height: 15px;
-        right: -14px;
-        top: -3px; }
+        right: -16px;
+        top: -1px; }
+
+.item-card_photo  {
+  max-height: 595px;
+  height: 100%;
+}
+
+.item-card_photo .slick-list, .item-card_photo .slick-track, .item-card_photo  .slick-slide {
+   max-height: 595px;
+  height: 100%;
+}
 
 .offer-item:hover {
   -webkit-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
@@ -1553,8 +1563,7 @@ footer {
     margin-right: -10px;
     cursor: pointer; }
   .catalog-item .catalog-item_info {
-    margin-left: -10px;
-    margin-right: -10px;
+   
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -2447,7 +2456,7 @@ footer {
   .catalog-item .catalog-item_photo {
     height: 100%; }
     .catalog-item .catalog-item_photo img {
-      height: auto;
+     
       max-width: 100% !important; }
   .filter-row {
     -webkit-flex-wrap: wrap;
@@ -2750,7 +2759,6 @@ footer {
   .catalog-item .catalog-item_photo {
     height: 100%; }
     .catalog-item .catalog-item_photo img {
-      height: auto;
       max-width: 100% !important; }
   .catalog-sort {
     -webkit-flex-wrap: wrap;
