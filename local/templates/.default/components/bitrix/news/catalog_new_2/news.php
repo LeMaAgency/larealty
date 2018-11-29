@@ -261,7 +261,7 @@ while ($ar_res = $res->Fetch()) {
             </form>
         </div>
     </div>
-    <?
+    <?/*
     $APPLICATION->IncludeComponent("bitrix:catalog.section.list", "catalog-sections", Array(
         "ADD_SECTIONS_CHAIN" => "Y",
         "CACHE_GROUPS" => "Y",
@@ -286,5 +286,5 @@ while ($ar_res = $res->Fetch()) {
         "VIEW_MODE" => "LIST",
     ),
         false
-    ); ?>
+    ); */?>
 </section>

@@ -382,7 +382,7 @@ $APPLICATION->IncludeComponent(
             </form>
         </div>
     </div>
-    <?
+    <?/*
     $APPLICATION->IncludeComponent("bitrix:catalog.section.list", "catalog-sections", Array(
         "ADD_SECTIONS_CHAIN" => "Y",
         "CACHE_GROUPS" => "Y",
@@ -407,5 +407,5 @@ $APPLICATION->IncludeComponent(
         "VIEW_MODE" => "LIST",
     ),
         false
-    ); ?>
+    ); */?>
 </section>

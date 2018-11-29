@@ -13,7 +13,6 @@
 ?>
 <div class="subscribe-form"  id="subscribe-form">
     <?
-    var_dump($arResult);
     $frame = $this->createFrame("subscribe-form", false)->begin();
     ?>
     <form action="<?=$arResult["FORM_ACTION"]?>" class="js-subscribe-form">
