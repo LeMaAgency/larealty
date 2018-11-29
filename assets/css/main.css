@@ -2,6 +2,10 @@
   padding-left: 10px;
   padding-right: 10px; }
 
+ img {
+ 	max-width: 100%;
+ }
+
 .row {
   margin-left: -10px;
   margin-right: -10px; }
@@ -1527,6 +1531,7 @@ footer {
 .catalog-item {
   font-family: "Graphik LC Web";
   background: #fff;
+  min-height: 320px;
   -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
           box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   -webkit-border-radius: 2px;
@@ -1556,6 +1561,7 @@ footer {
     display: flex; }
   .catalog-item .catalog-item_left {
     max-width: 580px;
+    width: 100%;
     padding-top: 22px; }
   .catalog-item .catalog-item_right {
     padding-top: 30px;
@@ -2403,7 +2409,7 @@ footer {
   .offer-tabs .content {
     min-height: 590px; }
   .help .form-row input, .bhelp .form-row input {
-    width: 30%; }
+    width: 100%; }
   .catalog-item .catalog-item_photo img {
     max-width: 100%; }
   .catalog-item .catalog-item_info {
@@ -2441,7 +2447,8 @@ footer {
   .catalog-item .catalog-item_photo {
     height: 100%; }
     .catalog-item .catalog-item_photo img {
-      height: 100%; }
+      height: auto;
+      max-width: 100% !important; }
   .filter-row {
     -webkit-flex-wrap: wrap;
         -ms-flex-wrap: wrap;
@@ -2453,7 +2460,7 @@ footer {
   .button-list {
     margin-top: 19px; }
   .filter-list .city-filter {
-    margin-top: 19px; }
+    margin-top: 0px; }
   .filter-list .ready-filter, .filter-list .view-filter, .filter-list .infrastructure-filter {
     width: 200px; }
   .filter-list .filter-button {
@@ -2743,7 +2750,8 @@ footer {
   .catalog-item .catalog-item_photo {
     height: 100%; }
     .catalog-item .catalog-item_photo img {
-      height: 100%; }
+      height: auto;
+      max-width: 100% !important; }
   .catalog-sort {
     -webkit-flex-wrap: wrap;
         -ms-flex-wrap: wrap;

@@ -3,7 +3,7 @@
 }
 
 .catalog-item_photo img {
-    max-width: 400px !important;
+    max-width: 100% !important;
 }
 
 .catalog-item_desc {
