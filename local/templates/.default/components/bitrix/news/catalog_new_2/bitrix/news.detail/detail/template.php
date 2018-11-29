@@ -169,8 +169,22 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
         <div class='container'>
             <h3>Характеристики</h3>
             <div class='characteristics-list'>
-                <? foreach ($arResult['PROPERTIES'] as $property) { ?>
-                    <? if (!empty($property['VALUE']) && ($property['CODE'] != 'MAP' && $property['NAME'] != 'CML2_LINK')) { ?>
+                <? foreach ($arResult['PROPERTIES'] as $property) {
+                    $arNotShowProp=[
+                        'MAP',
+                        'CML2_LINK',
+                        'POPULAR',
+                        'MORE_PHOTO',
+                        'USER_PHONE',
+                        'USER_NAME',
+                        'USER_EMAIL',
+                        'USER_HIDDEN_TEXT',
+                        'REMINDER_DATE',
+                        'REMINDER_TEXT',
+                        'RIELTOR',
+                        'ADD_OBJECT_TO_EXPORT',
+                    ];?>
+                    <? if (!empty($property['VALUE']) && !(in_array($property['CODE'],$arNotShowProp))) { ?>
                         <div class='characteristics-item'>
                             <div class='characteristics-name'>
                                 <? if (!empty($property['NAME'])) { ?>

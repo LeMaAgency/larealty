@@ -500,7 +500,7 @@ $this->setFrameMode(true);
                     </form>
                 </div>
             </div>
-            <?
+            <?/*
             $APPLICATION->IncludeComponent(
                 "bitrix:catalog.section.list",
                 "catalog-sections",
@@ -528,7 +528,7 @@ $this->setFrameMode(true);
                     "VIEW_MODE" => "LIST",
                 ),
                 false
-            ); ?>
+            ); */?>
             <div id="assign-view-form" style="display: none;">
                 <section class="catalog-text assign-view-form">
                     <div class="container bhelp">
