@@ -313,7 +313,7 @@ $APPLICATION->SetTitle("Главная");
 		),
 		"FILTER_NAME" => "",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => "9",
+		"IBLOCK_ID" => "26",
 		"IBLOCK_TYPE" => "content",
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"INCLUDE_SUBSECTIONS" => "Y",
@@ -330,7 +330,7 @@ $APPLICATION->SetTitle("Главная");
 		"PARENT_SECTION_CODE" => "",
 		"PREVIEW_TRUNCATE_LEN" => "",
 		"PROPERTY_CODE" => array(
-			0 => "",
+			0 => "LINK",
 			1 => "CITY",
 			2 => "STREET",
 			3 => "HOUSE_NUMBER",
