@@ -19,6 +19,8 @@ $this->setFrameMode(true);
 </div>
 <section class="catalog-text">
     <div class="container bhelp">
+        <h1><?=$APPLICATION->ShowTitle();?></h1>
+
 <?$ElementID = $APPLICATION->IncludeComponent(
 	"bitrix:news.detail",
 	"",
