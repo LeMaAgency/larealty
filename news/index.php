@@ -5,7 +5,7 @@ $APPLICATION->SetTitle("Новости");
 
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news", 
-	".default", 
+	"news",
 	array(
 		"ADD_ELEMENT_CHAIN" => "N",
 		"ADD_SECTIONS_CHAIN" => "Y",
@@ -85,7 +85,7 @@ $APPLICATION->SetTitle("Новости");
 		"USE_RSS" => "N",
 		"USE_SEARCH" => "N",
 		"USE_SHARE" => "N",
-		"COMPONENT_TEMPLATE" => ".default",
+		"COMPONENT_TEMPLATE" => "news",
 		"SEF_URL_TEMPLATES" => array(
 			"news" => "",
 			"section" => "",

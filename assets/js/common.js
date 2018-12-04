@@ -37,8 +37,14 @@ $(document).ready(function() {
 
   $('.main-menu ul > li').clone().appendTo('.mobile-menu').removeAttr('class');
   $('.header-menu ul > li').clone().appendTo('.mobile-menu');
-  
-  $('.mobile-menu li:nth-child(4) a').addClass('active');
+  $('.mobile-menu li a').each(function (i,elem) {
+      $(elem).removeClass('active');
+    if(window.location.href.indexOf($(elem).attr('href')) != "-1"){
+        $(elem).addClass('active');
+    }
+  });
+
+  /*$('.mobile-menu li:nth-child(1) a').addClass('active');*/
 
 
   var someDiv1 = $('.button-list div');
