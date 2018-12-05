@@ -56,7 +56,7 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
         <div class='item-card_info'>
             <div class='item-card_left'>
                 <div class='item-card_price'>
-                    <? if ($item->propVal('PRICE') || $offer->propVal('PRICE')) { ?>
+                    <? if ($item->propVal('PRICE') || (!empty($offer) && $offer->propVal('PRICE'))) { ?>
                         <div class='item-card_price-coutn'>
                             <? if ($item->propVal('PRICE')) { ?>
                                 <span>
