@@ -592,7 +592,7 @@ if($isOffer){
     $GLOBALS['THIS_OFFER_ID'] = $item->getId();
 }
 $GLOBALS['REGION_ELEM_VALUE'] = $item->propVal('REGION');
-$GLOBALS['PRICE_ELEM_VALUE'] = $item->propVal('PRICE') ? $item->propVal('PRICE') : $offer->propVal('PRICE');
+$GLOBALS['PRICE_ELEM_VALUE'] = $item->propVal('PRICE') ? $item->propVal('PRICE') : (!empty($offer)?$offer->propVal('PRICE'):'');
 ?>
 
 <? if (isset($arParams['USE_SHARE']) && $arParams['USE_SHARE'] == 'Y'): ?>
