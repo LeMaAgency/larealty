@@ -95,7 +95,7 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                 </div>
                 <div class='item-card_phone'>
                     <span>Или позвоните нам: </span>
-                    <a href='#'>+7 (495) 151-90-00</a>
+                    <a href='tel:+74954775450'>+7 (495) 477-54-50</a>
                 </div>
             </div>
         </div>
