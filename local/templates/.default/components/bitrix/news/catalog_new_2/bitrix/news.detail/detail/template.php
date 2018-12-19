@@ -27,6 +27,7 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
     $offer = new \Lema\Template\Item(current($arResult['OFFERS']));
 }
 
+
 ?>
 
     <h1 class='item-title'><?= $item->getName(); ?></h1>
@@ -49,6 +50,13 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                     </div>
                 <? endforeach;
             }
+        }elseif($isOffer){
+            ?>
+            <? foreach ($arResult['SLIDER_IMAGES'] as $imageSrc): ?>
+                <div>
+                    <img src='<?= $imageSrc; ?>' alt=''>
+                </div>
+            <? endforeach;
         } ?>
     </div>
 
