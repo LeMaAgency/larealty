@@ -1,6 +1,9 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
-$APPLICATION->SetTitle("Главная");
+$APPLICATION->SetPageProperty("description", "Агентство недвижимости Lexhome – мы занимаемся арендой и продажей жилой, коммерческой и загородной недвижимости. Также мы проводим аналитику, консалтинг и оценку недвижимости. Подробности на сайте.");
+$APPLICATION->SetPageProperty("keywords", "агентство недвижимости официальный сайт");
+$APPLICATION->SetPageProperty("title", "Агентство недвижимости Lexhome – официальный сайт");
+$APPLICATION->SetTitle("Агентство недвижимости Lexhome");
 ?>
 <?$APPLICATION->IncludeComponent(
     "lema:new_catalog.filter",
