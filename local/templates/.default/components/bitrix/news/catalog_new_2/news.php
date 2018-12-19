@@ -107,11 +107,26 @@ while ($ar_res = $res->Fetch()) {
                 ); ?>
             </div>
             <div class="sort-list">
-                <!--<select name="sort-select" class="sort-select js-sort-select">
-                    <option value="1">
+                <select name="sort-select" class="sort-select js-sort-select js-sort-select">
+                    <option value="0">
                         Сортировать по
                     </option>
-                </select>-->
+                    <option value="1"
+                            <? if (!!selected('sort', 'PROPERTY_PRICE') && !!selected('sort_order','asc')) { ?>selected<? } ?>
+                            data-url="<?= $APPLICATION->GetCurPageParam('sort=PROPERTY_PRICE&sort_order=asc', array('sort','sort_order')); ?>">
+                        Увеличению цены
+                    </option>
+                    <option value="2"
+                            <? if (!!selected('sort', 'PROPERTY_PRICE') && !!selected('sort_order','desc')) { ?>selected<? } ?>
+                            data-url="<?= $APPLICATION->GetCurPageParam('sort=PROPERTY_PRICE&sort_order=desc', array('sort','sort_order')); ?>">
+                        Уменьшению цены
+                    </option>
+                    <option value="3"
+                            <? if (!!selected('sort', 'timestamp_x')) { ?>selected<? } ?>
+                            data-url="<?= $APPLICATION->GetCurPageParam('sort=timestamp_x', array('sort','sort_order')); ?>">
+                        Обновлению
+                    </option>
+                </select>
                 <div>
                     <div class="sort-list_count js-sort">
                         <div class="sort-btn <? if (!!selected('count', '24')) { ?>sort-list_count-active<? } ?>"
@@ -149,8 +164,8 @@ while ($ar_res = $res->Fetch()) {
                 "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
                 "IBLOCK_ID" => $arParams["IBLOCK_ID"],
                 "NEWS_COUNT" => $_REQUEST['count'] ? $_REQUEST['count'] : $arParams["NEWS_COUNT"],
-                "SORT_BY1" => $arParams["SORT_BY1"],
-                "SORT_ORDER1" => $arParams["SORT_ORDER1"],
+                "SORT_BY1" => (isset($_GET['sort']) && !empty($_GET['sort']))? $_GET['sort'] : $arParams["SORT_BY1"],
+                "SORT_ORDER1" => (isset($_GET['sort_order']) && !empty($_GET['sort_order']))? $_GET['sort_order'] : $arParams["SORT_ORDER1"],
                 "SORT_BY2" => $arParams["SORT_BY2"],
                 "SORT_ORDER2" => $arParams["SORT_ORDER2"],
                 "FIELD_CODE" => $arParams["LIST_FIELD_CODE"],

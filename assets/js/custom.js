@@ -137,6 +137,14 @@ $(function () {
             window.location.href = $(this).data('url');
         }
     });
+
+    $(document).off('click', 'select.js-sort-select').on('click', 'select.js-sort-select', function () {
+        var selectedIndex = $(this).find('option').context.selectedIndex,
+            option = $(this).find('option[value="' + selectedIndex + '"]');
+        if (option.data('url')) {
+            window.location.href = option.data('url');
+        }
+    });
     $(document).off('click', '.js-show-offer').on('click', '.js-show-offer', function (e) {
         e.preventDefault();
        $(this).closest('.container').find('table.offer-table tr').each(function (i,elem) {
