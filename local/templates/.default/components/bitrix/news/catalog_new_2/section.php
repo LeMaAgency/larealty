@@ -81,7 +81,9 @@ Loc::loadMessages(__FILE__);
     if (method_exists($APPLICATION, 'addheadstring'))
         $APPLICATION->AddHeadString('<link rel="alternate" type="application/rss+xml" title="' . $rss_url . '" href="' . $rss_url . '" />');
     ?>
-    <a href="<?= $rss_url ?>" title="rss" target="_self"><img alt="RSS" src="<?= $templateFolder ?>/images/gif-light/feed-icon-16x16.gif" border="0"
+    <a href="<?= $rss_url ?>" title="rss" target="_self"><img alt="RSS"
+                                                              src="<?= $templateFolder ?>/images/gif-light/feed-icon-16x16.gif"
+                                                              border="0"
                                                               align="right"/></a>
 <? endif ?>
 
@@ -116,18 +118,18 @@ Loc::loadMessages(__FILE__);
     ?>
 <? endif ?>
 <?
-$arFilter =array(
+$arFilter = array(
     'IBLOCK_ID' => $arParams['IBLOCK_ID'],
     '=SECTION_CODE' => $arResult['VARIABLES']['SECTION_CODE'],
     'INCLUDE_SUBSECTIONS' => 'Y',
     'ACTIVE' => 'Y',
 );
-if(!empty($GLOBALS['arrFilter']['ID'])){
+if (!empty($GLOBALS['arrFilter']['ID'])) {
     $arFilter['ID'] = $GLOBALS['arrFilter']['ID'];
-}elseif (!empty($GLOBALS['arrFilter']['PROPERTY'])) {
+} elseif (!empty($GLOBALS['arrFilter']['PROPERTY'])) {
     foreach ($GLOBALS['arrFilter']['PROPERTY'] as $prop => $val) {
-        $strProp = preg_replace("/[^a-zA-ZА-Яа-я0-9\s]/","",$prop);
-        $arFilter[str_replace($strProp,'PROPERTY_'.$strProp,$prop)] = $val;
+        $strProp = preg_replace("/[^a-zA-ZА-Яа-я0-9\s]/", "", $prop);
+        $arFilter[str_replace($strProp, 'PROPERTY_' . $strProp, $prop)] = $val;
     }
 }
 $countElements = '0';
@@ -146,7 +148,7 @@ while ($ar_res = $res->Fetch()) {
 ?>
 <? if (!empty($_REQUEST['region'])) {
     $GLOBALS['arrFilter']['PROPERTY']['REGION'] = $_REQUEST['region'];
-};?>
+}; ?>
 
 <section class="catalog">
     <div class="container">
@@ -382,30 +384,33 @@ $APPLICATION->IncludeComponent(
             </form>
         </div>
     </div>
-    <?/*
-    $APPLICATION->IncludeComponent("bitrix:catalog.section.list", "catalog-sections", Array(
-        "ADD_SECTIONS_CHAIN" => "Y",
-        "CACHE_GROUPS" => "Y",
-        "CACHE_TIME" => "36000000",
-        "CACHE_TYPE" => "A",
-        "COUNT_ELEMENTS" => "Y",
-        "IBLOCK_ID" => "2",
-        "IBLOCK_TYPE" => "realty",
-        "SECTION_CODE" => $_REQUEST["SECTION_CODE"],
-        "SECTION_FIELDS" => array(
-            0 => "",
-            1 => "",
+    <?
+    $APPLICATION->IncludeComponent(
+        "bitrix:catalog.section.list",
+        "catalog-sections",
+        Array(
+            "ADD_SECTIONS_CHAIN" => "Y",
+            "CACHE_GROUPS" => "Y",
+            "CACHE_TIME" => "36000000",
+            "CACHE_TYPE" => "A",
+            "COUNT_ELEMENTS" => "Y",
+            "IBLOCK_ID" => "2",
+            "IBLOCK_TYPE" => "realty",
+            "SECTION_CODE" => $arResult['VARIABLES']['SECTION_CODE'],
+            "SECTION_FIELDS" => array(
+                0 => "",
+                1 => "",
+            ),
+            "SECTION_ID" => $_REQUEST["SECTION_ID"],
+            "SECTION_URL" => "",
+            "SECTION_USER_FIELDS" => array(
+                0 => "",
+                1 => "",
+            ),
+            "SHOW_PARENT_NAME" => "Y",
+            "TOP_DEPTH" => "2",
+            "VIEW_MODE" => "LIST",
         ),
-        "SECTION_ID" => $_REQUEST["SECTION_ID"],
-        "SECTION_URL" => "",
-        "SECTION_USER_FIELDS" => array(
-            0 => "",
-            1 => "",
-        ),
-        "SHOW_PARENT_NAME" => "Y",
-        "TOP_DEPTH" => "3",
-        "VIEW_MODE" => "LIST",
-    ),
         false
-    ); */?>
+    ); ?>
 </section>

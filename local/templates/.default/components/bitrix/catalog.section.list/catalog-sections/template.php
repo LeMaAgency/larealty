@@ -33,7 +33,7 @@ foreach ($arResult['SECTIONS'] as &$arSection) {
 
                     <?
                     break;
-                case 9:
+                case $arResult['COUNT']:
                 ?>
                                 <li>
                                     <a href="<?= $arSection['SECTION_PAGE_URL'];?>">

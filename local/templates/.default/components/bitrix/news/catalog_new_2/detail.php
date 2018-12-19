@@ -500,7 +500,7 @@ $this->setFrameMode(true);
                     </form>
                 </div>
             </div>
-            <?/*
+            <?
             $APPLICATION->IncludeComponent(
                 "bitrix:catalog.section.list",
                 "catalog-sections",
@@ -512,7 +512,7 @@ $this->setFrameMode(true);
                     "COUNT_ELEMENTS" => "Y",
                     "IBLOCK_ID" => "2",
                     "IBLOCK_TYPE" => "realty",
-                    "SECTION_CODE" => $_REQUEST["SECTION_CODE"],
+                    "SECTION_CODE" => $arResult['VARIABLES']['SECTION_CODE'],
                     "SECTION_FIELDS" => array(
                         0 => "",
                         1 => "",
@@ -524,11 +524,11 @@ $this->setFrameMode(true);
                         1 => "",
                     ),
                     "SHOW_PARENT_NAME" => "Y",
-                    "TOP_DEPTH" => "3",
+                    "TOP_DEPTH" => "2",
                     "VIEW_MODE" => "LIST",
                 ),
                 false
-            ); */?>
+            ); ?>
             <div id="assign-view-form" style="display: none;">
                 <section class="catalog-text assign-view-form">
                     <div class="container bhelp">

@@ -1,4 +1,4 @@
-<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
+<? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 /** @var array $arParams */
 /** @var array $arResult */
 /** @global CMain $APPLICATION */
@@ -11,31 +11,35 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
+
 use \Bitrix\Main\Localization\Loc;
 
 Loc::loadMessages(__FILE__);
 
 ?>
 
-<?if($arParams["USE_RSS"]=="Y"):?>
-	<?
-	if(method_exists($APPLICATION, 'addheadstring'))
-		$APPLICATION->AddHeadString('<link rel="alternate" type="application/rss+xml" title="'.$arResult["FOLDER"].$arResult["URL_TEMPLATES"]["rss"].'" href="'.$arResult["FOLDER"].$arResult["URL_TEMPLATES"]["rss"].'" />');
-	?>
-	<a href="<?=$arResult["FOLDER"].$arResult["URL_TEMPLATES"]["rss"]?>" title="rss" target="_self"><img alt="RSS" src="<?=$templateFolder?>/images/gif-light/feed-icon-16x16.gif" border="0" align="right" /></a>
-<?endif?>
+<? if ($arParams["USE_RSS"] == "Y"): ?>
+    <?
+    if (method_exists($APPLICATION, 'addheadstring'))
+        $APPLICATION->AddHeadString('<link rel="alternate" type="application/rss+xml" title="' . $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["rss"] . '" href="' . $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["rss"] . '" />');
+    ?>
+    <a href="<?= $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["rss"] ?>" title="rss" target="_self"><img alt="RSS"
+                                                                                                             src="<?= $templateFolder ?>/images/gif-light/feed-icon-16x16.gif"
+                                                                                                             border="0"
+                                                                                                             align="right"/></a>
+<? endif ?>
 
-<?if($arParams["USE_SEARCH"]=="Y"):?>
-<?=GetMessage("SEARCH_LABEL")?><?$APPLICATION->IncludeComponent(
-	"bitrix:search.form",
-	"flat",
-	Array(
-		"PAGE" => $arResult["FOLDER"].$arResult["URL_TEMPLATES"]["search"]
-	),
-	$component
-);?>
-<br />
-<?endif?>
+<? if ($arParams["USE_SEARCH"] == "Y"): ?>
+    <?= GetMessage("SEARCH_LABEL") ?><? $APPLICATION->IncludeComponent(
+        "bitrix:search.form",
+        "flat",
+        Array(
+            "PAGE" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["search"]
+        ),
+        $component
+    ); ?>
+    <br/>
+<? endif ?>
 <? if ($arParams["USE_FILTER"] == "Y"): ?>
     <? $APPLICATION->IncludeComponent(
         "lema:new_catalog.filter",
@@ -57,20 +61,19 @@ Loc::loadMessages(__FILE__);
 <? endif ?>
 <?
 
-$arFilter =array(
+$arFilter = array(
     'IBLOCK_ID' => $arParams['IBLOCK_ID'],
     'ACTIVE' => 'Y',
 );
-if(!empty($GLOBALS['arrFilter']['ID'])){
+if (!empty($GLOBALS['arrFilter']['ID'])) {
     $arFilter['ID'] = $GLOBALS['arrFilter']['ID'];
-}elseif (!empty($GLOBALS['arrFilter']['PROPERTY'])) {
+} elseif (!empty($GLOBALS['arrFilter']['PROPERTY'])) {
     foreach ($GLOBALS['arrFilter']['PROPERTY'] as $prop => $val) {
-        $strProp = preg_replace("/[^a-zA-ZА-Яа-я0-9\s]/","",$prop);
-        $arFilter[str_replace($strProp,'PROPERTY_'.$strProp,$prop)] = $val;
+        $strProp = preg_replace("/[^a-zA-ZА-Яа-я0-9\s]/", "", $prop);
+        $arFilter[str_replace($strProp, 'PROPERTY_' . $strProp, $prop)] = $val;
     }
 }
-if($_GET['show_new_objects'] == 'Y')
-{
+if ($_GET['show_new_objects'] == 'Y') {
     $arFilter['PROPERTY_SHOW_IN_NEW_OBJ_BLOCK_VALUE'] = 'Y';
     $GLOBALS['arrFilter']['PROPERTY_SHOW_IN_NEW_OBJ_BLOCK_VALUE'] = 'Y';
 }
@@ -202,7 +205,6 @@ while ($ar_res = $res->Fetch()) {
 </section>
 
 
-
 <section class="catalog-text">
     <div class="container bhelp">
         <? $rsSections = CIBlockSection::GetList(
@@ -261,30 +263,33 @@ while ($ar_res = $res->Fetch()) {
             </form>
         </div>
     </div>
-    <?/*
-    $APPLICATION->IncludeComponent("bitrix:catalog.section.list", "catalog-sections", Array(
-        "ADD_SECTIONS_CHAIN" => "Y",
-        "CACHE_GROUPS" => "Y",
-        "CACHE_TIME" => "36000000",
-        "CACHE_TYPE" => "A",
-        "COUNT_ELEMENTS" => "Y",
-        "IBLOCK_ID" => "2",
-        "IBLOCK_TYPE" => "realty",
-        "SECTION_CODE" => $_REQUEST["SECTION_CODE"],
-        "SECTION_FIELDS" => array(
-            0 => "",
-            1 => "",
+    <?
+    $APPLICATION->IncludeComponent(
+        "bitrix:catalog.section.list",
+        "catalog-sections",
+        Array(
+            "ADD_SECTIONS_CHAIN" => "Y",
+            "CACHE_GROUPS" => "Y",
+            "CACHE_TIME" => "36000000",
+            "CACHE_TYPE" => "A",
+            "COUNT_ELEMENTS" => "Y",
+            "IBLOCK_ID" => "2",
+            "IBLOCK_TYPE" => "realty",
+            "SECTION_CODE" => $_REQUEST["SECTION_CODE"],
+            "SECTION_FIELDS" => array(
+                0 => "",
+                1 => "",
+            ),
+            "SECTION_ID" => $_REQUEST["SECTION_ID"],
+            "SECTION_URL" => "",
+            "SECTION_USER_FIELDS" => array(
+                0 => "",
+                1 => "",
+            ),
+            "SHOW_PARENT_NAME" => "Y",
+            "TOP_DEPTH" => "2",
+            "VIEW_MODE" => "LIST",
         ),
-        "SECTION_ID" => $_REQUEST["SECTION_ID"],
-        "SECTION_URL" => "",
-        "SECTION_USER_FIELDS" => array(
-            0 => "",
-            1 => "",
-        ),
-        "SHOW_PARENT_NAME" => "Y",
-        "TOP_DEPTH" => "3",
-        "VIEW_MODE" => "LIST",
-    ),
         false
-    ); */?>
+    ); ?>
 </section>
