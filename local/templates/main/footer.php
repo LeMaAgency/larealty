@@ -261,7 +261,7 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
             </div>
         </section>
     </div>
-    <div id="consultation-form">
+    <div id="consultation-form" style="display: none;">
         <?$APPLICATION->IncludeComponent(
             "lema:form.ajax",
             "feedback",
