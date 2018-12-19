@@ -156,8 +156,8 @@ $APPLICATION->IncludeComponent(
         "FILE_404" => "",
         "SEF_URL_TEMPLATES" => array(
             "news" => "",
-            "section" => "#SECTION_CODE#/",
-            "detail" => "#SECTION_CODE#/#ELEMENT_CODE#/",
+            "section" => "#SECTION_CODE_PATH#/",
+            "detail" => "#SECTION_CODE_PATH#/#ELEMENT_CODE#/",
             "search" => "search/",
         ),
         'SHOW_ALL_WO_SECTION' => 'Y',

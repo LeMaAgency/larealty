@@ -512,7 +512,7 @@ $this->setFrameMode(true);
                     "COUNT_ELEMENTS" => "Y",
                     "IBLOCK_ID" => "2",
                     "IBLOCK_TYPE" => "realty",
-                    "SECTION_CODE" => $arResult['VARIABLES']['SECTION_CODE'],
+                    "SECTION_CODE" => explode('/', $arResult['VARIABLES']['SECTION_CODE_PATH'])[0],
                     "SECTION_FIELDS" => array(
                         0 => "",
                         1 => "",
