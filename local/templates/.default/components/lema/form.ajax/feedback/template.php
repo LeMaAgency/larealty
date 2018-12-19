@@ -7,36 +7,38 @@ use Bitrix\Main\Localization\Loc;
 Loc::loadMessages(__FILE__);
 ?>
 
-<div class="container-index">
-    <div class="top-slider-mobile-form">
-        <a data-fancybox data-src="#call-order-mobile-form" href="javascript:;" class="call-order-link">
-            <?= Loc::getMessage("LEMA_FEEDBACK_ORDER_CALL"); ?>
-        </a>
-    </div>
-    <div class="top-slider-form">
-        <form method="post" <?= $component->getFormClass(); ?> <?= $component->getFormAction(); ?>
-              enctype="multipart/form-data">
-            <div class="call-order-title">
-                <?= Loc::getMessage("LEMA_FEEDBACK_BACK_CALL"); ?>
-            </div>
-            <? foreach ($component->getFields() as $field): ?>
-                <div class="it-block">
-                    <?= $component->getInput($field, array('class' => 'call-order-input')); ?>
-                    <div class="it-error"></div>
+<section class="catalog-text assign-view-form">
+    <div class="container bhelp">
+        <div class="help-form">
+            <form method="post" <?= $component->getFormClass(); ?> <?= $component->getFormAction(); ?>
+                  enctype="multipart/form-data">
+                <h2 class="section-h2">
+                    <?= Loc::getMessage("LEMA_CONSULTATION_FORM"); ?>
+                </h2>
+                <? foreach ($component->getFields() as $field): ?>
+                    <div class="form-row">
+                        <div class="it-block">
+                            <?= $component->getInput($field, array('class' => '')); ?>
+                            <div class="it-error"></div>
+                        </div>
+                    </div>
+                <? endforeach; ?>
+
+                <div class="help-consent">
+                    <div id="bx_incl_area_25" class="bx-context-toolbar-empty-area"
+                         title="Двойной щелчок - Редактировать область как html" style="min-height: 12px;">
+                        <?= Loc::getMessage("LEMA_AGREEMENT"); ?>
+                    </div>
                 </div>
-            <? endforeach; ?>
-            <div class="it-block checkbox" style="border:1px solid transparent">
-                <label style="margin:5px 10px;">
-                    <input type="checkbox" value="1" class="checkbox-152-fz">
-                    <?=$component->get152FZ();?>
-                </label>
-            </div>
-            <div class="it-block it-buttons">
-                <input type="submit" value="<?= $component->getBtnTitle() ?>" class="green-btn">
-            </div>
-        </form>
+                <input type="checkbox" checked value="1" class="checkbox-152-fz" style="display: none;">
+                <div class="it-block it-buttons help-btn">
+                    <input type="submit" value="<?= $component->getBtnTitle() ?>" class="green-btn hover-black">
+                </div>
+
+            </form>
+        </div>
     </div>
-</div>
+</section>
 
 <script type="text/javascript">
     $(function () {

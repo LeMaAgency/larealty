@@ -218,6 +218,11 @@ $(function () {
         }, 'json');
         return false;
     });
+    $('.js-consultation-form-open').on('click',function (e) {
+        e.preventDefault();
+        $.fancybox.open($('#consultation-form'));
+    });
+
 });
 function initMap() {
 

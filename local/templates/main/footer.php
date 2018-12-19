@@ -261,6 +261,31 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
             </div>
         </section>
     </div>
+    <div id="consultation-form">
+        <?$APPLICATION->IncludeComponent(
+            "lema:form.ajax",
+            "feedback",
+            Array(
+                "CACHE_TIME" => "3600",
+                "CACHE_TYPE" => "A",
+                "EVENT_TYPE" => "103",
+                "FORM_152_FZ" => "",
+                "FORM_ACTION" => "",
+                "FORM_BTN_TITLE" => "Отправить",
+                "FORM_CLASS" => "js-consultation-form",
+                "FORM_FIELDS" => "[
+                    {\"name\":\"name\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Имя\",\"default\":\"\",\"required\":\"Y\"},
+                    {\"name\":\"phone\",\"type\":\"tel\",\"title\":\"\",\"placeholder\":\"Телефон\",\"default\":\"\",\"required\":\"Y\"}
+                ]",
+                "FORM_SUCCESS_FUNCTION" => "\\$.fancybox.open(\"Ваше сообщение успешно отправлено\")",
+                "FORM_SUCCESS_FUNCTION_CORRECT_JSON" => "Y",
+                "IBLOCK_ID" => "31",
+                "IBLOCK_TYPE" => "feedback",
+                "NEED_SAVE_TO_IBLOCK" => "Y",
+                "NEED_SEND_EMAIL" => "Y"
+            )
+        );?>
+    </div>
 </footer>
 </body>
 </html>

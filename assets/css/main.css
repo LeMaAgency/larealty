@@ -742,7 +742,7 @@ header {
       color: #a49183; }
   .help .help-btn, .bhelp .help-btn {
     text-align: center; }
-    .help .help-btn button, .bhelp .help-btn button {
+    .help .help-btn button, .bhelp .help-btn button,.help-btn input[type='submit'] {
       font-size: 16px;
       text-transform: uppercase;
       color: #ffffff;

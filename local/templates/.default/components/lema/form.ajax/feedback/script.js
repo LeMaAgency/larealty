@@ -90,10 +90,12 @@ var formAjax = {
         functionName = functionName.substring(0, functionName.indexOf('('));
 
         var namespaces = functionName.split('.');
-        var func = namespaces.pop();
-        for(var i = 0; i < namespaces.length; ++i)
+        /*var func = namespaces.pop();
+        for(var i = 0; i < namespaces.length; ++i) {
             context = context[namespaces[i]];
+            console.log(context);
+        }*/
 
-        return context[func].apply(context, args);
+        return $.fancybox.open(args);
     }
 };
