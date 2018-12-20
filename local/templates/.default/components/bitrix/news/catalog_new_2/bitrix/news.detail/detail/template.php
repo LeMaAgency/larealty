@@ -31,7 +31,10 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
 ?>
 
     <h1 class='item-title'><?= $item->getName(); ?></h1>
-    <div class='item-id'>ID: <?= $item->getId(); ?></div>
+    <div class='item-id'>
+        <?= Loc::getMessage('LEMA_ID'); ?>:
+        <?= $item->getId(); ?>
+    </div>
     </div>
 
     <div class='item-card_photo'>
@@ -50,7 +53,7 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                     </div>
                 <? endforeach;
             }
-        }elseif($isOffer){
+        } elseif ($isOffer) {
             ?>
             <? foreach ($arResult['SLIDER_IMAGES'] as $imageSrc): ?>
                 <div>
@@ -98,17 +101,20 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                     <a class='hover-black js-assign-view'
                        href='#'
                         <?= $isOffer ? 'data-offer-id=\'' . $item->getId() . '\'' : 'data-id=\'' . $item->getId() . '\''; ?>>
-                        Назначить просмотр
+                        <?= Loc::getMessage('LEMA_ASSIGN_VIEW'); ?>
                     </a>
                     <a href='#'
                        class='hover-black js-form-open'
                        data-form-id='make-bid'
                        data-form-title='Предложить цену'
                         <?= $isOffer ? 'data-offer-id=\'' . $item->getId() . '\'' : 'data-id=\'' . $item->getId() . '\''; ?>>
-                        Предложить цену</a>
+                        <?= Loc::getMessage('LEMA_MAKE_BID'); ?>
+                    </a>
                 </div>
                 <div class='item-card_phone'>
-                    <span>Или позвоните нам: </span>
+                    <span>
+                        <?= Loc::getMessage('LEMA_CALL'); ?>
+                    </span>
                     <a href='tel:+74954775450'>+7 (495) 477-54-50</a>
                 </div>
             </div>
@@ -143,7 +149,8 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
             <? if (!empty($item->propVal('SQUARE'))) { ?>
                 <div class='item-card_icon'>
                     <img src='/assets/img/area-icon.png' alt=''>
-                    <?= $item->propVal('SQUARE'); ?> м²
+                    <?= $item->propVal('SQUARE'); ?>
+                    <?= Loc::getMessage('LEMA_SQUARE_M2'); ?>
                 </div>
             <? } ?>
             <? if (!empty($item->propVal('BEDROOM'))) { ?>
@@ -168,23 +175,25 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
             <? if (!empty($item->propVal('LIFT_FLAG'))) { ?>
                 <div class='item-card_icon'>
                     <img src='/assets/img/valik.png' alt=''>
-                    С лифтом
+                    <?= Loc::getMessage('LEMA_LIFT'); ?>
                 </div>
             <? } ?>
             <? if (!empty($item->propVal('PARKING'))) { ?>
                 <div class='item-card_icon'>
                     <img src='/assets/img/area-icon.png' alt=''>
-                    Паркинг
+                    <?= Loc::getMessage('LEMA_PARKING'); ?>
                 </div>
             <? } ?>
         </div>
     </div>
     <div class='card-characteristics'>
         <div class='container'>
-            <h3>Характеристики</h3>
+            <h3>
+                <?= Loc::getMessage('LEMA_SPECIFICATIONS'); ?>
+            </h3>
             <div class='characteristics-list'>
                 <? foreach ($arResult['PROPERTIES'] as $property) {
-                    $arNotShowProp=[
+                    $arNotShowProp = [
                         'MAP',
                         'CML2_LINK',
                         'POPULAR',
@@ -197,18 +206,20 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                         'REMINDER_TEXT',
                         'RIELTOR',
                         'ADD_OBJECT_TO_EXPORT',
-                    ];?>
-                    <? if (!empty($property['VALUE']) && !(in_array($property['CODE'],$arNotShowProp))) { ?>
+                    ]; ?>
+                    <? if (!empty($property['VALUE']) && !(in_array($property['CODE'], $arNotShowProp))) { ?>
                         <div class='characteristics-item'>
                             <div class='characteristics-name'>
                                 <? if (!empty($property['NAME'])) { ?>
                                     <span><?= $property['NAME']; ?>:</span>
                                 <? } else { ?>
-                                    <span><?= $arResult['OFFER_PROP_NAME'][$property['CODE']]; ?></span>
+                                    <span>
+                                        <?= $arResult['OFFER_PROP_NAME'][$property['CODE']]; ?>
+                                    </span>
                                 <? } ?>
                             </div>
                             <div class='characteristics-info'>
-                                <?= $property['VALUE']; ?>
+                                <?= $property['VALUE'] != 'Y' ? $property['VALUE'] : Loc::getMessage('LEMA_PROPERTIES_VALUE_Y'); ?>
                             </div>
                         </div>
                     <? } ?>
@@ -222,7 +233,7 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                    data-form-id='request-layout'
                    data-form-title='Запросить планировку'
                     <?= $isOffer ? 'data-offer-id=\'' . $item->getId() . '\'' : 'data-id=\'' . $item->getId() . '\''; ?>>
-                    Планировка
+                    <?= Loc::getMessage('LEMA_LAYOUT'); ?>
                 </a>
             </div>
         </div>
@@ -253,16 +264,28 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
         <?
         if (!empty($arResult['OFFERS']) && !$isOffer) { ?>
             <div class='container'>
-                <h2>Другие предложения в <?= $item->getName(); ?></h2>
+                <h2><?= Loc::getMessage('LEMA_OTHER_OFFERS'); ?> <?= $item->getName(); ?></h2>
                 <table class='offer-table'>
                     <thead>
                     <tr>
-                        <td>ID</td>
-                        <td>Тип</td>
-                        <td>Этаж</td>
-                        <td>Кол-во комнат</td>
-                        <td>Площадь, кв.м.</td>
-                        <td>Цена</td>
+                        <td>
+                            <?= Loc::getMessage('LEMA_ID'); ?>
+                        </td>
+                        <td>
+                            <?= Loc::getMessage('LEMA_TYPE'); ?>
+                        </td>
+                        <td>
+                            <?= Loc::getMessage('LEMA_STAGE'); ?>
+                        </td>
+                        <td>
+                            <?= Loc::getMessage('LEMA_ROOM_COUNT'); ?>
+                        </td>
+                        <td>
+                            <?= Loc::getMessage('LEMA_SQUARE'); ?>
+                        </td>
+                        <td>
+                            <?= Loc::getMessage('LEMA_PRICE'); ?>
+                        </td>
                     </tr>
                     </thead>
                     <tbody>
@@ -273,7 +296,7 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                         <tr <? if ($i > $countShow){ ?>style="display:none;"<? } ?>>
                             <td>
                                 <span class='dn'>
-                                    ID:
+                                    <?= Loc::getMessage('LEMA_ID'); ?>:
                                 </span>
                                 <a href='<?= $APPLICATION->GetCurPageParam('offerId=' . $arOffer['ID'], ['offerId']); ?>'
                                    class='table-link'>
@@ -282,31 +305,31 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                             </td>
                             <td>
                                 <span class='dn'>
-                                    Тип:
+                                    <?= Loc::getMessage('LEMA_TYPE'); ?>:
                                 </span>
                                 <?= $arOffer['PROPERTY_REALTY_TYPE_VALUE'] ? $arOffer['PROPERTY_REALTY_TYPE_VALUE'] : '-'; ?>
                             </td>
                             <td>
                                 <span class='dn'>
-                                    Этаж:
+                                    <?= Loc::getMessage('LEMA_STAGE'); ?>:
                                 </span>
                                 <?= $arOffer['PROPERTY_STAGE_VALUE'] ? $arOffer['PROPERTY_STAGE_VALUE'] : '-'; ?>
                             </td>
                             <td>
                                 <span class='dn'>
-                                    Кол-во комнат:
+                                    <?= Loc::getMessage('LEMA_ROOM_COUNT'); ?>:
                                 </span>
                                 <?= $arOffer['PROPERTY_ROOMS_COUNT_VALUE'] ? $arOffer['PROPERTY_ROOMS_COUNT_VALUE'] : '-'; ?>
                             </td>
                             <td>
                                 <span class='dn'>
-                                    Площадь, кв.м.:
+                                    <?= Loc::getMessage('LEMA_SQUARE'); ?>:
                                 </span>
                                 <?= $arOffer['PROPERTY_SQUARE_VALUE'] ? $arOffer['PROPERTY_SQUARE_VALUE'] : '-'; ?>
                             </td>
                             <td>
                                 <span class='dn'>
-                                    Цена:
+                                    <?= Loc::getMessage('LEMA_PRICE'); ?>:
                                 </span>
                                 <span class='table-price'>
                                     <?= $arOffer['PROPERTY_PRICE_VALUE'] ? $arOffer['PROPERTY_PRICE_VALUE'] : '-'; ?>
@@ -320,7 +343,7 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                 <? if (count($arResult['OFFERS']) > $countShow) { ?>
                     <div class='more-offer_link js-show-offer'>
                         <a class='hover-black' href='#'>
-                            Показать все
+                            <?=Loc::getMessage('LEMA_SHOW_ALL');?>
                             <span>
                             (
                                 <?= \Lema\Common\Helper::pluralizeN(
@@ -607,12 +630,12 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
 <? $GLOBALS['ELEM_ID_CATALOG'] = $arResult['PROPERTIES']['RESEMBLING']['VALUE'];
 $GLOBALS['THIS_ELEM_ID'] = $item->getId();
 $GLOBALS['THIS_OFFER_ID'] = '';
-if($isOffer){
+if ($isOffer) {
     $GLOBALS['THIS_ELEM_ID'] = $item->propVal('CML2_LINK');
     $GLOBALS['THIS_OFFER_ID'] = $item->getId();
 }
 $GLOBALS['REGION_ELEM_VALUE'] = $item->propVal('REGION');
-$GLOBALS['PRICE_ELEM_VALUE'] = $item->propVal('PRICE') ? $item->propVal('PRICE') : (!empty($offer)?$offer->propVal('PRICE'):'');
+$GLOBALS['PRICE_ELEM_VALUE'] = $item->propVal('PRICE') ? $item->propVal('PRICE') : (!empty($offer) ? $offer->propVal('PRICE') : '');
 ?>
 
 <? if (isset($arParams['USE_SHARE']) && $arParams['USE_SHARE'] == 'Y'): ?>
