@@ -138,6 +138,27 @@ $(function () {
         }
     });
 
+    $(document).off('click', '.js-form-open').on('click', '.js-form-open', function (e) {
+        e.preventDefault();
+        var formId = $('#'+$(this).data('form-id')),
+            title = $(this).data('form-title'),
+            id = $(this).data('id'),
+            offerId = $(this).data('offer-id'),
+            infoblockCode = $(this).data('infoblock-code');
+
+        if(typeof id !='undefined'){
+            formId.find('input[name="id"]').val(id);
+        }
+        if(typeof offerId !='undefined'){
+            formId.find('input[name="offer_id"]').val(offerId);
+        }
+        if(typeof infoblockCode !='undefined'){
+            formId.find('input[name="infoblock-code"]').val(infoblockCode);
+        }
+        formId.find('h2').html(title);
+        $.fancybox.open(formId);
+    });
+
     $(document).off('click', 'select.js-sort-select').on('click', 'select.js-sort-select', function () {
         var selectedIndex = $(this).find('option').context.selectedIndex,
             option = $(this).find('option[value="' + selectedIndex + '"]');

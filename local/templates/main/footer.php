@@ -277,7 +277,7 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
                     {\"name\":\"name\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Имя\",\"default\":\"\",\"required\":\"Y\"},
                     {\"name\":\"phone\",\"type\":\"tel\",\"title\":\"\",\"placeholder\":\"Телефон\",\"default\":\"\",\"required\":\"Y\"}
                 ]",
-                "FORM_SUCCESS_FUNCTION" => "\\$.fancybox.open(\"Ваше сообщение успешно отправлено\")",
+                "FORM_SUCCESS_FUNCTION" => "\$.fancybox.open(\"Ваше сообщение успешно отправлено\")",
                 "FORM_SUCCESS_FUNCTION_CORRECT_JSON" => "Y",
                 "IBLOCK_ID" => "31",
                 "IBLOCK_TYPE" => "feedback",

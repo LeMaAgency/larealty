@@ -568,3 +568,59 @@ $this->setFrameMode(true);
         </section>
     </div>
 </div>
+<div id="make-bid" class="display-none">
+    <?$APPLICATION->IncludeComponent(
+        "lema:form.ajax",
+        "feedback",
+        Array(
+            "CACHE_TIME" => "3600",
+            "CACHE_TYPE" => "A",
+            "EVENT_TYPE" => "105",
+            "FORM_152_FZ" => "",
+            "FORM_ACTION" => "",
+            "FORM_BTN_TITLE" => "Отправить",
+            "FORM_CLASS" => "make-bid",
+            "FORM_FIELDS" => "[
+                    {\"name\":\"name\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Имя\",\"default\":\"\",\"required\":\"Y\"},
+                    {\"name\":\"phone\",\"type\":\"tel\",\"title\":\"\",\"placeholder\":\"Телефон\",\"default\":\"\",\"required\":\"Y\"},                    
+                    {\"name\":\"id\",\"type\":\"hidden\",\"title\":\"\",\"placeholder\":\"id\",\"default\":\"\",\"\":\"Y\"},
+                    {\"name\":\"offer_id\",\"type\":\"hidden\",\"title\":\"\",\"placeholder\":\"offer_id\",\"default\":\"\",\"\":\"Y\"}
+                ]",
+            "FORM_SUCCESS_FUNCTION" => "\$.fancybox.open(\"Ваше сообщение успешно отправлено\")",
+            "FORM_SUCCESS_FUNCTION_CORRECT_JSON" => "Y",
+            "IBLOCK_ID" => "32",
+            "IBLOCK_TYPE" => "feedback",
+            "NEED_SAVE_TO_IBLOCK" => "Y",
+            "NEED_SEND_EMAIL" => "Y"
+        )
+    );?>
+</div>
+
+<div id="request-layout" class="display-none">
+    <?$APPLICATION->IncludeComponent(
+        "lema:form.ajax",
+        "feedback",
+        Array(
+            "CACHE_TIME" => "3600",
+            "CACHE_TYPE" => "A",
+            "EVENT_TYPE" => "107",
+            "FORM_152_FZ" => "",
+            "FORM_ACTION" => "",
+            "FORM_BTN_TITLE" => "Отправить",
+            "FORM_CLASS" => "request-layout",
+            "FORM_FIELDS" => "[
+                    {\"name\":\"name\",\"type\":\"text\",\"title\":\"\",\"placeholder\":\"Имя\",\"default\":\"\",\"required\":\"Y\"},
+                    {\"name\":\"phone\",\"type\":\"tel\",\"title\":\"\",\"placeholder\":\"Телефон\",\"default\":\"\",\"required\":\"Y\"},
+                    {\"name\":\"email\",\"type\":\"email\",\"title\":\"\",\"placeholder\":\"Email\",\"default\":\"\",\"required\":\"Y\"},                 
+                    {\"name\":\"id\",\"type\":\"hidden\",\"title\":\"\",\"placeholder\":\"id\",\"default\":\"\",\"\":\"Y\"},
+                    {\"name\":\"offer_id\",\"type\":\"hidden\",\"title\":\"\",\"placeholder\":\"offer_id\",\"default\":\"\",\"\":\"Y\"}
+                ]",
+            "FORM_SUCCESS_FUNCTION" => "\$.fancybox.open(\"Ваше сообщение успешно отправлено\")",
+            "FORM_SUCCESS_FUNCTION_CORRECT_JSON" => "Y",
+            "IBLOCK_ID" => "33",
+            "IBLOCK_TYPE" => "feedback",
+            "NEED_SAVE_TO_IBLOCK" => "Y",
+            "NEED_SEND_EMAIL" => "Y"
+        )
+    );?>
+</div>

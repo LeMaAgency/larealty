@@ -95,11 +95,17 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
             </div>
             <div class='item-card_right'>
                 <div class='item-card_button'>
-                    <!--<a class='hover-black' href='#'>Предложить цену</a>-->
                     <a class='hover-black js-assign-view'
-                       href='#' <?= $isOffer ? 'data-offer-id=\'' . $item->getId() . '\'' : 'data-id=\'' . $item->getId() . '\''; ?>>
+                       href='#'
+                        <?= $isOffer ? 'data-offer-id=\'' . $item->getId() . '\'' : 'data-id=\'' . $item->getId() . '\''; ?>>
                         Назначить просмотр
                     </a>
+                    <a href='#'
+                       class='hover-black js-form-open'
+                       data-form-id='make-bid'
+                       data-form-title='Предложить цену'
+                        <?= $isOffer ? 'data-offer-id=\'' . $item->getId() . '\'' : 'data-id=\'' . $item->getId() . '\''; ?>>
+                        Предложить цену</a>
                 </div>
                 <div class='item-card_phone'>
                     <span>Или позвоните нам: </span>
@@ -210,8 +216,14 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
 
             </div>
             <div class='characteristics-link'>
-                <!--<a href='#' class='hover-black link-presentation'>Презентация</a>
-                <a href='#' class='hover-black link-plan'>Планировки</a>-->
+                <!--<a href='#' class='hover-black link-presentation'>Презентация</a>-->
+                <a href='#'
+                   class='hover-black link-plan js-form-open'
+                   data-form-id='request-layout'
+                   data-form-title='Запросить планировку'
+                    <?= $isOffer ? 'data-offer-id=\'' . $item->getId() . '\'' : 'data-id=\'' . $item->getId() . '\''; ?>>
+                    Планировка
+                </a>
             </div>
         </div>
     </div>

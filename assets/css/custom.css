@@ -30,8 +30,13 @@
 
 .assign-view-form .form-row {
     display: inline-block !important;
-    width: 100%;
+    width: auto;
     text-align: center;
+    margin-bottom: 0px;
+}
+
+.assign-view-form .form-row input:not([type='hidden']){
+    margin-bottom: 20px;
 }
 
 .bhelp h1 {
@@ -87,4 +92,7 @@
 }
 .expert-txt{
     z-index: 1;
+}
+.display-none{
+    display: none;
 }

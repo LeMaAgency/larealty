@@ -167,7 +167,7 @@ while ($ar_res = $res->Fetch()) {
             <div class="sort-list">
                <select name="sort-select" class="sort-select js-sort-select js-sort-select">
                     <option value="0"
-                            data-url="<?= $APPLICATION->GetCurPageParam('', array('sort','sort_order')); ?>">>
+                            data-url="<?= $APPLICATION->GetCurPageParam('', array('sort','sort_order')); ?>">
                         Сортировать по
                     </option>
                    <option value="1"
