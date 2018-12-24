@@ -159,7 +159,7 @@ $(function () {
         $.fancybox.open(formId);
     });
 
-    $(document).off('click', 'select.js-sort-select').on('click', 'select.js-sort-select', function () {
+    $(document).on('change', 'select.js-sort-select', function () {
         var selectedIndex = $(this).find('option').context.selectedIndex,
             option = $(this).find('option[value="' + selectedIndex + '"]');
         if (option.data('url')) {
