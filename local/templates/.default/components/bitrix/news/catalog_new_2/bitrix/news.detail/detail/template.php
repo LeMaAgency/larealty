@@ -35,7 +35,7 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
         <?= Loc::getMessage('LEMA_ID'); ?>:
         <?= $item->getId(); ?>
     </div>
-    </div>
+    </div> <!-- Закрывающий тег блока "div" с классом "container" из detail.php компонента news -->
 
     <div class='item-card_photo'>
         <? if (!empty($item->detailPicture()) || !empty($item->propVal('MORE_PHOTO'))) { ?>
@@ -71,19 +71,19 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                         <div class='item-card_price-coutn'>
                             <? if ($item->propVal('PRICE')) { ?>
                                 <span>
-                                <?= $item->propVal('PRICE'); ?>
-                            </span>
+                                    <?= $item->propVal('PRICE'); ?>
+                                </span>
                             <? } else { ?>
                                 <span>
-                                <?= $offer->propVal('PRICE'); ?>
-                            </span>
+                                    <?= $offer->propVal('PRICE'); ?>
+                                </span>
                             <? } ?>
                         </div>
                         <div class='item-card_price-for'>
                             <? if (!empty($item->propVal('PRICE')) && !empty($item->propVal('SQUARE'))) { ?>
                                 <span>
-                                <?= intdiv($item->propVal('PRICE'), $item->propVal('SQUARE')); ?>
-                            </span>
+                                    <?= intdiv($item->propVal('PRICE'), $item->propVal('SQUARE')); ?>
+                                </span>
                             <? } ?>
                         </div>
                     <? } ?>
@@ -112,9 +112,9 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                     </a>
                 </div>
                 <div class='item-card_phone'>
-                    <span>
-                        <?= Loc::getMessage('LEMA_CALL'); ?>
-                    </span>
+                        <span>
+                            <?= Loc::getMessage('LEMA_CALL'); ?>
+                        </span>
                     <a href='tel:+74954775450'>+7 (495) 477-54-50</a>
                 </div>
             </div>
@@ -211,15 +211,24 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                         <div class='characteristics-item'>
                             <div class='characteristics-name'>
                                 <? if (!empty($property['NAME'])) { ?>
-                                    <span><?= $property['NAME']; ?>:</span>
+                                    <span>
+                                        <?= $property['NAME']; ?>:
+                                    </span>
                                 <? } else { ?>
                                     <span>
-                                        <?= $arResult['OFFER_PROP_NAME'][$property['CODE']]; ?>
-                                    </span>
+                                            <?= $arResult['OFFER_PROP_NAME'][$property['CODE']]; ?>
+                                        </span>
                                 <? } ?>
                             </div>
                             <div class='characteristics-info'>
-                                <?= $property['VALUE'] != 'Y' ? $property['VALUE'] : Loc::getMessage('LEMA_PROPERTIES_VALUE_Y'); ?>
+                                <?
+                                if (is_array($property['VALUE'])) {
+                                    foreach ($property['VALUE'] as $value) {
+                                        echo $value. '; ';
+                                    }
+                                } else {
+                                    echo $property['VALUE'] != 'Y' ? $property['VALUE'] : Loc::getMessage('LEMA_PROPERTIES_VALUE_Y');
+                                } ?>
                             </div>
                         </div>
                     <? } ?>
@@ -245,8 +254,21 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                  data-address='<?= $item->propVal('ADDRESS'); ?>'>
             </div>
         <? endif; ?>
-
     </div>
+<? if (!empty($item->propVal('MORE_PHOTO'))) { ?>
+    <div class="container">
+        <div class="detail-gallery">
+            <? foreach ($item->propVal('MORE_PHOTO') as $photo) { ?>
+                <a class="fancybox"
+                   data-fancybox="gallery"
+                   href="<?= \CFile::GetPath($photo); ?>"
+                   title=""
+                   style="background-image: url(<?= \CFile::GetPath($photo); ?>);">
+                </a>
+            <? } ?>
+        </div>
+    </div>
+<? } ?>
     <div class='item-card_desc'>
         <div class='container'>
             <h2><?= $item->getName(); ?></h2>
@@ -259,7 +281,7 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
             </div>
         </div>
     </div>
-    </div>
+    </div> <!-- Закрывающий тег блока "div" с классом "item-card" из detail.php компонента news -->
     <div class='more-offer'>
         <?
         if (!empty($arResult['OFFERS']) && !$isOffer) { ?>
@@ -343,7 +365,7 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                 <? if (count($arResult['OFFERS']) > $countShow) { ?>
                     <div class='more-offer_link js-show-offer'>
                         <a class='hover-black' href='#'>
-                            <?=Loc::getMessage('LEMA_SHOW_ALL');?>
+                            <?= Loc::getMessage('LEMA_SHOW_ALL'); ?>
                             <span>
                             (
                                 <?= \Lema\Common\Helper::pluralizeN(

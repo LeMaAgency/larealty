@@ -128,9 +128,82 @@ Loc::loadMessages(__FILE__);
                 </div>
             </div>
             <? if ($arResult['STATISTICS_INFO']['ALL_COUNT'] > 6) { ?>
-                <!--<div class="catalog-head_link"><a href="#"><img src="/assets/img/plus.png" alt="plus"><span>Все районы</span></a></div>-->
+                <div class="catalog-head_link"><a href="#" class="js-statistic-list"><img src="/assets/img/plus.png" alt="plus"><span>Все районы</span></a></div>
             <? } ?>
         <? } ?>
 
+    </div>
+</div>
+<div id="statistic-list" class="statistic-list-block" style="display: none;">
+    <h2>Все районы</h2>
+    <div class="catalog-head_list">
+        <div class="flex-list">
+            <?
+            $count = $countColumn = 0;
+            foreach ($arResult["STATISTICS"] as $key => $arRegion):
+                if ($count <= $arResult['STATISTICS_INFO']['ELEM_IN_BLOCK']) {
+                    $count++;
+                    switch ($count):
+                        case 1:
+                            ?>
+                            <ul>
+                            <li>
+                                <a href="<?= $APPLICATION->GetCurPageParam('region=' . $key, array('region')); ?>">
+                                    <span class="feature-left">
+                                        <?= $arRegion['NAME']; ?>
+                                    </span>
+                                    <span class="count feature-right">
+                                        <?= $arRegion['COUNT']; ?>
+                                    </span>
+                                </a>
+                            </li>
+                            <?
+                            break;
+                        case $arResult['STATISTICS_INFO']['ELEM_IN_BLOCK']:
+                            ?>
+                            <li>
+                                <a href="<?= $APPLICATION->GetCurPageParam('region=' . $key, array('region')); ?>">
+                                        <span class="feature-left">
+                                            <?= $arRegion['NAME']; ?>
+                                        </span>
+                                        <span class="count feature-right">
+                                            <?= $arRegion['COUNT']; ?>
+                                        </span>
+                                </a>
+                            </li>
+                            </ul>
+                            <?
+                            break;
+                        default:
+                            ?>
+                            <li>
+                                <a href="<?= $APPLICATION->GetCurPageParam('region=' . $key, array('region')); ?>">
+                                    <span class="feature-left">
+                                        <?= $arRegion['NAME']; ?>
+                                    </span>
+                                    <span class="count feature-right">
+                                        <?= $arRegion['COUNT']; ?>
+                                    </span>
+                                </a>
+                            </li>
+                            <?
+                            break;
+                    endswitch;
+                    if ($arResult['STATISTICS_INFO']['LAST_COUNT_ID'] == $key) {
+                        ?>
+                        </ul>
+                        <?
+                    }
+                    if ($count == $arResult['STATISTICS_INFO']['ELEM_IN_BLOCK']) {
+                        $countColumn++;
+                        $count = 0;
+                    }
+                    if($countColumn == 2){
+                        break;
+                    }
+                }
+
+            endforeach; ?>
+        </div>
     </div>
 </div>

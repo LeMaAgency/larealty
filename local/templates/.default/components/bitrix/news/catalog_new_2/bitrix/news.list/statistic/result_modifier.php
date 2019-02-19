@@ -13,6 +13,7 @@ foreach ($arResult['ITEMS'] as $arItem) {
         $counter++;
     }
 }
+ksort($arResult['STATISTICS']);
 $arResult['STATISTICS_INFO']['ALL_COUNT'] = $counter;
 $arResult['STATISTICS_INFO']['ELEM_IN_BLOCK'] = ceil(count($arResult['STATISTICS'])/2);
 $arResult['STATISTICS_INFO']['LAST_REGION_ID'] = $region['VALUE_ENUM_ID'];

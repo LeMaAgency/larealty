@@ -24,8 +24,8 @@ Loc::loadMessages(__FILE__);
         "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
         "IBLOCK_ID" => $arParams["IBLOCK_ID"],
         "NEWS_COUNT" => "10000",
-        "SORT_BY1" => $arParams["SORT_BY1"],
-        "SORT_ORDER1" => $arParams["SORT_ORDER1"],
+        "SORT_BY1" => 'name',
+        "SORT_ORDER1" => "asc",
         "SORT_BY2" => $arParams["SORT_BY2"],
         "SORT_ORDER2" => $arParams["SORT_ORDER2"],
         "FIELD_CODE" => $arParams["LIST_FIELD_CODE"],
@@ -124,6 +124,10 @@ $arFilter = array(
     'INCLUDE_SUBSECTIONS' => 'Y',
     'ACTIVE' => 'Y',
 );
+if (!empty($_REQUEST['region'])) {
+    $GLOBALS['arrFilter']['PROPERTY']['REGION'] = $_REQUEST['region'];
+    $arFilter['PROPERTY_REGION'] = $_REQUEST['region'];
+};
 if (!empty($GLOBALS['arrFilter']['ID'])) {
     $arFilter['ID'] = $GLOBALS['arrFilter']['ID'];
 } elseif (!empty($GLOBALS['arrFilter']['PROPERTY'])) {
@@ -146,9 +150,6 @@ while ($ar_res = $res->Fetch()) {
     $countElements++;
 }
 ?>
-<? if (!empty($_REQUEST['region'])) {
-    $GLOBALS['arrFilter']['PROPERTY']['REGION'] = $_REQUEST['region'];
-}; ?>
 
 <section class="catalog">
     <div class="container">
