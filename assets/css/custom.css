@@ -96,3 +96,47 @@
 .display-none{
     display: none;
 }
+.detail-gallery .fancybox{
+    width: 300px;
+    height: 200px;
+    overflow: hidden;
+    background-position: center;
+    display: inline-block;
+    background-size: cover;
+}
+@media (max-width: 450px){
+    .detail-gallery{
+        text-align: center;
+    }
+}
+.statistic-list-block{
+    padding: 35px 0 15px 50px;
+}
+.statistic-list-block h2{
+    padding-bottom: 35px;
+}
+.statistic-list-block a{
+    color: black;
+}
+.feature-left {
+       width: 100%;
+       vertical-align: top;
+       overflow: hidden;
+       display: inline-block;
+       letter-spacing: normal;
+   }
+.feature-left:after {
+    content: '';
+    display: inline-block;
+    width: 100%;
+    margin: 0 -99% 0 3px;
+    vertical-align: baseline;
+    border-bottom: 1px dotted #888;
+    height: 5px;
+}
+.feature-right {
+    display: inline-block;
+    letter-spacing: normal;
+    padding-left: 3px;
+    vertical-align: bottom;
+}

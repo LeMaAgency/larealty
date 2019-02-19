@@ -140,19 +140,19 @@ $(function () {
 
     $(document).off('click', '.js-form-open').on('click', '.js-form-open', function (e) {
         e.preventDefault();
-        var formId = $('#'+$(this).data('form-id')),
+        var formId = $('#' + $(this).data('form-id')),
             title = $(this).data('form-title'),
             id = $(this).data('id'),
             offerId = $(this).data('offer-id'),
             infoblockCode = $(this).data('infoblock-code');
 
-        if(typeof id !='undefined'){
+        if (typeof id != 'undefined') {
             formId.find('input[name="id"]').val(id);
         }
-        if(typeof offerId !='undefined'){
+        if (typeof offerId != 'undefined') {
             formId.find('input[name="offer_id"]').val(offerId);
         }
-        if(typeof infoblockCode !='undefined'){
+        if (typeof infoblockCode != 'undefined') {
             formId.find('input[name="infoblock-code"]').val(infoblockCode);
         }
         formId.find('h2').html(title);
@@ -168,21 +168,21 @@ $(function () {
     });
     $(document).off('click', '.js-show-offer').on('click', '.js-show-offer', function (e) {
         e.preventDefault();
-       $(this).closest('.container').find('table.offer-table tr').each(function (i,elem) {
-           $(elem).show();
-       });
-       $(this).hide();
+        $(this).closest('.container').find('table.offer-table tr').each(function (i, elem) {
+            $(elem).show();
+        });
+        $(this).hide();
     });
 
     $(document).off('click', '.button-list div').on('click', '.button-list div', function (e) {
         var value = $(this).data('value');
-        $(this).closest('.filter-row').find('select.js-realty-type option').each(function (i,elem) {
-            if($(elem).val() == value){
-                $(elem).attr("selected",true);
-            }else{
-                $(elem).attr("selected",false);
+        $(this).closest('.filter-row').find('select.js-realty-type option').each(function (i, elem) {
+            if ($(elem).val() == value) {
+                $(elem).attr("selected", true);
+            } else {
+                $(elem).attr("selected", false);
             }
-            console.log($(elem),$(elem).val(),value,$(elem).val() == value);
+            console.log($(elem), $(elem).val(), value, $(elem).val() == value);
         });
     });
     $('form.js-subscribe-form').on('submit', function (e) {
@@ -196,7 +196,8 @@ $(function () {
             if (ans && ans['errors']) {
                 //show errors on inputs
                 for (var inputName in ans.errors) {
-                    curForm.find('[name="' + inputName + '"]').closest('.js-field-block').find('.core__form__input__log_danger').html(ans['errors'][inputName]);                }
+                    curForm.find('[name="' + inputName + '"]').closest('.js-field-block').find('.core__form__input__log_danger').html(ans['errors'][inputName]);
+                }
                 //show message with errors
                 $.fancybox.open(
                     '<div style="margin:25px;padding:35px;color:red;">' +
@@ -247,12 +248,21 @@ $(function () {
         }, 'json');
         return false;
     });
-    $('.js-consultation-form-open').on('click',function (e) {
+    $('.js-consultation-form-open').on('click', function (e) {
         e.preventDefault();
         $.fancybox.open($('#consultation-form'));
     });
+    $(".fancybox").fancybox({
+        openEffect: 'none',
+        closeEffect: 'none'
+    });
 
+    $('.js-statistic-list').off('click').on('click', function (e) {
+        e.preventDefault();
+        $.fancybox.open($('#statistic-list'));
+    })
 });
+
 function initMap() {
 
     var map,
@@ -298,7 +308,7 @@ function initMap() {
             }
         ];
 
-        if(address.length) {
+        if (address.length) {
             var infowindow = new google.maps.InfoWindow({
                 content: address,
                 maxWidth: 200
@@ -312,7 +322,7 @@ function initMap() {
                 icon: icons[feature.type].icon,
                 map: map
             });
-            if(address.length) {
+            if (address.length) {
                 marker.addListener('click', function () {
                     infowindow.open(map, marker);
                 });
