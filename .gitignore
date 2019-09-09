@@ -2,6 +2,7 @@
 /bitrix
 /upload
 /local/import/
+/import
 !/local/import/run.php
 !/local/import/delete_all_elements.php
 !/robots.txt
@@ -12,6 +13,7 @@
 /*.sql
 *.zip
 *.tar.gz
+*.tar.gz*
 *.gz
 *.tar
 *.bak
