@@ -24,7 +24,7 @@ $APPLICATION->SetTitle("Агентство недвижимости Lexhome");
         "SAVE_IN_SESSION" => "N",
         "TEXT_WIDTH" => "20"
     )
-); ?>1
+); ?>
 <section class="realties">
     <div class="container">
         <h2 class="section-h2">Все виды недвижимости</h2>
