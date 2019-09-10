@@ -261,6 +261,15 @@ $(function () {
         e.preventDefault();
         $.fancybox.open($('#statistic-list'));
     })
+
+    $('.have_submenu').hover(
+        function () {
+            $(this).find('.submenu').fadeIn()
+        },
+        function () {
+            $(this).find('.submenu').fadeOut()
+        }
+    )
 });
 
 function initMap() {

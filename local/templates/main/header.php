@@ -150,21 +150,20 @@ global $APPLICATION;
 </header>
 <nav class="main-menu">
     <div class="container">
-        <? $APPLICATION->IncludeComponent(
-            'bitrix:menu',
-            'top__menu',
-            array(
-                'ALLOW_MULTI_SELECT' => 'N',
-                'ROOT_MENU_TYPE' => 'main',
-                'CHILD_MENU_TYPE' => 'main',
-                'DELAY' => 'N',
-                'MAX_LEVEL' => '1',
-                'MENU_CACHE_GET_VARS' => array(),
-                'MENU_CACHE_TIME' => '3600',
-                'MENU_CACHE_TYPE' => 'A',
-                'MENU_CACHE_USE_GROUPS' => 'N',
-                'USE_EXT' => 'Y',
-                'COMPONENT_TEMPLATE' => 'top__menu'
-            )); ?>
+        <? $APPLICATION->IncludeComponent("bitrix:menu", "top_menu_iblock", Array(
+	"ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно
+		"ROOT_MENU_TYPE" => "main",	// Тип меню для первого уровня
+		"CHILD_MENU_TYPE" => "main",	// Тип меню для остальных уровней
+		"DELAY" => "N",	// Откладывать выполнение шаблона меню
+		"MAX_LEVEL" => "1",	// Уровень вложенности меню
+		"MENU_CACHE_GET_VARS" => "",	// Значимые переменные запроса
+		"MENU_CACHE_TIME" => "3600",	// Время кеширования (сек.)
+		"MENU_CACHE_TYPE" => "A",	// Тип кеширования
+		"MENU_CACHE_USE_GROUPS" => "N",	// Учитывать права доступа
+		"USE_EXT" => "Y",	// Подключать файлы с именами вида .тип_меню.menu_ext.php
+		"COMPONENT_TEMPLATE" => "top__menu"
+	),
+	false
+); ?>
     </div>
 </nav>

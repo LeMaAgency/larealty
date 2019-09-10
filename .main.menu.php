@@ -8,32 +8,18 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Загородная недвижимость", 
-		"/catalog/cottage/", 
+		"Арендный бизнес",
+		"/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"Коммерческая недвижимость", 
-		"/catalog/commercial/", 
+		"Инвестпроекты",
+		"/",
 		Array(), 
 		Array(), 
 		"" 
 	),
-	Array(
-		"Зарубежная недвижимость", 
-		"/catalog/foreign/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Аналитика, Консалтинг, Оценка недвижимости", 
-		"/consult/", 
-		Array(), 
-		Array(), 
-		"" 
-	)
 );
 ?>

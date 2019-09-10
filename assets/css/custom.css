@@ -143,3 +143,28 @@
 .slogan{
     text-align: center;
 }
+.main-menu{
+    padding: 0;
+}
+.main-menu ul{
+    justify-content: center;
+}
+.top_menu_wrap .first_level{
+    padding: 13px 40px !important;
+}
+.top_menu_wrap .second_level{
+    padding: 13px 0px !important;
+    text-align: center;
+}
+.main-menu .submenu{
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.72);
+    bottom: -52px;
+    left: 0;
+    width: 100%;
+}
+.have_submenu{
+    position: relative;
+}
+
