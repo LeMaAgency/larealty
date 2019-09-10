@@ -262,7 +262,8 @@ $(function () {
         $.fancybox.open($('#statistic-list'));
     })
 
-    $('.have_submenu').hover(
+    //Меню десктом
+    $('.main-menu .have_submenu').hover(
         function () {
             $(this).find('.submenu').fadeIn()
         },
@@ -270,6 +271,10 @@ $(function () {
             $(this).find('.submenu').fadeOut()
         }
     )
+    //меню моб.
+    $('.main-menu_mobile .have_submenu .open_submenu').on('click',function (e) {
+        $(this).closest('.have_submenu').find('.submenu').slideToggle()
+    })
 });
 
 function initMap() {

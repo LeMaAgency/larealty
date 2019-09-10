@@ -167,4 +167,22 @@
 .have_submenu{
     position: relative;
 }
+.main-menu_mobile .submenu{
+    display: none
+}
+.main-menu_mobile .second_level a{
+    padding-top: 0px;
+    padding-bottom: 5px;
+}
+.main-menu_mobile .open_submenu{
+    position: absolute;
+    right: 20px;
+    top: 25%;
+    width: 40px;
+    height: 40px;
+    display: block;
+    text-align: center;
+}
+@media (max-width: 767px){
 
+}

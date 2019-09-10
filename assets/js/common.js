@@ -35,6 +35,7 @@ $(document).ready(function() {
   	$('.open-menu').slideToggle('slow');
   });
 
+/*
   $('.main-menu ul > li').clone().appendTo('.mobile-menu').removeAttr('class');
   $('.header-menu ul > li').clone().appendTo('.mobile-menu');
   $('.mobile-menu li a').each(function (i,elem) {
@@ -43,6 +44,7 @@ $(document).ready(function() {
         $(elem).addClass('active');
     }
   });
+*/
 
   /*$('.mobile-menu li:nth-child(1) a').addClass('active');*/
 
