@@ -59,8 +59,11 @@ global $APPLICATION;
                 </div>
             </div>
             <div class="col-lg-4 col-md-4">
-                <div class="header-menu">
-                    <? $APPLICATION->IncludeComponent(
+                <div class="slogan">
+                    Недвижимость. Инвестиции. Консалтинг.
+                </div>
+                <!--<div class="header-menu">
+                    <?/* $APPLICATION->IncludeComponent(
                         'bitrix:menu',
                         'top__menu',
                         array(
@@ -75,8 +78,8 @@ global $APPLICATION;
                             'MENU_CACHE_USE_GROUPS' => 'N',
                             'USE_EXT' => 'Y',
                             'COMPONENT_TEMPLATE' => 'top__menu'
-                        )); ?>
-                </div>
+                        )); */?>
+                </div>-->
             </div>
             <div class="col-lg-5 col-md-4">
                 <div class="header-contact">
