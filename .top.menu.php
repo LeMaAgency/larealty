@@ -1,8 +1,8 @@
 <?
 $aMenuLinks = array(
     array(
-        'О компании',
-        '/about/',
+        'Cтаньте партнером',
+        '/stante-partnerom/',
         array(),
         array(),
         '',

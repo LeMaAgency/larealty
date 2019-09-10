@@ -43,6 +43,36 @@ global $APPLICATION;
 </head>
 <body>
 <? $APPLICATION->ShowPanel(); ?>
+<div class="pre_header">
+    <div class="city_selector pre_header_item">
+        <div class="geo_icon">
+            <i class="fa fa-map-marker" aria-hidden="true"></i>
+        </div>
+        <div class="city_name">
+            Москва
+        </div>
+    </div>
+    <div class="pre_header_menu pre_header_item">
+        <? $APPLICATION->IncludeComponent("bitrix:menu", "pre_header_menu", Array(
+            "ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно
+            "ROOT_MENU_TYPE" => "top",	// Тип меню для первого уровня
+            "CHILD_MENU_TYPE" => "top",	// Тип меню для остальных уровней
+            "DELAY" => "N",	// Откладывать выполнение шаблона меню
+            "MAX_LEVEL" => "1",	// Уровень вложенности меню
+            "MENU_CACHE_GET_VARS" => "",	// Значимые переменные запроса
+            "MENU_CACHE_TIME" => "3600",	// Время кеширования (сек.)
+            "MENU_CACHE_TYPE" => "A",	// Тип кеширования
+            "MENU_CACHE_USE_GROUPS" => "N",	// Учитывать права доступа
+            "USE_EXT" => "Y",	// Подключать файлы с именами вида .тип_меню.menu_ext.php
+            "COMPONENT_TEMPLATE" => "pre_header_menu"
+        ),
+            false
+        ); ?>
+    </div>
+    <div class="pre_header_item">
+
+    </div>
+</div>
 <header>
     <div class="container desc-header">
         <div class="row">
@@ -140,6 +170,21 @@ global $APPLICATION;
                     "ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно
                     "ROOT_MENU_TYPE" => "main",	// Тип меню для первого уровня
                     "CHILD_MENU_TYPE" => "main",	// Тип меню для остальных уровней
+                    "DELAY" => "N",	// Откладывать выполнение шаблона меню
+                    "MAX_LEVEL" => "1",	// Уровень вложенности меню
+                    "MENU_CACHE_GET_VARS" => "",	// Значимые переменные запроса
+                    "MENU_CACHE_TIME" => "3600",	// Время кеширования (сек.)
+                    "MENU_CACHE_TYPE" => "A",	// Тип кеширования
+                    "MENU_CACHE_USE_GROUPS" => "N",	// Учитывать права доступа
+                    "USE_EXT" => "Y",	// Подключать файлы с именами вида .тип_меню.menu_ext.php
+                    "COMPONENT_TEMPLATE" => "top_menu_iblock_mobile"
+                ),
+                    false
+                ); ?>
+                <? $APPLICATION->IncludeComponent("bitrix:menu", "top_menu_iblock_mobile", Array(
+                    "ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно
+                    "ROOT_MENU_TYPE" => "top",	// Тип меню для первого уровня
+                    "CHILD_MENU_TYPE" => "top",	// Тип меню для остальных уровней
                     "DELAY" => "N",	// Откладывать выполнение шаблона меню
                     "MAX_LEVEL" => "1",	// Уровень вложенности меню
                     "MENU_CACHE_GET_VARS" => "",	// Значимые переменные запроса

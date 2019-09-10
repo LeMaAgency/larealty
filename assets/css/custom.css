@@ -183,6 +183,55 @@
     display: block;
     text-align: center;
 }
-@media (max-width: 767px){
 
+.pre_header{
+    background-color: #333;
+    height: 38px;
+    padding: 0 40px;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    color: white;
+}
+.pre_header .city_selector{
+    display: flex;
+}
+.pre_header .city_name{
+    margin-left: 5px;
+}
+.pre_header_menu ul{
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+.pre_header_menu li{
+    padding: 0 10px;
+}
+.pre_header_menu li a{
+    color: white;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+.pre_header_menu li a:hover{
+    color: #a49183;
+    transition: color 0.3s;
+}
+
+.pre_header_menu{
+    display: block;
+}
+
+@media (max-width: 767px){
+    .pre_header{
+        display: none;
+    }
+    .mobile-menu{
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    .main-menu_mobile{
+        margin-top: 60px;
+    }
 }
