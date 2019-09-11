@@ -265,10 +265,10 @@ $(function () {
     //Меню десктом
     $('.main-menu .have_submenu').hover(
         function () {
-            $(this).find('.submenu').fadeIn()
+            $(this).find('.submenu').fadeIn(200)
         },
         function () {
-            $(this).find('.submenu').fadeOut()
+            $(this).find('.submenu').fadeOut(200)
         }
     )
     //меню моб.
