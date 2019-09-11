@@ -222,7 +222,51 @@
 .pre_header_menu{
     display: block;
 }
+#file_input_arenda_prodazha{
+    display: none;
+}
+.file_input{
+    border-radius: 2px;
+    border: 1px solid #a49183;
+    max-width: 300px;
+    text-transform: uppercase;
+    padding: 10px;
+    color: #666666;
+    font-size: 12px;
+    cursor: pointer;
+    position: relative;
+}
+.zayavka_page_form{
+    max-width: 600px !important;
+}
+.zayavka_page_form .form-row{
+    display: block !important;
+    margin-bottom: 0 !important;
+}
+.zayavka_page_form input{
+    width: 100% !important;
+    margin-bottom: 5px !important;
+}
+.file_input_wrap{
+    position: relative;
+}
+.file_input_info{
+    max-width: 203px;
+    display: inline-block;
+    font-size: 12px;
+    position: absolute;
+    right: 0;
+    top: -8px;
+}
 
+@media (max-width: 480px){
+    .file_input_info{
+        display: block;
+        position: static;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
 @media (max-width: 767px){
     .pre_header{
         display: none;

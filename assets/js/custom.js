@@ -275,6 +275,59 @@ $(function () {
     $('.main-menu_mobile .have_submenu .open_submenu').on('click',function (e) {
         $(this).closest('.have_submenu').find('.submenu').slideToggle()
     })
+
+    //форма заявки на продажу или покупку
+    $('form.js-sale_page-form').on('submit', function (e) {
+
+        e.preventDefault();
+
+        var curForm = $(this),
+            waitElement = curForm.find('input[type="submit"], button[type="submit"]').get(0);
+
+        BX.showWait(waitElement);
+
+        var name = curForm.find('[name=name]').val();
+        var phone = curForm.find('[name=phone]').val();
+        var comment = curForm.find('[name=comment]').val();
+        var data = new FormData(curForm[0]);
+
+        $.ajax({
+            url:$(this).attr('action'),
+            type: 'POST',
+            data: data,
+            processData: false,
+            contentType: false,
+            dataType: "json",
+            success: function (ans) {
+
+                BX.closeWait(waitElement);
+
+                curForm.find('input:not([type="submit"]):not([type="button"]), textarea').css({'border': '1px solid #dfcd7d'});
+
+                if (ans && ans.errors) {
+                    curForm.find('.it-error').empty();
+                    for (var inputName in ans.errors) {
+                        curForm.find('[name="' + inputName + '"]').first().css({border: '1px solid red'})
+                            .closest('.it-block').find('.it-error').html(ans.errors[inputName]);
+                    }
+                }
+                else {
+                    //ok
+                    curForm.find('input:not([type="submit"]):not([type="button"]), textarea').val('').css({'border': '1px solid black'});
+                    $.fancybox.open('Спасибо за заявку. В ближайшее время мы Вам перезвоним')
+                }
+            },
+
+        })
+        return false;
+
+    });
+    //счетчик прикрепленных файлов
+    $('#file_input_arenda_prodazha').on('change',function () {
+        var fileCount = this.files.length;
+        $('#file_count').text('('+fileCount+')')
+    })
+
 });
 
 function initMap() {
