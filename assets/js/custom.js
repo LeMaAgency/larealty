@@ -289,7 +289,7 @@ $(function () {
 
 
         var phoneRegex = /^\+7\([0-9]{3}\)[0-9]{3}-[0-9]{2}-[0-9]{2}$/;
-        var fileNameRegex = /\.(?:jpe?g|png|doc|docx)$/;
+        var fileNameRegex = /\.(?:jpeg|jpg|png|doc|docx)$/;
         var validatePhoneStatus;
         var validateFilesStatus;
 
