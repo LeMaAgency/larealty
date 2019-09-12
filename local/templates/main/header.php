@@ -70,7 +70,7 @@ global $APPLICATION;
         ); ?>
     </div>
     <div class="pre_header_item">
-
+        <a class="zayavka_button" href="/ostavit-zayavku-na-prodazhu-pokupku/">Оставить заявку</a>
     </div>
 </div>
 <header>
@@ -204,6 +204,9 @@ global $APPLICATION;
                 <div class="header-callback">
                     <a class="hlink js-order-call" href="#">
                         <? $APPLICATION->IncludeFile(SITE_DIR . 'include/header/phone-text.php'); ?>
+                    </a>
+                    <a class="hlink zayavka" href="/ostavit-zayavku-na-prodazhu-pokupku/">
+                        Оставить заявку
                     </a>
                 </div>
             </div>
