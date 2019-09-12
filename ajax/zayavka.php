@@ -19,6 +19,12 @@ $form = new \Lema\Forms\AjaxForm(array(
 );
 
 
+//проверка количества файлов
+if(count($_FILES['files']['name']) > 10)
+{
+    echo json_encode(array('max_files'=>'max files count 10'));
+    die();
+}
 //Валидация файлов
 if(!empty($_FILES['files']['name'][0])){
     $types = '(?:jpe?g|png|doc?x)';
@@ -44,8 +50,13 @@ if(!empty($_FILES['files']['name'][0])){
 //check form fields
 if($form->validate()){
 
+    if (CModule::IncludeModule("iblock")){
+        $ib_list = \CIBlock::GetList(Array(), Array("CODE" => 'zayavki',));
+        while($ar_res = $ib_list->Fetch())
+            $iblockId = $ar_res['ID'];
+    }
     $status = $form->formActionFull(
-        34,
+        $iblockId,
         array(
             'NAME' => $form->getField('name'),
             'PREVIEW_TEXT' => $form->getField('comment'),
@@ -56,13 +67,12 @@ if($form->validate()){
                 'FILES' => $picturesData['fileData']
             ),
         ),
-        'FEEDBACK_FORM_NEWsssssssss',
+        'FORM_ZAYAVKA',
         array(
             'NAME' => $form->getField('name'),
             'PHONE' => $form->getField('phone'),
-            'EMAIL' => $form->getField('email'),
+            //'EMAIL' => $form->getField('email'),
             'COMMENT' => $form->getField('comment'),
-
         )
     );
 

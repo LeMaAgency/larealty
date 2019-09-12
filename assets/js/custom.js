@@ -310,6 +310,10 @@ $(function () {
                         curForm.find('[name="' + inputName + '"]').first().css({border: '1px solid red'})
                             .closest('.it-block').find('.it-error').html(ans.errors[inputName]);
                     }
+                    $('#file_input_arenda_prodazha').val('')
+                }
+                else if(ans && ans.max_files){
+                    alert('Прикрепить можно не более 10 файлов. Попробуйте еще раз.')
                 }
                 else {
                     //ok
@@ -325,7 +329,13 @@ $(function () {
     //счетчик прикрепленных файлов
     $('#file_input_arenda_prodazha').on('change',function () {
         var fileCount = this.files.length;
-        $('#file_count').text('('+fileCount+')')
+        if(fileCount > 10){
+            alert('Прикрепить можно не более 10 файлов. Попробуйте еще раз.')
+            $(this).val('');
+        }
+        else {
+            $('#file_count').text('('+fileCount+')')
+        }
     })
 
 });
