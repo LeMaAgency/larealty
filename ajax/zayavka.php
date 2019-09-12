@@ -49,9 +49,8 @@ if(!empty($_FILES['files']['name'][0])){
 
 //check form fields
 if($form->validate()){
-
     if (CModule::IncludeModule("iblock")){
-        $ib_list = \CIBlock::GetList(Array(), Array("CODE" => 'zayavki',));
+        $ib_list = \CIBlock::GetList(Array(), Array("CODE" => 'zayavki','CHECK_PERMISSIONS'=>'N'));
         while($ar_res = $ib_list->Fetch())
             $iblockId = $ar_res['ID'];
     }
