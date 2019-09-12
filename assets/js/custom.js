@@ -302,6 +302,8 @@ $(function () {
         //Валидация файлов
         var files = $('#file_input_arenda_prodazha').prop("files")
         var fileNames = $.map(files, function(val) { return val.name; });
+        var postSize = 0;
+
         if(fileNames.length > 0){
             for(i=0; i < fileNames.length;i++){
                 validateFilesStatus = fileNames[i].match(fileNameRegex)
@@ -310,6 +312,12 @@ $(function () {
             }
             if(validateFilesStatus === null){
                 alert('Недопустимый формат некоторых файлов')
+                return false;
+            }
+            //проверка объема
+            $.map(files, function(val) { postSize+=val.size; });
+            if(postSize > 100000000){
+                alert('Объем вложений не должен превышать 100МБ')
                 return false;
             }
         }
