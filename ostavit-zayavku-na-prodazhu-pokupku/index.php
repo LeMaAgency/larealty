@@ -38,7 +38,7 @@ $APPLICATION->SetTitle("Оставить заявку на продажу/пок
                             <span class="file_input_info">Вы можете прикрепить до 10 файлов, форматов docx,doc,jpeg,jpg,png</span>
                             <input id="file_input_arenda_prodazha" type="file" placeholder="Прикрепите файлы" name="files[]" multiple="multiple" accept=".docx,.doc,.jpeg,.jpg,.png">
                             <div id="upload_progress">
-                               Идет отправка файлов... 100 %
+
                             </div>
                         </div>
                         <div class="it-error"></div>
