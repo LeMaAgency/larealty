@@ -276,7 +276,7 @@ $(function () {
         $(this).closest('.have_submenu').find('.submenu').slideToggle()
     })
 
-    //форма заявки на продажу или покупку
+//форма заявки на продажу или покупку
     $('form.js-sale_page-form').on('submit', function (e) {
 
         e.preventDefault();
@@ -342,6 +342,8 @@ $(function () {
                 }
                 else {
                     //ok
+                    $('#file_input_arenda_prodazha').val('')
+                    $('#file_count').text('')
                     curForm.find('input:not([type="submit"]):not([type="button"]), textarea').val('').css({'border': '1px solid black'});
                     $.fancybox.open('Спасибо за заявку. В ближайшее время мы Вам перезвоним')
                 }
@@ -351,7 +353,7 @@ $(function () {
         return false;
 
     });
-    //счетчик прикрепленных файлов
+    //счетчик прикрепленных файлов к форме заявки
     $('#file_input_arenda_prodazha').on('change',function () {
         var fileCount = this.files.length;
         if(fileCount > 10){
