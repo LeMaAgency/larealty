@@ -280,17 +280,41 @@ $(function () {
     $('form.js-sale_page-form').on('submit', function (e) {
 
         e.preventDefault();
-
         var curForm = $(this),
-            waitElement = curForm.find('input[type="submit"], button[type="submit"]').get(0);
-
-        BX.showWait(waitElement);
-
+            waitElement = curForm;
         var name = curForm.find('[name=name]').val();
         var phone = curForm.find('[name=phone]').val();
         var comment = curForm.find('[name=comment]').val();
         var data = new FormData(curForm[0]);
 
+
+        var phoneRegex = /^\+7\([0-9]{3}\)[0-9]{3}-[0-9]{2}-[0-9]{2}$/;
+        var fileNameRegex = /\.(?:jpe?g|png|doc|docx)$/;
+        var validatePhoneStatus;
+        var validateFilesStatus;
+
+        //валидация телефона
+        validatePhoneStatus = phone.match(phoneRegex);
+        if(validatePhoneStatus === null){
+            curForm.find('[name=phone]').closest('.it-block').find('.it-error').text('Телефон должен быть в формате +7(999)666-33-11')
+            return false;
+        }
+        //Валидация файлов
+        var files = $('#file_input_arenda_prodazha').prop("files")
+        var fileNames = $.map(files, function(val) { return val.name; });
+        if(fileNames.length > 0){
+            for(i=0; i < fileNames.length;i++){
+                validateFilesStatus = fileNames[i].match(fileNameRegex)
+                if(validateFilesStatus === null)
+                    break;
+            }
+            if(validateFilesStatus === null){
+                alert('Недопустимый формат некоторых файлов')
+                return false;
+            }
+        }
+
+        BX.showWait(waitElement);
         $.ajax({
             url:$(this).attr('action'),
             type: 'POST',
@@ -311,6 +335,7 @@ $(function () {
                             .closest('.it-block').find('.it-error').html(ans.errors[inputName]);
                     }
                     $('#file_input_arenda_prodazha').val('')
+                    $('#file_count').text('')
                 }
                 else if(ans && ans.max_files){
                     alert('Прикрепить можно не более 10 файлов. Попробуйте еще раз.')
@@ -332,11 +357,14 @@ $(function () {
         if(fileCount > 10){
             alert('Прикрепить можно не более 10 файлов. Попробуйте еще раз.')
             $(this).val('');
+            $('#file_count').text('')
         }
         else {
             $('#file_count').text('('+fileCount+')')
         }
     })
+
+    $('.phone_mask').mask('+7(000)000-00-00')
 
 });
 

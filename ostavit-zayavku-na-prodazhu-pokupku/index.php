@@ -19,7 +19,7 @@ $APPLICATION->SetTitle("Оставить заявку на продажу/пок
                             <div class="it-error"></div>
                         </div>
                         <div class="it-block">
-                            <input type="text" placeholder="Телефон *" name="phone" required>
+                            <input type="text" class="phone_mask" placeholder="+7(___)___-__-__" name="phone" required>
                             <div class="it-error"></div>
                         </div>
                         <!--<div class="it-block">

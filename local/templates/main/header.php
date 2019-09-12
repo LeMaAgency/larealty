@@ -33,6 +33,7 @@ global $APPLICATION;
             '/assets/js/slick.min.js',
             '//use.fontawesome.com/acae6499e9.js',
             '/assets/js/common.js',
+            '/assets/js/jquery.mask.min.js',
             '/assets/js/custom.js',
         ));
     ?>
