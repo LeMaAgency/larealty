@@ -343,6 +343,7 @@ $(function () {
                     }
                     $('#file_input_arenda_prodazha').val('')
                     $('#file_count').text('')
+                    $('#upload_progress').text('')
                 }
                 else if(ans && ans.max_files){
                     alert('Прикрепить можно не более 10 файлов. Попробуйте еще раз.')
@@ -351,6 +352,7 @@ $(function () {
                     //ok
                     $('#file_input_arenda_prodazha').val('')
                     $('#file_count').text('')
+                    $('#upload_progress').text('')
                     curForm.find('input:not([type="submit"]):not([type="button"]), textarea').val('').css({'border': '1px solid black'});
                     $.fancybox.open('Спасибо за заявку. В ближайшее время мы Вам перезвоним')
                 }
