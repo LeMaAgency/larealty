@@ -368,12 +368,12 @@ $(function () {
             var current = e.loaded;
 
             var Percentage = (current * 100)/max;
-            console.log(Percentage);
+            $('#upload_progress').text('Идет отправка файлов... '+Percentage.toFixed(1)+'%');
 
 
             if(Percentage >= 100)
             {
-                // process completed
+                $('#upload_progress').text('Отправка завершена!')
             }
         }
     }
