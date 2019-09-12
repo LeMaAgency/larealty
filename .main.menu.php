@@ -1,18 +1,18 @@
 <?
 $aMenuLinks = Array(
 	Array(
-		"Арендный бизнес",
-		"/",
+		"Арендный бизнес", 
+		"/arendnyy-biznes/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"Инвестпроекты",
-		"/",
+		"Инвестпроекты", 
+		"/investproekty/", 
 		Array(), 
 		Array(), 
 		"" 
-	),
+	)
 );
 ?>

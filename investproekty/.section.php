@@ -1,0 +1,6 @@
+<?
+$sSectionName = "Инвестпроекты";
+$arDirProperties = Array(
+
+);
+?>
