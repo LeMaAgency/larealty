@@ -319,6 +319,13 @@ $(function () {
             url:$(this).attr('action'),
             type: 'POST',
             data: data,
+            xhr: function() {
+                var myXhr = $.ajaxSettings.xhr();
+                if(myXhr.upload){
+                    myXhr.upload.addEventListener('progress',progress, false);
+                }
+                return myXhr;
+            },
             processData: false,
             contentType: false,
             dataType: "json",
@@ -353,6 +360,23 @@ $(function () {
         return false;
 
     });
+
+    function progress(e){
+
+        if(e.lengthComputable){
+            var max = e.total;
+            var current = e.loaded;
+
+            var Percentage = (current * 100)/max;
+            console.log(Percentage);
+
+
+            if(Percentage >= 100)
+            {
+                // process completed
+            }
+        }
+    }
     //счетчик прикрепленных файлов к форме заявки
     $('#file_input_arenda_prodazha').on('change',function () {
         var fileCount = this.files.length;
