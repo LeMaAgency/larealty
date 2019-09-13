@@ -186,6 +186,67 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
             <? } ?>
         </div>
     </div>
+<? if (!empty($item->propVal('BEDROOM'))) { ?>
+<? } ?>
+    <div class="calculation">
+        <div class="calculation_list">
+            <? if (!empty($item->propVal('RENTAL_STREAM'))) { ?>
+                <div class="calculation_item">
+                    <div class="calculation_item_name">
+                        <?=$item->propName('RENTAL_STREAM');?>
+                    </div>
+                    <div class="calculation_item_value ruble_icon">
+                        <?=number_format($item->propVal('RENTAL_STREAM'), 0, '.', ' ');?>
+                    </div>
+                </div>
+            <? } ?>
+
+
+            <? if (!empty($item->propVal('CLEAR_PROFIT'))) { ?>
+                <div class="calculation_item">
+                    <div class="calculation_item_name">
+                        <?=$item->propName('CLEAR_PROFIT');?>
+                    </div>
+                    <div class="calculation_item_value ruble_icon">
+                        <?=number_format($item->propVal('CLEAR_PROFIT'), 0, '.', ' ');?>
+                    </div>
+                </div>
+            <? } ?>
+
+            <? if (!empty($item->propVal('MONTH_PAY'))) { ?>
+                <div class="calculation_item">
+                    <div class="calculation_item_name">
+                        <?=$item->propName('MONTH_PAY');?>
+                    </div>
+                    <div class="calculation_item_value ruble_icon">
+                        <?=number_format($item->propVal('MONTH_PAY'), 0, '.', ' ');?>
+                    </div>
+                </div>
+            <? } ?>
+
+            <? if (!empty($item->propVal('PAYBACK'))) { ?>
+                <div class="calculation_item">
+                    <div class="calculation_item_name">
+                        <?=$item->propName('PAYBACK');?>
+                    </div>
+                    <div class="calculation_item_value">
+                        <?=number_format($item->propVal('PAYBACK'), 0, '.', ' ');?>
+                    </div>
+                </div>
+            <? } ?>
+
+            <? if (!empty($item->propVal('INVEST_INCOME'))) { ?>
+                <div class="calculation_item">
+                    <div class="calculation_item_name">
+                        <?=$item->propName('INVEST_INCOME');?>
+                    </div>
+                    <div class="calculation_item_value ">
+                        <?=number_format($item->propVal('INVEST_INCOME'), 0, '.', ' ');?>
+                    </div>
+                </div>
+            <? } ?>
+        </div>
+    </div>
     <div class='card-characteristics'>
         <div class='container'>
             <h3>

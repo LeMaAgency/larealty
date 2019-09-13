@@ -306,6 +306,40 @@ header{
     max-width: 690px;
     flex-wrap: wrap;
 }
+
+.calculation{
+    padding-bottom: 30px;
+}
+.calculation h3{
+    color: #2b2e35;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 32px;
+}
+.calculation_list{
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+}
+.calculation_item{
+    margin-right: 30px;
+    margin-bottom: 10px;
+}
+.calculation_item_name{
+    font-weight: bold;
+}
+.calculation_item_value{
+    position: relative;
+}
+.calculation_item_value.ruble_icon:after{
+    background-image: url(../img/big-ruble.png);
+    display: inline-block;
+    content: "";
+    width: 12px;
+    height: 12px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
 @media (max-width: 480px){
     .file_input_info{
         display: block;
@@ -314,6 +348,7 @@ header{
         margin-bottom: 10px;
     }
 }
+
 @media (max-width: 767px){
     .pre_header{
         display: none;
@@ -324,5 +359,13 @@ header{
     }
     .main-menu_mobile{
         margin-top: 60px;
+    }
+    .calculation_list{
+        display: block;
+    }
+    .calculation_item{
+        background-color: #f8f7f7;
+        padding-left: 10px;
+        margin-right: 0;
     }
 }
