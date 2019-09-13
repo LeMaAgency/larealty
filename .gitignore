@@ -1,4 +1,5 @@
 .idea
+/.htaccess
 /bitrix
 /upload
 /local/import/
