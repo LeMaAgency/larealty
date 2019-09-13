@@ -230,7 +230,7 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                         <?=$item->propName('PAYBACK');?>
                     </div>
                     <div class="calculation_item_value">
-                        <?=number_format($item->propVal('PAYBACK'), 0, '.', ' ');?>
+                        <?=$item->propVal('PAYBACK');?>
                     </div>
                 </div>
             <? } ?>
@@ -241,7 +241,7 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                         <?=$item->propName('INVEST_INCOME');?>
                     </div>
                     <div class="calculation_item_value ">
-                        <?=number_format($item->propVal('INVEST_INCOME'), 0, '.', ' ');?>
+                        <?=$item->propVal('INVEST_INCOME');?>
                     </div>
                 </div>
             <? } ?>
