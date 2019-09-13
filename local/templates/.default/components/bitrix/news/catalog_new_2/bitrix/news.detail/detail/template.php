@@ -275,17 +275,18 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
             <p>
                 <?= $item->detailText(); ?>
             </p>
-            <div class='desc-link'>
-                <!--<a href='#' class='hover-black link-share'>Поделиться</a>
-                <a href='#' class='hover-black link-favorite'>В избранное</a>-->
-            </div>
+            <!--<div class='desc-link'>
+                <a href='#' class='hover-black link-share'>Поделиться</a>
+                <a href='#' class='hover-black link-favorite'>В избранное</a>
+            </div>-->
         </div>
     </div>
     </div> <!-- Закрывающий тег блока "div" с классом "item-card" из detail.php компонента news -->
-    <div class='more-offer'>
+
         <?
         if (!empty($arResult['OFFERS']) && !$isOffer) { ?>
-            <div class='container'>
+            <div class='more-offer'>
+                <div class='container'>
                 <h2><?= Loc::getMessage('LEMA_OTHER_OFFERS'); ?> <?= $item->getName(); ?></h2>
                 <table class='offer-table'>
                     <thead>
@@ -382,8 +383,9 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                     </div>
                 <? } ?>
             </div>
+            </div>
         <? } ?>
-    </div>
+
 
     <!--<div class='flat-details'>
         <div class='container'>
