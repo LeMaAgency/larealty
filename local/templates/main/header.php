@@ -45,39 +45,49 @@ global $APPLICATION;
 <body>
 <? $APPLICATION->ShowPanel(); ?>
 <div class="pre_header">
-    <div class="city_selector pre_header_item">
-        <div class="geo_icon">
-            <i class="fa fa-map-marker" aria-hidden="true"></i>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-3">
+                <div class="city_selector pre_header_item">
+                    <div class="geo_icon">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    </div>
+                    <div class="city_name">
+                        Москва
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-9 pre_header_menu_and_button">
+                <div class="pre_header_menu pre_header_item">
+                    <? $APPLICATION->IncludeComponent("bitrix:menu", "pre_header_menu", Array(
+                        "ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно
+                        "ROOT_MENU_TYPE" => "top",	// Тип меню для первого уровня
+                        "CHILD_MENU_TYPE" => "top",	// Тип меню для остальных уровней
+                        "DELAY" => "N",	// Откладывать выполнение шаблона меню
+                        "MAX_LEVEL" => "1",	// Уровень вложенности меню
+                        "MENU_CACHE_GET_VARS" => "",	// Значимые переменные запроса
+                        "MENU_CACHE_TIME" => "3600",	// Время кеширования (сек.)
+                        "MENU_CACHE_TYPE" => "A",	// Тип кеширования
+                        "MENU_CACHE_USE_GROUPS" => "N",	// Учитывать права доступа
+                        "USE_EXT" => "Y",	// Подключать файлы с именами вида .тип_меню.menu_ext.php
+                        "COMPONENT_TEMPLATE" => "pre_header_menu"
+                    ),
+                        false
+                    ); ?>
+                </div>
+
+                <div class="pre_header_item">
+                    <a class="zayavka_button" href="/ostavit-zayavku-na-prodazhu-pokupku/">Оставить заявку</a>
+                </div>
+            </div>
         </div>
-        <div class="city_name">
-            Москва
-        </div>
     </div>
-    <div class="pre_header_menu pre_header_item">
-        <? $APPLICATION->IncludeComponent("bitrix:menu", "pre_header_menu", Array(
-            "ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно
-            "ROOT_MENU_TYPE" => "top",	// Тип меню для первого уровня
-            "CHILD_MENU_TYPE" => "top",	// Тип меню для остальных уровней
-            "DELAY" => "N",	// Откладывать выполнение шаблона меню
-            "MAX_LEVEL" => "1",	// Уровень вложенности меню
-            "MENU_CACHE_GET_VARS" => "",	// Значимые переменные запроса
-            "MENU_CACHE_TIME" => "3600",	// Время кеширования (сек.)
-            "MENU_CACHE_TYPE" => "A",	// Тип кеширования
-            "MENU_CACHE_USE_GROUPS" => "N",	// Учитывать права доступа
-            "USE_EXT" => "Y",	// Подключать файлы с именами вида .тип_меню.menu_ext.php
-            "COMPONENT_TEMPLATE" => "pre_header_menu"
-        ),
-            false
-        ); ?>
-    </div>
-    <div class="pre_header_item">
-        <a class="zayavka_button" href="/ostavit-zayavku-na-prodazhu-pokupku/">Оставить заявку</a>
-    </div>
+
 </div>
 <header>
     <div class="container desc-header">
         <div class="row">
-            <div class="col-lg-3 col-md-4">
+            <div class="col-lg-4 col-md-4">
 
                 <div class="logo">
                     <? if ($APPLICATION->GetCurDir() == SITE_DIR): ?>
@@ -112,16 +122,16 @@ global $APPLICATION;
                         )); */?>
                 </div>-->
             </div>
-            <div class="col-lg-5 col-md-4">
+            <div class="col-lg-4 col-md-4">
                 <div class="header-contact">
                     <div class="header-phone">
                         <? $APPLICATION->IncludeFile(SITE_DIR . 'include/header/phone.php'); ?>
                     </div>
-                    <div class="header-callback">
+                    <!--<div class="header-callback">
                         <a class="hlink js-order-call" href="#">
-                            <? $APPLICATION->IncludeFile(SITE_DIR . 'include/header/phone-text.php'); ?>
+                            <?/* $APPLICATION->IncludeFile(SITE_DIR . 'include/header/phone-text.php'); */?>
                         </a>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>

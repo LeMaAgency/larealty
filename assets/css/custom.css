@@ -143,6 +143,18 @@
 .slogan{
     text-align: center;
 }
+header{
+    padding: 10px 0;
+}
+.header-contact .header-phone,
+.slogan{
+    padding-top: 10px;
+}
+.header-contact{
+    display: block !important;
+    text-align: right;
+    margin: 0 !important;
+}
 .main-menu{
     padding: 0;
 }
@@ -186,12 +198,14 @@
 
 .pre_header{
     background-color: #333;
-    height: 38px;
-    padding: 0 40px;
+    padding: 7px 0;
     align-items: center;
-    justify-content: space-between;
-    display: flex;
+   /* justify-content: space-between;
+    display: flex;*/
     color: white;
+}
+.header-contact .header-phone{
+    margin: 0;
 }
 .pre_header .city_selector{
     display: flex;
@@ -221,6 +235,12 @@
 
 .pre_header_menu{
     display: block;
+}
+.pre_header_item{
+    display: inline-block;
+}
+.pre_header_menu_and_button{
+    text-align: right;
 }
 #file_input_arenda_prodazha{
     display: none;
@@ -267,6 +287,7 @@
     border-radius: 2px;
     padding: 4px 15px;;
     display: block;
+    max-width: 160px;
 }
 .zayavka_button:hover{
     color: #a49183;
