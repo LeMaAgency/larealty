@@ -71,18 +71,18 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                         <div class='item-card_price-coutn'>
                             <? if ($item->propVal('PRICE')) { ?>
                                 <span>
-                                    <?= $item->propVal('PRICE'); ?>
+                                    <?= number_format($item->propVal('PRICE'), 0, '.', ' '); ?>
                                 </span>
                             <? } else { ?>
                                 <span>
-                                    <?= $offer->propVal('PRICE'); ?>
+                                    <?= number_format( $offer->propVal('PRICE'), 0, '.', ' '); ?>
                                 </span>
                             <? } ?>
                         </div>
                         <div class='item-card_price-for'>
                             <? if (!empty($item->propVal('PRICE')) && !empty($item->propVal('SQUARE'))) { ?>
                                 <span>
-                                    <?= intdiv($item->propVal('PRICE'), $item->propVal('SQUARE')); ?>
+                                    <?= number_format( intdiv($item->propVal('PRICE'), $item->propVal('SQUARE')), 0, '.', ' '); ?>
                                 </span>
                             <? } ?>
                         </div>
