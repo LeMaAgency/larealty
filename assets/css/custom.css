@@ -302,6 +302,10 @@ header{
     margin-bottom: 10px;
 }
 
+.button-list{
+    max-width: 690px;
+    flex-wrap: wrap;
+}
 @media (max-width: 480px){
     .file_input_info{
         display: block;
