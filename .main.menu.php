@@ -7,12 +7,12 @@ $aMenuLinks = Array(
 		Array(),
 		""
 	),*/
-	Array(
+	/*Array(
 		"Инвестпроекты", 
 		"/investproekty/", 
 		Array(), 
 		Array(), 
 		"" 
-	)
+	)*/
 );
 ?>
