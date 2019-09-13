@@ -255,20 +255,20 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
             </div>
         <? endif; ?>
     </div>
-<? if (!empty($item->propVal('MORE_PHOTO'))) { ?>
+<?/* if (!empty($item->propVal('MORE_PHOTO'))) { */?><!--
     <div class="container">
         <div class="detail-gallery">
-            <? foreach ($item->propVal('MORE_PHOTO') as $photo) { ?>
+            <?/* foreach ($item->propVal('MORE_PHOTO') as $photo) { */?>
                 <a class="fancybox"
                    data-fancybox="gallery"
-                   href="<?= \CFile::GetPath($photo); ?>"
+                   href="<?/*= \CFile::GetPath($photo); */?>"
                    title=""
-                   style="background-image: url(<?= \CFile::GetPath($photo); ?>);">
+                   style="background-image: url(<?/*= \CFile::GetPath($photo); */?>);">
                 </a>
-            <? } ?>
+            <?/* } */?>
         </div>
     </div>
-<? } ?>
+--><?/* } */?>
     <div class='item-card_desc'>
         <div class='container'>
             <h2><?= $item->getName(); ?></h2>
