@@ -326,21 +326,23 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
             </div>
         </div>
     </div>
-    <div class="card_yandex_map">
-        <div id="ya_detail_map"></div>
-    </div>
-    <script type="text/javascript">
-        ymaps.ready(function(){
-            var myMap = new ymaps.Map("ya_detail_map", {
-                center: [<?=$arResult['PROPERTIES']['YANDEX_MAP']['VALUE']?>],
-                zoom: 15
+    <?if(!empty($arResult['PROPERTIES']['YANDEX_MAP']['VALUE'])):?>
+        <div class="card_yandex_map">
+            <div id="ya_detail_map"></div>
+        </div>
+        <script type="text/javascript">
+            ymaps.ready(function(){
+                var myMap = new ymaps.Map("ya_detail_map", {
+                    center: [<?=$arResult['PROPERTIES']['YANDEX_MAP']['VALUE']?>],
+                    zoom: 15
+                });
+                var myPlacemark = new ymaps.Placemark(
+                    [<?=$arResult['PROPERTIES']['YANDEX_MAP']['VALUE']?>]
+                );
+                myMap.geoObjects.add(myPlacemark);
             });
-            var myPlacemark = new ymaps.Placemark(
-                [<?=$arResult['PROPERTIES']['YANDEX_MAP']['VALUE']?>]
-            );
-            myMap.geoObjects.add(myPlacemark);
-        });
-    </script>
+        </script>
+    <?endif;?>
 <?/* if (!empty($item->propVal('MORE_PHOTO'))) { */?><!--
     <div class="container">
         <div class="detail-gallery">
