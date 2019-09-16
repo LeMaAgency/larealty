@@ -188,7 +188,7 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
     </div>
 <? if (!empty($item->propVal('BEDROOM'))) { ?>
 <? } ?>
-    <div class="calculation">
+    <div class="calculation container">
         <div class="calculation_list">
             <? if (!empty($item->propVal('RENTAL_STREAM'))) { ?>
                 <div class="calculation_item">
