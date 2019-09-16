@@ -348,7 +348,16 @@ header{
     border-radius: 2px;
     border: 1px solid #a49183;
     padding: 0 5px;
-
+}
+.item-card_photo{
+    max-width: 900px;
+    margin: 0 auto;
+}
+.item-card_photo .prev-card{
+    left: 1%;
+}
+.item-card_photo .next-card{
+    right: 1%;
 }
 @media (max-width: 480px){
     .file_input_info{
