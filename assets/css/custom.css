@@ -340,6 +340,16 @@ header{
     background-size: contain;
     background-repeat: no-repeat;
 }
+.square_list{
+    display: flex;
+}
+.square_list_item{
+    margin-right: 10px;
+    border-radius: 2px;
+    border: 1px solid #a49183;
+    padding: 0 5px;
+
+}
 @media (max-width: 480px){
     .file_input_info{
         display: block;

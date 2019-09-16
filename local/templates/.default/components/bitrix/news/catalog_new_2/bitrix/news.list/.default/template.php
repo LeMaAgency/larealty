@@ -105,6 +105,15 @@ if (!empty($arResult['ITEMS'])) {
                                 </div>
                             <? } ?>
                         </div>
+                        <? if(!empty($arItem['PROPERTIES']['SQUARE_LIST']['VALUE'])):?>
+                            <div class="square_list">
+                                <? foreach ($arItem['PROPERTIES']['SQUARE_LIST']['VALUE'] as $square):?>
+                                    <div class="square_list_item">
+                                       <?=$square?>м²
+                                    </div>
+                                <?endforeach;?>
+                            </div>
+                        <? endif;?>
                         <div class="catalog-item_desc">
                             <?= $arItem['PREVIEW_TEXT']; ?>
                         </div>
