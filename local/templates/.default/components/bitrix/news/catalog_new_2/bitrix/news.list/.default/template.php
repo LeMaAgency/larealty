@@ -131,13 +131,13 @@ if (!empty($arResult['ITEMS'])) {
                             <div class="fdc">
                                 <div class="catalog-item_price">
                                     <span>
-                                        <?= $arItem['PROPERTIES']['PRICE']['VALUE']; ?>
+                                        <?= number_format($arItem['PROPERTIES']['PRICE']['VALUE'], 0, '.', ' '); ?>
                                     </span>
                                 </div>
                                 <? if (!empty($arItem['PROPERTIES']['SQUARE']['VALUE'])) { ?>
                                     <div class="catalog-item_price-for">
                                         <span>
-                                            <?= intdiv($arItem['PROPERTIES']['PRICE']['VALUE'], $arItem['PROPERTIES']['SQUARE']['VALUE']); ?>
+                                            <?= number_format(intdiv($arItem['PROPERTIES']['PRICE']['VALUE'], $arItem['PROPERTIES']['SQUARE']['VALUE']), 0, '.', ' '); ?>
                                         </span>
                                     </div>
                                 <? } ?>
