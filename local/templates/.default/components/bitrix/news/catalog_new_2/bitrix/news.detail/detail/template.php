@@ -326,14 +326,21 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
             </div>
         </div>
     </div>
-    <div class='card-item_map'>
-        <? if (!empty($item->propVal('MAP'))): ?>
-            <div class='flat-on-map__content__location' id='map-location-flat'
-                 data-coords='<?= $item->propVal('MAP'); ?>'
-                 data-address='<?= $item->propVal('ADDRESS'); ?>'>
-            </div>
-        <? endif; ?>
+    <div class="card_yandex_map">
+        <div id="ya_detail_map"></div>
     </div>
+    <script type="text/javascript">
+        ymaps.ready(function(){
+            var myMap = new ymaps.Map("ya_detail_map", {
+                center: [<?=$arResult['PROPERTIES']['YANDEX_MAP']['VALUE']?>],
+                zoom: 15
+            });
+            var myPlacemark = new ymaps.Placemark(
+                [<?=$arResult['PROPERTIES']['YANDEX_MAP']['VALUE']?>]
+            );
+            myMap.geoObjects.add(myPlacemark);
+        });
+    </script>
 <?/* if (!empty($item->propVal('MORE_PHOTO'))) { */?><!--
     <div class="container">
         <div class="detail-gallery">

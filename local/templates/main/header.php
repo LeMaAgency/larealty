@@ -41,6 +41,7 @@ global $APPLICATION;
     <title><? $APPLICATION->ShowTitle(); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC13YDGbR523RNjDydlddANioNBMMFSRkg&callback=initMap" async defer></script>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=4a23621a-c827-4cb9-af68-a5062ae93b06&lang=ru_RU" type="text/javascript"></script>
 </head>
 <body>
 <? $APPLICATION->ShowPanel(); ?>
