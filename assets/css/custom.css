@@ -352,6 +352,13 @@ header{
 .item-card_photo{
     max-width: 900px;
     margin: 0 auto;
+    height: auto !important;
+    max-height: 600px !important;
+
+}
+.item-card_photo .slick-list, .item-card_photo .slick-track, .item-card_photo  .slick-slide{
+    max-height: 600px !important;
+    height: auto;
 }
 .item-card_photo .prev-card{
     left: 1%;
