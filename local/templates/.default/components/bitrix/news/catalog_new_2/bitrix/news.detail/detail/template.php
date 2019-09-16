@@ -267,6 +267,7 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                         'REMINDER_TEXT',
                         'RIELTOR',
                         'ADD_OBJECT_TO_EXPORT',
+                        'SQUARE_LIST'
                     ]; ?>
                     <? if (!empty($property['VALUE']) && !(in_array($property['CODE'], $arNotShowProp))) { ?>
                         <div class='characteristics-item'>
@@ -294,6 +295,23 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                         </div>
                     <? } ?>
                 <? } ?>
+
+                <? if(!empty($arResult['PROPERTIES']['SQUARE_LIST']['VALUE'])):?>
+                    Цены
+                    <?foreach ($arResult['PROPERTIES']['SQUARE_LIST']['VALUE'] as $square):?>
+                        <?
+                            $squareInfo = explode('@',str_replace(' ','',$square));
+                        ?>
+                        <div class='characteristics-item'>
+                            <div class='characteristics-name'>
+                                <?=$squareInfo[0]?>м²
+                            </div>
+                            <div class='characteristics-info'>
+                                <?=number_format($squareInfo[1], 0, '.', ' ').'.руб'?>
+                            </div>
+                        </div>
+                    <? endforeach;?>
+                <?endif;?>
 
             </div>
             <div class='characteristics-link'>
