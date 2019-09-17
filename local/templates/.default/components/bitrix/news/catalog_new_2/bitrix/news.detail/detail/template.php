@@ -297,7 +297,7 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                 <? } ?>
 
                 <? if(!empty($arResult['PROPERTIES']['SQUARE_LIST']['VALUE'])):?>
-                    Цены
+                    Площади и цены
                     <?foreach ($arResult['PROPERTIES']['SQUARE_LIST']['VALUE'] as $square):?>
                         <?
                             $squareInfo = explode('@',str_replace(' ','',$square));
@@ -306,9 +306,11 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                             <div class='characteristics-name'>
                                 <?=$squareInfo[0]?>м²
                             </div>
-                            <div class='characteristics-info'>
-                                <?=number_format($squareInfo[1], 0, '.', ' ').'руб.'?>
-                            </div>
+                            <? if($squareInfo[1]):?>
+                                <div class='characteristics-info'>
+                                    <?=number_format($squareInfo[1], 0, '.', ' ').'руб.'?>
+                                </div>
+                            <? endif;?>
                         </div>
                     <? endforeach;?>
                 <?endif;?>
