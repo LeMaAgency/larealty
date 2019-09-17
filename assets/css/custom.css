@@ -386,7 +386,7 @@ header{
     background: transparent url(../img/banners/new_banners/main_new.jpg) 0 0 no-repeat;
 }
 .realties-first{
-    background: transparent url(../img/banners/new_banners/credit.jpg) 0 0 no-repeat;
+    background: transparent url(../img/banners/realty_banners/credit.jpg) 0 0 no-repeat;
     background-size: cover;
 }
 .realties-second{
@@ -394,11 +394,11 @@ header{
     background-size: cover;
 }
 .realties-third{
-    background: transparent url(../img/banners/new_banners/torg.jpg) 0 0 no-repeat;
+    background: transparent url(../img/banners/realty_banners/torg.jpg) 0 0 no-repeat;
     background-size: cover;
 }
 .realties-fourth{
-    background: transparent url(../img/banners/new_banners/arend.png) 0 0 no-repeat;
+    background: transparent url(../img/banners/realty_banners/arenda.jpg) 0 0 no-repeat;
     background-size: cover;
 }
 .catalog-head-title{
