@@ -380,6 +380,25 @@ header{
     margin-bottom: 7px;
     font-family: "Graphik LC Web";
 }
+.main{
+    background: transparent url(../img/banners/new_banners/main_new.jpg) 0 0 no-repeat;
+}
+.realties-first{
+    background: transparent url(../img/banners/new_banners/credit.jpg) 0 0 no-repeat;
+    background-size: cover;
+}
+.realties-second{
+    background: transparent url(../img/banners/new_banners/hotel.png) 0 0 no-repeat;
+    background-size: cover;
+}
+.realties-third{
+    background: transparent url(../img/banners/new_banners/torg.jpg) 0 0 no-repeat;
+    background-size: cover;
+}
+.realties-fourth{
+    background: transparent url(../img/banners/new_banners/arend.png) 0 0 no-repeat;
+    background-size: cover;
+}
 @media (max-width: 480px){
     .file_input_info{
         display: block;

@@ -32,7 +32,7 @@ $APPLICATION->SetTitle("Агентство недвижимости Lexhome");
             <div class="col-md-8">
                 <div class="realties-item realties-first">
                     <div class="realties-overlay"></div>
-                    <div class="realties-title">Жилая в городе</div>
+                    <div class="realties-title">Кредитование</div>
                     <div class="realties-list">
                         <!--<ul>
                             <li><a href="#">Все жилые комплексы <span>163</span></a></li>
@@ -55,7 +55,7 @@ $APPLICATION->SetTitle("Агентство недвижимости Lexhome");
             <div class="col-md-4">
                 <div class="realties-item realties-second">
                     <div class="realties-overlay"></div>
-                    <div class="realties-title">Загородная</div>
+                    <div class="realties-title">Гостиничный бизнес</div>
                     <div class="realties-list">
                         <!--<ul>
                             <li><a href="#">Дом <span>1 184</span></a></li>
@@ -74,7 +74,7 @@ $APPLICATION->SetTitle("Агентство недвижимости Lexhome");
             <div class="col-md-4">
                 <div class="realties-item realties-third">
                     <div class="realties-overlay"></div>
-                    <div class="realties-title">Коммерческая</div>
+                    <div class="realties-title">Торговые помещения</div>
                     <div class="realties-list">
                         <!--<ul>
                             <li><a href="#">Аренда <span>764</span></a></li>
@@ -88,7 +88,7 @@ $APPLICATION->SetTitle("Агентство недвижимости Lexhome");
             <div class="col-md-8">
                 <div class="realties-item realties-fourth">
                     <div class="realties-overlay"></div>
-                    <div class="realties-title">Зарубежная</div>
+                    <div class="realties-title">Арендный бизнес</div>
                     <div class="realties-list">
                         <!--<ul>
                             <li><a href="#">Вилла <span>214</span></a></li>
