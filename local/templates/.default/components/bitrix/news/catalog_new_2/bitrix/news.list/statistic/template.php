@@ -39,11 +39,13 @@ Loc::loadMessages(__FILE__);
 ?>
 <div class="catalog-head" style="background-image:  url(<?=$bannerSrc?>);">
     <div class="container">
-        <h1><?= $APPLICATION->ShowTitle(); ?></h1>
-        <?if (!empty($arResult["STATISTICS"])) { ?>
+        <div class="catalog-head-title">
+            <h1><?= $APPLICATION->ShowTitle(); ?></h1>
+        </div>
+        <?/*if (!empty($arResult["STATISTICS"])) { */?><!--
             <div class="catalog-head_list">
                 <div class="flex-list">
-                    <?
+                    <?/*
                     $count = $countColumn = 0;
                     $maxCount = 3;
                     foreach ($arResult["STATISTICS"] as $key => $arRegion):
@@ -51,57 +53,57 @@ Loc::loadMessages(__FILE__);
                             $count++;
                             switch ($count):
                                 case 1:
-                                    ?>
+                                    */?>
                                     <ul>
                                     <li>
-                                        <a href="<?= $APPLICATION->GetCurPageParam('region=' . $key, array('region')); ?>">
+                                        <a href="<?/*= $APPLICATION->GetCurPageParam('region=' . $key, array('region')); */?>">
                                     <span>
-                                        <?= $arRegion['NAME']; ?>
+                                        <?/*= $arRegion['NAME']; */?>
                                     </span>
                                             <img src="/assets/img/d1.png" alt="">
                                             <span class="count">
-                                        <?= $arRegion['COUNT']; ?>
+                                        <?/*= $arRegion['COUNT']; */?>
                                     </span>
                                         </a>
                                     </li>
-                                    <?
+                                    <?/*
                                     break;
                                 case $arResult['STATISTICS_INFO']['ELEM_IN_BLOCK']:
-                                    ?>
+                                    */?>
                                     <li>
-                                        <a href="<?= $APPLICATION->GetCurPageParam('region=' . $key, array('region')); ?>">
+                                        <a href="<?/*= $APPLICATION->GetCurPageParam('region=' . $key, array('region')); */?>">
                                         <span>
-                                            <?= $arRegion['NAME']; ?>
+                                            <?/*= $arRegion['NAME']; */?>
                                         </span>
                                             <img src="/assets/img/d1.png" alt="">
                                             <span class="count">
-                                            <?= $arRegion['COUNT']; ?>
+                                            <?/*= $arRegion['COUNT']; */?>
                                         </span>
                                         </a>
                                     </li>
                                     </ul>
-                                    <?
+                                    <?/*
                                     break;
                                 default:
-                                    ?>
+                                    */?>
                                     <li>
-                                        <a href="<?= $APPLICATION->GetCurPageParam('region=' . $key, array('region')); ?>">
+                                        <a href="<?/*= $APPLICATION->GetCurPageParam('region=' . $key, array('region')); */?>">
                                     <span>
-                                        <?= $arRegion['NAME']; ?>
+                                        <?/*= $arRegion['NAME']; */?>
                                     </span>
                                             <img src="/assets/img/d1.png" alt="">
                                             <span class="count">
-                                        <?= $arRegion['COUNT']; ?>
+                                        <?/*= $arRegion['COUNT']; */?>
                                     </span>
                                         </a>
                                     </li>
-                                    <?
+                                    <?/*
                                     break;
                             endswitch;
                             if ($arResult['STATISTICS_INFO']['LAST_COUNT_ID'] == $key || $count == $maxCount) {
-                                ?>
+                                */?>
                                 </ul>
-                                <?
+                                <?/*
                             }
                             if ($count == $arResult['STATISTICS_INFO']['ELEM_IN_BLOCK'] || $count == $maxCount) {
                                 $countColumn++;
@@ -112,25 +114,25 @@ Loc::loadMessages(__FILE__);
                             }
                         }
 
-                    endforeach; ?>
+                    endforeach; */?>
                 </div>
                 <div class="count-object">
                 <span>
-                <?= \Lema\Common\Helper::pluralizeN(
+                <?/*= \Lema\Common\Helper::pluralizeN(
                     $arResult['STATISTICS_INFO']['ALL_COUNT'],
                     array(
                         Loc::getMessage('LEMA_OBJECTS_NEW_ONE_OBJECT'),
                         Loc::getMessage('LEMA_OBJECTS_NEW_TWO_OBJECTS'),
                         Loc::getMessage('LEMA_OBJECTS_NEW_MANY_OBJECTS'),
                     )
-                ); ?>
+                ); */?>
                 </span>
                 </div>
             </div>
-            <? if ($arResult['STATISTICS_INFO']['ALL_COUNT'] > 6) { ?>
+            <?/* if ($arResult['STATISTICS_INFO']['ALL_COUNT'] > 6) { */?>
                 <div class="catalog-head_link"><a href="#" class="js-statistic-list"><img src="/assets/img/plus.png" alt="plus"><span>Все районы</span></a></div>
-            <? } ?>
-        <? } ?>
+            <?/* } */?>
+        --><?/* } */?>
 
     </div>
 </div>

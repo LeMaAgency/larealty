@@ -401,6 +401,16 @@ header{
     background: transparent url(../img/banners/new_banners/arend.png) 0 0 no-repeat;
     background-size: cover;
 }
+.catalog-head-title{
+    text-align: left;
+}
+.catalog-head-title h1{
+    display: inline-block;
+    padding: 30px;
+    margin: 0 !important;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 2px;
+}
 @media (max-width: 480px){
     .file_input_info{
         display: block;
@@ -431,5 +441,9 @@ header{
     }
     #ya_detail_map {
         max-height: 400px;
+    }
+    .catalog-head-title h1{
+        display: block;
+        text-align: center;
     }
 }
