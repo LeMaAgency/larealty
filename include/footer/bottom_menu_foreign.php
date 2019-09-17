@@ -1,3 +1,3 @@
-<a href="<?=SITE_DIR;?>catalog/foreign/" class="list-title">
-    Зарубежная
+<a href="<?=SITE_DIR;?>catalog/arendnyy-biznes/" class="list-title">
+    Арендный бизнес
 </a>

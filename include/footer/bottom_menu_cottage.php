@@ -1,3 +1,3 @@
-<a href="<?=SITE_DIR;?>catalog/cottage/" class="list-title">
-    Загородная
+<a href="<?=SITE_DIR;?>catalog/prodazha/" class="list-title">
+    Продажа
 </a>

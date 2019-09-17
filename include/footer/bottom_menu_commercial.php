@@ -1,3 +1,3 @@
-<a href="<?=SITE_DIR;?>catalog/commercial/" class="list-title">
-    Коммерческая
+<a href="<?=SITE_DIR;?>catalog/investproekty/" class="list-title">
+    Инвестпроекты
 </a>

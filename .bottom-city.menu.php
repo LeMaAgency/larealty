@@ -1,24 +1,25 @@
 <?
 $aMenuLinks = array(
-/*    array(
-        'О компании',
-        '/about/',
+    array(
+        'Гостиницы',
+        '/catalog/arenda/gostinitsy-arenda/',
         array(),
         array(),
         '',
     ),
     array(
-        'Услуги',
-        '/services/',
+        'Офисы',
+        '/catalog/arenda/ofisy-arenda/',
         array(),
         array(),
         '',
     ),
     array(
-        'Контакты',
-        '/contacts/',
+        'Торговые',
+        '/catalog/arenda/torgovye-arenda/',
         array(),
         array(),
         '',
-    ),*/
+    ),
+
 );

@@ -411,6 +411,10 @@ header{
     background-color: rgba(0, 0, 0, 0.4);
     border-radius: 2px;
 }
+.footer-list li{
+    width: 100%;
+    float: none;
+}
 @media (max-width: 480px){
     .file_input_info{
         display: block;
