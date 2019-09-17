@@ -333,10 +333,10 @@ $APPLICATION->SetTitle("Агентство недвижимости Lexhome");
     </div>
 </section>
 <!--Акции-->
-<section class="stock">
+<!--<section class="stock">
     <div class="container">
         <h2 class="section-h2">Акции</h2>
-        <? $APPLICATION->IncludeComponent(
+        <?/* $APPLICATION->IncludeComponent(
             "bitrix:news.list",
             "main_stocks_block",
             array(
@@ -408,14 +408,14 @@ $APPLICATION->SetTitle("Агентство недвижимости Lexhome");
                 "COMPONENT_TEMPLATE" => "main_stocks_block"
             ),
             false
-        ); ?>
+        ); */?>
     </div>
-</section>
+</section>-->
 <!--Новости-->
-<section class="news">
+<!--<section class="news">
     <div class="container">
         <h2 class="section-h2">Новости и материалы</h2>
-        <? $APPLICATION->IncludeComponent(
+        <?/* $APPLICATION->IncludeComponent(
             "bitrix:news.list",
             "main_news_block",
             array(
@@ -487,9 +487,9 @@ $APPLICATION->SetTitle("Агентство недвижимости Lexhome");
                 "COMPONENT_TEMPLATE" => "main_news_block"
             ),
             false
-        ); ?>
+        ); */?>
     </div>
-</section>
+</section>-->
 <!--форма обратной связи-->
 <section class="help">
     <div class="container">
