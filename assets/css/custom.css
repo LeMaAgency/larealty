@@ -342,12 +342,14 @@ header{
 }
 .square_list{
     display: flex;
+    flex-wrap: wrap;
 }
 .square_list_item{
     margin-right: 10px;
     border-radius: 2px;
     border: 1px solid #a49183;
     padding: 0 5px;
+    margin-bottom: 7px;
 }
 .item-card_photo{
     max-width: 900px;
