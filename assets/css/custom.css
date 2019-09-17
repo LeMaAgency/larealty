@@ -371,6 +371,15 @@ header{
     height: 600px;
 }
 
+.mobile-catalog .square_list{
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 0 20px;
+}
+.mobile-catalog .square_list_item{
+    margin-bottom: 7px;
+    font-family: "Graphik LC Web";
+}
 @media (max-width: 480px){
     .file_input_info{
         display: block;

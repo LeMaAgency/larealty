@@ -218,10 +218,20 @@ if (!empty($arResult['ITEMS'])) {
                         <div class="offer-price">
                             <? if (!empty($arItem['PROPERTIES']['PRICE']['VALUE'])) { ?>
                                 <span>
-                            <?= $arItem['PROPERTIES']['PRICE']['VALUE']; ?>
+                                    <?=number_format($arItem['PROPERTIES']['PRICE']['VALUE'], 0, '.', ' '); ?>
                         </span>
                             <? } ?>
                         </div>
+                        <? if(!empty($arItem['PROPERTIES']['SQUARE_LIST']['VALUE'])):?>
+                            <div class="square_list">
+                                <? foreach ($arItem['PROPERTIES']['SQUARE_LIST']['VALUE'] as $square):?>
+                                    <? $squareInfo = explode('@',str_replace(' ','',$square));?>
+                                    <div class="square_list_item">
+                                        <?=$squareInfo[0]?>м²
+                                    </div>
+                                <?endforeach;?>
+                            </div>
+                        <? endif;?>
                     </div>
                 </div>
             <? endforeach; ?>
