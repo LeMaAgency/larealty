@@ -169,9 +169,9 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
             </div>
         </div>-->
     </div>
-    <div class="container pt1">
+    <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-8">
+            <div class="col-lg-9 col-md-8">
                 <div class="footer-contact">
                     <div class="footer-phone">
                         <? $APPLICATION->IncludeFile(SITE_DIR . 'include/header/phone.php'); ?>
@@ -196,13 +196,13 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-12">
+            <!--<div class="col-lg-6 col-md-12">
                 <div class="footer-form">
                     <h3>
-                        <? $APPLICATION->IncludeFile(SITE_DIR . 'include/footer/subscribe-text.php'); ?>
+                        <?/* $APPLICATION->IncludeFile(SITE_DIR . 'include/footer/subscribe-text.php'); */?>
                     </h3>
 
-                    <? $APPLICATION->IncludeComponent(
+                    <?/* $APPLICATION->IncludeComponent(
                         "bitrix:subscribe.form",
                         "subscribe_footer",
                         Array(
@@ -214,12 +214,12 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
                             "COMPONENT_TEMPLATE" => ".default"
                         ),
                         false
-                    ); ?>
+                    ); */?>
                     <div class="form-txt">
-                        <? $APPLICATION->IncludeFile(SITE_DIR . 'include/footer/subscribe-subtext.php'); ?>
+                        <?/* $APPLICATION->IncludeFile(SITE_DIR . 'include/footer/subscribe-subtext.php'); */?>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
         <div class="footer-txt">
             <? $APPLICATION->IncludeFile(SITE_DIR . 'include/footer/bottom-text.php'); ?>

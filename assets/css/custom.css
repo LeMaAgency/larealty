@@ -415,6 +415,12 @@ header{
     width: 100%;
     float: none;
 }
+footer{
+    padding: 40px 0;
+}
+footer .row-top{
+    margin-bottom: 30px;
+}
 @media (max-width: 480px){
     .file_input_info{
         display: block;
