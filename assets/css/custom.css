@@ -421,6 +421,12 @@ footer{
 footer .row-top{
     margin-bottom: 30px;
 }
+a.realties-item{
+
+    display: block;
+    color: white;
+    cursor: pointer;
+}
 @media (max-width: 480px){
     .file_input_info{
         display: block;
@@ -455,5 +461,8 @@ footer .row-top{
     .catalog-head-title h1{
         display: block;
         text-align: center;
+    }
+    a.realties-item{
+        display: flex;
     }
 }

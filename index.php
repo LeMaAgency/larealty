@@ -30,7 +30,7 @@ $APPLICATION->SetTitle("Агентство недвижимости Lexhome");
         <h2 class="section-h2">Все виды недвижимости</h2>
         <div class="row">
             <div class="col-md-8">
-                <div class="realties-item realties-first">
+                <a href="/kreditovanie/" class="realties-item realties-first">
                     <div class="realties-overlay"></div>
                     <div class="realties-title">Кредитование</div>
                     <div class="realties-list">
@@ -49,11 +49,11 @@ $APPLICATION->SetTitle("Агентство недвижимости Lexhome");
                             <li><a href="#">Дисконты <span>27</span></a></li>
                         </ul>-->
                     </div>
-                </div>
+                </a>
             </div>
 
             <div class="col-md-4">
-                <div class="realties-item realties-second">
+                <a href="/catalog/prodazha/gostinitsy-prodazha/" class="realties-item realties-second">
                     <div class="realties-overlay"></div>
                     <div class="realties-title">Гостиничный бизнес</div>
                     <div class="realties-list">
@@ -68,11 +68,11 @@ $APPLICATION->SetTitle("Агентство недвижимости Lexhome");
                             <li><a href="#">Аренда <span>277</span></a></li>
                         </ul>-->
                     </div>
-                </div>
+                </a>
             </div>
 
             <div class="col-md-4">
-                <div class="realties-item realties-third">
+                <a href="/catalog/prodazha/torgovye-prodazha/" class="realties-item realties-third">
                     <div class="realties-overlay"></div>
                     <div class="realties-title">Торговые помещения</div>
                     <div class="realties-list">
@@ -82,11 +82,11 @@ $APPLICATION->SetTitle("Агентство недвижимости Lexhome");
                             <li><a href="#">Арендный бизнес <span>33</span></a></li>
                         </ul>-->
                     </div>
-                </div>
+                </a>
             </div>
 
             <div class="col-md-8">
-                <div class="realties-item realties-fourth">
+                <a href="/catalog/arendnyy-biznes/" class="realties-item realties-fourth">
                     <div class="realties-overlay"></div>
                     <div class="realties-title">Арендный бизнес</div>
                     <div class="realties-list">
@@ -99,7 +99,7 @@ $APPLICATION->SetTitle("Агентство недвижимости Lexhome");
                             <li><a href="#">Таунхаус <span>18</span></a></li>
                         </ul>-->
                     </div>
-                </div>
+                </a>
             </div>
         </div>
         <?/* $APPLICATION->IncludeComponent(
