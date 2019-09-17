@@ -108,8 +108,9 @@ if (!empty($arResult['ITEMS'])) {
                         <? if(!empty($arItem['PROPERTIES']['SQUARE_LIST']['VALUE'])):?>
                             <div class="square_list">
                                 <? foreach ($arItem['PROPERTIES']['SQUARE_LIST']['VALUE'] as $square):?>
+                                    <? $squareInfo = explode('@',$square)?>
                                     <div class="square_list_item">
-                                       <?=$square?>м²
+                                       <?=$squareInfo[0]?>м²
                                     </div>
                                 <?endforeach;?>
                             </div>
