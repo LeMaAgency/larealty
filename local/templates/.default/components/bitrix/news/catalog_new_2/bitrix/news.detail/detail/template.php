@@ -307,7 +307,7 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                                 <?=$squareInfo[0]?>м²
                             </div>
                             <div class='characteristics-info'>
-                                <?=number_format($squareInfo[1], 0, '.', ' ').'.руб'?>
+                                <?=number_format($squareInfo[1], 0, '.', ' ').'руб.'?>
                             </div>
                         </div>
                     <? endforeach;?>
