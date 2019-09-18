@@ -57,6 +57,7 @@ if($form->validate()){
     $status = $form->formActionFull(
         $iblockId,
         array(
+            'ACTIVE' => 'N',
             'NAME' => $form->getField('name'),
             'PREVIEW_TEXT' => $form->getField('comment'),
             'PREVIEW_PICTURE'=> $_FILES['file'],
