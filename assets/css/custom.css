@@ -430,6 +430,10 @@ a.realties-item{
 .catalog-head{
     height: auto;
 }
+.main{
+    background-position-y: bottom;
+    height: 540px;
+}
 @media (max-width: 480px){
     .file_input_info{
         display: block;
