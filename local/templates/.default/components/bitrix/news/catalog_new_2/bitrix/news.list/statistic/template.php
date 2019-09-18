@@ -20,17 +20,17 @@ Loc::loadMessages(__FILE__);
 <?
     $bannerSrc = '/assets/css/../img/banners/';
     switch ($APPLICATION->GetCurPage()) {
-        case '/catalog/city/':
-            $bannerSrc .='1-jilaya.jpg';
+        case '/catalog/arenda/':
+            $bannerSrc .='test.jpg';
             break;
-        case '/catalog/cottage/':
-            $bannerSrc .='2-zagorod.jpg';
+        case '/catalog/prodazha/':
+            $bannerSrc .='test.jpg';
             break;
-        case '/catalog/commercial/':
-            $bannerSrc .='3-kommerciya.jpg';
+        case '/catalog/arendnyy-biznes/':
+            $bannerSrc .='test.jpg';
             break;
-        case '/catalog/foreign/':
-            $bannerSrc .='4-zarubejnaya.jpg';
+        case '/catalog/investproekty/':
+            $bannerSrc .='test.jpg';
             break;
         default:
             $bannerSrc .='1-jilaya.jpg';

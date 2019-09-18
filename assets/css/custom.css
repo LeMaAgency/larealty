@@ -427,6 +427,9 @@ a.realties-item{
     color: white;
     cursor: pointer;
 }
+.catalog-head{
+    height: auto;
+}
 @media (max-width: 480px){
     .file_input_info{
         display: block;
