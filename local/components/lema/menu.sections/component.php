@@ -37,12 +37,14 @@ if($this->StartResultCache())
 			"GLOBAL_ACTIVE"=>"Y",
 			"IBLOCK_ACTIVE"=>"Y",
 			"<="."DEPTH_LEVEL" => $arParams["DEPTH_LEVEL"],
+			"ELEMENT_SUBSECTIONS"=>"Y",
+			"CNT_ACTIVE"=>"Y"
 		);
 		$arOrder = array(
 			"left_margin"=>"asc",
 		);
 
-		$rsSections = CIBlockSection::GetList($arOrder, $arFilter, false, array(
+		$rsSections = CIBlockSection::GetList($arOrder, $arFilter, true, array(
 			"ID",
 			"DEPTH_LEVEL",
 			"NAME",
@@ -54,13 +56,15 @@ if($this->StartResultCache())
 			$rsSections->SetUrlTemplates("", $arParams["SEF_BASE_URL"].$arParams["SECTION_PAGE_URL"]);
 		while($arSection = $rsSections->GetNext())
 		{
-			$arResult["SECTIONS"][] = array(
-				"ID" => $arSection["ID"],
-				"DEPTH_LEVEL" => $arSection["DEPTH_LEVEL"],
-				"~NAME" => $arSection["~NAME"],
-				"~SECTION_PAGE_URL" => $arSection["~SECTION_PAGE_URL"],
-			);
-			$arResult["ELEMENT_LINKS"][$arSection["ID"]] = array();
+            if($arSection["ELEMENT_CNT"]) {
+                $arResult["SECTIONS"][] = array(
+                    "ID" => $arSection["ID"],
+                    "DEPTH_LEVEL" => $arSection["DEPTH_LEVEL"],
+                    "~NAME" => $arSection["~NAME"],
+                    "~SECTION_PAGE_URL" => $arSection["~SECTION_PAGE_URL"],
+                );
+                $arResult["ELEMENT_LINKS"][$arSection["ID"]] = array();
+            }
 		}
 		$this->EndResultCache();
 	}
