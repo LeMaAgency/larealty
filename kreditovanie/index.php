@@ -30,7 +30,7 @@ $APPLICATION->SetTitle("Кредитование");
             <div class="help-form">
                 <form action="<?= SITE_DIR; ?>ajax/feedback-form.php" class="js-feedback-form" method="POST">
                     <h2 class="section-h2">
-                        <? $APPLICATION->IncludeFile(SITE_DIR . 'include/footer/feedback_title.php'); ?>
+                        Узнать больше о кредитовании
                     </h2>
                     <div class="form-row">
                         <div class="it-block">
