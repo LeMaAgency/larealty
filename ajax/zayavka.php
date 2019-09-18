@@ -73,6 +73,7 @@ if($form->validate()){
             'PHONE' => $form->getField('phone'),
             //'EMAIL' => $form->getField('email'),
             'COMMENT' => $form->getField('comment'),
+            'WITH_FILES' => !empty($picturesData) ?'Есть прикрепленные файлы. См. в инфоблоке': 'Без прикрепленных файлов'
         )
     );
 
