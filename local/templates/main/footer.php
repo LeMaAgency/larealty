@@ -4,13 +4,13 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 ?>
 
 <footer>
-    <div class="container">
+    <!--<div class="container">
         <div class="row row-top">
             <div class="col-md-3 col-6">
                 <div class="footer-list">
                     <div class="list-item">
-                        <? $APPLICATION->IncludeFile(SITE_DIR . 'include/footer/bottom_menu_city.php'); ?>
-                        <? $APPLICATION->IncludeComponent(
+                        <?/* $APPLICATION->IncludeFile(SITE_DIR . 'include/footer/bottom_menu_city.php'); */?>
+                        <?/* $APPLICATION->IncludeComponent(
                             "bitrix:menu",
                             "bottom_menu",
                             Array(
@@ -27,15 +27,15 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
                                 "COMPONENT_TEMPLATE" => "footer_menu"
                             ),
                             false
-                        ); ?>
+                        ); */?>
                     </div>
                 </div>
             </div>
             <div class="col-md-3 col-6">
                 <div class="footer-list">
                     <div class="list-item">
-                        <? $APPLICATION->IncludeFile(SITE_DIR . 'include/footer/bottom_menu_cottage.php'); ?>
-                        <? $APPLICATION->IncludeComponent(
+                        <?/* $APPLICATION->IncludeFile(SITE_DIR . 'include/footer/bottom_menu_cottage.php'); */?>
+                        <?/* $APPLICATION->IncludeComponent(
                             "bitrix:menu",
                             "bottom_menu",
                             array(
@@ -52,15 +52,15 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
                                 "COMPONENT_TEMPLATE" => "bottom_menu"
                             ),
                             false
-                        ); ?>
+                        ); */?>
                     </div>
                 </div>
             </div>
             <div class="col-md-3 col-6">
                 <div class="footer-list">
                     <div class="list-item">
-                        <? $APPLICATION->IncludeFile(SITE_DIR . 'include/footer/bottom_menu_foreign.php'); ?>
-                        <? $APPLICATION->IncludeComponent(
+                        <?/* $APPLICATION->IncludeFile(SITE_DIR . 'include/footer/bottom_menu_foreign.php'); */?>
+                        <?/* $APPLICATION->IncludeComponent(
                             "bitrix:menu",
                             "bottom_menu",
                             Array(
@@ -77,15 +77,15 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
                                 "COMPONENT_TEMPLATE" => "footer_menu"
                             ),
                             false
-                        ); ?>
+                        ); */?>
                     </div>
                 </div>
             </div>
             <div class="col-md-3 col-6">
                 <div class="footer-list last-list">
                     <div class="list-item">
-                        <? $APPLICATION->IncludeFile(SITE_DIR . 'include/footer/bottom_menu_commercial.php'); ?>
-                        <? $APPLICATION->IncludeComponent(
+                        <?/* $APPLICATION->IncludeFile(SITE_DIR . 'include/footer/bottom_menu_commercial.php'); */?>
+                        <?/* $APPLICATION->IncludeComponent(
                             "bitrix:menu",
                             "bottom_menu",
                             Array(
@@ -102,73 +102,12 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
                                 "COMPONENT_TEMPLATE" => "footer_menu"
                             ),
                             false
-                        ); ?>
+                        ); */?>
                     </div>
                 </div>
             </div>
         </div>
-        <!--<div class="row row-bottom">
-            <div class="col-md-3 col-6">
-                <div class="footer-list_bottom">
-                    <div class="list-item">
-                        <a href="#" class="list-title">Продажа</a>
-                        <ul>
-                            <li><a href="#">По метро</a></li>
-                            <li><a href="#">По району</a></li>
-                            <li><a href="#">По улицам Москвы</a></li>
-                            <li><a href="#">Все ЖК Москвы</a></li>
-                        </ul>
-                    </div>
-                    <div class="list-item">
-                        <a href="#" class="list-title">Аренда</a>
-                        <ul>
-                            <li><a href="#">По метро</a></li>
-                            <li><a href="#">По району</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-6">
-                <div class="footer-list_bottom">
-                    <div class="list-item">
-                        <a href="#" class="list-title">Продажа</a>
-                        <ul>
-                            <li><a href="#">Дома по шоссе</a></li>
-                            <li><a href="#">Участки по шоссе</a></li>
-                            <li><a href="#">Поселки по шоссе</a></li>
-                            <li><a href="#">Все поселки</a></li>
-                        </ul>
-                    </div>
-                    <div class="list-item">
-                        <a href="#" class="list-title">Аренда</a>
-                        <ul>
-                            <li><a href="#">По шоссе</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-6"></div>
-            <div class="col-md-3 col-12">
-                <div class="footer-list_bottom">
-                    <div class="list-item last-list">
-                        <a href="#" class="list-title">Продажа</a>
-                        <ul>
-                            <li><a href="#">По метро</a></li>
-                            <li><a href="#">По району</a></li>
-                            <li><a href="#">Все БЦ Москвы</a></li>
-                        </ul>
-                    </div>
-                    <div class="list-item last-list">
-                        <a href="#" class="list-title">Аренда</a>
-                        <ul>
-                            <li><a href="#">По метро</a></li>
-                            <li><a href="#">По району</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>-->
-    </div>
+    </div>-->
     <div class="container">
         <div class="row">
             <div class="col-lg-9 col-md-8">
