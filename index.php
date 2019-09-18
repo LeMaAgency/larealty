@@ -175,10 +175,10 @@ $APPLICATION->SetTitle("Агентство недвижимости Lexhome");
         </p>
     </div>
 </section>
-<section class="popular">
+<!--<section class="popular">
     <div class="container">
         <h2 class="section-h2">Популярные объекты</h2>
-        <?
+        <?/*
         $GLOBALS['arPopularMainPage']['=PROPERTY_POPULAR_VALUE'] = 'Y';
         $APPLICATION->IncludeComponent(
             "bitrix:news.list",
@@ -251,14 +251,14 @@ $APPLICATION->SetTitle("Агентство недвижимости Lexhome");
                 "COMPONENT_TEMPLATE" => "main_popular_objects"
             ),
             false
-        ); ?>
+        ); */?>
     </div>
 </section>
 
 <section class="newoffer">
     <div class="container">
         <h2 class="section-h2">Новые предложения</h2>
-        <? $APPLICATION->IncludeComponent(
+        <?/* $APPLICATION->IncludeComponent(
             "bitrix:news.list",
             "main_new_objects",
             array(
@@ -329,9 +329,9 @@ $APPLICATION->SetTitle("Агентство недвижимости Lexhome");
                 "COMPONENT_TEMPLATE" => "main_new_objects"
             ),
             false
-        ); ?>
+        ); */?>
     </div>
-</section>
+</section>-->
 <!--Акции-->
 <!--<section class="stock">
     <div class="container">
