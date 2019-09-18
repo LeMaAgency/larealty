@@ -1,12 +1,12 @@
 <?
 $aMenuLinks = array(
-    array(
+    /*array(
         'Cтаньте партнером',
         '/stante-partnerom/',
         array(),
         array(),
         '',
-    ),
+    ),*/
     array(
         'Услуги',
         '/services/',
