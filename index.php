@@ -27,7 +27,7 @@ $APPLICATION->SetTitle("Агентство недвижимости Lexhome");
 ); ?>
 <section class="realties">
     <div class="container">
-        <h2 class="section-h2">Все виды недвижимости</h2>
+<!--        <h2 class="section-h2">Все виды недвижимости</h2>-->
         <div class="row">
             <div class="col-md-8">
                 <a href="/kreditovanie/" class="realties-item realties-first">
