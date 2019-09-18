@@ -21,19 +21,19 @@ Loc::loadMessages(__FILE__);
     $bannerSrc = '/assets/css/../img/banners/';
     switch ($APPLICATION->GetCurPage()) {
         case '/catalog/arenda/':
-            $bannerSrc .='test.jpg';
+            $bannerSrc .='catalog_sections.jpg';
             break;
         case '/catalog/prodazha/':
-            $bannerSrc .='test.jpg';
+            $bannerSrc .='catalog_sections.jpg';
             break;
         case '/catalog/arendnyy-biznes/':
-            $bannerSrc .='test.jpg';
+            $bannerSrc .='catalog_sections.jpg';
             break;
         case '/catalog/investproekty/':
-            $bannerSrc .='test.jpg';
+            $bannerSrc .='catalog_sections.jpg';
             break;
         default:
-            $bannerSrc .='1-jilaya.jpg';
+            $bannerSrc .='catalog_sections.jpg';
             break;
     }
 ?>
