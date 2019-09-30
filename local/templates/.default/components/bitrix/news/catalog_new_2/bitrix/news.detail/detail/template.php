@@ -166,12 +166,13 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                     ); ?>
                 </div>
             <? } ?>
-            <? if (!empty($item->propVal('RENT_TYPE'))) { ?>
+            <?/* if (!empty($item->propVal('RENT_TYPE'))) { */?><!--
                 <div class='item-card_icon'>
                     <img src='/assets/img/room.png' alt=''>
-                    <?= $item->propVal('RENT_TYPE'); ?>
+                    <?/*= $item->propVal('RENT_TYPE'); */?>
                 </div>
-            <? } ?>
+            --><?/* } */?>
+            <div class='item-card_icon'>Кредит</div>
             <? if (!empty($item->propVal('LIFT_FLAG'))) { ?>
                 <div class='item-card_icon'>
                     <img src='/assets/img/valik.png' alt=''>

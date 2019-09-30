@@ -121,11 +121,12 @@ if (!empty($arResult['ITEMS'])) {
                     </div>
                     <div class="catalog-item_right">
                         <div class="catalog-item_label">
-                            <? if (!empty($arItem['PROPERTIES']['RENT_TYPE']['VALUE'])) { ?>
+                            <?/* if (!empty($arItem['PROPERTIES']['RENT_TYPE']['VALUE'])) { */?><!--
                                 <span class="type-label">
-                                    <?= $arItem['PROPERTIES']['RENT_TYPE']['VALUE']; ?>
+                                    <?/*= $arItem['PROPERTIES']['RENT_TYPE']['VALUE']; */?>
                                 </span>
-                            <? } ?>
+                            --><?/* } */?>
+                            <span class="type-label">Кредит</span>
                         </div>
 
                         <? if (!empty($arItem['PROPERTIES']['PRICE']['VALUE'])) { ?>
