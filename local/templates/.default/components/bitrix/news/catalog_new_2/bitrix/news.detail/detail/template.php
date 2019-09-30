@@ -115,7 +115,7 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                         <span>
                             <?= Loc::getMessage('LEMA_CALL'); ?>
                         </span>
-                    <a href='tel:+79629299889'>+7 (962) 929-98-89</a>
+                    <a href='tel:+74951116926'>+7 (495) 111-69-26</a>
                 </div>
             </div>
         </div>
