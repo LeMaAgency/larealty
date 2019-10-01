@@ -133,6 +133,7 @@ if (!empty($arResult['ITEMS'])) {
                             <div class="fdc">
                                 <div class="catalog-item_price">
                                     <span>
+                                        <?=!empty($arItem['PROPERTIES']['WORD_BEFORE_PRICE']['VALUE']) ?"от ":''?>
                                         <?= number_format($arItem['PROPERTIES']['PRICE']['VALUE'], 0, '.', ' '); ?>
                                     </span>
                                 </div>

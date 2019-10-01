@@ -71,6 +71,7 @@ if (isset($_GET['offerId'], $arResult['OFFERS'][$_GET['offerId']])) {
                         <div class='item-card_price-coutn'>
                             <? if ($item->propVal('PRICE')) { ?>
                                 <span>
+                                    <?=!empty($item->propVal('WORD_BEFORE_PRICE')) ?"от ":''?>
                                     <?= number_format($item->propVal('PRICE'), 0, '.', ' '); ?>
                                 </span>
                             <? } else { ?>
