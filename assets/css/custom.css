@@ -434,6 +434,13 @@ a.realties-item{
     background-position-y: bottom;
     height: 540px;
 }
+.thanks_page{
+    padding: 70px 0;
+    text-align: center;
+}
+.thanks_page .thanks_title{
+    margin-bottom: 50px;
+}
 @media (max-width: 480px){
     .file_input_info{
         display: block;
