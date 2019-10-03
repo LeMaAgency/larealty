@@ -24,7 +24,8 @@ $(function () {
             else {
                 //ok
                 curForm.find('input:not([type="submit"]):not([type="button"]), textarea').val('').css({'border': '1px solid black'});
-                $.fancybox.open('Спасибо за заявку. В ближайшее время мы Вам перезвоним')
+                //$.fancybox.open('Спасибо за заявку. В ближайшее время мы Вам перезвоним')
+                window.location.href = '/thanks/';
             }
         }, 'json');
         return false;
@@ -54,7 +55,8 @@ $(function () {
             else {
                 //ok
                 curForm.find('input:not([type="submit"]):not([type="button"]), textarea').val('').css({'border': '1px solid black'});
-                $.fancybox.open('Спасибо за заявку. В ближайшее время мы Вам перезвоним')
+                //$.fancybox.open('Спасибо за заявку. В ближайшее время мы Вам перезвоним')
+                window.location.href = '/thanks/';
             }
         }, 'json');
         return false;
@@ -84,7 +86,8 @@ $(function () {
             else {
                 //ok
                 curForm.find('input:not([type="submit"]):not([type="button"]), textarea').val('').css({'border': '1px solid black'});
-                $.fancybox.open('Спасибо за заявку. В ближайшее время мы Вам перезвоним')
+                //$.fancybox.open('Спасибо за заявку. В ближайшее время мы Вам перезвоним')
+                window.location.href = '/thanks/';
             }
         }, 'json');
         return false;
@@ -114,7 +117,8 @@ $(function () {
             else {
                 //ok
                 curForm.find('input:not([type="submit"]):not([type="button"]), textarea').val('').css({'border': '1px solid black'});
-                $.fancybox.open('Спасибо за заявку. В ближайшее время мы Вам перезвоним')
+                //$.fancybox.open('Спасибо за заявку. В ближайшее время мы Вам перезвоним')
+                window.location.href = '/thanks/';
             }
         }, 'json');
         return false;
@@ -243,7 +247,8 @@ $(function () {
             else {
                 //ok
                 curForm.find('input:not([type="submit"]):not([type="button"]), textarea').val('').css({'border': '1px solid black'});
-                $.fancybox.open('Спасибо за заявку. В ближайшее время мы Вам перезвоним')
+                //$.fancybox.open('Спасибо за заявку. В ближайшее время мы Вам перезвоним')
+                window.location.href = '/thanks/';
             }
         }, 'json');
         return false;
@@ -362,7 +367,7 @@ $(function () {
                     $('#file_count').text('')
                     $('#upload_progress').text('')
                     curForm.find('input:not([type="submit"]):not([type="button"]), textarea').val('').css({'border': '1px solid black'});
-                    $.fancybox.open('Спасибо за заявку. В ближайшее время мы Вам перезвоним')
+                    window.location.href = '/thanks/';
                 }
             },
 

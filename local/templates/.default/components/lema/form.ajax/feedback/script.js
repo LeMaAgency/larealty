@@ -18,7 +18,8 @@ var formAjax = {
         {
             curForm.find('input:not([type="submit"]):not([type="button"]), textarea').val('');
             curForm.find('input[type="checkbox"]').prop('checked', false);
-            this.executeFunctionByName(arParams.FORM_SUCCESS_FUNCTION, window, arParams.FORM_SUCCESS_FUNCTION_CORRECT_JSON != 'Y')
+            //this.executeFunctionByName(arParams.FORM_SUCCESS_FUNCTION, window, arParams.FORM_SUCCESS_FUNCTION_CORRECT_JSON != 'Y')
+            window.location.href = '/thanks/';
         }
     },
     init: function (arParams) {
